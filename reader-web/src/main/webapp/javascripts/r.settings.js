@@ -245,7 +245,7 @@ r.settings.onTabUsers = function(panel, initialize) {
           url: newUser ?
             r.util.url.user_register :
             r.util.url.user_username_update.replace('{username}', username),
-          type: 'POST',
+          type: newUser ? 'PUT' : 'POST',
           data: {
             username: username,
             email: email,

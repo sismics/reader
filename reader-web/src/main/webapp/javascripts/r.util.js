@@ -2,13 +2,13 @@
  * API URLs.
  */
 r.util.url = {
-  user_info: 'api/user/info',
+  user_info: 'api/user',
   user_login: 'api/user/login',
   user_update: 'api/user/update',
   user_logout: 'api/user/logout',
   user_list: 'api/user/list',
-  user_register: 'api/user/register',
-  user_username_info: 'api/user/{username}/info',
+  user_register: 'api/user',
+  user_username_info: 'api/user/{username}',
   user_username_update: 'api/user/{username}/update',
   subscription_list: 'api/subscription',
   subscription_add: 'api/subscription',
