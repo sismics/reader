@@ -6,7 +6,7 @@
   version="3.0"> 
   <display-name>Reader</display-name>
 
-  <!-- Ce filtre permet de sécuriser les URL -->
+  <!-- This filter is used to secure URLs -->
   <filter>
     <filter-name>requestContextFilter</filter-name>
     <filter-class>com.sismics.util.filter.RequestContextFilter</filter-class>
@@ -18,7 +18,7 @@
     <url-pattern>*.jsp</url-pattern>
   </filter-mapping>
 
-  <!-- Ce filtre permet de sécuriser les URL -->
+  <!-- This filter is used to secure URLs -->
   <filter>
     <filter-name>tokenBasedSecurityFilter</filter-name>
     <filter-class>com.sismics.util.filter.TokenBasedSecurityFilter</filter-class>
@@ -29,7 +29,7 @@
     <url-pattern>/api/*</url-pattern>
   </filter-mapping>
 
-  <!-- Fichiers d'accueil -->
+  <!-- Welcome files -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>

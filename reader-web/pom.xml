@@ -100,7 +100,7 @@
       <artifactId>freemarker</artifactId>
     </dependency>
     
-    <!-- Dépendances de test -->
+    <!-- Test dependencies -->
     <dependency>
       <groupId>com.sismics.reader</groupId>
       <artifactId>reader-web-common</artifactId>
@@ -249,7 +249,7 @@
   </build>
 
   <profiles>
-    <!-- Profil de développement (activé par défaut) -->
+    <!-- Development profile (active by default) -->
     <profile>
       <id>dev</id>
       <activation>
@@ -486,17 +486,17 @@
                     <echo message="war : ${war.dir}" />
                     <echo message="webapp : ${webapp.dir}" />
                     
-                    <!-- Copie des fichiers HTML -->
+                    <!-- Copy HTML files -->
                     <copy todir="${war.dir}">
                       <fileset dir="${webapp.dir}" includes="*.html"/>
                     </copy>
                     
-                    <!-- Utilisation des imports minifiés -->
+                    <!-- Use minified imports -->
                     <replaceregexp match="&lt;!-- MINIFIED (.*) --&gt;" replace="\1" flags="g">
                       <fileset dir="${war.dir}" includes="*.html"/>
                     </replaceregexp>
                     
-                    <!-- Suppression des imports non minifiés -->
+                    <!-- Delete unminified imports -->
                     <replaceregexp match="&lt;!-- BEGIN NON MINIFIED --&gt;(.*?)&lt;!-- END NON MINIFIED --&gt;" replace="" flags="gs">
                       <fileset dir="${war.dir}" includes="*.html"/>
                     </replaceregexp>

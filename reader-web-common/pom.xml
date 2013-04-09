@@ -90,7 +90,7 @@
       <artifactId>joda-time</artifactId>
     </dependency>
     
-    <!-- Dépendances de test -->
+    <!-- Test dependencies -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
