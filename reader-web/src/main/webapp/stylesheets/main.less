@@ -1,0 +1,616 @@
+@main-color: #33B5E5;
+@main-color-active: #0099CC;
+
+// TODO : Not parametrized colors: smartphone actionbar, important buttons, login background
+
+@import "_mixins.less";
+@import "_jquery.toastmessage.less";
+@import "_general.less";
+
+// Login
+#login-page {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #50c0e9;
+  
+  form {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    width: 210px;
+    margin-left: -105px;
+    height: 120px;
+    margin-top: -60px;
+    text-align: center;
+  }
+  
+  input {
+    margin: 5px 0;
+  }
+  
+  input[type="text"], input[type="password"] {
+    width: 200px;
+    .border-radius(4px);
+  }
+  
+  input[type="submit"] {
+    width: 100px;
+  }
+}
+
+// Subscriptions
+#subscriptions {
+  .input-container {
+    width: 100%;
+    text-align: center;
+    
+    input {
+      margin: 20px auto;
+    }
+  }
+  
+  h1 {
+    font-weight: 300;
+    font-size: 16px;
+    color: #888;
+    border-top: 1px solid @main-color;
+    border-bottom: 1px solid @main-color;
+    background: #eee;
+    padding: 6px;
+    padding-left: 20px;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    
+    &:hover {
+      #category-add-button, #subscription-unread-button {
+        display: inline-block;
+      }
+    }
+    
+    #category-add-button, #subscription-unread-button {
+      position: absolute;
+      display: none;
+      right: 10px;
+      top: 3px;
+      cursor: pointer;
+    }
+    
+    #subscription-unread-button {
+      width: 24px;
+      height: 24px;
+      right: 34px;
+      background: url(../images/unread.png);
+    }
+  }
+  
+  p {
+    text-align: center;
+    color: #444;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 15px;
+    min-height: 12px;
+    
+    li {
+      padding: 0;
+      margin: 0;
+      display: block;
+      position: relative;
+      white-space: nowrap;
+      
+      a {
+        display: block;
+        padding: 4px;
+        margin-left: 22px;
+        
+        &:hover {
+          ~ .edit {
+            display: inline-block;
+          }
+        }
+        
+        img {
+          display: inline-block;
+          vertical-align: middle;
+        }
+        
+        .name, .title {
+          overflow: hidden;
+          display: inline-block;
+          max-width: 120px;
+          text-overflow: ellipsis;
+          vertical-align: middle;
+        }
+        
+        .unread-count {
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+      
+      &:hover {
+        background: #eee;
+      }
+      
+      &.active {
+        > a {
+          background: #ddd !important;
+        }
+      }
+      
+      &.unread {
+        > a {
+          font-weight: bold;
+        }
+      }
+      
+      .collapse {
+        position: absolute;
+        display: inline-block;
+        height: 11px;
+        width: 11px;
+        top: 11px;
+        left: 12px;
+        cursor: pointer;
+        
+        &.opened {
+          background: url('../images/tree_minus.gif');
+        }
+        
+        &.closed {
+          background: url('../images/tree_plus.gif');
+        }
+      }
+      
+      .edit {
+        position: absolute;
+        display: none;
+        height: 16px;
+        width: 16px;
+        top: 6px;
+        right: 4px;
+        cursor: pointer;
+        background: url('../images/edit.png');
+        
+        &:hover {
+          display: inline-block;
+        }
+      }
+    }
+    
+    .placeholder {
+      border: 1px dashed #aaa;
+      margin-left: 20px;
+      margin-right: 10px;
+    }
+  }
+}
+
+.qtip-drop-menu {
+  width: 200px;
+  text-align: center;
+  
+  input[type="text"] {
+    width: 50px;
+    margin: 5px;
+    margin-left: 0;
+  }
+  
+  .showable {
+   margin: 5px;
+  }
+  
+  input[type="text"] {
+    width: 120px;
+    margin: 0;
+  }
+  
+  input[type="button"] {
+    width: 190px;
+    margin: 5px;
+    display: block;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    
+    li {
+      margin: 0;
+      padding: 8px;
+      display: block;
+      cursor: pointer;
+      color: #444;
+      font-size: 11px;
+      
+      &.active {
+        background: @main-color !important;
+        color: #fff;
+      }
+      
+      &:hover {
+        background: #eee;
+      }
+    }
+  }
+}
+
+#qtip-category-add {
+  text-align: center;
+  width: 200px;
+  
+  input[type="text"] {
+    width: 80%;
+    margin: 5px;
+  }
+  
+  input[type="submit"] {
+    margin: 5px;
+  }
+}
+
+#qtip-subscription-add {
+  text-align: center;
+  width: 400px;
+  
+  input[type="text"] {
+    width: 90%;
+    margin: 5px;
+  }
+  
+  input[type="submit"] {
+    margin: 5px;
+  }
+}
+
+#qtip-settings {
+  ul {
+    li {
+      padding: 0;
+      a {
+        padding: 8px;
+        display: block;
+      }
+    }
+  }
+}
+
+// Feed
+#feed {
+  background: #f5f5f5;
+  
+  #toolbar {
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    height: 27px;
+    
+    > .full-button {
+      border-left: none;
+      border-radius: 0 2px 2px 0;
+    }
+    
+    > .list-button {
+      border-radius: 2px 0 0 2px;
+      margin-left: 8px;
+    }
+    
+    > .settings-button {
+      margin-left: 8px;
+    }
+    
+    > .search-input {
+      width: 300px;
+      background: url(../images/search.png) no-repeat 3px center;
+      text-indent: 18px;
+      color: #333;
+    }
+    
+    > .back-button {
+      display: inline-block;
+    }
+    
+    > .full-button, > .list-button, > .settings-button, > .category-button, > .back-button {
+      float: right;
+    }
+  }
+  
+  #feed-container {
+    &.list {
+      > .feed-item {
+        margin: 0;
+        border-collapse: collapse;
+      
+        .collapsed {
+          display: block;
+          height: 40px;
+          position: relative;
+          
+          .feed-item-star {
+            display: block;
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            left: 7px;
+          }
+          
+          > .feed-item-collapsed-subscription {
+            height: 40px;
+            line-height: 40px;
+            position: absolute;
+            left: 38px;
+            width: 150px;
+            overflow: hidden;
+          }
+          
+          .container {
+            position: absolute;
+            display: block;
+            overflow: hidden;
+            left: 200px;
+            right: 160px;
+            height: 40px;
+            cursor: pointer;
+            
+            > .feed-item-collapsed-subscription {
+              display: none;
+            }
+          }
+          
+          .feed-item-collapsed-title {
+            display: inline;
+            line-height: 40px;
+          }
+          
+          .feed-item-collapsed-description {
+            display: inline;
+            line-height: 40px;
+            color: #777;
+            margin-left: 8px;
+          }
+          
+          .feed-item-date {
+            display: block;
+            position: absolute;
+            line-height: 40px;
+            right: 28px;
+          }
+          
+          .feed-item-collapsed-link {
+            display: block;
+            position: absolute;
+            right: 7px;
+            top: 50%;
+            margin-top: -8px;
+            opacity: 0.4;
+          }
+        }
+        
+        .header {
+          .feed-item-date {
+            display: none;
+          }
+        }
+        
+        &.unfolded {
+          .collapsed {
+            background: #eee;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #ccc;
+          }
+        }
+        
+        &:not(.unfolded) {
+          .header {
+            display: none;
+          }
+        
+          .content {
+            display: none;
+          }
+          
+          .footer {
+            display: none;
+          }
+        }
+        
+        &:not(.read) {
+          .collapsed .feed-item-collapsed-title {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  
+    > .feed-item {
+      background: #fff;
+      margin: 20px;
+      border: 1px solid #ccc;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      overflow: auto;
+      
+      &.read {
+        border: 1px solid #888;
+      }
+      
+      &.selected {
+        border-left: 1px solid @main-color;
+      }
+      
+      .collapsed {
+        display: none;
+      }
+      
+      .header {
+        padding: 14px;
+        vertical-align: top;
+        position: relative;
+      
+        .feed-item-title {
+          display: inline-block;
+          margin-right: 130px;
+          font-size: 140%;
+          font-weight: bold;
+          color: @main-color;
+        }
+        
+        .feed-item-subscription {
+          display: inline-block;
+          margin-top: 8px;
+        }
+        
+        .feed-item-creator {
+          display: inline-block;
+          margin-top: 8px;
+        }
+        
+        .feed-item-date {
+          position: absolute;
+          top: 14px;
+          right: 14px;
+        }
+      }
+      
+      .content {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+      
+      .footer {
+        margin-top: 14px;
+        display: block;
+        background: #f8f8f8;
+        padding: 14px;
+        color: #444;
+        
+        .feed-item-unread {
+          display: inline-block;
+          margin-right: 14px;
+          vertical-align: middle;
+          line-height: 24px;
+          height: 24px;
+        }
+        
+        .feed-item-comments {
+          display: inline-block;
+          vertical-align: middle;
+          line-height: 24px;
+          height: 24px;
+        }
+      }
+      
+      .feed-item-star {
+        display: inline-block;
+        margin-right: 14px;
+        vertical-align: middle;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        background: url('../images/nostar.png');
+        
+        &.starred {
+          background: url('../images/star.png');
+        }
+      }
+    }
+    
+    > .bumper {
+      height: 1000px;
+      position: relative;
+      
+      .loader {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 10px;
+        margin-left: -8px;
+      }
+    }
+    
+    > .empty, > .bumper {
+      text-align: center;
+      padding: 100px;
+      color: #444;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    
+    > .empty ~ .bumper {
+      display: none;
+    }
+    
+    > .loader {
+      text-align: center;
+      padding: 100px;
+    }
+  }
+  
+  #settings-container {
+    h1 {
+      font-size: 22px;
+      font-variant: small-caps;
+      font-weight: 300;
+      padding-bottom: 6px;
+      padding-left: 8px;
+      margin-bottom: 20px;
+      margin-top: 24px;
+      color: @main-color;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    form {
+      label {
+        span {
+          width: 200px;
+          display: inline-block;
+        }
+        
+        input[type="text"], input[type="password"], select {
+          display: inline-block;
+          width: 200px;
+        }
+      }
+      
+      input.error, select.error {
+        border: 1px solid #ff4444 !important;
+      }
+      
+      label.error {
+        margin-left: 10px;
+        color: #ff4444;
+      }
+    }
+  }
+  
+  #wizard-container {
+    font-size: 20px;
+    font-weight: 300;
+    tex-align: center;
+    padding: 200px;
+    
+    p {
+      text-align: center;
+    }
+  }
+}
+
+// Media queries overrides
+@import "_desktop.less" screen and (min-width: 1024px);
+@import "_smartphone.less" screen and (max-width: 1023px);
+
+// Visibility override
+.hidden {
+  display: none !important;
+}

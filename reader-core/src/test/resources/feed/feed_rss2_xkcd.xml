@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>xkcd.com</title>
+    <link>http://xkcd.com/</link>
+    <description>xkcd.com: A webcomic of romance and math humor.</description>
+    <language>en</language>
+    <item>
+      <title>Voyager 1</title>
+      <link>http://xkcd.com/1189/</link>
+      <description>&lt;img src="http://imgs.xkcd.com/comics/voyager_1.png" title="So far Voyager 1 has 'left the Solar System' by passing through the termination shock three times, the heliopause twice, and once each through the heliosheath, heliosphere, heliodrome, auroral discontinuity, Heaviside layer, trans-Neptunian panic zone, magnetogap, US Census Bureau Solar System statistical boundary, Kuiper gauntlet, Oort void, and crystal sphere holding the fixed stars." alt="So far Voyager 1 has 'left the Solar System' by passing through the termination shock three times, the heliopause twice, and once each through the heliosheath, heliosphere, heliodrome, auroral discontinuity, Heaviside layer, trans-Neptunian
+        panic zone, magnetogap, US Census Bureau Solar System statistical boundary, Kuiper gauntlet, Oort void, and crystal sphere holding the fixed stars." /&gt;</description>
+      <pubDate>Fri, 22 Mar 2013 04:00:00 -0000</pubDate>
+      <guid>http://xkcd.com/1189/</guid>
+    </item>
+    <item>
+      <title>Bonding</title>
+      <link>http://xkcd.com/1188/</link>
+      <description>&lt;img src="http://imgs.xkcd.com/comics/bonding.png" title="I'm trying to build character but Eclipse is really confusing." alt="I'm trying to build character but Eclipse is really confusing." /&gt;</description>
+      <pubDate>Wed, 20 Mar 2013 04:00:00 -0000</pubDate>
+      <guid>http://xkcd.com/1188/</guid>
+    </item>
+    <item>
+      <title>Aspect Ratio</title>
+      <link>http://xkcd.com/1187/</link>
+      <description>&lt;img src="http://imgs.xkcd.com/comics/aspect_ratio.png" title="I'm always disappointed when 'Anamorphic Widescreen' doesn't refer to a widescreen Animorphs movie." alt="I'm always disappointed when 'Anamorphic Widescreen' doesn't refer to a widescreen Animorphs movie." /&gt;</description>
+      <pubDate>Mon, 18 Mar 2013 04:00:00 -0000</pubDate>
+      <guid>http://xkcd.com/1187/</guid>
+    </item>
+    <item>
+      <title>Bumblebees</title>
+      <link>http://xkcd.com/1186/</link>
+      <description>&lt;img src="http://imgs.xkcd.com/comics/bumblebees.png" title="Did you know sociologists can't explain why people keep repeating that urban legend about bumblebees not being able to fly!?" alt="Did you know sociologists can't explain why people keep repeating that urban legend about bumblebees not being able to fly!?" /&gt;</description>
+      <pubDate>Fri, 15 Mar 2013 04:00:00 -0000</pubDate>
+      <guid>http://xkcd.com/1186/</guid>
+    </item>
+  </channel>
+</rss>

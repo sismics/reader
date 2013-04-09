@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule"
+>
+
+<channel>
+	<title>ploum.net</title>
+	<atom:link href="http://ploum.net/feed" rel="self" type="application/rss+xml" />
+	<link>http://ploum.net</link>
+	<description>Le blog de Lionel Dricot</description>
+	<lastBuildDate>Thu, 28 Mar 2013 16:12:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.5.1</generator>
+<creativeCommons:license>http://creativecommons.org/licenses/by/2.0/be/</creativeCommons:license>
+	<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=ploum&amp;popout=1&amp;url=http%3A%2F%2Fploum.net%2F&amp;language=en_US&amp;category=text&amp;title=ploum.net&amp;description=Le+blog+de+Lionel+Dricot&amp;tags=blog" type="text/html" />
+		<item>
+		<title>The Disruptive Free Price</title>
+		<link>http://ploum.net/post/the-disruptive-free-price</link>
+		<comments>http://ploum.net/post/the-disruptive-free-price#comments</comments>
+		<pubDate>Thu, 28 Mar 2013 15:41:53 +0000</pubDate>
+		<dc:creator>Lionel Dricot</dc:creator>
+				<category><![CDATA[blog]]></category>
+		<category><![CDATA[EN]]></category>
+		<category><![CDATA[Flattr]]></category>
+
+		<guid isPermaLink="false">http://ploum.net/?p=2810</guid>
+		<description><![CDATA[During most of my life, I thought that there was only two ways to give money to someone. Firstly, in exchange of something you want/need but not available without paying. It is called &#8220;buying&#8221;. The other occasion is giving money for nothing, because you want to help someone in a bad situation and want to [...]]]></description>
+				<content:encoded><![CDATA[<p>During most of my life, I thought that there was only two ways to give money to someone. Firstly, in exchange of something you want/need but not available without paying. It is called &#8220;buying&#8221;. The other occasion is giving money for nothing, because you want to help someone in a bad situation and want to feel good about it. It is called &#8220;charity&#8221;.</p>
+<p>If I forget about gifts, which are a rare exception happening only within my close social circle, every transaction is either a purchase or a charity donation. Nothing else.</p>
+<p>The implications are huge. It means that something has one and only one fixed price, fixed by the market and identical for everybody. That price is perceived as the real value. People will pay an expensive ticket for a violin concerto but will not pay attention if <a href="http://urbanlegends.about.com/od/music/a/violinist_metro.htm">the same artist plays in the metro</a>. It is free, thus worthless. In our society, price and value are synonym.</p>
+<p>In that world, when you plan to earn money, you only have two solutions: pledge for charity or give something that customers cannot get for free. On the internet, where nearly everything can be found freely, this translated into two business models: a paywall (your readers being your customers) or advertising (your readers being the product you sell to your customers). The paywall proved to be ineffective (because people can get what they want for free anyway) and the advertisements proved to be very lucrative for the intermediaries (like Google) but not for the content providers. It also has the result of making the content providers caring more about advertiser&#8217;s interests (their customers) and to think about their followers (their product) only in terms of volume.</p>
+<p>When I joined Flattr, in 2010, I thought it was only a way for people to give me charity. My bet was to invest 24€ in a year in order to earn more. I told myself that I would quit Flattr if made less than the, at the time mandatory, 2€/month.</p>
+<p>I&#8217;ve earned more but, most importantly, learned much much more.</p>
+<p>I discovered that transactions are not only of the &#8220;buying because you have no choice&#8221; or &#8220;charity&#8221; kind. It could be something hybrid, something I call the &#8220;free price&#8221;.</p>
+<p>I thought that what I wrote on my blog had no value. My writing would be valued only if published in a book. But I discovered that it nevertheless had value for some. A different one for each reader. Not fixed by the invisible hand of the market but by their personal history. Flattr allowed people to pay for each of my blog post according to the value they saw in it. It is not charity, it is not giving. It is &#8220;paying freely&#8221;.</p>
+<p>In a sense, it is a lot more fair. A poor reader will be able to give me 0.10€ while a richer reader can give me 1, 10 or even 50€. The content producer dilemma was &#8220;publish something for free and make it worthless in order to reach a wide audience&#8221; or &#8220;keep it confidential to earn money and monetize the content&#8221;. Now, with the &#8220;free price&#8221;, you can have both. Making stuff for free while keeping an high value.</p>
+<p>As <a href="http://on.ted.com/Amanda">Amanda Palmer said</a>, this is not new. It always existed for street artists, for waiter&#8217;s tips. But I was confusing it with charity and may not be alone in that case. It is clearly not charity. You pay for something, for a product. It is a free price.</p>
+<p>This has the groundbreaking effect of putting into question the traditional equation price = value. Because there&#8217;s not one fixed price but as many prices as customers.</p>
+<p>While I&#8217;m very excited about this, I also realise that this is the main weakness of Flattr: it is too disruptive.</p>
+<p>Flattr will only work for people already convinced that this third transaction model is possible. It will only work for the people that are already seeing value in stuff that have no price. People that are ready to go through the hassle of creating an account, sending money, etc.</p>
+<p>But what if we could transform Flattr into an educational tool? Teaching people <a title="Feel free to tip free content" href="http://ploum.net/post/feel-free-to-tip-free-content">the joy of paying for stuff without a fixed price</a>? After all, it&#8217;s exactly the effect it had on me.</p>
+<p>What about a Flattr paywall as a Trojan horse? A Flattr paywall is something I already explored in my story <a title="The Publisher’s Dilemma" href="http://ploum.net/post/publishers-dilemma">&#8220;The Publisher&#8217;s Dilemma&#8221;</a>. To access a list of content, a Flattr account would be required and any content you access would be automatically Flattered. Psychologically, content producers will then learn to make content for a &#8220;free price&#8221; without being required to publish completely for free (which is, thanks to <a title="An Open Letter To Pirated Artists" href="http://ploum.net/post/open-letter-pirated-artists">the industry lobbying</a>, something artists are afraid of).</p>
+<p>On the other hand, many consumers who never bothered to pay for something may think &#8220;Hey, I can access many content on many websites for only 2€/month. Let&#8217;s create an account.&#8221; Once their account is credited, they may Flattr other content. After all it doesn&#8217;t cost them more money. And, like I did myself,<a title="Paying for the web?" href="http://ploum.net/post/paying-web"> find themselves increasing their monthly Flattr</a>.</p>
+<p>Flattr is an awesome tool for people who believe in a &#8220;free price&#8221;. But it could go one step further and become an advocacy tool for the &#8220;free price&#8221;. Something which is shaking one of the deepest foundation of our society, the infamous price tyranny.</p>
+<p>&nbsp;</p>
+<p><em>Picture by <a href="http://www.flickr.com/photos/51068224@N05/5247205874">FrostWire</a>.</em></p>
+ <p><a href="http://ploum.net/?flattrss_redirect&amp;id=2810&amp;md5=7861031a8a153bb9ceb348413f2664ba" title="Flattr" target="_blank"><img src="http://ploum.net/wp-content/plugins/flattr/img/flattr-badge-large.png" alt="flattr this!"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://ploum.net/post/the-disruptive-free-price/feed</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+	<creativeCommons:license>http://creativecommons.org/licenses/by/2.0/be/</creativeCommons:license>
+	<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=ploum&amp;popout=1&amp;url=http%3A%2F%2Fploum.net%2Fpost%2Fthe-disruptive-free-price&amp;language=fr_FR&amp;category=text&amp;title=The+Disruptive+Free+Price&amp;description=During+most+of+my+life%2C+I+thought+that+there+was+only+two+ways+to+give+money+to+someone.+Firstly%2C+in+exchange+of+something+you+want%2Fneed+but+not+available+without+paying....&amp;tags=EN%2CFlattr%2Cblog" type="text/html" />
+	</item>
+		<item>
+		<title>Chérie, il n&#8217;y a plus de papier !</title>
+		<link>http://ploum.net/post/cherie-il-ny-a-plus-de-papier</link>
+		<comments>http://ploum.net/post/cherie-il-ny-a-plus-de-papier#comments</comments>
+		<pubDate>Tue, 26 Mar 2013 15:21:03 +0000</pubDate>
+		<dc:creator>Lionel Dricot</dc:creator>
+				<category><![CDATA[blog]]></category>
+		<category><![CDATA[FR]]></category>
+		<category><![CDATA[futur]]></category>
+		<category><![CDATA[plume]]></category>
+
+		<guid isPermaLink="false">http://ploum.net/?p=2773</guid>
+		<description><![CDATA[Ah non ! Pas encore ! Décidément, ça ne rate jamais. Je suis là, comme un pignouf, le pantalon sur les chevilles, et j&#8217;observe avec désarroi le maigre rouleau en carton où sont encore collés quelques reliefs de papier déchiré. Dans la main, je tiens la seule et unique feuille qui restait. Soupir. En m&#8217;étirant [...]]]></description>
+				<content:encoded><![CDATA[<p>Ah non ! Pas encore ! Décidément, ça ne rate jamais. Je suis là, comme un pignouf, le pantalon sur les chevilles, et j&#8217;observe avec désarroi le maigre rouleau en carton où sont encore collés quelques reliefs de papier déchiré. Dans la main, je tiens la seule et unique feuille qui restait.</p>
+<p>Soupir.</p>
+<p>En m&#8217;étirant au maximum, je dois bien pouvoir atteindre l&#8217;armoire de la réserve en gardant mes fesses vissées sur la lunette. Humf ! Encore un petit effort. Gni ! J&#8217;attrape l&#8217;emballage plastique et… Victoire !</p>
+<p>Je me saisis de mon précieux trophée, le dernier rouleau du paquet. Le dernier ? Machinalement, je fixe le code barre et murmure « Vide ». Dans mes lunettes, une légère notification me confirme que le fait a bien été enregistré.</p>
+<p>C&#8217;est HouseSupply, une startup canadienne, qui a lancé cela. Plutôt que d&#8217;écrire une liste de courses, il suffit de s&#8217;inscrire et de scanner l&#8217;emballage des produits vides. De leur côtés, ils tiennent à jour l&#8217;état de votre stock pour ce produit et s&#8217;occupent de faire en sorte que vous ne soyez jamais à cours.</p>
+<p>Bien sûr, cela fonctionne surtout pour les biens non-périssables que l&#8217;on souhaite avoir en permanence sous la main. Les produits ménagers, les conserves, les boissons gazeuses et, bien entendu, le papier toilette. Ils s&#8217;arrangent pour faire le minimum de livraisons possibles et tiennent compte de votre rythme de consommation.</p>
+<p>Personnellement, j&#8217;adore. Lorsque je me rends au supermarché, c&#8217;est dorénavant uniquement pour acheter des produits frais. Du coup, je peux y aller à pieds avec un sac à dos plutôt qu&#8217;en voiture. Il est bien entendu qu&#8217;il ne faut pas oublier de scanner les étiquettes des pots vides. J&#8217;ai intégré le réflexe. Pour les autres, j&#8217;ai entendu dire que des poubelles intelligentes avec lecteurs RFID devraient bientôt s&#8217;en charger.</p>
+<p>Un service similaire existe pour les produits périssables, avec rappel automatique lorsque la date de péremption approche. Mais j&#8217;avoue ne pas avoir franchi le pas. C&#8217;est mon côté un peu frileux mais la nourriture, c&#8217;est sacré. Je l&#8217;achète dans mon bon vieux super traditionnel.</p>
+<p>Tout en tirant la chasse, je tente de camoufler les mauvaises odeurs avec la bonbonne décorée de champs de lavande et de petits oiseaux.</p>
+<p>Pf…rr Pf…rr</p>
+<p>Décidément, c&#8217;est le jour ! La bonbonne est vide. Sans réfléchir, je la tourne histoire de fixer le code barre en murmurant « Vide ». La notification qui s&#8217;affiche dans mes lunettes se marque en orange. Bizarre.</p>
+<p>— Chérie ?</p>
+<p>Une voix lointaine me répond du salon :<br />
+— Quoi ?<br />
+— Tu as changé de marque pour le Pschit-Pschit Sent-Bon lavande ?<br />
+— Oui. HouseSupply m&#8217;a fait savoir que plus de 70% de nos amis Facebook sont passés de Pschit-Pschit Sent-Bon à Ouragan Senteur et sont très satisfaits du changement pour un coût inférieur. J&#8217;ai accepté l&#8217;offre de changer.<br />
+— Ah, dis-je peu convaincu. Mais t&#8217;es sûr que c&#8217;était pas une promotion déguisée ?<br />
+— Non, j&#8217;ai demandé à Laure. Elle m&#8217;a confirmé que c&#8217;est tout aussi bon et que ça coûte moins cher. D&#8217;ailleurs, globalement, sur HouseSupply il y a une migration très nette vers Ouragan Senteur avec un fort taux de satisfaction. J&#8217;ai fait une recherche sur HouseSupply Trends et la migration inverse est elle quasi inexistante.<br />
+— Bon, dans ce cas, va pour Ouragan Senteur.</p>
+<p>J&#8217;ai pas mal d&#8217;amis qui sont formellement opposés à HouseSupply. Ils parlent d&#8217;une invasion dans nos vies privées. De mon côté, je ne trouve pas cela pire que les cartes de fidélité. Et si quelqu&#8217;un tient absolument à mesurer ma consommation de papier toilette, grand bien lui fasse ! Est-ce qu&#8217;ils prennent en compte qu&#8217;un rouleau sur deux est tout simplement dégommé par le chat ? D&#8217;ailleurs, à choisir, je sacrifierais toutes mes données de consommation de PQ et de Pschit-Pshit Sent-Bon passées, présentes et à venir pour que le système puisse me prévenir que le rouleau est vide avant que je pose mes fesses sur la cuvette.</p>
+<p>Genre un gros avertissement rouge qui clignote dans les lunettes : « Attention ! Vous allez vous asseoir sur la toilette mais le rouleau actuel ne comporte plus que six feuillets or votre consommation habituelle est de vingt-trois feuillets. »</p>
+<p>Tout en me marrant silencieusement à cette idée, je jette le flacon vide de Pshit-Pshit Sent-Bon dans la poubelle appropriée et prend un nouveau dans la réserve. Tiens, il s&#8217;agit du dernier ! Une livraison ne devrait donc pas tarder…</p>
+<p>&nbsp;</p>
+<p><em>Photo par <a href="http://www.flickr.com/photos/80126176@N00/129022254">Jane Waterbury</a></em></p>
+ <p><a href="http://ploum.net/?flattrss_redirect&amp;id=2773&amp;md5=c96c2af1515a0a5fbdb02f64ab06ca36" title="Flattr" target="_blank"><img src="http://ploum.net/wp-content/plugins/flattr/img/flattr-badge-large.png" alt="flattr this!"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://ploum.net/post/cherie-il-ny-a-plus-de-papier/feed</wfw:commentRss>
+		<slash:comments>10</slash:comments>
+	<creativeCommons:license>http://creativecommons.org/licenses/by/2.0/be/</creativeCommons:license>
+	<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=ploum&amp;popout=1&amp;url=http%3A%2F%2Fploum.net%2Fpost%2Fcherie-il-ny-a-plus-de-papier&amp;language=fr_FR&amp;category=text&amp;title=Ch%C3%A9rie%2C+il+n%26%238217%3By+a+plus+de+papier%C2%A0%21&amp;description=Ah+non+%21+Pas+encore+%21+D%C3%A9cid%C3%A9ment%2C+%C3%A7a+ne+rate+jamais.+Je+suis+l%C3%A0%2C+comme+un+pignouf%2C+le+pantalon+sur+les+chevilles%2C+et+j%26%238217%3Bobserve+avec+d%C3%A9sarroi+le+maigre+rouleau+en...&amp;tags=FR%2Cfutur%2Cplume%2Cblog" type="text/html" />
+	</item>
+		<item>
+		<title>Bitcoin pour les nuls</title>
+		<link>http://ploum.net/post/bitcoin-pour-les-nuls</link>
+		<comments>http://ploum.net/post/bitcoin-pour-les-nuls#comments</comments>
+		<pubDate>Tue, 19 Mar 2013 23:07:17 +0000</pubDate>
+		<dc:creator>Lionel Dricot</dc:creator>
+				<category><![CDATA[blog]]></category>
+		<category><![CDATA[Bitcoin]]></category>
+		<category><![CDATA[FR]]></category>
+
+		<guid isPermaLink="false">http://ploum.net/?p=2749</guid>
+		<description><![CDATA[Vous entendez peut-être parler, surtout sur ce blog, du Bitcoin. Mais qu&#8217;est-ce donc ? Et bien, il s&#8217;agit d&#8217;une monnaie. Rien de moins, rien de plus. Mais au fond, qu&#8217;est-ce qui caractérise une monnaie ? C&#8217;est un instrument dans lequel vous placez une certaine confiance. La confiance de pouvoir, plus tard, l&#8217;échanger contre des biens [...]]]></description>
+				<content:encoded><![CDATA[<p>Vous entendez peut-être parler, surtout sur ce blog, du Bitcoin. Mais qu&#8217;est-ce donc ? Et bien, il s&#8217;agit d&#8217;une monnaie. Rien de moins, rien de plus.</p>
+<p>Mais au fond, qu&#8217;est-ce qui caractérise une monnaie ? C&#8217;est un instrument dans lequel vous placez une certaine confiance. La confiance de pouvoir, plus tard, l&#8217;échanger contre des biens ou des services dont vous avez besoin. Ce qui vous pousse, vous-même, à l&#8217;accepter en échange d&#8217;un service ou d&#8217;un bien. Dans la plupart des cas, la monnaie n&#8217;est qu&#8217;un instrument et n&#8217;a pas de valeur intrinsèque ou alors une valeur intrinsèque plus faible que la valeur faciale. Depuis plusieurs années, la monnaie est même devenue principalement virtuelle : il s&#8217;agit d&#8217;un chiffre qui s&#8217;affiche sur un écran. Avez-vous déjà songé que vous travaillez uniquement pour augmenter un chiffre sur un « compte » ?</p>
+<p>Afin de maintenir la confiance, il faut que la monnaie soit suffisamment rare et difficile à produire. C&#8217;est une des raisons qui ont fait que, très tôt, les hommes ont adopté l&#8217;or, l&#8217;argent ou les coquillages comme monnaie : rare, difficile à trouver ou à contrefaire et facile à transférer ou à diviser en plus petites parties.</p>
+<p>Mais les billets de banques ou les chiffres sur un ordinateur peuvent être reproduits très facilement. Une rareté artificielle est donc maintenue par les états et les banques. L&#8217;importance de la monnaie fait que ceux qui la contrôlent, les états et les banques, ont un pouvoir énorme.</p>
+<p>Bitcoin est également une monnaie virtuelle. Il s&#8217;agit simplement d&#8217;un chiffre sur un ordinateur. Mais grâce à un algorithme mathématique complexe, il est possible de le rendre  inmultipliable sans recourir à une autorité centrale. Toute personne qui envoie un bitcoin le perd donc, comme pour n&#8217;importe quelle monnaie. Cela fonctionne tellement bien que des internautes ont commencé à avoir confiance dans le fait qu&#8217;il pouvait acheter des biens, des services, des euros ou des dollars avec des bitcoins. Le Bitcoin a donc acquis une valeur proportionnelle à cette confiance.</p>
+<p><strong>Comment fonctionne Bitcoin ?</strong></p>
+<p>Pour simplifier très grandement, chaque bitcoin est en fait la solution à un problème mathématique ultra-complexe. De par sa conception, nous savons qu&#8217;il existe un total de 21 millions de solutions différentes à ce problème mathématique. Mais les solutions les plus simples étant trouvées les premières, il devient de plus en plus difficile de trouver de nouvelles solutions. À ce jour, 11 millions de bitcoins sont en circulation, de nouveaux bitcoins apparaissent chaque jour chez les « mineurs », personnes équipées de matériel pour la recherche de solutions. Nous savons qu&#8217;il n&#8217;y aura jamais plus de 21 millions de bitcoins en circulation et chaque nouveau bitcoin est plus difficile à trouver que le précédent.</p>
+<p>Un bitcoin est donc unique et rare. Mais il est divisible presqu&#8217;à l&#8217;infini, ce qui permet de ne pas limiter les échanges.</p>
+<p>Le problème qui se pose ensuite est la double dépense. Comment s&#8217;assurer que lorsque je donne un bitcoin à quelqu&#8217;un, je n&#8217;en garde pas une copie. La solution est conceptuellement simple : le logiciel qui permet d&#8217;envoyer et de recevoir des bitcoins télécharge, en peer-to-peer, l&#8217;historique de tous les propriétaires successifs. Si je donne un bitcoin à Alice mais que j&#8217;essaie de le garder pour le dépenser une seconde fois chez Bob, Bob verra immédiatement, dans l&#8217;historique du bitcoin en question, qu&#8217;il a déjà été donné à Alice. Bob le refusera donc.</p>
+<p>Il s&#8217;agit évidemment d&#8217;une simplification outrancière (et fausse par certains aspects) mais qui vous donne une idée de ce qu&#8217;est le bitcoin.</p>
+<p><strong>Comment obtenir des bitcoins ?</strong></p>
+<p>La première chose à faire c&#8217;est d&#8217;avoir un portefeuille pour recevoir des bitcoins. Vous pouvez soit vous créer un compte sur un service de portefeuille Bitcoin soit installer <a href="http://bitcoin.org/clients.html">un client bitcoin</a> sur votre ordinateur. Votre portefeuille peut générer des adresses de réception qui ressemble à <strong>18Trqk3tKkF8vNoW6am5rx8K6wUSQAqo1q. </strong></p>
+<p>Muni de cette adresse, vous pouvez échanger vos euros ou vos dollars contre des bitcoins. Cet échange peut se faire en direct avec une connaissance ou un ami. Ou bien, vous pouvez vous rendre sur un site d&#8217;échange de bitcoins. Le plus connu est sans conteste <a href="https://mtgox.com/">MtGox</a>, par lequel transite la toute grande majorité des échanges bitcoins/dollars. Mais l&#8217;utiliser implique pas mal de contraintes de sécurité. Un échange plus simple d&#8217;accès est <a href="https://www.bitstamp.net">Bitstamp</a>. Une fois votre compte créé là-bas, vous pouvez faire un versement en euros, qui sera converti en dollars. Avec ces dollars, vous pourrez acheter des bitcoins et vous les envoyer sur votre adresse.</p>
+<p>Une autre manière bien plus intéressante est de fournir vos services ou vos biens contre paiement en bitcoins. Il vous suffit de générer une adresse par transaction et de la donner à votre client. Le client ne peut pas ajouter de commentaire avec son paiement, ce qui rend Bitcoin un peu complexe et contre-intuitif lors des transactions.</p>
+<p><strong>Comment payer en bitcoins ?</strong></p>
+<p>Dépenser les bitcoins est très simple. Si vous faites un achat sur un site acceptant les paiements en bitcoins, vous verrez tout simplement l&#8217;adresse de réception du vendeur. Dans votre client bitcoin (en ligne ou sur votre ordinateur), introduisez cette adresse et le montant. Voilà, c&#8217;est aussi simple que ça. À titre d&#8217;exercice, copiez/coller <strong>18Trqk3tKkF8vNoW6am5rx8K6wUSQAqo1q</strong> et envoyez moi ce que vous voulez, par exemple 0,01 bitcoin. Voilà, vous venez de faire un paiement. Ce paiement est anonyme : je n&#8217;ai aucun moyen de savoir qui me l&#8217;a envoyé. Notons que cet anonymat n&#8217;est pas absolument garanti si les investigateurs disposent de moyens suffisants.</p>
+<p>Cette facilité et cet anonymat sont une force mais également un danger pour les utilisateurs peu avertis. En effet, imaginons que votre fournisseur d&#8217;accès internet décide de remplacer automatiquement les adresses Bitcoin dans les sites que vous visitez par ses adresses à lui. En toutes bonne foi, vous allez envoyer un paiement à l&#8217;adresse qui s&#8217;affiche sur votre écran. Mais votre destinataire ne recevra rien. Il est donc important de garantir la validité d&#8217;une adresse de paiement et Bitcoin ne résout pas ce problème.</p>
+<p><strong>Comment garder ses bitcoins en sécurité ?</strong></p>
+<p>Si vous avez installé un client Bitcoin sur votre ordinateur, il est impératif de sauvegarder votre fichier wallet.dat et de bien vous souvenir de son mot de passe. Si vous perdez l&#8217;un ou l&#8217;autre, vos bitcoins sont perdus sans espoir. Vos économies sont donc à la merci d&#8217;un crash disque ou d&#8217;un vol de laptop si vous n&#8217;y prenez garde. D&#8217;un autre côté, votre fichier wallet.dat ne doit pas tomber en de mauvaises mains.</p>
+<p>Quand aux services de portefeuille Bitcoin en ligne, ils sont la proie des pirates ou des arnaqueurs. J&#8217;avais ainsi décidé de ne pas mettre mes œufs dans le même panier en mettant des bitcoins sur TradeHill, qui a fait faillite en emportant tous les bitcoins, sur Bitcoin7, qui a disparu du jour au lendemain et sur Bitmarket, dont le propriétaire s&#8217;est fait voler les bitcoins. Une belle leçon…</p>
+<p>Garder ses bitcoins en sécurité nécessite donc une attention et une expertise assez pointue.</p>
+<p><strong>L&#8217;avenir du Bitcoin</strong></p>
+<p>Malgré ses défauts, Bitcoin permet de s&#8217;affranchir du contrôle des banques et des états. Personne ne contrôle Bitcoin. C&#8217;est pourquoi certaines personnes font confiance au Bitcoin. Cette confiance se traduit par une montée des prix. Cette montée des prix est elle même entretenue par les spéculateurs : les personnes qui ne font pas spécialement confiance au Bitcoin mais qui espèrent que les prix vont monter et qui ne font qu&#8217;acheter pour revendre plus tard. La proportion entre les spéculateurs et ceux qui achètent des bitcoins pour les dépenser, que ce soit maintenant ou plus tard, est tout à fait inconnue.</p>
+<p>Personne ne peut prédire l&#8217;avenir. Il est très important de garder à l&#8217;esprit que tout achat de bitcoins à titre d&#8217;investissement est à haut risque. On n&#8217;investit que ce qu&#8217;on peut se permettre de perdre totalement.</p>
+<p>Dans un futur proche, Bitcoin pourrait <a title="Ripple, making Bitcoin easier (or obsolete)" href="http://ploum.net/post/ripple-making-bitcoin-easier-or-obsolete">résoudre ses problèmes</a> et, en se simplifiant, devenir pour la monnaie ce que l&#8217;email est à la communication et finir par s&#8217;échanger à plus de 1000$ le bitcoin. De même, une faille dans l&#8217;algorithme mathématique pourrait être découverte et faire tomber à zéro la valeur du Bitcoin en quelques heures.</p>
+<p>De mon côté, je vous ai déjà raconté <a title="Le jour où les geeks prirent le contrôle de l’économie…" href="http://ploum.net/post/futur-economie">comment je voyais l&#8217;avenir</a>. À vous de faire confiance au Bitcoin… ou pas !</p>
+<p>&nbsp;</p>
+<p><em>Photo par <a href="http://www.flickr.com/photos/22823034@N00/7459087708">Zach Copley</a></em></p>
+<p>&nbsp;</p>
+ <p><a href="http://ploum.net/?flattrss_redirect&amp;id=2749&amp;md5=fb5fc5b8d571cab63e3ab8dc6d3a5bd3" title="Flattr" target="_blank"><img src="http://ploum.net/wp-content/plugins/flattr/img/flattr-badge-large.png" alt="flattr this!"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://ploum.net/post/bitcoin-pour-les-nuls/feed</wfw:commentRss>
+		<slash:comments>8</slash:comments>
+	<creativeCommons:license>http://creativecommons.org/licenses/by/2.0/be/</creativeCommons:license>
+	<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=ploum&amp;popout=1&amp;url=http%3A%2F%2Fploum.net%2Fpost%2Fbitcoin-pour-les-nuls&amp;language=fr_FR&amp;category=text&amp;title=Bitcoin+pour+les+nuls&amp;description=Vous+entendez+peut-%C3%AAtre+parler%2C+surtout+sur+ce+blog%2C+du+Bitcoin.+Mais+qu%26%238217%3Best-ce+donc+%3F+Et+bien%2C+il+s%26%238217%3Bagit+d%26%238217%3Bune+monnaie.+Rien+de+moins%2C+rien+de+plus.+Mais+au+fond%2C+qu%26%238217%3Best-ce...&amp;tags=Bitcoin%2CFR%2Cblog" type="text/html" />
+	</item>
+		<item>
+		<title>Habetis Nuntium (le futur du journalisme)</title>
+		<link>http://ploum.net/post/habetis-nuntium-le-futur-du-journalisme</link>
+		<comments>http://ploum.net/post/habetis-nuntium-le-futur-du-journalisme#comments</comments>
+		<pubDate>Sun, 17 Mar 2013 13:14:35 +0000</pubDate>
+		<dc:creator>Lionel Dricot</dc:creator>
+				<category><![CDATA[blog]]></category>
+		<category><![CDATA[FR]]></category>
+		<category><![CDATA[futur]]></category>
+
+		<guid isPermaLink="false">http://ploum.net/?p=2739</guid>
+		<description><![CDATA[J&#8217;ai à peine le temps de pousser la porte de mon bar favori que François, mon pote de vingt ans, m&#8217;attrape le coude. — Hey Lio, tu as vu ? Habemus papam ! Il a choisi le nom de règne de Télesphore 2 ! On va enfin arrêter de me faire des blagues. — Non, je [...]]]></description>
+				<content:encoded><![CDATA[<p>J&#8217;ai à peine le temps de pousser la porte de mon bar favori que François, mon pote de vingt ans, m&#8217;attrape le coude.</p>
+<p>— Hey Lio, tu as vu ? Habemus papam ! Il a choisi le nom de règne de Télesphore 2 ! On va enfin arrêter de me faire des blagues.<br />
+— Non, je n&#8217;ai pas vu. Mais je ne suis pas catholique et pas très intéressé par les choses religieuses. Habetis papam !<br />
+— Je ne suis pas moi-même très religieux mais c&#8217;est une nouvelle relativement importante dans mon entourage. Je l&#8217;ai vu passer plusieurs fois dans mon flux.<br />
+— Visiblement, ce n&#8217;est pas le cas pour les gens que je suis. D&#8217;ailleurs, je t&#8217;avoue que je me porte très bien sans le savoir.<br />
+— J&#8217;ai compris, je ne te partage pas l&#8217;article de blog qui analyse le personnage, continue-t-il avec un clin d&#8217;œil.</p>
+<p>Nous rigolons doucement tandis que je demande à Jean-Paul de m&#8217;apporter un demi. La discussion s&#8217;engage sur nos vies respectives, sur nos espoirs et nos futurs. Après un instant, François revient sur le sujet.</p>
+<p>— Ça me perturbe que tu ne sois pas au courant de l&#8217;élection du nouveau pape. Pour le dernier pape, ce fût un événement planétaire. Personne n&#8217;aurait pu l&#8217;ignorer.<br />
+— Pendant des millénaires, les hommes ont lutté contre la faim. Ils ne tendaient qu&#8217;à une chose: manger. Lorsque la nourriture devint abondante et disponible, on assistât à l&#8217;excès inverse : boulimie, uniformisation mondiale à travers les fast food. En réaction, on redécouvrit les joies de la culture locale, du potager dans son jardin.<br />
+— Je vois où tu veux en venir : c&#8217;est exactement pareil pour l&#8217;actualité. Au cours de l&#8217;histoire, l&#8217;information a toujours été rare, précieuse. Une fois devenue abondante, l&#8217;humain devint boulimique. Il fallait absolument connaître les derniers détails de cette guerre à l&#8217;autre bout de la planète, les résultats d&#8217;une compétition sportive ou avoir vu la vidéo d&#8217;une agression crapuleuse filmée par une caméra de surveillance.<br />
+— Le tout étant uniformisé par un petit nombre de médias ayant chacun une grande audience, décidant de ce qui devait être connu mondialement ou complètement ignoré du grand public. L&#8217;exemple type, c&#8217;est la télévision.</p>
+<p>François pose son verre et semble chercher dans ses souvenirs.</p>
+<p>— J&#8217;ai un peu perdu l&#8217;habitude de la télévision. J&#8217;étais petit. C&#8217;était comme des vidéos en streaming sauf que tu ne pouvais pas choisir quand tu les regardais. Si tu étais en retard de cinq minutes, tu ratais le début.<br />
+— C&#8217;est exactement cela, dis-je. Du coup, tu captais l&#8217;attention des gens, tu les forçais à te suivre et tu leur faisais avaler n&#8217;importe quoi.<br />
+— Dire que ça me faisait rêver. Je voulais être journaliste à la télévision.<br />
+— Encore un métier qui a disparu. Ou s&#8217;est radicalement transformé, c&#8217;est selon.<br />
+— Quand on y pense, il fallait une sacrée technologie pour réussir à diffuser en continu sans que les gens téléchargent directement le fichier vidéo, non ?</p>
+<p>Je me rappelle que François est un littéraire. La technologie pour lui, c&#8217;est du chinois. Quoiqu&#8217;il parle assez bien cette langue, justement. J&#8217;essaie de le sortir du bourbeux terrain technique.</p>
+<p>— Pourquoi on parle de télévision encore ?<br />
+— On comparait cela à la boulimie et au fast-food.<br />
+— Ah oui. Et bien moi, tu vois, j&#8217;ai repris goût à me nourrir d&#8217;aliments locaux, de prêter plus attention à mon potager.</p>
+<p>Il rigole :<br />
+— Et alors ? Le pape ne fait pas partie de ton potager ?<br />
+— Oh, au moins autant qu&#8217;un Big Mac.</p>
+<p>&nbsp;</p>
+<p><em>Photo par <a href="http://www.flickr.com/photos/14795407@N05/3146092196">Whitecat sg</a></em></p>
+ <p><a href="http://ploum.net/?flattrss_redirect&amp;id=2739&amp;md5=39ae7772479590636b301d6e08c2c225" title="Flattr" target="_blank"><img src="http://ploum.net/wp-content/plugins/flattr/img/flattr-badge-large.png" alt="flattr this!"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://ploum.net/post/habetis-nuntium-le-futur-du-journalisme/feed</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+	<creativeCommons:license>http://creativecommons.org/licenses/by/2.0/be/</creativeCommons:license>
+	<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=ploum&amp;popout=1&amp;url=http%3A%2F%2Fploum.net%2Fpost%2Fhabetis-nuntium-le-futur-du-journalisme&amp;language=fr_FR&amp;category=text&amp;title=Habetis+Nuntium+%28le+futur+du+journalisme%29&amp;description=J%26%238217%3Bai+%C3%A0+peine+le+temps+de+pousser+la+porte+de+mon+bar+favori+que+Fran%C3%A7ois%2C+mon+pote+de+vingt+ans%2C+m%26%238217%3Battrape+le+coude.+%E2%80%94+Hey+Lio%2C+tu+as+vu+%3F...&amp;tags=FR%2Cfutur%2Cblog" type="text/html" />
+	</item>
+		<item>
+		<title>Feel free to tip free content</title>
+		<link>http://ploum.net/post/feel-free-to-tip-free-content</link>
+		<comments>http://ploum.net/post/feel-free-to-tip-free-content#comments</comments>
+		<pubDate>Thu, 14 Mar 2013 12:40:55 +0000</pubDate>
+		<dc:creator>Lionel Dricot</dc:creator>
+				<category><![CDATA[blog]]></category>
+		<category><![CDATA[EN]]></category>
+		<category><![CDATA[Flattr]]></category>
+
+		<guid isPermaLink="false">http://ploum.net/?p=2730</guid>
+		<description><![CDATA[We have entered in an incredible world of free content. If it can be copied, you can find it for free on the Internet. It is as simple as that and it is awesome. We never dared to dream about such a world where every content, every knowledge was free, shareable with everybody. But it’s [...]]]></description>
+				<content:encoded><![CDATA[<p>We have entered in an incredible world of free content. If it can be copied, you can find it for free on the Internet. It is as simple as that and it is awesome. We never dared to dream about such a world where every content, every knowledge was free, shareable with everybody. But it’s the world we are living in.</p>
+<p>Nevertheless, on the individual scale, this evolution is understandably not accepted by the people who were used to sell content by purposedly confusing a given content and its physical medium. After a failed attempt to artificially make content <a title="Do I have to protect my content with DRM ? (The DRM equation)" href="http://ploum.net/post/145-do-i-have-to-protect-my-content-with-drm-the-drm-equation">impossible to copy</a>, some tried to monetize their content through <a title="The Ghost Web" href="http://ploum.net/post/ghost-web">advertisements</a>. The fundamental flaw in that model being that it would keep the money in the real big-blue-ceiling world. A world which, unlike the virtual world, is physically limited. The growing virtual world would become nothing but a huge billboard for the real world. Not realistic…</p>
+<p>When you cannot block people to access stuff for free but want to make them pay anyway, you have only one solution left: morality.</p>
+<p>Current calls to morality are incredibly negative: “Not paying is bad”, “If you don’t pay, content creators will die”, “If you don’t pay, you will get sued”, “Not paying is stealing”, …</p>
+<p>It leads to a business model based on fear and guilt. A world where everyone has to pay the same price before consuming the content. Not to mention the inherent contradiction of wanting to see the content spreading while, at the same time, blocking some from accessing it.</p>
+<p>But what if the call to morality was actually positive? “You don’t have to pay but it will be appreciated”. “If you pay, I will be able to create more content”. “If you can’t afford to pay for it, at least share it with your friends, spread it!”.</p>
+<p>In that new virtual world, only those who liked the content would pay. And they would pay the amount they want. Does it seems unrealistic because most people would choose to not pay? But it already exists. A lot of waiter and waitress in the world actually earn a living from tips. Or street artists like <a href="http://on.ted.com/Amanda">Amanda Palmer</a> in her early days. Those tips are optional and paid afterwards. The amount being proportional to the quality of the service or the pleasure we had. Why is it working? Because we are used to that system. Because we are positively compelled to give a tip. Because we can give what we find reasonable for our budget.</p>
+<p>In order for this system to work in the virtual world, it should be incredibly easy to give a tip without even thinking about it. Yet, such a system already exists. It is called <a href="http://flattr.com">Flattr</a> and I already <a title="Paying for the web?" href="http://ploum.net/post/paying-web">gave you a presentation</a>. The strength of Flattr is that you pay in advance a monthly tip. There’s no way to get over your budget as it is monthly fixed.</p>
+<p>But this would be even more awesome it the tip could be automatized. We spend a lot of time liking picture on Instagram, video on Vimeo, favouriting tweets and listenning to song on Grooveshark. Guess what? Flattr dit it! Starting yesterday, <a href="https://flattr.com/wherecaniflattr">those like/favourite/recommend actions will automatically give a Flattr</a> to the authors (if you enable it, of course).</p>
+<p>And this service is open to <a href="http://flattr.com/partner">any content provider</a>. Each time you would like something on your favourite platform, you would send a tip. 90% of that tip goes directly to the author, 5% goes to Flattr and 5% goes to Medium.</p>
+<p>For sure, those tips might appear negligible in the first time. But, as a content creator, isn’t it compelling to earn money because people wanted to give you money? Not because they were deceived into buying the entrance ticket but because they actually enjoyed your content? Wouldn’t it send a positive signal to new generation of content creators?</p>
+<p>Feel free to consume the content. Feel free to share it. Feel free to tip it.</p>
+<p>Just feel free…</p>
+<p>&nbsp;</p>
+<p><em>Disclaimer: I earn between 4€ and 110€ per month with Flattr. I&#8217;m not affiliated with Flattr in any way but I&#8217;m really excited by the philosophical implications of Flattr. That&#8217;s why I&#8217;m writing so much about it. I would of course welcome any similar service, especially if it could be decentralized. This post was first <a href="https://medium.com/medium-ideas/a998ead27e46">written on Medium</a>. Picture by <a href="http://www.flickr.com/photos/asirap/3810064060/">Parisa</a>.</em></p>
+ <p><a href="http://ploum.net/?flattrss_redirect&amp;id=2730&amp;md5=996f8a7ba9e82156b2c5ac0b3ca25ca0" title="Flattr" target="_blank"><img src="http://ploum.net/wp-content/plugins/flattr/img/flattr-badge-large.png" alt="flattr this!"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://ploum.net/post/feel-free-to-tip-free-content/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<creativeCommons:license>http://creativecommons.org/licenses/by/2.0/be/</creativeCommons:license>
+	<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=ploum&amp;popout=1&amp;url=http%3A%2F%2Fploum.net%2Fpost%2Ffeel-free-to-tip-free-content&amp;language=fr_FR&amp;category=text&amp;title=Feel+free+to+tip+free+content&amp;description=We+have+entered+in+an+incredible+world+of+free+content.+If+it+can+be+copied%2C+you+can+find+it+for+free+on+the+Internet.+It+is+as+simple+as+that...&amp;tags=EN%2CFlattr%2Cblog" type="text/html" />
+	</item>
+		<item>
+		<title>Le dilemme de l&#8217;éditeur</title>
+		<link>http://ploum.net/post/le-dilemme-de-lediteur</link>
+		<comments>http://ploum.net/post/le-dilemme-de-lediteur#comments</comments>
+		<pubDate>Wed, 06 Mar 2013 15:17:36 +0000</pubDate>
+		<dc:creator>Lionel Dricot</dc:creator>
+				<category><![CDATA[blog]]></category>
+		<category><![CDATA[ebooks]]></category>
+		<category><![CDATA[FR]]></category>
+		<category><![CDATA[futur]]></category>
+		<category><![CDATA[plume]]></category>
+
+		<guid isPermaLink="false">http://ploum.net/?p=2675</guid>
+		<description><![CDATA[This text in English Je suis un éditeur de livres. Devrais-je dire « J&#8217;étais un éditeur » ? Ou « Je suis encore un éditeur ? ». En fait, je ne suis plus certain d&#8217;avoir encore un travail. Tout ce que je sais c&#8217;est que je suis au prise avec « Le dilemme de l&#8217;éditeur [...]]]></description>
+				<content:encoded><![CDATA[<p><a title="The Publisher’s Dilemma" href="http://ploum.net/post/publishers-dilemma">This text in English</a></p>
+<p>Je suis un éditeur de livres. Devrais-je dire « J&#8217;étais un éditeur » ? Ou « Je suis encore un éditeur ? ». En fait, je ne suis plus certain d&#8217;avoir encore un travail. Tout ce que je sais c&#8217;est que je suis au prise avec « Le dilemme de l&#8217;éditeur ». Dois-je m&#8217;en réjouir ? Ou, au contraire, être désespéré ? Aucune idée…<br />
+En 2016, les ventes de magazines électroniques dépassèrent pour la première fois les ventes papier. Une évolution rendue possible grâce à l&#8217;existence de liseuses numériques bon marché, étanches et en couleurs. Sans même parler de l&#8217;arrivée des écrans mixtes, combinant amoled et e-ink sur les smartphones et les tablettes.</p>
+<p>Néanmoins, les ebooks étaient toujours aussi chers que leurs équivalents papier, encourageant de ce fait le téléchargement illégal. Ou encourageant l&#8217;achat de la version papier auprès des utilisateurs ayant toujours le besoin irrationnel de « posséder un objet ».</p>
+<p>Tout cela, c&#8217;était avant l&#8217;apparition de ReadR. Dès sa première année, la startup fût encensée par la presse spécialisée et appelée « le Spotify pour ebooks ». Le business model était simple : vous achetiez un abonnement mensuel et vous pouviez lire autant de livres que vous le souhaitiez. Leur slogan ? « Lire sans contrainte ».</p>
+<p>Vous avez probablement déjà utilisé ReadR et vous en connaissez les avantages : une bibliothèque virtuelle synchronisée vers tous vos terminaux. Vous commencez à lire un livre sur votre liseuse à la maison, vous le continuez sur votre smartphone dans la file au supermarché avant de le terminer sur l&#8217;écran de l&#8217;ordinateur du bureau pendant votre pause déjeuner. Oui, vous pouvez même télécharger une version sans DRM de chacun des livres que vous avez lu.</p>
+<p>L&#8217;expérience est parfaite. Mais le meilleur reste à venir : vous pouvez ajouter vos propres ebooks sur votre compte ReadR, par exemple ceux achetés sur une autre plateforme. Vous pouvez ensuite les partager avec vos amis. Vous venez de terminer un roman ? Voici automatiquement une liste des livres du même auteur recommandés par vos amis. ReadR fait disparaître les limitations du monde réel. Lire sans contrainte.</p>
+<p>La possibilité d&#8217;envoyer ses propres ebooks combinée avec les recommandations fut immédiatement perçue comme un appel au piratage. Heureusement, l&#8217;industrie du livre décida de ne pas reproduire les erreurs de l&#8217;industrie du disque et, au contraire, de marcher dans le sens du progrès.</p>
+<p>Après de longues négociations, la plupart des éditeurs, y compris ma propre société, accepta de publier l&#8217;entièreté de son catalogue sur ReadR. Chaque livre recevrait une certaine somme à chaque fois qu&#8217;il serait lu. Mais, au lieu d&#8217;une somme fixée, il fût décidé de s&#8217;inspirer de <a href="http://flattr.com">Flattr</a>, une société suédoise permettant les micro-dons.</p>
+<p>ReadR offre donc maintenant quatre types d&#8217;abonnements : le gratuit, qui vous donne accès au contenu gratuit y compris l&#8217;entièreté du <a href="http://www.gutenberg.org/">Projet Gutenberg</a>, le mini, à 2€ par mois, le normal à 5€ par mois et le premium à 10€ par mois. En fait, 10€ est une somme minimale pour avoir accès au premium mais vous pouvez très bien décider de verser plus.</p>
+<p>Chaque livre que vous ouvrez au cours du mois récolte un point ReadR. Si vous avez fait une recommandation pour ce livre, il reçoit un second point ReadR pour ce mois. À la fin du mois, votre abonnement est divisé par le nombre de points que vous avez donné. Si, en janvier, vous avez ouvert trois livres et recommandé un des trois, cela fait un total de quatre points ReadR. Avec l&#8217;abonnement mini, chaque point vaut donc 50 centimes. Le livre recommandé recevra 1€ (50 centimes pour la lecture plus 50 centimes pour la recommandation). Nonante pourcent de cette somme va directement à l&#8217;auteur.</p>
+<p>Secrètement, les auteurs espèrent donc que vous commencerez un livre à la fin du mois et mettrez cinq semaines à le lire, histoire de recevoir trois points ReadR de trois mois différents. Certains commencent même à publier les chapitres séparément.</p>
+<p>L&#8217;industrie du livre accepta cet accord à une condition : chaque auteur pourrait choisir de ne publier son livre qu&#8217;à partir d&#8217;un niveau d&#8217;abonnement pré-défini. On calcula qu&#8217;un lecteur lisant en moyenne deux livres par mois, il serait rentable de n&#8217;avoir que des lecteurs abonnés à 5€ ou à 10€ par mois. On réserverait les courtes nouvelles ou les textes à caractère promotionnel pour les abonnés gratuits ou mini.</p>
+<p>Tout le monde était enchanté par l&#8217;accord. Il nous semblait que, contrairement au disque, le livre avait réalisé une transition en douceur du papier vers le virtuel. Nous avons fait la fête toute la nuit, le futur nous souriait et les auteurs étaient enchantés. L&#8217;alcool aidant, on s&#8217;est lâché sur le dos de ces crétins de l&#8217;industrie musicale.</p>
+<p>Ce que je n&#8217;avais pas réalisé c&#8217;est qu&#8217;une nouvelle génération d&#8217;auteurs avait fait son apparition durant les dix dernières années. Des auteurs qui vivaient dans la virtualité pure bien avant nous : les blogueurs, les journalistes, les auteurs amateurs. La plupart d&#8217;entre eux n&#8217;ayant jamais publié un « vrai » livre papier, nous ne les considérions pas comme de « vrais » auteurs. C&#8217;était juste quelques amateurs sans talent et nous n&#8217;y prêtions pas attention. Néanmoins, ils écrivaient et avaient une audience grandissante.</p>
+<p>Ils se ruèrent sur ReadR dès le début, sans prendre la peine de négocier quoi que ce soit. Ils publiaient de tout : depuis des courts articles jusqu&#8217;à des romans de centaines de pages. Les journalistes publiaient leurs enquêtes en direct. Grâce aux recommandations et aux réseaux sociaux, ils attiraient des lecteurs sans avoir rencontré un seul éditeur ou un seul rédacteur en chef de magazine.</p>
+<p>Ils diffusaient leur contenu aux lecteurs sans avoir besoin de nous ! Ils étaient payés sans notre intermédiaire.</p>
+<p>Mais au fond, qui est un écrivain ? Qui est un journaliste ? Qui est <a title="Le blogueur venu de Demain (première partie)" href="http://ploum.net/post/le-blogueur-venu-de-demain-premiere-partie">un blogueur</a> ? Qui est un adolescent écrivant sur Internet ? Pourquoi se poser la question ? Lisons sans contraintes…</p>
+<p>Lire sans contrainte !</p>
+<p>C&#8217;est à ce moment que j&#8217;ai réellement compris le slogan de ReadR.</p>
+<p>Le concept même du « livre » est en train de changer et nous sommes les témoins de ces expériences mêlant la vidéo, l&#8217;écriture, les images, les sons. Le manuscrit papier du livre à publier qui est à côté de mon clavier me fait de plus en plus penser à un grimoire antique. Je me sens moi-même obsolète, racorni comme une vieille page jaunie.</p>
+<p>Deux ans après le lancement de ReadR, l&#8217;industrie du livre ne souriait plus. La panique commençait à se faire sentir. Certains des best-sellers des dernières années ne se vendent pas bien du tout sur ReadR. Il y a tellement d&#8217;alternatives que chacun lit ce qui lui plaît, suivant plus les recommandations de ses amis que la publicité. Nous devons radicalement repenser notre infrastructure marketing afin que les gens lisent ce que nous voulons qu&#8217;ils lisent.</p>
+<p>Nous pensions que les abonnements ReadR nous garantissaient un revenu. Les gens ne pourraient pas lire nos livres sans payer. Mais au lieu de payer ou de pirater, ils décidèrent tout simplement de lire autre chose.</p>
+<p>Fallait-il publier gratuitement sur ReadR dans l&#8217;espoir d&#8217;avoir le plus de recommandations et donc de lecteurs (y compris les abonnés premium) ou se réserver uniquement aux abonnés ?</p>
+<p>La réponse est évidente : il est toujours préférable de publier gratuitement. C&#8217;est le meilleur moyen d&#8217;attirer des lecteurs premium. Mais si chaque auteur décide de faire pareil, pourquoi acheter un abonnement ? Quel serait l&#8217;incitant ? Nous avons appelé cette question « Le dilemme de l&#8217;éditeur » et j&#8217;en ai de sérieuses migraines.</p>
+<p>Au fond, peut-être aurait-il été préférable de suivre les traces de l&#8217;industrie du disque : corrompre des politiciens, faire du lobbying, attaquer en justice et faire le maximum d&#8217;argent pendant quelques années même si cela devait être fait au prix d&#8217;<a title="Lettre ouverte aux artistes piratés" href="http://ploum.net/post/lettre-ouverte-aux-artistes-pirates">une corruption morale</a>. Ou alors faire comme la presse et mendier auprès de Google.</p>
+<p>Mais je me dis qu&#8217;il doit y avoir une autre solution. Je me souviens d&#8217;avoir entendu un conversation ce matin dans la rue. Une jeune femme disait « C&#8217;est marrant… » à sa petite amie. Quelque chose comme « C&#8217;est marrant, j&#8217;ai un abonnement premium sur ReadR et je ne lis que des livre du catalogue gratuit. Mais je m&#8217;en fiche, je suis même plutôt contente de contribuer quelques euros aux auteurs que j&#8217;aime et qui partagent gratuitement leur talent. » Oui, c&#8217;était quelque chose dans ce genre là…</p>
+<p>Il faut que j&#8217;y réfléchisse. Il doit bien y avoir <a title="Et si vous testiez le web payant ?" href="http://ploum.net/post/si-vous-testiez-le-web-payant">une solution</a> pour lire sans contraintes. Lire sans contrainte…</p>
+<p>&nbsp;</p>
+<p><a title="The Publisher’s Dilemma" href="http://ploum.net/post/publishers-dilemma">This text in English</a>.</p>
+<p><em>Photo par <a href="http://www.flickr.com/photos/34876780@N08/4708236332">Kevin Raybon</a>.</em></p>
+ <p><a href="http://ploum.net/?flattrss_redirect&amp;id=2675&amp;md5=178f72c4affc0dbed52ddfc8bb02c5a0" title="Flattr" target="_blank"><img src="http://ploum.net/wp-content/plugins/flattr/img/flattr-badge-large.png" alt="flattr this!"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://ploum.net/post/le-dilemme-de-lediteur/feed</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+	<creativeCommons:license>http://creativecommons.org/licenses/by/2.0/be/</creativeCommons:license>
+	<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=ploum&amp;popout=1&amp;url=http%3A%2F%2Fploum.net%2Fpost%2Fle-dilemme-de-lediteur&amp;language=fr_FR&amp;category=text&amp;title=Le+dilemme+de+l%26%238217%3B%C3%A9diteur&amp;description=This+text+in+English+Je+suis+un+%C3%A9diteur+de+livres.+Devrais-je+dire+%C2%AB+J%26%238217%3B%C3%A9tais+un+%C3%A9diteur+%C2%BB+%3F+Ou+%C2%AB+Je+suis+encore+un+%C3%A9diteur+%3F+%C2%BB.+En+fait%2C+je...&amp;tags=ebooks%2CFR%2Cfutur%2Cplume%2Cblog" type="text/html" />
+	</item>
+		<item>
+		<title>Tiens, salut tonton !</title>
+		<link>http://ploum.net/post/tiens-salut-tonton</link>
+		<comments>http://ploum.net/post/tiens-salut-tonton#comments</comments>
+		<pubDate>Tue, 05 Mar 2013 19:37:04 +0000</pubDate>
+		<dc:creator>Lionel Dricot</dc:creator>
+				<category><![CDATA[blog]]></category>
+		<category><![CDATA[FR]]></category>
+		<category><![CDATA[nombril]]></category>
+
+		<guid isPermaLink="false">http://ploum.net/?p=2664</guid>
+		<description><![CDATA[Il y a quelques années, alors que je rattrapais mon inculture cinématographique en regardant la trilogie de La 7ème compagnie, voilà que, dans le troisième épisode, un individu entre entre dans la chapelle où se sont réfugiés les héros. — Tiens, salut tonton ! Il faut dire que mon tonton Francis est coutumier de ce [...]]]></description>
+				<content:encoded><![CDATA[<p>Il y a quelques années, alors que je rattrapais mon inculture cinématographique en regardant la trilogie de La 7ème compagnie, voilà que, dans le troisième épisode, un individu entre entre dans la chapelle où se sont réfugiés les héros.</p>
+<p>— Tiens, salut tonton !</p>
+<p>Il faut dire que mon tonton Francis est coutumier de ce genre de surprises. Acteur de théâtre, il a néamoins une floppée de petits (et moins petits) rôles au cinéma à son actif, comme l&#8217;atteste <a href="http://fr.wikipedia.org/wiki/Francis_Lemaire_(acteur)">sa filmographie</a>. Il m&#8217;avait déjà fait le coup dans Les anges gardiens, lors de la scène d&#8217;ouverture du Jaguar ou dans les secrets professionnels du docteur Apfelglück où son « Bonjour docteur » est resté dans les annales. Je regarde un film sans me douter de rien et puis « Tiens, salut tonton ! »</p>
+<p>À chaque enterrement ou à chaque fête de famille, il en profite pour m&#8217;enseigner sa science pour faire le guignol. En une après-midi il m&#8217;a appris à jongler avec des quilles, avec un certain succès. Il a tenté de m&#8217;expliquer l&#8217;accordéon, avec moins de succès.</p>
+<p><img class="aligncenter size-full wp-image-2665" alt="francis" src="http://ploum.net/wp-content/uploads/francis.jpg" width="417" height="313" /></p>
+<p><em>Mon tonton Francis, en train de me donner une leçon de « Je fais le con dans une fête de famille ».</em></p>
+<p>Appliquant les leçons, je mets en pratique lors du décès de mon tonton Éli, <a title="La vie trépidante des moules… (prélude)" href="http://ploum.net/post/196-la-vie-trepidante-des-moules-prelude">grand amateur de jeu de mot foireux</a> devant l&#8217;éternel. Mon tonton Francis apprécie la performance, lui qui partage avec Éli et moi cette dévorante passion de la science-fiction et du jeu de mot foireux. Nous passons l&#8217;après-midi ensemble et je découvre une nouvelle facette de la personnalité de cet artiste aux multiples talents, celle qui l&#8217;a fait participer à l&#8217;aventure de <a href="http://fr.wikipedia.org/wiki/Plan%C3%A8te_(revue)">la revue Planète</a> dont la collection complète encombre mon grenier.</p>
+<p>Et comme à chaque fois qu&#8217;on se voit, il me promet de m&#8217;envoyer le texte de son one-man-show. Je lui promet de lui envoyer mes nouvelles de Science-Fiction. Et puis on se quitte : « Salut tonton ! »</p>
+<p>Ce vendredi, tonton Francis, tu sacrifieras à la mode chère à toutes les grandes stars parisiennes, à savoir te faire ensevelir dans un petit carré de terre au Père-Lachaise.</p>
+<p>Ce n&#8217;est pas l&#8217;envie qui me manque de venir faire une dernière fois le guignol devant toi, de te réclamer ce one-man-show tant promis et de balancer quelques jeux de mots foireux. Mais je laisserai faire ceux qui te connaissaient mieux. Je me contenterai d&#8217;un petit signe de la main en murmurant :</p>
+<p>— Tiens, salut tonton !</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+ <p><a href="http://ploum.net/?flattrss_redirect&amp;id=2664&amp;md5=0086e3e4d987cb1020078190c2446b0c" title="Flattr" target="_blank"><img src="http://ploum.net/wp-content/plugins/flattr/img/flattr-badge-large.png" alt="flattr this!"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://ploum.net/post/tiens-salut-tonton/feed</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+	<creativeCommons:license>http://creativecommons.org/licenses/by/2.0/be/</creativeCommons:license>
+	<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=ploum&amp;popout=1&amp;url=http%3A%2F%2Fploum.net%2Fpost%2Ftiens-salut-tonton&amp;language=fr_FR&amp;category=text&amp;title=Tiens%2C+salut+tonton%C2%A0%21&amp;description=Il+y+a+quelques+ann%C3%A9es%2C+alors+que+je+rattrapais+mon+inculture+cin%C3%A9matographique+en+regardant+la+trilogie+de+La+7%C3%A8me+compagnie%2C+voil%C3%A0+que%2C+dans+le+troisi%C3%A8me+%C3%A9pisode%2C+un+individu+entre+entre...&amp;tags=FR%2Cnombril%2Cblog" type="text/html" />
+	</item>
+		<item>
+		<title>Le blogueur venu de Demain (seconde partie)</title>
+		<link>http://ploum.net/post/le-blogueur-venu-de-demain-seconde-partie</link>
+		<comments>http://ploum.net/post/le-blogueur-venu-de-demain-seconde-partie#comments</comments>
+		<pubDate>Tue, 05 Mar 2013 10:49:21 +0000</pubDate>
+		<dc:creator>Lionel Dricot</dc:creator>
+				<category><![CDATA[blog]]></category>
+		<category><![CDATA[Bitcoin]]></category>
+		<category><![CDATA[crowdfunding]]></category>
+		<category><![CDATA[decentralisation]]></category>
+		<category><![CDATA[Flattr]]></category>
+		<category><![CDATA[FR]]></category>
+		<category><![CDATA[futur]]></category>
+		<category><![CDATA[pirate]]></category>
+		<category><![CDATA[plume]]></category>
+
+		<guid isPermaLink="false">http://ploum.net/?p=2652</guid>
+		<description><![CDATA[Lire la première partie de cet interview Face à Max, le célèbre blogueur qui est en train de m’entraîner doucement sur le terrain de la politique, je tente de me ressaisir. Innocemment, je l’interroge : Pourquoi les élections européennes ? Car lors de ces élections, le Parti Pirate a fait pas mal parler de lui [...]]]></description>
+				<content:encoded><![CDATA[<p><a title="Le blogueur venu de Demain (première partie)" href="http://ploum.net/post/le-blogueur-venu-de-demain-premiere-partie">Lire la première partie de cet interview</a></p>
+<p><em>Face à Max, le célèbre blogueur qui est en train de m’entraîner doucement sur le terrain de la politique, je tente de me ressaisir. Innocemment, je l’interroge :</em></p>
+<p><strong>Pourquoi les élections européennes ?</strong></p>
+<p>Car lors de ces élections, le Parti Pirate a fait pas mal parler de lui dans tous les pays.</p>
+<p>Depuis des années, le Parti Pirate était confronté à un paradoxe : il prétendait défendre <a title="Le Parti Pirate, la démocratie du troisième millénaire ?" href="http://ploum.net/post/parti-pirate-nouvelle-democracie">la liberté, la citoyenneté, la décentralisation</a> mais se devait d&#8217;avoir un chef, un président ou un organisme central qui déterminait à quoi allait être dépensé l&#8217;argent du parti ou qui punissait un pirate qui avait un comportement « non-pirate ». Tel groupe pirate local est-il vraiment pirate ? Selon quelle définition ? Doit-on leur envoyer de l&#8217;argent pour leur projet d&#8217;affiche ? Et tel membre doit-il être exclu ?</p>
+<p>La solution qu&#8217;ils ont trouvé est tout simplement géniale : ils ont fait évoluer le crowdfunding à l&#8217;échelle non plus du projet mais de l&#8217;entité.</p>
+<p><strong>Peux-tu donner un exemple ?</strong></p>
+<p>Oui, sur la plate-forme du Parti Pirate, n&#8217;importe qui, je dis bien n&#8217;importe qui peut proposer un projet en lien avec le parti pirate : imprimer des affiches, organiser un happening, créer un site web sur une problématique, organiser une assemblée générale.</p>
+<p>Pour chaque projet, le budget était fixé et, comme n&#8217;importe quelle plateforme de crowdfunding, n&#8217;importe qui pouvait soutenir le projet de son choix. Et si une personne se prétendant pirate avait une mauvaise réputation, la communauté se contentait de ne pas soutenir ses projets.</p>
+<p><strong>Ce n&#8217;est pourtant pas très différent de Kickstarter ou de Kisskissbankbank.</strong></p>
+<p>Il y a une différence de taille: en dehors des projets, il existe également sur ce site des « organisations », typiquement le Parti Pirate de France, le Parti Pirate de Belgique, etc.</p>
+<p>Si on le souhaite, on peut soutenir l&#8217;organisation plutôt qu&#8217;un projet particulier. J&#8217;aime les pirates, je veux leur envoyer de l&#8217;argent mais je souhaite qu&#8217;ils l&#8217;utilisent à leur guise. D&#8217;ailleurs, le Parti Pirate n&#8217;a plus d&#8217;argent sur son compte en banque. Tout l&#8217;argent des dotations publiques ou des versements d&#8217;élus est immédiatement envoyé sur la plateforme de crowdfunding.</p>
+<p><strong>Il n&#8217;en reste pas moins qu&#8217;il faut décider comment utiliser cet argent.</strong></p>
+<p>C&#8217;est ici que réside l&#8217;éclat de génie : tout est automatique. Quand on donne de l&#8217;argent à un projet, on peut décider de l&#8217;importance que ce projet à pour nous. Les projets les plus prioritaires sont automatiquement financés par la caisse jusqu&#8217;à épuisement de celle-ci.</p>
+<p>Admettons que je fasse un projet d&#8217;imprimer des affiches pour ma ville et que j&#8217;aie besoin de 50 bitcoins. J&#8217;ai récolté 2 bitcoins mais comme le projet est voté comme prioritaire par les 20 donateurs, il se voit compléter de 48 btc par le compte de l&#8217;organisation.</p>
+<p>Une fois les affiches imprimées et le projet terminé, j&#8217;introduis la facture finale dans la plateforme, qui est d 52 btc car j&#8217;avais oublié de prévoir de la colle. Le compte de l&#8217;organisation complète et envoie la somme sur mon compte en banque vu que c&#8217;est moi qui vais payer la facture de l&#8217;imprimeur. En même temps, les affiches ont un tel succès que la moitié de la ville décide de donner au projet a postiori ou via Flattr. Le surplus est alors automatiquement versé au compte de l&#8217;organisation. En effet, le projet étant clôturé, il ne peut rien faire de ce surplus.</p>
+<p>Tout cela est donc entièrement transparent et consultable par tout un chacun jusqu&#8217;à la moindre facture. Des graphiques sont automatiquement générés. Il n&#8217;y a plus aucune autorité centrale qui détermine qui paie quoi.</p>
+<p><strong>Il y a donc des imprimeurs qui acceptent les bitcoins ?</strong></p>
+<p>C&#8217;est un exemple. Comme il s&#8217;agit de ma monnaie principale, j&#8217;ai tendance à penser en bitcoins. Je sais que c&#8217;est loin d&#8217;être la norme.</p>
+<p>D’ailleurs, j’ai installé l’extension <a href="https://bitspend.net/">BitSpend</a> dans mon Firefox: elle me permet de payer en bitcoins sur la toute grande majorité des sites d’e-commerce même si eux n’acceptent pas encore Bitcoin. C’est tout à fait transparent pour moi.</p>
+<p><strong>Le problème de cette solution c&#8217;est qu&#8217;il n&#8217;est pas possible d&#8217;épargner, par exemple en vue d&#8217;élections prochaines. Tout l&#8217;argent de l&#8217;organisation est immédiatement reversé aux projets actuels.</strong></p>
+<p>La solution est simple : il suffit de créer un projet « Épargne en vue des prochaines élections » avec un objectif précis. Cela encourage d&#8217;ailleurs les gens a contribuer à ce fond. Et si personne ne considère ce projet comme prioritaire et bien tant pis. C’est aussi cela la démocratie.</p>
+<p><strong>Et les cotisations du parti ?</strong></p>
+<p>Ils les ont tout simplement supprimées. À chaque section locale de sélectionner ses candidats pour chaque élection. Certains se plantent, ont des candidats loufoques. Mais d&#8217;autres réussissent et partagent leur expérience. Il n&#8217;y a plus de véritable parti, plus de structure pyramidale mais un réseau de groupuscules locaux. Il n&#8217;est plus possible de dire « Je suis un membre du parti pirate ». Un prétendu pirate fait des déclarations racistes ? Il perd tout simplement son crédit et aura du mal à devenir candidat ou à obtenir la confiance des autres pour lancer des projets. On est dans la do-ocracy, pas dans la discussion.</p>
+<p>Fait amusant : à l&#8217;époque, le Parti Pirate était fort critiqué pour son nom. On leur disait à tout bout de champs de changer, d&#8217;enlever le terme « Pirate », qui avait une connotation négative.</p>
+<p>Ils ont accepté de modifier leur nom mais c&#8217;est le mot « Parti » qu&#8217;ils ont supprimé. Avec un brin de populisme, certains ont d&#8217;ailleurs déclaré « Dans votre vie quotidienne, souffrez-vous le plus à cause de la piraterie ou de la particratie ? ».</p>
+<p>C&#8217;est depuis qu&#8217;on dit « Pirates » et non plus « Parti Pirate ». Un beau pieds de nez face à la déliquescence du concept de parti.</p>
+<p><strong>Mais on s&#8217;éloigne de ton parcours là, non ?</strong></p>
+<p>Pas vraiment car, comme beaucoup de blogueur, j&#8217;ai suivi de très près l&#8217;ascension des pirates. Je n&#8217;ai jamais été membre ni candidat, souhaitant rester indépendant, mais je ne cache pas avoir voté pour eux aux dernières élections.</p>
+<p>Ce crowdfunding politique m&#8217;a servi de modèle. S&#8217;ils peuvent le faire pour la politique, pourquoi ne pourrais-je pas le faire pour moi, pour ma vie ?</p>
+<p><strong>Raconte nous comment cela se met en place, pratiquement.</strong></p>
+<p>En utilisant une plateforme de crowdfunding similaire, j&#8217;ai décidé de faire pareil. Un projet mensuel pour mon loyer, un projet pour un voyage à la Silicon Valley, un projet pour l&#8217;hébergement de mon blog et puis un projet « dépenses diverses ».</p>
+<p>Il faut préciser que, contrairement au Parti Pirate, je ne suis pas une organisation « ouverte ». Dans une organisation « fermée », seuls les membres de l&#8217;organisation ont la possibilité de donner une priorité à un projet. Comme je suis le seul membre, je garde le contrôle sur ma vie.</p>
+<p>Un exemple simple est mon loyer : j&#8217;ai un projet récurrent de payer le loyer. C&#8217;est un projet prioritaire. J&#8217;ai indiqué directement en récipient le compte en banque de mon propriétaire. Du coup, je n&#8217;ai rien à faire. Si un lecteur veut contribuer à mon loyer du mois, il peut. Mais c&#8217;est rare. En règle générale, mon loyer est intégralement rempli par l&#8217;argent issu de l&#8217;organisation, à savoir moi.</p>
+<p>Lorsque j&#8217;ai été à la conférence I/O à San Francisco, j&#8217;avais préparé tout un budget. Comme je retransmettais en direct, cela intéressait très fort mes lecteurs. Ils ont donc contribué énormément. Mon essai en <a title="Le monde selon Google" href="http://ploum.net/post/le-monde-selon-google">voiture partagée entièrement automatique</a> a fait un buzz et a reçu beaucoup de Flattrs. Comme Flattr est intégré à ma plateforme de crowdfunding, ces flattrs spécifiques sont immédiatement ajoutés au budget du projet.</p>
+<p>Au final, lorsque j&#8217;ai mis toutes mes factures dans la plateforme, y compris les moindres restaurants, je me suis rendu compte que j&#8217;avais été économe. Le projet a donc fait un bénéfice qui est venu s&#8217;ajouter au capital de mon organisation.</p>
+<p><strong>Tout cela est donc transparent ?</strong></p>
+<p>Oui, ma vie est très transparente. Il faut cependant signaler que je fais de la consultance pour certaines entreprises. Je crée ces projets comme les autres sur la plateforme de crowdfunding mais ils sont invisibles au public.</p>
+<p>Quand un de mes clients a découvert ça, il a réalisé qu&#8217;il pouvait s&#8217;associer avec un autre de mes clients pour me financer un projet spécifique en simplifiant grandement la comptabilité et le contrat.</p>
+<p>Ces projets sont donc entièrement bénéficiaires. Notons que, en conséquence, le budget de mon « organisation » est également privé. Comme l&#8217;est mon projet « épargne pour la pension ». Être transparent ne signifie pas pour autant ne plus avoir de vie privée.</p>
+<p>La plateforme de crowdfunding me sert à la fois d&#8217;outil de budget, de facturation et de comptabilité. Sans compter les projets impliquant plusieurs personnes auxquels je participe.</p>
+<p><strong>Tu n&#8217;as donc plus de compte en banque ?</strong></p>
+<p>Si car il y a encore des magasins où l&#8217;on doit encore payer avec une carte de banque plutôt qu&#8217;en scannant un QR code avec ses lunettes. Et deux trois broutilles comme les impôts. Mais ce n&#8217;est qu&#8217;une très petite somme d&#8217;argent qui transite par ce compte. C&#8217;est un accessoire. Un peu comme un lecteur CD sur un vieil ordinateur : il est là mais on ne l&#8217;utilise plus jamais. Mon épargne est entièrement en bitcoins, sur différents services. J’ai également un peu d’argent sur mon Google Wallet.</p>
+<p>D&#8217;ailleurs, je ne paie mes impôts que sur la somme qui entre sur mon compte en banque traditionnel. Tout le reste est dans un flou juridique absolu. J&#8217;ai déjà usé trois comptables avant d&#8217;abandonner. Je ne me cache pas, je ne cherche pas à frauder mais ce n’est pas à moi de résoudre les problèmes de l’administration. Si je suis un jour condamné, ça me donnera d’ailleurs de la matière à beaucoup d’articles.</p>
+<p>Mais c&#8217;est une bonne idée : supprimer complètement le compte en banque. Ça ferait une série de billets intéressants pour mon blog. J&#8217;achète déjà, en bitcoins, des cartes VISA prépayées. Peut-être qu&#8217;elles me permettraient de retirer du liquide à un distributeur ?</p>
+<p><strong>Mais, par exemple, ton loyer est bien versé sur un compte en banque qui n&#8217;est pas le tien. Tu ne payes donc pas d&#8217;impôt dessus.</strong></p>
+<p>Tiens, c&#8217;est juste. Je vais tenter de convaincre mon propriétaire d&#8217;accepter les bitcoins.</p>
+<p><strong>En résumé, peut-on dire que tu vis essentiellement de dons ?</strong></p>
+<p>Cela a été le cas car, effectivement, le crowdfunding ne concernait que le don, pas l&#8217;investissement. Or, depuis peu, la plateforme que j&#8217;utilise gère les contrats, que j’utilise pour mes missions de consultance et vient d&#8217;intégrer une nouvelle fonctionnalité : l&#8217;achat de parts. Un créateur de projet peut vendre des parts de son projet. Si le projet est rentable, l&#8217;investisseur recevra automatiquement une partie du bénéfice. Il est également possible d&#8217;acheter des parts d&#8217;une organisation chapeautant plusieurs projets.</p>
+<p>Tout cela est fait automatiquement sans la nécessité de la moindre comptabilité. Si vous avez des actions en bourse, mon conseil est de vendre tout. Je ne suis pas sûr que le concept même de bourse tienne encore longtemps. D&#8217;ailleurs, pensez-vous vraiment que les entreprises et les start-ups de bon-papa vont pouvoir lutter contre la simplicité d&#8217;une « organisation » sur une plateforme de crowdfunding ?</p>
+<p><strong>Mais tout cela n&#8217;est possible que sur la plateforme de crowdfunding que tu utilises. En existe-t-il d&#8217;autres ?</strong></p>
+<p>Il y en a de plus en plus et j&#8217;ai été enchanté d&#8217;apprendre qu&#8217;il allait bientôt être possible de contribuer à un projet sur une plateforme donnée en utilisant un compte sur une autre. En fait, les plateformes communiquent entre elles en utilisant <a title="Ripple, making Bitcoin easier (or obsolete)" href="http://ploum.net/post/ripple-making-bitcoin-easier-or-obsolete">Ripple</a>, qui est un système décentralisé de transfert de dettes basé sur la confiance.</p>
+<p>Étant donné ma présence sur le web, pas mal de personnes me font confiance sur Ripple. Je réfléchis à leur emprunter de l&#8217;argent de cette manière pour acheter un terrain et me faire imprimer une maison, histoire de me poser un peu.</p>
+<p>Honnêtement, je ne suis pas sûr que nos banques traditionnelles feront de vieux os.</p>
+<p><strong>Merci Max, un mot pour la fin ?</strong></p>
+<p>Lorsqu&#8217;une nouvelle technologie apparait, on a tendance à surestimer l&#8217;impact à court terme. Les smartglasses, les bitcoins, le crowdfunding. Tout le monde s’extasiait, faisait des prévisions farfelues. Et, deux ou trois ans plus tard, on s&#8217;est rendu compte que le monde n&#8217;avait, au fond, pas vraiment changé.</p>
+<p>Par contre, nous avons une énorme tendance à sous estimer l&#8217;impact à long terme de ces mêmes technologies. Vous souvenez-vous qu&#8217;il y a 15 ans, personne n&#8217;avait de smartphone et que la 3G n&#8217;existait pas ? Tout cela produira un changement profond que je pressens sans avoir la prétention de le comprendre. Et qui n&#8217;est pas seulement sous-estimé mais radicalement ignoré par les puissants : les hommes riches et les politiciens.</p>
+<p>Peut-être est-ce dans leur intérêt de ne pas comprendre ce changement. Qu&#8217;importe, moi j&#8217;ai décidé de ne pas attendre.</p>
+<p><em>Machinalement, je fais signe au serveur. Il m&#8217;apporte un ticket avec un QR code. Tout en le regardant, je murmure « accepter paiement, copie dans notes de frais ». Max se lève et me lance un joyeux « Merci pour le verre et à la prochaine ! » avant de s&#8217;éloigner en rabattant ses lunettes sur son nez.</em></p>
+<p><em>Un peu abasourdi, je reste sans voix. Je venais rencontrer un blogueur, discuter de l&#8217;audience sur le web, de la manière de se faire connaître. J&#8217;en ressors estomaqué. Ce que je pensais être de la science-fiction est pour lui déjà du passé. Il ne vit plus dans la même société que moi, plus dans le même pays. La preuve, il n&#8217;en utilise pas la monnaie, il n&#8217;y travaille pas, il n&#8217;y paie pas ses impôts. Max est d&#8217;ailleurs, il vient de Demain.</em></p>
+<p><em>Cul-sec, je termine mon Mojito. Je crois que je tiens un titre accrocheur pour ce papier !</em></p>
+<p>&nbsp;</p>
+<p><em>Photo par <a href="http://www.flickr.com/photos/80854685@N08/8465319847">Mark Fischer</a></em></p>
+ <p><a href="http://ploum.net/?flattrss_redirect&amp;id=2652&amp;md5=399ddc67487246e534f2e8b11050e446" title="Flattr" target="_blank"><img src="http://ploum.net/wp-content/plugins/flattr/img/flattr-badge-large.png" alt="flattr this!"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://ploum.net/post/le-blogueur-venu-de-demain-seconde-partie/feed</wfw:commentRss>
+		<slash:comments>18</slash:comments>
+	<creativeCommons:license>http://creativecommons.org/licenses/by/2.0/be/</creativeCommons:license>
+	<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=ploum&amp;popout=1&amp;url=http%3A%2F%2Fploum.net%2Fpost%2Fle-blogueur-venu-de-demain-seconde-partie&amp;language=fr_FR&amp;category=text&amp;title=Le+blogueur+venu+de+Demain+%28seconde+partie%29&amp;description=Lire+la+premi%C3%A8re+partie+de+cet+interview+Face+%C3%A0+Max%2C+le+c%C3%A9l%C3%A8bre+blogueur+qui+est+en+train+de+m%E2%80%99entra%C3%AEner+doucement+sur+le+terrain+de+la+politique%2C+je+tente+de+me...&amp;tags=Bitcoin%2Ccrowdfunding%2Cdecentralisation%2CFlattr%2CFR%2Cfutur%2Cpirate%2Cplume%2Cblog" type="text/html" />
+	</item>
+		<item>
+		<title>Le blogueur venu de Demain (première partie)</title>
+		<link>http://ploum.net/post/le-blogueur-venu-de-demain-premiere-partie</link>
+		<comments>http://ploum.net/post/le-blogueur-venu-de-demain-premiere-partie#comments</comments>
+		<pubDate>Sun, 03 Mar 2013 20:57:06 +0000</pubDate>
+		<dc:creator>Lionel Dricot</dc:creator>
+				<category><![CDATA[blog]]></category>
+		<category><![CDATA[Bitcoin]]></category>
+		<category><![CDATA[crowdfunding]]></category>
+		<category><![CDATA[Flattr]]></category>
+		<category><![CDATA[FR]]></category>
+		<category><![CDATA[futur]]></category>
+		<category><![CDATA[plume]]></category>
+
+		<guid isPermaLink="false">http://ploum.net/?p=2646</guid>
+		<description><![CDATA[Le soleil de fin d&#8217;après-midi brille sur le bord de mer de cette charmante station balnéaire méditerranéenne. Alors que j&#8217;arrive en vue du bar où nous avons convenu de nous rencontrer, je le reconnais immédiatement, assis en terrasse en train de siroter un cocktail. Si j&#8217;ai déjà vu des photos de lui, j&#8217;ai été en [...]]]></description>
+				<content:encoded><![CDATA[<h1 dir="ltr"></h1>
+<p><em>Le soleil de fin d&#8217;après-midi brille sur le bord de mer de cette charmante station balnéaire méditerranéenne. Alors que j&#8217;arrive en vue du bar où nous avons convenu de nous rencontrer, je le reconnais immédiatement, assis en terrasse en train de siroter un cocktail. Si j&#8217;ai déjà vu des photos de lui, j&#8217;ai été en grande partie aidé par son uniforme de blogueur typique: un t-shirt faisant référence à un jeu vidéo du siècle passé, un jeans usé et des tongs. Il n&#8217;a pas de sac mais je devine un téléphone dans sa poche. Son air concentré, ses lunettes sur le nez, les deux bracelets claviers à chaque poignets et les imperceptibles mouvement de ses doigts tapotant la table m&#8217;indiquent qu&#8217;il est en train d&#8217;écrire un billet.</em></p>
+<p><em>Alors que je m&#8217;approche, il sourit et m&#8217;invite à prendre un siège. Dans ce geste de politesse devenu courant, il remonte ses lunettes sur le sommet de son crâne, indiquant par là qu&#8217;il se consacre tout entier à notre conversation. Ce faisant, je l&#8217;entends murmurer « draft ». Je ne m&#8217;étais pas trompé, il était bien en train de rédiger un article.</em></p>
+<p><em>Je touche ostensiblement mes lunettes de l&#8217;index droit pour lui signaler que je suis en train de filmer. Comme je n&#8217;ai utilisé qu&#8217;un seul doigt, il comprend qu&#8217;il n&#8217;y a pas de retransmission en direct et qu&#8217;à priori la vidéo sera essentiellement pour mon usage personnel. Il acquiesce d&#8217;un sourire.</em></p>
+<p><strong>Bonjour Max. Heureux de te rencontrer. Tu es ici en vacances ?</strong></p>
+<p>Des vacances ? (il rit) Et bien c&#8217;est un concept que je ne comprends plus très bien. Je suis en vacances perpétuelles mais je travaille 365 jours par an. Je suppose que que le mot « vacances » ne s&#8217;applique plus vraiment à moi.</p>
+<p><strong>Peux-tu te présenter pour nos lecteurs ? Quel est ton parcours ?</strong></p>
+<p>Dans une vie antérieure, j&#8217;étais un ingénieur en informatique, un programmeur. Je sais que ça me fait paraître pour un dinosaure auprès des plus jeunes mais je faisais du <a title="Ploum.net en J2EE" href="http://ploum.net/post/ploum-en-j2ee">J2EE</a> dans une banque. J&#8217;ai aussi travaillé un peu comme journaliste. Il y a quinze ans, j&#8217;ai démarré un blog, « Le blog de Max », car <a title="Toi aussi deviens un véritable blogueur Web 2.0" href="http://ploum.net/post/162-toi-aussi-deviens-un-veritable-blogueur-web-20">c&#8217;était la mode parmi les geeks</a>. Certains le voyaient comme le futur du journalisme mais, personnellement, je n&#8217;avais pas d&#8217;objectifs particuliers. J&#8217;ai créé un blog, c&#8217;est tout.</p>
+<p>Ce blog a commencé à avoir du succès et à attirer des lecteurs. Grâce à la publicité, j&#8217;ai pu rentabiliser le coût de mon hébergement puis, petit à petit, me créer un véritable salaire. J&#8217;ai quitté mon travail et je me suis lancé comme blogueur professionnel.</p>
+<p><strong>Tu considérais sans doute cela comme une réussite. Cela t&#8217;a-t-il rendu heureux ?</strong></p>
+<p>Au début, j&#8217;étais très fier, bien entendu. Mais j&#8217;ai réalisé que j&#8217;étais forcé de mettre mon blog à jour de plus en plus fréquemment. La compétition était très dure et il y avait une véritable course à l&#8217;audience. Auparavant, je ne m&#8217;inquiétais pas trop du nombre de visiteurs. Étant devenu un professionnel, je n&#8217;avais plus le choix. Ce que j&#8217;avais dans mon frigo à la fin du mois était directement proportionnel au nombre de lecteurs.</p>
+<p>J&#8217;ai alors commencé à écrire des articles peu intéressants mais qui faisaient du chiffre : des potins de stars, du sensationnalisme, ce genre de choses.</p>
+<p>J&#8217;ai aussi reçu des contrats pour parler de certains produits. Bien que ce soit de l&#8217;argent facile, j&#8217;ai découvert que je perdais mon indépendance. Ce n&#8217;était plus une passion mais un travail comme un autre. Je bâclais un post, je le postais sur Reddit et je demandais à mes followers sur Twitter de voter pour le billet. Puis, je modérais les commentaires sans vraiment les lire.</p>
+<p>Parfois, je recevais des offres pour écrire un billet sur un produit où il était explicitement stipulé que je ne pouvais pas informer mes lecteurs du caractère commercial.</p>
+<p><strong>Comment as-tu répondu à ces offres ?</strong></p>
+<p>Je pense que chaque homme à un prix. Si on m&#8217;avait offert un million, j&#8217;aurais accepté sans hésiter. Mon prix est donc inférieur à un million mais, heureusement, les offres ne l&#8217;ont jamais atteint. Par ailleurs, ma crédibilité auprès des lecteurs s&#8217;essoufflait et ce genre de choses ne pouvaient que me faire du tort.</p>
+<p>De manière amusante, c&#8217;est lorsque mon audience a été la plus grande que j&#8217;ai compris qu&#8217;il y avait un problème.</p>
+<p><strong>Que veux-tu dire ?</strong></p>
+<p>Beaucoup de gens se basent sur la valeur absolue. Mon audience était impressionnante et ne faisait que croître. J&#8217;aurais pu m&#8217;en contenter.</p>
+<p>Mais, personnellement, je me fiais à d&#8217;autres indicateurs et à mon instinct. Mes plus fidèles lecteurs ne réagissaient plus dans les commentaires dont le niveau ortographique tendait vers le bas. Si on liait mes articles dans les forums génériques, ce n&#8217;était plus le cas sur les sites spécialisés où les communautés à la pointe. Bref, j&#8217;étais en train de devenir grand-public.</p>
+<p><strong>Est-ce un tort ? N&#8217;est-ce pas une bonne chose d&#8217;élargir son audience ?</strong></p>
+<p>Pour moi, c&#8217;était un très mauvais signe. Lorsqu&#8217;on est respecté par une communauté précise, on a un capital de réputation. Vis-à-vis du grand public, ce capital est nul. Les gens partageaient mes articles par habitude, parce que mon nom était relativement connu. Mais, en quelques semaines, je pouvais tomber dans l&#8217;oubli total, un peu comme ces stars de télé-réalité.</p>
+<p>J&#8217;étais lu mais je n&#8217;étais plus respecté par personne. Personne ne disait plus: « Si Max en parle, c&#8217;est que c&#8217;est bien ». J&#8217;ai donc décidé de reconquérir cette confiance, de me recréer un public.</p>
+<p><strong>Quelle a été ta stratégie ?</strong></p>
+<p>Tout d&#8217;abord, du jour au lendemain, j&#8217;ai complètement supprimé la pub. J&#8217;ai également encourager mes lecteurs à réfléchir <a title="Mais qui paie la publicité ?" href="http://ploum.net/post/mais-qui-paie-la-publicite">au sens profond de la publicité</a> et à installer AdBlock.</p>
+<p>Financièrement, je n&#8217;avais pas trop d&#8217;idée. J&#8217;acceptais les dons par Paypal mais c&#8217;est un lecteur qui m&#8217;a parlé de <a title="Et si vous testiez le web payant ?" href="http://ploum.net/post/si-vous-testiez-le-web-payant">Flattr</a>. C&#8217;est également à cette époque que j&#8217;ai découvert le <a title="Le jour où les geeks prirent le contrôle de l’économie…" href="http://ploum.net/post/futur-economie">bitcoin</a>, qui était bien moins connu qu&#8217;aujourd&#8217;hui.</p>
+<p><strong>Et tu t&#8217;y es retrouvé financièrement ?</strong></p>
+<p>Non. Les premiers mois ont été durs. J&#8217;avais prévu le coup et mis de côté pour tenir un an. J&#8217;ai cependant été heureusement surpris de Flattr: un bon billet pouvait me rapporter 150-200€. Le plus surprenant étant qu&#8217;un bon billet peut continuer à rapporter durant plusieurs mois.</p>
+<p>C&#8217;est un incitant génial : au lieu d&#8217;essayer de faire de l&#8217;audience, j&#8217;essayais d&#8217;écrire des billets que mes lecteurs auraient envie de Flattrer. Quand un billet que je trouvais bon se retrouvait presque sans Flattrs, je me posais des questions. Bref, j&#8217;ai énormément appris, je pense que j&#8217;ai fait beaucoup de progrès.</p>
+<p>Paypal et bitcoins étaient eux anecdotiques. Faire un don régulier est trop ennuyeux avec ces systèmes.</p>
+<p>Histoire de survivre, je retirais mes gains Flattr principalement en bitcoins et j&#8217;achetais autant que je pouvais en ligne en utilisant cette monnaie. Cela me permettait de ne pas payer d&#8217;impôts. C&#8217;est une forme de fraude mais Bitcoin n&#8217;étant pas reconnu comme une monnaie, cela n&#8217;est pas illégal: pour le législateur, je n&#8217;ai tout simplement jamais gagné d&#8217;argent. De plus, rien ne transite par un compte en France et n&#8217;est donc pas soumis aux lois françaises.</p>
+<p>De toutes façons, si je dois me soumettre à des lois, pourquoi ici plutôt qu&#8217;ailleurs ? L&#8217;année passée, j&#8217;ai passé plus de jours à l&#8217;étranger qu&#8217;en France.</p>
+<p><strong>Au final, quelle était ta situation ?</strong></p>
+<p>Selon les mois, je faisais entre 500€ et 2000€ sur Flattr. Cela parait beaucoup mais n&#8217;oublions pas que j&#8217;étais taxé sur ce qui arrivait sur mon compte en banque. Et que vivre à Paris avec ce qui restait n&#8217;était pas envisageable. Je grignotais sur mes réserves.</p>
+<p>J&#8217;ai découvert que c&#8217;était une réelle limitation lorsque le parlement a commencé à discuter d&#8217;interdire les smartglasses pour éviter que les gens soient filmés sans le savoir. À l&#8217;époque, il ne s&#8217;agissait que des <a title="Le monde selon Google" href="http://ploum.net/post/le-monde-selon-google">Google glasses</a> mais j&#8217;ai senti qu&#8217;une fois encore on exploitait la peur des gens pour bloquer l&#8217;innovation et tenter de se voiler la face.</p>
+<p>J&#8217;ai écrit un billet à charge, qui a eu beaucoup de succès, et je suis devenu de facto le porte parole des « pro-lunettes ». J&#8217;ai voulu lancer un site dédié sur le sujet avec pétition en ligne, vidéos explicatives, etc. Et je me suis rendu compte que je n&#8217;avais pas le budget.</p>
+<p>Pour la première fois de ma carrière de blogueur, je ne pouvais pas lancer un projet que j&#8217;avais en tête pour faute de budget. Pourtant, le graphiste était un ami, je connaissais ceux qui faisaient les vidéos : j&#8217;avais juste besoin d&#8217;une centaine de bitcoins. Investissement que j&#8217;étais d&#8217;ailleurs presque sûr de récupérer en dons et en vente de t-shirt par après. Mais je ne pouvais pas lancer le projet.</p>
+<p><strong>Pourtant, je me souviens de cette campagne. Quelle a été ta solution ?</strong></p>
+<p>C&#8217;est à ce moment là que j&#8217;ai découvert le crowdfunding. Popularisé par <a href="http://www.kickstarter.com/">Kickstarter</a> et <a href="http://www.kisskissbankbank.com/">Kisskissbankbank</a>, le principe est fort simple : on lance un projet avec le montant dont on a besoin. Les gens donnent selon leur choix. Si l&#8217;argent n&#8217;est par récolté au bout d&#8217;un temps déterminé, le projet est annulé et les donateurs récupèrent leur argent.</p>
+<p>Il s&#8217;agit donc en quelques sortes d&#8217;une donation a priori. Facile et sans risque. Les donateurs peuvent même donner dans la monnaie de leur choix qui est automatiquement convertie si nécessaire.</p>
+<p>Cette expérience m&#8217;a complètement ouvert les yeux sur les possibilités du crowdfunding.</p>
+<p><strong>Quel parti en as-tu tiré ?</strong></p>
+<p>Aucun dans l&#8217;immédiat. En effet, le crowdfunding s&#8217;adressait à des projets concrets d&#8217;une certaine ampleur qui nécessitait une préparation. Je me voyais mal créer un projet pour chaque billet que je pensais écrire sur mon blog.</p>
+<p>L&#8217;idée est juste resté dans un coin de mon cerveau jusqu&#8217;aux élections européennes.<br />
+<em>Le serveur nous interrompt un instant pour apporter ma commande. Je reste une seconde interloqué. Cet interview est en train de prendre une tournure que je n’avais pas soupçonnée. Pourquoi parler d’élections ? Quel est le rapport entre la politique et le financement d&#8217;un blog ? Où Max est-il en train de m&#8217;emmener ?</em></p>
+<p>Suite et fin dans <a title="Le blogueur venu de Demain (seconde partie)" href="http://ploum.net/post/le-blogueur-venu-de-demain-seconde-partie">la seconde partie</a></p>
+<p><em>Photo par <a href="http://www.flickr.com/photos/32080494@N02/7624324004">Elisa Pictures</a></em></p>
+ <p><a href="http://ploum.net/?flattrss_redirect&amp;id=2646&amp;md5=da7e1244cba6d082b01419a4ad4d81c0" title="Flattr" target="_blank"><img src="http://ploum.net/wp-content/plugins/flattr/img/flattr-badge-large.png" alt="flattr this!"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://ploum.net/post/le-blogueur-venu-de-demain-premiere-partie/feed</wfw:commentRss>
+		<slash:comments>13</slash:comments>
+	<creativeCommons:license>http://creativecommons.org/licenses/by/2.0/be/</creativeCommons:license>
+	<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=ploum&amp;popout=1&amp;url=http%3A%2F%2Fploum.net%2Fpost%2Fle-blogueur-venu-de-demain-premiere-partie&amp;language=fr_FR&amp;category=text&amp;title=Le+blogueur+venu+de+Demain+%28premi%C3%A8re+partie%29&amp;description=Le+soleil+de+fin+d%26%238217%3Bapr%C3%A8s-midi+brille+sur+le+bord+de+mer+de+cette+charmante+station+baln%C3%A9aire+m%C3%A9diterran%C3%A9enne.+Alors+que+j%26%238217%3Barrive+en+vue+du+bar+o%C3%B9+nous+avons+convenu+de+nous...&amp;tags=Bitcoin%2Ccrowdfunding%2CFlattr%2CFR%2Cfutur%2Cplume%2Cblog" type="text/html" />
+	</item>
+		<item>
+		<title>Ripple, making Bitcoin easier (or obsolete)</title>
+		<link>http://ploum.net/post/ripple-making-bitcoin-easier-or-obsolete</link>
+		<comments>http://ploum.net/post/ripple-making-bitcoin-easier-or-obsolete#comments</comments>
+		<pubDate>Tue, 26 Feb 2013 14:31:50 +0000</pubDate>
+		<dc:creator>Lionel Dricot</dc:creator>
+				<category><![CDATA[blog]]></category>
+		<category><![CDATA[Bitcoin]]></category>
+		<category><![CDATA[EN]]></category>
+
+		<guid isPermaLink="false">http://ploum.net/?p=2641</guid>
+		<description><![CDATA[Who needs borders and local regulations when you have internet? The answer to this question is why I like Bitcoin so much. It is a trully decentralized currency. But Bitcoin has some major issues, something which was covered by Rick Falkvinge on his blog. The first problem that hits any Bitcoin user is usability. Using [...]]]></description>
+				<content:encoded><![CDATA[<p>Who needs borders and local regulations when you have internet? The answer to this question is why I like <a title="The Bitcoin Bubble" href="http://ploum.net/post/bitcoin-bubble">Bitcoin</a> so much. It is a trully decentralized currency.</p>
+<p>But Bitcoin has some major issues, something which was covered by Rick Falkvinge on <a href="http://falkvinge.net/2011/06/04/bitcoins-four-hurdles-part-one-usability/">his blog</a>.</p>
+<p>The first problem that hits any Bitcoin user is usability. Using Bitcoin is complicated and cumbersome. You can&#8217;t send a simple payment with a comment to someone without asking him first to create a dedicated Bitcoin address. You have to care about making a secure backup of your wallet. This makes things nearly impossible to use for a huge percentage of the population.</p>
+<p>The second problem is trust: how do you know that the Bitcoin address is valid and was not replaced through a man-in-the-middle attack? How do you know that you will well receive the goods or the service? Sure, many escrow services appeared but they make a Bitcoin transaction even more cumbersome.</p>
+<p>The third problem is the power of the exchanges. The whole Bitcoin economy runs with only a handful of Bitcoin exchange services, MtGox being the bigger. This de-facto centralisation is a big weakness for Bitcoin. MtGox has the power to control the price. If MtGox has any problem, the whole value plummets.</p>
+<p>Last but not least, people have to trust bitcoins. Except when <a href="http://thenextweb.com/insider/2013/02/21/after-employees-opt-to-be-paid-in-bitcoin-the-internet-archive-asks-for-donations-in-the-digital-currency/">Internet Archives offers its employees to receive a Bitcoin salary</a>, most services accepting bitcoins are in fact converting them immediately to dollars/euros. It means that Bitcoin is seen as a transport, not a currency.</p>
+<p>I even drafted a proposed solution as a <a title="Proposal for a decentralized and open online payment protocol" href="http://ploum.net/post/bitcoin-banking">Bitcoin-banking decentralized protocol</a>. Recently a quite old project called <a href="https://ripple.com">Ripple</a> surfaced and brought the idea to a whole new level: what if every one of us was a bank and we decide who we trust and at what level.</p>
+<p>Remember when you go on a trip with a bunch of friends. Everybody pays for some stuff and, at the end, you try to equilibrate the balance. It was a nightmare until you discovered <a href="http://tricount.com">Tricount</a>. Well, Ripple is basically <a href="http://www.screenr.com/c5K">a decentralised Tricount at the scale of the internet</a>. We are 7 billions friends on the same trip. We pay for each other, we owe some people money and that&#8217;s it.</p>
+<p>The beauty of it is that it solves all Bitcoin&#8217;s hurdles as long as there are enough people in the network. It is easy, decentralized. It will also make money exchanges completely obsoletes. It has the potential to create a true P2P economy.</p>
+<p>Now, it is only a proof of concept. Firstly, if <a href="https://github.com/rippleFoundation/ripple-client">the client is opensource</a>, the server is not (yet). And that&#8217;s a problem because there&#8217;s no competition to ripple.com at the moment. It means it is hugely centralised.</p>
+<p>Also, you still have to exchange weird addresses like <strong>rKXFsg5EuG4BzLxdTBFXJq2a6iNfyx1hRX</strong> (this is my actual Ripple address). In order to become popular, Ripple should allow you to directly connect with your Facebook/G+/Twitter friends so you can trust them or send them money. After creating the Ripple wallet, the process is still very mysterious.</p>
+<p>Ripple also raises a few questions. Is its own internal money (XRP) making Bitcoin obsolete? Or is Bitcoin going to stay? And what about the Dollar or the Euro? At least, an interesting experiment to follow.</p>
+<p>&nbsp;</p>
+<p><em>Picture by <a href="http://www.flickr.com/photos/leehaywood/4359067703/in/photostream/">Lee Haywood</a></em></p>
+<p>&nbsp;</p>
+ <p><a href="http://ploum.net/?flattrss_redirect&amp;id=2641&amp;md5=9481e3ec62dd5d1e2168314a95a7b528" title="Flattr" target="_blank"><img src="http://ploum.net/wp-content/plugins/flattr/img/flattr-badge-large.png" alt="flattr this!"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://ploum.net/post/ripple-making-bitcoin-easier-or-obsolete/feed</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+	<creativeCommons:license>http://creativecommons.org/licenses/by/2.0/be/</creativeCommons:license>
+	<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=ploum&amp;popout=1&amp;url=http%3A%2F%2Fploum.net%2Fpost%2Fripple-making-bitcoin-easier-or-obsolete&amp;language=fr_FR&amp;category=text&amp;title=Ripple%2C+making+Bitcoin+easier+%28or+obsolete%29&amp;description=Who+needs+borders+and+local+regulations+when+you+have+internet%3F+The+answer+to+this+question+is+why+I+like+Bitcoin+so+much.+It+is+a+trully+decentralized+currency.+But+Bitcoin...&amp;tags=Bitcoin%2CEN%2Cblog" type="text/html" />
+	</item>
+	</channel>
+</rss>

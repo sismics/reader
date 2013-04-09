@@ -1,0 +1,18 @@
+.border-radius (@radius) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+.linear-gradient(@type, @from, @to) {
+  background-image: -webkit-linear-gradient(@type, @from, @to); 
+  background-image:    -moz-linear-gradient(@type, @from, @to);
+  background-image:     -ms-linear-gradient(@type, @from, @to);
+  background-image:      -o-linear-gradient(@type, @from, @to);
+}
+
+.transition(@property, @duration) {
+	transition: @property @duration;
+	-moz-transition: @property @duration;
+	-webkit-transition: @property @duration;
+}

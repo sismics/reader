@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+  <head>
+    <title>Abonnements de Naku dans Google Reader</title>
+  </head>
+  <body>
+    <outline text="Good Math, Bad Math" title="Good Math, Bad Math" type="rss" xmlUrl="http://scientopia.org/blogs/goodmath/feed/" htmlUrl="http://scientopia.org/blogs/goodmath/feed/" />
+    <outline title="Comics" text="Comics">
+      <outline title="Sub">
+        <outline text="Explosm.net, Comics" title="Explosm.net, Comics" type="rss" xmlUrl="http://pipes.yahoo.com/pipes/pipe.run?_id=1009ffe75092cb1845efb5cb901c2886&amp;_render=rss" htmlUrl="http://pipes.yahoo.com/pipes/pipe.info?_id=1009ffe75092cb1845efb5cb901c2886" />
+        <outline text="Saturday Morning Breakfast Cereal (updated daily)" title="Saturday Morning Breakfast Cereal (updated daily)" type="rss" xmlUrl="http://www.smbc-comics.com/rss.php" htmlUrl="http://www.smbc-comics.com" />
+      </outline>
+    </outline>
+    <outline title="Dev" text="Dev">
+      <outline text="Android Developers Blog" title="Android Developers Blog" type="rss" xmlUrl="http://android-developers.blogspot.com/feeds/posts/default" htmlUrl="http://android-developers.blogspot.com/" />
+    </outline>
+  </body>
+</opml>

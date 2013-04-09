@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <groupId>com.sismics.reader</groupId>
+    <artifactId>reader-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../reader-parent</relativePath>
+  </parent>
+  
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>reader-web</artifactId>
+  <packaging>war</packaging>
+  <name>Reader Web</name>
+
+  <dependencies>
+    <!-- Dependencies to Reader -->
+    <dependency>
+      <groupId>com.sismics.reader</groupId>
+      <artifactId>reader-core</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.sismics.reader</groupId>
+      <artifactId>reader-web-common</artifactId>
+    </dependency>
+    
+    <!-- Dependencies to Jersey -->
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-server</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-bundle</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-json</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.sun.jersey.contribs</groupId>
+      <artifactId>jersey-multipart</artifactId>
+    </dependency>
+      
+    <!-- Other external dependencies -->
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-email</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+    </dependency>
+  
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jsp-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+    </dependency>
+    
+    <!-- Dépendances de test -->
+    <dependency>
+      <groupId>com.sismics.reader</groupId>
+      <artifactId>reader-web-common</artifactId>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.sun.grizzly</groupId>
+      <artifactId>grizzly-servlet-webserver</artifactId>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.sun.jersey.jersey-test-framework</groupId>
+      <artifactId>jersey-test-framework-grizzly2</artifactId>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.subethamail</groupId>
+      <artifactId>subethasmtp-wiser</artifactId>
+      <scope>test</scope>
+    </dependency>
+    
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${org.mortbay.jetty.jetty-maven-plugin.version}</version>
+        <configuration>
+          <systemProperties>
+            <systemProperty>
+              <name>webapp.root</name>
+              <value>${basedir}/src/main/webapp</value>
+            </systemProperty>
+          </systemProperties>
+          <scanIntervalSeconds>0</scanIntervalSeconds>
+          <webAppConfig>
+            <contextPath>/reader-web</contextPath>
+            <extraClasspath>target/classes;../reader-core/target/classes</extraClasspath>
+            <overrideDescriptor>src/dev/main/webapp/web-override.xml</overrideDescriptor>
+          </webAppConfig>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>${project.mainClass}</mainClass>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>${project.mainClass}</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      
+      <!-- Plugin Cargo -->
+      <plugin>
+        <groupId>org.codehaus.cargo</groupId>
+        <artifactId>cargo-maven2-plugin</artifactId>
+        <configuration>
+          <container>
+            <containerId>jetty8x</containerId>
+            <type>remote</type>
+          </container>
+
+          <deployer>
+            <type>remote</type>
+          </deployer>
+
+          <deployables>
+            <deployable>
+              <groupId>com.sismics.reader</groupId>
+              <artifactId>reader-web</artifactId>
+              <type>war</type>
+              <properties>
+                <context>/reader</context>
+              </properties>
+              <pingURL>http://localhost:8080/reader/index.html</pingURL>
+            </deployable>
+          </deployables>
+        </configuration>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>com.samaxes.maven</groupId>
+                    <artifactId>
+                      minify-maven-plugin
+                    </artifactId>
+                    <versionRange>[1.5,)</versionRange>
+                    <goals>
+                      <goal>minify</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <profiles>
+    <!-- Profil de développement (activé par défaut) -->
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>env</name>
+          <value>dev</value>
+        </property>
+      </activation>
+      
+      <build>
+        <resources>
+          <resource>
+            <directory>src/dev/resources</directory>
+            <filtering>false</filtering>
+            <excludes>
+              <exclude>**/config.properties</exclude>
+            </excludes>
+          </resource>
+          <resource>
+            <directory>src/dev/resources</directory>
+            <filtering>true</filtering>
+            <includes>
+              <include>**/config.properties</include>
+            </includes>
+          </resource>
+        </resources>
+      </build>
+
+      <dependencies>
+        <dependency>
+          <groupId>hsqldb</groupId>
+          <artifactId>hsqldb</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    
+    <!-- Profil webdev -->
+    <profile>
+      <id>webdev</id>
+      <activation>
+        <property>
+          <name>env</name>
+          <value>webdev</value>
+        </property>
+      </activation>
+      
+      <build>
+        <resources>
+          <resource>
+            <directory>src/webdev/resources</directory>
+            <filtering>false</filtering>
+            <excludes>
+              <exclude>**/config.properties</exclude>
+            </excludes>
+          </resource>
+          <resource>
+            <directory>src/webdev/resources</directory>
+            <filtering>true</filtering>
+            <includes>
+              <include>**/config.properties</include>
+            </includes>
+          </resource>
+        </resources>
+      </build>
+
+      <dependencies>
+        <dependency>
+          <groupId>hsqldb</groupId>
+          <artifactId>hsqldb</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    
+    <!-- Profil de production -->
+    <profile>
+      <id>prod</id>
+      <activation>
+        <property>
+          <name>env</name>
+          <value>prod</value>
+        </property>
+      </activation>
+      
+      <build>
+        <resources>
+          <resource>
+            <directory>src/prod/resources</directory>
+            <filtering>false</filtering>
+            <excludes>
+              <exclude>**/config.properties</exclude>
+            </excludes>
+          </resource>
+          <resource>
+            <directory>src/prod/resources</directory>
+            <filtering>true</filtering>
+            <includes>
+              <include>**/config.properties</include>
+            </includes>
+          </resource>
+        </resources>
+        
+        <plugins>
+        
+          <!-- Minify -->
+          <plugin>
+            <groupId>com.samaxes.maven</groupId>
+            <artifactId>minify-maven-plugin</artifactId>
+            <version>1.5.1-sismics</version>
+            <executions>
+              <execution>
+                <id>reader-minify</id>
+                <phase>process-resources</phase>
+                <configuration>
+                  <cssSourceDir>style</cssSourceDir>
+                  <cssTargetDir>style</cssTargetDir>
+                  <cssSourceFiles>
+                    <cssSourceFile>main.css</cssSourceFile>
+                    <cssSourceFile>jqueryui.css</cssSourceFile>
+                    <cssSourceFile>jquery.jcrop.css</cssSourceFile>
+                    <cssSourceFile>jquery.calendar.css</cssSourceFile>
+                    <cssSourceFile>jquery.colorbox.css</cssSourceFile>
+                    <cssSourceFile>jquery.qtip.css</cssSourceFile>
+                  </cssSourceFiles>
+                  <cssFinalFile>reader.css</cssFinalFile>
+                  <jsSourceDir>js</jsSourceDir>
+                  <jsTargetDir>js</jsTargetDir>
+                  <jsSourceFiles>
+                    <jsSourceFile>jquery.i18n.js</jsSourceFile>
+                    <jsSourceFile>jquery.ui.i18n.js</jsSourceFile>
+                    <jsSourceFile>jquery.jcrop.js</jsSourceFile>
+                    <jsSourceFile>jquery.qtip.js</jsSourceFile>
+                    <jsSourceFile>jquery.bbq.js</jsSourceFile>
+                    <jsSourceFile>jquery.upload.js</jsSourceFile>
+                    <jsSourceFile>jquery.cookie.js</jsSourceFile>
+                    <jsSourceFile>jquery.json.js</jsSourceFile>
+                    <jsSourceFile>jquery.timeago.js</jsSourceFile>
+                    <jsSourceFile>jquery.validate.js</jsSourceFile>
+                    <jsSourceFile>jquery.flot.js</jsSourceFile>
+                    <jsSourceFile>jquery.flot.crosshair.js</jsSourceFile>
+                    <jsSourceFile>jquery.calendar.js</jsSourceFile>
+                    <jsSourceFile>jquery.colorbox.js</jsSourceFile>
+                    <jsSourceFile>jquery.slides.js</jsSourceFile>
+                    <jsSourceFile>main.js</jsSourceFile>
+                    <jsSourceFile>tracking.js</jsSourceFile>
+                    <jsSourceFile>ui.js</jsSourceFile>
+                    <jsSourceFile>stream.js</jsSourceFile>
+                    <jsSourceFile>profile.js</jsSourceFile>
+                    <jsSourceFile>search.js</jsSourceFile>
+                    <jsSourceFile>view.js</jsSourceFile>
+                    <jsSourceFile>login.js</jsSourceFile>
+                    <jsSourceFile>intro.js</jsSourceFile>
+                    <jsSourceFile>util.js</jsSourceFile>
+                    <jsSourceFile>comment.js</jsSourceFile>
+                    <jsSourceFile>media.js</jsSourceFile>
+                    <jsSourceFile>post.js</jsSourceFile>
+                    <jsSourceFile>track.js</jsSourceFile>
+                    <jsSourceFile>notification.js</jsSourceFile>
+                    <jsSourceFile>preference.js</jsSourceFile>
+                    <jsSourceFile>connect.js</jsSourceFile>
+                  </jsSourceFiles>
+                  <jsFinalFile>reader.js</jsFinalFile>
+                </configuration>
+                <goals>
+                  <goal>minify</goal>
+                </goals>
+              </execution>
+              
+              <execution>
+                <id>login-minify</id>
+                <phase>process-resources</phase>
+                <configuration>
+                  <jsSourceDir>js</jsSourceDir>
+                  <jsTargetDir>js</jsTargetDir>
+                  <jsSourceFiles>
+                    <jsSourceFile>jquery.i18n.js</jsSourceFile>
+                    <jsSourceFile>jquery.timeago.js</jsSourceFile>
+                    <jsSourceFile>jquery.validate.js</jsSourceFile>
+                    <jsSourceFile>jquery.json.js</jsSourceFile>
+                    <jsSourceFile>jquery.qtip.js</jsSourceFile>
+                    <jsSourceFile>jquery.jstz.js</jsSourceFile>
+                    <jsSourceFile>main.js</jsSourceFile>
+                    <jsSourceFile>ui.js</jsSourceFile>
+                    <jsSourceFile>util.js</jsSourceFile>
+                    <jsSourceFile>login.js</jsSourceFile>
+                    <jsSourceFile>tracking.js</jsSourceFile>
+                  </jsSourceFiles>
+                  <jsFinalFile>reader.login.js</jsFinalFile>
+                </configuration>
+                <goals>
+                  <goal>minify</goal>
+                </goals>
+              </execution>
+              
+              <execution>
+                <id>newpwd-minify</id>
+                <phase>process-resources</phase>
+                <configuration>
+                  <jsSourceDir>js</jsSourceDir>
+                  <jsTargetDir>js</jsTargetDir>
+                  <jsSourceFiles>
+                    <jsSourceFile>jquery.i18n.js</jsSourceFile>
+                    <jsSourceFile>jquery.timeago.js</jsSourceFile>
+                    <jsSourceFile>jquery.validate.js</jsSourceFile>
+                    <jsSourceFile>jquery.qtip.js</jsSourceFile>
+                    <jsSourceFile>jquery.bbq.js</jsSourceFile>
+                    <jsSourceFile>main.js</jsSourceFile>
+                    <jsSourceFile>ui.js</jsSourceFile>
+                    <jsSourceFile>util.js</jsSourceFile>
+                    <jsSourceFile>newpwd.js</jsSourceFile>
+                  </jsSourceFiles>
+                  <jsFinalFile>reader.newpwd.js</jsFinalFile>
+                </configuration>
+                <goals>
+                  <goal>minify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          
+          <!-- Ant task to modify the JS/CSS imports -->
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+              <execution>
+                <id>default-antrun</id>
+                <phase>process-resources</phase>
+                <configuration>
+                  <target>
+                    
+                    <property name="webapp.dir" location="${basedir}/src/main/webapp"/>
+                    <property name="war.dir" location="${project.build.directory}/${project.artifactId}-${project.version}"/>
+                    <echo message="war : ${war.dir}" />
+                    <echo message="webapp : ${webapp.dir}" />
+                    
+                    <!-- Copie des fichiers HTML -->
+                    <copy todir="${war.dir}">
+                      <fileset dir="${webapp.dir}" includes="*.html"/>
+                    </copy>
+                    
+                    <!-- Utilisation des imports minifiés -->
+                    <replaceregexp match="&lt;!-- MINIFIED (.*) --&gt;" replace="\1" flags="g">
+                      <fileset dir="${war.dir}" includes="*.html"/>
+                    </replaceregexp>
+                    
+                    <!-- Suppression des imports non minifiés -->
+                    <replaceregexp match="&lt;!-- BEGIN NON MINIFIED --&gt;(.*?)&lt;!-- END NON MINIFIED --&gt;" replace="" flags="gs">
+                      <fileset dir="${war.dir}" includes="*.html"/>
+                    </replaceregexp>
+                    
+                  </target>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          
+          <!-- Generation of the war -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.2</version>
+            <configuration>
+              <warSourceExcludes>
+                **/style/main.css,
+                **/style/jquery.calendar.css,
+                **/style/jquery.colorbox.css,
+                **/style/jquery.jcrop.css,
+                **/style/jquery.qtip.css,
+                **/style/jqueryui.css,
+                **/js/jquery.i18n.js,
+                **/js/jquery.ui.i18n.js,
+                **/js/jquery.jcrop.js,
+                **/js/jquery.qtip.js,
+                **/js/jquery.upload.js,
+                **/js/jquery.cookie.js,
+                **/js/jquery.json.js,
+                **/js/jquery.timeago.js,
+                **/js/jquery.validate.js,
+                **/js/jquery.flot.js,
+                **/js/jquery.flot.crosshair.js,
+                **/js/jquery.calendar.js,
+                **/js/jquery.colorbox.js,
+                **/js/jquery.slides.js,
+                **/js/jquery.jstz.js,
+                **/js/main.js,
+                **/js/tracking.js,
+                **/js/ui.js,
+                **/js/stream.js,
+                **/js/profile.js,
+                **/js/search.js,
+                **/js/view.js,
+                **/js/login.js,
+                **/js/intro.js,
+                **/js/util.js,
+                **/js/newpwd.js,
+                **/js/comment.js,
+                **/js/media.js,
+                **/js/post.js,
+                **/js/track.js,
+                **/js/notification.js,
+                **/js/preference.js,
+                **/js/connect.js,
+                *.html
+              </warSourceExcludes>
+              <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
+            </configuration>
+          </plugin>
+          
+        </plugins>
+      </build>
+      
+      <properties>
+          <!-- <hibernate.datasource>java:comp/env/jdbc/live_datasource</hibernate.datasource>-->
+      </properties>
+    </profile>
+  </profiles>  
+</project>

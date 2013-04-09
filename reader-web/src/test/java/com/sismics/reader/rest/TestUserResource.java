@@ -1,0 +1,261 @@
+package com.sismics.reader.rest;
+
+import java.util.Locale;
+
+import javax.ws.rs.core.MultivaluedMap;
+
+import junit.framework.Assert;
+
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+import org.junit.Test;
+
+import com.sismics.reader.rest.filter.CookieAuthenticationFilter;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.ClientResponse.Status;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
+/**
+ * Exhaustive test of the user resource.
+ * 
+ * @author jtremeaux
+ */
+public class TestUserResource extends BaseJerseyTest {
+    /**
+     * Test the user resource.
+     * 
+     * @throws JSONException
+     */
+    @Test
+    public void testUserResource() throws JSONException {
+        // Check anonymous user information
+        WebResource userResource = resource().path("/user");
+        ClientResponse response = userResource.acceptLanguage(Locale.US).get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        JSONObject json = response.getEntity(JSONObject.class);
+        
+        // Create alice user
+        clientUtil.createUser("alice");
+
+        // Login admin
+        String adminAuthenticationToken = clientUtil.login("admin", "admin");
+        
+        // List all users
+        userResource = resource().path("/user/list");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        MultivaluedMapImpl getParams = new MultivaluedMapImpl();
+        getParams.putSingle("sort_column", 2);
+        getParams.putSingle("asc", false);
+        response = userResource.queryParams(getParams).get(ClientResponse.class);
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        JSONArray users = json.getJSONArray("users");
+        Assert.assertTrue(users.length() > 0);
+        JSONObject user = (JSONObject) users.get(0);
+        Assert.assertEquals("user", user.optString("id"));
+        
+        // Create a user KO (login length validation)
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
+        postParams.putSingle("username", "   bb  ");
+        postParams.putSingle("email", "bob@reader.com");
+        postParams.putSingle("password", "12345678");
+        response = userResource.put(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ValidationError", json.getString("type"));
+        Assert.assertTrue(json.getString("message"), json.getString("message").contains("more than 3"));
+
+        // Create a user KO (login format validation)
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        postParams = new MultivaluedMapImpl();
+        postParams.putSingle("username", "bob-");
+        postParams.putSingle("email", " bob@reader.com ");
+        postParams.putSingle("password", "12345678");
+        response = userResource.put(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ValidationError", json.getString("type"));
+        Assert.assertTrue(json.getString("message"), json.getString("message").contains("alphanumeric"));
+
+        // Create a user KO (email format validation)
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        postParams = new MultivaluedMapImpl();
+        postParams.putSingle("username", "bob");
+        postParams.putSingle("email", " bobreader.com ");
+        postParams.putSingle("password", "12345678");
+        response = userResource.put(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ValidationError", json.getString("type"));
+        Assert.assertTrue(json.getString("message"), json.getString("message").contains("must be an email"));
+
+        // Create a user bob OK
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        postParams = new MultivaluedMapImpl();
+        postParams.putSingle("username", " bob ");
+        postParams.putSingle("email", " bob@reader.com ");
+        postParams.putSingle("password", " 12345678 ");
+        response = userResource.put(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+
+        // Create a user bob KO : duplicate username
+        response = userResource.put(ClientResponse.class, postParams);
+        Assert.assertNotSame(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("AlreadyExistingUsername", json.getString("type"));
+
+        // Check if a username is free : OK
+        userResource = resource().path("/user/check_username");
+        MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+        queryParams.add("username", "carol");
+        response = userResource.queryParams(queryParams).get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+
+        // Check if a username is free : KO
+        userResource = resource().path("/user/check_username");
+        queryParams = new MultivaluedMapImpl();
+        queryParams.add("username", "alice");
+        response = userResource.queryParams(queryParams).get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ko", json.getString("status"));
+
+        // Login alice with extra whitespaces
+        userResource = resource().path("/user/login");
+        postParams = new MultivaluedMapImpl();
+        postParams.putSingle("username", " alice ");
+        postParams.putSingle("password", " 12345678 ");
+        response = userResource.post(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        String aliceAuthToken = clientUtil.getAuthenticationCookie(response);
+
+        // Login user bob
+        String bobAuthToken = clientUtil.login("bob");
+
+        // Check alice user information
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(aliceAuthToken));
+        response = userResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("alice@reader.com", json.getString("email"));
+        Assert.assertNotNull(json.getLong("last_login_date"));
+        Assert.assertFalse(json.getBoolean("display_title_web"));
+        Assert.assertTrue(json.getBoolean("display_title_mobile"));
+        Assert.assertTrue(json.getBoolean("display_unread_web"));
+        Assert.assertTrue(json.getBoolean("display_unread_mobile"));
+        
+        // Check bob user information
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(bobAuthToken));
+        response = userResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("bob@reader.com", json.getString("email"));
+        
+        // Test login KO (user not found)
+        userResource = resource().path("/user/login");
+        postParams.putSingle("username", "intruder");
+        postParams.putSingle("password", "12345678");
+        response = userResource.post(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.FORBIDDEN, Status.fromStatusCode(response.getStatus()));
+
+        // Test login KO (wrong password)
+        userResource = resource().path("/user/login");
+        postParams.putSingle("username", "alice");
+        postParams.putSingle("password", "error");
+        response = userResource.post(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.FORBIDDEN, Status.fromStatusCode(response.getStatus()));
+
+        // User alice updates her information + changes her email
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(aliceAuthToken));
+        postParams = new MultivaluedMapImpl();
+        postParams.add("email", " alice2@reader.com ");
+        postParams.add("locale", " en ");
+        postParams.add("display_title_web", true);
+        postParams.add("display_title_mobile", false);
+        postParams.add("display_unread_web", false);
+        postParams.add("display_unread_mobile", false);
+        response = userResource.post(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ok", json.getString("status"));
+        
+        // Check the update
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(aliceAuthToken));
+        response = userResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertTrue(json.getBoolean("display_title_web"));
+        Assert.assertFalse(json.getBoolean("display_title_mobile"));
+        Assert.assertFalse(json.getBoolean("display_unread_web"));
+        Assert.assertFalse(json.getBoolean("display_unread_mobile"));
+        
+        // Delete user alice
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(aliceAuthToken));
+        response = userResource.delete(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        
+        // Check the deletion
+        userResource = resource().path("/user/login");
+        postParams.putSingle("username", "alice");
+        postParams.putSingle("password", "12345678");
+        response = userResource.post(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.FORBIDDEN, Status.fromStatusCode(response.getStatus()));
+    }
+
+    /**
+     * Test the user resource admin functions.
+     * 
+     * @throws JSONException
+     */
+    @Test
+    public void testUserResourceAdmin() throws JSONException {
+        // Create admin_user1 user
+        clientUtil.createUser("admin_user1");
+
+        // Login admin
+        String adminAuthenticationToken = clientUtil.login("admin", "admin");
+
+        // User admin update admin_user1 information
+        WebResource userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
+        postParams.add("email", " alice2@reader.com ");
+        postParams.add("locale", " en ");
+        postParams.add("display_title_web", true);
+        postParams.add("display_title_mobile", false);
+        postParams.add("display_unread_web", false);
+        postParams.add("display_unread_mobile", false);
+        ClientResponse response = userResource.post(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        JSONObject json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ok", json.getString("status"));
+        
+        // User admin deletes user admin_user1
+        userResource = resource().path("/user/admin_user1");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        response = userResource.delete(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ok", json.getString("status"));
+        
+        // User admin deletes user admin_user1 : KO (user doesn't exist)
+        userResource = resource().path("/user/admin_user1");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        response = userResource.delete(ClientResponse.class);
+        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("UserNotFound", json.getString("type"));
+    }
+}

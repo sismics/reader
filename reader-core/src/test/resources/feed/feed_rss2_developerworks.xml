@@ -1,0 +1,2218 @@
+<?xml version="1.0"?>
+
+ 
+<rss version="2.0" xmlns:dw="http://www.ibm.com/developerworks/feeds/">
+<channel>
+<title>IBM developerWorks : Java technology</title>
+<link>http://www.ibm.com/developerworks/</link>
+<description>The latest content from IBM developerWorks</description>
+<pubDate>05 Apr 2013 12:25:20 +0000</pubDate>
+<language>en</language>
+<copyright>Copyright 2004 IBM Corporation.</copyright>
+<image>
+<title>developerWorks</title>
+<url>http://www.ibm.com/developerworks/i/dwlogo-small.gif</url>
+<link>http://www.ibm.com/developerworks/</link>
+</image>
+
+	<item>
+		
+		
+		<title><![CDATA[Process real-time big data with Twitter Storm]]></title>
+		
+		<description><![CDATA[Storm is an open source, big-data processing system that differs from other systems in that it&apos;s intended for distributed real-time processing and is language independent. Learn about Twitter Storm, its architecture, and the spectrum of batch and stream processing solutions.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/opensource/library/os-twitterstorm/index.html?ca=drs-]]></link> 
+		<pubDate>02 Apr 2013 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>Analytics</category>
+		
+			
+			<category>java</category>
+		
+			
+			<category>linux</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Build a text visualization and analytics application]]></title>
+		
+		<description><![CDATA[Text visualization is an effective way to see and analyze what a designated text is saying. Learn to combine Eclipse and open source text visualization and analytics tools to build a word-wave application that visualizes and compares two texts.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/opensource/library/os-txtviz/index.html?ca=drs-]]></link> 
+		<pubDate>02 Apr 2013 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+			
+			<category>Analytics</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Java.next: Common ground in Groovy, Scala, and Clojure, Part 1]]></title>
+		
+		<description><![CDATA[The Java.next languages (Groovy, Scala, and Clojure) have more commonalities than differences, converging toward common ground in many of their features and conveniences. This installment explores how they each address a longstanding deficiency in the Java language -- the inability to overload operators. It also discusses the related concepts of associativity and precedence.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-jn2/index.html?ca=drs-]]></link> 
+		<pubDate>12 Mar 2013 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[HTML5 2D game development: Manipulating time, Part 2]]></title>
+		
+		<description><![CDATA[In this series, HTML5 maven David Geary shows
+            you how to implement an HTML5 2D video game one step at a time. In this
+            installment, you&apos;ll learn how to bend time to your will to create nonlinear
+            motion and color changes.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/wa-html5-game7/index.html?ca=drs-]]></link> 
+		<pubDate>12 Mar 2013 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>web</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Mobile for the masses: A gentle introduction to Android]]></title>
+		
+		<description><![CDATA[The mobile landscape is rich with promise, and Android is a viable and exciting platform for developers who seek
+a way in. This new series starts with an introduction to Android that is tailored specifically for Java developers just getting started with mobile. Learn about Android&apos;s three-layer versioning system (and find out why it matters), then set up your development environment and build your first Android app.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-mobileforthemasses1/index.html?ca=drs-]]></link> 
+		<pubDate>05 Mar 2013 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>Mobile</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Monitor a Java application with the Health Center API, Part 2]]></title>
+		
+		<description><![CDATA[The 2.1 release of Health Center contains a powerful API. The API allows
+      Java developers to embed Health Center in their applications and harness its
+      monitoring power to troubleshoot problems. Part 2 of this series takes the
+      deadlock detection application from Part 1 and adds a method-profiling view to show where the application spends most of its CPU cycles.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-healthcareapi2/index.html?ca=drs-]]></link> 
+		<pubDate>26 Feb 2013 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Monitor a Java application with the Health Center API, Part 1]]></title>
+		
+		<description><![CDATA[The 2.1 release of Health Center contains a powerful API. The API allows
+      Java developers to embed Health Center in their applications and harness its
+      monitoring power to troubleshoot problems. In Part 1 of this two-part article, 
+      you learn to use the Health Center API and to monitor for deadlocks in a running Java application. Part
+         2 uses the deadlock detection application that is developed in this article and adds a method-profiling view to show where
+      the application spends most of its CPU cycles.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-healthcareapi1/index.html?ca=drs-]]></link> 
+		<pubDate>26 Feb 2013 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Test automation and continuous integration with STAF/STAX]]></title>
+		
+		<description><![CDATA[Regression and incremental tests play an important role during the testing 
+of an application that might comprise hundreds or thousands of requirements. While the execution 
+of incremental tests can sometimes be run manually, regression tests require an automation 
+tool or framework. The support for multiple operating systems, architectures, and middleware 
+software, like application servers and databases, make the necessity of an automation framework 
+even more urgent. This article briefly introduces STAF/STAX test automation framework. It also  
+shows how you can use it to build a framework for the automation of tests and continuous 
+integration in a complex test bed.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/opensource/library/os-test-stafstax/index.html?ca=drs-]]></link> 
+		<pubDate>26 Feb 2013 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>industries</category>
+		
+			
+			<category>web</category>
+		
+			
+			<category>java</category>
+		
+			
+			<category>cloud</category>
+		
+			
+			<category>Agile</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[HTML5 2D game development: Manipulating time, Part 1]]></title>
+		
+		<description><![CDATA[In this series, HTML5 maven David Geary shows you how to implement an HTML5 2D video game one step at a time. In the first of two consecutive installments, you&apos;ll implement the runner sprite&apos;s jumping behavior.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-html5-game6/index.html?ca=drs-]]></link> 
+		<pubDate>05 Feb 2013 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>web</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Java.next: The Java.next languages]]></title>
+		
+		<description><![CDATA[This article launches a new developerWorks series by Neal Ford that performs a
+    deep comparison of three next-generation JVM languages: Groovy, Scala, and Clojure. In
+    this initial installment, find out what you&apos;ll gain from understanding their similarities and differences -- whether or not you choose to keep using Java as your main programming language for now.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-jn1/index.html?ca=drs-]]></link> 
+		<pubDate>29 Jan 2013 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Why functional programming is on the rise]]></title>
+		
+		<description><![CDATA[Java developers should learn functional paradigms now, even if they have no
+    immediate plans to move to a functional language such as Scala or Clojure. Over time,
+    all mainstream languages will become more functional; Neal Ford explores the reasons
+    why in this installment.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft20/index.html?ca=drs-]]></link> 
+		<pubDate>29 Jan 2013 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Look-ahead Java deserialization]]></title>
+		
+		<description><![CDATA[When Java serialization is used to exchange information
+            between a client and a server, attackers can try to replace the legitimate
+            serialized stream with malicious data. This article explains the nature of
+            this threat and describes a simple way to protect against it. Find out how to
+            stop the deserialization process as soon as an unexpected Java class is found
+            in the stream.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/se-lookahead/index.html?ca=drs-]]></link> 
+		<pubDate>15 Jan 2013 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>security</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[HTML5 2D game development: Implementing Sprite behaviors]]></title>
+		
+		<description><![CDATA[In this series, HTML5 maven David Geary shows you how to implement an HTML5 2D video game one step at a time. In this installment, you&apos;ll learn how to implement the essence of any video game: sprite behaviors.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-html5-game5/index.html?ca=drs-]]></link> 
+		<pubDate>08 Jan 2013 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>web</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Agile DevOps: Continuous software delivery in the cloud]]></title>
+		
+		<description><![CDATA[When developers and operations work together in a collaborative manner, they often need one place to manage the software delivery process and pipeline of changes. A Continuous Delivery (CD) platform addresses this need. In this Agile DevOps installment, DevOps expert Paul Duvall lays out how you can use OpenDelivery, an open CD platform.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/agile/library/a-devops8/index.html?ca=drs-]]></link> 
+		<pubDate>08 Jan 2013 05:00:00 +0000</pubDate>     
+		
+		<dw:image-url>http://www.ibm.com/developerworks/i/t-j-f-immutable_ebf7fb.jpg</dw:image-url>
+		
+		
+		
+			
+			<category>Agile</category>
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>cloud</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Laziness, Part 2]]></title>
+		
+		<description><![CDATA[Implementing lazy evaluation is easy in a language that supports closures. This Functional thinking installment shows how to derive a lazy list using Groovy&apos;s closures as building blocks. Then it explores some of the performance and conceptual benefits of lazy evaluation, including the ability to initialize fields lazily in some languages.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft19/index.html?ca=drs-]]></link> 
+		<pubDate>19 Dec 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[IBM@JavaOne 2012, Part 2: Roundup of the IBM sessions]]></title>
+		
+		<description><![CDATA[IBM was active throughout JavaOne 2012, leading numerous technical talks and birds-of-a-feather (BOF) sessions, participating in panels, and delivering an opening-day keynote. This article summarizes IBM&apos;s contributions to the conference. Get synopses of the IBM sessions you might have missed, and view the video or presentation slides for many of them.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ibm-j1-2/index.html?ca=drs-]]></link> 
+		<pubDate>18 Dec 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Characterizing code for refactoring]]></title>
+		
+		<description><![CDATA[The primary purpose of writing characterization tests is to protect
+    business functionality from inadvertent side-effects when difficult-to-change code
+    needs to be modified. Untested or poorly tested legacy code can be complex, difficult to read, and not injectible -- all of which makes it hard to change when you need to. This article explains how to characterize such code properly for unit testing so that you can refactor it safely.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/a-refactoring/index.html?ca=drs-]]></link> 
+		<pubDate>18 Dec 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>Agile</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Generate PDF files from Java applications dynamically]]></title>
+		
+		<description><![CDATA[If your application needs to generate PDF documents dynamically, you need the iText library. The open source iText library makes PDF creation a snap. This article introduces iText and gives a step-by-step guide to using it to generate PDF documents from Java technology applications. We create a sample application to better understand iText.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/os-javapdf/index.html?ca=drs-]]></link> 
+		<pubDate>12 Dec 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Introduction to VoltDB]]></title>
+		
+		<description><![CDATA[Learn about VoltDB, an in-memory database that offers the scalability of NoSQL databases with the ACID-compliance of traditional relational database systems. You&apos;ll design and partition database tables, store and retrieve data with stored procedures written in Java code. You&apos;ll also explore VoltCache, a key-value store built on top of VoltDB.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/os-voltdb/index.html?ca=drs-]]></link> 
+		<pubDate>11 Dec 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[The Java technical podcast series: The cloud files]]></title>
+		
+		<description><![CDATA[This season, Andrew Glover focuses his interviews on the technologies, companies, and
+    people influencing cloud computing. Recorded over a three-month period, Andrew spoke
+    with established players and their interests, including CloudBees and Heroku, as well
+    as exciting newcomers like Jelastic and NuoDB. And that&apos;s not all. If you&apos;re working
+    in the cloud, you won&apos;t want to miss a single interview.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-gloverpodcast5/index.html?ca=drs-]]></link> 
+		<pubDate>11 Dec 2012 05:00:00 +0000</pubDate>     
+		
+		<dw:image-url>http://www.ibm.com/developerworks/i/t-j-f-podcast_f4f7fa.jpg</dw:image-url>
+		
+		
+		
+			
+			<category>cloud</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Discover MongoDB quiz]]></title>
+		
+		<description><![CDATA[Test your MongoDB knowledge and skills and you&apos;ll be able to quickly assess how well you&apos;ve mastered key information and coding techniques you&apos;ve learned from this knowledge path.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-mongodbquiz/index.html?ca=drs-]]></link> 
+		<pubDate>04 Dec 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[HTML5 2D game development: Sprites]]></title>
+		
+		<description><![CDATA[In this series, HTML5 maven David Geary shows you how to implement an HTML5 2D
+    video game one step at a time. Sprites -- graphical objects that you can assign
+    behaviors to -- are one of the most fundamental and important aspects of video games.
+    In this installment, you&apos;ll learn how to implement the sprites that make up Snail Bait&apos;s cast of characters.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-html5-game4/index.html?ca=drs-]]></link> 
+		<pubDate>04 Dec 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>web</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Discover MongoDB]]></title>
+		
+		<description><![CDATA[Some problem domains lend themselves better to a document-oriented data model
+    than to a relational one. MongoDB -- a high-performance, highly scalable open
+    source document database -- has seen widespread adoption in the web space and is making enterprise inroads. MongoDB offers client support for most programming languages, and its powerful query language distinguishes it significantly from other NoSQL alternatives. Follow this knowledge path to master MongoDB&apos;s basic and advanced capabilities, and start using it in your programming.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/training/kp/j-kp-mongo/index.html?ca=drs-]]></link> 
+		<pubDate>04 Dec 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Java development 2.0: Scalable searching with ElasticSearch]]></title>
+		
+		<description><![CDATA[Like the word google, search technology has evolved tremendously over the past 10 years. Learn how one of the newer cloud-friendly search platforms brings simple, scalable search to your Java enterprise applications.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-javadev2-24/index.html?ca=drs-]]></link> 
+		<pubDate>27 Nov 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>cloud</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Agile DevOps: Version everything]]></title>
+		
+		<description><![CDATA[Which types of software-system artifacts should you version? In this Agile DevOps installment, DevOps expert Paul Duvall recommends that DevOps teams version application code, infrastructure, configuration, data, and even internal system artifacts to gain the capacity to deliver software to users quickly and often.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/a-devops6/index.html?ca=drs-]]></link> 
+		<pubDate>27 Nov 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>Agile</category>
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Laziness, Part 1]]></title>
+		
+		<description><![CDATA[A common feature of many functional programming languages is lazy evaluation,
+    whereby expressions are evaluated only when necessary rather than upon declaration.
+    Java doesn&apos;t support this style of laziness, but several frameworks and related
+    languages do. This article shows how to build laziness into your Java applications, using pure Java and functional frameworks.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft18/index.html?ca=drs-]]></link> 
+		<pubDate>20 Nov 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Parse cloud-based services for Android apps]]></title>
+		
+		<description><![CDATA[Mobile developer C. Enrique Ortiz introduces the Parse API, demonstrating how to store Android application data and files in the Parse cloud.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-parse/index.html?ca=drs-]]></link> 
+		<pubDate>20 Nov 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>Mobile</category>
+		
+			
+			<category>cloud</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Build server-cluster-aware Java applications]]></title>
+		
+		<description><![CDATA[Server clustering has become commonplace for highly scalable Java enterprise application development, but application-level server-cluster awareness is not currently part of Java EE. In this article, Mukul Gupta and Paresh Paladiya show you how to leverage two open source projects, Apache ZooKeeper and LinkedIn&apos;s Project Norbert, for server-group coordination in distributed enterprise Java applications.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-zookeeper/index.html?ca=drs-]]></link> 
+		<pubDate>13 Nov 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Agile DevOps: Test-driven infrastructure]]></title>
+		
+		<description><![CDATA[Few in the software industry question that writing automated tests for application code is a good practice. Teams are now applying similar automated testing practices to infrastructure and environments. In this Agile DevOps installment, DevOps expert Paul Duvall covers writing automated tests for your infrastructure using tools such as Cucumber with Gherkin. These tests can be run in conjunction with every scripted change to the infrastructure to ensure quick feedback when a change introduces an error into an environment.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/a-devops5/index.html?ca=drs-]]></link> 
+		<pubDate>06 Nov 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>Agile</category>
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[The Direct Project: Sending health information over the cloud]]></title>
+		
+		<description><![CDATA[Promoting interoperable and meaningful use of electronic health record (EHR) systems is one of the major goals of the federal government&apos;s healthcare reform, and the Direct Project is one of its most promising initiatives. Get started with this peer-to-peer protocol for sending sensitive patient information over the cloud, then find out how to use Direct Sender, an open source, Java-based client, to send secure email in health IT systems.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/cl-directproject/index.html?ca=drs-]]></link> 
+		<pubDate>06 Nov 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>cloud</category>
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Configure JMS clustering in IBM SSFS V9.2]]></title>
+		
+		<description><![CDATA[IBM Sterling Selling and Fulfillment Suite (SSFS) V9.2
+            introduces support for JMS clustering. This article explains how to configure
+            JMS clustering to improve the scalability and high availability of
+            SSFS.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/co-jms-cluster-ssfs/index.html?ca=drs-]]></link> 
+		<pubDate>02 Nov 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>commerce</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Boost JDBC application performance using the IBM Data Server Driver for JDBC and
+            SQLJ]]></title>
+		
+		<description><![CDATA[Developing high performing JDBC applications is not an easy task. This article
+            helps you gain a better understanding of the factors that contribute to your JDBC
+            application performance using the IBM Data Server Driver for JDBC and SQLJ to
+            access DB2 and Informix. Learn to
+            identify these issues and to find and alleviate client-side bottlenecks.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/data/library/techarticle/dm-1211jdbcapplication/index.html?ca=drs-]]></link> 
+		<pubDate>01 Nov 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>data</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[HTML5 2D game development: Setting the stage]]></title>
+		
+		<description><![CDATA[In this series, HTML5 maven David Geary shows you how to implement an HTML5 2D video game one step at a time. In this installment, you&apos;ll learn how to encapsulate game code in an object, how to implement pause and unpause, and how to use CSS3 transitions to implement a game-restart countdown.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-html5-game3/index.html?ca=drs-]]></link> 
+		<pubDate>30 Oct 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>web</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Agile DevOps: Unleash the Chaos Monkey]]></title>
+		
+		<description><![CDATA[When would it ever be a good idea to randomly and intentionally try to terminate
+    parts of your software system -- including the hardware it runs on? How about early and often? In this Agile DevOps installment, DevOps expert Paul Duvall describes approaches to creating a Chaos Monkey (as it&apos;s been dubbed by Netflix) to ensure that your production infrastructure can recover from inevitable system failures.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/a-devops4/index.html?ca=drs-]]></link> 
+		<pubDate>23 Oct 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>Agile</category>
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Implement POSIX Semaphore APIs using System V Semaphores APIs]]></title>
+		
+		<description><![CDATA[Need to use POSIX APIs but the development platform doesn&apos;t support them (such as z/OS)? Don&apos;t let that hold you back. Learn how you can implement POSIX Semaphore APIs using System V Semaphore APIs to bring your code to more platforms and keep it maintainable.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/l-semaphore/index.html?ca=drs-]]></link> 
+		<pubDate>16 Oct 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>linux</category>
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Transformations and optimizations]]></title>
+		
+		<description><![CDATA[Various functional languages and frameworks feature many of the same abstractions and behaviors but name them differently. In this Functional thinking article, series author Neal Ford optimizes the solution from the preceding installment by improving the algorithm and adding caching, illustrating how each language or framework accommodates the required changes.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft17/index.html?ca=drs-]]></link> 
+		<pubDate>16 Oct 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Agile DevOps: Transient environments]]></title>
+		
+		<description><![CDATA[Often, after a shared environment is provisioned, it&apos;s never decommissioned and might run for weeks or months, with engineers applying manual configuration changes throughout its lifetime. This risky approach regularly causes deployment problems and other strange &quot;environment&quot; errors to occur during development, test, and production cycles. This Agile DevOps installment explains how to create ephemeral environments that are terminated on a frequent basis. Once all environments are scripted and versioned, these test environments are only used long enough to run through a suite of tests as the software moves through a delivery pipeline on its way to production.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/agile/library/a-devops3/index.html?ca=drs-]]></link> 
+		<pubDate>09 Oct 2012 04:00:00 +0000</pubDate>     
+		
+		<dw:image-url>http://www.ibm.com/developerworks/i/t-j-f-immutable_ebf7fb.jpg</dw:image-url>
+		
+		
+		
+			
+			<category>Agile</category>
+		
+			
+			<category>cloud</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Implement responsive web design using WebSphere Portal, Part
+                1: Get started with the default theme]]></title>
+		
+		<description><![CDATA[Creating an experience for multiple devices is essential, 
+            but targeting the right set of devices can be challenging. 
+            Responsive web design (RWD) has become a popular approach for creating a 
+            single web site that optimizes content and layout automatically based on screen size, 
+            device and orientation, eliminating the need to design for a specific user device preference. 
+            This article discusses how to transform your WebSphere Portal theme into a 
+            responsive web experience from the ground up. With advanced 
+            CSS techniques, you can implement a theme that responds in real time to 
+            different screen resolutions using flexible layouts and elastic elements.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/mobile/library/mo-responsive-design-1/index.html?ca=drs-]]></link> 
+		<pubDate>09 Oct 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>Mobile</category>
+		
+			
+			<category>websphere</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[HTML5 2D game development: Graphics and animation]]></title>
+		
+		<description><![CDATA[In this series, HTML5 maven David Geary shows you how to implement an HTML5 2D video game one step at a time. This installment covers Canvas graphics and HTML5 animation. You&apos;ll see how to draw the game&apos;s graphics and how to set them in motion. You will also learn the best way to animate with HTML5, how to scroll the background, and how to implement parallax to simulate three dimensions.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-html5-game2/index.html?ca=drs-]]></link> 
+		<pubDate>02 Oct 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>web</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[IBM@JavaOne 2012, Part 1: Introduction to the IBM sessions]]></title>
+		
+		<description><![CDATA[IBM is a staunch supporter of the JavaOne conference, both as a sponsor and as a source of technical presenters. If you&apos;re going to attend JavaOne 2012, don&apos;t miss your opportunity to glean invaluable knowledge from IBM&apos;s Java experts and to learn about their vital contributions to the Java ecosystem. This article gives you an overview of the activities that the IBM team is involved in during JavaOne 2012.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ibm-j1/index.html?ca=drs-]]></link> 
+		<pubDate>28 Sep 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>cloud</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Tons of transformations]]></title>
+		
+		<description><![CDATA[Functional programming constructs are appearing in all major languages now, but they can
+be hard to spot because they&apos;re identified by a wide variety of common names. This
+installment of Functional thinking shows the same example written using seven different functional frameworks and languages, investigating similarities and differences.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft16/index.html?ca=drs-]]></link> 
+		<pubDate>25 Sep 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Deploying into the cloud with the IBM Application Pattern for Java]]></title>
+		
+		<description><![CDATA[The IBM Application Pattern for Java lets you easily move any existing Java
+    application into a cloud-based environment and make it reusable as either a platform
+    or a modifiable template. Find out how this pattern works with IBM&apos;s cloud offerings,
+    and get started with step-by-step instructions -- including two video demos -- for creating, deploying, and monitoring Java virtual applications in a variety of usage scenarios.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-apppattern/index.html?ca=drs-]]></link> 
+		<pubDate>18 Sep 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>cloud</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Agile DevOps: Infrastructure automation]]></title>
+		
+		<description><![CDATA[How many times have you manually applied the same steps when creating an
+    infrastructure, or relied on another team to set up an environment for you? What if
+    all of these actions were scripted and versioned just like the rest of the software
+    system? In this Agile DevOps installment, DevOps expert Paul Duvall shows how Chef and
+    Puppet enable you to automate infrastructure provisioning. He covers the basics of each of these tools -- along with their similarities, use cases, and differences -- and provides a video demo of scripting with Puppet.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/a-devops2/index.html?ca=drs-]]></link> 
+		<pubDate>11 Sep 2012 04:00:00 +0000</pubDate>     
+		
+		<dw:image-url>http://www.ibm.com/developerworks/i/t-j-f-immutable_ebf7fb.jpg</dw:image-url>
+		
+		
+		
+			
+			<category>Agile</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Troubleshoot with Memory Analyzer]]></title>
+		
+		<description><![CDATA[The Eclipse Memory Analyzer tool (MAT) is a Java heap analyzer that
+    helps you find memory leaks and reduce memory consumption. IBM (a primary contributor to the Eclipse MAT project) has extended Eclipse MAT using the IBM Diagnostic Tool Framework for Java (DTFJ) to bring the tool&apos;s diagnostic capabilities to the IBM Virtual Machines for Java. Extensions to the IBM Memory Analyzer offer additional capabilities for debugging both generic Java applications and specific IBM software products. This knowledge path explains and demonstrates Memory Analyzer capabilities to Java developers.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/training/kp/j-kp-mat/index.html?ca=drs-]]></link> 
+		<pubDate>11 Sep 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Introducing Spring Roo, Part 7: Develop Spring MongoDB applications using Spring Roo]]></title>
+		
+		<description><![CDATA[MongoDB is a very popular document-oriented, horizontally-scalable NoSQL datastore. With Spring Roo version 1.2, you can build Spring applications with MongoDB as data storage solutions. Investigate MongoDB and then build an enterprise Spring MongoDB application using Spring Roo.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/os-springroo7/index.html?ca=drs-]]></link> 
+		<pubDate>07 Sep 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+			
+			<category>linux</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Introducing Spring Roo, Part 6: Develop Spring MVC and GWT applications using Spring Roo 1.2 and deploy them on Cloud Foundry]]></title>
+		
+		<description><![CDATA[Spring Roo advanced considerably with the release of Version 1.2. This article introduces the new features in the current release like multi-module project, MongoDB support, JSF support, and many more. You then will develop a multi-module GWT web application using Spring Roo and deploy the application to Cloud Foundry.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/os-springroo6/index.html?ca=drs-]]></link> 
+		<pubDate>07 Sep 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[HTML5 2D game development: Introducing Snail Bait]]></title>
+		
+		<description><![CDATA[In this series, HTML5 maven David Geary shows you how to implement an HTML5 2D video game one step at a time. This initial installment shows you the finished game and then gets you started implementing it from scratch. If you&apos;ve ever wanted to create an HTML5 game but didn&apos;t have time to master all the details, this is the series for you.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-html5-game1/index.html?ca=drs-]]></link> 
+		<pubDate>28 Aug 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>web</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Agile DevOps: The flattening of the software release process]]></title>
+		
+		<description><![CDATA[What does it mean to &quot;flatten&quot; your software release process? How will this
+    affect your organizational structure? In the first installment of the Agile DevOps
+    series, DevOps expert Paul Duvall describes how developers and operations are working together on software delivery teams to streamline the process of developing and releasing software. He discusses such nascent topics as test-driven infrastructures, transient environments, and the Chaos Monkey -- and how these techniques all work toward the goal of getting software to users more quickly and more often.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/a-devops1/index.html?ca=drs-]]></link> 
+		<pubDate>23 Aug 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>Agile</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Integrate an external code checker into Eclipse CDT]]></title>
+		
+		<description><![CDATA[Good news for users of Eclipse CDT&apos;s built-in code analysis framework for C/C++:  Codan now lets you integrate and execute your favorite external code analysis tools inside Eclipse!]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-codan/index.html?ca=drs-]]></link> 
+		<pubDate>22 Aug 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>xml</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Rethinking dispatch]]></title>
+		
+		<description><![CDATA[Next-generation languages for the Java platform have more-flexible method-dispatch mechanisms than the Java language. In this Functional thinking installment, Neal Ford explores dispatch mechanisms in functional languages like Scala and Clojure, showing new ways to think about executing code.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft15/index.html?ca=drs-]]></link> 
+		<pubDate>21 Aug 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Explore IBM Java 7]]></title>
+		
+		<description><![CDATA[The IBM Centre for Java Technology Development provides developer kits for creating and testing Java Platform, Standard Edition (Java SE) applications and applets on Linux, AIX, IBM i, and z/OS systems. IBM SDK Java Technology Edition Version 7 (IBM Java 7), released shortly after the Oracle Java 7 release, offers performance, memory-management, internationalization, and accessibility enhancements to the other improvements in this major Java platform version. This knowledge path takes Java developers on a tour of IBM Java 7, including its role in WebSphere Application Server.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/training/kp/j-kp-java7/index.html?ca=drs-]]></link> 
+		<pubDate>08 Aug 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Multicore CPUs and the concurrency changes they bring]]></title>
+		
+		<description><![CDATA[Multicore chip architectures have brought little improvement to individual core performance. This continuing trend shifts the burden of maximizing the use of hardware resources to the developers of operating systems, programming languages, and applications. Many in the application-development community rely on thread-based concurrent programming to implement application parallelism. This article explains why thread-based programming is not the best approach for application parallelism in the multicore era.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-nothreads/index.html?ca=drs-]]></link> 
+		<pubDate>31 Jul 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[LDAP Schema Manager]]></title>
+		
+		<description><![CDATA[The LDAP Schema Manager tool provides a facility to extend and expand the Lightweight Directory Access Protocol (LDAP) server schema-related attributes. It provides a provision to add new schema attributes to the LDAP directory server and it helps in managing an LDAP server schema in heterogeneous environment.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/aix/library/au-aix-ldap-schema-manager/index.html?ca=drs-]]></link> 
+		<pubDate>12 Jul 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Either trees and pattern matching]]></title>
+		
+		<description><![CDATA[Scala&apos;s ability to perform dispatch based on pattern matching is a feature much envied by Java developers. This installment shows how a combination of standard data structures and generics provides a pattern-matching-like syntax in pure Java.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft14/index.html?ca=drs-]]></link> 
+		<pubDate>10 Jul 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Use Drools and JPA for continuous, real-time data profiling]]></title>
+		
+		<description><![CDATA[Use what you know about JPA and Drools 5 and learn even more while implementing a continuous, real-time data profiling application.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-drools5/index.html?ca=drs-]]></link> 
+		<pubDate>05 Jul 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Node.js beyond the basics]]></title>
+		
+		<description><![CDATA[Node.js (Node) is an I/O environment built on top of Google Chrome&apos;s JavaScript
+    runtime -- essentially, a server-side implementation of JavaScript. Node&apos;s asynchronous, event-driven I/O model makes it easy for developers with JavaScript knowledge to build high-performing, scalable, and highly concurrent web applications rapidly and run them in the cloud. This knowledge path starts with Node.js basics and takes you beyond them to using Node and supporting technologies to build an application, test it,  and deploy it on a platform-as-a service.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/training/kp/j-kp-node/index.html?ca=drs-]]></link> 
+		<pubDate>26 Jun 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Node.js beyond the basics quiz]]></title>
+		
+		<description><![CDATA[Test your Node.js knowledge and skills and you&apos;ll be able to quickly assess how well you&apos;ve mastered key information and coding techniques you&apos;ve learned from this knowledge path.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-nodejsquiz/index.html?ca=drs-]]></link> 
+		<pubDate>26 Jun 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Java Facebook applications on Google App Engine]]></title>
+		
+		<description><![CDATA[Lack of native Java support in the Facebook Platform needn&apos;t be an obstacle to building third-party Facebook applications in the Java language. This article shows how to create a Facebook app, implement it in Java, and deploy it on Google&apos;s App Engine service.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-fb-gae/index.html?ca=drs-]]></link> 
+		<pubDate>19 Jun 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Understanding dump devices]]></title>
+		
+		<description><![CDATA[If the unexpected happens and the IBM AIX operating system crashes, you want the information to be gathered automatically. Using dump devices, the core dump is placed on these devices in readiness for transfer to IBM support.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/aix/library/au-aix_dump/index.html?ca=drs-]]></link> 
+		<pubDate>18 Jun 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>aix</category>
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[IBM i switchable IASPs — a working configuration by example]]></title>
+		
+		<description><![CDATA[This article provides insight to a migration exercise in clustered production environment and covers issues and resolutions on the way to successfully achieving the migration of 
+        complex network deployment configuration from IBM WebSphere Application Server Network Deployment (ND) V6 to V7 on AIX 6.1 platform. 
+        The WebSphere and AIX system administrators would benefit most from this article as these migration issues may occur in one form or the other.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/ibmi/library/i-iseries/index.html?ca=drs-]]></link> 
+		<pubDate>18 Jun 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>ibmi</category>
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Functional error handling with Either and Option]]></title>
+		
+		<description><![CDATA[Java developers are accustomed to handling errors by throwing and catching exceptions, which doesn&apos;t match the functional paradigm. This Functional thinking installment investigates ways to indicate Java errors functionally while still preserving type safety, shows how to wrap checked exceptions with functional returns, and introduces a handy abstraction named Either.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft13/index.html?ca=drs-]]></link> 
+		<pubDate>12 Jun 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Create solutions on IBM SmartCloud Enterprise: Transfer image assets between different accounts]]></title>
+		
+		<description><![CDATA[IBM SmartCloud Enterprise is an agile cloud computing Infrastructure as a
+    Service designed to provide rapid access to security-rich, enterprise-class virtual
+    server environments, well suited for development and test activities and other
+    dynamic workloads. Images are important assets on IBM SmartCloud Enterprise; users may have
+    different accounts for different purposes on the cloud among which they would like to
+    share private image assets to avoid duplication of their efforts. In this article, the
+    authors provide a step-by-step guide to transferring an image from one account to
+    another on IBM SmartCloud Enterprise.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/cloud/library/cl-smartcloudsolution2/index.html?ca=drs-]]></link> 
+		<pubDate>06 Jun 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>cloud</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[A Java actor library for parallel execution]]></title>
+		
+		<description><![CDATA[Actors aren&apos;t supported on the Java platform, but there are still plenty of ways to use them in your Java programs. Barry Feigenbaum returns to developerWorks with μJavaActors, a lightweight actor library for highly parallel execution on the Java platform.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-javaactors/index.html?ca=drs-]]></link> 
+		<pubDate>30 May 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Actor concurrency for Java applications]]></title>
+		
+		<description><![CDATA[Actor concurrency has long been associated with the functional language
+    Erlang. More recently, it has migrated to the JVM via languages such as Scala and
+    Groovy, as well as Java-based implementation libraries and frameworks. With this
+    knowledge path, you&apos;ll discover why actor concurrency is becoming an increasingly popular and necessary alternative to traditional Java concurrency. Learn the nuts and bolts of actors and the actor model, then try out a range of actor implementations, including GPars, Kilim, Akka, and the μJavaActors library.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/training/kp/j-kp-actorconcurrency/index.html?ca=drs-]]></link> 
+		<pubDate>30 May 2012 04:00:00 +0000</pubDate>     
+		
+		<dw:image-url>http://www.ibm.com/developerworks/i/t-j-f-immutable_ebf7fb.jpg</dw:image-url>
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Java technology zone technical podcast series: Season 4]]></title>
+		
+		<description><![CDATA[For years, the Java zone has brought you top-quality technical content by some
+    of the best minds in the industry. But taking the time to read an in-depth, code-heavy
+    article can be difficult, even if it&apos;s about a topic that&apos;s critical to your day job.
+    This podcast series, led by the engaging and technically curious Andrew Glover,
+    provides a new way to get information from the sources you trust most. Every few weeks, we&apos;ll publish a new discussion with an expert on the topics that are important to your job.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-gloverpodcast4/index.html?ca=drs-]]></link> 
+		<pubDate>15 May 2012 04:00:00 +0000</pubDate>     
+		
+		<dw:image-url>http://www.ibm.com/developerworks/i/t-j-f-podcast_f4f7fa.jpg</dw:image-url>
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Functional design patterns, Part 3]]></title>
+		
+		<description><![CDATA[The Gang of Four&apos;s Interpreter design pattern encourages extending a language by building
+a new language from it. Most functional languages let you extend the language in a variety
+of ways, such as operator overloading and pattern matching. Although Java doesn&apos;t
+    permit any of these techniques, next-generation JVM languages do, with varying
+    implementation details. In this article, Neal Ford investigates how Groovy, Scala, and Clojure realize the intent of the Interpreter design pattern by allowing functional extensions in ways that Java does not.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft12/index.html?ca=drs-]]></link> 
+		<pubDate>15 May 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Get a picture of your IBM i environment with DB2 catalog views]]></title>
+		
+		<description><![CDATA[Traditionally, Traditionally, IBM DB2® for i  catalog views have only provided metadata about existing database objects. A new set of catalog views also provide information about your IBM i system environment. Specifically, these view make it easy to access information about the Group PTFs and TCP/IP network connections related to your DB2 for i database.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/ibmi/library/i-db2_catalog/index.html?ca=drs-]]></link> 
+		<pubDate>10 May 2012 04:00:00 +0000</pubDate>     
+		
+		<dw:image-url>http://www.ibm.com/developerworks/i/t-j-f-immutable_ebf7fb.jpg</dw:image-url>
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>ibmi</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Explore alternative languages for the Java platform]]></title>
+		
+		<description><![CDATA[The JVM&apos;s ability to execute machine- and language-independent bytecode
+    opens a world of problem-solving possibilities to polyglot programmers. Languages for
+    the Java platform are proliferating rapidly (with more than 200 now available), and several have captured significant developer mindshare. This knowledge path is an overview of some of the robust languages that can complement your Java programming skills by taking full advantage of the Java platform.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/training/kp/j-kp-altlang/index.html?ca=drs-]]></link> 
+		<pubDate>08 May 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Immutability and appendOnly features in GPFS 3.4v on AIX]]></title>
+		
+		<description><![CDATA[Protect your business data on AIX systems using immutability and appendOnly features supported by IBM General Parallel File System V3.4 ensuring compliance to various government regulations. Having rich set of command line interfaces, GPFS allows you to set appropriate restrictions to your business audit files, health center records and log files in order to effectively secure them from being tampered or accidentally deleted. This article illustrates how to make use of immutability and appendOnly restrictions offered by IBM GPFS V3.4 to protect your AIX data.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/aix/library/au-gpfs/index1.html?ca=drs-]]></link> 
+		<pubDate>30 Apr 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>aix</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Use SQL-like languages for the MapReduce framework]]></title>
+		
+		<description><![CDATA[Select the most suitable MapReduce implementation for large scale data analysis jobs based on your skills, preferences, and requirements. MapReduce is a simple and powerful programming model that enables the easy development of scalable parallel applications to process vast amounts of data on large clusters of commodity machines. It isolates the application from the details of running a distributed program. But many programmers are unfamiliar with the MapReduce programming style and prefer to use a  SQL-like language to perform their tasks. In this article, read an overview of high-level languages and systems designed to tackle these problems and add declarative interfaces on top of the MapReduce framework.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/opensource/library/os-mapreducesql/index.html?ca=drs-]]></link> 
+		<pubDate>17 Apr 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+			
+			<category>data</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Manage application services with virtual application patterns]]></title>
+		
+		<description><![CDATA[In the IBM PureApplication System environment, a virtual
+    application pattern is the critical element that allows a user to rapidly set up and manage cloud application infrastructure; a virtual application pattern describes an application, and employs the tools to build the appropriate infrastructure for the application and then deploys the application to that infrastructure. IBM PureApplication System virtual application patterns are the captured essence of years of application-infrastructure-deployment experience and best practices. Virtual application patterns encapsulate optimized solutions of multiple middleware elements to host specific types of application workloads.  In this article, the authors introduce you to virtual application patterns and their place in the ecosystem, describe their components and functions, and provide a basic look at how to create and use a virtual application pattern.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/cloud/library/cl-puresystem-vap/index.html?ca=drs-]]></link> 
+		<pubDate>11 Apr 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>websphere</category>
+		
+			
+			<category>data</category>
+		
+			
+			<category>java</category>
+		
+			
+			<category>cloud</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Manage the topology with virtual system patterns]]></title>
+		
+		<description><![CDATA[In the IBM PureApplication System environment, a virtual system pattern is the critical element that allows a user to rapidly set up and manage the cloud middleware topology; a virtual system pattern describes a middleware topology and  employs the tools to automatically build that topology in the cloud. IBM PureApplication System virtual system patterns are the captured essence of years of infrastructure-management experience and best practices. Virtual system patterns encapsulate repeatable topology definitions based on various middleware images and runtime configurations; they give you control over the middleware landscape being deployed. In this article, the authors introduce you to virtual system patterns and their place in the ecosystem, describe their components and functions, and provide a basic look at how to create and use a virtual system pattern.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/cloud/library/cl-puresystem-vsp/index.html?ca=drs-]]></link> 
+		<pubDate>11 Apr 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>cloud</category>
+		
+			
+			<category>websphere</category>
+		
+			
+			<category>data</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Introducing Spring Roo, Part 5: Write advanced and wrapper Spring Roo add-ons]]></title>
+		
+		<description><![CDATA[Spring Roo Advanced add-ons provide the mechanisms to add Java code in applications (for example, building an add-on that can write equals and hashcode methods for your domain object). With the addon create command, you can create a template of an advanced add-on. You then can extend the template to meet developer requirements. This article walks through the steps to create an advanced add-on.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/os-springroo5/index.html?ca=drs-]]></link> 
+		<pubDate>10 Apr 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Introducing Spring Roo, Part 2: Developing an application with Spring Roo]]></title>
+		
+		<description><![CDATA[In Part 1 of this series, we looked at building a
+            CRUD-based application in minutes with Roo. Here in Part 2, we will
+            extend that application to a full-fledged enterprise application by adding 
+            features such as Spring security, email support, and many others.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/os-springroo2/index.html?ca=drs-]]></link> 
+		<pubDate>10 Apr 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Introducing Spring Roo, Part 1: Building from source]]></title>
+		
+		<description><![CDATA[Spring Roo is a lightweight productivity tool for Java
+            technology that makes it fast and easy to develop Spring-based applications. Applications
+            created using Spring Roo follow Spring best practices and are based on
+            standards such as JPA, Bean Validation (JSR-303), and Dependency Injection
+            (JSR-330). Roo offers a usable, context-aware, tab completing shell for
+            building applications. Spring Roo is extensible and allows add-ons, enhancing
+            its capability. This article introduces Spring Roo and provides step-by-step
+            instructions on building Spring Roo source on Windows and *nix
+            systems.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/os-springroo1/index.html?ca=drs-]]></link> 
+		<pubDate>10 Apr 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Introducing Spring Roo, Part 4: Rapid application development in cloud with Spring Roo and Cloud
+            Foundry]]></title>
+		
+		<description><![CDATA[Take the rapid development of Roo a step further by creating
+            applications to work in the cloud with Cloud Foundry, the first open platform
+            as a service project created by VMWare. Learn more about the environment and
+            then deploy an application into Cloud Foundry using the Roo shell.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/os-springroo4/index.html?ca=drs-]]></link> 
+		<pubDate>10 Apr 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Functional design patterns, Part 2]]></title>
+		
+		<description><![CDATA[Design patterns represent just one way to solve problems, but if you primarily use
+object-oriented languages, you may come to think in design patterns. In this
+    installment of Functional thinking, Neal Ford illustrates solutions to a common
+    problem -- incompatible interfaces -- using traditional design patterns, metaprogramming, and functional composition. Each approach has pros and cons, but thinking about the design of the solutions helps you see problems in new ways.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft11/index.html?ca=drs-]]></link> 
+		<pubDate>03 Apr 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[WebSphere Message Broker on z/OS : Reading MVS datasets using Java for z/OS]]></title>
+		
+		<description><![CDATA[Traditional MVS datasets are not directly accessible from WebSphere Message Broker. This article shows you how to read them using Java for z/OS (JZOS) libraries with WebSphere Message Broker. 
+Using a Java class to read records from a dataset provides much more flexibility in post-processing, enabling you to modify the records in many different ways.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/websphere/library/techarticles/1203_subrahmanyam/1203_subrahmanyam.html?ca=drs-]]></link> 
+		<pubDate>28 Mar 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>websphere</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Integrating Java EE applications and C-based implementations in WebSphere Application Server]]></title>
+		
+		<description><![CDATA[The Java Native Interface (JNI) is a programming framework that enables
+            Java code running in a Java Virtual Machine (JVM) to call and to be called by
+            native applications and libraries written in other languages such as C, C++
+            and assembly. This article describes how developers can leverage this
+            framework to integrate their J2EE applications deployed on IBM WebSphere Application Server with these C libraries.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/websphere/techjournal/1203_chandra/1203_chandra.html?ca=drs-]]></link> 
+		<pubDate>14 Mar 2012 04:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>websphere</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Functional design patterns, Part 1]]></title>
+		
+		<description><![CDATA[Contrary to popular belief, design patterns exist in functional programming -- but
+    they sometimes differ from their object-oriented counterparts in appearance and
+    behavior. In this installment of Functional thinking, Neal Ford looks at ways in which patterns manifest in the functional paradigm, illustrating how the solutions differ.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft10/index.html?ca=drs-]]></link> 
+		<pubDate>06 Mar 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Manage a J2EE app with TSAM extensions]]></title>
+		
+		<description><![CDATA[IBM Tivoli Service Automation Manager (TSAM) V7.2.2  introduces the extension: A set of TSAM software components that can implement a new IT service automation solution (known as a service definition) or add capabilities to existing service definitions. In this article, the authors explain how to tune the load balancer policy to your system&apos;s needs; how to add and remove application servers as the workload of the business application changes; and how to modify the firewall rules and why you might need to do that.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/cloud/library/cl-tsamextensions2/index.html?ca=drs-]]></link> 
+		<pubDate>02 Mar 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>cloud</category>
+		
+			
+			<category>tivoli</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[From Java code to Java heap]]></title>
+		
+		<description><![CDATA[This article gives you insight into the memory usage of Java code, covering the memory overhead of putting an int value into an Integer object, the cost of object delegation, and the memory efficiency of the different collection types.  You&apos;ll learn how to determine where inefficiencies occur in your application and how to choose the right collections to improve your code.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-codetoheap/index.html?ca=drs-]]></link> 
+		<pubDate>29 Feb 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional JavaScript with CoffeeScript and Node]]></title>
+		
+		<description><![CDATA[Master web application complexity with the functional scripting superstack of CoffeeScript, Node, and Underscore.js.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-coffeescript/index.html?ca=drs-]]></link> 
+		<pubDate>21 Feb 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>web</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Explore Java, COBOL, and DB2 assets using IBM Rational Asset Analyzer]]></title>
+		
+		<description><![CDATA[Learn about COBOL, Java (WAR), and related DB2 assets, including
+          embedded SQL, by exploring the features of the Rational Asset Analyzer browser user interface.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/offers/lp/demos/summary/r-raa2.html?ca=drs-]]></link> 
+		<pubDate>15 Feb 2012 05:00:00 +0000</pubDate>     
+		
+					<dw:video-url>http://public.dhe.ibm.com/software/dw/demos/raa2/IBMRAAexploration.mp4</dw:video-url>
+					<dw:video-url-transcript>http://public.dhe.ibm.com/software/dw/demos/raa2/IBMRAAJavaCOBOLexplorationTranscript.pdf</dw:video-url-transcript>
+
+		
+		
+			
+			<category>rational</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Sending push notifications to iOS devices]]></title>
+		
+		<description><![CDATA[Using push notification technology, server applications can send rich
+            content to apps installed on iOS or Android devices, <!--bypassing the
+                difficulty--> saving you the trouble and expense of implementing 
+            Short Message Service (SMS) or Multimedia
+            Messaging Service (MMS) in your mobile-messaging apps. Michael Yuan
+            shows how to support this key feature in your iOS applications. You&apos;ll also
+            see how to use an open source Java library that simplifies the notification
+            process.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/mo-ios-push/index.html?ca=drs-]]></link> 
+		<pubDate>14 Feb 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>Mobile</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Scan COBOL and Java with SQL from a Windows directory structure using IBM Rational Asset Analyzer]]></title>
+		
+		<description><![CDATA[Learn how to use the IBM Rational Asset Analyzer inventory wizard to analyze
+          COBOL and Java (WAR) files, including embedded SQL, by scanning the related files from a Windows directory structure.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/offers/lp/demos/summary/r-raa1.html?ca=drs-]]></link> 
+		<pubDate>13 Feb 2012 05:00:00 +0000</pubDate>     
+		
+					<dw:video-url>http://public.dhe.ibm.com/software/dw/demos/raa1/IBMRAAScanningJavaCOBOL.mp4</dw:video-url>
+					<dw:video-url-transcript>http://public.dhe.ibm.com/software/dw/demos/raa1/IBMRAAScanningJavaCOBOLtranscript.pdf</dw:video-url-transcript>
+
+		
+		
+			
+			<category>rational</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Passing data objects between CICS Java environments: Part 3: Transporting Java data objects from a CICS transaction Java client program to a CICS TS Java program]]></title>
+		
+		<description><![CDATA[Java is becoming a popular programming language for CICS applications. CICS provides multiple Java environments, each with its own strengths, so passing data objects between the different CICS Java environments is an important topic. This three-part article series gives you the details.  Part 3 describes the API that enables CICS TG Java client programs to interact with a CICS TS program.  It also provides 
+an object transporter that you can use in a CICS TG Java client along with the wizards in Rational Application Developer to generate code to communicate from a CICS TG Java client to a CICS TS program.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/websphere/library/techarticles/1202_weiand/1202_weiand3.html?ca=drs-]]></link> 
+		<pubDate>08 Feb 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>websphere</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Functional features in Groovy, Part 3]]></title>
+		
+		<description><![CDATA[Modern dynamic languages have incorporated many functional features to take
+    mundane tasks off developers&apos; hands. This article explores the benefits of caching at
+    the function level with Groovy, contrasting it with an imperative approach. It
+    illustrates two types of caching -- intramethod and external -- and discusses the advantages and disadvantages of the imperative and functional versions.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft9/index.html?ca=drs-]]></link> 
+		<pubDate>31 Jan 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Deploy a J2EE app with TSAM extensions]]></title>
+		
+		<description><![CDATA[IBM Tivoli Service Automation Manager (TSAM) 7.2.2 introduces the extension,
+            a set of TSAM software components that can implement a new IT service
+            automation solution (known as a service definition) or add capabilities to
+            existing service definitions. In this article, the authors define a scenario
+            in which the desired result is to securely deploy a three-tiered enterprise application (in this case J2EE) to the cloud. They demonstrate how to set up and provision extensions in TSAM as the first step to accomplishing this task.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/cloud/library/cl-tsamextensions/index.html?ca=drs-]]></link> 
+		<pubDate>26 Jan 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>cloud</category>
+		
+			
+			<category>tivoli</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Java development 2.0: Securing Java application data for cloud computing]]></title>
+		
+		<description><![CDATA[Data security is a serious concern for organizations considering cloud
+    adoption, but in many cases it needn&apos;t be.  In this installment of Java development
+    2.0, learn how to use private-key encryption and the Advanced Encryption Standard to
+    secure sensitive application data for the cloud. You&apos;ll also get a quick tutorial on encryption strategy, which is important for maximizing the efficiency of conditional searches on distributed cloud datastores.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-javadev2-23/index.html?ca=drs-]]></link> 
+		<pubDate>24 Jan 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>cloud</category>
+		
+			
+			<category>security</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Customize container-managed security with AuthenticRoast]]></title>
+		
+		<description><![CDATA[AuthenticRoast is an open source project that works with the Java Authentication Service Provider Interface for Containers (JSR 196) to let you develop custom authentication modules for use with container-managed, declarative security. Joe Sam Shirah shows how AuthenticRoast can minimize configuration impact on Java Enterprise Edition (JEE) containers and greatly reduce coding effort for custom security requirements. A downloadable WAR with demonstration code is provided.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-authenticroast/index.html?ca=drs-]]></link> 
+		<pubDate>17 Jan 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>security</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Passing data objects between CICS Java environments: Part 2: Techniques for passing Java data objects]]></title>
+		
+		<description><![CDATA[Java is becoming a popular programming language for CICS applications. CICS provides multiple Java environments, each with its own strengths, so passing data objects between the different CICS Java environments is an important topic. This three-part article series gives you the details. Part 2 uses an example Java class to show you how to pass Java data objects between applications running in a CICS-pooled JVM, an Axis2-based JVM, a CICS Dynamic Scripting environment, and a CICS OSGi-based JVM.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/websphere/library/techarticles/1201_weiand2/1201_weiand2.html?ca=drs-]]></link> 
+		<pubDate>11 Jan 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>websphere</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Using RichFaces with JSF 2]]></title>
+		
+		<description><![CDATA[RichFaces, like most other rich/Ajax component frameworks designed for use with JavaServer Faces (JSF), was extensively revamped for compatibility with the significant changes in JSF 2. Joe Sam Shirah examines changed and new RichFaces 4.1 components that provide the same functionality he demonstrated in &quot;An introduction to RichFaces&quot; with version 3.1. He also updates the setup requirements for using RichFaces with JSF.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-richfaces4/index.html?ca=drs-]]></link> 
+		<pubDate>10 Jan 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>opensource</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Passing data objects between CICS Java environments: Part 1: CICS Java environments]]></title>
+		
+		<description><![CDATA[Java is becoming a popular programming language for CICS applications. CICS provides multiple Java environments, each with its own strengths, so passing data objects between the different CICS Java environments is an important topic. This article series gives you the details. Part 1 describes the CICS Java environments, the advantages of each one, and the different ways to pass data between them. 
+Part 2 uses an example Java class to show you how to pass Java data objects between applications running in a CICS-pooled JVM, an Axis2-based JVM, a CICS Dynamic Scripting environment, 
+and a CICS OSGi-based JVM. Part 3 shows you how to pass Java data objects from a CICS Transaction Gateway Java client program to a CICS-pooled JVM or CICS OSGi-based JVM.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/websphere/library/techarticles/1201_weiand1/1201_weiand1.html?ca=drs-]]></link> 
+		<pubDate>04 Jan 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>websphere</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Become a Java developer]]></title>
+		
+		<description><![CDATA[This knowledge path introduces Java development concepts and skills to programmers who are new to the language and platform. Experienced Java developers guide you from basic Java syntax to more-advanced abstractions and constructs, sharing best practices and useful resources along the way. You&apos;ll also get acquainted with the Eclipse IDE and use it for hands-on learning.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/training/kp/j-kp-intro/index.html?ca=drs-]]></link> 
+		<pubDate>03 Jan 2012 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Functional thinking: Functional features in Groovy, Part 2]]></title>
+		
+		<description><![CDATA[With Groovy, metaprogramming and functional programming form a potent combination. See how
+metaprogramming enables you to add methods to the Integer data
+    type that take advantage of Groovy&apos;s built-in functional capabilities. And learn how
+    to use metaprogramming to incorporate the Functional Java framework&apos;s rich set of functional features seamlessly into Groovy.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-ft8/index.html?ca=drs-]]></link> 
+		<pubDate>20 Dec 2011 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Java technology zone technical podcast series: Season 3]]></title>
+		
+		<description><![CDATA[For years, the Java zone has brought you top-quality technical content by some
+    of the best minds in the industry. But taking the time to read an in-depth, code-heavy
+    article can be difficult, even if it&apos;s about a topic that&apos;s critical to your day job.
+    This new podcast series, led by the engaging and technically curious Andrew Glover,
+    provides a new way to get information from the sources you trust most. Every few weeks, we&apos;ll publish a new discussion with an expert on the topics that are important to your job.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-gloverpodcast3/index.html?ca=drs-]]></link> 
+		<pubDate>20 Dec 2011 05:00:00 +0000</pubDate>     
+		
+		<dw:image-url>http://www.ibm.com/developerworks/i/t-j-f-podcast_f4f7fa.jpg</dw:image-url>
+		
+		
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Transactions with file systems using XADisk]]></title>
+		
+		<description><![CDATA[Java applications, which store their data in files, can benefit
+            in many ways by accessing file-systems using transactions. Learn how to work with open source XADisk for transactional file access.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/os-xadisk/index.html?ca=drs-]]></link> 
+		<pubDate>19 Dec 2011 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>opensource</category>
+		
+			
+			<category>java</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Java development 2.0: Redis for the real world]]></title>
+		
+		<description><![CDATA[Redis has a lot in common with memcached but it boasts a richer set of
+    features. In this month&apos;s Java
+        development 2.0, Andrew experiments with adding Redis (by way of Java-based variant Jedis) to his location-based mobile application. Learn how Redis works as a simple data store, then try repurposing it for ultra-fast, lightweight caching.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-javadev2-22/index.html?ca=drs-]]></link> 
+		<pubDate>13 Dec 2011 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>cloud</category>
+		
+		
+	</item>
+
+	<item>
+		
+		
+		<title><![CDATA[Node.js for Java developers]]></title>
+		
+		<description><![CDATA[Node.js presents an exciting alternative to traditional Java concurrency, and all you need to get started is an open mind and a little bit of JavaScript.]]></description> 
+		<link><![CDATA[http://www.ibm.com/developerworks/java/library/j-nodejs/index.html?ca=drs-]]></link> 
+		<pubDate>29 Nov 2011 05:00:00 +0000</pubDate>     
+		
+		
+		
+			
+			<category>java</category>
+		
+			
+			<category>web</category>
+		
+		
+	</item>
+
+</channel>
+</rss>
+
+

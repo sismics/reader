@@ -1,0 +1,136 @@
+#actionbar {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+  .linear-gradient(top, #a8dff4, #8ad5f0);
+  border-bottom: 1px solid #2cb1e1;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  z-index: 2;
+  
+  h1 {
+    font-size: 14px;
+    font-weight: bold;
+    font-variant: small-caps;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    margin-left: 12px;
+    color: #006688;
+  }
+}
+
+// Subscriptions
+#subscriptions {
+  top: 0;
+  width: 300px;
+  bottom: 0;
+  display: none;
+  position: fixed;
+  background: #f0f0f0;
+  overflow-y: auto;
+  border-right: 1px solid #ccc;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  z-index: 3;
+}
+
+#qtip-subscription-add {
+  width: 300px;
+}
+
+// Feed
+#feed {
+  #toolbar {
+    .search-input {
+      width: 21px;
+      transition: width 0s;
+      
+      &:focus {
+        width: 95%;
+        transition: width 0.5s;
+        
+        ~ * {
+          display: none;
+        }
+      }
+    }
+  }
+  
+  #feed-container {
+    > .feed-item {
+      .header {
+        .feed-item-title {
+          font-size: 120%;
+          margin: 0;
+        }
+      
+        .feed-item-date {
+          display: inline-block;
+          position: relative;
+        }
+      }
+    }
+    
+    &.list {
+      > .feed-item {
+        .collapsed {
+          height: auto;
+          padding: 3px;
+        
+          .feed-item-star {
+            display: inline;
+          }
+        
+          > .feed-item-collapsed-subscription {
+            display: none;
+          }
+        
+          .container {
+            position: relative;
+            left: 0;
+            right: 0;
+            height: auto;
+            padding: 4px;
+            margin-left: 36px;
+            
+            > .feed-item-collapsed-subscription {
+	            display: inline;
+	            margin-left: 4px;
+	            color: @main-color;
+	            font-weight: bold;
+	          }
+          }
+          
+          .feed-item-collapsed-title {
+            display: inline;
+            line-height: 16px;
+          }
+          
+          .feed-item-collapsed-description {
+            display: block;
+            line-height: 16px;
+            height: 16px;
+            margin: 0;
+            overflow: hidden;
+          }
+          
+          .feed-item-date {
+            display: none;
+          }
+          
+          .feed-item-collapsed-link {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  
+  #settings-container {
+    display: none;
+  }
+  
+  #wizard-container {
+    display: none;
+  }
+}

@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.sismics.reader</groupId>
+  <artifactId>reader-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>Reader Parent</name>
+
+  <properties>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Dependencies version (internal) -->
+    <reader.version>1.0-SNAPSHOT</reader.version>
+
+    <!-- Dependencies version (external) -->
+    <commons-lang.commons-lang.version>2.6</commons-lang.commons-lang.version>
+    <commons-io.commons-io.version>2.1</commons-io.commons-io.version>
+    <org.apache.commons.commons-email.version>1.2</org.apache.commons.commons-email.version>
+    <com.google.guava.guava.version>13.0</com.google.guava.guava.version>
+    <log4j.log4j.version>1.2.14</log4j.log4j.version>
+    <org.slf4j.version>1.6.4</org.slf4j.version>
+    <org.slf4j.jcl-over-slf4j.version>1.6.6</org.slf4j.jcl-over-slf4j.version>
+    <junit.junit.version>4.7</junit.junit.version>
+    <hsqldb.hsqldb.version>1.8.0.1</hsqldb.hsqldb.version>
+    <com.sun.jersey.version>1.17</com.sun.jersey.version>
+    <org.mindrot.jbcrypt>0.3m</org.mindrot.jbcrypt>
+    <org.freemarker.freemarker.version>2.3.19</org.freemarker.freemarker.version>
+    <org.subethamail.subethasmtp.version>3.1.6</org.subethamail.subethasmtp.version>
+    <org.subethamail.subethasmtp-wiser.version>1.2</org.subethamail.subethasmtp-wiser.version>
+    <com.drewnoakes.metadata-extractor.version>2.4.0-beta-1</com.drewnoakes.metadata-extractor.version>
+    <org.codehaus.jettison.jettison.version>1.1</org.codehaus.jettison.jettison.version>
+    <com.google.oauth-client.google-oauth-client.version>1.12.0-beta</com.google.oauth-client.google-oauth-client.version>
+    <com.google.http-client.google-http-client-jackson2.version>1.12.0-beta</com.google.http-client.google-http-client-jackson2.version>
+    <com.google.apis.google-api-services-oauth2.version>v2-rev19-1.12.0-beta</com.google.apis.google-api-services-oauth2.version>
+    <java3d.j3d-core.version>1.3.1</java3d.j3d-core.version>
+    <org.imgscalr.imgscalr-lib.version>4.2</org.imgscalr.imgscalr-lib.version>
+    <org.ccil.cowan.tagsoup.tagsoup.version>1.2.1</org.ccil.cowan.tagsoup.tagsoup.version>
+    <com.googlecode.owasp-java-html-sanitizer.owasp-java-html-sanitizer.version>r156</com.googlecode.owasp-java-html-sanitizer.owasp-java-html-sanitizer.version>
+    <org.apache.lucene.version>4.2.0</org.apache.lucene.version>
+    <com.cybozu.labs.langdetect.version>1.1-20120112</com.cybozu.labs.langdetect.version>
+    <org.json.jsoup.version>1.7.2</org.json.jsoup.version>
+
+    <com.sun.grizzly.version>1.9.18-m</com.sun.grizzly.version>
+    <javax.transaction.jta.version>1.1</javax.transaction.jta.version>
+    <org.hibernate.hibernate.version>4.1.0.Final</org.hibernate.hibernate.version>
+    <commons-dbcp.version>1.4</commons-dbcp.version>
+    <org.simpleframework.simple-xml.version>2.6.1</org.simpleframework.simple-xml.version>
+    <joda-time.joda-time.version>2.2</joda-time.joda-time.version>
+    <org.codehaus.jackson.jackson.version>1.7.1</org.codehaus.jackson.jackson.version>
+
+    <mysql.mysql-connector-java.version>5.1.15</mysql.mysql-connector-java.version>
+    
+    <org.mortbay.jetty.servlet-api.version>3.0.20100224</org.mortbay.jetty.servlet-api.version>
+    <javax.servlet.jsp-api.version>2.0</javax.servlet.jsp-api.version>
+    
+    <!-- Plugins version -->
+    <org.apache.maven.plugins.maven-eclipse-plugin.version>2.8</org.apache.maven.plugins.maven-eclipse-plugin.version>
+    <org.codehaus.mojo.exec-maven-plugin.version>1.2.1</org.codehaus.mojo.exec-maven-plugin.version>
+    <org.codehaus.cargo.cargo-maven2-plugin.version>1.2.0</org.codehaus.cargo.cargo-maven2-plugin.version>
+    <org.apache.maven.plugins.maven-jar-plugin.version>2.4</org.apache.maven.plugins.maven-jar-plugin.version>
+    <org.mortbay.jetty.jetty-maven-plugin.version>8.1.2.v20120308</org.mortbay.jetty.jetty-maven-plugin.version>
+    <com.google.apis.google-api-services-plus.version>v1-rev45-1.12.0-beta</com.google.apis.google-api-services-plus.version>
+    
+  </properties> 
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <version>${org.apache.maven.plugins.maven-eclipse-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${org.apache.maven.plugins.maven-jar-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>${org.codehaus.mojo.exec-maven-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.cargo</groupId>
+        <artifactId>cargo-maven2-plugin</artifactId>
+        <version>${org.codehaus.cargo.cargo-maven2-plugin.version}</version>
+      </plugin>
+    </plugins>
+  </build>
+        
+  <modules>
+    <module>../reader-core</module>
+    <module>../reader-web</module>
+    <module>../reader-web-common</module>
+  </modules>
+  
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.sismics.reader</groupId>
+        <artifactId>reader-core</artifactId>
+        <version>${reader.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>com.sismics.reader</groupId>
+        <artifactId>reader-web-common</artifactId>
+        <version>${reader.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>com.sismics.reader</groupId>
+        <artifactId>reader-web-common</artifactId>
+        <type>test-jar</type>
+        <version>${reader.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>com.sismics.reader</groupId>
+        <artifactId>reader-web</artifactId>
+        <version>${reader.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>${org.mortbay.jetty.servlet-api.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jsp-api</artifactId>
+        <version>${javax.servlet.jsp-api.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>${commons-lang.commons-lang.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.commons-io.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-email</artifactId>
+        <version>${org.apache.commons.commons-email.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${com.google.guava.guava.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-core-asl</artifactId>
+        <version>${org.codehaus.jackson.jackson.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-mapper-asl</artifactId>
+        <version>${org.codehaus.jackson.jackson.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.freemarker</groupId>
+        <artifactId>freemarker</artifactId>
+        <version>${org.freemarker.freemarker.version}</version>
+      </dependency>
+            
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>${log4j.log4j.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>${org.slf4j.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${org.slf4j.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>${org.slf4j.jcl-over-slf4j.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.junit.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mindrot</groupId>
+        <artifactId>jbcrypt</artifactId>
+        <version>${org.mindrot.jbcrypt}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-server</artifactId>
+        <version>${com.sun.jersey.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-bundle</artifactId>
+        <version>${com.sun.jersey.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-json</artifactId>
+        <version>${com.sun.jersey.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sun.jersey.contribs</groupId>
+        <artifactId>jersey-multipart</artifactId>
+        <version>${com.sun.jersey.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>com.sun.grizzly</groupId>
+        <artifactId>grizzly-servlet-webserver</artifactId>
+        <version>${com.sun.grizzly.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sun.jersey.jersey-test-framework</groupId>
+        <artifactId>jersey-test-framework-grizzly2</artifactId>
+        <version>${com.sun.jersey.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>hsqldb</groupId>
+        <artifactId>hsqldb</artifactId>
+        <version>${hsqldb.hsqldb.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>${org.hibernate.hibernate.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>${org.hibernate.hibernate.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-entitymanager</artifactId>
+        <version>${org.hibernate.hibernate.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>javax.transaction</groupId>
+        <artifactId>jta</artifactId>
+        <version>${javax.transaction.jta.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.mysql-connector-java.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>commons-dbcp</groupId>
+        <artifactId>commons-dbcp</artifactId>
+        <version>${commons-dbcp.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.simpleframework</groupId>
+        <artifactId>simple-xml</artifactId>
+        <version>${org.simpleframework.simple-xml.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>${joda-time.joda-time.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.subethamail</groupId>
+        <artifactId>subethasmtp-wiser</artifactId>
+        <version>${org.subethamail.subethasmtp-wiser.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>com.drewnoakes</groupId>
+        <artifactId>metadata-extractor</artifactId>
+        <version>${com.drewnoakes.metadata-extractor.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.codehaus.jettison</groupId>
+        <artifactId>jettison</artifactId>
+        <version>${org.codehaus.jettison.jettison.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>java3d</groupId>
+        <artifactId>j3d-core</artifactId>
+        <version>${java3d.j3d-core.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.oauth-client</groupId>
+        <artifactId>google-oauth-client</artifactId>
+        <version>${com.google.oauth-client.google-oauth-client.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.apis</groupId>
+        <artifactId>google-api-services-oauth2</artifactId>
+        <version>${com.google.apis.google-api-services-oauth2.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.http-client</groupId>
+        <artifactId>google-http-client-jackson2</artifactId>
+        <version>${com.google.http-client.google-http-client-jackson2.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.apis</groupId>
+        <artifactId>google-api-services-plus</artifactId>
+        <version>${com.google.apis.google-api-services-plus.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.imgscalr</groupId>
+        <artifactId>imgscalr-lib</artifactId>
+        <version>${org.imgscalr.imgscalr-lib.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.ccil.cowan.tagsoup</groupId>
+        <artifactId>tagsoup</artifactId>
+        <version>${org.ccil.cowan.tagsoup.tagsoup.version}</version>
+      </dependency>
+            
+      <dependency>
+        <groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
+        <artifactId>owasp-java-html-sanitizer</artifactId>
+        <version>${com.googlecode.owasp-java-html-sanitizer.owasp-java-html-sanitizer.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.lucene</groupId>
+        <artifactId>lucene-core</artifactId>
+        <version>${org.apache.lucene.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.apache.lucene</groupId>
+        <artifactId>lucene-analyzers-common</artifactId>
+        <version>${org.apache.lucene.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.apache.lucene</groupId>
+        <artifactId>lucene-queryparser</artifactId>
+        <version>${org.apache.lucene.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>com.cybozu.labs</groupId>
+        <artifactId>langdetect</artifactId>
+        <version>${com.cybozu.labs.langdetect.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.jsoup</groupId>
+        <artifactId>jsoup</artifactId>
+        <version>${org.json.jsoup.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+  
+  <repositories>
+    <repository>
+      <id>google-api-services</id>
+      <url>http://google-api-client-libraries.appspot.com/mavenrepo</url>
+    </repository>
+  </repositories>
+</project>

@@ -1,0 +1,62 @@
+package com.sismics.reader.core.dao.file.opml;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+
+/**
+ * Utility used to flatten the outline hierarchy to only one root and one category level.
+ * 
+ * @author jtremeaux
+ */
+public class OpmlFlattener {
+
+    /**
+     * Flattens the outline tree to keep only one level of categories.
+     * 
+     * @param outlineList Tree to flatten
+     * @return Flattened tree
+     */
+    public static Map<String, List<Outline>> flatten(List<Outline> outlineList) {
+        Map<String, List<Outline>> result = new HashMap<>();
+        flatten(outlineList, result, null);
+        return result;
+    }
+
+    private static void flatten(List<Outline> outlineTree, Map<String, List<Outline>> outlineMap, String prefix) {
+        for (Outline outline : outlineTree) {
+            if ("rss".equals(outline.getType())) {
+                List<Outline> outlineList = outlineMap.get(prefix);
+                if (outlineList == null) {
+                    outlineList = new ArrayList<>();
+                    outlineMap.put(prefix, outlineList);
+                }
+                outlineList.add(outline);
+            } else if (outline.getType() == null) {
+                flatten(outline.getOutlineList(), outlineMap, getPrefix(outline, prefix));
+            }
+        }
+    }
+    
+    private static String getPrefix(Outline outline, String prefix) {
+        String text = outline.getText();
+        String title = outline.getTitle();
+        String category = null;
+        if (StringUtils.isNotBlank(text)) {
+            category = text;
+        } else if (StringUtils.isNotBlank(title)) {
+            category = title;
+        }
+        if (category != null) {
+            if (prefix == null) {
+                prefix = category;
+            } else {
+                prefix += " / " + category;
+            }
+        }
+        return prefix;
+    }
+}

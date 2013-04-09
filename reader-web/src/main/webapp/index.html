@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title data-i18n="app">Sismics Reader</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1, minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="stylesheets/jquery.qtip.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/jquery.ui.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/loader.css" type="text/css" />
+    <link rel="stylesheet/less" href="stylesheets/main.less" type="text/css"  />
+    <script src="javascripts/jquery.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.ui.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.visible.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.history.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.timeago.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.qtip.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.toastmessage.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.json.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.throttle.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.i18next.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.validate.js" type="text/javascript"></script>
+    <script src="javascripts/r.main.js" type="text/javascript"></script>
+    <script src="javascripts/r.user.js" type="text/javascript"></script>
+    <script src="javascripts/r.subscription.js" type="text/javascript"></script>
+    <script src="javascripts/r.article.js" type="text/javascript"></script>
+    <script src="javascripts/r.category.js" type="text/javascript"></script>
+    <script src="javascripts/r.feed.js" type="text/javascript"></script>
+    <script src="javascripts/r.search.js" type="text/javascript"></script>
+    <script src="javascripts/r.settings.js" type="text/javascript"></script>
+    <script src="javascripts/r.wizard.js" type="text/javascript"></script>
+    <script src="javascripts/r.util.js" type="text/javascript"></script>
+
+  	<script>
+    	less = {
+    		env: 'development', // or "production"
+    		async: false,       // load imports async
+    		fileAsync: false,   // load imports async when in a page under a file protocol
+    		poll: 1000,         // when in watch mode, time in ms between polls
+    		dumpLineNumbers: 'all', // or "mediaQuery" or "comments"
+    	};
+  	</script>
+  	<script src="javascripts/jquery.less.js" type="text/javascript"></script>
+  </head>
+  <body>
+    
+    <!-- Actionbar -->
+    <div id="actionbar">
+      <input class="important" id="subscriptions-show-button" type="button" value="Menu" />
+      <h1 data-i18n="app">Sismics Reader</h1>
+    </div>
+    
+    <!-- Subscriptions -->
+    <div id="subscriptions">
+      <div class="input-container">
+        <input class="important" id="subscription-add-button" type="button" value="New subscription" data-i18n="[value]subscription.add.button" />
+      </div>
+      
+      <h1 data-i18n="subscription.latest">Latest</h1>
+      <ul>
+        <li id="unread-feed-button"><a href="#/feed/unread"><span class="name" data-i18n="subscription.unread">Unread</span><span class="unread-count" style="display: none;">&nbsp;(<span class="count">0</span>)</span></a></li>
+        <li id="all-feed-button"><a href="#/feed/all" data-i18n="subscription.all">All</a></li>
+        <li id="starred-feed-button"><a href="#/feed/starred" data-i18n="subscription.starred">Starred</a></li>
+      </ul>
+    
+      <h1>
+        <span data-i18n="subscription.subscriptions">Subscriptions</span>
+        <div class="ajax-loader hidden"></div>
+        <div id="subscription-unread-button" title="Toggle all/unread subscriptions" data-i18n="[title]subscription.toggleunread"></div>
+        <img id="category-add-button" src="images/category_add.png" title="Add a category" data-i18n="[title]category.add.button" />
+      </h1>
+      <div id="subscription-list">
+        <!-- Here subscriptions -->
+      </div>
+    </div>
+    
+    <!-- Feed -->
+    <div id="feed">
+      <div id="toolbar">
+        <input class="feed settings search-input hidden" id="search-input" type="text" name="search" />
+        <div class="button feed refresh-button hidden"><img src="images/refresh.png" class="icon" />&nbsp;</div>
+        <div class="button unread subscription category hidden all-button" data-i18n="toolbar.showall">Show all</div>
+        <div class="button all unread subscription category hidden all-read-button" data-i18n="toolbar.allread">All read</div>
+        
+        <div class="button feed settings hidden settings-button"><img src="images/settings.png" class="icon" />&nbsp;</div>
+        <div class="button feed hidden full-button"><img src="images/full.png" class="icon" />&nbsp;</div>
+        <div class="button feed hidden list-button"><img src="images/list.png" class="icon" />&nbsp;</div>
+        <div class="button subscription category-button hidden" data-i18n="toolbar.category">Category</div>
+        <div class="settings back-button hidden"><a href="#/feed/unread" data-i18n="[html]toolbar.back">&larr; Back</a></div>
+      </div>
+      
+      <div id="feed-container">
+      </div>
+      
+      <div id="settings-container">
+        <div id="settings-tabs">
+          <ul>
+            <li><a href="#settings-tab-account" data-i18n="settings.tabs.account">Account</a></li>
+            <li><a href="#settings-tab-import" data-i18n="settings.tabs.importexport">Import/Export</a></li>
+            <li><a href="#settings-tab-users" data-i18n="settings.tabs.users">Users</a></li>
+          </ul>
+          <div id="settings-tab-account">
+            <h1 data-i18n="settings.account.edit.title">Account Preferences</h1>
+            <form id="settings-account-edit-form">
+              <p><label><span data-i18n="settings.account.edit.email">E-mail</span> <input name="email" type="text" class="edit-email-input" /></label></p>
+              <p><label><span data-i18n="settings.account.edit.locale">Locale</span> <select name="locale" class="edit-locale-input"></select></label></p>
+              <p><label><span data-i18n="settings.account.edit.password">Password</span> <input name="password" type="password" class="edit-password-input" /></label></p>
+              <p><label><span data-i18n="settings.account.edit.passwordconfirm">Password (confirm)</span> <input name="password2" type="password" class="edit-password2-input" /></label></p>
+              <p><input class="important" type="submit" value="Edit" data-i18n="[value]settings.account.edit.submit" /></p>
+            </form>
+          </div>
+          <div id="settings-tab-import">
+            <h1 data-i18n="settings.import.title">Import</h1>
+            <p data-i18n="settings.import.opml">Only OPML format is accepted.</p>
+            <form id="settings-import-form">
+							<p><input type="file" name="file"></p>
+							<p><input class="important" type="submit" value="Import" data-i18n="settings.import.submit" /> <span class="ajax-loader hidden"></span></p>
+						</form>
+						<h1 data-i18n="settings.export.title">Export</h1>
+						<p data-i18n="settings.export.explain">Export your categories and subscriptions.</p>
+						<input type="button" class="important" id="settings-export-button" value="Export" />
+          </div>
+          <div id="settings-tab-users">
+            <h1 data-i18n="settings.users.title">Users Administration</h1>
+            <form>
+              <p><label><span data-i18n="settings.users.select">Select a user</span> <select id="settings-users-select"></select></label></p>
+            </form>
+            <form id="settings-users-edit-form">
+              <h2 data-i18n="settings.users.edit.newtitle">New user</h2>
+              <p><label><span data-i18n="settings.account.edit.username">Username</span> <input name="username" type="text" class="edit-username-input" /></label></p>
+              <p><label><span data-i18n="settings.account.edit.email">E-mail</span> <input name="email" type="text" class="edit-email-input" /></label></p>
+              <p><label><span data-i18n="settings.account.edit.locale">Locale</span> <select name="locale" class="edit-locale-input"></select></label></p>
+              <p><label><span data-i18n="settings.account.edit.password">Password</span> <input name="password" type="password" class="edit-password-input" /></label></p>
+              <p><label><span data-i18n="settings.account.edit.passwordconfirm">Password (confirm)</span> <input name="password2" type="password" class="edit-password2-input" /></label></p>
+              <p><input class="important" type="submit" value="Submit" data-i18n="[value]settings.users.edit.submit" /></p>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div id="wizard-container">
+        <p>Startup wizard</p>
+        <p><a href="#/feed/unread">Start</a></p>
+      </div>
+    </div>
+    
+    <!-- Login form -->
+    <div id="login-page">
+      <form>
+        <input type="text" id="login-username-input" placeholder="Username" />
+        <input type="password" id="login-password-input" placeholder="Password" />
+        <input class="important" type="submit" id="login-submit-button" value="Login" />
+      </form>
+    </div>
+
+    <!-- Templates -->
+    <div id="template" style="display: none;">
+      
+      <div id="qtip-subscription-add">
+        <form>
+          <input type="text" id="subscription-url-input" placeholder="Paste a feed or website URL" data-i18n="[placeholder]subscription.add.placeholder" />
+          <input class="important" type="submit" id="subscription-submit-button" value="Add" data-i18n="[value]subscription.add.submit" />
+        </form>
+      </div>
+      
+      <div id="qtip-category-add">
+        <form>
+          <input type="text" id="category-name-input" placeholder="Name" data-i18n="[placeholder]category.add.placeholder" />
+          <input class="important" type="submit" id="category-submit-button" value="Add" data-i18n="[value]category.add.submit" />
+        </form>
+      </div>
+      
+      <div class="qtip-subscription-edit qtip-drop-menu">
+        <form>
+          <input type="button" value="Edit" class="show-pattern-button" data-show="+ .showable" data-i18n="[value]subscription.edit.button" />
+          <div class="showable">
+	          <input type="text" class="subscription-edit-title-input" placeholder="Title" data-i18n="[placeholder]subscription.edit.placeholder" />
+	          <input type="submit" class="subscription-edit-submit-button important" value="OK" data-i18n="[value]subscription.edit.submit" />
+          </div>
+          <input type="button" class="subscription-edit-delete-button" value="Delete" data-i18n="[value]subscription.edit.delete" />
+        </form>
+      </div>
+      
+      <div class="qtip-change-category qtip-drop-menu">
+        <ul>
+        </ul>
+      </div>
+      
+      <div class="qtip-category-edit qtip-drop-menu">
+        <form>
+          <input type="button" value="Edit" class="show-pattern-button" data-show="+ .showable" data-i18n="[value]category.edit.button" />
+          <div class="showable">
+            <input type="text" class="category-edit-name-input" placeholder="Name" data-i18n="[placeholder]category.edit.placeholder" />
+            <input type="submit" class="category-edit-submit-button important" value="OK" data-i18n="[value]category.edit.submit" />
+          </div>
+          <input type="button" class="category-edit-delete-button" value="Delete" data-i18n="[value]category.edit.delete" />
+        </form>
+      </div>
+      
+      <div id="qtip-settings" class="qtip-drop-menu">
+        <ul>
+          <li><a href="#/settings/" data-i18n="toolbar.settings">Settings</a></li>
+          <li><a href="#" class="logout" data-i18n="toolbar.logout">Logout</a></li>
+        </ul>
+      </div>
+      
+      <div class="feed-item">
+        <div class="collapsed">
+          <div class="feed-item-star"></div>
+          <div class="feed-item-collapsed-subscription"></div>
+          <div class="container">
+            <div class="feed-item-collapsed-subscription"></div> <div class="feed-item-collapsed-title"></div>
+            <div class="feed-item-collapsed-description"></div>
+          </div>
+          <div class="feed-item-date"></div>
+          <div class="feed-item-collapsed-link"></div>
+        </div>
+        <div class="header">
+	        <div class="feed-item-title"></div><br />
+	        <div class="feed-item-subscription"></div>
+          <div class="feed-item-creator"></div>
+	        <div class="feed-item-date"></div>
+        </div>
+        <div class="content">
+          <div class="feed-item-description"></div>
+        </div>
+        <div class="footer">
+          <div class="feed-item-star"></div>
+          <div class="feed-item-unread"><label><input type="checkbox" /> <span data-i18n="article.markasunread">Mark as unread</span></label></div>
+          <div class="feed-item-comments"></div>
+        </div>
+      </div>
+      
+    </div>
+
+  </body>
+</html>
