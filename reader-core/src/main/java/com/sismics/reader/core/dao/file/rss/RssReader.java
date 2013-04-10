@@ -247,7 +247,9 @@ public class RssReader extends DefaultHandler {
         } else if (atom && currentElement == Element.FEED && "link".equalsIgnoreCase(localName)) {
             String rel = StringUtils.trim(attributes.getValue("rel"));
             String href = StringUtils.trim(attributes.getValue("href"));
-            atomLinkList.add(new AtomLink(rel, href));
+            if (!"self".equals(rel)) {
+                atomLinkList.add(new AtomLink(rel, href));
+            }
             pushElement(Element.ATOM_LINK);
         } else if (atom && currentElement == Element.FEED && "updated".equalsIgnoreCase(localName)) {
             pushElement(Element.ATOM_UPDATED);

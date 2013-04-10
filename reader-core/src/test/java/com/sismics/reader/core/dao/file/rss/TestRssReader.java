@@ -95,6 +95,20 @@ public class TestRssReader {
     }
 
     @Test
+    public void atomReaderWhatifTest() throws Exception {
+        String url = new File(getClass().getResource("/feed/feed_atom_whatif.xml").getFile()).toURI().toString();
+        RssReader reader = new RssReader(url);
+        reader.readRssFeed();
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("What If?", feed.getTitle());
+        Assert.assertEquals("http://what-if.xkcd.com", feed.getUrl());
+        Assert.assertNull(feed.getLanguage());
+        Assert.assertNull(feed.getDescription());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(3, articleList.size());
+    }
+
+    @Test
     public void rssReaderSpaceTest() throws Exception {
         String url = new File(getClass().getResource("/feed/feed_rss2_space.xml").getFile()).toURI().toString();
         RssReader reader = new RssReader(url);

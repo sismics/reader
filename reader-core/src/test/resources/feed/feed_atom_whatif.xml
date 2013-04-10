@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>What If?</title>
+    <link href="http://what-if.xkcd.com/feed.atom" rel="self" />
+    <link href="http://what-if.xkcd.com" />
+    <id>http://what-if.xkcd.com/feed.atom</id>
+    <author>
+        <name>xkcd</name>
+        <email>whatif@xkcd.com</email>
+    </author>
+    <updated>2013-04-09T00:00:00Z</updated>
+    <entry>
+    <title>Pressure Cooker</title>
+    <link href="http://what-if.xkcd.com/40/" />
+    <id>http://what-if.xkcd.com/40/</id>
+    <published>2013-04-09T00:00:00Z</published>
+    <updated>2013-04-09T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<article class="entry">
+  <a href="//what-if.xkcd.com/40/"><h1>Pressure Cooker</h1></a>
+  <p id="question">Am I right to be afraid of pressure cookers? What's the worst thing that can happen if you misuse a pressure cooker in an ordinary kitchen?</p>
+
+<p id="attribute">—Delphine Lourtau</p>
+
+<p>The <em>worst</em> thing?</p>
+
+<img class="illustration" title="why are you humming ice ice baby?" src="//what-if.xkcd.com/imgs/a/40/pressure_cooker_hmm.png">
+
+<p>Pressure cookers are dangerous.</p>
+
+<p>They can explode, in a sense, but not as violently as you might fear (or hope). The pressure inside a consumer cooker doesn’t go above about two atmospheres—about the pressure <a href="http://hypertextbook.com/facts/2000/SeemaMeraj.shtml">inside a can of soda</a>. Those levels can be dangerous, but they’re generally not high enough to cause the metal to violently rupture.</p>
+
+<p>So what makes a pressure cooker dangerous? </p>
+
+<p>Imagine a world where Pepsi is scalding hot. Now imagine that someone shakes up a can of Pepsi and sets it in front of you. </p>
+
+<img class="illustration" title="the first thing i’d do in this world is try the diet coke and mentos thing" src="//what-if.xkcd.com/imgs/a/40/pressure_cooker_pepsi.png">
+
+<p>That’s the real threat from a pressure cooker: If the seal fails (or the lid is opened too early), it can <a href="http://www.flickr.com/photos/12670995@N02/1888382766/">spray scalding stew in all directions</a>.</p>
+
+<p>But it’s not really an <em>explosion</em>.</p>
+
+<p>The blast couldn’t even fling the lid very far. If you mounted a rifle-style barrel on a pressure cooker, even in ideal circumstances it wouldn’t be able to fire the lid much faster than you could throw it. Any potato cannon (especially <a href="http://www.spudfiles.com/forums/mk-2-rotary-barrel-semi-automatic-combustion-t15766.html">this one</a>) could do better.</p>
+
+<p>Of course, the question wasn’t about whether a pressure cooker is likely to explode. It was about what the worst thing that could happen was.</p>
+
+<p>If you disable the safety valve, there are plenty of ways to produce much more dangerous pressures. You could completely fill it with water and heat it, <a href="http://www.youtube.com/watch?v=YbaiCdX1XWc">fill it with Drano and aluminum foil</a>, or just pump in air from a compressor.</p>
+
+<p>The result would depend on your pressure cooker. Chances are it would start to leak. If it didn’t, and it somehow stayed together up a few hundred atmospheres (pressures typical of scuba tank), when it finally <a href="http://www.youtube.com/watch?v=tyINNUaXa8Q">ruptured</a> it could easily kill you.</p>
+
+<img class="illustration" title="frankly, we're surprised she survived this long" src="//what-if.xkcd.com/imgs/a/40/pressure_cooker_grave.png">
+
+<p>Even so, that’s far from the <em>worst</em> thing you could do with a pressure cooker.</p>
+
+<p>Frankly, there are so many options it would be impossible to survey them all. But for my money, one of the most horrifying things you could do is this:</p>
+
+<p><em>(Note: </em><strong><em>Never</em></strong><em> try this, for reasons which will become obvious in a moment.)</em></p>
+
+<p>Fill the cooker with oxygen up to 5 PSI, then pump in fluorine until it starts escaping through the safety valve. Put the vessel over an open flame until it reaches 700°C (That’s °C, not °F. Yes, this will probably set off the smoke alarm.) Now, pump the hot gas over a liquid-oxygen-cooled stainless steel surface. </p>
+
+<p>The procedure here is a little tricky, but if you do things <a href="http://www.sciencedirect.com/science/article/pii/S0022113900803413">right</a>, the gas will condense into <strong>dioxygen difluoride</strong> (O2F2). </p>
+
+<p>And that stuff is <em>awful</em>.</p>
+
+<p>Ray Bradbury <a href="http://en.wikipedia.org/wiki/Fahrenheit_451">taught us</a> that paper burns when exposed to oxygen at temperatures above 451°F. Dioxygen difluoride is so volatile that it makes almost any organic substance ignite and explode at any temperature hotter than 300°F <em>below zero.</em> It can literally make <strong><em>ice</em></strong> catch fire.</p>
+
+<p><a href="http://pipeline.corante.com/archives/2010/02/23/things_i_wont_work_with_dioxygen_difluoride.php">In an article about O</a><a href="http://pipeline.corante.com/archives/2010/02/23/things_i_wont_work_with_dioxygen_difluoride.php">2</a><a href="http://pipeline.corante.com/archives/2010/02/23/things_i_wont_work_with_dioxygen_difluoride.php">F</a><a href="http://pipeline.corante.com/archives/2010/02/23/things_i_wont_work_with_dioxygen_difluoride.php">2</a>, Chemistry blogger Derek Lowe (of the excellent <em>In The Pipeline</em>) used phrases like “violently hideous”, “deeply alarming”, and “chemicals that I never hope to encounter”. <a href="http://www.lateralscience.co.uk/Fluorine/Fluorine.html">Another article</a> refers to fluorine as “the gas of Lucifer”, and lists chemists who were poisoned or blown up while attempting to work with it.</p>
+
+<p>If your house is heated by natural gas, and it happens to contain hydrogen sulfide, you could pipe some of it into your container of O2F2. In addition to a massive explosion, this will <em>also</em> produce a cloud of hydrogen fluoride gas. Hydrogen fluoride can dissolve human tissue on contact, starting with your lungs and corneas.</p>
+
+<p>As Lowe points out, the chemistry of this kind of reaction (O2F2 and sulfides) is largely unexplored. </p>
+
+<p>Which gives us an answer to our question. What’s the worst thing that can happen in a pressure cooker?</p>
+
+<img class="illustration" title="i’m expecting this contraption to get me a nobel prize, assuming it proves powerful enough to blow open the safe where they’re kept." src="//what-if.xkcd.com/imgs/a/40/pressure_cooker_science.png">
+
+<p><strong><em>Science.</em></strong></p>
+
+</article>
+]]></summary>
+</entry>
+<entry>
+    <title>Hockey Puck</title>
+    <link href="http://what-if.xkcd.com/39/" />
+    <id>http://what-if.xkcd.com/39/</id>
+    <published>2013-04-02T00:00:00Z</published>
+    <updated>2013-04-02T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<article class="entry">
+  <a href="//what-if.xkcd.com/39/"><h1>Hockey Puck</h1></a>
+  <p id="question">How hard would a puck have to be shot to be able to knock the goalie himself backwards into the net?</p>
+
+<p id="attribute">—Tom</p>
+
+<p>This can’t really happen.</p>
+
+<p>It’s not just a problem of hitting it hard enough. This blog <a href="http://what-if.xkcd.com/1/">isn’t concerned</a> with that kind of limitation. Humans with sticks can’t make a puck go much faster than <a href="http://sports.yahoo.com/blogs/nhl-puck-daddy/khl-alexander-ryazantsev-sets-world-record-hardest-shot-174131642.html">about 50 meters per second</a>, so we’ll assume this puck is launched by a <a href="http://hockeyrobotics.com/">hockey robot</a> or an <a href="http://www.psfc.mit.edu/~radovinsky/papers/32.pdf">electric sled</a> or a <a href="http://www.nasa.gov/centers/wstf/laboratories/hypervelocity/gasguns.html">hypersonic light gas gun</a>.</p>
+
+<p>The problem, in a nutshell, is that hockey players are heavy and pucks are not. A goalie in full gear outweighs a puck by a factor of about 600. Even the fastest slap shot has less momentum than a ten-year-old skating along at a mile per hour.</p>
+
+<p>Hockey players also can brace pretty hard against the ice. A player skating at full speed can stop in the space of a few meters, which means the force they’re exerting on the ice is pretty substantial. (It also suggests that if you started to slowly tilt a hockey rink, it could get up to 50 degrees before the players would all slide to one end. Clearly, experiments are needed to confirm this.)</p>
+
+<p>From estimates of collision speeds in <a href="http://www.youtube.com/watch?v=fWj6--Cf9QA">hockey videos</a>, and some guidance from a hockey player friend, I estimated that the 165-gram puck would have to be moving somewhere between Mach 2 and Mach 8 to knock the goalie backward into the goal—faster if the goalie is bracing against the hit, and slower if the puck hits at an upward angle.</p>
+
+<p>Firing an object at Mach 8 is not, in itself, very hard. One of the best methods for doing so is the aforementioned <a href="http://www.nasa.gov/centers/wstf/laboratories/hypervelocity/gasguns.html">hypersonic gas gun</a>, which is—at its core—the same mechanism a BB gun uses to fire BBs. </p>
+
+<img class="illustration" title="and world peace, which i recognize my first request makes significantly less likely" src="//what-if.xkcd.com/imgs/a/39/goalie_bb_gun.png">
+
+<p>But a hockey puck moving at Mach 8 will have a lot of problems. It’s not on the same scale as a relativistic baseball, but the air ahead of the puck would be compressed and heated very rapidly. It wouldn’t be going fast enough to ionize the air and leave a glowing trail like a meteor, but the surface of the puck would (given enough time) start to melt or char.</p>
+
+<p>The air resistance, however, will slow the puck down very quickly, so a puck going at Mach 8 when it leaves the launcher might be going a fraction of that when it arrives at the goal. And even at Mach 8, the puck probably wouldn’t pass through the goalie’s body. Instead, it would burst apart on impact with the power of a large firecracker or small stick of dynamite.</p>
+
+<p>If you’re like me, when you first saw this question, you might’ve imagined the puck leaving a cartoon-style hockey-puck-shaped hole. But that’s because our intuitions are shaky about how materials react at very high speeds.  </p>
+
+<p>Instead, a different mental picture might be more accurate: Imagine throwing a ripe tomato—as hard as you can—at a cake.</p>
+
+<img class="illustration" title="...goal?" src="//what-if.xkcd.com/imgs/a/39/goalie_cake.png">
+
+<p>That’s about what would happen.</p>
+
+</article>
+]]></summary>
+</entry>
+<entry>
+    <title>Voyager</title>
+    <link href="http://what-if.xkcd.com/38/" />
+    <id>http://what-if.xkcd.com/38/</id>
+    <published>No date found.</published>
+    <updated>No date found.</updated>
+    <summary type="html"><![CDATA[<article class="entry">
+  <a href="//what-if.xkcd.com/38/"><h1>Voyager</h1></a>
+  <p id="question">With today's technology, would it be possible to launch an unmanned mission to retrieve Voyager I?</p>
+
+<p id="attribute">—Elliott Bennett</p>
+
+<p><em>Voyager I</em> is farther from Earth than any other manmade object. After getting a pair of gravitational kicks from Jupiter and Saturn, it’s headed out of the Solar System at a pretty high speed, and nothing else we’ve built is on track to pass it.</p>
+
+<p>Strangely, as of the day I’m writing this, <em>Voyager</em> is actually <a href="http://voyager.jpl.nasa.gov/where/">getting </a><a href="http://voyager.jpl.nasa.gov/where/">closer</a> to us, because Earth is in a part of its orbit where it’s approaching <em>Voyager</em> faster than <em>Voyager</em> is fleeing. But in a few months, we’ll swing around the Sun and <em>Voyager</em> will again be getting farther away.</p>
+
+<img class="illustration" title="Earth is faster than Voyager but only goes in circles." src="//what-if.xkcd.com/imgs/a/38/voyager_earth.png">
+
+<p>It has a 35-year head start, so it would be hard to catch. But catching up isn’t the problem.</p>
+
+<p><em>New Horizons</em>, the spacecraft currently headed out of the Solar System by way of Pluto, is never going to catch up to <em>Voyager</em>—it’s not moving fast enough and it’s headed in the wrong direction<em>.</em> But it could have. </p>
+
+<p>The reason <em>Voyager</em> is moving so fast is that it got gravitational assists from Jupiter and Saturn, while <em>New Horizons</em> only got one from Jupiter. </p>
+
+<img class="illustration" title="Voyager gets a boost from Jupiter and a ball gets a boost from a truck." src="//what-if.xkcd.com/imgs/a/38/voyager_assist.png">
+
+<p><em>Gravity assists aren’t paradoxical magic. It’s just like bouncing a tennis ball off a passing truck. Gyroscopes, on the other hand, ARE magic.</em></p>
+
+<p>If <em>New Horizons</em> had ditched the Pluto objective and waited for the right planetary alignment (the 2030s look promising), it could have swung by Jupiter and Saturn, then caught up to <em>Voyager</em> in as little as a century or two! (Assuming we could manage to hit Voyager from that far away. But I bet we could; our rocket scientists are pretty good at rocket science.)</p>
+
+<p>Of course, getting there’s the easy part. The hard part is getting back.</p>
+
+<p><em>Voyager</em> weighs a little less than a ton and is moving away at 17 kilometers per second (if it were in the atmosphere, that would be Mach 50). And since it’s out in interstellar space, there are no speeding Jupiters to grab on to. Stopping <em>Voyager</em> is going to take a <em>lot</em> of fuel. </p>
+
+<p>It’s what engineers call the <a href="http://www.nasa.gov/mission_pages/station/expeditions/expedition30/tryanny.html">tyranny of the rocket equation</a>: As the amount that you want to change your speed (“delta-v”) goes up, the fuel required increases exponentially. The equation tells us that to turn the 720-kilogram <em>Voyager</em> around, we’re going to need at least 30<em> tons</em> of fuel.</p>
+
+<p>But to get <em>that</em> fuel out there, we need even <em>more</em> fuel. And to get <em>that</em> fuel, we need even <em>more</em> fuel. (This is where the tyrannical rocket equation gets its exponential term.) In fact, to rescue Voyager, we’d have to launch a fleet of—at minimum—60 <em>New Horizons</em>-sized spacecraft loaded with nothing but fuel. </p>
+
+<p>Could we do it? Sure. There are a couple plausible ways. Instead of building five to ten dozen fuel-laden Titan IIIEs, we could just build a fleet of ten or fifteen Saturn Vs, and do the whole thing with fewer launches. But however we did it, it would be a massive and expensive operation similar in scale to the Apollo program.</p>
+
+<p>The difference between the launch vehicle we’d used to get Voyager out of the Solar System and the fleet we’d need for a round trip is striking:</p>
+
+<img class="illustration" title src="//what-if.xkcd.com/imgs/a/38/voyager_comparison.png">
+
+<p>Fortunately, there’s one way around the tyranny of the rocket equation: Ditch the rockets. </p>
+
+<p>Ion engines—which use electric fields to accelerate exhaust gas to high speeds—are far more efficient than chemical rockets, and they make accelerating to high speeds much more plausible.</p>
+
+<p>The reason we’re not using them for everything is that they produce very little thrust, so it takes a long time to get up to speed. It’s like if you had a car that gets amazing mileage but has a one-horsepower engine. (Actually, are you sure that’s not just a horse?) Ion engines are great; the current ones just take forever to get you moving.</p>
+
+<p>But since catching <em>Voyager</em> is going to take a long time anyway, ion engines are fine. We could launch a probe (like <a href="http://trs-new.jpl.nasa.gov/dspace/bitstream/2014/13644/1/00-0010.pdf">this one</a>), send it out to <em>Voyager</em>, latch on, turn everything around, and let it spend a few decades slowing <em>Voyager </em>down.</p>
+
+<p>Once Voyager had lost nearly all its speed, the Sun’s gravity would take over, and the probe would begin a long slow slide toward the inner Solar System. This would take about 200 years, and with some extremely careful nudges, we could make sure it falls in an Earth-crossing orbit.</p>
+
+<p>Two centuries later, <em>Voyager</em> would reach Earth and, with no way to slow down, burn up in our atmosphere, because we didn’t think to send out an aerobraking shell with the rescue craft. So that was a waste of a few centuries of work and billions upon billions of dollars.</p>
+
+<img class="illustration" title="A returning Voyager becomes a very expensive firework." src="//what-if.xkcd.com/imgs/a/38/voyager_burn_up.png">
+
+<p>Maybe a better idea would be to borrow a salvage vessel and set sail for the coast of New South Wales, Australia. There, in the waters off Jervis Bay, the Australian Royal Navy ship <em>Voyager</em> sank in 1964 after an accidental collision. </p>
+
+<p>That one’s probably easier to retrieve.</p>
+
+<img class="illustration" title="NASA goes sailing" src="//what-if.xkcd.com/imgs/a/38/voyager_salvage.png">
+
+</article>
+]]></summary>
+</entry>
+
+</feed>
