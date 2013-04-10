@@ -1,9 +1,9 @@
 package com.sismics.reader.core.dao.file.html;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.ByteStreams;
+import com.google.common.io.Files;
+import com.sismics.reader.core.util.MimeTypeUtil;
 
 /**
  * Utility to download a favicon from a website.
@@ -29,9 +31,9 @@ public class FaviconDownloader {
     private static final Logger log = LoggerFactory.getLogger(FaviconDownloader.class);
 
     /**
-     * Authorized favicon MIME types and corresponding file extensions.
+     * Authorized MIME types and corresponding file extensions.
      */
-    final protected ImmutableMap<String, String> faviconMimeMap = new ImmutableMap.Builder<String, String>()
+    final public ImmutableMap<String, String> FAVICON_MIME_TYPE_MAP = new ImmutableMap.Builder<String, String>()
             .put("image/bmp", ".bmp")
             .put("image/gif", ".gif")
             .put("image/jpeg", ".jpg")
@@ -80,7 +82,7 @@ public class FaviconDownloader {
             if (localFilename != null) {
                 log.info(MessageFormat.format("Favicon successfully downloaded to {0}", localFilename));
             } else {
-                log.info(MessageFormat.format("Cannot find a valid favicon for feed {0} at page {1} or on the domain", fileName, pageUrl));
+                log.info(MessageFormat.format("Cannot find a valid favicon for feed {0} at page {1} or at the domain root", fileName, pageUrl));
             }
         }
         return localFilename;
@@ -116,19 +118,39 @@ public class FaviconDownloader {
      * @return Local file path or null if failed
      */
     public String downloadFavicon(String faviconUrl, String directory, String fileName) {
+        File localFile = null;
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(faviconUrl).openConnection();
-            String type = connection.getContentType();
-    
-            String extension = faviconMimeMap.get(type);
-            if (extension != null) {
-                File outputFile = new File(directory + File.separator + fileName + extension);
-                ByteStreams.copy(connection.getInputStream(), new FileOutputStream(outputFile));
-                return outputFile.getPath();
+            // Download the icon file to temporary location
+            InputStream remoteInputStream = new URL(faviconUrl).openConnection().getInputStream();
+            localFile = File.createTempFile("reader_favicon", ".ico");
+            if (ByteStreams.copy(remoteInputStream, new FileOutputStream(localFile)) > 0) {
+                // Check if it is a graphics file, we cannot rely on HTTP headers for Content-Type
+                String type = MimeTypeUtil.guessMimeType(localFile);
+                if (type != null) {
+                    String extension = FAVICON_MIME_TYPE_MAP.get(type);
+                    if (extension != null) {
+                        File outputFile = new File(directory + File.separator + fileName + extension);
+                        Files.copy(localFile, new FileOutputStream(outputFile));
+                        return outputFile.getPath();
+                    }
+                }
             }
-        } catch (IOException e) {
-            if (log.isErrorEnabled()) {
-                log.error(MessageFormat.format(MessageFormat.format("Error downloading favicon at URL {0}", faviconUrl), e));
+        } catch (FileNotFoundException e) {
+            if (log.isInfoEnabled()) {
+                log.info(MessageFormat.format("Favicon file not found at URL {0}", faviconUrl));
+            }
+        } catch (Exception e) {
+            if (log.isInfoEnabled()) {
+                log.info(MessageFormat.format("Error downloading favicon at URL {0}", faviconUrl), e);
+            }
+        } finally {
+            // Clean up temporary local file
+            if (localFile != null) {
+                try {
+                    localFile.delete();
+                } catch (Exception e) {
+                    // NOP
+                }
             }
         }
         return null;

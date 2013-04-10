@@ -354,7 +354,7 @@
         <artifactId>google-api-services-plus</artifactId>
         <version>${com.google.apis.google-api-services-plus.version}</version>
       </dependency>
-      
+
       <dependency>
         <groupId>org.imgscalr</groupId>
         <artifactId>imgscalr-lib</artifactId>
@@ -366,7 +366,7 @@
         <artifactId>tagsoup</artifactId>
         <version>${org.ccil.cowan.tagsoup.tagsoup.version}</version>
       </dependency>
-            
+
       <dependency>
         <groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
         <artifactId>owasp-java-html-sanitizer</artifactId>
