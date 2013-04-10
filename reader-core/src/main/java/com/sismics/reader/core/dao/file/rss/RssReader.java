@@ -28,6 +28,7 @@ import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
+import com.sismics.reader.core.util.StreamUtil;
 import com.sismics.util.DateUtil;
 
 /**
@@ -161,23 +162,34 @@ public class RssReader extends DefaultHandler {
      * @throws Exception
      */
     public void readRssFeed() throws Exception {
-        InputStream in = read();
-//        SAXParserImpl parser = SAXParserImpl.newInstance(null);
-//        parser.setFeature("http://xml.org/sax/features/namespaces", true);    
-//        parser.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
-        SAXParserFactory factory = SAXParserFactory.newInstance();
-        factory.setNamespaceAware(true);
-        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-        SAXParser parser = factory.newSAXParser();
-
-        parser.parse(in, this);
+        InputStream in = null;
+        try {
+            in = StreamUtil.openStream(url);
+    //        SAXParserImpl parser = SAXParserImpl.newInstance(null);
+    //        parser.setFeature("http://xml.org/sax/features/namespaces", true);    
+    //        parser.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            factory.setNamespaceAware(true);
+            factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            SAXParser parser = factory.newSAXParser();
+    
+            parser.parse(in, this);
         
-        if (atom) {
-            String url = new AtomUrlGuesserStrategy().guess(atomLinkList);
-            feed.setUrl(url);
+            if (atom) {
+                String url = new AtomUrlGuesserStrategy().guess(atomLinkList);
+                feed.setUrl(url);
+            }
+            validateFeed();
+            fixGuid();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // NOP
+                }
+            }
         }
-        validateFeed();
-        fixGuid();
     }
     
     @Override
@@ -471,14 +483,6 @@ public class RssReader extends DefaultHandler {
         String content = StringUtils.trim(this.content);
         this.content = null;
         return content;
-    }
-
-    private InputStream read() {
-        try {
-            return url.openStream();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**

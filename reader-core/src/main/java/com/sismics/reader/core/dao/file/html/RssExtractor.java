@@ -16,6 +16,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.sismics.reader.core.util.StreamUtil;
+
 /**
  * HTML parser used to look for RSS / Atom feeds.
  *
@@ -51,12 +53,23 @@ public class RssExtractor extends DefaultHandler {
      * @throws Exception
      */
     public void readPage() throws Exception {
-        InputStream in = read();
-        SAXParserImpl parser = SAXParserImpl.newInstance(null);
-        parser.setFeature("http://xml.org/sax/features/namespaces", true);    
-        parser.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
-
-        parser.parse(in, this);
+        InputStream in = null;
+        try {
+            in = StreamUtil.openStream(url);
+            SAXParserImpl parser = SAXParserImpl.newInstance(null);
+            parser.setFeature("http://xml.org/sax/features/namespaces", true);    
+            parser.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
+    
+            parser.parse(in, this);
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // NOP
+                }
+            }
+        }
     }
     
     @Override
@@ -100,14 +113,6 @@ public class RssExtractor extends DefaultHandler {
         }
     }
     
-    private InputStream read() {
-        try {
-            return url.openStream();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * Getter of feedList.
      *

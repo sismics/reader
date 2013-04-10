@@ -14,6 +14,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.sismics.reader.core.util.StreamUtil;
+
 /**
  * HTML parser used to look for a favicon.
  *
@@ -27,6 +29,9 @@ public class FaviconExtractor extends DefaultHandler {
      */
     private final URL url;
 
+    /**
+     * Extracted favicon URL.
+     */
     private String favicon;
     
     /**
@@ -45,12 +50,24 @@ public class FaviconExtractor extends DefaultHandler {
      * @throws Exception
      */
     public void readPage() throws Exception {
-        InputStream in = read();
-        SAXParserImpl parser = SAXParserImpl.newInstance(null);
-        parser.setFeature("http://xml.org/sax/features/namespaces", true);    
-        parser.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
+        InputStream in = null;
+        try {
+            in = StreamUtil.openStream(url);
 
-        parser.parse(in, this);
+            SAXParserImpl parser = SAXParserImpl.newInstance(null);
+            parser.setFeature("http://xml.org/sax/features/namespaces", true);    
+            parser.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
+    
+            parser.parse(in, this);
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // NOP
+                }
+            }
+        }
     }
     
     @Override
@@ -64,6 +81,7 @@ public class FaviconExtractor extends DefaultHandler {
                     favicon = href;
                 } else {
                     if (!href.startsWith("/")) {
+                        // TODO Build relative links relative to base url
                         href = "/" + href;
                     }
                     try {
@@ -77,14 +95,6 @@ public class FaviconExtractor extends DefaultHandler {
         }
     }
     
-    private InputStream read() {
-        try {
-            return url.openStream();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * Getter of favicon.
      *
