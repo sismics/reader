@@ -6,10 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
+import com.sismics.reader.core.dao.file.html.FaviconDownloader;
 import com.sismics.reader.core.event.FaviconUpdateRequestedEvent;
-import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.Feed;
-import com.sismics.reader.core.service.FeedService;
+import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.TransactionUtil;
 
 /**
@@ -40,8 +40,9 @@ public class FaviconUpdateRequestedAsyncListener {
         TransactionUtil.handle(new Runnable() {
             @Override
             public void run() {
-                final FeedService feedService = AppContext.getInstance().getFeedService();
-                feedService.downloadFavicon(feed);
+                String faviconDirectory = DirectoryUtil.getFaviconDirectory().getPath();
+                FaviconDownloader downloader = new FaviconDownloader();
+                downloader.downloadFaviconFromPage(feed.getUrl(), faviconDirectory, feed.getId());
             }
         });
     }

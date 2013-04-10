@@ -1,19 +1,12 @@
 package com.sismics.reader.core.service;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.UnknownHostException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -25,12 +18,8 @@ import org.owasp.html.Sanitizers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.google.common.io.ByteStreams;
 import com.google.common.util.concurrent.AbstractScheduledService;
-import com.sismics.reader.core.dao.file.html.FaviconExtractor;
 import com.sismics.reader.core.dao.file.html.FeedChooserStrategy;
 import com.sismics.reader.core.dao.file.html.RssExtractor;
 import com.sismics.reader.core.dao.file.rss.RssReader;
@@ -50,7 +39,6 @@ import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
 import com.sismics.reader.core.model.jpa.UserArticle;
-import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
@@ -61,18 +49,6 @@ import com.sismics.reader.core.util.jpa.PaginatedLists;
  * @author jtremeaux 
  */
 public class FeedService extends AbstractScheduledService {
-    /**
-     * Authorized favicon MIME types and corresponding file extensions.
-     */
-    final ImmutableMap<String, String> faviconMimeMap = new ImmutableMap.Builder<String, String>()
-            .put("image/bmp", ".bmp")
-            .put("image/gif", ".gif")
-            .put("image/jpeg", ".jpg")
-            .put("image/png", ".png")
-            .put("image/x-icon", ".ico")
-            .put("image/vnd.microsoft.icon", ".ico")
-            .build();
-    
     /**
      * Logger.
      */
@@ -310,96 +286,5 @@ public class FeedService extends AbstractScheduledService {
                 userArticleDto.setId(userArticleId);
             }
         }
-    }
-    
-    /**
-     * Attempt to download the favicon from a feed's webpage.
-     * 
-     * @param feed Feed
-     */
-    public void downloadFavicon(Feed feed) {
-        // Try to extract the favicon URL from the page specified in the feed
-        String faviconUrl = null;
-        try {
-            FaviconExtractor extractor = new FaviconExtractor(feed.getUrl());
-            extractor.readPage();
-            faviconUrl = extractor.getFavicon();
-        } catch (Exception e) {
-            log.error("Error extracting icon from feed HTML page", e);
-        }
-        
-        // Attempt to download a valid favicon from the HTML page 
-        String localFilename = null;
-        if (faviconUrl != null) {
-            localFilename = downloadFavicon(faviconUrl, feed.getId());
-        }
-
-        // Attempt to download a valid favicon from guessed URLs 
-        final List<String> filenameList = ImmutableList.of(
-                "favicon.png", "favicon.gif", "favicon.ico", "favicon.jpg", "favicon.jpeg", "favicon.bmp");
-        Iterator<String> iterator = filenameList.iterator(); 
-        while (localFilename == null && iterator.hasNext()) {
-            String filename = iterator.next();
-            faviconUrl = getFaviconUrl(feed, filename);
-            localFilename = downloadFavicon(faviconUrl, feed.getId());
-        }
-        
-        if (log.isInfoEnabled()) {
-            if (localFilename != null) {
-                log.info(MessageFormat.format("Favicon successfully downloaded to {0}", localFilename));
-            } else {
-                log.info(MessageFormat.format("Cannot find a valid favicon for feed {0} at page {1}", feed.getId(), feed.getUrl()));
-            }
-        }
-    }
-
-    /**
-     * Constructs a favicon URL from a feed path, and a guessed of the favicon file name (e.g. "favicon.ico").
-     * 
-     * @param feed Feed
-     * @param fileName Favicon file name
-     * @return Favicon URL
-     */
-    private String getFaviconUrl(Feed feed, String fileName) {
-        String feedUrl = feed.getUrl();
-        
-        if (feedUrl != null) {
-            try {
-                URL url = new URL(feedUrl);
-                return new URL(url.getProtocol(), url.getHost(), url.getPort(), "/" + fileName).toString();
-            } catch (MalformedURLException e) {
-                if (log.isErrorEnabled()) {
-                    log.error(MessageFormat.format("Error building Favicon URL from URL {0} with filename {1}", feedUrl, fileName));
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Attempts to download a favicon from an URL.
-     * 
-     * @param faviconUrl URL to download the favicon from
-     * @param feedId Feed ID
-     * @return Local file path or null if failed
-     */
-    private String downloadFavicon(String faviconUrl, String feedId) {
-        try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(faviconUrl).openConnection();
-            String type = connection.getContentType();
-    
-            String extension = faviconMimeMap.get(type);
-            if (extension != null) {
-                File faviconDirectory = DirectoryUtil.getFaviconDirectory();
-                File outputFile = new File(faviconDirectory + File.separator + feedId + extension);
-                ByteStreams.copy(connection.getInputStream(), new FileOutputStream(outputFile));
-                return outputFile.getPath();
-            }
-        } catch (IOException e) {
-            if (log.isErrorEnabled()) {
-                log.error(MessageFormat.format(MessageFormat.format("Error downloading favicon at URL {0}", faviconUrl), e));
-            }
-        }
-        return null;
     }
 }
