@@ -63,6 +63,9 @@ public class FaviconExtractor extends DefaultHandler {
                 if (href.startsWith("http")) {
                     favicon = href;
                 } else {
+                    if (!href.startsWith("/")) {
+                        href = "/" + href;
+                    }
                     try {
                         favicon = new URL(url.getProtocol(), url.getHost(), url.getPort(), href).toString();
                     } catch (MalformedURLException e) {
