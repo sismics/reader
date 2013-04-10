@@ -42,6 +42,7 @@ r.user.boot = function() {
       if (data.anonymous) {
         // Current user is anonymous, displaying login
         $('#login-page').show();
+        $('#login-username-input').focus();
       } else {
         // Hiding login
         $('#login-page').hide();
