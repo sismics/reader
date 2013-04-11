@@ -1,7 +1,8 @@
 {
   "app": "Sismics Reader",
   "defaultpassword": {
-    "warning": "You haven't changed your default Reader admin password, it's a security risk!",
+    "info": "Reader is not secured. Please log in with username and password \"admin\", then change password immediately.",
+    "warning": "You haven't changed your default admin password. Secure your server by changing the default password now.",
     "dismiss": "Dismiss"
   },
   "subscription": {

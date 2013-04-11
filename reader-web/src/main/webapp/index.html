@@ -29,6 +29,7 @@
     <script src="javascripts/r.search.js" type="text/javascript"></script>
     <script src="javascripts/r.settings.js" type="text/javascript"></script>
     <script src="javascripts/r.wizard.js" type="text/javascript"></script>
+    <script src="javascripts/r.theme.js" type="text/javascript"></script>
     <script src="javascripts/r.util.js" type="text/javascript"></script>
 
   	<script>
@@ -186,15 +187,18 @@
     <!-- Login form -->
     <div id="login-page">
       <form>
-        <input type="text" id="login-username-input" placeholder="Username" />
-        <input type="password" id="login-password-input" placeholder="Password" />
-        <input class="important" type="submit" id="login-submit-button" value="Login" />
+        <input type="text" id="login-username-input" placeholder="Username" data-i18n="[placeholder]login.username" /><br />
+        <input type="password" id="login-password-input" placeholder="Password" data-i18n="[placeholder]login.password" /><br />
+        <label><input type="checkbox" id="login-remember-input" /> <span data-i18n="login.remember">Remember me</span></label><br />
+        <input class="important" type="submit" id="login-submit-button" value="Login" data-i18n="[value]login.submit" />
+        
+        <p id="default-password-info" data-i18n="defaultpassword.info">Reader is not secured. Please log in with username and password "admin", then change password immediately.</p>
       </form>
     </div>
     
     <!-- Default admin password warning -->
     <div id="default-password">
-      <span data-i18n="defaultpassword.warning" class="warning">You haven't changed your default Reader admin password, it's a security risk!</span>
+      <span data-i18n="defaultpassword.warning" class="warning">You haven't changed your default admin password. Secure your server by changing the default password now.</span>
       <span data-i18n="defaultpassword.dismiss" class="dismiss" onclick="javascript:$(this).parent().hide();">Dismiss</span>
     </div>
 
