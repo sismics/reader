@@ -317,11 +317,12 @@ public class UserResource extends BaseResource {
     }
 
     /**
-     * This resource is used to authenticate the user and create a long lasted ession.
+     * This resource is used to authenticate the user and create a user ession.
      * The "session" is only used to identify the user, no other data is stored in the session.
      * 
      * @param username Username
      * @param password Password
+     * @param longLasted Remember the user next time, create a long lasted session.
      * @return Response
      */
     @POST
@@ -329,7 +330,8 @@ public class UserResource extends BaseResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(
         @FormParam("username") String username,
-        @FormParam("password") String password) throws JSONException {
+        @FormParam("password") String password,
+        @FormParam("remember") boolean longLasted) throws JSONException {
         
         // Validate the input data
         username = StringUtils.strip(username);
@@ -346,10 +348,15 @@ public class UserResource extends BaseResource {
         AuthenticationTokenDao authenticationTokenDao = new AuthenticationTokenDao();
         AuthenticationToken authenticationToken = new AuthenticationToken();
         authenticationToken.setUserId(userId);
+        authenticationToken.setLongLasted(longLasted);
         String token = authenticationTokenDao.create(authenticationToken);
+        
+        // Cleanup old session tokens
+        authenticationTokenDao.deleteOldSessionToken(userId);
 
         JSONObject response = new JSONObject();
-        NewCookie cookie = new NewCookie(TokenBasedSecurityFilter.COOKIE_NAME, token, "/", null, null, TokenBasedSecurityFilter.TOKEN_LIFETIME, false);
+        int maxAge = longLasted ? TokenBasedSecurityFilter.TOKEN_LONG_LIFETIME : 0;
+        NewCookie cookie = new NewCookie(TokenBasedSecurityFilter.COOKIE_NAME, token, "/", null, null, maxAge, false);
         return Response.ok().entity(response).cookie(cookie).build();
     }
 
@@ -479,9 +486,6 @@ public class UserResource extends BaseResource {
             User user = userDao.getById(principal.getId());
             response.put("username", user.getUsername());
             response.put("email", user.getEmail());
-            if (user.getLastLoginDate() != null) {
-                response.put("last_login_date", user.getLastLoginDate().getTime());
-            }
             response.put("locale", user.getLocaleId());
             response.put("display_title_web", user.isDisplayTitleWeb());
             response.put("display_title_mobile", user.isDisplayTitleMobile());
@@ -563,9 +567,6 @@ public class UserResource extends BaseResource {
             user.put("username", userDto.getUsername());
             user.put("email", userDto.getEmail());
             user.put("create_date", userDto.getCreateTimestamp());
-            if (userDto.getLastLoginTimestamp() != null) {
-                user.put("last_login_date", userDto.getLastLoginTimestamp());
-            }
             users.add(user);
         }
         response.put("total", paginatedList.getResultCount());

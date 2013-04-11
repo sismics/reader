@@ -36,7 +36,7 @@ public class ClientUtil {
      */
     public void createUser(String username) {
         // Login admin to create the user
-        String adminAuthenticationToken = login("admin", "admin");
+        String adminAuthenticationToken = login("admin", "admin", false);
         
         // Create the user
         WebResource userResource = resource.path("/user");
@@ -58,13 +58,15 @@ public class ClientUtil {
      * 
      * @param username Username
      * @param password Password
+     * @param remember Remember user
      * @return Authentication token
      */
-    public String login(String username, String password) {
+    public String login(String username, String password, Boolean remember) {
         WebResource userResource = resource.path("/user/login");
         MultivaluedMap<String, String> postParams = new MultivaluedMapImpl();
         postParams.putSingle("username", username);
         postParams.putSingle("password", password);
+        postParams.putSingle("remember", remember.toString());
         ClientResponse response = userResource.post(ClientResponse.class, postParams);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         
@@ -78,7 +80,7 @@ public class ClientUtil {
      * @return Authentication token
      */
     public String login(String username) {
-        return login(username, "12345678");
+        return login(username, "12345678", false);
     }
     
     /**

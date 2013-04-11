@@ -21,8 +21,8 @@ public class AuthenticationToken {
      * Token.
      */
     @Id
-    @Column(name = "AUT_TOKEN_C")
-    private String token;
+    @Column(name = "AUT_ID_C", length = 36)
+    private String id;
 
     /**
      * User ID.
@@ -31,27 +31,39 @@ public class AuthenticationToken {
     private String userId;
     
     /**
+     * Remember the user next time (long lasted session).
+     */
+    @Column(name = "AUT_LONGLASTED_B", nullable = false)
+    private boolean longLasted;
+    
+    /**
      * Token creation date.
      */
     @Column(name = "AUT_CREATIONDATE_D", nullable = false)
     private Date creationDate;
 
     /**
-     * Getter of token.
-     *
-     * @return token
+     * Last connection date using this token.
      */
-    public String getToken() {
-        return token;
+    @Column(name = "AUT_LASTCONNECTIONDATE_D")
+    private Date lastConnectionDate;
+
+    /**
+     * Getter of id.
+     *
+     * @return id
+     */
+    public String getId() {
+        return id;
     }
 
     /**
-     * Setter of token.
+     * Setter of id.
      *
-     * @param token token
+     * @param id id
      */
-    public void setToken(String token) {
-        this.token = token;
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -73,6 +85,24 @@ public class AuthenticationToken {
     }
 
     /**
+     * Getter de longLasted.
+     *
+     * @return longLasted
+     */
+    public boolean isLongLasted() {
+        return longLasted;
+    }
+
+    /**
+     * Setter de longLasted.
+     *
+     * @param longLasted longLasted
+     */
+    public void setLongLasted(boolean longLasted) {
+        this.longLasted = longLasted;
+    }
+
+    /**
      * Getter of creationDate.
      *
      * @return creationDate
@@ -90,11 +120,30 @@ public class AuthenticationToken {
         this.creationDate = creationDate;
     }
 
+    /**
+     * Getter de lastConnectionDate.
+     *
+     * @return lastConnectionDate
+     */
+    public Date getLastConnectionDate() {
+        return lastConnectionDate;
+    }
+
+    /**
+     * Setter de lastConnectionDate.
+     *
+     * @param lastConnectionDate lastConnectionDate
+     */
+    public void setLastConnectionDate(Date lastConnectionDate) {
+        this.lastConnectionDate = lastConnectionDate;
+    }
+
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
-                .add("token", "**hidden**")
+                .add("id", "**hidden**")
                 .add("userId", userId)
+                .add("longLasted", longLasted)
                 .toString();
     }
 }

@@ -41,7 +41,7 @@ public class TestUserResource extends BaseJerseyTest {
         clientUtil.createUser("alice");
 
         // Login admin
-        String adminAuthenticationToken = clientUtil.login("admin", "admin");
+        String adminAuthenticationToken = clientUtil.login("admin", "admin", false);
         
         // List all users
         userResource = resource().path("/user/list");
@@ -147,7 +147,6 @@ public class TestUserResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         Assert.assertEquals("alice@reader.com", json.getString("email"));
-        Assert.assertNotNull(json.getLong("last_login_date"));
         Assert.assertFalse(json.getBoolean("display_title_web"));
         Assert.assertTrue(json.getBoolean("display_title_mobile"));
         Assert.assertTrue(json.getBoolean("display_unread_web"));
@@ -228,7 +227,7 @@ public class TestUserResource extends BaseJerseyTest {
         clientUtil.createUser("admin_user1");
 
         // Login admin
-        String adminAuthenticationToken = clientUtil.login("admin", "admin");
+        String adminAuthenticationToken = clientUtil.login("admin", "admin", false);
 
         // Check admin information
         WebResource userResource = resource().path("/user");

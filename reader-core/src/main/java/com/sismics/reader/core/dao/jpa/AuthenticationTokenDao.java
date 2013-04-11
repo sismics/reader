@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.joda.time.DateTime;
 
 import com.sismics.reader.core.model.jpa.AuthenticationToken;
 import com.sismics.util.context.ThreadLocalContext;
@@ -17,12 +20,12 @@ public class AuthenticationTokenDao {
     /**
      * Gets an authentication token.
      * 
-     * @param token Authentication token ID
+     * @param id Authentication token ID
      * @return Authentication token
      */
-    public AuthenticationToken get(String token) {
+    public AuthenticationToken get(String id) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        return em.find(AuthenticationToken.class, token);
+        return em.find(AuthenticationToken.class, id);
     }
 
     /**
@@ -34,11 +37,11 @@ public class AuthenticationTokenDao {
     public String create(AuthenticationToken authenticationToken) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
             
-        authenticationToken.setToken(UUID.randomUUID().toString());
+        authenticationToken.setId(UUID.randomUUID().toString());
         authenticationToken.setCreationDate(new Date());
         em.persist(authenticationToken);
         
-        return authenticationToken.getToken();
+        return authenticationToken.getId();
     }
 
     /**
@@ -55,5 +58,42 @@ public class AuthenticationTokenDao {
         } else {
             throw new Exception("Token not found: " + authenticationTokenId);
         }
+    }
+
+    /**
+     * Deletes old short lived tokens.
+     *
+     * @param userId User ID
+     * @throws Exception
+     */
+    public void deleteOldSessionToken(String userId) {
+        StringBuilder sb = new StringBuilder("delete from T_AUTHENTICATION_TOKEN at ");
+        sb.append(" where at.AUT_IDUSER_C = :userId and at.AUT_LONGLASTED_B = :longLasted");
+        sb.append(" and at.AUT_LASTCONNECTIONDATE_D < :minDate ");
+
+        EntityManager em = ThreadLocalContext.get().getEntityManager();
+        Query q = em.createNativeQuery(sb.toString());
+        q.setParameter("userId", userId);
+        q.setParameter("longLasted", false);
+        q.setParameter("minDate", DateTime.now().minusDays(1).toDate());
+        q.executeUpdate();
+    }
+
+    /**
+     * Deletes old short lived tokens.
+     *
+     * @param id Token id
+     * @throws Exception
+     */
+    public void updateLastConnectionDate(String id) {
+        StringBuilder sb = new StringBuilder("update T_AUTHENTICATION_TOKEN at ");
+        sb.append(" set at.AUT_LASTCONNECTIONDATE_D = :currentDate ");
+        sb.append(" where at.AUT_ID_C = :id");
+
+        EntityManager em = ThreadLocalContext.get().getEntityManager();
+        Query q = em.createNativeQuery(sb.toString());
+        q.setParameter("currentDate", new Date());
+        q.setParameter("id", id);
+        q.executeUpdate();
     }
 }

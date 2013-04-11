@@ -85,12 +85,6 @@ public class User {
     private Date createDate;
     
     /**
-     * Last login date.
-     */
-    @Column(name = "USE_LASTLOGINDATE_D")
-    private Date lastLoginDate;
-    
-    /**
      * Deletion date.
      */
     @Column(name = "USE_DELETEDATE_D")
@@ -292,24 +286,6 @@ public class User {
      */
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    /**
-     * Getter of lastLoginDate.
-     *
-     * @return lastLoginDate
-     */
-    public Date getLastLoginDate() {
-        return lastLoginDate;
-    }
-
-    /**
-     * Setter of lastLoginDate.
-     *
-     * @param lastLoginDate lastLoginDate
-     */
-    public void setLastLoginDate(Date lastLoginDate) {
-        this.lastLoginDate = lastLoginDate;
     }
 
     /**
