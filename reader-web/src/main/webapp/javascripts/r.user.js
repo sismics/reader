@@ -11,11 +11,12 @@ r.user.init = function() {
   $('#login-submit-button').click(function() {
     var username = $('#login-username-input').val();
     var password = $('#login-password-input').val();
+    var remember = $('#login-remember-input').is(':checked');
     
     r.util.ajax({
       url: r.util.url.user_login,
       type: 'POST',
-      data: {username: username, password: password},
+      data: {username: username, password: password, remember: remember},
       done: function(data) {
         // Retrying to boot application
         r.user.boot();
@@ -42,6 +43,7 @@ r.user.boot = function() {
       // Default password warning
       if (data.is_default_password) {
         $('#default-password').show();
+        $('#default-password-info').show();
       }
       
       if (data.anonymous) {
