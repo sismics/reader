@@ -22,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
+import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.dao.jpa.AuthenticationTokenDao;
 import com.sismics.reader.core.dao.jpa.CategoryDao;
 import com.sismics.reader.core.dao.jpa.UserDao;
@@ -40,7 +41,6 @@ import com.sismics.rest.exception.ClientException;
 import com.sismics.rest.exception.ForbiddenClientException;
 import com.sismics.rest.exception.ServerException;
 import com.sismics.rest.util.ValidationUtil;
-import com.sismics.security.UserPrincipal;
 import com.sismics.util.LocaleUtil;
 import com.sismics.util.filter.TokenBasedSecurityFilter;
 
@@ -468,6 +468,11 @@ public class UserResource extends BaseResource {
 
             String localeId = LocaleUtil.getLocaleIdFromAcceptLanguage(request.getHeader("Accept-Language"));
             response.put("locale", localeId);
+            
+            // Check if admin has the default password
+            UserDao userDao = new UserDao();
+            User adminUser = userDao.getById("admin");
+            response.put("is_default_password", Constants.DEFAULT_ADMIN_PASSWORD.equals(adminUser.getPassword()));
         } else {
             response.put("anonymous", false);
             UserDao userDao = new UserDao();
@@ -483,7 +488,8 @@ public class UserResource extends BaseResource {
             response.put("display_unread_web", user.isDisplayUnreadWeb());
             response.put("display_unread_mobile", user.isDisplayUnreadMobile());
             response.put("first_connection", user.isFirstConnection());
-            response.put("is_admin", ((UserPrincipal) principal).getBaseFunctionSet().contains(BaseFunction.ADMIN.name()));
+            response.put("is_admin", hasBaseFunction(BaseFunction.ADMIN));
+            response.put("is_default_password", hasBaseFunction(BaseFunction.ADMIN) && Constants.DEFAULT_ADMIN_PASSWORD.equals(user.getPassword()));
         }
         
         return Response.ok().entity(response).build();

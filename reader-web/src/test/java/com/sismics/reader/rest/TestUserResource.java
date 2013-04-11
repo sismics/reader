@@ -35,6 +35,7 @@ public class TestUserResource extends BaseJerseyTest {
         ClientResponse response = userResource.acceptLanguage(Locale.US).get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         JSONObject json = response.getEntity(JSONObject.class);
+        Assert.assertTrue(json.getBoolean("is_default_password"));
         
         // Create alice user
         clientUtil.createUser("alice");
@@ -152,6 +153,7 @@ public class TestUserResource extends BaseJerseyTest {
         Assert.assertTrue(json.getBoolean("display_unread_web"));
         Assert.assertTrue(json.getBoolean("display_unread_mobile"));
         Assert.assertFalse(json.getBoolean("first_connection"));
+        Assert.assertFalse(json.getBoolean("is_default_password"));
         
         // Check bob user information
         userResource = resource().path("/user");
@@ -235,6 +237,7 @@ public class TestUserResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         JSONObject json = response.getEntity(JSONObject.class);
         Assert.assertTrue(json.getBoolean("first_connection"));
+        Assert.assertTrue(json.getBoolean("is_default_password"));
 
         // User admin updates his information
         userResource = resource().path("/user");
