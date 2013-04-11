@@ -355,7 +355,7 @@ public class UserResource extends BaseResource {
         authenticationTokenDao.deleteOldSessionToken(userId);
 
         JSONObject response = new JSONObject();
-        int maxAge = longLasted ? TokenBasedSecurityFilter.TOKEN_LONG_LIFETIME : 0;
+        int maxAge = longLasted ? TokenBasedSecurityFilter.TOKEN_LONG_LIFETIME : -1;
         NewCookie cookie = new NewCookie(TokenBasedSecurityFilter.COOKIE_NAME, token, "/", null, null, maxAge, false);
         return Response.ok().entity(response).cookie(cookie).build();
     }
