@@ -73,6 +73,12 @@ public class User {
     private boolean displayUnreadMobile;
 
     /**
+     * True if the user hasn't dismissed the first connection screen.
+     */
+    @Column(name = "USE_FIRSTCONNECTION_B", nullable = false)
+    private boolean firstConnection;
+
+    /**
      * Creation date.
      */
     @Column(name = "USE_CREATEDATE_D", nullable = false)
@@ -250,6 +256,24 @@ public class User {
      */
     public void setDisplayUnreadMobile(boolean displayUnreadMobile) {
         this.displayUnreadMobile = displayUnreadMobile;
+    }
+
+    /**
+     * Getter de firstConnection.
+     *
+     * @return firstConnection
+     */
+    public boolean isFirstConnection() {
+        return firstConnection;
+    }
+
+    /**
+     * Setter de firstConnection.
+     *
+     * @param firstConnection firstConnection
+     */
+    public void setFirstConnection(boolean firstConnection) {
+        this.firstConnection = firstConnection;
     }
 
     /**

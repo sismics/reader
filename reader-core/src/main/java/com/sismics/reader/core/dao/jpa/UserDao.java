@@ -99,6 +99,7 @@ public class UserDao {
         userFromDb.setDisplayTitleMobile(user.isDisplayTitleMobile());
         userFromDb.setDisplayUnreadWeb(user.isDisplayUnreadWeb());
         userFromDb.setDisplayUnreadMobile(user.isDisplayUnreadMobile());
+        userFromDb.setFirstConnection(user.isFirstConnection());
         
         return user;
     }

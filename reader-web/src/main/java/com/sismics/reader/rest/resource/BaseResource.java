@@ -54,18 +54,29 @@ public abstract class BaseResource {
     }
     
     /**
-     * Checks if the user has a base function.
+     * Checks if the user has a base function. Throw an exception if the check fails.
      * 
      * @param baseFunction Base function to check
      * @throws JSONException
      */
     protected void checkBaseFunction(BaseFunction baseFunction) throws JSONException {
-        if (principal == null || !(principal instanceof UserPrincipal)) {
+        if (!hasBaseFunction(baseFunction)) {
             throw new ForbiddenClientException();
+        }
+    }
+    
+    /**
+     * Checks if the user has a base function.
+     * 
+     * @param baseFunction Base function to check
+     * @return True if the user has the base function
+     * @throws JSONException
+     */
+    protected boolean hasBaseFunction(BaseFunction baseFunction) throws JSONException {
+        if (principal == null || !(principal instanceof UserPrincipal)) {
+            return false;
         }
         Set<String> baseFunctionSet = ((UserPrincipal) principal).getBaseFunctionSet();
-        if (baseFunctionSet == null || !(baseFunctionSet.contains(baseFunction.name()))) {
-            throw new ForbiddenClientException();
-        }
+        return baseFunctionSet != null && baseFunctionSet.contains(baseFunction.name());
     }
 }

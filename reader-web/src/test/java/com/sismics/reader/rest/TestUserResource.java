@@ -151,6 +151,7 @@ public class TestUserResource extends BaseJerseyTest {
         Assert.assertTrue(json.getBoolean("display_title_mobile"));
         Assert.assertTrue(json.getBoolean("display_unread_web"));
         Assert.assertTrue(json.getBoolean("display_unread_mobile"));
+        Assert.assertFalse(json.getBoolean("first_connection"));
         
         // Check bob user information
         userResource = resource().path("/user");
@@ -227,19 +228,45 @@ public class TestUserResource extends BaseJerseyTest {
         // Login admin
         String adminAuthenticationToken = clientUtil.login("admin", "admin");
 
-        // User admin update admin_user1 information
+        // Check admin information
         WebResource userResource = resource().path("/user");
         userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        ClientResponse response = userResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        JSONObject json = response.getEntity(JSONObject.class);
+        Assert.assertTrue(json.getBoolean("first_connection"));
+
+        // User admin updates his information
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
         MultivaluedMapImpl postParams = new MultivaluedMapImpl();
+        postParams.add("first_connection", false);
+        response = userResource.post(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ok", json.getString("status"));
+
+        // Check admin information update
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        response = userResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertFalse(json.getBoolean("first_connection"));
+
+        // User admin update admin_user1 information
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        postParams = new MultivaluedMapImpl();
         postParams.add("email", " alice2@reader.com ");
         postParams.add("locale", " en ");
         postParams.add("display_title_web", true);
         postParams.add("display_title_mobile", false);
         postParams.add("display_unread_web", false);
         postParams.add("display_unread_mobile", false);
-        ClientResponse response = userResource.post(ClientResponse.class, postParams);
+        response = userResource.post(ClientResponse.class, postParams);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        json = response.getEntity(JSONObject.class);
         Assert.assertEquals("ok", json.getString("status"));
         
         // User admin deletes user admin_user1
