@@ -11,4 +11,8 @@ public enum ConfigType {
      */
     BASE_DATA_DIR,
 
+    /**
+     * Lucene directory storage type.
+     */
+    LUCENE_DIRECTOY_STORAGE,
 }

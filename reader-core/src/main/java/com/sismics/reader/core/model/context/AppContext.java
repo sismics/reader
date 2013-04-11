@@ -10,6 +10,7 @@ import org.apache.lucene.store.Directory;
 
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
+import com.sismics.reader.core.listener.async.ArticleCreatedAsyncListener;
 import com.sismics.reader.core.listener.async.FaviconUpdateRequestedAsyncListener;
 import com.sismics.reader.core.listener.async.OpmlImportAsyncListener;
 import com.sismics.reader.core.listener.sync.DeadEventListener;
@@ -94,7 +95,7 @@ public class AppContext {
         ExecutorService asyncExecutor = Executors.newSingleThreadExecutor(); 
         asyncExecutorList.add(asyncExecutor);
         asyncEventBus = new AsyncEventBus(asyncExecutor);
-//        asyncEventBus.register(new ArticleCreatedAsyncListener());
+        asyncEventBus.register(new ArticleCreatedAsyncListener());
         asyncEventBus.register(new FaviconUpdateRequestedAsyncListener());
 
         ExecutorService mailExecutor = Executors.newSingleThreadExecutor(); 

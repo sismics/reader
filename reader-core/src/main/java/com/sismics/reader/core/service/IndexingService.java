@@ -7,17 +7,22 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.store.SimpleFSLockFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.util.concurrent.AbstractScheduledService;
+import com.sismics.reader.core.constant.ConfigType;
+import com.sismics.reader.core.constant.Constants;
+import com.sismics.reader.core.dao.jpa.ConfigDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.dao.lucene.ArticleDao;
 import com.sismics.reader.core.model.context.AppContext;
+import com.sismics.reader.core.model.jpa.Config;
 import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.reader.core.util.jpa.PaginatedList;
@@ -41,12 +46,19 @@ public class IndexingService extends AbstractScheduledService {
     
     @Override
     protected void startUp() {
-        File luceneDirectory = DirectoryUtil.getLuceneDirectory();
+        ConfigDao configDao = new ConfigDao();
+        Config luceneStorageConfig = configDao.getById(ConfigType.LUCENE_DIRECTOY_STORAGE);
         
-        try {
-            directory = new SimpleFSDirectory(luceneDirectory, new SimpleFSLockFactory());
-        } catch (IOException e) {
-            log.error("Error initializing Lucene index", e);
+        // RAM directory storage by default
+        if (luceneStorageConfig == null || luceneStorageConfig.getValue().equals(Constants.LUCENE_DIRECTORY_STORAGE_RAM)) {
+            directory = new RAMDirectory();
+        } else if (luceneStorageConfig.getValue().equals(Constants.LUCENE_DIRECTORY_STORAGE_FILE)) {
+            File luceneDirectory = DirectoryUtil.getLuceneDirectory();
+            try {
+                directory = new SimpleFSDirectory(luceneDirectory, new SimpleFSLockFactory());
+            } catch (IOException e) {
+                log.error("Error initializing Lucene index", e);
+            }
         }
     }
 
