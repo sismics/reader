@@ -10,11 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
-import org.owasp.html.HtmlPolicyBuilder;
-import org.owasp.html.PolicyFactory;
-import org.owasp.html.Sanitizers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,6 +35,7 @@ import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
 import com.sismics.reader.core.model.jpa.UserArticle;
+import com.sismics.reader.core.util.ArticleSanitizer;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
@@ -140,6 +137,8 @@ public class FeedService extends AbstractScheduledService {
         for (Article article : articleList) {
             guidIn.add(article.getGuid());
         }
+        
+        ArticleSanitizer sanitizer = new ArticleSanitizer(feed.getUrl());
         ArticleDao articleDao = new ArticleDao();
         if (!guidIn.isEmpty()) {
             ArticleCriteria articleCriteria = new ArticleCriteria();
@@ -153,7 +152,7 @@ public class FeedService extends AbstractScheduledService {
                 article.setUrl(newArticle.getUrl());
                 article.setTitle(newArticle.getTitle());
                 article.setCreator(newArticle.getCreator());
-                article.setDescription(sanitize(newArticle.getDescription()));
+                article.setDescription(sanitizer.sanitize(newArticle.getDescription()));
                 article.setCommentUrl(newArticle.getCommentUrl());
                 article.setCommentCount(newArticle.getCommentCount());
                 article.setEnclosureUrl(newArticle.getEnclosureUrl());
@@ -168,7 +167,7 @@ public class FeedService extends AbstractScheduledService {
         // Create new articles
         for (Article article : articleMap.values()) {
             article.setFeedId(feed.getId());
-            article.setDescription(sanitize(article.getDescription()));
+            article.setDescription(sanitizer.sanitize(article.getDescription()));
             if (article.getPublicationDate() == null) {
                 article.setPublicationDate(new Date());
             }
@@ -183,35 +182,6 @@ public class FeedService extends AbstractScheduledService {
         return feed.getId();
     }
     
-    /**
-     * Sanitize HTML description : removes iframes, JS etc.
-     * 
-     * @param html HTML to sanitize
-     * @return Sanitized HTML
-     */
-    private String sanitize(String html) {
-        // Allow YouTube iframes
-        PolicyFactory videoPolicyFactory = new HtmlPolicyBuilder()
-                .allowStandardUrlProtocols()
-                .allowElements("iframe")
-                .allowAttributes("src")
-                .matching(Pattern.compile("http://(www.)?youtube.com/embed/.+"))
-                .onElements("iframe")
-                .disallowWithoutAttributes("iframe")
-                .toFactory();
-
-        PolicyFactory policy = Sanitizers.BLOCKS
-                .and(Sanitizers.FORMATTING)
-                .and(Sanitizers.IMAGES)
-                .and(Sanitizers.LINKS)
-                .and(Sanitizers.STYLES)
-                .and(videoPolicyFactory);
-        
-        String safeHtml = policy.sanitize(html);
-        
-        return safeHtml;
-    }
-
     /**
      * Parse a page containing a RSS or Atom feed, or HTML linking to a feed.
      * 

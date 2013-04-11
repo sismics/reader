@@ -17,6 +17,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.sismics.reader.core.util.StreamUtil;
+import com.sismics.reader.core.util.UrlUtil;
 
 /**
  * HTML parser used to look for RSS / Atom feeds.
@@ -82,34 +83,15 @@ public class RssExtractor extends DefaultHandler {
             if ("alternate".equalsIgnoreCase(rel)) {
                 try {
                     if ("application/rss+xml".equalsIgnoreCase(type)) {
-                        feedList.add(completeUrl(href));
+                        feedList.add(UrlUtil.completeUrl(url.toString(), href));
                     } else if ("application/atom+xml".equalsIgnoreCase(type)) {
-                        feedList.add(completeUrl(href));
+                        feedList.add(UrlUtil.completeUrl(url.toString(), href));
                     }
                 } catch (MalformedURLException e) {
                     log.error(MessageFormat.format("Error parsing URL, extracted href: {0}", href), e);
                 }
             }
             return;
-        }
-    }
-    
-    /**
-     * Completes relative URLs / validates URLs.
-     * 
-     * @param href URL to complete
-     * @return Completed and validated URL
-     * @throws MalformedURLException
-     */
-    private String completeUrl(String href) throws MalformedURLException {
-        if (!href.toLowerCase().startsWith("http")) {
-            if (!href.startsWith("/")) {
-                href = "/" + href;
-            }
-            URL rssUrl = new URL(url.getProtocol(), url.getHost(), url.getPort(), href);
-            return rssUrl.toString();
-        } else {
-            return new URL(href).toString();
         }
     }
     

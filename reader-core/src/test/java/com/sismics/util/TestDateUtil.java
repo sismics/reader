@@ -6,6 +6,7 @@ import org.junit.Test;
 
 /**
  * Test of the date utilities.
+ * 
  * @author jtremeaux
  */
 public class TestDateUtil {
