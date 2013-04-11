@@ -13,6 +13,7 @@ var r = {
   search: {},
   settings: {},
   wizard: {},
+  theme: {},
   util: {}
 };
 
@@ -51,6 +52,7 @@ r.main.initModules = function() {
   r.search.init();
   r.settings.init();
   r.wizard.init();
+  r.theme.init();
   
   // First page
   if (r.user.userInfo.is_admin && r.user.userInfo.first_connection) {
