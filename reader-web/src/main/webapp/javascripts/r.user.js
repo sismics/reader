@@ -39,6 +39,11 @@ r.user.boot = function() {
     url: r.util.url.user_info,
     type: 'GET',
     done: function(data) {
+      // Default password warning
+      if (data.is_default_password) {
+        $('#default-password').show();
+      }
+      
       if (data.anonymous) {
         // Current user is anonymous, displaying login
         $('#login-page').show();

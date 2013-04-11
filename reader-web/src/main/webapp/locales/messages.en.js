@@ -1,5 +1,9 @@
 {
   "app": "Sismics Reader",
+  "defaultpassword": {
+    "warning": "You haven't changed your default Reader admin password, it's a security risk!",
+    "dismiss": "Dismiss"
+  },
   "subscription": {
     "latest": "Latest",
     "unread": "Unread",
@@ -91,6 +95,20 @@
     "nomorearticles": "No more articles",
     "nomoreunreadarticles": "No more unread articles",
     "showall": "Show all"
+  },
+  "wizard": {
+    "title": "Sismics Reader installation wizard",
+    "subtitle": "Just a few setup steps before adding your first feed",
+    "step0explain": "You should change the default admin password, especially if you plan to use your Reader installation on an open network.",
+    "step1explain": "Tick \"UPnP\" if you want Reader to try to open port 8080 on your router.",
+    "step2explain": "It's nearly over! Add your first user and start using Sismics Reader.",
+    "upnp": "UPnP?",
+    "previous": "Previous",
+    "next": "Next",
+    "keepdefaultpassword": "Are you sure to keep the default password? It's a potential security risk!",
+    "passwordconfirmerror": "Password and password confirmation are different",
+    "passwordtooshort": "This password is too short",
+    "installationcompleted": "Installation completed!"
   },
   "locale": {
     "ar": "Arabic",

@@ -78,6 +78,13 @@ r.article.init = function() {
       r.feed.scrollTop(item.position().top + container.scrollTop() + 1, true);
     }
   });
+  
+  // Delegate on link click
+  $('#feed-container').on('click', 'a', function() {
+    $(this).target = '_blank';
+    window.open($(this).prop('href'));
+    return false;
+  });
 };
 
 /**

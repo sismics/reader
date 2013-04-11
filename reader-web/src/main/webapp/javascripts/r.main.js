@@ -53,7 +53,9 @@ r.main.initModules = function() {
   r.wizard.init();
   
   // First page
-  if (window.location.hash.length == 0) {
+  if (r.user.userInfo.is_admin && r.user.userInfo.first_connection) {
+    window.location.hash = '#/wizard/';
+  } else if (window.location.hash.length == 0) {
     window.location.hash = '#/feed/unread';
   }
 };

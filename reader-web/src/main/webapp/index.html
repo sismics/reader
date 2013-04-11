@@ -139,8 +139,47 @@
       </div>
       
       <div id="wizard-container">
-        <p>Startup wizard</p>
-        <p><a href="#/feed/unread">Start</a></p>
+        <h1 data-i18n="wizard.title">Sismics Reader installation wizard</h1>
+        <p data-i18n="wizard.subtitle">Just a few setup steps before adding your first feed</p>
+      
+        <ul>
+          <li data-wizard-container="#wizard-step-0-container" onclick="javascript:r.wizard.changePage(0);">Change admin password</li>
+          <li data-wizard-container="#wizard-step-1-container" onclick="javascript:r.wizard.changePage(1);">Setup network</li>
+          <li data-wizard-container="#wizard-step-2-container" onclick="javascript:r.wizard.changePage(2);">Add first user</li>
+        </ul>
+	      
+        <div class="wizard-container" id="wizard-step-0-container">
+          <p data-i18n="wizard.step0explain">You should change the default admin password, especially if you plan to use your Reader installation on an open network.</p>
+          
+          <form id="wizard-step-0-form">
+            <p><label><span data-i18n="settings.account.edit.password">Password</span> <input name="password" type="password" class="wizard-password-input" /></label></p>
+            <p><label><span data-i18n="settings.account.edit.passwordconfirm">Password (confirm)</span> <input name="password2" type="password" class="wizard-password2-input" /></label></p>
+          </form>
+        </div>
+        
+        <div class="wizard-container" id="wizard-step-1-container">
+          <p data-i18n="wizard.step1explain">Tick "UPnP" if you want Reader to try to open port 8080 on your router.</p>
+          
+          <form id="wizard-step-1-form">
+            <p><label><span data-i18n="wizard.upnp">UPnP?</span> <input name="upnp" type="checkbox" class="wizard-upnp-input" /></label></p>
+          </form>
+        </div>
+        
+        <div class="wizard-container" id="wizard-step-2-container">
+          <p data-i18n="wizard.step2explain">It's nearly over! Add your first user and start using Sismics Reader.</p>
+        
+          <form id="wizard-step-2-form">
+            <p><label><span data-i18n="settings.account.edit.username">Username</span> <input name="username" type="text" class="wizard-username-input" /></label></p>
+            <p><label><span data-i18n="settings.account.edit.email">E-mail</span> <input name="email" type="text" class="wizard-email-input" /></label></p>
+            <p><label><span data-i18n="settings.account.edit.password">Password</span> <input name="password" type="password" class="wizard-password-input" /></label></p>
+            <p><label><span data-i18n="settings.account.edit.passwordconfirm">Password (confirm)</span> <input name="password2" type="password" class="wizard-password2-input" /></label></p>
+          </form>
+        </div>
+        
+        <div id="wizard-navigation">
+          <input id="wizard-navigation-previous" data-i18n="[value]wizard.previous" class="important" type="button" value="Previous" />
+          <input id="wizard-navigation-next" data-i18n="[value]wizard.next" class="important" type="button" value="Next" />
+        </div>
       </div>
     </div>
     
@@ -151,6 +190,12 @@
         <input type="password" id="login-password-input" placeholder="Password" />
         <input class="important" type="submit" id="login-submit-button" value="Login" />
       </form>
+    </div>
+    
+    <!-- Default admin password warning -->
+    <div id="default-password">
+      <span data-i18n="defaultpassword.warning" class="warning">You haven't changed your default Reader admin password, it's a security risk!</span>
+      <span data-i18n="defaultpassword.dismiss" class="dismiss" onclick="javascript:$(this).parent().hide();">Dismiss</span>
     </div>
 
     <!-- Templates -->
