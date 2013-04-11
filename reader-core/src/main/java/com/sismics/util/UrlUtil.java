@@ -1,4 +1,4 @@
-package com.sismics.reader.core.util;
+package com.sismics.util;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,6 +22,13 @@ public class UrlUtil {
         // If the URL is already absolute, just validate
         if (relativeUrl.toLowerCase().startsWith("http")) {
             return new URL(relativeUrl).toString();
+        }
+        
+        // Leading double slash: inherit the current protocol
+        if (relativeUrl.startsWith("//")) {
+            URL base = new URL(baseUrl);
+            URL url = new URL(base.getProtocol() + ":" + relativeUrl);
+            return url.toString();
         }
         
         //TODO use the querypart of baseUrl
