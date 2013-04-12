@@ -29,7 +29,7 @@ public class EnvironmentUtil {
      * 
      * @return Running under Mac OS
      */
-    public static boolean isMac() {
+    public static boolean isMacOs() {
         return OS.indexOf("mac") >= 0;
     }
 

@@ -34,12 +34,12 @@ public class DirectoryUtil {
                     if (!baseDataDir.isDirectory()) {
                         baseDataDir.mkdirs();
                     }
-                } else if (EnvironmentUtil.isWindows()) {
+                } else if (EnvironmentUtil.isUnix()) {
                     baseDataDir = new File("/var/sismicsreader");
                     if (!baseDataDir.isDirectory()) {
                         baseDataDir.mkdirs();
                     }
-                } else if (EnvironmentUtil.isWindows()) {
+                } else if (EnvironmentUtil.isMacOs()) {
                     baseDataDir = new File(EnvironmentUtil.getMacOsUserHome() + "/Library/Application Support/Sismics Reader");
                     if (!baseDataDir.isDirectory()) {
                         baseDataDir.mkdirs();
