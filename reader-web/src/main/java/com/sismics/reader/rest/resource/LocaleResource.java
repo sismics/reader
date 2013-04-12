@@ -29,7 +29,6 @@ public class LocaleResource extends BaseResource {
      * @throws JSONException
      */
     @GET
-    @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response list() throws JSONException {
         LocaleDao localeDao = new LocaleDao();
