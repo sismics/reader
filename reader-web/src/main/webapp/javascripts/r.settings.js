@@ -136,16 +136,37 @@ r.settings.onTabAccount = function(panel, initialize) {
   var form = panel.find('#settings-account-edit-form');
   var emailInput = form.find('.edit-email-input');
   var localeInput = form.find('.edit-locale-input');
+  var themeInput = form.find('.edit-theme-input');
   var passwordInput = form.find('.edit-password-input');
   var password2Input = form.find('.edit-password2-input');
   
   // Initialize values
   emailInput.val(r.user.userInfo.email);
   localeInput.val(r.user.userInfo.locale);
+  themeInput.val(r.user.userInfo.theme);
   passwordInput.val('');
   password2Input.val('');
   
   if (initialize) {
+    // Change theme on select change
+    themeInput.change(function() {
+      r.theme.update($(this).val());
+    });
+    
+    // Populating themes from server
+    var userTheme = r.user.userInfo.theme;
+    r.util.ajax({
+      url: r.util.url.theme_list,
+      type: 'GET',
+      done: function(data) {
+        var html = '';
+        $(data.themes).each(function(i, theme) {
+          html += '<option value="' + theme.id + '"' + (userTheme == theme.id ? ' selected' : '') + '>' +  $.t('theme.' + theme.id) + '</option>';
+        });
+        form.find('.edit-theme-input').html(html);
+      }
+    });
+    
     // Populating locales from server
     var userLocale = r.user.userInfo.locale;
     r.util.ajax({
@@ -179,6 +200,7 @@ r.settings.onTabAccount = function(panel, initialize) {
         // Calling API
         var email = emailInput.val();
         var locale = localeInput.val();
+        var theme =themeInput.val();
         var password = passwordInput.val();
         
         r.util.ajax({
@@ -187,11 +209,13 @@ r.settings.onTabAccount = function(panel, initialize) {
           data: {
             email: email,
             locale: locale,
+            theme: theme,
             password: password
           },
           done: function(data) {
             r.user.userInfo.email = email;
             r.user.userInfo.locale = locale;
+            r.user.userInfo.theme = theme;
             $().toastmessage('showSuccessToast', $.t('settings.account.edit.success'));
           }
         });
