@@ -27,7 +27,8 @@ r.util.url = {
   article_read: 'api/article/{id}/read',
   article_unread: 'api/article/{id}/unread',
   search: 'api/search/{query}',
-  locale_list: 'api/locale/list'
+  locale_list: 'api/locale',
+  theme_list: 'api/theme'
 };
 
 /**

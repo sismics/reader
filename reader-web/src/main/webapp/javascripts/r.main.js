@@ -40,7 +40,7 @@ r.main.initModules = function() {
     useCookie: false,
     getAsync: false,
     resGetPath: 'locales/messages.__lng__.js',
-    debug: true
+    debug: false
   });
   $('html').i18n();
   
