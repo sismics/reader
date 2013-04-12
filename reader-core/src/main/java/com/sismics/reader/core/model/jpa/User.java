@@ -51,7 +51,7 @@ public class User {
     /**
      * Theme.
      */
-    @Column(name = "USE_THEME_C", length = 100)
+    @Column(name = "USE_THEME_C", nullable = false, length = 100)
     private String theme;
     
     /**

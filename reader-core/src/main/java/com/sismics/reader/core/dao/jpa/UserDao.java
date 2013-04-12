@@ -15,6 +15,7 @@ import javax.persistence.Query;
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.google.common.base.Joiner;
+import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.dao.jpa.dto.UserDto;
 import com.sismics.reader.core.model.jpa.User;
 import com.sismics.reader.core.util.jpa.PaginatedList;
@@ -72,6 +73,7 @@ public class UserDao {
         
         user.setCreateDate(new Date());
         user.setPassword(hashPassword(user.getPassword()));
+        user.setTheme(Constants.DEFAULT_THEME_ID);
         em.persist(user);
         
         return user.getId();

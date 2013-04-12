@@ -147,7 +147,7 @@ public class TestUserResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         Assert.assertEquals("alice@reader.com", json.getString("email"));
-        Assert.assertTrue(json.isNull("theme"));
+        Assert.assertEquals("default.less", json.getString("theme"));
         Assert.assertFalse(json.getBoolean("display_title_web"));
         Assert.assertTrue(json.getBoolean("display_title_mobile"));
         Assert.assertTrue(json.getBoolean("display_unread_web"));
