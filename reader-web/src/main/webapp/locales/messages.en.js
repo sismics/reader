@@ -65,7 +65,8 @@
         "theme": "Theme",
         "password": "Password",
         "passwordconfirm": "Password (confirm)",
-        "submit": "edit",
+        "submit": "Save",
+        "cancel": "Cancel",
         "success": "Account preferences updated"
       }
     },

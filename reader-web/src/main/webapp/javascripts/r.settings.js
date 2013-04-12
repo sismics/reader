@@ -148,6 +148,11 @@ r.settings.onTabAccount = function(panel, initialize) {
   password2Input.val('');
   
   if (initialize) {
+    // Cancel button
+    form.find('.edit-cancel-button').click(function() {
+      window.location.hash = '#/feed/unread';
+    });
+    
     // Change theme on select change
     themeInput.change(function() {
       r.theme.update($(this).val());
@@ -200,7 +205,7 @@ r.settings.onTabAccount = function(panel, initialize) {
         // Calling API
         var email = emailInput.val();
         var locale = localeInput.val();
-        var theme =themeInput.val();
+        var theme = themeInput.val();
         var password = passwordInput.val();
         
         r.util.ajax({
