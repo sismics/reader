@@ -70,11 +70,14 @@ public class DirectoryUtil {
      */
     public static File getThemeDirectory() {
         String webappRoot = getWebappRoot();
+        File themeDir = null;
         if (webappRoot != null) {
-            File themeDir = new File(webappRoot + File.separator + "stylesheets" + File.separator + "theme");
-            if (themeDir.isDirectory()) {
-                return themeDir;
-            }
+            themeDir = new File(webappRoot + File.separator + "stylesheets" + File.separator + "theme");
+        } else {
+            themeDir = new File(DirectoryUtil.class.getResource("/stylesheets/theme").getFile());
+        }
+        if (themeDir != null && themeDir.isDirectory()) {
+            return themeDir;
         }
         return null;
     }

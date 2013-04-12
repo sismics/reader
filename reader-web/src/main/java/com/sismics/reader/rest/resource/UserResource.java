@@ -131,6 +131,7 @@ public class UserResource extends BaseResource {
      * 
      * @param password Password
      * @param email E-Mail
+     * @param themeId Theme
      * @param localeId Locale ID
      * @param displayTitleWeb Display only article titles (web application).
      * @param displayTitleMobile Display only article titles (mobile application).
@@ -145,6 +146,7 @@ public class UserResource extends BaseResource {
     public Response update(
         @FormParam("password") String password,
         @FormParam("email") String email,
+        @FormParam("theme") String themeId,
         @FormParam("locale") String localeId,
         @FormParam("display_title_web") Boolean displayTitleWeb,
         @FormParam("display_title_mobile") Boolean displayTitleMobile,
@@ -160,12 +162,16 @@ public class UserResource extends BaseResource {
         password = ValidationUtil.validateLength(password, "password", 8, 50, true);
         email = ValidationUtil.validateLength(email, "email", null, 100, true);
         localeId = ValidationUtil.validateLocale(localeId, "locale", true);
+        themeId = ValidationUtil.validateTheme(themeId, "theme", true);
         
         // Update the user
         UserDao userDao = new UserDao();
         User user = userDao.getActiveByUsername(principal.getName());
         if (email != null) {
             user.setEmail(email);
+        }
+        if (themeId != null) {
+            user.setTheme(themeId);
         }
         if (localeId != null) {
             user.setLocaleId(localeId);
@@ -212,6 +218,7 @@ public class UserResource extends BaseResource {
      * @param username Username
      * @param password Password
      * @param email E-Mail
+     * @param themeId Theme
      * @param localeId Locale ID
      * @param displayTitleWeb Display only article titles (web application).
      * @param displayTitleMobile Display only article titles (mobile application).
@@ -227,6 +234,7 @@ public class UserResource extends BaseResource {
         @PathParam("username") String username,
         @FormParam("password") String password,
         @FormParam("email") String email,
+        @FormParam("theme") String themeId,
         @FormParam("locale") String localeId,
         @FormParam("display_title_web") Boolean displayTitleWeb,
         @FormParam("display_title_mobile") Boolean displayTitleMobile,
@@ -242,6 +250,7 @@ public class UserResource extends BaseResource {
         password = ValidationUtil.validateLength(password, "password", 8, 50, true);
         email = ValidationUtil.validateLength(email, "email", null, 100, true);
         localeId = ValidationUtil.validateLocale(localeId, "locale", true);
+        themeId = ValidationUtil.validateTheme(themeId, "theme", true);
         
         // Check if the user exists
         UserDao userDao = new UserDao();
@@ -253,6 +262,9 @@ public class UserResource extends BaseResource {
         // Update the user
         if (email != null) {
             user.setEmail(email);
+        }
+        if (themeId != null) {
+            user.setTheme(themeId);
         }
         if (localeId != null) {
             user.setLocaleId(localeId);
@@ -486,6 +498,7 @@ public class UserResource extends BaseResource {
             User user = userDao.getById(principal.getId());
             response.put("username", user.getUsername());
             response.put("email", user.getEmail());
+            response.put("theme", user.getTheme());
             response.put("locale", user.getLocaleId());
             response.put("display_title_web", user.isDisplayTitleWeb());
             response.put("display_title_mobile", user.isDisplayTitleMobile());
@@ -500,7 +513,7 @@ public class UserResource extends BaseResource {
     }
 
     /**
-     * Returns the public information about a user.
+     * Returns the information about a user.
      * 
      * @param username Username
      * @return Response
@@ -525,6 +538,7 @@ public class UserResource extends BaseResource {
         
         response.put("username", user.getUsername());
         response.put("email", user.getEmail());
+        response.put("theme", user.getTheme());
         response.put("locale", user.getLocaleId());
         
         return Response.ok().entity(response).build();

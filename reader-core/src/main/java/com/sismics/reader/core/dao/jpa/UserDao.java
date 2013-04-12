@@ -94,6 +94,7 @@ public class UserDao {
         // Update the user
         userFromDb.setLocaleId(user.getLocaleId());
         userFromDb.setEmail(user.getEmail());
+        userFromDb.setTheme(user.getTheme());
         userFromDb.setDisplayTitleWeb(user.isDisplayTitleWeb());
         userFromDb.setDisplayTitleMobile(user.isDisplayTitleMobile());
         userFromDb.setDisplayUnreadWeb(user.isDisplayUnreadWeb());

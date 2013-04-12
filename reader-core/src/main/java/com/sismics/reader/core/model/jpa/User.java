@@ -49,6 +49,12 @@ public class User {
     private String email;
     
     /**
+     * Theme.
+     */
+    @Column(name = "USE_THEME_C", length = 100)
+    private String theme;
+    
+    /**
      * Display only article titles (web application).
      */
     @Column(name = "USE_DISPLAYTITLEWEB_B", nullable = false)
@@ -178,6 +184,24 @@ public class User {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * Getter de theme.
+     *
+     * @return theme
+     */
+    public String getTheme() {
+        return theme;
+    }
+
+    /**
+     * Setter de theme.
+     *
+     * @param theme theme
+     */
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
 
     /**

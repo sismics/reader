@@ -1,0 +1,93 @@
+@main-color: #007aa2;
+@main-color-active: #0099cc;
+
+@import "../_mixins.less";
+
+a:link, a:visited {
+  color: @main-color;
+}
+
+a:hover, a:active {
+  color: @main-color-active;
+}
+
+#feed {
+  #feed-container {
+    &.list {
+      > .feed-item {
+        &.selected {
+	        border-left: 1px solid @main-color;
+	      }
+      
+        .collapsed {
+          .container {
+            > .feed-item-collapsed-subscription {
+              color: @main-color;
+            }
+          }
+        }
+        
+        .header {
+	        .feed-item-title {
+	          color: @main-color;
+	        }
+	      }
+      }
+    }
+  }
+  
+  #settings-container {
+    h1 {
+      color: @main-color;
+    }
+  }
+  
+  #wizard-container {
+    > h1 {
+      color: @main-color;
+    }
+    
+    > ul {
+      li {
+        &:hover {
+          background: @main-color;
+        }
+      }
+    }
+  }
+}
+
+#subscriptions {
+	background: #fff;
+	
+  h1 {
+    border-top: 1px solid @main-color;
+    border-bottom: 1px solid @main-color;
+    color: #111;
+  }
+}
+
+.qtip-drop-menu {
+  ul {
+    li {
+      &.active {
+        background: @main-color !important;
+      }
+    }
+  }
+}
+
+input[type="button"].important, input[type="submit"].important, .button.important {
+  .linear-gradient(top, @main-color-active, @main-color);
+  
+  &:hover {
+    .linear-gradient(top, @main-color, @main-color-active);
+    border: 1px solid #0086b2;
+  }
+}
+
+input[type="text"], input[type="password"], select {
+  &:focus {
+    border: 1px solid @main-color;
+  }
+}
