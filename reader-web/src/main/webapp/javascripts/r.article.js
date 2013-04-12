@@ -191,6 +191,24 @@ r.article.build = function(article, classes) {
     item.find('.feed-item-star').addClass('starred');
   }
   
+  // Enclosure
+  if (article.enclosure) {
+    var html = '<a href="' + article.enclosure.url + '" target="_blank">';
+    if (article.enclosure.type) {
+      var type = article.enclosure.type.split('/');
+      html += '<img src="images/mime/' + type[0] + '.png" title="' + article.enclosure.type + '" />';
+    } else {
+      html += '<img src="images/mime/text.png" />';
+    }
+    var url = article.enclosure.url.split('/');
+    html += ' ' + url[url.length - 1];
+    if (article.enclosure.length) {
+      html += ' (' + Math.round(article.enclosure.length / 104858) / 10 + 'MB)';
+    }
+    html += '</a>';
+    item.find('.feed-item-enclosure').html(html);
+  }
+  
   // Collapsed fields
   item.find('.feed-item-collapsed-subscription').html(article.subscription.title);
   item.find('.feed-item-collapsed-title').html(article.title);
