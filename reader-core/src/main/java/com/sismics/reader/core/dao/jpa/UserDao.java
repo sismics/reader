@@ -15,6 +15,7 @@ import javax.persistence.Query;
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.google.common.base.Joiner;
+import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.dao.jpa.dto.UserDto;
 import com.sismics.reader.core.model.jpa.User;
 import com.sismics.reader.core.util.jpa.PaginatedList;
@@ -41,7 +42,6 @@ public class UserDao {
         q.setParameter("username", username);
         try {
             User user = (User) q.getSingleResult();
-            user.setLastLoginDate(new Date());
             if (!BCrypt.checkpw(password, user.getPassword())) {
                 return null;
             }
@@ -73,6 +73,7 @@ public class UserDao {
         
         user.setCreateDate(new Date());
         user.setPassword(hashPassword(user.getPassword()));
+        user.setTheme(Constants.DEFAULT_THEME_ID);
         em.persist(user);
         
         return user.getId();
@@ -95,6 +96,7 @@ public class UserDao {
         // Update the user
         userFromDb.setLocaleId(user.getLocaleId());
         userFromDb.setEmail(user.getEmail());
+        userFromDb.setTheme(user.getTheme());
         userFromDb.setDisplayTitleWeb(user.isDisplayTitleWeb());
         userFromDb.setDisplayTitleMobile(user.isDisplayTitleMobile());
         userFromDb.setDisplayUnreadWeb(user.isDisplayUnreadWeb());
@@ -208,7 +210,7 @@ public class UserDao {
      */
     public void findAll(PaginatedList<UserDto> paginatedList, SortCriteria sortCriteria) {
         Map<String, Object> parameterMap = new HashMap<String, Object>();
-        StringBuilder sb = new StringBuilder("select u.USE_ID_C as c0, u.USE_USERNAME_C as c1, u.USE_EMAIL_C as c2, u.USE_CREATEDATE_D as c3, u.USE_LASTLOGINDATE_D as c4, u.USE_IDLOCALE_C as c5");
+        StringBuilder sb = new StringBuilder("select u.USE_ID_C as c0, u.USE_USERNAME_C as c1, u.USE_EMAIL_C as c2, u.USE_CREATEDATE_D as c3, u.USE_IDLOCALE_C as c4");
         sb.append(" from T_USER u ");
         
         // Add search criterias
@@ -232,10 +234,6 @@ public class UserDao {
             userDto.setUsername((String) o[i++]);
             userDto.setEmail((String) o[i++]);
             userDto.setCreateTimestamp(((Timestamp) o[i++]).getTime());
-            Timestamp lastLoginTimestamp = ((Timestamp) o[i++]);
-            if (lastLoginTimestamp != null) {
-                userDto.setLastLoginTimestamp(lastLoginTimestamp.getTime());
-            }
             userDto.setLocaleId((String) o[i++]);
             userDtoList.add(userDto);
         }

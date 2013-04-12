@@ -13,6 +13,8 @@ import org.owasp.html.Sanitizers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sismics.util.UrlUtil;
+
 /**
  * Sanitize the contents of an article : removes iframes, JS etc.
  *

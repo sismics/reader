@@ -17,7 +17,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.sismics.reader.core.util.StreamUtil;
-import com.sismics.reader.core.util.UrlUtil;
+import com.sismics.util.UrlUtil;
 
 /**
  * HTML parser used to look for RSS / Atom feeds.

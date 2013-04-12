@@ -1,6 +1,7 @@
 package com.sismics.util.filter;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
@@ -14,9 +15,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.joda.time.DateTimeZone;
 
 import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.dao.jpa.AuthenticationTokenDao;
@@ -53,9 +54,14 @@ public class TokenBasedSecurityFilter implements Filter {
     public static final String PRINCIPAL_ATTRIBUTE = "principal";
     
     /**
-     * Lifetime of the authentication token in seconds.
+     * Lifetime of the authentication token in seconds, since login.
      */
-    public static final int TOKEN_LIFETIME = 3600 * 24 * 365 * 20;
+    public static final int TOKEN_LONG_LIFETIME = 3600 * 24 * 365 * 20;
+    
+    /**
+     * Lifetime of the authentication token in seconds, since last connection.
+     */
+    public static final int TOKEN_SESSION_LIFETIME = 3600 * 24;
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -91,12 +97,16 @@ public class TokenBasedSecurityFilter implements Filter {
             injectAnonymousUser(request);
         } else {
             // Check if the token is still valid
-            if (new Date().getTime() >= authenticationToken.getCreationDate().getTime() + ((long) TOKEN_LIFETIME) * 1000L) {
+            if (isTokenExpired(authenticationToken)) {
                 try {
+                    injectAnonymousUser(request);
+
+                    // Destroy the expired token
                     authenticationTokenDao.delete(authToken);
                 } catch (Exception e) {
-                    injectAnonymousUser(request);
-                    log.error("Error deleting authentication token: " + authToken, e);
+                    if (log.isErrorEnabled()) {
+                        log.error(MessageFormat.format("Error deleting authentication token {0} ", authToken), e);
+                    }
                 }
             } else {
                 // Check if the user is still valid
@@ -104,6 +114,9 @@ public class TokenBasedSecurityFilter implements Filter {
                 User user = userDao.getById(authenticationToken.getUserId());
                 if (user != null && user.getDeleteDate() == null) {
                     injectAuthenticatedUser(request, user);
+                    
+                    // Update the last connection date
+                    authenticationTokenDao.updateLastConnectionDate(authenticationToken.getId());
                 } else {
                     injectAnonymousUser(request);
                 }
@@ -113,6 +126,24 @@ public class TokenBasedSecurityFilter implements Filter {
         filterChain.doFilter(request, response);
     }
     
+    /**
+     * Returns true if the token is expired.
+     * 
+     * @param authenticationToken Authentication token
+     * @return Token expired
+     */
+    private boolean isTokenExpired(AuthenticationToken authenticationToken) {
+        final long now = new Date().getTime();
+        final long creationDate = authenticationToken.getCreationDate().getTime();
+        if (authenticationToken.isLongLasted()) {
+            return now >= creationDate + ((long) TOKEN_LONG_LIFETIME) * 1000L;
+        } else {
+            long date = authenticationToken.getLastConnectionDate() != null ?
+                    authenticationToken.getLastConnectionDate().getTime() : creationDate;
+            return now >= date + ((long) TOKEN_SESSION_LIFETIME) * 1000L;
+        }
+    }
+
     /**
      * Inject an authenticated user into the request attributes.
      * 

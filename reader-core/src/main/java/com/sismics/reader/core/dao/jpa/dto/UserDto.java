@@ -30,11 +30,6 @@ public class UserDto {
      * Creation date of this user.
      */
     private Long createTimestamp;
-    
-    /**
-     * Last login date of this user.
-     */
-    private Long lastLoginTimestamp;
 
     /**
      * Getter of id.
@@ -124,23 +119,5 @@ public class UserDto {
      */
     public void setCreateTimestamp(Long createTimestamp) {
         this.createTimestamp = createTimestamp;
-    }
-
-    /**
-     * Getter of lastLoginTimestamp.
-     *
-     * @return lastLoginTimestamp
-     */
-    public Long getLastLoginTimestamp() {
-        return lastLoginTimestamp;
-    }
-
-    /**
-     * Setter of lastLoginTimestamp.
-     *
-     * @param lastLoginTimestamp lastLoginTimestamp
-     */
-    public void setLastLoginTimestamp(Long lastLoginTimestamp) {
-        this.lastLoginTimestamp = lastLoginTimestamp;
     }
 }

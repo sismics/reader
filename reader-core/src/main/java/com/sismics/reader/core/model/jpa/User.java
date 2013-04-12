@@ -49,6 +49,12 @@ public class User {
     private String email;
     
     /**
+     * Theme.
+     */
+    @Column(name = "USE_THEME_C", nullable = false, length = 100)
+    private String theme;
+    
+    /**
      * Display only article titles (web application).
      */
     @Column(name = "USE_DISPLAYTITLEWEB_B", nullable = false)
@@ -83,12 +89,6 @@ public class User {
      */
     @Column(name = "USE_CREATEDATE_D", nullable = false)
     private Date createDate;
-    
-    /**
-     * Last login date.
-     */
-    @Column(name = "USE_LASTLOGINDATE_D")
-    private Date lastLoginDate;
     
     /**
      * Deletion date.
@@ -184,6 +184,24 @@ public class User {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * Getter de theme.
+     *
+     * @return theme
+     */
+    public String getTheme() {
+        return theme;
+    }
+
+    /**
+     * Setter de theme.
+     *
+     * @param theme theme
+     */
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
 
     /**
@@ -292,24 +310,6 @@ public class User {
      */
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    /**
-     * Getter of lastLoginDate.
-     *
-     * @return lastLoginDate
-     */
-    public Date getLastLoginDate() {
-        return lastLoginDate;
-    }
-
-    /**
-     * Setter of lastLoginDate.
-     *
-     * @param lastLoginDate lastLoginDate
-     */
-    public void setLastLoginDate(Date lastLoginDate) {
-        this.lastLoginDate = lastLoginDate;
     }
 
     /**

@@ -12,18 +12,17 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-import com.sismics.reader.core.dao.jpa.LocaleDao;
-import com.sismics.reader.core.model.jpa.Locale;
+import com.sismics.reader.core.dao.file.theme.ThemeDao;
 
 /**
- * Locale REST resources.
+ * Theme REST resources.
  * 
  * @author jtremeaux
  */
-@Path("/locale")
-public class LocaleResource extends BaseResource {
+@Path("/theme")
+public class ThemeResource extends BaseResource {
     /**
-     * Returns the list of all locales.
+     * Returns the list of all themes.
      * 
      * @return Response
      * @throws JSONException
@@ -31,16 +30,16 @@ public class LocaleResource extends BaseResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response list() throws JSONException {
-        LocaleDao localeDao = new LocaleDao();
-        List<Locale> localeList = localeDao.findAll();
+        ThemeDao themeDao = new ThemeDao();
+        List<String> themeList = themeDao.findAll();
         JSONObject response = new JSONObject();
         List<JSONObject> items = new ArrayList<JSONObject>();
-        for (Locale locale : localeList) {
+        for (String theme : themeList) {
             JSONObject item = new JSONObject();
-            item.put("id", locale.getId());
+            item.put("id", theme);
             items.add(item);
         }
-        response.put("locales", items);
+        response.put("themes", items);
         return Response.ok().entity(response).build();
     }
 }

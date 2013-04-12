@@ -78,5 +78,11 @@ public class TestSecurity extends BaseJerseyTest {
         response = userResource.post(ClientResponse.class, postParams);
         json = response.getEntity(JSONObject.class);
         Assert.assertEquals(Status.FORBIDDEN, Status.fromStatusCode(response.getStatus()));
+
+        // User testsecurity logs in with a long lived session
+        testSecurityAuthenticationToken = clientUtil.login("testsecurity", "12345678", true);
+
+        // User testsecurity logs out
+        clientUtil.logout(testSecurityAuthenticationToken);
     }
 }

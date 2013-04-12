@@ -131,6 +131,7 @@ public class UserResource extends BaseResource {
      * 
      * @param password Password
      * @param email E-Mail
+     * @param themeId Theme
      * @param localeId Locale ID
      * @param displayTitleWeb Display only article titles (web application).
      * @param displayTitleMobile Display only article titles (mobile application).
@@ -145,6 +146,7 @@ public class UserResource extends BaseResource {
     public Response update(
         @FormParam("password") String password,
         @FormParam("email") String email,
+        @FormParam("theme") String themeId,
         @FormParam("locale") String localeId,
         @FormParam("display_title_web") Boolean displayTitleWeb,
         @FormParam("display_title_mobile") Boolean displayTitleMobile,
@@ -160,12 +162,16 @@ public class UserResource extends BaseResource {
         password = ValidationUtil.validateLength(password, "password", 8, 50, true);
         email = ValidationUtil.validateLength(email, "email", null, 100, true);
         localeId = ValidationUtil.validateLocale(localeId, "locale", true);
+        themeId = ValidationUtil.validateTheme(themeId, "theme", true);
         
         // Update the user
         UserDao userDao = new UserDao();
         User user = userDao.getActiveByUsername(principal.getName());
         if (email != null) {
             user.setEmail(email);
+        }
+        if (themeId != null) {
+            user.setTheme(themeId);
         }
         if (localeId != null) {
             user.setLocaleId(localeId);
@@ -212,6 +218,7 @@ public class UserResource extends BaseResource {
      * @param username Username
      * @param password Password
      * @param email E-Mail
+     * @param themeId Theme
      * @param localeId Locale ID
      * @param displayTitleWeb Display only article titles (web application).
      * @param displayTitleMobile Display only article titles (mobile application).
@@ -227,6 +234,7 @@ public class UserResource extends BaseResource {
         @PathParam("username") String username,
         @FormParam("password") String password,
         @FormParam("email") String email,
+        @FormParam("theme") String themeId,
         @FormParam("locale") String localeId,
         @FormParam("display_title_web") Boolean displayTitleWeb,
         @FormParam("display_title_mobile") Boolean displayTitleMobile,
@@ -242,6 +250,7 @@ public class UserResource extends BaseResource {
         password = ValidationUtil.validateLength(password, "password", 8, 50, true);
         email = ValidationUtil.validateLength(email, "email", null, 100, true);
         localeId = ValidationUtil.validateLocale(localeId, "locale", true);
+        themeId = ValidationUtil.validateTheme(themeId, "theme", true);
         
         // Check if the user exists
         UserDao userDao = new UserDao();
@@ -253,6 +262,9 @@ public class UserResource extends BaseResource {
         // Update the user
         if (email != null) {
             user.setEmail(email);
+        }
+        if (themeId != null) {
+            user.setTheme(themeId);
         }
         if (localeId != null) {
             user.setLocaleId(localeId);
@@ -317,11 +329,12 @@ public class UserResource extends BaseResource {
     }
 
     /**
-     * This resource is used to authenticate the user and create a long lasted ession.
+     * This resource is used to authenticate the user and create a user ession.
      * The "session" is only used to identify the user, no other data is stored in the session.
      * 
      * @param username Username
      * @param password Password
+     * @param longLasted Remember the user next time, create a long lasted session.
      * @return Response
      */
     @POST
@@ -329,7 +342,8 @@ public class UserResource extends BaseResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(
         @FormParam("username") String username,
-        @FormParam("password") String password) throws JSONException {
+        @FormParam("password") String password,
+        @FormParam("remember") boolean longLasted) throws JSONException {
         
         // Validate the input data
         username = StringUtils.strip(username);
@@ -346,10 +360,15 @@ public class UserResource extends BaseResource {
         AuthenticationTokenDao authenticationTokenDao = new AuthenticationTokenDao();
         AuthenticationToken authenticationToken = new AuthenticationToken();
         authenticationToken.setUserId(userId);
+        authenticationToken.setLongLasted(longLasted);
         String token = authenticationTokenDao.create(authenticationToken);
+        
+        // Cleanup old session tokens
+        authenticationTokenDao.deleteOldSessionToken(userId);
 
         JSONObject response = new JSONObject();
-        NewCookie cookie = new NewCookie(TokenBasedSecurityFilter.COOKIE_NAME, token, "/", null, null, TokenBasedSecurityFilter.TOKEN_LIFETIME, false);
+        int maxAge = longLasted ? TokenBasedSecurityFilter.TOKEN_LONG_LIFETIME : -1;
+        NewCookie cookie = new NewCookie(TokenBasedSecurityFilter.COOKIE_NAME, token, "/", null, null, maxAge, false);
         return Response.ok().entity(response).cookie(cookie).build();
     }
 
@@ -479,9 +498,7 @@ public class UserResource extends BaseResource {
             User user = userDao.getById(principal.getId());
             response.put("username", user.getUsername());
             response.put("email", user.getEmail());
-            if (user.getLastLoginDate() != null) {
-                response.put("last_login_date", user.getLastLoginDate().getTime());
-            }
+            response.put("theme", user.getTheme());
             response.put("locale", user.getLocaleId());
             response.put("display_title_web", user.isDisplayTitleWeb());
             response.put("display_title_mobile", user.isDisplayTitleMobile());
@@ -496,7 +513,7 @@ public class UserResource extends BaseResource {
     }
 
     /**
-     * Returns the public information about a user.
+     * Returns the information about a user.
      * 
      * @param username Username
      * @return Response
@@ -521,6 +538,7 @@ public class UserResource extends BaseResource {
         
         response.put("username", user.getUsername());
         response.put("email", user.getEmail());
+        response.put("theme", user.getTheme());
         response.put("locale", user.getLocaleId());
         
         return Response.ok().entity(response).build();
@@ -563,9 +581,6 @@ public class UserResource extends BaseResource {
             user.put("username", userDto.getUsername());
             user.put("email", userDto.getEmail());
             user.put("create_date", userDto.getCreateTimestamp());
-            if (userDto.getLastLoginTimestamp() != null) {
-                user.put("last_login_date", userDto.getLastLoginTimestamp());
-            }
             users.add(user);
         }
         response.put("total", paginatedList.getResultCount());

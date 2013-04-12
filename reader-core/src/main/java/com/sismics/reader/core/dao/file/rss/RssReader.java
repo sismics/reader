@@ -45,8 +45,8 @@ public class RssReader extends DefaultHandler {
             DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss Z").withOffsetParsed().withLocale(Locale.ENGLISH));
     
     private static final List<DateTimeFormatter> DF_ATOM = ImmutableList.of(
-            DateTimeFormat.forPattern("yyyy-mm-dd'T'HH:mm:ssZ").withOffsetParsed().withLocale(Locale.ENGLISH),
-            DateTimeFormat.forPattern("yyyy-mm-dd'T'HH:mm:ss.SSSZ").withOffsetParsed().withLocale(Locale.ENGLISH));
+            DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").withOffsetParsed().withLocale(Locale.ENGLISH),
+            DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withOffsetParsed().withLocale(Locale.ENGLISH));
 
     /**
      * Contents of the current element.
@@ -241,15 +241,18 @@ public class RssReader extends DefaultHandler {
             pushElement(Element.ITEM_CONTENT_ENCODED);
         } else if (rss && currentElement == Element.ITEM && "enclosure".equalsIgnoreCase(localName)) {
             pushElement(Element.ITEM_ENCLOSURE);
-            article.setEnclosureUrl(attributes.getValue("url"));
-            Integer enclosureLength = null;
-            try {
-                enclosureLength = Integer.valueOf(attributes.getValue("length"));
-            } catch (Exception e) {
-                log.error("Error parsing enclosure length", e);
+            String enclosureUrl = StringUtils.trim(attributes.getValue("url"));
+            if (!StringUtils.isBlank(enclosureUrl)) {
+                article.setEnclosureUrl(enclosureUrl);
+                Integer enclosureLength = null;
+                try {
+                    enclosureLength = Integer.valueOf(attributes.getValue("length"));
+                } catch (Exception e) {
+                    log.error("Error parsing enclosure length", e);
+                }
+                article.setEnclosureLength(enclosureLength);
+                article.setEnclosureType(StringUtils.trim(attributes.getValue("type")));
             }
-            article.setEnclosureLength(enclosureLength);
-            article.setEnclosureType(attributes.getValue("type"));
         } else if (rss && currentElement == Element.ITEM && "pubDate".equalsIgnoreCase(localName)) {
             pushElement(Element.ITEM_PUB_DATE);
         } else if (atom && currentElement == Element.FEED && "title".equalsIgnoreCase(localName)) {
@@ -380,7 +383,7 @@ public class RssReader extends DefaultHandler {
         for (DateTimeFormatter df : dateTimeFormatterList) {
             try {
                 publicationDate = df.parseDateTime(dateAsString).toDate();
-                break;
+                return publicationDate;
             } catch (IllegalArgumentException e) {
                 // NOP
             }
@@ -390,14 +393,14 @@ public class RssReader extends DefaultHandler {
             for (DateTimeFormatter df : dateTimeFormatterList) {
                 try {
                     publicationDate = df.parseDateTime(dateWithOffset).toDate();
-                    break;
+                    return publicationDate;
                 } catch (IllegalArgumentException e) {
                     // NOP
                 }
             }
         }
         
-        if (publicationDate == null && log.isWarnEnabled()) {
+        if (log.isWarnEnabled()) {
             log.warn(MessageFormat.format("Error parsing comment date: {0}", dateAsString));
         }
         return publicationDate;

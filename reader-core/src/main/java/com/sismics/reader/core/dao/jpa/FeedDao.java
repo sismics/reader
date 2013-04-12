@@ -89,6 +89,12 @@ public class FeedDao {
         Map<String, Object> parameterMap = new HashMap<String, Object>();
         
         StringBuilder sb = new StringBuilder("select f.FED_ID_C as id, f.FED_RSSURL_C ");
+        if (criteria.isWithUserSubscription()) {
+            sb.append(", (select count(fs.FES_ID_C)");
+            sb.append("     from T_FEED_SUBSCRIPTION fs");
+            sb.append("     where fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_DELETEDATE_D is null)");
+            sb.append("  as feedSubscriptionCount");
+        }
         sb.append(" from T_FEED f ");
         
         // Adds search criteria
@@ -96,6 +102,9 @@ public class FeedDao {
         if (criteria.getFeedUrl() != null) {
             criteriaList.add("f.FED_URL_C = :feedUrl");
             parameterMap.put("feedUrl", criteria.getFeedUrl());
+        }
+        if (criteria.isWithUserSubscription()) {
+            criteriaList.add("feedSubscriptionCount > 0");
         }
         criteriaList.add("f.FED_DELETEDATE_D is null");
         

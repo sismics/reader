@@ -2,6 +2,7 @@ package com.sismics.rest.util;
 
 import java.text.MessageFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
@@ -9,6 +10,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.joda.time.DateTime;
 
 import com.google.common.base.Strings;
+import com.sismics.reader.core.dao.file.theme.ThemeDao;
 import com.sismics.reader.core.dao.jpa.LocaleDao;
 import com.sismics.reader.core.model.jpa.Locale;
 import com.sismics.rest.exception.ClientException;
@@ -182,5 +184,31 @@ public class ValidationUtil {
             throw new ClientException("ValidationError", "Locale not found: " + localeId);
         }
         return localeId;
+    }
+
+    /**
+     * Validates a theme.
+     * 
+     * @param themeId ID of the theme to validate
+     * @param name Name of the parameter
+     * @return String without white spaces
+     * @param nullable True if the string can be empty or null
+     * @throws ClientException
+     */
+    public static String validateTheme(String themeId, String name, boolean nullable) throws JSONException {
+        themeId = StringUtils.strip(themeId);
+        if (StringUtils.isEmpty(themeId)) {
+            if (!nullable) {
+                throw new ClientException("ValidationError", MessageFormat.format("{0} is required", name));
+            } else {
+                return null;
+            }
+        }
+        ThemeDao themeDao = new ThemeDao();
+        List<String> themeList = themeDao.findAll();
+        if (!themeList.contains(themeId)) {
+            throw new ClientException("ValidationError", "Theme not found: " + themeId);
+        }
+        return themeId;
     }
 }

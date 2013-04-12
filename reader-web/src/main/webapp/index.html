@@ -34,7 +34,7 @@
 
   	<script>
     	less = {
-    		env: 'development', // or "production"
+    		env: 'production', // or "production"
     		async: false,       // load imports async
     		fileAsync: false,   // load imports async when in a page under a file protocol
     		poll: 1000,         // when in watch mode, time in ms between polls
@@ -105,9 +105,13 @@
             <form id="settings-account-edit-form">
               <p><label><span data-i18n="settings.account.edit.email">E-mail</span> <input name="email" type="text" class="edit-email-input" /></label></p>
               <p><label><span data-i18n="settings.account.edit.locale">Locale</span> <select name="locale" class="edit-locale-input"></select></label></p>
+              <p><label><span data-i18n="settings.account.edit.theme">Theme</span> <select name="theme" class="edit-theme-input"></select></label></p>
               <p><label><span data-i18n="settings.account.edit.password">Password</span> <input name="password" type="password" class="edit-password-input" /></label></p>
               <p><label><span data-i18n="settings.account.edit.passwordconfirm">Password (confirm)</span> <input name="password2" type="password" class="edit-password2-input" /></label></p>
-              <p><input class="important" type="submit" value="Edit" data-i18n="[value]settings.account.edit.submit" /></p>
+              <p>
+                <input class="important" type="submit" value="Save" data-i18n="[value]settings.account.edit.submit" />
+                <input class="important edit-cancel-button" type="button" value="Cancel" data-i18n="[value]settings.account.edit.cancel" />
+              </p>
             </form>
           </div>
           <div id="settings-tab-import">
@@ -277,6 +281,7 @@
           <div class="feed-item-star"></div>
           <div class="feed-item-unread"><label><input type="checkbox" /> <span data-i18n="article.markasunread">Mark as unread</span></label></div>
           <div class="feed-item-comments"></div>
+          <div class="feed-item-enclosure"></div>
         </div>
       </div>
       

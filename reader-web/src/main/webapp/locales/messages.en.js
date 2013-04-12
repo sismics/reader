@@ -62,9 +62,11 @@
         "title": "Account Preferences",
         "username": "Username",
         "locale": "Locale",
+        "theme": "Theme",
         "password": "Password",
         "passwordconfirm": "Password (confirm)",
-        "submit": "edit",
+        "submit": "Save",
+        "cancel": "Cancel",
         "success": "Account preferences updated"
       }
     },
@@ -110,6 +112,14 @@
     "passwordconfirmerror": "Password and password confirmation are different",
     "passwordtooshort": "This password is too short",
     "installationcompleted": "Installation completed!"
+  },
+  "theme": {
+    "default": {
+      "less": "Default"
+    },
+    "highcontrast": {
+      "less": "High contrast"
+    }
   },
   "locale": {
     "ar": "Arabic",

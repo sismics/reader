@@ -65,7 +65,9 @@ public class FeedService extends AbstractScheduledService {
             @Override
             public void run() {
                 FeedDao feedDao = new FeedDao();
-                List<FeedDto> feedList = feedDao.findByCriteria(new FeedCriteria());
+                FeedCriteria feedCriteria = new FeedCriteria();
+                feedCriteria.setWithUserSubscription(true);
+                List<FeedDto> feedList = feedDao.findByCriteria(feedCriteria);
                 for (FeedDto feed : feedList) {
                     try {
                         synchronize(feed.getRssUrl());

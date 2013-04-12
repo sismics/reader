@@ -26,7 +26,7 @@ public class TestSanitize {
      * Test of the OWASP sanitizer library. 
      */
     @Test
-    public void sanitizeTester() {
+    public void sanitizeTest() {
         PolicyFactory videoPolicy = new HtmlPolicyBuilder()
             .allowStandardUrlProtocols()
             
@@ -57,7 +57,7 @@ public class TestSanitize {
      * @throws Exception
      */
     @Test
-    public void articleSanitizerTester() throws Exception {
+    public void articleSanitizerTest() throws Exception {
         // Load a feed
         String url = new File(getClass().getResource("/feed/feed_atom_akewea.xml").getFile()).toURI().toString();
         RssReader reader = new RssReader(url);

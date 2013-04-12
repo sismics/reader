@@ -2,9 +2,7 @@ package com.sismics.reader.core.util;
 
 import java.io.File;
 
-import com.sismics.reader.core.constant.ConfigType;
-import com.sismics.reader.core.dao.jpa.ConfigDao;
-import com.sismics.reader.core.model.jpa.Config;
+import com.sismics.util.EnvironmentUtil;
 
 /**
  * Utilities to gain access to the storage directories used by the application.
@@ -19,32 +17,52 @@ public class DirectoryUtil {
      * @return Base data directory
      */
     public static File getBaseDataDirectory() {
-        ConfigDao configDao = new ConfigDao();
-        Config baseDataDirConfig = configDao.getById(ConfigType.BASE_DATA_DIR);
         File baseDataDir = null;
-        if (baseDataDirConfig != null) {
-            // If the directory is specified in the configuration parameter, use this value
-            baseDataDir = new File(baseDataDirConfig.getValue());
-            if (!baseDataDir.isDirectory()) {
-                baseDataDir.mkdirs();
-            }
-        } else {
-            String webappRoot = System.getProperty("webapp.root");
-            if (webappRoot != null) {
-                // If we are in a Jetty context, use the base of the Web directory
+        String webappRoot = getWebappRoot();
+        if (webappRoot != null) {
+            // We are in a webapp environment
+            if (EnvironmentUtil.isDev()) {
+                // Use the base of the Web directory
                 baseDataDir = new File(webappRoot + File.separator + "sismicsreader");
                 if (!baseDataDir.isDirectory()) {
-                    baseDataDir.mkdir();
+                    baseDataDir.mkdirs();
                 }
             } else {
-                // Or else (for unit testing), use a temporary directory
-                baseDataDir = new File(System.getProperty("java.io.tmpdir"));
+                // Use the OS-dependant app directory
+                if (!EnvironmentUtil.isWindows()) {
+                    baseDataDir = new File(EnvironmentUtil.getWindowsAppData() + File.separator + "Sismics" + File.separator + "Reader");
+                    if (!baseDataDir.isDirectory()) {
+                        baseDataDir.mkdirs();
+                    }
+                } else if (EnvironmentUtil.isWindows()) {
+                    baseDataDir = new File("/var/sismicsreader");
+                    if (!baseDataDir.isDirectory()) {
+                        baseDataDir.mkdirs();
+                    }
+                } else if (EnvironmentUtil.isWindows()) {
+                    baseDataDir = new File(EnvironmentUtil.getMacOsUserHome() + "/Library/Application Support/Sismics Reader");
+                    if (!baseDataDir.isDirectory()) {
+                        baseDataDir.mkdirs();
+                    }
+                } 
             }
+        } else {
+            // Or else (for unit testing), use a temporary directory
+            baseDataDir = new File(System.getProperty("java.io.tmpdir"));
         }
         
         return baseDataDir;
     }
     
+    /**
+     * Returns the database directory.
+     * 
+     * @return Database directory.
+     */
+    public static File getDbDirectory() {
+        return getDataSubDirectory("db");
+    }
+
     /**
      * Returns the favicons directory.
      * 
@@ -55,12 +73,40 @@ public class DirectoryUtil {
     }
 
     /**
-     * Returns the favicons directory.
+     * Returns the lucene indexes directory.
      * 
-     * @return Favicons directory.
+     * @return Lucene indexes directory.
      */
     public static File getLuceneDirectory() {
         return getDataSubDirectory("lucene");
+    }
+
+    /**
+     * Returns the themes directory.
+     * 
+     * @return Theme directory.
+     */
+    public static File getThemeDirectory() {
+        String webappRoot = getWebappRoot();
+        File themeDir = null;
+        if (webappRoot != null) {
+            themeDir = new File(webappRoot + File.separator + "stylesheets" + File.separator + "theme");
+        } else {
+            themeDir = new File(DirectoryUtil.class.getResource("/stylesheets/theme").getFile());
+        }
+        if (themeDir != null && themeDir.isDirectory()) {
+            return themeDir;
+        }
+        return null;
+    }
+
+    /**
+     * Return the webapp root.
+     * 
+     * @return Webapp root
+     */
+    private static String getWebappRoot() {
+        return System.getProperty("webapp.root");
     }
 
     /**

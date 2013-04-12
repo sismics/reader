@@ -7,11 +7,6 @@ package com.sismics.reader.core.constant;
  */
 public enum ConfigType {
     /**
-     * Base data directory.
-     */
-    BASE_DATA_DIR,
-
-    /**
      * Lucene directory storage type.
      */
     LUCENE_DIRECTOY_STORAGE,

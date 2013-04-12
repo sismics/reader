@@ -44,7 +44,6 @@ import org.w3c.dom.Element;
 import com.google.common.io.ByteStreams;
 import com.sismics.reader.core.dao.file.opml.OpmlReader;
 import com.sismics.reader.core.dao.jpa.CategoryDao;
-import com.sismics.reader.core.dao.jpa.FeedDao;
 import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
 import com.sismics.reader.core.dao.jpa.UserDao;
@@ -486,25 +485,8 @@ public class SubscriptionResource extends BaseResource {
             throw new ClientException("SubscriptionNotFound", MessageFormat.format("Subscription not found: {0}", id));
         }
         
-        // Delete the category
+        // Delete the subscription
         feedSubscriptionDao.delete(id);
-        
-        // Checks if the feed is still used by other users
-        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
-        feedSubscriptionCriteria.setFeedId(feedSubscription.getFeedId());
-        List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
-        boolean feedInUse = false;
-        for (FeedSubscriptionDto currentFeedSubscription : feedSubscriptionList) {
-            if (!currentFeedSubscription.getId().equals(id)) {
-                feedInUse = true;
-                break;
-            }
-        }
-        
-        if (!feedInUse) {
-            FeedDao feedDao = new FeedDao();
-            feedDao.delete(feedSubscription.getFeedId());
-        }
         
         // Always return ok
         JSONObject response = new JSONObject();

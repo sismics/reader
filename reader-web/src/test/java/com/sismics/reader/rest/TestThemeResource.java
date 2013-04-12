@@ -13,24 +13,24 @@ import com.sun.jersey.api.client.ClientResponse.Status;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * Test the locale resource.
+ * Test the theme resource.
  * 
  * @author jtremeaux
  */
-public class TestLocaleResource extends BaseJerseyTest {
+public class TestThemeResource extends BaseJerseyTest {
     /**
-     * Test the locale resource.
+     * Test the theme resource.
      * 
      * @throws JSONException
      */
     @Test
-    public void testLocaleResource() throws JSONException {
-        WebResource localeResource = resource().path("/locale");
-        ClientResponse response = localeResource.get(ClientResponse.class);
-        response = localeResource.get(ClientResponse.class);
+    public void testThemeResource() throws JSONException {
+        WebResource themeResource = resource().path("/theme");
+        ClientResponse response = themeResource.get(ClientResponse.class);
+        response = themeResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         JSONObject json = response.getEntity(JSONObject.class);
-        JSONArray locale = json.getJSONArray("locales");
-        Assert.assertTrue(locale.length() > 0);
+        JSONArray theme = json.getJSONArray("themes");
+        Assert.assertTrue(theme.length() > 0);
     }
 }
