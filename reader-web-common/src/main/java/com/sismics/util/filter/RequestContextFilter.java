@@ -1,6 +1,8 @@
 package com.sismics.util.filter;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.Locale;
 
 import javax.persistence.EntityManager;
@@ -18,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.model.context.AppContext;
+import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.util.context.ThreadLocalContext;
 import com.sismics.util.jpa.EMF;
@@ -37,6 +40,17 @@ public class RequestContextFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         // Force the locale in order to not depend on the execution environment
         Locale.setDefault(new Locale(Constants.DEFAULT_LOCALE_ID));
+
+        // Initialize the app directory
+        File baseDataDirectory = null;
+        try {
+            baseDataDirectory = DirectoryUtil.getBaseDataDirectory();
+        } catch (Exception e) {
+            log.error("Error initializing base data directory", e);
+        }
+        if (log.isInfoEnabled()) {
+            log.info(MessageFormat.format("Using base data directory: {0}", baseDataDirectory.toString()));
+        }
         
         // Initialize the application context
         TransactionUtil.handle(new Runnable() {

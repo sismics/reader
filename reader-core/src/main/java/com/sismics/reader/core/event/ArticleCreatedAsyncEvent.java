@@ -37,7 +37,7 @@ public class ArticleCreatedAsyncEvent {
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
-                .add("articles", articleList)
+                .add("articles", (articleList != null ? articleList.size() : "0") + " articles")
                 .toString();
     }
 }
