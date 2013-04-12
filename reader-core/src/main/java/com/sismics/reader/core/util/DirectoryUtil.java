@@ -29,7 +29,7 @@ public class DirectoryUtil {
                 baseDataDir.mkdirs();
             }
         } else {
-            String webappRoot = System.getProperty("webapp.root");
+            String webappRoot = getWebappRoot();
             if (webappRoot != null) {
                 // If we are in a Jetty context, use the base of the Web directory
                 baseDataDir = new File(webappRoot + File.separator + "sismicsreader");
@@ -55,12 +55,37 @@ public class DirectoryUtil {
     }
 
     /**
-     * Returns the favicons directory.
+     * Returns the lucene indexes directory.
      * 
-     * @return Favicons directory.
+     * @return Lucene indexes directory.
      */
     public static File getLuceneDirectory() {
         return getDataSubDirectory("lucene");
+    }
+
+    /**
+     * Returns the themes directory.
+     * 
+     * @return Theme directory.
+     */
+    public static File getThemeDirectory() {
+        String webappRoot = getWebappRoot();
+        if (webappRoot != null) {
+            File themeDir = new File(webappRoot + File.separator + "stylesheets" + File.separator + "theme");
+            if (themeDir.isDirectory()) {
+                return themeDir;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Return the webapp root.
+     * 
+     * @return Webapp root
+     */
+    private static String getWebappRoot() {
+        return System.getProperty("webapp.root");
     }
 
     /**
