@@ -34,9 +34,9 @@ public class ArticleAssembler {
         userArticleJson.put("comment_count", userArticle.getArticleCommentCount());
         if (userArticle.getArticleEnclosureUrl() != null) {
             JSONObject enclosure = new JSONObject();
-            subscription.put("url", userArticle.getArticleEnclosureUrl());
-            subscription.put("length", userArticle.getArticleEnclosureLength());
-            subscription.put("type", userArticle.getArticleEnclosureType());
+            enclosure.put("url", userArticle.getArticleEnclosureUrl());
+            enclosure.put("length", userArticle.getArticleEnclosureLength());
+            enclosure.put("type", userArticle.getArticleEnclosureType());
             userArticleJson.put("enclosure", enclosure);
         }
         userArticleJson.put("subscription", subscription);
