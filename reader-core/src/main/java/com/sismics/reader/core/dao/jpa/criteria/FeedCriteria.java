@@ -10,6 +10,11 @@ public class FeedCriteria {
      * Feed URL.
      */
     private String feedUrl;
+    
+    /**
+     * Returns only feed having user subscriptions.
+     */
+    private boolean withUserSubscription;
 
     /**
      * Getter of feedUrl.
@@ -28,4 +33,23 @@ public class FeedCriteria {
     public void setFeedUrl(String feedUrl) {
         this.feedUrl = feedUrl;
     }
+
+    /**
+     * Getter de withUserSubscription.
+     *
+     * @return withUserSubscription
+     */
+    public boolean isWithUserSubscription() {
+        return withUserSubscription;
+    }
+
+    /**
+     * Setter de withUserSubscription.
+     *
+     * @param withUserSubscription withUserSubscription
+     */
+    public void setWithUserSubscription(boolean withUserSubscription) {
+        this.withUserSubscription = withUserSubscription;
+    }
+
 }

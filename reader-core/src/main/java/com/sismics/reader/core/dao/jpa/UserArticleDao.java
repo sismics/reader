@@ -151,7 +151,11 @@ public class UserArticleDao {
         sb.append("   on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_IDUSER_C = :userId and a.ART_DELETEDATE_D is null) ");
         if (criteria.getUserId() != null) {
             sb.append(" join T_FEED f on(f.FED_ID_C = a.ART_IDFEED_C and f.FED_DELETEDATE_D is null) ");
-            sb.append(" join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
+            if (criteria.isStarred()) {
+                sb.append(" left join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and (fs.FES_DELETEDATE_D is null)) ");
+            } else {
+                sb.append(" join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and (fs.FES_DELETEDATE_D is null)) ");
+            }
         }
         
         // Adds search criteria

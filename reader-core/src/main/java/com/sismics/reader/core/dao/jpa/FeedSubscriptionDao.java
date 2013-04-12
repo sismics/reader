@@ -160,7 +160,7 @@ public class FeedSubscriptionDao {
             sb.append("     from T_ARTICLE a");
             sb.append("     left join T_USER_ARTICLE ua on(ua.USA_IDUSER_C = :userId and ua.USA_IDARTICLE_C = a.ART_ID_C and ua.USA_DELETEDATE_D is null) ");
             sb.append("     where a.ART_IDFEED_C = f.FED_ID_C and a.ART_DELETEDATE_D is null and ua.USA_READDATE_D is null and (a.ART_CREATEDATE_D >= fs.FES_CREATEDATE_D or ua.USA_ID_C is not null))");
-            sb.append("   as unreadUserArticleCount");
+            sb.append("  as unreadUserArticleCount");
         }
         sb.append(" from T_FEED_SUBSCRIPTION fs ");
         sb.append(" join T_FEED f on(f.FED_ID_C = fs.FES_IDFEED_C and f.FED_DELETEDATE_D is null) ");
@@ -175,10 +175,6 @@ public class FeedSubscriptionDao {
         if (criteria.getUserId() != null) {
             criteriaList.add("fs.FES_IDUSER_C = :userId");
             parameterMap.put("userId", criteria.getUserId());
-        }
-        if (criteria.getFeedId() != null) {
-            criteriaList.add("fs.FES_IDFEED_C = :feedId");
-            parameterMap.put("feedId", criteria.getFeedId());
         }
         if (criteria.getFeedUrl() != null) {
             criteriaList.add("f.FED_RSSURL_C = :feedUrl");
