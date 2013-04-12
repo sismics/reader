@@ -241,15 +241,18 @@ public class RssReader extends DefaultHandler {
             pushElement(Element.ITEM_CONTENT_ENCODED);
         } else if (rss && currentElement == Element.ITEM && "enclosure".equalsIgnoreCase(localName)) {
             pushElement(Element.ITEM_ENCLOSURE);
-            article.setEnclosureUrl(attributes.getValue("url"));
-            Integer enclosureLength = null;
-            try {
-                enclosureLength = Integer.valueOf(attributes.getValue("length"));
-            } catch (Exception e) {
-                log.error("Error parsing enclosure length", e);
+            String enclosureUrl = StringUtils.trim(attributes.getValue("url"));
+            if (!StringUtils.isBlank(enclosureUrl)) {
+                article.setEnclosureUrl(enclosureUrl);
+                Integer enclosureLength = null;
+                try {
+                    enclosureLength = Integer.valueOf(attributes.getValue("length"));
+                } catch (Exception e) {
+                    log.error("Error parsing enclosure length", e);
+                }
+                article.setEnclosureLength(enclosureLength);
+                article.setEnclosureType(StringUtils.trim(attributes.getValue("type")));
             }
-            article.setEnclosureLength(enclosureLength);
-            article.setEnclosureType(attributes.getValue("type"));
         } else if (rss && currentElement == Element.ITEM && "pubDate".equalsIgnoreCase(localName)) {
             pushElement(Element.ITEM_PUB_DATE);
         } else if (atom && currentElement == Element.FEED && "title".equalsIgnoreCase(localName)) {
