@@ -43,12 +43,6 @@ public class UserBaseFunction {
     private Date createDate;
     
     /**
-     * Date the user starred this article.
-     */
-    @Column(name = "UBF_STARREDDATE_D")
-    private Date starredDate;
-    
-    /**
      * Deletion date.
      */
     @Column(name = "UBF_DELETEDATE_D")
@@ -124,24 +118,6 @@ public class UserBaseFunction {
      */
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    /**
-     * Getter of starredDate.
-     *
-     * @return starredDate
-     */
-    public Date getStarredDate() {
-        return starredDate;
-    }
-
-    /**
-     * Setter of starredDate.
-     *
-     * @param starredDate starredDate
-     */
-    public void setStarredDate(Date starredDate) {
-        this.starredDate = starredDate;
     }
 
     /**

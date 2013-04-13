@@ -30,7 +30,7 @@ public class FaviconUpdateRequestedAsyncListener {
      * @throws Exception
      */
     @Subscribe
-    public void onOpmlImport(final FaviconUpdateRequestedEvent faviconUpdateRequestedEvent) throws Exception {
+    public void onFaviconUpdateRequested(final FaviconUpdateRequestedEvent faviconUpdateRequestedEvent) throws Exception {
         if (log.isInfoEnabled()) {
             log.info(MessageFormat.format("Favicon update requested event: {0}", faviconUpdateRequestedEvent.toString()));
         }
