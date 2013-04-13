@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Instant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,7 +85,7 @@ public class FeedService extends AbstractScheduledService {
     @Override
     protected Scheduler scheduler() {
         // TODO Implement a better schedule strategy... Use update period specified in the feed if avail & use last update date from feed to backoff
-        return Scheduler.newFixedDelaySchedule(0, 10, TimeUnit.MINUTES);
+        return Scheduler.newFixedDelaySchedule(0, 1, TimeUnit.MINUTES);
     }
     
     /**
@@ -115,11 +118,17 @@ public class FeedService extends AbstractScheduledService {
             feed.setLastFetchDate(new Date());
             feedDao.create(feed);
 
-            // Try to download the feed's favicon TODO update periodically (like 1 time /week)
+            // Try to download the feed's favicon
             FaviconUpdateRequestedEvent faviconUpdateRequestedEvent = new FaviconUpdateRequestedEvent();
             faviconUpdateRequestedEvent.setFeed(feed);
             AppContext.getInstance().getAsyncEventBus().post(faviconUpdateRequestedEvent);
         } else {
+            // Try to update the feed's favicon every week
+            boolean newDay = feed.getLastFetchDate() == null ||
+                    DateTime.now().getDayOfYear() != new DateTime(feed.getLastFetchDate()).getDayOfYear();
+            int daysFromCreation = Days.daysBetween(Instant.now(), new Instant(feed.getCreateDate().getTime())).getDays();
+            boolean updateFavicon = newDay && daysFromCreation % 7 == 0;
+
             // Update metadata
             feed.setUrl(newFeed.getUrl());
             feed.setTitle(newFeed.getTitle());
@@ -127,6 +136,13 @@ public class FeedService extends AbstractScheduledService {
             feed.setDescription(newFeed.getDescription());
             feed.setLastFetchDate(new Date());
             feedDao.update(feed);
+
+            // Update the favicon
+            if (updateFavicon) {
+                FaviconUpdateRequestedEvent faviconUpdateRequestedEvent = new FaviconUpdateRequestedEvent();
+                faviconUpdateRequestedEvent.setFeed(feed);
+                AppContext.getInstance().getAsyncEventBus().post(faviconUpdateRequestedEvent);
+            }
         }
         
         // Update existing articles
