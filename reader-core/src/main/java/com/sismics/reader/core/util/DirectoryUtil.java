@@ -18,7 +18,7 @@ public class DirectoryUtil {
      */
     public static File getBaseDataDirectory() {
         File baseDataDir = null;
-        String webappRoot = getWebappRoot();
+        String webappRoot = EnvironmentUtil.getWebappRoot();
         if (webappRoot != null) {
             // We are in a webapp environment
             if (EnvironmentUtil.isDev()) {
@@ -29,7 +29,7 @@ public class DirectoryUtil {
                 }
             } else {
                 // Use the OS-dependant app directory
-                if (!EnvironmentUtil.isWindows()) {
+                if (EnvironmentUtil.isWindows()) {
                     baseDataDir = new File(EnvironmentUtil.getWindowsAppData() + File.separator + "Sismics" + File.separator + "Reader");
                     if (!baseDataDir.isDirectory()) {
                         baseDataDir.mkdirs();
@@ -46,7 +46,8 @@ public class DirectoryUtil {
                     }
                 } 
             }
-        } else {
+        }
+        if (baseDataDir == null) {
             // Or else (for unit testing), use a temporary directory
             baseDataDir = new File(System.getProperty("java.io.tmpdir"));
         }
@@ -87,7 +88,7 @@ public class DirectoryUtil {
      * @return Theme directory.
      */
     public static File getThemeDirectory() {
-        String webappRoot = getWebappRoot();
+        String webappRoot = EnvironmentUtil.getWebappRoot();
         File themeDir = null;
         if (webappRoot != null) {
             themeDir = new File(webappRoot + File.separator + "stylesheets" + File.separator + "theme");
@@ -98,15 +99,6 @@ public class DirectoryUtil {
             return themeDir;
         }
         return null;
-    }
-
-    /**
-     * Return the webapp root.
-     * 
-     * @return Webapp root
-     */
-    private static String getWebappRoot() {
-        return System.getProperty("webapp.root");
     }
 
     /**

@@ -11,6 +11,10 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.hibernate.cfg.Environment;
+import org.hibernate.internal.util.config.ConfigurationHelper;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +33,34 @@ public final class EMF {
 
     static {
         try {
+            Map<Object, Object> properties = getEntityManagerProperties();
+
+            Environment.verifyProperties(properties);
+            ConfigurationHelper.resolvePlaceHolders(properties);
+            ServiceRegistry reg = new ServiceRegistryBuilder().applySettings( properties ).buildServiceRegistry();
+
+            DbOpenHelper openHelper = new DbOpenHelper(reg) {
+                
+                @Override
+                public void onCreate() throws Exception {
+                    File inputFile = new File(getClass().getResource("/db/update/dbupdate-000.sql").getFile());
+                    executeScript(inputFile);
+                    
+                    if (EnvironmentUtil.isDev()) {
+                        inputFile = new File(getClass().getResource("/db/update/dbupdate-000-test.sql").getFile());
+                        executeScript(inputFile);
+                    }
+                }
+
+                @Override
+                public void onUpgrade(int oldVersion, int newVersion) throws Exception {
+                    // TODO Auto-generated method stub
+                }
+            };
+            openHelper.open();
+            
             emfInstance = Persistence.createEntityManagerFactory("transactions-optional", getEntityManagerProperties());
+            
         } catch (Throwable t) {
             log.error("Error creating EMF", t);
         }
@@ -39,10 +70,12 @@ public final class EMF {
         // Use properties file if exists
         try {
             URL hibernatePropertiesUrl = EMF.class.getResource("/hibernate.properties");
-            InputStream is = hibernatePropertiesUrl.openStream();
-            Properties properties = new Properties();
-            properties.load(is);
-            return properties;
+            if (hibernatePropertiesUrl != null) {
+                InputStream is = hibernatePropertiesUrl.openStream();
+                Properties properties = new Properties();
+                properties.load(is);
+                return properties;
+            }
         } catch (IOException e) {
             log.error("Error reading hibernate.properties", e);
         }
@@ -54,11 +87,7 @@ public final class EMF {
         String dbFile = dbDirectory.getAbsoluteFile() + File.separator + "reader";
         props.put("hibernate.connection.url", "jdbc:hsqldb:file:" + dbFile + ";hsqldb.write_delay=false");
         props.put("hibernate.connection.username", "sa");
-        if (EnvironmentUtil.isDev()) {
-            props.put("hibernate.hbm2ddl.auto", "create-drop");
-        } else {
-            props.put("hibernate.hbm2ddl.auto", "validate");
-        }
+        props.put("hibernate.hbm2ddl.auto", "validate");
         props.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
         if (EnvironmentUtil.isDev()) {
             props.put("hibernate.show_sql", "true");

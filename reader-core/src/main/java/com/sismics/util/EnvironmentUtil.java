@@ -14,6 +14,8 @@ public class EnvironmentUtil {
     private static String WINDOWS_APPDATA = System.getenv("APPDATA");
 
     private static String MAC_OS_USER_HOME = System.getProperty("user.home");
+    
+    private static String WEBAPP_ROOT = System.getProperty("webapp.root");
 
     /**
      * Returns true if running under Microsoft Windows.
@@ -48,7 +50,8 @@ public class EnvironmentUtil {
      * @return Development environment
      */
     public static boolean isDev() {
-        return SISMICS_READER_ENV != null && "dev".equals(SISMICS_READER_ENV);
+        return EnvironmentUtil.getWebappRoot() == null ||
+                SISMICS_READER_ENV != null && "dev".equals(SISMICS_READER_ENV);
     }
 
     /**
@@ -68,4 +71,14 @@ public class EnvironmentUtil {
     public static String getMacOsUserHome() {
         return MAC_OS_USER_HOME;
     }
+
+    /**
+     * Return the webapp root.
+     * 
+     * @return Webapp root
+     */
+    public static String getWebappRoot() {
+        return WEBAPP_ROOT;
+    }
+
 }
