@@ -19,6 +19,7 @@ import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.event.OpmlImportedEvent;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.Category;
+import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
 import com.sismics.reader.core.model.jpa.User;
 import com.sismics.reader.core.service.FeedService;
@@ -113,10 +114,10 @@ public class OpmlImportAsyncListener {
                         }
 
                         // Get feed and articles
-                        String feedId = null;
+                        Feed feed = null;
                         final FeedService feedService = AppContext.getInstance().getFeedService();
                         try {
-                            feedId = feedService.synchronize(feedUrl);
+                            feed = feedService.synchronize(feedUrl);
                         } catch (Exception e) {
                             if (log.isErrorEnabled()) {
                                 log.error(MessageFormat.format("Error importing the feed at URL {0} for user {1}", feedUrl, user.getId()), e);
@@ -128,7 +129,7 @@ public class OpmlImportAsyncListener {
                         try {
                             FeedSubscription feedSubscription = new FeedSubscription();
                             feedSubscription.setUserId(user.getId());
-                            feedSubscription.setFeedId(feedId);
+                            feedSubscription.setFeedId(feed.getId());
                             feedSubscription.setCategoryId(category.getId());
                             feedSubscription.setOrder(feedDisplayOrder);
                             feedSubscription.setTitle(feedTitle);

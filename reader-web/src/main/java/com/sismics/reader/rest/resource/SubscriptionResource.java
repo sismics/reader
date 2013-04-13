@@ -54,6 +54,7 @@ import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.event.OpmlImportedEvent;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.Category;
+import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
 import com.sismics.reader.core.model.jpa.User;
 import com.sismics.reader.core.model.jpa.UserArticle;
@@ -276,8 +277,6 @@ public class SubscriptionResource extends BaseResource {
         FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
         feedSubscriptionCriteria.setUserId(principal.getId());
         feedSubscriptionCriteria.setFeedUrl(url);
-        
-        // TODO Check later when we're sure it's the url of an RSS feed
         FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
         List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
         if (!feedSubscriptionList.isEmpty()) {
@@ -285,15 +284,24 @@ public class SubscriptionResource extends BaseResource {
         }
         
         // Get feed and articles
-        String feedId = null;
+        Feed feed = null;
         final FeedService feedService = AppContext.getInstance().getFeedService();
         try {
-            feedId = feedService.synchronize(url);
+            feed = feedService.synchronize(url);
         } catch (Exception e) {
             throw new ServerException("FeedError", MessageFormat.format("Error retrieving feed at {0}", url), e);
             // TODO NoFeedFound if it isn't a feed or a page referencing a feed
         }
         
+        // Check again that we are not subscribed, if the page URL was replaced by the feed URL
+        feedSubscriptionCriteria = new FeedSubscriptionCriteria();
+        feedSubscriptionCriteria.setUserId(principal.getId());
+        feedSubscriptionCriteria.setFeedUrl(feed.getRssUrl());
+        feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
+        if (!feedSubscriptionList.isEmpty()) {
+            throw new ClientException("AlreadySubscribed", "You are already subscribed to this URL");
+        }
+
         // Get the root category
         CategoryDao categoryDao = new CategoryDao();
         Category category = categoryDao.getRootCategory(principal.getId());
@@ -304,7 +312,7 @@ public class SubscriptionResource extends BaseResource {
         // Create the subscription
         FeedSubscription feedSubscription = new FeedSubscription();
         feedSubscription.setUserId(principal.getId());
-        feedSubscription.setFeedId(feedId);
+        feedSubscription.setFeedId(feed.getId());
         feedSubscription.setCategoryId(category.getId());
         feedSubscription.setOrder(displayOrder);
         feedSubscription.setTitle(title);

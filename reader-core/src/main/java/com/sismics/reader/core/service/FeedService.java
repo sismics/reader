@@ -92,10 +92,10 @@ public class FeedService extends AbstractScheduledService {
      * Synchronize the feed to local database.
      * 
      * @param url RSS url of a feed or page containing a feed to synchronize
-     * @param Feed ID
+     * @param Feed
      * @throws Exception
      */
-    public String synchronize(String url) throws Exception {
+    public Feed synchronize(String url) throws Exception {
         if (log.isInfoEnabled()) {
             log.info(MessageFormat.format("Synchronizing feed at URL: {0}", url));
         }
@@ -198,7 +198,7 @@ public class FeedService extends AbstractScheduledService {
         articleCreatedAsyncEvent.setArticleList(Lists.newArrayList(articleMap.values()));
         AppContext.getInstance().getAsyncEventBus().post(articleCreatedAsyncEvent);
 
-        return feed.getId();
+        return feed;
     }
     
     /**
