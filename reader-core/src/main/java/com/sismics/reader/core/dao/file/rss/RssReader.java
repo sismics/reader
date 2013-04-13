@@ -53,6 +53,9 @@ public class RssReader extends DefaultHandler {
      */
     private String content;
 
+    /**
+     * Feed URL.
+     */
     private final URL url;
 
     private Feed feed;
@@ -504,5 +507,14 @@ public class RssReader extends DefaultHandler {
      */
     public List<Article> getArticleList() {
         return articleList;
+    }
+
+    /**
+     * Getter de url.
+     *
+     * @return url
+     */
+    public URL getUrl() {
+        return url;
     }
 }

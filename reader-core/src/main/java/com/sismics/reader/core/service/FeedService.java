@@ -85,33 +85,34 @@ public class FeedService extends AbstractScheduledService {
     @Override
     protected Scheduler scheduler() {
         // TODO Implement a better schedule strategy... Use update period specified in the feed if avail & use last update date from feed to backoff
-        return Scheduler.newFixedDelaySchedule(0, 1, TimeUnit.MINUTES);
+        return Scheduler.newFixedDelaySchedule(0, 10, TimeUnit.MINUTES);
     }
     
     /**
      * Synchronize the feed to local database.
      * 
-     * @param rssUrl RSS url to synchronize to
+     * @param url RSS url of a feed or page containing a feed to synchronize
      * @param Feed ID
      * @throws Exception
      */
-    public String synchronize(String rssUrl) throws Exception {
+    public String synchronize(String url) throws Exception {
         if (log.isInfoEnabled()) {
-            log.info(MessageFormat.format("Synchronizing feed at URL: {0}", rssUrl));
+            log.info(MessageFormat.format("Synchronizing feed at URL: {0}", url));
         }
         
         // Parse the feed
-        RssReader rssReader = parseFeedOrPage(rssUrl, true);
+        RssReader rssReader = parseFeedOrPage(url, true);
         Feed newFeed = rssReader.getFeed();
         List<Article> articleList = rssReader.getArticleList();
         
         // Create the feed if necessary (not created and currently in use by another user)
         FeedDao feedDao = new FeedDao();
-        Feed feed = feedDao.getByRssUrl(rssUrl);
+        url = rssReader.getUrl().toString();
+        Feed feed = feedDao.getByRssUrl(rssReader.getUrl().toString());
         if (feed == null) {
             feed = new Feed();
             feed.setUrl(newFeed.getUrl());
-            feed.setRssUrl(rssUrl);
+            feed.setRssUrl(url);
             feed.setTitle(newFeed.getTitle());
             feed.setLanguage(newFeed.getLanguage());
             feed.setDescription(newFeed.getDescription());
