@@ -43,12 +43,12 @@ public final class EMF {
                 
                 @Override
                 public void onCreate() throws Exception {
-                    File inputFile = new File(getClass().getResource("/db/update/dbupdate-000.sql").getFile());
-                    executeScript(inputFile);
+                    InputStream is = getClass().getResourceAsStream("/db/update/dbupdate-000.sql");
+                    executeScript(is);
                     
                     if (EnvironmentUtil.isDev()) {
-                        inputFile = new File(getClass().getResource("/db/update/dbupdate-000-test.sql").getFile());
-                        executeScript(inputFile);
+                        is = getClass().getResourceAsStream("/db/update/dbupdate-000-test.sql");
+                        executeScript(is);
                     }
                 }
 

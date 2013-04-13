@@ -1,7 +1,8 @@
 package com.sismics.util.jpa;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Writer;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,8 +22,7 @@ import org.hibernate.tool.hbm2ddl.ConnectionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
+import com.google.common.io.CharStreams;
 
 /**
  * A helper to update the database incrementally.
@@ -134,12 +134,12 @@ public abstract class DbOpenHelper {
     /**
      * Execute a SQL script. All statements must be one line only.
      * 
-     * @param inputFile Script to execute
+     * @param inputScript Script to execute
      * @throws IOException
      * @throws SQLException
      */
-    protected void executeScript(File inputFile) throws IOException, SQLException {
-        List<String> lines = Files.readLines(inputFile, Charsets.UTF_8);
+    protected void executeScript(InputStream inputScript) throws IOException, SQLException {
+        List<String> lines = CharStreams.readLines(new InputStreamReader(inputScript));
         
         for (String sql : lines) {
             String formatted = formatter.format(sql);

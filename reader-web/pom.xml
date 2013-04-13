@@ -100,6 +100,11 @@
       <artifactId>freemarker</artifactId>
     </dependency>
     
+    <dependency>
+      <groupId>hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+    </dependency>
+
     <!-- Test dependencies -->
     <dependency>
       <groupId>com.sismics.reader</groupId>
@@ -123,12 +128,6 @@
     <dependency>
       <groupId>com.sun.jersey.jersey-test-framework</groupId>
       <artifactId>jersey-test-framework-grizzly2</artifactId>
-      <scope>test</scope>
-    </dependency>
-    
-    <dependency>
-      <groupId>hsqldb</groupId>
-      <artifactId>hsqldb</artifactId>
       <scope>test</scope>
     </dependency>
     
@@ -174,6 +173,7 @@
           <mainClass>${project.mainClass}</mainClass>
         </configuration>
       </plugin>
+      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -304,14 +304,6 @@
           </plugin>
         </plugins>
       </build>
-
-      <dependencies>
-        <dependency>
-          <groupId>hsqldb</groupId>
-          <artifactId>hsqldb</artifactId>
-        </dependency>
-      </dependencies>
-
     </profile>
     
     <!-- Production profile -->
