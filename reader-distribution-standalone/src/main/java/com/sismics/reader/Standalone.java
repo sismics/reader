@@ -14,7 +14,7 @@ public class Standalone {
 
         WebAppContext webapp = new WebAppContext();
         webapp.setContextPath("/");
-        webapp.setWar("sismicsreader.jar");
+        webapp.setWar("sismicsreader.war");
         server.setHandler(webapp);
 
         server.start();

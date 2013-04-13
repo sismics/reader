@@ -53,7 +53,7 @@
 				  <type>war</type>
                   <overWrite>false</overWrite>
                   <outputDirectory>${project.build.directory}</outputDirectory>
-                  <destFileName>sismicsreader.jar</destFileName>
+                  <destFileName>sismicsreader.war</destFileName>
                 </artifactItem>
               </artifactItems>
               <!--<outputDirectory>${project.build.directory}/wars</outputDirectory>
@@ -65,26 +65,26 @@
       </plugin>
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-              <mainClass>com.sismics.reader.Standalone</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
-
-      <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
           <execution>
+            <id>jar-with-dependencies</id>
             <phase>package</phase>
             <goals>
               <goal>attached</goal>
             </goals>
+          </execution>
+          <execution>
+            <id>dist</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptors>
+                <descriptor>src/main/assembly/dist.xml</descriptor>
+              </descriptors>
+            </configuration>
           </execution>
         </executions>
         <configuration>
@@ -104,18 +104,6 @@
         <groupId>org.mortbay.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${org.mortbay.jetty.jetty-maven-plugin.version}</version>
-      </plugin>
-	  
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.1</version>
-        <executions>
-          <execution><goals><goal>java</goal></goals></execution>
-        </executions>
-        <configuration>
-          <mainClass>com.sismics.reader.Standalone</mainClass>
-        </configuration>
       </plugin>
     </plugins>
   </build>

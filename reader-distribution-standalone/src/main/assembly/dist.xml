@@ -1,0 +1,34 @@
+<assembly>
+  <id>dist</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <files>
+    <file>
+      <source>target/${project.artifactId}-${project.version}-jar-with-dependencies.jar</source>
+      <outputDirectory>/</outputDirectory>
+      <destName>reader-standalone.jar</destName>
+    </file>
+    <file>
+      <source>target/sismicsreader.war</source>
+      <outputDirectory>/</outputDirectory>
+    </file>
+    <file>
+      <source>src/main/assembly/run.bat</source>
+      <outputDirectory>/</outputDirectory>
+    </file>
+    <file>
+      <source>src/main/assembly/run.sh</source>
+      <outputDirectory>/</outputDirectory>
+    </file>
+  </files>
+  <fileSets>
+    <fileSet>
+      <directory>${project.basedir}/src/main/resources</directory>
+      <includes>
+        <include>*</include>
+      </includes>
+     <outputDirectory>/</outputDirectory> 
+    </fileSet>
+  </fileSets>
+</assembly>
