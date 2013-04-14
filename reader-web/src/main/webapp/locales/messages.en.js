@@ -86,6 +86,9 @@
       "edit": {
         "newtitle": "New user",
         "submit": "Submit",
+        "delete": "Delete user",
+        "deletebutton": "Delete",
+        "deleteconfirm": "Are you sure to delete this user?",
         "successNew": "New user added",
         "successUpdate": "User updated"
       }

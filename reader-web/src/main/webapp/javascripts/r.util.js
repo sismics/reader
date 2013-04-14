@@ -10,6 +10,7 @@ r.util.url = {
   user_register: 'api/user',
   user_username_info: 'api/user/{username}',
   user_username_update: 'api/user/{username}',
+  user_username_delete: 'api/user/{username}',
   subscription_list: 'api/subscription',
   subscription_add: 'api/subscription',
   subscription_update: 'api/subscription/{id}',

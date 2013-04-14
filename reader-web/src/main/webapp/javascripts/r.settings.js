@@ -242,6 +242,8 @@ r.settings.onTabUsers = function(panel, initialize) {
   var localeInput = form.find('.edit-locale-input');
   var passwordInput = form.find('.edit-password-input');
   var password2Input = form.find('.edit-password2-input');
+  var deleteSection = form.find('.edit-delete-section');
+  var deleteButton = form.find('.edit-delete-button');
   
   if (initialize) {
     // User add/edit form validation
@@ -306,6 +308,7 @@ r.settings.onTabUsers = function(panel, initialize) {
       if (!username) {
         // New user case
         usernameInput.removeAttr('disabled');
+        deleteSection.hide();
         
         // Title
         form.find('h2').html($.t('settings.users.edit.newtitle'));
@@ -319,6 +322,7 @@ r.settings.onTabUsers = function(panel, initialize) {
       } else {
         // Edit user case
         usernameInput.attr('disabled', 'disabled');
+        deleteSection.show();
         
         // Title
         form.find('h2').html(username);
@@ -336,6 +340,29 @@ r.settings.onTabUsers = function(panel, initialize) {
           }
         });
       }
+    });
+    
+    // User delete
+    deleteButton.click(function() {
+      if (!confirm($.t('settings.users.edit.deleteconfirm'))) {
+        return;
+      }
+      
+      var username = usernameInput.val();
+      
+      // Calling API
+      r.util.ajax({
+        url: r.util.url.user_username_delete.replace('{username}', username),
+        type: 'DELETE',
+        done: function(data) {
+          // Remove user from select
+          selectInput
+            .val('')
+            .change()
+            .find('option[value="' + username + '"]')
+            .remove();
+        }
+      });
     });
     
     // Fetching users from API
