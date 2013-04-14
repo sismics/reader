@@ -31,7 +31,7 @@ public class ThemeDao {
         if (themeDirectory != null) {
             return Lists.newArrayList(themeDirectory.list(CSS_FILTER));
         } else {
-            return new ArrayList<>();
+            return new ArrayList<String>();
         }
     }
 

@@ -156,7 +156,7 @@ public class RssReader extends DefaultHandler {
      */
     public RssReader(String feedUrl) throws MalformedURLException {
         url = new URL(feedUrl);
-        elementStack = new Stack<>();
+        elementStack = new Stack<Element>();
     }
 
     /**
@@ -367,8 +367,8 @@ public class RssReader extends DefaultHandler {
      */
     private void initFeed() {
         feed = new Feed();
-        articleList = new ArrayList<>();
-        atomLinkList = new ArrayList<>();
+        articleList = new ArrayList<Article>();
+        atomLinkList = new ArrayList<AtomLink>();
     }
     
     /**

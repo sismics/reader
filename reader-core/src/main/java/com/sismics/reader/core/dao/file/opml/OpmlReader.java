@@ -67,8 +67,8 @@ public class OpmlReader extends DefaultHandler {
      */
     public OpmlReader(String opmlUrl) throws MalformedURLException {
         url = new URL(opmlUrl);
-        elementStack = new Stack<>();
-        outlineStack = new Stack<>();
+        elementStack = new Stack<Element>();
+        outlineStack = new Stack<Outline>();
     }
 
     /**

@@ -45,7 +45,7 @@ public class RssExtractor extends DefaultHandler {
      */
     public RssExtractor(String url) throws MalformedURLException {
         this.url = new URL(url);
-        feedList = new ArrayList<>();
+        feedList = new ArrayList<String>();
     }
 
     /**

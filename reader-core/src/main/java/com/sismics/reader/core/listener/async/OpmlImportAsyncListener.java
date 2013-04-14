@@ -61,7 +61,7 @@ public class OpmlImportAsyncListener {
                 // Find all user categories
                 CategoryDao categoryDao = new CategoryDao();
                 List<Category> categoryList = categoryDao.findAllCategory(user.getId());
-                Map<String, Category> categoryMap = new HashMap<>();
+                Map<String, Category> categoryMap = new HashMap<String, Category>();
                 for (Category category : categoryList) {
                     categoryMap.put(category.getName(), category);
                 }

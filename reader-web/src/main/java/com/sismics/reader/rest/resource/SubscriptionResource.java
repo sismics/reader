@@ -153,7 +153,7 @@ public class SubscriptionResource extends BaseResource {
         if (!unread) {
             List<Category> allCategoryList = categoryDao.findSubCategory(rootCategory.getId(), principal.getId());
             JSONArray categoryArrayJson = rootCategoryJson.optJSONArray("categories");
-            List<JSONObject> fullCategoryListJson = new ArrayList<>();
+            List<JSONObject> fullCategoryListJson = new ArrayList<JSONObject>();
             int i = 0;
             for (Category category : allCategoryList) {
                 categoryJson = null;

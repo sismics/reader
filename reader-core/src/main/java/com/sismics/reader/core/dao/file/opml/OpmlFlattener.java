@@ -21,7 +21,7 @@ public class OpmlFlattener {
      * @return Flattened tree
      */
     public static Map<String, List<Outline>> flatten(List<Outline> outlineList) {
-        Map<String, List<Outline>> result = new HashMap<>();
+        Map<String, List<Outline>> result = new HashMap<String, List<Outline>>();
         flatten(outlineList, result, null);
         return result;
     }
@@ -31,7 +31,7 @@ public class OpmlFlattener {
             if ("rss".equals(outline.getType())) {
                 List<Outline> outlineList = outlineMap.get(prefix);
                 if (outlineList == null) {
-                    outlineList = new ArrayList<>();
+                    outlineList = new ArrayList<Outline>();
                     outlineMap.put(prefix, outlineList);
                 }
                 outlineList.add(outline);

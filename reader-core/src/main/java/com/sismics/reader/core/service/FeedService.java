@@ -147,12 +147,12 @@ public class FeedService extends AbstractScheduledService {
         }
         
         // Update existing articles
-        Map<String, Article> articleMap = new HashMap<>();
+        Map<String, Article> articleMap = new HashMap<String, Article>();
         for (Article article : articleList) {
             articleMap.put(article.getGuid(), article);
         }
 
-        List<String> guidIn = new ArrayList<>();
+        List<String> guidIn = new ArrayList<String>();
         for (Article article : articleList) {
             guidIn.add(article.getGuid());
         }

@@ -22,7 +22,7 @@ public class Outline {
     private List<Outline> outlineList;
     
     public Outline() {
-        outlineList = new ArrayList<>();
+        outlineList = new ArrayList<Outline>();
     }
 
     /**

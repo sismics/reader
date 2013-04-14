@@ -81,7 +81,7 @@ public final class EMF {
         }
         
         // Use environment parameters
-        Map<Object, Object> props = new HashMap<>();
+        Map<Object, Object> props = new HashMap<Object, Object>();
         props.put("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver");
         File dbDirectory = DirectoryUtil.getDbDirectory();
         String dbFile = dbDirectory.getAbsoluteFile() + File.separator + "reader";
