@@ -65,7 +65,7 @@
     <org.codehaus.cargo.cargo-maven2-plugin.version>1.2.0</org.codehaus.cargo.cargo-maven2-plugin.version>
     <org.apache.maven.plugins.maven-jar-plugin.version>2.4</org.apache.maven.plugins.maven-jar-plugin.version>
     <org.mortbay.jetty.jetty-maven-plugin.version>8.1.2.v20120308</org.mortbay.jetty.jetty-maven-plugin.version>
-    <com.google.apis.google-api-services-plus.version>v1-rev45-1.12.0-beta</com.google.apis.google-api-services-plus.version>
+    <org.vafer.jdeb.version>1.0.1</org.vafer.jdeb.version>
   </properties> 
 
   <build>
@@ -97,6 +97,8 @@
     <module>../reader-core</module>
     <module>../reader-web</module>
     <module>../reader-web-common</module>
+    <module>../reader-distribution-standalone</module>
+    <module>../reader-distribution-debian</module>
   </modules>
   
   <dependencyManagement>
@@ -123,6 +125,18 @@
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-web</artifactId>
+        <version>${reader.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>com.sismics.reader</groupId>
+        <artifactId>reader-distribution-standalone</artifactId>
+        <version>${reader.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>com.sismics.reader</groupId>
+        <artifactId>reader-distribution-debian</artifactId>
         <version>${reader.version}</version>
       </dependency>
     

@@ -1,0 +1,11 @@
+Package: reader
+Version: 1.0
+Section: net
+Priority: optional
+Architecture: all
+Description: Reader is a Web-based aggregator of content served by Web Feeds.
+ .
+ Java 1.6 or higher is required to run Reader.
+ .
+ More information can be found at http://reader.sismics.com/
+Maintainer: jm.tremeaux@gmail.com

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+# Stop Reader service.
+if [ -e /etc/init.d/reader ]; then
+  invoke-rc.d reader stop
+fi
+
+# Backup database.
+if [ -e /var/reader/db ]; then
+  rm -rf /var/reader/db.backup
+  cp -R /var/reader/db /var/reader/db.backup
+fi

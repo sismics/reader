@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+# Remove symlink.
+rm -f /usr/bin/reader
+
+# Remove startup scripts.
+update-rc.d -f reader remove
