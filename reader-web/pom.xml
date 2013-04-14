@@ -336,62 +336,42 @@
         
         <plugins>
         
-          <!-- Minify 
+          <!-- Minify -->
           <plugin>
             <groupId>com.samaxes.maven</groupId>
             <artifactId>minify-maven-plugin</artifactId>
-            <version>[1.5,)</version>
+            <version>1.7</version>
             <executions>
               <execution>
                 <id>reader-minify</id>
                 <phase>process-resources</phase>
                 <configuration>
-                  <cssSourceDir>style</cssSourceDir>
-                  <cssTargetDir>style</cssTargetDir>
-                  <cssSourceFiles>
-                    <cssSourceFile>main.css</cssSourceFile>
-                    <cssSourceFile>jqueryui.css</cssSourceFile>
-                    <cssSourceFile>jquery.jcrop.css</cssSourceFile>
-                    <cssSourceFile>jquery.calendar.css</cssSourceFile>
-                    <cssSourceFile>jquery.colorbox.css</cssSourceFile>
-                    <cssSourceFile>jquery.qtip.css</cssSourceFile>
-                  </cssSourceFiles>
-                  <cssFinalFile>reader.css</cssFinalFile>
-                  <jsSourceDir>js</jsSourceDir>
-                  <jsTargetDir>js</jsTargetDir>
+                  <jsSourceDir>javascripts</jsSourceDir>
+                  <jsTargetDir>javascripts</jsTargetDir>
                   <jsSourceFiles>
-                    <jsSourceFile>jquery.i18n.js</jsSourceFile>
-                    <jsSourceFile>jquery.ui.i18n.js</jsSourceFile>
-                    <jsSourceFile>jquery.jcrop.js</jsSourceFile>
-                    <jsSourceFile>jquery.qtip.js</jsSourceFile>
-                    <jsSourceFile>jquery.bbq.js</jsSourceFile>
-                    <jsSourceFile>jquery.upload.js</jsSourceFile>
-                    <jsSourceFile>jquery.cookie.js</jsSourceFile>
-                    <jsSourceFile>jquery.json.js</jsSourceFile>
+                    <jsSourceFile>jquery.less.js</jsSourceFile>
+                    <jsSourceFile>jquery.ui.js</jsSourceFile>
+                    <jsSourceFile>jquery.visible.js</jsSourceFile>
+                    <jsSourceFile>jquery.history.js</jsSourceFile>
                     <jsSourceFile>jquery.timeago.js</jsSourceFile>
+                    <jsSourceFile>jquery.qtip.js</jsSourceFile>
+                    <jsSourceFile>jquery.toastmessage.js</jsSourceFile>
+                    <jsSourceFile>jquery.json.js</jsSourceFile>
+                    <jsSourceFile>jquery.throttle.js</jsSourceFile>
+                    <jsSourceFile>jquery.i18next.js</jsSourceFile>
+                    <jsSourceFile>jquery.visible.js</jsSourceFile>
                     <jsSourceFile>jquery.validate.js</jsSourceFile>
-                    <jsSourceFile>jquery.flot.js</jsSourceFile>
-                    <jsSourceFile>jquery.flot.crosshair.js</jsSourceFile>
-                    <jsSourceFile>jquery.calendar.js</jsSourceFile>
-                    <jsSourceFile>jquery.colorbox.js</jsSourceFile>
-                    <jsSourceFile>jquery.slides.js</jsSourceFile>
-                    <jsSourceFile>main.js</jsSourceFile>
-                    <jsSourceFile>tracking.js</jsSourceFile>
-                    <jsSourceFile>ui.js</jsSourceFile>
-                    <jsSourceFile>stream.js</jsSourceFile>
-                    <jsSourceFile>profile.js</jsSourceFile>
-                    <jsSourceFile>search.js</jsSourceFile>
-                    <jsSourceFile>view.js</jsSourceFile>
-                    <jsSourceFile>login.js</jsSourceFile>
-                    <jsSourceFile>intro.js</jsSourceFile>
-                    <jsSourceFile>util.js</jsSourceFile>
-                    <jsSourceFile>comment.js</jsSourceFile>
-                    <jsSourceFile>media.js</jsSourceFile>
-                    <jsSourceFile>post.js</jsSourceFile>
-                    <jsSourceFile>track.js</jsSourceFile>
-                    <jsSourceFile>notification.js</jsSourceFile>
-                    <jsSourceFile>preference.js</jsSourceFile>
-                    <jsSourceFile>connect.js</jsSourceFile>
+                    <jsSourceFile>r.main.js</jsSourceFile>
+                    <jsSourceFile>r.user.js</jsSourceFile>
+                    <jsSourceFile>r.subscription.js</jsSourceFile>
+                    <jsSourceFile>r.article.js</jsSourceFile>
+                    <jsSourceFile>r.category.js</jsSourceFile>
+                    <jsSourceFile>r.feed.js</jsSourceFile>
+                    <jsSourceFile>r.search.js</jsSourceFile>
+                    <jsSourceFile>r.settings.js</jsSourceFile>
+                    <jsSourceFile>r.wizard.js</jsSourceFile>
+                    <jsSourceFile>r.theme.js</jsSourceFile>
+                    <jsSourceFile>r.util.js</jsSourceFile>
                   </jsSourceFiles>
                   <jsFinalFile>reader.js</jsFinalFile>
                 </configuration>
@@ -399,58 +379,8 @@
                   <goal>minify</goal>
                 </goals>
               </execution>
-              
-              <execution>
-                <id>login-minify</id>
-                <phase>process-resources</phase>
-                <configuration>
-                  <jsSourceDir>js</jsSourceDir>
-                  <jsTargetDir>js</jsTargetDir>
-                  <jsSourceFiles>
-                    <jsSourceFile>jquery.i18n.js</jsSourceFile>
-                    <jsSourceFile>jquery.timeago.js</jsSourceFile>
-                    <jsSourceFile>jquery.validate.js</jsSourceFile>
-                    <jsSourceFile>jquery.json.js</jsSourceFile>
-                    <jsSourceFile>jquery.qtip.js</jsSourceFile>
-                    <jsSourceFile>jquery.jstz.js</jsSourceFile>
-                    <jsSourceFile>main.js</jsSourceFile>
-                    <jsSourceFile>ui.js</jsSourceFile>
-                    <jsSourceFile>util.js</jsSourceFile>
-                    <jsSourceFile>login.js</jsSourceFile>
-                    <jsSourceFile>tracking.js</jsSourceFile>
-                  </jsSourceFiles>
-                  <jsFinalFile>reader.login.js</jsFinalFile>
-                </configuration>
-                <goals>
-                  <goal>minify</goal>
-                </goals>
-              </execution>
-              
-              <execution>
-                <id>newpwd-minify</id>
-                <phase>process-resources</phase>
-                <configuration>
-                  <jsSourceDir>js</jsSourceDir>
-                  <jsTargetDir>js</jsTargetDir>
-                  <jsSourceFiles>
-                    <jsSourceFile>jquery.i18n.js</jsSourceFile>
-                    <jsSourceFile>jquery.timeago.js</jsSourceFile>
-                    <jsSourceFile>jquery.validate.js</jsSourceFile>
-                    <jsSourceFile>jquery.qtip.js</jsSourceFile>
-                    <jsSourceFile>jquery.bbq.js</jsSourceFile>
-                    <jsSourceFile>main.js</jsSourceFile>
-                    <jsSourceFile>ui.js</jsSourceFile>
-                    <jsSourceFile>util.js</jsSourceFile>
-                    <jsSourceFile>newpwd.js</jsSourceFile>
-                  </jsSourceFiles>
-                  <jsFinalFile>reader.newpwd.js</jsFinalFile>
-                </configuration>
-                <goals>
-                  <goal>minify</goal>
-                </goals>
-              </execution>
             </executions>
-          </plugin>-->
+          </plugin>
           
           <!-- Ant task to modify the JS/CSS imports -->
           <plugin>
@@ -465,8 +395,6 @@
                     
                     <property name="webapp.dir" location="${basedir}/src/main/webapp"/>
                     <property name="war.dir" location="${project.build.directory}/${project.artifactId}-${project.version}"/>
-                    <echo message="war : ${war.dir}" />
-                    <echo message="webapp : ${webapp.dir}" />
                     
                     <!-- Copy HTML files -->
                     <copy todir="${war.dir}">
@@ -499,45 +427,31 @@
             <version>2.2</version>
             <configuration>
               <warSourceExcludes>
-                **/style/main.css,
-                **/style/jquery.calendar.css,
-                **/style/jquery.colorbox.css,
-                **/style/jquery.jcrop.css,
-                **/style/jquery.qtip.css,
-                **/style/jqueryui.css,
-                **/js/jquery.i18n.js,
-                **/js/jquery.ui.i18n.js,
-                **/js/jquery.jcrop.js,
-                **/js/jquery.qtip.js,
-                **/js/jquery.upload.js,
-                **/js/jquery.cookie.js,
-                **/js/jquery.json.js,
-                **/js/jquery.timeago.js,
-                **/js/jquery.validate.js,
-                **/js/jquery.flot.js,
-                **/js/jquery.flot.crosshair.js,
-                **/js/jquery.calendar.js,
-                **/js/jquery.colorbox.js,
-                **/js/jquery.slides.js,
-                **/js/jquery.jstz.js,
-                **/js/main.js,
-                **/js/tracking.js,
-                **/js/ui.js,
-                **/js/stream.js,
-                **/js/profile.js,
-                **/js/search.js,
-                **/js/view.js,
-                **/js/login.js,
-                **/js/intro.js,
-                **/js/util.js,
-                **/js/newpwd.js,
-                **/js/comment.js,
-                **/js/media.js,
-                **/js/post.js,
-                **/js/track.js,
-                **/js/notification.js,
-                **/js/preference.js,
-                **/js/connect.js,
+                **/javascripts/jquery.less.js,
+                **/javascripts/jquery.ui.js,
+                **/javascripts/jquery.visible.js,
+                **/javascripts/jquery.history.js,
+                **/javascripts/jquery.timeago.js,
+                **/javascripts/jquery.qtip.js,
+                **/javascripts/jquery.toastmessage.js,
+                **/javascripts/jquery.json.js,
+                **/javascripts/jquery.throttle.js,
+                **/javascripts/jquery.i18next.js,
+                **/javascripts/jquery.visible.js,
+                **/javascripts/jquery.validate.js,
+                **/javascripts/r.main.js,
+                **/javascripts/r.user.js,
+                **/javascripts/r.subscription.js,
+                **/javascripts/r.article.js,
+                **/javascripts/r.category.js,
+                **/javascripts/r.feed.js,
+                **/javascripts/r.search.js,
+                **/javascripts/r.settings.js,
+                **/javascripts/r.wizard.js,
+                **/javascripts/r.theme.js,
+                **/javascripts/r.util.js,
+                test/**,
+                sismicsreader/**,
                 *.html
               </warSourceExcludes>
               <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
