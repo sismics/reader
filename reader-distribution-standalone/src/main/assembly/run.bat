@@ -1,1 +1,0 @@
-java -jar reader-standalone.jar

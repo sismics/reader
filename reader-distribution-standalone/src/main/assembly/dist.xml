@@ -13,16 +13,15 @@
       <source>target/sismicsreader.war</source>
       <outputDirectory>/</outputDirectory>
     </file>
-    <file>
-      <source>src/main/assembly/run.bat</source>
-      <outputDirectory>/</outputDirectory>
-    </file>
-    <file>
-      <source>src/main/assembly/run.sh</source>
-      <outputDirectory>/</outputDirectory>
-    </file>
   </files>
   <fileSets>
+    <fileSet>
+      <directory>${project.basedir}/src/main/assembly</directory>
+      <includes>
+        <include>reader.*</include>
+      </includes>
+     <outputDirectory>/</outputDirectory> 
+    </fileSet>
     <fileSet>
       <directory>${project.basedir}/src/main/resources</directory>
       <includes>
