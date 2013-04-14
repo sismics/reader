@@ -98,7 +98,6 @@ ${JAVA} -Xmx${READER_MAX_MEMORY}m \
   -Dreader.port=${READER_PORT} \
   -Dreader.contextPath=${READER_CONTEXT_PATH} \
   -Djava.awt.headless=true \
-  -verbose:gc \
   -jar reader-standalone.jar > ${LOG} 2>&1 &
 
 # Write pid to pidfile if it is defined.

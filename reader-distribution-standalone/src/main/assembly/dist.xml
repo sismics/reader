@@ -1,7 +1,7 @@
 <assembly>
   <id>dist</id>
   <formats>
-    <format>zip</format>
+    <format>tar.gz</format>
   </formats>
   <files>
     <file>
@@ -13,15 +13,18 @@
       <source>target/sismicsreader.war</source>
       <outputDirectory>/</outputDirectory>
     </file>
+    <file>
+      <source>src/main/assembly/reader.bat</source>
+      <outputDirectory>/</outputDirectory>
+    </file>
+    <file>
+      <source>src/main/assembly/reader.sh</source>
+      <outputDirectory>/</outputDirectory>
+      <lineEnding>unix</lineEnding>
+      <fileMode>0755</fileMode>
+    </file>
   </files>
   <fileSets>
-    <fileSet>
-      <directory>${project.basedir}/src/main/assembly</directory>
-      <includes>
-        <include>reader.*</include>
-      </includes>
-     <outputDirectory>/</outputDirectory> 
-    </fileSet>
     <fileSet>
       <directory>${project.basedir}/src/main/resources</directory>
       <includes>
