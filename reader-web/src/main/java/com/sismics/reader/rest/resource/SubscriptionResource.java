@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -429,6 +431,7 @@ public class SubscriptionResource extends BaseResource {
             }
         };
         return Response.ok(stream)
+                .header("Expires", new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z").format(new Date().getTime() + 3600000 * 24 * 7))
                 .header("Content-Disposition", MessageFormat.format("attachment; filename=\"{0}\"", faviconFile.getName()))
                 .build();
     }
