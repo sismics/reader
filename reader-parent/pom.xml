@@ -57,39 +57,87 @@
     <org.eclipse.jetty.jetty-webapp.version>8.1.10.v20130312</org.eclipse.jetty.jetty-webapp.version>
     <org.eclipse.jetty.jetty-servlet.version>8.1.10.v20130312</org.eclipse.jetty.jetty-servlet.version>
     <org.mortbay.jetty.servlet-api.version>3.0.20100224</org.mortbay.jetty.servlet-api.version>
-    <javax.servlet.jsp-api.version>2.0</javax.servlet.jsp-api.version>
     
     <!-- Plugins version -->
+    <org.apache.maven.plugins.maven-antrun-plugin.version>1.7</org.apache.maven.plugins.maven-antrun-plugin.version>
+    <org.apache.maven.plugins.maven-dependency-plugin.version>2.7</org.apache.maven.plugins.maven-dependency-plugin.version>
     <org.apache.maven.plugins.maven-eclipse-plugin.version>2.8</org.apache.maven.plugins.maven-eclipse-plugin.version>
-    <org.codehaus.mojo.exec-maven-plugin.version>1.2.1</org.codehaus.mojo.exec-maven-plugin.version>
-    <org.codehaus.cargo.cargo-maven2-plugin.version>1.2.0</org.codehaus.cargo.cargo-maven2-plugin.version>
     <org.apache.maven.plugins.maven-jar-plugin.version>2.4</org.apache.maven.plugins.maven-jar-plugin.version>
+    <org.apache.maven.plugins.maven-war-plugin.version>2.2</org.apache.maven.plugins.maven-war-plugin.version>
+    <org.codehaus.cargo.cargo-maven2-plugin.version>1.2.0</org.codehaus.cargo.cargo-maven2-plugin.version>
     <org.mortbay.jetty.jetty-maven-plugin.version>8.1.2.v20120308</org.mortbay.jetty.jetty-maven-plugin.version>
     <org.vafer.jdeb.version>1.0.1</org.vafer.jdeb.version>
-    <org.codehaus.mojo.rpm-maven-plugin.version>2.1-alpha-3-SNAPSHOT</org.codehaus.mojo.rpm-maven-plugin.version>
+    <org.codehaus.mojo.rpm-maven-plugin.version>2.1-alpha-2</org.codehaus.mojo.rpm-maven-plugin.version>
+    <org.eclipse.m2e.lifecycle-mapping.version>1.0.0</org.eclipse.m2e.lifecycle-mapping.version>
+    <com.samaxes.maven.minify-maven-plugin.version>1.7</com.samaxes.maven.minify-maven-plugin.version>
   </properties> 
 
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>${org.apache.maven.plugins.maven-antrun-plugin.version}</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>${org.apache.maven.plugins.maven-dependency-plugin.version}</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-eclipse-plugin</artifactId>
         <version>${org.apache.maven.plugins.maven-eclipse-plugin.version}</version>
       </plugin>
+      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>${org.apache.maven.plugins.maven-jar-plugin.version}</version>
       </plugin>
+      
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>${org.codehaus.mojo.exec-maven-plugin.version}</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>${org.apache.maven.plugins.maven-war-plugin.version}</version>
       </plugin>
+      
       <plugin>
         <groupId>org.codehaus.cargo</groupId>
         <artifactId>cargo-maven2-plugin</artifactId>
         <version>${org.codehaus.cargo.cargo-maven2-plugin.version}</version>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${org.mortbay.jetty.jetty-maven-plugin.version}</version>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.eclipse.m2e</groupId>
+        <artifactId>lifecycle-mapping</artifactId>
+        <version>${org.eclipse.m2e.lifecycle-mapping.version}</version>
+      </plugin>
+      
+      <plugin>
+        <groupId>com.samaxes.maven</groupId>
+        <artifactId>minify-maven-plugin</artifactId>
+        <version>${com.samaxes.maven.minify-maven-plugin.version}</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.vafer</groupId>
+        <artifactId>jdeb</artifactId>
+        <version>${org.vafer.jdeb.version}</version>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>rpm-maven-plugin</artifactId>
+        <version>${org.codehaus.mojo.rpm-maven-plugin.version}</version>
       </plugin>
     </plugins>
   </build>
@@ -98,11 +146,19 @@
     <module>../reader-core</module>
     <module>../reader-web</module>
     <module>../reader-web-common</module>
-    <module>../reader-distribution-standalone</module>
-    <module>../reader-distribution-debian</module>
-    <module>../reader-distribution-redhat</module>
   </modules>
   
+  <profiles>
+    <profile>
+      <id>prod</id>
+      <modules>
+        <module>../reader-distribution-standalone</module>
+        <module>../reader-distribution-debian</module>
+        <module>../reader-distribution-redhat</module>
+      </modules>
+    </profile>
+  </profiles>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -164,12 +220,6 @@
         <groupId>org.mortbay.jetty</groupId>
         <artifactId>servlet-api</artifactId>
         <version>${org.mortbay.jetty.servlet-api.version}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>jsp-api</artifactId>
-        <version>${javax.servlet.jsp-api.version}</version>
       </dependency>
       
       <dependency>
