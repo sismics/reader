@@ -1,0 +1,17 @@
+#!/bin/sh
+
+mkdir -p /var/reader
+ln -sf /usr/share/reader/reader.sh /usr/bin/reader
+chmod 750 /var/reader
+
+# Clear jetty cache.
+rm -rf /var/reader/jetty
+
+# For SELinux: Set security context
+chcon -t java_exec_t /etc/init.d/reader 2>/dev/null
+
+# Configure and start Reader service.
+chkconfig --add reader
+service reader start
+
+exit 0

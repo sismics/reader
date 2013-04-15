@@ -39,7 +39,7 @@
                 <artifactItem>
 				  <groupId>com.sismics.reader</groupId>
 				  <artifactId>reader-distribution-standalone</artifactId>
-                  <version>1.0-SNAPSHOT</version>
+                  <version>${reader.version}</version>
 				  <type>tar.gz</type>
                   <classifier>dist</classifier>
                   <overWrite>false</overWrite>
@@ -111,28 +111,6 @@
                     <filemode>755</filemode>
                   </mapper>
                 </data>
-      
-                <!-- <data>
-                  <type>link</type>
-                  <symlink>true</symlink>
-                  <linkName>/usr/share/java/jdeb.jar</linkName>
-                  <linkTarget>/usr/share/jdeb/lib/${project.build.finalName}.jar</linkTarget>
-                </data>-->
-      
-                <!-- <data>
-                  <type>template</type>
-                  <paths>
-                    <path>etc/${project.artifactId}</path>
-                    <path>var/lib/${project.artifactId}</path>
-                    <path>var/log/${project.artifactId}</path>
-                    <path>var/run/${project.artifactId}</path>
-                  </paths>
-                  <mapper>
-                    <type>perm</type>
-                    <user>sismicsreader</user>
-                    <group>sismicsreader</group>
-                  </mapper>
-                </data>-->
               </dataSet>
             </configuration>
           </execution>

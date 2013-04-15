@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Only do it if uninstalling, not upgrading.
+if [ $1 = 0 ] ; then
+  # Stop the service.
+  [ -e /etc/init.d/reader ] && service reader stop
+
+  # Remove symlink.
+  rm -f /usr/bin/reader
+
+  # Remove startup scripts.
+  chkconfig --del reader
+fi
+
+exit 0

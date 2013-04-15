@@ -1,0 +1,24 @@
+#
+# This is the configuration file for the Sismics Reader service
+# (/etc/init.d/reader)
+#
+# To change the startup parameters of Reader, modify
+# the READER_ARGS variable below.
+#
+# Type "reader --help" on the command line to read an
+# explanation of the different options.
+#
+# For example, to specify that Reader should use port 80 (for http)
+# and use a Java memory heap size of 200 MB, use the following:
+#
+# READER_ARGS="--port=80 --max-memory=200"
+
+READER_ARGS="--max-memory=150"
+
+
+# The user which should run the Reader process. Default "root".
+# Note that non-root users are by default not allowed to use ports
+# below 1024. Also make sure to grant the user write permissions in
+# the music directories, otherwise changing album art and tags will fail.
+
+READER_USER=root

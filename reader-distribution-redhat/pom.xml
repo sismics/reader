@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <groupId>com.sismics.reader</groupId>
+    <artifactId>reader-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../reader-parent</relativePath>
+  </parent>
+  
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>reader-distribution-redhat</artifactId>
+  <packaging>jar</packaging>
+  <name>Reader Red Hat Distribution</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.sismics.reader</groupId>
+      <artifactId>reader-distribution-standalone</artifactId>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>package</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+				  <groupId>com.sismics.reader</groupId>
+				  <artifactId>reader-distribution-standalone</artifactId>
+                  <version>${reader.version}</version>
+				  <type>tar.gz</type>
+                  <classifier>dist</classifier>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${project.build.directory}</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+		</executions>
+      </plugin>
+
+      <!-- 
+        Note: The rpm-maven-plugin needs to rpm command to build.
+        See http://crlog.info/2012/09/11/building-rpms-on-windows/ for instructions
+        on how to build RPMs on Windows. -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>rpm-maven-plugin</artifactId>
+        <version>${org.codehaus.mojo.rpm-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>rpm</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <name>reader</name>
+          <version>${reader.version}</version>
+          <targetOS>linux</targetOS> 
+          <copyright>GPLv2</copyright>
+          <group>Application/Internet</group>
+          <packager>Sismics</packager>
+          <vendor>Sismics</vendor>
+          <url>http://www.sismics.com/reader/</url>
+          <targetArchitecture>i586</targetArchitecture>
+          <summary>A Web-based aggregator of content served by Web Feeds</summary>
+          <description>Reader is a Web-based aggregator of content served by Web Feeds.
+ 
+Java 1.6 or higher is required to run Reader.
+ 
+More information can be found at http://reader.sismics.com/</description>
+          <defineStatements>
+            <defineStatement>_unpackaged_files_terminate_build 0</defineStatement>
+          </defineStatements>
+          <mappings>
+            <mapping>
+              <directory>/etc/init.d</directory>
+              <directoryIncluded>false</directoryIncluded>
+              <username>root</username>
+              <groupname>root</groupname>
+              <filemode>755</filemode>
+              <sources>
+                <source>
+                  <location>src/main/package/etc/init.d/reader</location>
+                </source>
+              </sources>
+            </mapping>
+
+            <mapping>
+              <directory>/etc/sysconfig</directory>
+              <directoryIncluded>false</directoryIncluded>
+              <username>root</username>
+              <groupname>root</groupname>
+              <sources>
+                <source>
+                  <location>src/main/package/etc/sysconfig/reader</location>
+                </source>
+              </sources>
+            </mapping>
+
+            <mapping>
+              <directory>/usr/share/reader</directory>
+              <username>root</username>
+              <groupname>root</groupname>
+              <sources>
+                <source>
+                  <location>target/reader-distribution-standalone-${reader.version}</location>
+                  <excludes>
+                    <exclude>reader.sh</exclude>
+                    <exclude>reader.bat</exclude>
+                  </excludes>
+                </source>
+              </sources>
+            </mapping>
+
+            <mapping>
+              <directory>/usr/share/reader</directory>
+              <username>root</username>
+              <groupname>root</groupname>
+              <filemode>755</filemode>
+              <sources>
+                <source>
+                  <location>target/reader-distribution-standalone-${reader.version}/reader.sh</location>
+                </source>
+              </sources>
+            </mapping>
+          </mappings>
+          
+          <preinstallScriptlet>
+            <scriptFile>src/main/rpm/script/preinstall</scriptFile>
+          </preinstallScriptlet>
+          
+          <postinstallScriptlet>
+            <scriptFile>src/main/rpm/script/postinstall</scriptFile>
+          </postinstallScriptlet>
+          
+          <preremoveScriptlet>
+            <scriptFile>src/main/rpm/script/preremove</scriptFile>
+          </preremoveScriptlet>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

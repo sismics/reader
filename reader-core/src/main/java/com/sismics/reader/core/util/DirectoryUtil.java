@@ -35,7 +35,7 @@ public class DirectoryUtil {
                         baseDataDir.mkdirs();
                     }
                 } else if (EnvironmentUtil.isUnix()) {
-                    baseDataDir = new File("/var/sismicsreader");
+                    baseDataDir = new File("/var/reader");
                     if (!baseDataDir.isDirectory()) {
                         baseDataDir.mkdirs();
                     }

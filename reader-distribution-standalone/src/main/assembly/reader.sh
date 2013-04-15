@@ -8,7 +8,7 @@
 #
 #################################################################
 
-READER_HOME=/var/sismicsreader
+READER_HOME=/var/reader
 #READER_HOST=0.0.0.0
 #READER_PORT=4001
 #READER_CONTEXT_PATH=/
@@ -21,7 +21,7 @@ usage() {
     echo "Usage: reader.sh [options]"
     echo "  --help               This small usage guide."
     echo "  --home=DIR           The directory where reader will create its files (database, index...)"
-    echo "                       Make sure it is writable. Default: /var/sismicsreader"
+    echo "                       Make sure it is writable. Default: /var/reader"
     echo "  --host=HOST          The host name or IP address on which to bind Reader."
     echo "                       Only relevant if you have multiple network interfaces and want"
     echo "                       to make Reader available on only one of them. The default value 0.0.0.0"
