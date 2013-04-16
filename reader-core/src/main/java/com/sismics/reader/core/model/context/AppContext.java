@@ -107,7 +107,7 @@ public class AppContext {
     /**
      * Returns a single instance of the application context.
      * 
-     * @return Contexte applicatif
+     * @return Application context
      */
     public static AppContext getInstance() {
         if (instance == null) {

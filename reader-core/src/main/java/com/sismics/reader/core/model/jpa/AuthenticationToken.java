@@ -85,7 +85,7 @@ public class AuthenticationToken {
     }
 
     /**
-     * Getter de longLasted.
+     * Getter of longLasted.
      *
      * @return longLasted
      */
@@ -94,7 +94,7 @@ public class AuthenticationToken {
     }
 
     /**
-     * Setter de longLasted.
+     * Setter of longLasted.
      *
      * @param longLasted longLasted
      */

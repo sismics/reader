@@ -35,7 +35,7 @@ public class FeedCriteria {
     }
 
     /**
-     * Getter de withUserSubscription.
+     * Getter of withUserSubscription.
      *
      * @return withUserSubscription
      */
@@ -44,7 +44,7 @@ public class FeedCriteria {
     }
 
     /**
-     * Setter de withUserSubscription.
+     * Setter of withUserSubscription.
      *
      * @param withUserSubscription withUserSubscription
      */

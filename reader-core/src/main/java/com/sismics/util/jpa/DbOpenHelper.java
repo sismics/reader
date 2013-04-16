@@ -103,7 +103,7 @@ public abstract class DbOpenHelper {
             } else {
                 // Execute update script
                 log.info("Executing database inscremental update scripts");
-                onUpgrade(oldVersion, 42);
+                onUpgrade(oldVersion, 42); // TODO complete upgrade scripting
                 log.info("Database upgrade complete");
             }
         } catch (Exception e) {

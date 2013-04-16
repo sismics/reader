@@ -187,7 +187,7 @@ public class User {
     }
 
     /**
-     * Getter de theme.
+     * Getter of theme.
      *
      * @return theme
      */
@@ -196,7 +196,7 @@ public class User {
     }
 
     /**
-     * Setter de theme.
+     * Setter of theme.
      *
      * @param theme theme
      */

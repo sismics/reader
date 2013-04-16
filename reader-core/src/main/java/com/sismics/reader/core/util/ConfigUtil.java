@@ -2,9 +2,6 @@ package com.sismics.reader.core.util;
 
 import java.util.ResourceBundle;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.sismics.reader.core.constant.ConfigType;
 import com.sismics.reader.core.dao.jpa.ConfigDao;
 import com.sismics.reader.core.model.jpa.Config;
@@ -15,11 +12,6 @@ import com.sismics.reader.core.model.jpa.Config;
  * @author jtremeaux
  */
 public class ConfigUtil {
-    /**
-     * Logger.
-     */
-    private static final Logger log = LoggerFactory.getLogger(ConfigUtil.class);
-
     /**
      * Returns the textual value of a configuration parameter.
      * 

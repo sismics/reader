@@ -517,7 +517,7 @@ public class RssReader extends DefaultHandler {
     }
 
     /**
-     * Getter de url.
+     * Getter of url.
      *
      * @return url
      */
