@@ -19,7 +19,7 @@ Features
 - OPML import / export
 - Skinnable
 
-See <http://reader.sismics.com/> for a list of features and benefits.
+See <http://www.sismics.com/reader/> for a list of features and benefits.
 
 License
 -------

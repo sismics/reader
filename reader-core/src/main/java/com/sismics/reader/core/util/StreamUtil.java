@@ -15,7 +15,7 @@ public class StreamUtil {
      * User-Agent to use.
      * Note: some servers refuse to talk to the default user-agent and issue a 403 Bad Behavior.
      */
-    private static final String USER_AGENT = "Mozilla/4.0 (compatible; SismicsReaderBot/1.0;+http://reader.sismics.com/)";
+    private static final String USER_AGENT = "Mozilla/4.0 (compatible; SismicsReaderBot/1.0;+http://www.sismics.com/reader/)";
 
     /**
      * Open a stream from a URL.
