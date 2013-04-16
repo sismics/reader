@@ -3,7 +3,8 @@ package com.sismics.reader.core.model.context;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.lucene.store.Directory;
@@ -92,17 +93,21 @@ public class AppContext {
         
         asyncExecutorList = new ArrayList<ExecutorService>();
         
-        ExecutorService asyncExecutor = Executors.newSingleThreadExecutor(); 
+        ExecutorService asyncExecutor = getAsyncExecutor(); 
         asyncExecutorList.add(asyncExecutor);
         asyncEventBus = new AsyncEventBus(asyncExecutor);
         asyncEventBus.register(new ArticleCreatedAsyncListener());
         asyncEventBus.register(new FaviconUpdateRequestedAsyncListener());
 
-        ExecutorService mailExecutor = Executors.newSingleThreadExecutor(); 
+        ExecutorService mailExecutor = new ThreadPoolExecutor(1, 1,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>()); 
         asyncExecutorList.add(mailExecutor);
         mailEventBus = new AsyncEventBus(mailExecutor);
 
-        ExecutorService importExecutor = Executors.newSingleThreadExecutor(); 
+        ExecutorService importExecutor = new ThreadPoolExecutor(1, 1,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>()); 
         asyncExecutorList.add(importExecutor);
         importEventBus = new AsyncEventBus(importExecutor);
         importEventBus.register(new OpmlImportAsyncListener());
@@ -127,6 +132,17 @@ public class AppContext {
     public void waitForAsync() {
         try {
             for (ExecutorService executor : asyncExecutorList) {
+                // Wait for executor to finish
+                ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) executor;
+                for (int i = 0; i < 10 && threadPoolExecutor.getActiveCount() > 0; i++) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        // NOP
+                    }
+                }
+                
+                // Shutdown executor, don't accept any more tasks (can cause error with nested events)
                 try {
                     executor.shutdown();
                     executor.awaitTermination(60, TimeUnit.SECONDS);
@@ -137,6 +153,17 @@ public class AppContext {
         } finally {
             resetEventBus();
         }
+    }
+
+    /**
+     * Returns a new asynchronous exceutor.
+     * 
+     * @return Async executor
+     */
+    private ExecutorService getAsyncExecutor() {
+        return new ThreadPoolExecutor(1, 1,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>());
     }
 
     /**
