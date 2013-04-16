@@ -55,6 +55,15 @@ public class EnvironmentUtil {
     }
 
     /**
+     * Returns true if we are in a unit testing environment.
+     * 
+     * @return Unit testing environment
+     */
+    public static boolean isUnitTest() {
+        return WEBAPP_ROOT == null;
+    }
+
+    /**
      * Returns the MS Windows AppData directory of this user.
      * 
      * @return AppData directory

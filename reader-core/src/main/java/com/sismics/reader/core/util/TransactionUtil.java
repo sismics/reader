@@ -26,7 +26,13 @@ public class TransactionUtil {
      * @param runnable
      */
     public static void handle(Runnable runnable) {
-        EntityManager em = null;
+        EntityManager em = ThreadLocalContext.get().getEntityManager();
+        
+        if (em != null) {
+            // We are already in a transactional context, nothing to do
+            runnable.run();
+            return;
+        }
         
         try {
             em = EMF.get().createEntityManager();

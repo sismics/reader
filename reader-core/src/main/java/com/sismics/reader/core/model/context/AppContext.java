@@ -17,6 +17,7 @@ import com.sismics.reader.core.listener.async.OpmlImportAsyncListener;
 import com.sismics.reader.core.listener.sync.DeadEventListener;
 import com.sismics.reader.core.service.FeedService;
 import com.sismics.reader.core.service.IndexingService;
+import com.sismics.util.EnvironmentUtil;
 
 /**
  * Global application context.
@@ -37,17 +38,17 @@ public class AppContext {
     /**
      * Generic asynchronous event bus.
      */
-    private AsyncEventBus asyncEventBus;
+    private EventBus asyncEventBus;
 
     /**
      * Asynchronous event bus for emails.
      */
-    private AsyncEventBus mailEventBus;
+    private EventBus mailEventBus;
     
     /**
      * Asynchronous event bus for mass imports.
      */
-    private AsyncEventBus importEventBus;
+    private EventBus importEventBus;
 
     /**
      * Feed service.
@@ -93,23 +94,13 @@ public class AppContext {
         
         asyncExecutorList = new ArrayList<ExecutorService>();
         
-        ExecutorService asyncExecutor = getAsyncExecutor(); 
-        asyncExecutorList.add(asyncExecutor);
-        asyncEventBus = new AsyncEventBus(asyncExecutor);
+        asyncEventBus = newAsyncEventBus();
         asyncEventBus.register(new ArticleCreatedAsyncListener());
         asyncEventBus.register(new FaviconUpdateRequestedAsyncListener());
 
-        ExecutorService mailExecutor = new ThreadPoolExecutor(1, 1,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>()); 
-        asyncExecutorList.add(mailExecutor);
-        mailEventBus = new AsyncEventBus(mailExecutor);
+        mailEventBus = newAsyncEventBus();
 
-        ExecutorService importExecutor = new ThreadPoolExecutor(1, 1,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>()); 
-        asyncExecutorList.add(importExecutor);
-        importEventBus = new AsyncEventBus(importExecutor);
+        importEventBus = newAsyncEventBus();
         importEventBus.register(new OpmlImportAsyncListener());
     }
 
@@ -130,18 +121,11 @@ public class AppContext {
      * /!\ Must be used only in unit tests and never a multi-user environment. 
      */
     public void waitForAsync() {
+        if (EnvironmentUtil.isUnitTest()) {
+            return;
+        }
         try {
             for (ExecutorService executor : asyncExecutorList) {
-                // Wait for executor to finish
-                ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) executor;
-                for (int i = 0; i < 10 && threadPoolExecutor.getActiveCount() > 0; i++) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        // NOP
-                    }
-                }
-                
                 // Shutdown executor, don't accept any more tasks (can cause error with nested events)
                 try {
                     executor.shutdown();
@@ -156,14 +140,20 @@ public class AppContext {
     }
 
     /**
-     * Returns a new asynchronous exceutor.
+     * Creates a new asynchronous event bus.
      * 
-     * @return Async executor
+     * @return Async event bus
      */
-    private ExecutorService getAsyncExecutor() {
-        return new ThreadPoolExecutor(1, 1,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>());
+    private EventBus newAsyncEventBus() {
+        if (EnvironmentUtil.isUnitTest()) {
+            return new EventBus();
+        } else {
+            ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 1,
+                    0L, TimeUnit.MILLISECONDS,
+                    new LinkedBlockingQueue<Runnable>());
+            asyncExecutorList.add(executor);
+            return new AsyncEventBus(executor);
+        }
     }
 
     /**
@@ -180,7 +170,7 @@ public class AppContext {
      *
      * @return asyncEventBus
      */
-    public AsyncEventBus getAsyncEventBus() {
+    public EventBus getAsyncEventBus() {
         return asyncEventBus;
     }
 
@@ -189,7 +179,7 @@ public class AppContext {
      *
      * @return mailEventBus
      */
-    public AsyncEventBus getMailEventBus() {
+    public EventBus getMailEventBus() {
         return mailEventBus;
     }
 
@@ -198,7 +188,7 @@ public class AppContext {
      *
      * @return importEventBus
      */
-    public AsyncEventBus getImportEventBus() {
+    public EventBus getImportEventBus() {
         return importEventBus;
     }
 
