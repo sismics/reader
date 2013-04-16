@@ -22,6 +22,7 @@ import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.TransactionUtil;
+import com.sismics.util.EnvironmentUtil;
 import com.sismics.util.context.ThreadLocalContext;
 import com.sismics.util.jpa.EMF;
 
@@ -41,6 +42,10 @@ public class RequestContextFilter implements Filter {
         // Force the locale in order to not depend on the execution environment
         Locale.setDefault(new Locale(Constants.DEFAULT_LOCALE_ID));
 
+        // Injects the webapp root
+        String webappRoot = filterConfig.getServletContext().getRealPath("/");
+        EnvironmentUtil.setWebappRoot(webappRoot);
+        
         // Initialize the app directory
         File baseDataDirectory = null;
         try {

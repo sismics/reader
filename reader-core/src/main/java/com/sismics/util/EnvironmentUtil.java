@@ -1,5 +1,6 @@
 package com.sismics.util;
 
+
 /**
  * Environment properties utilities.
  *
@@ -15,8 +16,13 @@ public class EnvironmentUtil {
 
     private static String MAC_OS_USER_HOME = System.getProperty("user.home");
     
-    private static String WEBAPP_ROOT = System.getProperty("webapp.root");
+    private static String READER_HOME = System.getProperty("reader.home");
 
+    /**
+     * Web application root.
+     */
+    private static String webappRoot;
+    
     /**
      * Returns true if running under Microsoft Windows.
      * 
@@ -50,7 +56,7 @@ public class EnvironmentUtil {
      * @return Development environment
      */
     public static boolean isDev() {
-        return EnvironmentUtil.getWebappRoot() == null ||
+        return webappRoot == null ||
                 SISMICS_READER_ENV != null && "dev".equals(SISMICS_READER_ENV);
     }
 
@@ -60,7 +66,7 @@ public class EnvironmentUtil {
      * @return Unit testing environment
      */
     public static boolean isUnitTest() {
-        return WEBAPP_ROOT == null;
+        return webappRoot == null;
     }
 
     /**
@@ -82,12 +88,29 @@ public class EnvironmentUtil {
     }
 
     /**
-     * Return the webapp root.
+     * Returns the home directory of Reader (e.g. /var/reader).
      * 
-     * @return Webapp root
+     * @return Home directory
      */
-    public static String getWebappRoot() {
-        return WEBAPP_ROOT;
+    public static String getReaderHome() {
+        return READER_HOME;
     }
 
+    /**
+     * Getter of webappRoot.
+     *
+     * @return webappRoot
+     */
+    public static String getWebappRoot() {
+        return webappRoot;
+    }
+
+    /**
+     * Setter of webappRoot.
+     *
+     * @param webappRoot webappRoot
+     */
+    public static void setWebappRoot(String webappRoot) {
+        EnvironmentUtil.webappRoot = webappRoot;
+    }
 }

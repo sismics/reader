@@ -257,10 +257,6 @@
             <configuration>
               <systemProperties>
                 <systemProperty>
-                  <name>webapp.root</name>
-                  <value>${basedir}/src/main/webapp</value>
-                </systemProperty>
-                <systemProperty>
                   <name>sismicsreader_env</name>
                   <value>dev</value>
                 </systemProperty>

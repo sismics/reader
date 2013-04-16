@@ -2,6 +2,8 @@ package com.sismics.reader.core.util;
 
 import java.io.File;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.sismics.util.EnvironmentUtil;
 
 /**
@@ -10,7 +12,6 @@ import com.sismics.util.EnvironmentUtil;
  * @author jtremeaux
  */
 public class DirectoryUtil {
-
     /**
      * Returns the base data directory.
      * 
@@ -18,12 +19,17 @@ public class DirectoryUtil {
      */
     public static File getBaseDataDirectory() {
         File baseDataDir = null;
-        String webappRoot = EnvironmentUtil.getWebappRoot();
-        if (webappRoot != null) {
+        if (EnvironmentUtil.getWebappRoot() != null) {
             // We are in a webapp environment
-            if (EnvironmentUtil.isDev()) {
-                // Use the base of the Web directory
-                baseDataDir = new File(webappRoot + File.separator + "sismicsreader");
+            if (StringUtils.isNotBlank(EnvironmentUtil.getReaderHome())) {
+                // If the reader.home property is set then use it
+                baseDataDir = new File(EnvironmentUtil.getReaderHome());
+                if (!baseDataDir.isDirectory()) {
+                    baseDataDir.mkdirs();
+                }
+            } else if (EnvironmentUtil.isDev()) {
+                // Use the base of the Webapp directory
+                baseDataDir = new File(EnvironmentUtil.getWebappRoot() + File.separator + "sismicsreader");
                 if (!baseDataDir.isDirectory()) {
                     baseDataDir.mkdirs();
                 }
