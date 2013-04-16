@@ -35,7 +35,7 @@ public class TestSearchResource extends BaseJerseyTest {
         WebResource subscriptionResource = resource().path("/subscription");
         subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
         MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://www.bgamard.org/reader/feed_rss2_korben.xml");
+        postParams.add("url", "http://sismics.bgamard.org/reader_test/feed_rss2_korben.xml");
         ClientResponse response = subscriptionResource.put(ClientResponse.class, postParams);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         JSONObject json = response.getEntity(JSONObject.class);
@@ -45,7 +45,7 @@ public class TestSearchResource extends BaseJerseyTest {
         // Wait indexing
         AppContext.getInstance().waitForAsync();
         
-        // Search zelda
+        // Search "zelda"
         WebResource searchResource = resource().path("/search/zelda");
         searchResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
         response = searchResource.get(ClientResponse.class);
@@ -56,7 +56,7 @@ public class TestSearchResource extends BaseJerseyTest {
         JSONObject article = articles.getJSONObject(0);
         Assert.assertEquals("Quand Zelda prend les armes", article.getString("title"));
         
-        // Search something
+        // Search "something"
         searchResource = resource().path("/search/something");
         searchResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
         response = searchResource.get(ClientResponse.class);
@@ -65,7 +65,7 @@ public class TestSearchResource extends BaseJerseyTest {
         articles = json.getJSONArray("articles");
         Assert.assertEquals(0, articles.length());
         
-        // Search wifi
+        // Search "wifi"
         searchResource = resource().path("/search/wifi");
         searchResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
         response = searchResource.get(ClientResponse.class);
@@ -75,5 +75,14 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(2, articles.length());
         Assert.assertEquals("Récupérer les clés wifi sur un téléphone Android", articles.getJSONObject(0).getString("title"));
         Assert.assertEquals("Partagez vos clés WiFi avec vos amis", articles.getJSONObject(1).getString("title"));
+        
+        // Search "google keep"
+        searchResource = resource().path("/search/google%20keep");
+        searchResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
+        response = searchResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        articles = json.getJSONArray("articles");
+        Assert.assertEquals(2, articles.length());
     }
 }

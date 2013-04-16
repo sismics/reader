@@ -83,11 +83,12 @@ public class ArticleDao {
      * @throws Exception
      */
     public List<String> search(PaginatedList<UserArticleDto> paginatedList, List<String> feedList, String searchQuery) throws Exception {
-        // Escape query
-        searchQuery = QueryParserUtil.escape(searchQuery);
+        // Escape query and add quotes so QueryParser generate a PhraseQuery
+        searchQuery = "\"" + QueryParserUtil.escape(searchQuery) + "\"";
         
         // Build search query
         StandardQueryParser qpHelper = new StandardQueryParser(new StandardAnalyzer(Version.LUCENE_42));
+        qpHelper.setPhraseSlop(100000); // PhraseQuery add terms
         Query titleQuery = qpHelper.parse(searchQuery, "title");
         Query descriptionQuery = qpHelper.parse(searchQuery, "description");
         
