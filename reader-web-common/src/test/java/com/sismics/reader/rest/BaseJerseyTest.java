@@ -59,7 +59,7 @@ public abstract class BaseJerseyTest extends JerseyTest {
         wiser.start();
         
         String httpRoot = new File(getClass().getResource("/").getFile()).toString();
-        httpServer =  HttpServer.createSimpleServer(httpRoot, "127.0.0.1", 2501);
+        httpServer =  HttpServer.createSimpleServer(httpRoot, "127.0.0.1", 9997);
         httpServer.start();
     }
 

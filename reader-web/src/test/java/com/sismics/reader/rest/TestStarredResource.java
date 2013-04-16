@@ -34,7 +34,7 @@ public class TestStarredResource extends BaseJerseyTest {
         WebResource subscriptionResource = resource().path("/subscription");
         subscriptionResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
         MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://localhost:2501/http/feeds/korben.xml");
+        postParams.add("url", "http://localhost:9997/http/feeds/korben.xml");
         ClientResponse response = subscriptionResource.put(ClientResponse.class, postParams);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         JSONObject json = response.getEntity(JSONObject.class);
