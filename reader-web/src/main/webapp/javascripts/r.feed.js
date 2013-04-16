@@ -95,6 +95,7 @@ r.feed.init = function() {
       $('#toolbar > .category').removeClass('hidden');
     } else if (target.substring(0, 7) == 'search/') {
       // Configuring context for /search/query
+      r.feed.context.unread = false;
       r.feed.context.url = r.util.url.search.replace('{query}', target.substring(7));
       
       // Specific toolbar actions for search
