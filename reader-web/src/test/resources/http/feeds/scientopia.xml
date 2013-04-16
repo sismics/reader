@@ -1,0 +1,1170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Good Math, Bad Math</title>
+	<atom:link href="http://scientopia.org/blogs/goodmath/feed/" rel="self" type="application/rss+xml" />
+	<link>http://scientopia.org/blogs/goodmath</link>
+	<description>Just another Scientopia Blogs site</description>
+	<lastBuildDate>Wed, 10 Apr 2013 21:28:50 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.5.1</generator>
+		<item>
+		<title>What the heck is a DNS amplification DoS attack?</title>
+		<link>http://scientopia.org/blogs/goodmath/2013/04/08/what-the-heck-is-a-dns-amplification-dos-attack/</link>
+		<comments>http://scientopia.org/blogs/goodmath/2013/04/08/what-the-heck-is-a-dns-amplification-dos-attack/#comments</comments>
+		<pubDate>Mon, 08 Apr 2013 15:37:24 +0000</pubDate>
+		<dc:creator>MarkCC</dc:creator>
+				<category><![CDATA[Basics]]></category>
+		<category><![CDATA[woo]]></category>
+		<category><![CDATA[amplification]]></category>
+		<category><![CDATA[ddos]]></category>
+		<category><![CDATA[dos]]></category>
+		<category><![CDATA[internet]]></category>
+		<category><![CDATA[software]]></category>
+
+		<guid isPermaLink="false">http://scientopia.org/blogs/goodmath/?p=2164</guid>
+		<description><![CDATA[A couple of weeks ago, there was a bunch of news about a major DOS attack on Spamhaus. Spamhaus is an online service that maintains a blacklist of mail servers that are known for propagating spam. I've been getting questions about what a DoS attack is, and more specifically what a "DNS amplification attack" (the [...]]]></description>
+				<content:encoded><![CDATA[<p> A couple of weeks ago, there was a bunch of news about a major DOS attack on Spamhaus. Spamhaus is an online service that maintains a blacklist of mail servers that are known for propagating spam.  I've been getting questions about what a DoS attack is, and more specifically what a "DNS amplification attack" (the specific attack at the heart of last week's news) is. This all became a bit more relevant to me last week, because some asshole who was offended by my post about the Adria Richards affair launched a smallish DoS attack against scientopia. (This is why we were interrmitently very slow last week, between tuesday and thursday. Also, to be clear, the DNS amplification attack was used on Spamhaus. Scientopia was hit by a good old fashioned DDoS attack.)</p>
+<p> So what is a DoS attack? And what specifically is a DNS amplification attack?</p>
+<p> Suppose that you're a nastly person who wants to take down a website like scientopia.  How could you do it? You could hack in to the server, and delete everything. That would kill it pretty effectively, right?</p>
+<p> It certainly would. But from the viewpoint of an attacker, that's not a particularly easy thing to do. You'd need to get access to a privileged account on our server. Even if we're completely up to date on patches and security fixes, it's probably <em>possible</em> to do that, but it's still probably going to be a lot of work. Even for a dinky site like scientopia, getting that kind of access probably isn't trivial. For a big security-focused site like spamhaus, that's likely to be close to impossible: there are layers of security that you'd need to get through, and there are people constantly watching for attacks.  Even if you got through, if the site has reliable backups, it won't be down for long, and once they get back up, they'll patch whatever hole you used to get in, so you'd be back to square one. It's a lot of work, and there are much easier ways to take down a site. </p>
+<p> What you, as an attacker, want is a way to take the site down <em>without</em> having any kind of access to the system. You want a way that keeps the site down for as long as you want it down. And you want a way that doesn't leave easily traced connections to you.</p>
+<p> That's where the DoS attack comes in. DoS stands for "denial of service". The idea of a DoS attack is to take a site down without really taking it down. You don't actually kill the server; you just make it impossible for legitimate users to access it. If the sites users can't access the site even though the server is technically still up and running, you've still effectively killed it.</p>
+<p> How do you do that? You overwhelm the server. You target some finite resource on the server, and force it to use up that resource just dealing with requests or traffic that you sent to the server, leaving it with nothing for its legitimate users.</p>
+<p> In terms of the internet, the two resources that people typically target are CPU and network bandwidth.</p>
+<p> Every time that you send a request to a webserver, the server has to do some computation to process that request. The server has a finite amount of computational capability. If you can hit it with enough requests that it spends all of its time processing your requests, then the site becomes unusable, and it effectively goes down.  This is the simplest kind of DoS attack. It's generally done in a form called a DDoS - <em>distributed</em> denial of server attack, where the attacker users thousands or millions of virus-infected computers to send requests. The server gets hit by a vast storm of requests, and it can't distinguish the legitimate requests from the ones generated by the attacker. This is the kind of attack that hit Scientopia last week. We were getting streams of a couple of thousands malformed requests per second. </p>
+<p> This kind of attack can be very effective. It's hard - not impossible, but hard - to fight. You need to identify the common traits of the attackers, and set up some kind of filter to discard those requests. From the attacker's point of view, it's got one problem: price. Most people don't have a personal collection of virus-infected machines that they can use to mount an attack. What they actually do is rent machines! Virus authors run services where they'll use the machines that they've to run an attack for you, for a fee. They typically charge per machine-hour. So to keep a good attack going for a long time is expensive! Another problem with this kind of attack is that the amount of traffic that you can inflict on the server per attacker is also used by the client. The client needs to establish a connection to the server. That consumes CPU, network connections, and bandwidth on the client.  </p>
+<p> The other main DoS vector is network bandwidth.  Every server running a website is connected to the network by a connection with a fixed capacity, called it's bandwidth. A network connection can only carry a certain quantity of information. People love to make fun of the congressman who said that the internet is like a series of tubes, but that's not really a bad analogy. Any given connection is a lot like a pipe. You can only cram so much information through that pipe in a given period of time.  If you can send enough traffic to completely fill that pipe, then the computer on the other end is, effectively, off the network. It can't receive any requests. </p>
+<p> For a big site like spamhaus, it's very hard to get enough machines attacking to effectively kill the site. The amount of bandwidth, and the number of different network paths connecting spamhaus to the internet is huge! The number of infected machines available for an attack is limited, and the cost of using all of them is prohibitive.</p>
+<p> What an attacker would like for killing something like Spamhaus is an attack where the amount of work/cpu/traffic used to generate the attack is much smaller than the amount of work/cpu/traffic used by the server to combat the attack. That's where <em>amplification</em> comes in. You want to find some way of using a small amount of work/traffic on your attacker machines to cause your target to lost a large amount of work/traffic.</p>
+<p> In this recent attack on Spamhaus, they used an amplification attack, that was based on a basic internet infrastructure service called the Domain Name Service (DNS). DNS is the service which is used to convert between the name of a server (like scientopia.org), and its numeric internet address (184.106.221.182). DNS has some technical properties that make it idea for this kind of attack:</p>
+<ol>
+<li> It's not a connection-based service. In most internet services, you establish a connection to a server, and send a request on that connection. The server responds on the same connection.  In a connection-based service, that means two things. First, you need to use just as much bandwidth as the target, because if you drop the connection, the server sees the disconnect and stops processing your request. Second, the server knows who it's connected to, and it always sends the results of a request to the client that requested it. But DNS doesn't work that way. In DNS, you send a request without a connection, and in the request, you provide an address that the response should be sent to. So you can <em>fake</em> a DNS request, by putting someone else's address as the "respond-to" address in the request.</li>
+<li> It's possible to set up DNS to create very large responses to very small requests. There are lots of ways to do this. The important thing is that it's really easy to use DNS in a way that allows you to amplify the amount of data being sent to a server by a factor of 100. In one common form of DNS amplification, you send 60 byte requests, which generate responses larger than 6,000 bytes.</li>
+</ol>
+<p> Put these two properties together, and you get a great attack vector: you can send tiny, cheap requests to a server, which don't cause <em>any</em> incoming traffic on your attacker machine, and which send large quantities of data to your target. Doing this is called a DNS amplification attack: it's an amplification attack which uses properties of DNS to generate large quantities of data send to your server, using small quantities of data sent by your attackers.</p>
+<p> That's exactly what happened to Spamhaus last week. The attackers used a very common DNS extension, which allowed them to amplify 60 byte requests into 4,000 byte responses, and to send the responses to the spamhaus servers. </p>
+<p> There are, of course, more details. (For example, when direct attacks didn't work, they tried an indirect attack that didn't target the spamhaus servers, but instead tried to attack other servers that spamhaus relied on.) But this is the gist.</p>
+<p><a class="a2a_dd a2a_target addtoany_share_save" href="http://www.addtoany.com/share_save#url=http%3A%2F%2Fscientopia.org%2Fblogs%2Fgoodmath%2F2013%2F04%2F08%2Fwhat-the-heck-is-a-dns-amplification-dos-attack%2F&amp;title=What%20the%20heck%20is%20a%20DNS%20amplification%20DoS%20attack%3F" id="wpa2a_2"><img src="http://scientopia.org/blogs/goodmath/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://scientopia.org/blogs/goodmath/2013/04/08/what-the-heck-is-a-dns-amplification-dos-attack/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>A White Boy&#039;s Observations of Sexism and the Adria Richards Fiasco</title>
+		<link>http://scientopia.org/blogs/goodmath/2013/03/28/a-white-boys-observations-of-sexism-and-the-adria-richards-fiasco/</link>
+		<comments>http://scientopia.org/blogs/goodmath/2013/03/28/a-white-boys-observations-of-sexism-and-the-adria-richards-fiasco/#comments</comments>
+		<pubDate>Thu, 28 Mar 2013 16:04:33 +0000</pubDate>
+		<dc:creator>MarkCC</dc:creator>
+				<category><![CDATA[People]]></category>
+		<category><![CDATA[sexism]]></category>
+
+		<guid isPermaLink="false">http://scientopia.org/blogs/goodmath/?p=2156</guid>
+		<description><![CDATA[I've been watching the whole Adria Richards fiasco with a sense of horror and disgust. I'm finally going to say something, but for the most part, it's going to be indirect. See, I'm a white guy, born as a member of an upper middle class white family. That means that I'm awfully lucky. I'm part [...]]]></description>
+				<content:encoded><![CDATA[<p> I've been watching the whole Adria Richards fiasco with a sense of horror and disgust. I'm finally going to say something, but for the most part, it's going to be indirect.</p>
+<p> See, I'm a white guy, born as a member of an upper middle class white family. That means that I'm awfully lucky. I'm part of the group that is, effectively, treated as the normal, default person in most settings. I'm also a guy who's married to a chinese woman, and who's learned a bit about how utterly clueless I am. </p>
+<p> Here's the fundamental issue that underlies all of this, and many similar stories: our society is deeply sexist and racist. We are all raised in an environment in which mens voices are more important than womens. It's so deeply ingrained in us that we don't even notice it.</p>
+<p> What this means is that we are <em>all</em> to some degree, sexist, and racist. When I point this out, people get angry. We also have learned that sexism is a bad thing. So when I say to someone that you are sexist, it's really easy to interpret that as me saying that you're a bad person: sexism is bad, if I'm sexist, them I'm bad. </p>
+<p> But we really can't get away from this reality. We <em>are</em> sexists. For many of us, we're not <em>deliberately</em> sexist, we're not <em>consciously</em> sexist. But we <em>are</em> sexist.</p>
+<p> Here's a really interesting experiment to try, if you have the opportunity. Visit an elementary school classroom. First, just watch the teacher interact with the students while they're teaching. Don't try to count interactions. Just watch. See if you think that any group of kids is getting more attention than any other. Most of the time, you probably will get a feeling that they're paying roughly equal attention to the boys and the girls, or to the white students and the black students.  Then, come back on a different day, and <em>count</em> the number of times that they call on boys versus calling on girls. I've done this, after having the idea suggested by a friend. The result was amazing. I really, honestly believed that the teacher was treating her students (the teacher I did this with was a woman) equally. But when I counted?She was calling on boys <em>twice as often</em> as girls.</p>
+<p> This isn't an unusual outcome. Do some looking online for studies of classroom gender dynamics, and you'll find lots of structured observations that come to the same conclusion.</p>
+<p> My own awakening about these kinds of things came from my time working at IBM. I've told this first story before, but it's really worth repeating.</p>
+<p> One year, I managed the summer intership programs for my department. The previous summer, IBM research had wound up with an intership class consisting of 99% men. (That's not an estimate: that's a real number. That year, IBM research hired 198 summer interns, of whom 2 were women.) For a company like IBM, numbers like that are scary. Ignoring all of the social issues of excluding potentially great candidates, numbers like that can open the company up to gender discrimination lawsuits!</p>
+<p> So my year, they decided to encourage the hiring of more diverse candidates. The way that they did that was by allocating each department a budget for summer interns. They could only hire up to their budgeted number of interns. Only women and minority candidates didn't count against the budget.</p>
+<p> When the summer program hiring opened, my department was allocated a budget of six students. All six slots were gone within the first day. Every single one of them went to a white, american, male student.</p>
+<p> The second day, the guy across the hall from me came with a resume for a student he wanted to hire. This was a guy who I really liked, and really respected greatly. He was not, by any reasonable measure, a bad guy - he was a really good person. Anyway, he had this resume, for yet another guy. I told him the budget was gone, but if he could find a good candidate who was either a woman or minority, that we could hire them. He exploded, ranting about how we were being sexist, discriminating against men. He just wanted to hire the best candidate for the job! We were demanding that he couldn't hire the best candidate, he had to hire someone less qualified, in order to satisfy some politically correct bureaucrat! There was nothing I could do, so eventually he stormed out.</p>
+<p> Three days later, he came back to my office with another resume. He was practically bouncing off the walls he was so happy. "I found another student to hire. She's even better than the guy I originally came to you with! She's absolutely perfect for the job!". We hired her.</p>
+<p> I asked him why he didn't find her before. He had no answer - he didn't know why he didn't find her resume of his first search.</p>
+<p> This was a pattern that I observed multiple times that year. Looking through a stack of resumes, without deliberately excluding women, somehow, all of the candidates with female names wound up back in the slushpile. I don't think that anyone was deliberately saying "Hmm, Jane, that's a woman's name, I don't want to hire a woman". But I do think that in the process of looking through a file containing 5000 resumes, trying to select which ones to look at, on an unconscious level, they were more likely to look carefully at a candidate with a male name, because we all learn, from a young age, that men are smarter than women, men are more serious than women, men are better workers than women, men are more likely to be technically skilled than women. Those attitudes may not be part of our conscious thought, but they are part of the cultural background that gets drummed into us by school, by books, by movies, by television, by commercials.</p>
+<p> As I said, that was a real awakening for me.</p>
+<p> I was talking about this with my next-door office neighbor, who happened to be one of the only two women in my department (about 60 people) at the time. She was shocked that I hadn't noticed this before. So she pointed out to me that in meetings, she could say things, and everyone would ignore it, but if a guy said the same thing, they'd get listened to. We'd been in many meetings together, and I'd never noticed this!</p>
+<p> So I started paying attention, and she was absolutely right.</p>
+<p> What happened next is my second big awakening.</p>
+<p> I started watching this in meetings, and when people brushed over something she'd said, I'd raise my voice and say "X just suggested blah, which I think is a really good idea. What about it?". I wanted to help get her voice listened to.</p>
+<p> She was <em>furious</em> at me. This just blew my mind. I was really upset at her at first. Dammit, I was trying to <em>help</em>, and this asshole was yelling at me for it! She'd complained about how people didn't listen to her, and now when I was trying to help get her listened to, she was complaining again!</p>
+<p> What I realized after I calmed down and listened to her was that I was wrong. I hadn't spoken to her about doing it. I didn't understand what it meant. But the problem was, people didn't take her seriously because she was a woman. People might listen to me, because I'm also a white guy. But when I spoke <em>for her</em>, I wasn't helping. When a man speaks on behalf of a woman, we're <em>reinforcing</em> the idea that a woman's voice isn't supposed to be heard. I was substituting my man's voice for her woman's, and by doing that, I was not just not helping her, but I was actively <em>hurting</em>, because the social interpretation of my action was that "X can't speak for herself". And more, I learned that by taking offense at her, for pointing out that I had screwed up, I was definitely in the wrong - that I had an instinct for reacting wrong.</p>
+<p> What I learned, gradually, from watching things like this, from becoming more sensitive and aware, and by <em>listening</em> to what women said, was that this kind of thing is that I was completely clueless.</p>
+<p> The fact is, I constantly benefit from a very strong social preference.  I don't <em>notice</em> that. Unless I'm really trying hard to pay attention, I'm not aware of all of the benefits that I get from that. I don't notice all of the times when I'm getting a benefit. Worse, I don't notice all of the times when my behavior is <em>asserting</em> that social preference as my right.</p>
+<p> It's very easy for a member of an empowered majority to just take things for granted. We see the way that we are treated as a default, and assume that <em>everyone</em> is treated the same way. We don't perceive that we are being treated preferentially. We don't notice that the things that offend us are absolutely off limits to everyone, but that things that we do to offend   others are accepted as part of normal behavior. Most importantly, <em>we don't notice when our behavior is harmful to people who aren't part of our empowered group.</em> And when we do offend someone who isn't part of the empowered majority, we take offense at the fact that they're offended. Because they're saying that <em>we did something bad</em>, and we know that we aren't bad people!</p>
+<p> The way that this comes back to the whole Adria Richards fiasco is very simple. Many people have looked at what happened at PyCon, and said something like "She shouldn't have tweeted their picture", or "She shouldn't have been offended, they didn't do anything wrong", or "She should have just politely spoken to them".</p>
+<p> I don't know whether what she did was right or not. I wasn't there. I didn't hear the joke that the guys in question allegedly told.  What I do know is that for a member of the minority out-group, there is frequently <em>no action</em> that will be accepted as "right" if it includes the assertion that the majority did something offensive.</p>
+<p> I've seen this phenomena very directly myself, not in the context of sexism, but in terms of antisemitism. There's an expression that I've heard multiple times in the northeast US, to talk about bartering a price for a car: "jewing the salesman down". I absolutely find that extremely offensive. And I've called people out on it. There is no response that's actually acceptable.</p>
+<p> If I politely say "You know, that's relying on a stereotype of me and my ancestors that's really hurtful", the response is: "Oh, come on, it's just harmless. I'm not talking about you, it's just a word. You're being oversensitive". If I get angry, the response is "You Jews are so strident". If I go to an authority figure in the setting, "You Jews are so passive aggressive, why couldn't you just talk to me?". No matter what I do, I'm wrong. Women deal with this every day, only they're in a situation where the power dynamic is even less in their favor.</p>
+<p> That's the situation that women - particularly women in tech - find themselves in every day. We <em>are</em> sexist. We <em>do</em> mistreat women in tech every day, without even knowing that we're doing it. And we're very likely to take offense if they mention that we did something wrong. Because we know that we're good people, and since we aren't deliberately doing something bad, they <em>must</em> be wrong.</p>
+<p> For someone in Adria Richards' situation at PyCon, there is <em>no</em> course of action that can't be taken wrong. As a woman hearing the joke in question, she certainly knew whether or not it was offensive <em>to her</em>. But once she'd heard something offensive, there was nothing she could do that someone couldn't turn into a controversy.</p>
+<p> Was the joke offensive? We don't know what, specifically, he said. The only fact that we're certain of is that in her judgement, it was offensive; that the authorities at PyCon agreed, and asked the gentleman in question to apologize.</p>
+<p> Did the guy who made the joke deserve to be fired? I don't know. If this stupid joke were the first time he'd ever done something wrong, then he didn't deserve to be fired. But we don't know what his history is like. I know how hard it is to hire skilled engineers, so I'm very skeptical that any company would fire someone over one minor offense. It's possible that his company has a crazy hair-trigger HR department. But it's also possible that there's background that we don't know about. That he's done stuff before, and been warned. If that's the case, then his company could have decided that this was the last straw.</p>
+<p> Did Adria Richards deserve to be fired? Almost certainly not. We know more about her case than we do about the guy who told the joke. We know that her company fired her <em>over this specific incident</em>, because in their announcement of her firing, <em>they told us the reason</em>. They didn't cite any past behavior - they just specifically cited this incident and its aftermath as the reason for firing her. It's possible that there's a history here that we don't know about, that she'd soured relations with customers of her company in incidents other than this, and that this was a last straw. But it doesn't seem likely, based on the facts that we're aware of.</p>
+<p> Did either of them deserve to be threatened? Absolutely not.</p>
+<p><a class="a2a_dd a2a_target addtoany_share_save" href="http://www.addtoany.com/share_save#url=http%3A%2F%2Fscientopia.org%2Fblogs%2Fgoodmath%2F2013%2F03%2F28%2Fa-white-boys-observations-of-sexism-and-the-adria-richards-fiasco%2F&amp;title=A%20White%20Boy%27s%20Observations%20of%20Sexism%20and%20the%20Adria%20Richards%20Fiasco" id="wpa2a_4"><img src="http://scientopia.org/blogs/goodmath/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://scientopia.org/blogs/goodmath/2013/03/28/a-white-boys-observations-of-sexism-and-the-adria-richards-fiasco/feed/</wfw:commentRss>
+		<slash:comments>116</slash:comments>
+		</item>
+		<item>
+		<title>Genius Continuum Crackpottery</title>
+		<link>http://scientopia.org/blogs/goodmath/2013/03/21/genius-continuum-crackpottery/</link>
+		<comments>http://scientopia.org/blogs/goodmath/2013/03/21/genius-continuum-crackpottery/#comments</comments>
+		<pubDate>Fri, 22 Mar 2013 00:26:14 +0000</pubDate>
+		<dc:creator>MarkCC</dc:creator>
+				<category><![CDATA[Bad Algebra]]></category>
+		<category><![CDATA[Bad Logic]]></category>
+		<category><![CDATA[Bad Math]]></category>
+		<category><![CDATA[Cantor Crankery]]></category>
+
+		<guid isPermaLink="false">http://scientopia.org/blogs/goodmath/?p=2150</guid>
+		<description><![CDATA[There's a lot of mathematical crackpottery out there. Most of it is just pointless and dull. People making the same stupid mistakes over and over again, like the endless repetitions of the same-old supposed refutations of Cantor's diagonalization. After you eliminate that, you get reams of insanity - stuff which is simply so incoherent that [...]]]></description>
+				<content:encoded><![CDATA[<p> There's a lot of mathematical crackpottery out there. Most of it is just pointless and dull. People making the same stupid mistakes over and over again, like the endless repetitions of the same-old supposed refutations of Cantor's diagonalization.</p>
+<p> After you eliminate that, you get reams of insanity - stuff which<br />
+is simply so incoherent that it doesn't make any sense. This kind of thing is usually word salad - words strung together in ways that don't make sense.</p>
+<p> After you eliminate that, sometimes, if you're really lucky, you'll come accross something truly special. Crackpottery as utter genius. Not genius in a good way, like they're an outsider genius who discovered something amazing, but genius in the worst possible way, where someone has created something so bizarre, so overwrought, so utterly ridiculous that it's a masterpiece of insane, delusional foolishness.</p>
+<p> Today, we have an example of that: <a href="http://existics101.com"/><em>Existics!</em></a>. This is a body of work by a high school dropout named Gavin Wince with truly immense delusions of grandeur. Pomposity on a truly epic scale!</p>
+<p> I'll walk you through just a tiny sample of Mr. Wince's genius. You can go look at his site to get more, and develop a true appreciation for this. He doesn't limit himself to mere mathematics: math, physics, biology, cosmology - you name it, Mr. Wince has mastered it and written about it!</p>
+<p> The best of his mathematical crackpottery is something called <a href="http://existics101.com/wp-content/uploads/2012/01/C3-The-Canonized-Cardinal-Continuum.pdf">C3: the Canonized Cardinal Continuum</a>. Mr. Wince has created an algebraic solution to the continuum hypothesis, and along the way, has revolutionized number theory, algebra, calculus, real analysis, and god only knows what else!</p>
+<p> Since Mr. Wince believes that he has solved the continuum hypothesis. Let me remind you of what that is:</p>
+<ol>
+<li> If you use Cantor's set theory to explore numbers, you get to the uncomfortable result that there are different sizes of infinity.</li>
+<li> The smallest infinite cardinal number is called &aleph;<sub>0</sub>,<br />
+  and it's the size of the set of natural numbers.</li>
+<li> There are cardinal numbers larger than &aleph;<sub>0</sub>. The first<br />
+one larger than &aleph;<sub>0</sub> is &aleph;<sub>1</sub>. </li>
+<li> We know that the set of real numbers is the size of the powerset<br />
+of the natural numbers - 2<sup>&alefsym;<sub>0</sub></sup> - is larger than the set of the naturals.</li>
+<li> The question that the continuum hypothesis tries to answer is: is the size<br />
+ of the set of real numbers equal to &alefsym;<sub>1</sub>? That is, is there<br />
+ a cardinal number between &alefsym;<sub>0</sub> and |2<sup>&alefsym;<sub>0</sub></sup>|?</li>
+</ol>
+<p> The continuum hypothesis was "solved" in 1963. In 1940, G&ouml;del showed that you couldn't <em>disprove</em> the continuum hypothesis using ZFC. In 1963,<br />
+another mathematician named Paul Cohen, showed that it couldn't be <em>proven</em> using ZFC. So - a hypothesis which is about set theory can be neither proven <em>nor</em> disproven using set theory. It's <em>independent</em> of the axioms of set theory. You can choose to take the continuum hypothesis as an axiom, or you can choose to take the negation of the continuum hypothesis as an axiom: either choice is consistent and valid!</p>
+<p> It's not a happy solution. But it's solved in the sense that we've got a solid proof that you can't prove it's true, and another solid proof that you can't prove it's false. That means that given ZFC set theory as a basis, there is <em>no proof</em> either way that doesn't set it as an axiom.</p>
+<p> But... Mr. Wince knows better.</p>
+<p> The set of errors that Wince makes is really astonishing. This is really seriously epic crackpottery.</p>
+<p> He makes it through one page without saying anything egregious. But then he makes up for it on page 2, by making multiple errors.</p>
+<p> First, he pulls an Escultura:</p>
+<blockquote>
+<p> x<sub>1</sub> = 1/2<sup>1</sup> = 1/2 = 0.5</p>
+<p> x<sub>2</sub> = 1/2<sup>1</sup> + 1/2<sup>2</sup> = 1/2 + 1/4 = 0.75</p>
+<p> x<sub>3</sub> = 1/2<sup>1</sup> + 1/2<sup>2</sup> + 1/2<sup>3</sup> = 1/2 + 1/4 + 1/8 = 0.875</p>
+<p>...</p>
+<p>At the end or limit of the infinite sequence, the final term of the sequence is 1.0</p>
+<p> ...</p>
+<p> In this example we can see that as the number of finite sums of the sequence approaches the limit infinity, the last term of the sequence equals one. </p>
+<p> x<sub>n</sub> = 1.0</p>
+<p> If we are going to assume that the last term of the sequence equals one, it can be deduced that, prior to the last term in the sequence, some finite sum in the series occurs where:</p>
+<p>x<sub>n-1</sub> = 0.999…</p>
+<p>x<sub>n-1</sub> = 1/2<sup>1</sup> + 1/2<sup>2</sup> + 1/2<sup>3</sup> + 1/2<sup>4</sup> + … + 1/2<sup>n-1</sup> = 0.999…</p>
+<p> Therefore, at the limit, the last term of the series of the last term of the sequence would be the term, which, when added to the sum 0.999… equals 1.0.</p>
+</blockquote>
+<p> There is no such thing as the <em>last term</em> of an infinite sequence. Even if there were, the number 0.999.... <em>is exactly the same</em> as 1. It's a notational artifact, not a distinct number.</p>
+<p> But this is the least of his errors. For example, the first paragraph on the next page:</p>
+<blockquote><p>
+The set of all countable numbers, or natural numbers, is a subset of the continuum. Since the set of all natural numbers is a subset of the continuum, it is reasonable to assume that the set of all natural numbers is less in degree of infinity than the set containing the continuum.
+</p></blockquote>
+<p> We didn't need to go through the difficult of Cantor's diagonalization! We could have just blindly <em>asserted</em> that it's obvious!</p>
+<p> or actually... The fact that there are multiple degrees of infinity is anything but obvious. I don't know anyone who wasn't surprised the first time they saw Cantor's proof. It's a really <em>strange</em> idea that there's something bigger than infinity. </p>
+<p>  Moving on... the real heart of his stuff is built around some extremely strange notions about infinite and infinitessimal values. </p>
+<p> Before we even look at what he says, there's an important error here<br />
+which is worth mentioning. What Mr. Wince is trying to do is talk about the<br />
+continuum hypothesis. The continuum hypothesis is a question about the cardinality of the set of real numbers and the set of natural numbers.<br />
+<em>Neither infinites nor infinitessimals are part of either set</em>.
+</p>
+<p> Infinite values come into play in Cantor's work: the cardinality of the natural numbers and the cardinality of the reals are clearly infinite cardinal numbers. But &alefsym;<sub>0</sub>, the smallest infinite cardinal, is <emph>not</emph> a member of either set.</p>
+<p> Infinitessimals are fascinating. You can reconstruct differential and integral calculus without using limits by building in terms of infinitessimals. There's some great stuff in surreal numbers playing with infinitessimals. But infinitessimals <em>are not real numbers</em>. You can't reason about them as if they were members of the set of real numbers, because they aren't.</p>
+<p> Many of his mistakes are based on this idea. </p>
+<p> For example, he's got a very strange idea that infinites and infinitessimals don't have fixed values, but that their values cover a range. The way that he gets to that idea is by asserting the existence<br />
+of infinity as a specific, numeric value, and then using it in algebraic manipulations, like taking the "infinityth root" of a real number.</p>
+<p>For example, on his way to "proving" that infinitessimals have this range property that he calls "perambulation", he defines a value that he calls &kappa;:</p>
+<blockquote><p>
+<p style='text-align:center;'><span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_a4a6cb662e98cb2c7b4c34e4f2791ee1.gif' style='' class='tex' alt=" \sqrt[\infty]{\infty} = 1 + \kappa" /></span></p>
+</p></blockquote>
+<p> In terms of the theory of numbers, this is nonsense.  There is no such thing as an infinityth root. You can define an Nth root, where N is a real number, just like you can define an Nth power - exponents and roots are mirror images of the same concept. But roots and exponents aren't defined for infinity, because infinity <em>isn't a number</em>. There is no infinityth root. </p>
+<p> You could, if you really wanted to, come up with a definition of exponents that that allowed you to define an infinityth root. But it wouldn't be very interesting.  If you followed the usual pattern for these things, it would be a limit:  <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_e7a76826bc2dd6a6d4e72f2d03fdb330.gif' style=' ' class='tex' alt="\sqrt[\infty]{x}  \lim_{n\rightarrow\infty} \sqrt[n]{x}" /></span>. That's clearly 1. Not 1 <em>plus</em> something: just exactly 1. </p>
+<p> But Mr. Cringe doesn't let himself be limited by silly notions of consistency. No, he defines things his own way, and runs with it. As a result, he gets a notion that he calls <em>perambulation</em>. How?</p>
+<p> Take the definition of &kappa;:</p>
+<p><p style='text-align:center;'><span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_a4a6cb662e98cb2c7b4c34e4f2791ee1.gif' style='' class='tex' alt=" \sqrt[\infty]{\infty} = 1 + \kappa" /></span></p></p>
+<p> Now, you can, obviously, raise both sides to the power of infinity:</p>
+<p><p style='text-align:center;'><span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_bc76e83ff02e35f60de6abc9bcff6c28.gif' style='' class='tex' alt="\infty = (1 + \kappa)^{\infty}" /></span></p></p>
+<p> Now, you can substitute &alefsym;<sub>0</sub> for <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_7ed9abff4dafd78d08e616c899412e92.gif' style=' padding-bottom:2px;' class='tex' alt="\infty" /></span>. (Why? Don't ask why. You just can.) Then you can factor it. His factoring makes no rational sense, so I won't even try to explain it. But he concludes that:</p>
+<ul>
+<li> Factored and simplified one way, you end up with <em>(&kappa;+1)<sup>&alefsym;</sup> = 1 + x</em>, where <em>x</em> is some infinitessimal number larger than &kappa;. (Why? Why the heck not?)</li>
+<li> Factored and simplified another way, you end up with (&kappa;+1)<sup>&alefsym;</sup> = &alefsym;</li>
+<li> If you take the mean of of all of the possible factorings and reductions, you get a third result, that   (&kappa;+1)<sup>&alefsym;</sup> = 2.</li>
+</ul>
+<p> He goes on, and on, and on like this. From perambulation to perambulating reciprocals, to subambulation, to ambulation. Then un-ordinals, un-sets... this is really an absolute masterwork of utter insane crackpottery. </p>
+<p> Do download it and take a look. It's a masterpiece.</p>
+<p><a class="a2a_dd a2a_target addtoany_share_save" href="http://www.addtoany.com/share_save#url=http%3A%2F%2Fscientopia.org%2Fblogs%2Fgoodmath%2F2013%2F03%2F21%2Fgenius-continuum-crackpottery%2F&amp;title=Genius%20Continuum%20Crackpottery" id="wpa2a_6"><img src="http://scientopia.org/blogs/goodmath/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://scientopia.org/blogs/goodmath/2013/03/21/genius-continuum-crackpottery/feed/</wfw:commentRss>
+		<slash:comments>14</slash:comments>
+		</item>
+		<item>
+		<title>Pi-day randomness</title>
+		<link>http://scientopia.org/blogs/goodmath/2013/03/14/pi-day-randomness/</link>
+		<comments>http://scientopia.org/blogs/goodmath/2013/03/14/pi-day-randomness/#comments</comments>
+		<pubDate>Fri, 15 Mar 2013 01:04:57 +0000</pubDate>
+		<dc:creator>MarkCC</dc:creator>
+				<category><![CDATA[Bad Math]]></category>
+
+		<guid isPermaLink="false">http://scientopia.org/blogs/goodmath/?p=2145</guid>
+		<description><![CDATA[One of my twitter friends was complaining about something that's apparently making the rounds of Facebook for &#960;-day. It annoyed me sufficiently to be worth ranting about a little bit. Why isn't &#960; rational if &#960;=circumference/diameter, and both measurements are plainly finite? There's a couple of different ways of interpreting this question. The stupidest way [...]]]></description>
+				<content:encoded><![CDATA[<p> One of my twitter friends was complaining about something that's apparently making the rounds of Facebook for &pi;-day. It annoyed me sufficiently to be worth ranting about a little bit.</p>
+<blockquote><p>
+Why isn't &pi; rational if &pi;=circumference/diameter, and both measurements are plainly finite?
+</p></blockquote>
+<p> There's a couple of different ways of interpreting this question.</p>
+<p> The stupidest way of interpreting it is that the author didn't have any clue of what an irrational number is. An irrational number is a number which cannot be written as a ratio of two integers. Another way of saying essentially the same thing is that there's no way to create a finite representation of an irrational number. I've seen people get this wrong before, where they confuse <em>not having a finite representation</em> with <em>not being finite</em>.</p>
+<p> &pi; doesn't have a finite representation. But it's very clearly finite - it's less that 3 1/4, which is obviously not infinite. Anyone who can look at &pi;, and be confused about whether or not it's finite is... well... there's no nice way to say this. If you think that &pi; isn't finite, you're an idiot.
+</p>
+<p> The other way of interpreting this statement is less stupid: it's a question of <em>measurement</em>. If you have a circular object in real life, then you can <em>measure</em> the circumference and the diameter, and do the division on the measurements. The measurements have <em>finite precision</em>. So how can the ratio of two measurements with finite precision be irrational?</p>
+<p> The answer is, they can't. But perfect circles don't exist in the real world. Many mathematical concepts don't exist in the real world. In the real world, there's no such thing as a mathematical point, no such thing as a perfect line, no such thing as perfectly parallel lines.</p>
+<p> &pi; isn't a measured quantity. It's a theoretical quantity, which can be computed <em>analytically</em> from the theoretical properties derived from the abstract properties of an ideal, perfect circle.</p>
+<p> No "circle" in the real world has a perfect ratio of &pi; between its circumference and its diameter. But the theoretical circle does.</p>
+<p> The facebook comments on this get much worse than the original question. One in particular really depressed me.</p>
+<blockquote><p>
+Just because the measurements are finite doesn't mean they're rational.<br />
+Pi is possibly rational, we just haven't figured out where it ends.
+</p></blockquote>
+<p> Gah, no!</p>
+<p> We know an awful lot about &pi;. And we know, with absolute, 100% perfect certainty that &pi; never ends.</p>
+<p> We can define &pi; precisely as a series, and that series makes it abundantly clear that it never ends.</p>
+<p><p style='text-align:center;'><span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_bc3ba8986d66a51d7704808cd31bce09.gif' style='' class='tex' alt="\pi = \frac{4}{1} - \frac{4}{3} + \frac{4}{5} - \frac{4}{7} + \frac{4}{9} ..." /></span></p></p>
+<p> That series goes on forever. &pi; can't ever end, because that series never ends.</p>
+<p> Just for fun, here's a little snippet of Python code that you can play with. You can see how, up to the limits of your computer's floating point representation, that a series computation of &pi; keeps on going, changing with each additional iteration.
+</p>
+<pre>
+def pi(numiter):
+  val = 3.0
+  sign = 1
+  for i in range(numiter):
+    term = ((i+1)*2) * ((i+1)*2 + 1) * ((i+1) *2 + 2)
+    val = val + sign*4.0/term
+    sign = sign * -1
+  return val
+</pre>
+<p><a class="a2a_dd a2a_target addtoany_share_save" href="http://www.addtoany.com/share_save#url=http%3A%2F%2Fscientopia.org%2Fblogs%2Fgoodmath%2F2013%2F03%2F14%2Fpi-day-randomness%2F&amp;title=Pi-day%20randomness" id="wpa2a_8"><img src="http://scientopia.org/blogs/goodmath/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://scientopia.org/blogs/goodmath/2013/03/14/pi-day-randomness/feed/</wfw:commentRss>
+		<slash:comments>17</slash:comments>
+		</item>
+		<item>
+		<title>Finally: G&#246;del&#039;s Proof of Incompleteness!</title>
+		<link>http://scientopia.org/blogs/goodmath/2013/03/12/finally-gdels-proof-of-incompleteness/</link>
+		<comments>http://scientopia.org/blogs/goodmath/2013/03/12/finally-gdels-proof-of-incompleteness/#comments</comments>
+		<pubDate>Tue, 12 Mar 2013 14:17:16 +0000</pubDate>
+		<dc:creator>MarkCC</dc:creator>
+				<category><![CDATA[Incompleteness]]></category>
+		<category><![CDATA[godel]]></category>
+		<category><![CDATA[incompleteness]]></category>
+		<category><![CDATA[logic]]></category>
+
+		<guid isPermaLink="false">http://scientopia.org/blogs/goodmath/?p=2141</guid>
+		<description><![CDATA[Finally, we're at the end of our walkthrough of G&#246;del great incompleteness proof. As a refresher, the basic proof sketch is:]]></description>
+				<content:encoded><![CDATA[<p> Finally, we're at the end of our walkthrough of G&ouml;del great incompleteness proof. As a refresher, the basic proof sketch is:</p.</p>
+<ol>
+<li> Take a simple logic. We've been using a variant of the Principia Mathematica's logic, because that's what Gödel used.</li>
+<li> Show that any statement in the logic can be encoded as a number using an arithmetic process based on the syntax of the logic. The process of encoding statements numerically is called Gödel numbering.</li>
+<li>Show that you can express meta-mathematical properties of logical statements in terms of arithemetic properties of their Gödel numbers. In particular, we need to build up the logical infrastructure that we need to talk about whether or not a statement is provable.</li>
+<li> Using meta-mathematical properties, show how you can create an unprovable statement encoded as a Gödel number.  </li>
+</ol>
+<p> What came before:</p>
+<ol>
+<li> <a href="http://scientopia.org/blogs/goodmath/2013/02/07/gdel-numbering-encoding-logic-as-numbers/">G&ouml;del numbering:</a> The logic of the Principia, and how to encode it as numbers. This was step 1 in the sketch.</li>
+<li> <a href="http://scientopia.org/blogs/goodmath/2013/02/11/defining-properties-arithmetically-part-1-gdel-and-primitive-recursion/">Arithmetic Properties:</a> what it means to say that a property can be expressed arithemetically. This set the groundwork for step 2 in the proof sketch.</li>
+<li> <a href="http://scientopia.org/blogs/goodmath/2013/02/17/the-meta-of-gdel/">Encoding meta-math arithmetically:</a> how to take meta-mathematical properties of logical statements, and define them as arithmetic properties of the G&ouml;del numberings of the statements. This was step 2 proper.</li>
+</ol>
+<p> So now we can move on to step three, where we actually see why mathematical logic is necessarily incomplete.</p>
+<p> When we left off with G&ouml;del, we'd gone through a very laborious process showing how we could express meta-mathematical properties of logical statements as primitive recursive functions and relations. We built up to being able to express one <em>non</em>-primitive recursive property, which describes the property that a given statement is provable:</p>
+<pre>
+pred provable(x) =
+  some y {
+    proofFor(y, x)
+  }
+}
+</pre>
+<p> The reason for going through all of that was that we really needed to show how we could capture all of the necessary properties of logical statements in terms of arithmetic properties of their G&ouml;del numbers.</p>
+<p> Now we can get to the target of G&ouml;del's effort. What G&ouml;del was trying to do was show how to defeat the careful stratification of the Principia's logic. In the principia, Russell and Whitehead had tried to avoid problems with self-reference by creating a very strict stratification, where each variable or predicate had a numeric level, and could only reason about objects from lower levels. So if natural numbers were the primitive objects in the domain being reasoned about, then level-1 objects would be things like specific natural numbers, and level-1 predicates could reason about specific natural numbers, but not about sets of natural numbers or predicates over the natural numbers. Level-2 objects would be sets of natural numbers, and level-2 predicates could reason about natural numbers and sets of natural numbers, but not about predicates over sets of natural numbers, or sets of sets of natural numbers. Level-3 objects would be sets of sets of natural numbers... and so on.
+</p>
+<p> The point of this stratification was to make self-reference impossible. You couldn't make a statement of the form "This predicate is true": the predicate would be a level-N predicate, and only a level N+1 predicate could reason about a level-N predicate. </p>
+<p> What G&ouml;del did in the laborious process we went through in the last<br />
+  post is embed a model of logical statements in the natural numbers. That's the real trick: the logic is designed to work with a set of objects that are a model of the natural numbers. By embedding a model of logical statements in<br />
+  the natural numbers, he made it possible for a level-1 predicate (a predicate about a specific natural number) to reason about <em>any</em> logical statement or object. A level-1 predicate can now reason about a level-7 object! A level-1 predicate can reason about the set defined by a level-1 predicate: a level-1 predicate can reason <em>about itself!</em>.
+</p>
+<p> Now, we can finally start getting to the point of all of this: incompleteness! We're going to use our newfound ability to nest logical statements into numbers to construct an unprovable true statement.</p>
+<p> In the last post, one of the meta-mathematical properties that we defined for the G&ouml;del-numbered logic was <code>immConseq</code>, which defines when some statement <em>x</em> is an <em>immediate consequence</em> of a set of statements <em>S</em>. As a reminder, that means that <em>x</em> can be inferred from statements in <em>S</em> in one inferrence step.</p>
+<p> We can use that property to define what it means to be a consequence of a set of statements: it's the closure of immediate consequence. We can define it in pseudo-code as:</p>
+<pre>
+def conseq(&kappa;) = {
+  K = &kappa; + axioms
+  added_to_k = false
+  do {
+    added_to_k = false
+    for all c in immConseq(K) {
+      if c not in K {
+        add c to K
+        added_to_k = true
+      }
+    }
+  } while added_to_k
+  return K
+}
+</pre>
+<p> In other words, <em>Conseq(&kappa;)</em> is the complete set of everything that can possibly be inferred from the statements in &kappa; and the axioms of the system.  We can say that there's a proof for a statement <em>x</em> in &kappa; if and only if <em>x &isin; Conseq(&kappa;)</em>.</p>
+<p> We can the idea of <em>Conseq</em> use that to define a strong version of what it means for a logical system with a set of facts to be consistent. A system is &omega;-consistent if and only if there is <em>not</em> a statement <em>a</em> such that: <em>a &isin; Conseq(&kappa;) &and; not(forall(v, a)) &isin; Conseq(&kappa;)</em>.
+</p>
+<p> In other words, the system is &omega;-consistent as long as it's never true that both a universal statement and it. But for our purposes, we can treat it as being pretty much the same thing. (Yes, that's a bit hand-wavy, but I'm not trying to write an entire book about G&ouml;del here!)</p>
+<p> <em>(G&ouml;del's version of the definition of &omega;-consistency is  harder to read than this, because he's very explicit about the fact that <em>Conseq</em> is a property of the <em>numbers</em>. I'm willing to fuzz that, because we've shown that the statements and the numbers are interchangable.)</em></p>
+<p> Using the definition of &omega;-consistency, we can <em>finally</em> get to the actual statement of the incompleteness theorem!</p>
+<p> <b>G&ouml;del's First Incompleteness Theorem:</b> For every &omega;-consistent primitive recursive set &kappa; of formulae, there is a primitive-recursive predicate <em>r(x)</em> such that neither <em>forall(v, r)</em> nor <em>not(forall(v, r))</em> is provable.</p>
+<p> To prove that, we'll construct the predicate <em>r</em>.</p>
+<p> First, we need to define a version of our earlier <code>isProofFigure</code> that's specific to the set of statements &kappa;:</p>
+<pre>
+pred isProofFigureWithKappa(x, kappa) = {
+  all n in 1 to length(x) {
+    isAxiom(item(n, x)) or
+    item(n, x) in kappa or
+    some p in 0 to n {
+      some q in 0 to n {
+        immedConseq(item(n, x), item(p, x), item(q, x))
+      }
+    }
+  } and length(x) > 0
+}
+</pre>
+<p> This is the same as the earlier definition - just specialized so that it ensures that every statement in the proof figure is either an axiom, or a member of &kappa;.</p>
+<p> We can do the same thing to specialize the predicate <code>proofFor</code> and <code>provable</code>:</p>
+<pre>
+pred proofForStatementWithKappa(x, y, kappa) = {
+  isProofFigureWithKappa(x, kappa) and
+  item(length(x), x) = y
+}
+
+pred provableWithKappa(x, kappa) = {
+  some y {
+    proofForStatementWithKappa(y, x, kappa)
+  }
+}
+</pre>
+<p> If &kappa; is the set of basic truths that we can work with, then<br />
+provable in &kappa; is equivalent to provable. </p>
+<p> Now, we can define a predicate <em>UnprovableInKappa</em>:</p>
+<pre>
+pred NotAProofWithKappa(x, y, kappa) = {
+  not (proofForKappa(x, subst(y, 19, number(y))))
+}
+</pre>
+<p> Based on everything that we've done so far, <em>NotAProofWithKappa</em> is primitive recursive. </p>
+<p> This is tricky, but it's really important. We're getting very close to the goal, and it's subtle, so let's take the time to understand this.</p>
+<ul>
+<li> Remember that in a G&ouml;del numbering, each prime number is a variable. So 19 here is just the name of a free variable in <em>y</em>.</li>
+<li> Using the Principia's logic, the fact that variable 19 is free means that the statement is parametric in variable 19. For the moment, it's an incomplete statement, because it's got an unbound parameter.</li>
+<li>  What we're doing in <em>NotAProofWithKappa</em> is substituting the numeric coding of <em>y</em> for the value of <em>y</em>'s parameter. When that's done, <em>y</em> is no longer incomplete: it's unbound variable has been replaced by a binding.</li>
+<li> With that substitution, <em>NotAProofWithKappa(x, y, kappa)</em> is true  when <em>x</em> <em>does not</em> prove that <em>y(y)</em> is true.</li>
+</ul>
+<p> What <em>NotAProofWithKappa</em> does is give us a way to check whether a specific sequence of statements <em>x</em> is <b>not</b> a proof of <em>y</em>.
+</p>
+<p> We want to expand <em>NotAProofWithKappa</em> to something universal.  Instead of just saying that a specific sequence of statements <em>x</em> isn't a proof for <em>y</em>, we want to be able to say that <em>no possible sequence of statements</em> is a proof for <em>y</em>. That's easy to do in logic: you just wrap the statement in a "&forall; x ( )". In G&ouml;del numbering, we defined a function that does exactly that. So the universan form of provability is:<br />
+<em>&forall; a (NotAProofWithKappa(a, y, kappa))</em>.</p>
+<p>  In terms of the G&ouml;del numbering, if we assume that the G&ouml;del number for the variable <em>a</em> is 17, and the variable <em>y</em> is  numbered as 19, we're talking about the statement <em>p = forall(17, ProvableInKappa(17, 19, kappa)</em>. </p>
+<p> <em>p</em> is the statement that for some logical statement (the value of variable 19, or y in our definition), there is no possible value for variable 17 (a) where <em>a</em> proves <em>y</em> in &kappa;.</p>
+<p> All we need to do now is show that we can make <em>p</em> become self-referential. No problem: we can just put <em>number(p)</em> in as the value of <em>y</em> in <em>UnprovableInKappa</em>. If we let <em>q</em> be the numeric value of the statement <em>UnprovableInKappa(a, y)</em>, then:</p>
+<p> r = subst(q, 19, p)</p>
+<p> i = subst(p, 19, r)</p>
+<p> <em>i</em> says that there is no possible value <em>x</em> that proves <em>p(p)</em>. In other words, <em>p(p)</em> is unprovable: there exists no possible proof that there is no possible proof of p!</p>
+<p> This is what we've been trying to get at all this time: self-reference! We've got a predicate <em>y</em> which is able to express a property <em>of itself</em>. Worse, it's able to express a <em>negative property</em> of itself!</p>
+<p> Now we're faced with two possible choices. Either <em>i</em> is provable - in which case, &kappa; is inconsistent! Or else <em>i</em> is unprovable - in which case &kappa; is incomplete, because we've identified a true statement that can't be proven!</p>
+<p> That's it: we've shown that in the principia's logic, using nothing but arithmetic, we can create a true statement that cannot be proven. If, somehow, it were to be proven, the entire logic would be inconsistent. So the principia's logic is incomplete: there are true statements that cannot be proven true.</p>
+<p> We can go a bit further: the process that we used to produce this result about the Principia's logic is actually applicable to other logics. There's no magic here: if your logic is powerful enough to do Peano arithmetic, you can use the same trick that we demonstrated here, and show that the logic must be either incomplete or inconsistent. (G&ouml;del proved this formally, but we'll just handwave it.) </p>
+<p> Looking at this with modern eyes, it doesn't seem quite as profound as it did back in G&ouml;del's day.</p>
+<p> When we look at it through the lens of today, what we see is that in the Principia's logic, proof is a mechanical process: a computation. If every true statement was provable, then you could take any statement <em>S</em>, and write a program to search for a proof of either <em>S</em> or <em>&not; S</em>, and eventually, that program would find one or the other, and stop. </p>
+<p> In short, you'd be able to solve the halting problem. The proof of the halting problem is really an amazingly profound thing: on a very deep level, it's the same thing as incompleteness, only it's easier to understand.</p>
+<p> But at the time that G&ouml;del was working, Turing hadn't written his paper about the halting problem. Incompletess was published in 1931; Turing's halting paper was published in 1936. This was a totally unprecedented idea when it was published. G&ouml;del produced one of the most profound and surprising results in the entire history of mathematics, showing that the efforts of the best mathematicians in the world to produce the perfection of mathematics were completely futile.</p>
+<p><a class="a2a_dd a2a_target addtoany_share_save" href="http://www.addtoany.com/share_save#url=http%3A%2F%2Fscientopia.org%2Fblogs%2Fgoodmath%2F2013%2F03%2F12%2Ffinally-gdels-proof-of-incompleteness%2F&amp;title=Finally%3A%20G%C3%B6del%27s%20Proof%20of%20Incompleteness%21" id="wpa2a_10"><img src="http://scientopia.org/blogs/goodmath/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://scientopia.org/blogs/goodmath/2013/03/12/finally-gdels-proof-of-incompleteness/feed/</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>Passwords, Hashing, and Salt</title>
+		<link>http://scientopia.org/blogs/goodmath/2013/03/02/passwords-hashing-and-salt/</link>
+		<comments>http://scientopia.org/blogs/goodmath/2013/03/02/passwords-hashing-and-salt/#comments</comments>
+		<pubDate>Sat, 02 Mar 2013 20:08:12 +0000</pubDate>
+		<dc:creator>MarkCC</dc:creator>
+				<category><![CDATA[Cryptography]]></category>
+
+		<guid isPermaLink="false">http://scientopia.org/blogs/goodmath/?p=2137</guid>
+		<description><![CDATA[Over on twitter, some folks were chatting about the latest big security botch. A major service, called Evernote, had a security breach where a password file was stolen. Evernote has handled the situation quite well, being open about what happened, and explaining the risks. In their description of the breach, they said that the stolen [...]]]></description>
+				<content:encoded><![CDATA[<p> Over on twitter, some folks were chatting about the latest big security botch. A major service, called Evernote, had <a href="http://www.theverge.com/2013/3/2/4056704/evernote-password-reset">a security breach where a password file was stolen</a>. Evernote has handled the situation quite well, being open about what happened, and explaining the risks. </p>
+<p> In their description of the breach, they said that the stolen passwords were "both hashed and salted". Apparently this sounds funny to people outside of software. (Amazing how jargon becomes so ingrained that I didn't even notice the fact that it could be interpreted in a funny way until it was pointed out to me!)</p>
+<p> Anyway, since discussion of this is going around, I thought I'd explain just what password hashing and salting means.</p>
+<p> Let's start at the beginning. You're some kind of system that wants to have password security. Obviously, you need to save the passwords somewhere, right?</p>
+<p> As we'll see, that's only partially correct - but let's go with it for now. You need to store <em>something</em> that lets you check if a user supplied the right password, so you need to store something.</p>
+<p> The most naive approach is create a file (or database, or whatever) that contains the usernames and passwords of all of your users. Something like:</p>
+<pre> 
+alice:abc
+mark:pass
+joe:123
+jen:hello
+</pre>
+<p> Suppose you were a thief, and you wanted to crack this password file, what would you do? You'd try to steal that file! If you can get hold of that password file, then you'd have all of the passwords for all of the users of the system. </p>
+<p> That means that this is a terrible way of storing the passwords. One step, and a thief has completely breached your system. We don't want that. So what should we do?</p>
+<p> First, we could encrypt the file. </p>
+<p> This might seem like a good idea at first. If a thief were the steal the file, the wouldn't be able to find your user's passwords without figuring out the encryption key! It's going to take a <em>lot</em> of work to figure out that key!</p>
+<p> The first problem with this is that any password can be cracked given enough time and power. If there's only one encryption key for the entire file, then it's worth investing a lot of time and power into breaking it - and once it's broken, then <em>everything</em> is revealed.</p>
+<p> The second problem is: how does your system check a user's password? It needs to decrypt the file! That means that the encryption key must be available to your system! So all that a thief needs to do is figure out where your system is getting the key from. You've got your entire security system for all of your users set up with a single point of protection, and somewhere in your system, everything that you need to break that protection is available!</p>
+<p> What can we do to improve this? The answer is something called <em>crypto graphic hashing</em>. </p>
+<p> Cryptographic hashing is a combination of two concepts: hashing, and one-way functions.</p>
+<p> A really simple example of a not-very-good hash function of a string would be something like: convert all of the characters in the string to their numeric values, and exclusive-or the binary representation of those bits. With that hash function, you could take a string like "ABCD", and convert it to the numeric values of the characters ([65, 66, 67, 68]), and then x-or them together (1000001 xor 1000010 xor 1000011 xor 1000100 = 0000100) for a result of 4. Real practical hash functions are more complicated.</p>
+<p> For example, at least some versions of Java use the following as the default hash for a string of characters:</p>
+<p>	<p style='text-align:center;'><span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_c695557c241b2235f253a1cbd4c931b5.gif' style='' class='tex' alt="\text{hash}(s) = \left(\sum_{i \in \text{length}(s)} 31^{length(s) - i - 1}*s[i] \right) \mod 2^{32}" /></span></p></p>
+<p> There's a class of mathematical functions called <em>one-way functions</em>. A one way function is a function <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_8fa14cdd754f91cc6554c9e71929cce7.gif' style=' padding-bottom:1px;' class='tex' alt="f" /></span>,  where given <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_9dd4e461268c8034f5c8564e155c67a6.gif' style=' padding-bottom:2px;' class='tex' alt="x" /></span>, it's easy to compute <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_50bbd36e1fd2333108437a2ca378be62.gif' style=' ' class='tex' alt="f(x)" /></span>, but given <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_50bbd36e1fd2333108437a2ca378be62.gif' style=' ' class='tex' alt="f(x)" /></span> it's extremely difficult (or even impossible) to compute <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_9dd4e461268c8034f5c8564e155c67a6.gif' style=' padding-bottom:2px;' class='tex' alt="x" /></span>.</p>
+<p> If we combine those two, we have what's called a <em>crpytogrphic hash function</em>: a function that takes an arbitrary input string, and converts it to a number, in a way where it's very difficult to figure out what the input string that produced the number was. That's great for storing passwords! We don't store the password <em>at all</em>. We just store the hash-value produced from the password. Then when a user comes and logs in, we take their password, hash it, and compute the result to the stored hash.</p>
+<p> Instead of the file with explicit passwords, we get something like:</p>
+<pre>
+alice:7a2d28fc
+mark:dfd4e1c6 
+joe:ed849ee1
+jen:bb76e739
+</pre>
+<p> This is <em>much</em> better than storing the encrypted password. There is no encryption key that a thief can use to decrypt the password. Even if a thief knows the hash values of your user's passwords, they can't get in to the system! And your system actually never stores the actual values of the user's passwords - just their hashcodes! </p>
+<p> So again, let's look at this from the perspective of a thief. How can a thief break into a system with hashed passwords?</p>
+<p> If they don't know what hash function you're using, then they're completely stuck. Sadly, they can probably figure it out. Designing new crpytographic hash functions is hard. Implementing cryptographic hash functions correctly is hard. As a result, most people just use a hash function from a library. That means that for a thief, it's usually pretty easy to figure out what hash function is being used by a system.</p>
+<p> Once they know what hash function you used, their only choice to break your system is to try to guess the passwords. That is, they can guess passwords, compute their hash codes, and search through your password file to see if any of the users password hashes matches. If they find one, they're gold!</p>
+<p> In fact, there's a common strategy based on this idea called a <em>rainbow table</em>.  A rainbox table is a list of common passwords, and the numeric value that they hash to with a common crptographic hash value. Something like:</p>
+<table border="1">
+<tr>
+<th>Password String</th>
+<th>Hash value</th>
+</tr>
+<tr>
+<td>pass</td>
+<td>1b93eb12</td>
+</tr>
+<tr>
+<td>password</td>
+<td>a4532c47</td>
+</tr>
+<tr>
+<td>abc</td>
+<td>7a2d28fc</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+</table>
+<p> If you can somehow steal the passwords file, then with a rainbow table, you can find users with common passwords. For example, in the table above, you can see that the hashcode "7a2d28fc" occurs in the passwords file for the username "alice", and it's also in the rainbow table for the password "abc". So a thief could determing that alice's password was "abc". Even with the best crpytographic hash, all it takes is one idiot user who uses "password" as their password, and your system's security is breached.</p>
+<p> Salting passwords addresses that problem. In a salting strategy, you don't hash a user's password by itself: you combine it with some additional data, and then hash that combination. The additional information is called the <em>salt.</em>.</p>
+<p> You can use lots of different things for the salt. There's a complex set of tradeoffs in the exact salting strategy, which are beyond the scope of this post, but a few examples include:</p>
+<ol>
+<li> Always use a fixed salt string. This is weak, but better than nothing. It's got a similar weakness to the encrypted password system: you only need one salt to give you a handle on breaking all of the passwords, and that one salt needs to be in the system.</li>
+<li> Add a random piece of data for each password. The catch here is that you need to store the salt data for each password. This is what unix passwords used to use. They added 12 random bits to each password. In the passwords file, they stored the salt and the hashed password. The weakness of this is that the salt is right there	with the password entry. But because each user has a different salt, that means that any attempt to breach the system needs to look at each user separately.</li>
+<li> Salt on metadata: that is, take information about the user that isn't part of their username, and use that as the salt. For example, you could use a person's birthday as the salt for their account.</li>
+</ol>
+<p> If each user has a different salt, then even if you've got terrible passwords, a thief needs to do a lot of work to try to break your system. Even with a rainbow-table like strategy, they can't compute the hashcode for a given common password once, and then search the password hash list for that code - they need to recompute it for each possible salt value!</p>
+<p> What salting does is, effectively, increase the amount of effort needed to break the passwords.  If you add 12 bits of salt, then a rainbow table needs 4096 times more entries to find common passwords! If your salt is long enough, then it can make it effectively impossible to create a rainbox table at all. If they try to attack you without a rainbow table, a 12 bit salt means that your attacker needs to attack the passwords of each of your users seperately! Even if they know the value of the salt, you've made it much harder for them to breach your security.</p>
+<p><a class="a2a_dd a2a_target addtoany_share_save" href="http://www.addtoany.com/share_save#url=http%3A%2F%2Fscientopia.org%2Fblogs%2Fgoodmath%2F2013%2F03%2F02%2Fpasswords-hashing-and-salt%2F&amp;title=Passwords%2C%20Hashing%2C%20and%20Salt" id="wpa2a_12"><img src="http://scientopia.org/blogs/goodmath/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://scientopia.org/blogs/goodmath/2013/03/02/passwords-hashing-and-salt/feed/</wfw:commentRss>
+		<slash:comments>13</slash:comments>
+		</item>
+		<item>
+		<title>New Dimensions of Crackpottery</title>
+		<link>http://scientopia.org/blogs/goodmath/2013/02/26/new-dimensions-of-crackpottery/</link>
+		<comments>http://scientopia.org/blogs/goodmath/2013/02/26/new-dimensions-of-crackpottery/#comments</comments>
+		<pubDate>Tue, 26 Feb 2013 15:06:32 +0000</pubDate>
+		<dc:creator>MarkCC</dc:creator>
+				<category><![CDATA[Bad Physics]]></category>
+
+		<guid isPermaLink="false">http://scientopia.org/blogs/goodmath/?p=2131</guid>
+		<description><![CDATA[I have, in the past, ranted about how people abuse the word "dimension", but it's been a long time. One of my followers on twitter sent me a link to a remarkable piece of crackpottery which is a great example of how people simply do not understand what dimensions are. There are several ways of [...]]]></description>
+				<content:encoded><![CDATA[<p> I have, in the past, ranted about how people abuse the word "dimension", but it's been a long time. One of my followers on twitter sent me a link to a <a href="http://www.mikeelias.com/2013/02/10/why-emc2-is-just-the-beginning/">remarkable piece of crackpottery</a> which is a great example of how people simply do not understand what dimensions are.</p>
+<p> There are several ways of defining "dimension" mathematically, but they all come back to one basic concept. A dimension an abstract concept of a <em>direction</em>. We can use the number of dimensions in a space as a way of measuring properties of that space, but those properties all come back to the concept of direction. A dimension is neither a place nor a state of being: it is a direction.</p>
+<p> Imagine that you're sitting in an abstract space. You're at one point. There's another point that I want you to go to. In order to uniquely identify your destination, how many directions do I need to mention?</p>
+<p> If the space is a line, you only need one: I need to tell you the distance. There's only one possible direction that you can go, so all I need to tell you is how far. Since you only need one direction, the line is one-dimensional.</p>
+<p> If the line is a plane, then I need to tell you two things. I could do that by saying "go right three steps then up 4 steps", or I could say "turn 53 degrees clockwise, and then walk forward 5 steps." But there's no way I can tell you how to get to your destination with less than two directions. You need two directions, so the plane is two dimensional.</p>
+<p> If the space is the interior of a cube, then you'll need three directions, which means that the cube is three dimensional.</p>
+<p> On to the crackpottery!</p>
+<blockquote>
+<p>E=mc2 represents a translation across dimensions, from energy to matter.</p>
+</blockquote>
+<p> No, it does not. Energy and matter are <em>not</em> dimensions. <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_8105cc0386e42f3a4c62834c0dc86eb7.gif' style=' ' class='tex' alt="e=mc^2" /></span> is a statement about the fundamental relation between energy and matter, not a statement about dimensions. Our universe could be 2 dimensional, 3 dimensional, 4 dimensional, or 22 dimensional: relativity would still mean the same thing, and it's not a statement about a "translation across dimensions".</p>
+<blockquote>
+<p>Energy can travel at the speed of light, and as Special Relativity tells us, from the perspective of light speed it takes no time to travel any distance. In this way, energy is not bound by time and space the way matter is. Therefore, it is in a way five-dimensional, or beyond time.</p>
+</blockquote>
+<p> Bzzt, no. </p>
+<p> Energy does not travel. <em>Light</em> travels, and light can transmit energy, but light isn't energy. Or, from another perspective, light is energy: but <em>so is everything else</em>. Matter and energy are the same thing.</p>
+<p> From the perspective of light speed time most certainly does pass, and it does take plenty of time to travel a distance. Light takes roughly 6 minutes to get from the sun to the earth. What our intrepid author is trying to talk about here is the idea of time dilation. Time dilation describes the behavior of particles <em>with mass</em> when they move at high speeds. As a massive particle moves faster and approaches the speed of light, the mass of the particle increases, and the particle's experience of time slows. <em>If</em> you could accelerate a massive particle to the speed of light, its mass would become infinite, and time would stop for the particle. "If" is the key word there: it can't. It would require an infinite amount of energy to accelerate it to the speed of light.</p>
+<p> But light has no mass. Relativity describes a strange property of the universe, which is hard to wrap your head around. Light <em>always</em> moves at the same speed, no matter your perspective. Take two spacecraft in outer space, which are completely stationary relative to each other. Shine a laser from one, and measure how long it takes for the light to get to the other. How fast is it going? Roughly 186,000 miles/second. Now, start one ship moving away from the other at half the speed of light. Repeat the experiment. One ship is moving away from the other at a speed of 93,000 miles/second. From the perspective of the moving ship, how fast is the light moving away from it towards the other ship? 186,000 miles/second. From the perspective of the stationary ship, how fast is the laser light approaching it? 186,000 miles/second.</p>
+<p> It's not that there's some magic thing about light that makes it move while time stops for it. Light is massless, so it can move at the speed of light. Time dilation doesn't apply because it has no mass.</p>
+<p> But even if that weren't the case, that's got nothing to do with dimensionality. Dimensionality is a direction: what does this rubbish have to do with the different directions that light can move in? Absolutely nothing: the way he's using the word "dimension" has nothing to do with what dimensions mean.</p>
+<blockquote>
+<p>All “objects” or instances of matter are time-bound; they change, or die, or dissolve, or evaporate. Because they are subject to time, objects can be called four-dimensional.</p>
+</blockquote>
+<p> Nope.</p>
+<p> Everything in our universe is subject to time, because <em>time is one of the dimensions in our universe</em>. Time is a direction that we move.  We don't have direct control over it - but it's still a direction. When and where did I write this blog post compared to where I am when you're reading it? The only way you can specify that is by saying how far my position has changed in <em>four</em> directions: 3 spatial directions, and time. Time is a dimension, and everything in our universe needs to consider it, because you can't specify anything in our universe without all four dimensions.</p>
+<blockquote>
+<p>The enormous energy that can be released from a tiny object (as in an atomic bomb) demonstrates the role dimensions play in constructing reality.</p>
+</blockquote>
+<p> No: the enormous energy that can be released from a tiny object demonstrates the fact that a small quantity of matter is equivalent to a large quantity of energy. As you'd expect if you look at that original equation: <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_8105cc0386e42f3a4c62834c0dc86eb7.gif' style=' ' class='tex' alt="e=mc^2" /></span>. A gram of mass - something the size of a paperclip - is equivalent to about 25 <em>million</em> kilowatt-hours of energy - or more than the total yearly energy use of 1,200 average americans. That's damned impressive and profound, without needing to draw in any mangled notions of dimensions or magical dimensional powers.</p>
+<blockquote>
+<p>Higher dimensions are mind-blowingly powerful; even infinitely so. Such power is so expansive that it can’t have form, definition, or identity, like a ball of uranium or a human being, without finding expression in lower dimensions. The limitations of time and space allow infinite power to do something other than constantly annihilate itself.</p>
+</blockquote>
+<p> Do I even need to respond to this?</p>
+<blockquote>
+<p>Einstein’s equation E=mc2 bridges the fourth and the fifth dimensions, expressed as matter and energy. Imagine a discovery that bridges expressions of the fifth and sixth dimensions, such as energy and consciousness. Consciousness has the five-dimensional qualities of energy, but it can’t be “spent” in the way energy can because it doesn’t change form the way energy does. Therefore, it’s limitless.</p>
+</blockquote>
+<p> And now we move from crackpottery to mysticism. Einstein's mass-energy equation doesn't bridge dimensions, and dimensionality has nothing do with mass-energy equivalence. And now our crackpot friend suddenly throws in another claim, that consciousness is the sixth dimension? Or consciousness is the bridge between the fifth and sixth dimensions? It's hard to figure out just what he's saying here, except for the fact that it's got nothing to do with actual <em>dimensions</em>.</p>
+<p> Is there a sixth dimension? Who knows? According to some modern theories, our universe actually has many more than the 4 dimensions that we directly experience. There could be 6 or 10 or 20 dimensions. But if there are, those dimensions are just other directions that things can move. They're not abstract concepts like "consciousness".</p>
+<p> And of course, this is also remarkably sloppy logic:</p>
+<ol>
+<li> Consciousness has the 5-dimensional qualities of energy</li>
+<li> Consciousness can't be spent.</li>
+<li> Consciousness can't change form.</li>
+<li> Therefore consciousness is unlimited.</li>
+</ol>
+<p> The first three statements are just blind assertions, given without evidence or argument. The fourth is presented as a conclusion drawn from the first three - but it's a non-sequitur. There's no real way to conclude the last statement given the first three. Even if you give him all the rope in the world, and accept those three statements as axioms - it's still garbage.</p>
+<p><a class="a2a_dd a2a_target addtoany_share_save" href="http://www.addtoany.com/share_save#url=http%3A%2F%2Fscientopia.org%2Fblogs%2Fgoodmath%2F2013%2F02%2F26%2Fnew-dimensions-of-crackpottery%2F&amp;title=New%20Dimensions%20of%20Crackpottery" id="wpa2a_14"><img src="http://scientopia.org/blogs/goodmath/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://scientopia.org/blogs/goodmath/2013/02/26/new-dimensions-of-crackpottery/feed/</wfw:commentRss>
+		<slash:comments>32</slash:comments>
+		</item>
+		<item>
+		<title>The Intellectual Gravity of Brilliant Baseball Players</title>
+		<link>http://scientopia.org/blogs/goodmath/2013/02/21/the-intellectual-gravity-of-brilliant-baseball-players/</link>
+		<comments>http://scientopia.org/blogs/goodmath/2013/02/21/the-intellectual-gravity-of-brilliant-baseball-players/#comments</comments>
+		<pubDate>Thu, 21 Feb 2013 16:14:52 +0000</pubDate>
+		<dc:creator>MarkCC</dc:creator>
+				<category><![CDATA[Bad Math]]></category>
+		<category><![CDATA[Bad Physics]]></category>
+
+		<guid isPermaLink="false">http://scientopia.org/blogs/goodmath/?p=2123</guid>
+		<description><![CDATA[Some of my friends at work are baseball fans. I totally don't get baseball - to me, it's about as interesting as watching paint dry. But thankfully, some of my friends disagree, which is how I found this lovely little bit of crackpottery. You see, there's a (former?) baseball player named Jose Canseco, who's been [...]]]></description>
+				<content:encoded><![CDATA[<p> Some of my friends at work are baseball fans. I totally don't get baseball - to me, it's about as interesting as watching paint dry. But thankfully, some of my friends disagree, which is how I found this lovely little bit of crackpottery.</p>
+<p> You see, there's a (former?) baseball player named Jose Canseco, who's been plastering twitter with his deep thoughts about science.</p>
+<blockquote class="twitter-tweet"><p>Ancient gravity was much weaker</p>
+<p>&mdash; Jose Canseco (@JoseCanseco) <a href="https://twitter.com/JoseCanseco/status/303672574544584704">February 19, 2013</a></p></blockquote>
+<p><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<blockquote class="twitter-tweet"><p>You ever wonder why nothing REALLY big exists today in nature</p>
+<p>&mdash; Jose Canseco (@JoseCanseco) <a href="https://twitter.com/JoseCanseco/status/303673151055863808">February 19, 2013</a></p></blockquote>
+<p><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<blockquote class="twitter-tweet"><p>elephants today eight tons supersaurs two hundred tons a totally different world. why?</p>
+<p>&mdash; Jose Canseco (@JoseCanseco) <a href="https://twitter.com/JoseCanseco/status/303674414359265280">February 19, 2013</a></p></blockquote>
+<p><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<blockquote class="twitter-tweet"><p>Animal tissue of muscles and ligaments could not support huge dinosaurs even standing up or pump blood up 60 foot necks</p>
+<p>&mdash; Jose Canseco (@JoseCanseco) <a href="https://twitter.com/JoseCanseco/status/303676196019908608">February 19, 2013</a></p></blockquote>
+<p><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<blockquote class="twitter-tweet"><p>Gravity had to be weaker to make dinosaurs nimble</p>
+<p>&mdash; Jose Canseco (@JoseCanseco) <a href="https://twitter.com/JoseCanseco/status/303677609986904064">February 19, 2013</a></p></blockquote>
+<p><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<blockquote class="twitter-tweet"><p>My theory is the core of the planet shifted when single continent formed to keep us in a balanced spin</p>
+<p>&mdash; Jose Canseco (@JoseCanseco) <a href="https://twitter.com/JoseCanseco/status/303678580385259521">February 19, 2013</a></p></blockquote>
+<p><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<blockquote class="twitter-tweet"><p>The land was farther away from the core and had much less gravity so bigness could develop and dominate</p>
+<p>&mdash; Jose Canseco (@JoseCanseco) <a href="https://twitter.com/JoseCanseco/status/303679298911469571">February 19, 2013</a></p></blockquote>
+<p><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script</p>
+<blockquote class="twitter-tweet"><p>I may not be 100% right but think about it.How else could 30 foot leather birds fly?</p>
+<p>&mdash; Jose Canseco (@JoseCanseco) <a href="https://twitter.com/JoseCanseco/status/303679965889703936">February 19, 2013</a></p></blockquote>
+<p><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p> At first glance, this is funny, but not particularly interesting. I mean, it's a classic example of my mantra: <em>the worst math is no math</em>.</p>
+<p> The core of this argument is pseudo-mathematical. The dumbass wants to make the argument that under current gravity, it wouldn't be possible for things the size of the dinosaurs to move around. The problem with this argument is that there's no problem! Things the size of dinosaurs could move about in current gravity with absolutely no difficult. If you actually do the math, it's fine.</p>
+<p> <em>If</em> dinosaurs had the anatomy of human beings, then it's true that if you scaled them up, they wouldn't be able to walk. But they didn't. They had anatomical structures that were quite different from ours in order to support their massive size. For example, here's a bone from quetzlcoatlus:</p>
+<p> <a href="http://scientopia.org/blogs/goodmath/files/2013/02/Media111639en.jpeg"><img src="http://scientopia.org/blogs/goodmath/files/2013/02/Media111639en-181x300.jpeg" alt="Media,111639,en" width="181" height="300" class="alignright size-medium wp-image-2126" /></a> See the massive knob sticking out to the left? That's a muscle attachement point. That gave the muscles much greater torque than ours have, which they needed. (Yes, I know that Quetzalcoatlus wwasn't really a dinosaur, but it is one of the kinds of animals that Canseco was talking about, and it was easy to find a really clear image.)</p>
+<p> Most animal joints are, essentially, lever systems. Muscles attach to two different bones, which are connected by a hinge. The muscle attachement points stick out relative to the joint. When the muscles contract, that creates a torque which rotate the bones around the joint. </p>
+<p> The lever is one of the most fundamental machines in the universe. It operates by the principal of torque. Our regular daily experiences show that levers act in a way that magnifies our efforts. I can't walk up to a car and lift it. But with a lever, I can. Muscle attachment points <em>are</em> levers. Take another look at that bone picture: what you're seeing is a massive level to magnify the efforts of the muscles. That's all that a large animal needed to be able to move around in earths gravity.</p>
+<p> This isn't just speculation - this is stuff that's been modeled in great detail. And it's stuff that can be observed in modern day animals. Look at the skeleton of an elephant, and compare it to the skeleton of a dog. The gross structure is very similar - they are both quadripedal mammals. But if you look at the bones, the muscle attachment points in the elephants skeleton have much larger projections, to give the muscles greater torque. Likewise, compare the skeleton of an american robin with the skeleton of a mute swan: the swan (which has a maximum recorded wingspan of 8 feet!) has <em>much</em> larger projections on the attachment points for its muscles. If you just scaled a robin from its 12 inch wingspan to the 8 feet wingspan of a swan, it wouldn't be able to walk, much less fly! But the larger bird's anatomy is different in order to support its size - and it can and does fly with those 8 foot wings!</p>
+<p> That means that on the basic argument for needing different gravity, Canseco fails miserably.</p>
+<p> Canseco's argument for <em>how</em> gravity allegedly changed is even worse.</p>
+<p> What he claims is that at the time when the continental land masses were joined together as the pangea supercontinent, the earths core <em>moved</em> to counterbalance the weight of the continents. Since the earths core was, after this shift, farther from the surface, the gravity at the surface would be smaller.</p>
+<p> This is an amusingly ridiculous idea. It's even worse that Ted Holden and his reduced-felt-gravity because of the electromagnetic green saturn-star. </p>
+<p> First, the earths core isn't some lump of stuff that can putter around. The earth is a solid ball of material. It's not like a ball of powdered chalk with a solid lump of uranium at the center. The core can't move.</p>
+<p> Even if it could, Canseco is wrong. Canseco is playing with two different schemes of how gravity works. We can <em>approximate</em> the behavior of gravity on earth by assuming that the earth is a point: for most purposes, gravity behaves almost as if the entire mass of the earth was concentrated at the earths center of mass. Canseco is using this idea when he moves the "core" further from the surface. He's using the idea that the core (which surrounds the center of mass in the real world) <em>is</em> the center of mass. So if the core moves, and the center of mass moves with it, then the point-approximation of gravity will change because the distance from the center of mass has increased.</p>
+<p> But: the reason that he claims the core moved is because it was responding to the combined landmasses on the surface clumping together as pangea. That argument is based on the idea that the core had to move <em>to balance the continents</em>. In that case, the center of gravity wouldn't be any different - if the core could move to counterbalance the continents, it would move just enough to keep the center of gravity where it was - so if you were using the point approximation of gravity, it would be unaffected by the shift.</p>
+<p> He's combining incompatible assumptions. To justify moving the earths core, he's *not* using a point-model of gravity. He's assuming that the mass of the earths core and the mass of the continents are different. When he wants to talk about the effect of gravity of an animal on the surface, he wants to treat the full mass of the earth as a point source - <em>and</em> he wants that point source to be located at the core. </p>
+<p> It doesn't work that way.</p>
+<p> The thing that I find most interesting about this particular bit of crackpottery isn't really about this particular bit of crackpottery, but about the family of crackpottery that it belongs to.</p>
+<p> People are fascinated by the giant creatures that used to live on the earth. Intuitively, because we don't see giant animals in the world around us, there's a natural tendency to ask "Why?". And being the pattern-seekers that we are, we intuitively believe that there must be a <em>reason</em> why the animals back then were huge, but the animals today aren't. It can't just be random chance. So people keep coming up with reasons. Like:</p>
+<ol>
+<li> <a href="http://scientopia.org/blogs/goodmath/tag/neal-adams/">Neal Adams</a>: who argues that the earth is constantly growing larger, and that gravity is an illusion caused by that growth. One of the reasons, according to his "theory", for why we know that gravity is just an illusion, is because the dinosaurs supposedly couldn't walk in current gravity.</li>
+<li> <a href="http://www.n-atlantis.com/tedholden.htm">Ted Holden</a> and the Neo-Velikovskians: who argue that the solar system is drastically different today than it used to be. According to Holden, Saturn used to be a "hyperintelligent green electromagnetic start", and the earth used to be tide-locked in orbit around it. As a result, the felt effect of gravity was weaker. </li>
+<li> <a href="http://www.dinox.org/">Stephen Hurrell</a>, who argues similarly to Neal Adams that the earth is growing. Hurrell doesn't dispute the existence of gravity the way that Adams does, but similarly argues that dinosaurs couldn't walk in present day gravity, and resorts to an expanding earth to explain how gravity could have been weaker.</li>
+<li> <a href="http://www.dinosaurhome.com/the-theory-of-the-increasing-of-the-earths-gravity-39.html">Ramin Amir Mardfar</a>: who claims that the earth's mass has 	been continually increasing because meteors add mass to the earth.</li>
+<li> <a href="http://www.zmescience.com/research/a-hundred-years-in-the-future-earths-gravity-could-be-very-weak/">Gunther Bildmeyer</a>, who argues that gravity is really an electromagnetic effect, and so the known fluctuations in the earths magnetic fields change gravity. According to him, the dinosaurs could only exist because of the state of the magnetic field at the time, which reduced gravity.</li>
+</ol>
+<p> There are many others. All of them grasping at straws, trying to explain something that doesn't need explaining, if only they'd bother to do the damned math, and see that all it takes is a relatively small anatomical change.</p>
+<p><a class="a2a_dd a2a_target addtoany_share_save" href="http://www.addtoany.com/share_save#url=http%3A%2F%2Fscientopia.org%2Fblogs%2Fgoodmath%2F2013%2F02%2F21%2Fthe-intellectual-gravity-of-brilliant-baseball-players%2F&amp;title=The%20Intellectual%20Gravity%20of%20Brilliant%20Baseball%20Players" id="wpa2a_16"><img src="http://scientopia.org/blogs/goodmath/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://scientopia.org/blogs/goodmath/2013/02/21/the-intellectual-gravity-of-brilliant-baseball-players/feed/</wfw:commentRss>
+		<slash:comments>22</slash:comments>
+		</item>
+		<item>
+		<title>Euler&#039;s Equation Crackpottery</title>
+		<link>http://scientopia.org/blogs/goodmath/2013/02/18/eulers-equation-crackpottery/</link>
+		<comments>http://scientopia.org/blogs/goodmath/2013/02/18/eulers-equation-crackpottery/#comments</comments>
+		<pubDate>Mon, 18 Feb 2013 22:36:33 +0000</pubDate>
+		<dc:creator>MarkCC</dc:creator>
+				<category><![CDATA[Bad Math]]></category>
+		<category><![CDATA[Bad Physics]]></category>
+
+		<guid isPermaLink="false">http://scientopia.org/blogs/goodmath/?p=2113</guid>
+		<description><![CDATA[One of my twitter followers sent me an interesting piece of crackpottery. I debated whether to do anything with it. The thing about crackpottery is that it really needs to have some content. Total incoherence isn't amusing. This bit is, frankly, right on the line. Euler's Equation and the Reality of Nature. a) Euler's Equation [...]]]></description>
+				<content:encoded><![CDATA[<p> One of my twitter followers sent me an interesting piece of crackpottery. I debated whether to do anything with it. The thing about crackpottery is that it really needs to have <em>some</em> content. Total incoherence isn't amusing. This bit is, frankly, right on the line.</p>
+<blockquote>
+<p><b>Euler's Equation and the Reality of Nature.</b></p>
+<p><em>a)</em>  Euler's Equation as a mathematical reality.</p>
+<p> Euler's identity is "the gold standard for mathematical beauty'.<br />
+Euler's identity is "the most famous formula in all mathematics".<br />
+‘ . . . this equation is the mathematical analogue of  Leonardo<br />
+da Vinci’s Mona Lisa painting or Michelangelo’s statue of David’<br />
+‘It  is God’s equation’,  ‘our jewel ‘, ‘ It is a mathematical icon’.<br />
+ . . . .  etc.</p>
+<p><em>b)</em> Euler's Equation as a physical reality.</p>
+<p> "it is absolutely paradoxical; we cannot understand it,<br />
+ and we don't know what it means, .  . . . .’<br />
+‘ Euler's Equation reaches down into the very depths of existence’<br />
+‘ Is Euler's Equation about fundamental matters?’<br />
+‘It would be nice to understand﻿ Euler's Identity as a physical process<br />
+ using physics.‘<br />
+‘ Is it possible to unite Euler's Identity with physics, quantum physics ?’
+</p>
+<p>My aim is to understand the reality of nature.</p>
+<p>Can Euler's equation explain me something about reality?</p>
+<p>To give the answer to this. question I need to bind Euler's equation with an object – particle. Can it  be math- point or string- particle or triangle-particle? No, Euler's formula has quantity (pi) which says me that the particle must be only a circle .</p>
+<p>Now I want to understand the behavior of circle - particle and therefore I need to use spatial relativity and quantum theories. These two theories say me that the reason of circle – particle’s movement  is its own inner impulse (h) or  (h*=h/2pi).</p>
+<p><em>a)</em>  Using  its own inner impulse (h) circle - particle moves ( as a wheel) in a straight line with constant speed c = 1.  We call such particle - ‘photon’. From Earth – gravity point of view this speed is maximally. From Vacuum point of view this speed is minimally. In this movement quantum of light behave as a corpuscular (no charge).</p>
+<p> <em>b)</em> Using  its own inner impulse / intrinsic angular momentum ( h* = h / 2pi ) circle - particle  rotates around its axis.   In such movement particle has charge, produce electric waves ( waves property of particle) and its speed ( frequency) is :  c.</p>
+<p><em>1.</em> We call such particle - ‘ electron’  and its  energy is:  E=h*f.</p>
+<p>In this way I can understand the reality of nature.</p>
+<p>==.</p>
+<p>Best wishes.</p>
+<p>Israel Sadovnik  Socratus.</p>
+</blockquote>
+<p> Euler's equation says that <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_f2d2e607c3e99d5c34bc0aad01893a0d.gif' style=' ' class='tex' alt="e^{i\pi} + 1 = 0" /></span>.  It's an amazingly profound equation. The way that it draws together fundamental concepts is beautiful and surprising.</p>
+<p> But it's not nearly as mysterious as our loonie-toon makes it out to be. The natural logarithm-base is deeply embedded in the structure of numbers, and we've known that, and we've known <em>how</em> it works for a long time. What Euler did was show the relationship between <em>e</em> and the fundamental rotation group of the complex numbers.  There are a couple of ways of restating the definition of that make the meaning of that relationship clearer.</p>
+<p> For example:</p>
+<p><p style='text-align:center;'><span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_06435c0cb08ba3aaea6f1389d8834e6d.gif' style='' class='tex' alt="e^z = lim_{n\rightarrow \infty}(1 + \frac{z}{n})^n" /></span></p></p>
+<p> That's an alternative definition of what <em>e</em> is. If we use that, and we plug <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_d461c3e8dd824cc0d6211194d5c0052f.gif' style=' padding-bottom:1px;' class='tex' alt="i\pi" /></span> into it, we get:</p>
+<p><p style='text-align:center;'><span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_87d89e348588d89a92ab02db17dd4e72.gif' style='' class='tex' alt="e^{i\pi} = lim_{n \rightarrow \infty}(1+\frac{i\pi}{n})^n" /></span></p></p>
+<p> If you work out that limit, it's -1. Also, if you take values of N, and plot <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_0d20060d40a217b837fcf65baf3e66c9.gif' style=' ' class='tex' alt="(1 + \frac{i\pi}{n})^1" /></span>, <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_18cf1925684f269f38865eea9fa85741.gif' style=' ' class='tex' alt="(1+\frac{i\pi}{n})^2" /></span>, <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_0821b3ce88548b4c750f4a6a8aa23543.gif' style=' ' class='tex' alt="(1 + \frac{i\pi}{n})^3" /></span>, and <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_c5d1d7284091784a84788c79ba86db71.gif' style=' ' class='tex' alt="(1 + \frac{i\pi}{n})^4" /></span>, ... on the complex plane, as N gets larger, the resulting curve gets closer and closer to a semicircle.</p>
+<p> An equivalent way of seeing it is that exponents of <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_ea3384fb5b64a429c0a54368751ee292.gif' style=' ' class='tex' alt="e^i" /></span> are <em>rotations</em> in the complex number plane. The reason that <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_84173e6e0106d58349f6639c27db901d.gif' style=' ' class='tex' alt="e^{i\pi} = -1" /></span> is because if you take the complex number (1 + 0i), and rotate it by <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_4f08e3dba63dc6d40b22952c7a9dac6d.gif' style=' padding-bottom:2px;' class='tex' alt="\pi" /></span> radians, you get -1: <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_44b892d42f8996097874c296a2897c50.gif' style=' ' class='tex' alt="1(e^{i\pi}) = -1" /></span>.</p>
+<p> That's what Euler's equation means. It's amazing and beautiful, but it's not all that difficult to understand. It's not mysterious in the sense that our crackpot friend thinks it is.</p>
+<p> But what really sets me off is the idea that it must have some meaning in physics. That's silly. It doesn't matter what the physical laws of the universe are: the values of <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_4f08e3dba63dc6d40b22952c7a9dac6d.gif' style=' padding-bottom:2px;' class='tex' alt="\pi" /></span> and e <em>will not change</em>. It's like trying to say that there must be something special about our universe that makes 1 + 1 = 2 - or, conversely, that the fact that 1+1=2 means something special about the universe we live in. These things are facts of <em>numbers</em>, which are independent of physical reality. Create a universe with different values for all of the fundamental constants - e and &pi; will be exactly the same. Create a universe with less matter - e and &pi; will still be the same. Create a universe with no matter, a universe with different kinds of matter, a universe with 300 forces instead of the four that we see - and e and &pi; won't change.</p>
+<p> What things like e and &pi;, and their relationship via Euler's equation tell us is that there's a fundamental relationship between numbers and shapes on a two-dimensional plane which does not and <em>cannot</em> really exist in the world we live in.</p>
+<p> Beyond that, what he's saying is utter rubbish. For example: </p>
+<blockquote><p>
+These two theories say me that the reason of circle – particle’s movement  is its own inner impulse (h) or  (h*=h/2pi). Using  its own inner impulse (h) circle - particle moves ( as a wheel) in a straight line with constant speed c = 1.  We call such particle - ‘photon’. From Earth – gravity point of view this speed is maximally. From Vacuum point of view this speed is minimally. In this movement quantum of light behave as a corpuscular (no charge).
+</p></blockquote>
+<p> This is utterly meaningless. It's a jumble of words that pretends to be meaningful and mathematical, when in fact it's just a string of syllables strung together nonsensical ways. </p>
+<p> There's a lot that we know about how photons behave. There's also a lot that we <em>don't</em> know about photons. This word salad tells us exactly <em>nothing</em> about photons. In the classic phrase, it's not even wrong: what it says doesn't have enough meaning to <em>be</em> wrong. What is the "inner impulse" of a photon according to this crackpot? We can't know: the term isn't defined. We are pretty certain that a photon is <em>not</em> a wheel rolling along. Is that what the crank is saying? We can't be sure. And that's the problem with this kind of crankery. </p>
+<p> As I always say: the very worst math is no math. This is a perfect example. He starts with a beautiful mathematical fact. He uses it to jump to a completely non-mathematical conclusion. But he writes a couple of mathematical symbols, to pretend that he's using math. </p>
+<p><a class="a2a_dd a2a_target addtoany_share_save" href="http://www.addtoany.com/share_save#url=http%3A%2F%2Fscientopia.org%2Fblogs%2Fgoodmath%2F2013%2F02%2F18%2Feulers-equation-crackpottery%2F&amp;title=Euler%27s%20Equation%20Crackpottery" id="wpa2a_18"><img src="http://scientopia.org/blogs/goodmath/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://scientopia.org/blogs/goodmath/2013/02/18/eulers-equation-crackpottery/feed/</wfw:commentRss>
+		<slash:comments>12</slash:comments>
+		</item>
+		<item>
+		<title>The Meta of G&#246;del</title>
+		<link>http://scientopia.org/blogs/goodmath/2013/02/17/the-meta-of-gdel/</link>
+		<comments>http://scientopia.org/blogs/goodmath/2013/02/17/the-meta-of-gdel/#comments</comments>
+		<pubDate>Mon, 18 Feb 2013 00:27:43 +0000</pubDate>
+		<dc:creator>MarkCC</dc:creator>
+				<category><![CDATA[Incompleteness]]></category>
+
+		<guid isPermaLink="false">http://scientopia.org/blogs/goodmath/?p=2102</guid>
+		<description><![CDATA[As you may be figuring out, there's a reason why I resisted walking through G&#246;del's proof of incompleteness for so long. Incompeteness isn't a simple proof! To refresh your memory, here's a sketch of the proof: Take a simple logic. We've been using a variant of the Principia Mathematica's logic, because that's what G&#246;del used. [...]]]></description>
+				<content:encoded><![CDATA[<p> As you may be figuring out, there's a reason why I resisted walking through G&ouml;del's proof of incompleteness for so long. Incompeteness isn't a simple proof! </p>
+<p> To refresh your memory, here's a sketch of the proof:</p>
+<ol>
+<li> Take a simple logic. We've been using a variant of the Principia Mathematica's logic, because that's what G&ouml;del used. </li>
+<li> Show that any statement in the logic can be encoded as a number using an arithmetic process based on the syntax of the logic. The process of encoding statements numerically is called G&ouml;del numbering.</li>
+<li> Show that you can express meta-mathematical properties of logical statements in terms of arithemetic properties of their G&ouml;del numbers. In particular, we need to build up the logical infrastructure that we need to talk about whether or not a statement is <em>provable</em>.</li>
+<li> Using meta-mathematical properties, show how you can create an unprovable statement encoded as a G&ouml;del number.
+    </li>
+</ol>
+<p> What we've done so far is the first two steps, and part of the third. In <a href="http://scientopia.org/blogs/goodmath/2013/02/07/gdel-numbering-encoding-logic-as-numbers/">this post</a>, we saw the form of the Principia's logic that we're using, and how to numerically encode it as a G&ouml;del numbering. We've start started on the third point in <a href="http://scientopia.org/blogs/goodmath/2013/02/11/defining-properties-arithmetically-part-1-gdel-and-primitive-recursion/">this post</a>, by figuring out just what it means to say that things are encoded arithmetically. Now we can get to the part where we see how to encode meta-mathematical properties in terms of arithmetic properties of the G&ouml;del numbering. In this post, we're going to build up everything we need to express syntactic correctness, logical validity, and provability in terms of arithmetical properties of G&ouml;del numbers. (And, as a reminder, I've been using <a href="http://www.research.ibm.com/people/h/hirzel/papers/canon00-goedel.pdf">this translation</a> on G&ouml;del's original paper on incompleteness.)
+</p>
+<p> This is the most complex part of the incompleteness proof. The basic concept of what we're doing is simple, but the mechanics are very difficult. What we want to do is define a set of predicates about logical statements, but we want those predicates to be expressed as arithmetic properties of the numerical representations of the logical statements.</p>
+<p> The point of this is that we're showing that done in the right way, arithmetic <em>is</em> logic - that doing arithmetic on the G&ouml;del numbers is doing logical inference. So what we need to do is build up a toolkit that shows us how to understand and manipulate logic-as-numbers using arithmetic. As we saw in the last post, primitive recursion is equivalent to arithmetic - so if we can show how all of the properties/predicates that we define are primitive recursive, then they're arithmetic.</p>
+<p> This process involves a <em>lot</em> of steps, each of which is building the platform for the steps that follow it. I struggled quite a bit figuring out how to present these things in a comprehensible way. What I ended up with is writing them out as code in a pseudo-computer language. Before inventing this language,  I tried writing actual executable code, first in Python and then in Haskell, but I wasn't happy with the clarity of either one. </p>
+<p> Doing it in an unimplemented language isn't as big a problem as you might think. Even if this was all executable, you're not going to be able to actually run any of it on anything real - at least not before you hair turns good and gray. The way that this stuff is put together is not what any sane person would call efficient. But the point isn't to be efficient: it's to show that this is <em>possible</em>. This code is really all about searching; if we wanted to be efficient, this could all be done in a different representation, with a different search method that was a lot faster - but that wolud be harder to understand.</p>
+<p> So, in the end, I threw together a simple language that's easy to read. This language, if it were implemented, wouldn't really even be Turing complete - it's a primitive recursive language.</p>
+<h3>Basics</h3>
+<p> We'll start off with simple numeric properties that have no obvious connection to the kinds of meta-mathematical statements that we want to talk about, but we'll use those to define progressively more and more complex and profound properties, until we finally get to our goal.</p>
+<pre>
+# divides n x == True if n divides x without remainder.
+pred divides(n, x) = x mod n == 0
+
+pred isPrime(0) = False
+pred isPrime(1) = False
+pred isPrime(2) = True
+pred isPrime(n) = {
+  all i in 2 to n {
+    not divides(i, n)
+  }
+}
+
+fun fact(0) = 1
+fun fact(n) = n * fact(n - 1)
+</pre>
+<p> Almost everything we're going to do here is built on a common idiom. For anything we want to do arithmetically, we're going to find a bound - a maximum numeric value for it. Then we're going to iterate over all of the values smaller than that bound, searching for our target.</p>
+<p> For example, what's the <em>n</em>th prime factor of <em>x</em>? Obviously, it's got to be smaller than <em>x</em>, so we'll use <em>x</em> as our bound. (A better bound would be the square root of x, but it doesn't matter. We don't care about efficiency!)  To find the <em>n</em>th prime factor, we'll iterate over all of the numbers smaller than our bound <em>x</em>, and search for the smallest number which is prime, which divides <em>x</em>, and which is larger than the <em>n-1</em>th prime factor of <em>x</em>. We'll translate that into pseudo-code:</p>
+<pre>
+fun prFactor(0, x) = 0
+fun prFactor(n, x) = {
+  first y in 1 to x {
+    isPrime(y) and divides(y, x) and prFactor(n - 1, x) < y 
+  }
+}
+
+</pre>
+<p> Similarly, for extracting values from strings, we need to be able to ask, in general, what's the nth prime number? This is nearly identical to <code>prFactor</code> above. The only difference is that we need a different bound. Fortunately, we know that the <em>n</em>th prime number can't be larger than the factorial of the previous prime plus 1.
+</p>
+<pre>
+fun nthPrime(0) = 0
+fun nthPrime(n) = {
+  first y in 1 to fact(nthPrime(n - 1)) + 1  {
+    isPrime(y) and y &gt; nthPrime(n - 1)) 
+  }
+}
+
+</pre>
+<p> In composing strings of G&ouml;del numbers, we use exponentiation. Given integers <em>x</em> and <em>n</em>, <em>x<sup>n</sup></em>, we can obviously compute them via primitive recursion. I'll define them below, but in the rest of this post, I'll write them as an operator in the language:</p>
+<pre>
+fun pow(n, 0) = 1
+fun pow(n, i) = n * pow(n, i - 1)
+
+</pre>
+<h3>String Composition and Decomposition</h3>
+<p> With those preliminaries out of the way, we can get to the point of defining something that's actually about one of the strings encoded in these G&ouml;del numbers.  Given a number <em>n</em> encoding a string, <code>item(n, x)</code> is the value of the <em>n</em>th character of x. (This is slow. This is <em>really</em> slow! We're getting to the limit of what a very powerful computer can do in a reasonable amount of time. But this doesn't matter. The point isn't that this is a good way of doing these things: it's that these things are <em>possible</em>.  To give you an idea of just how slow this is, I started off writing the stuff in this post in Haskell. Compiled with GHC, which is a very good compiler, <code>item</code> to extract the 6th character of an 8 character string took around 10 minutes on a 2.4Ghz laptop.)
+</p>
+<pre>
+fun item(n, x) = {
+  first y in 1 to x {
+    divides(prFactor(n, x) ** y, y) and
+      not divides(prFactor(n, x)**(y+1), x) 
+  }
+}
+
+</pre>
+<p> Given a string, we want to be able to ask how long it is; and given two strings, we want to be able to concatenate them.</p>
+<pre>
+fun length(x) = {
+  first y in 1 to x {
+    prFactor(y, x) > 0 and prFactor(y + 1, x) == 0
+  }
+}
+
+fun concat(x, y) = {
+  val lx = length(x)
+  val ly = length(y)
+
+  first z in 1 to nthprime(lx + ly)**(x + y) {
+    (all n in 1 to lx {
+        item(n, z) == item(n, x)
+     }) and (all n in 1 to ly {
+        item(n + lx, z) == item(n, y)
+      }) 
+  }
+}
+
+fun concatl([]) = 0
+fun concatl(xs) = {
+  concat(head(xs), concatl(tail(xs)))
+}
+
+fun seq(x) = 2**x
+</pre>
+<p> We want to be able to build statements represented as numbers from other statements represented as numbers. We'll define a set of functions that either compose new strings from other strings, and to check if a particular string is a particular kind of syntactic element.</p>
+<pre>
+# x is a variable of type n.
+pred vtype(n, x) = {
+  some z in 17 to x {
+    isPrime(z) and x == n**z
+  }
+}
+
+# x is a variable
+pred isVar(x) = {
+  some n in 1 to x {
+    vtype(n, x)
+  }
+}
+
+fun paren(x) =
+  concatl([gseq(11), x, gseq(13)])
+
+# given the G&ouml;del number for a statement x, find 
+# the G&ouml;del number for not x.
+fun gnot(x) =
+  concat(gseq(5), paren(x))
+
+# Create the number for x or y.
+fun gor(x, y) =
+  concatl([paren(x), seq(7), paren(y)])
+
+# Create the number for 'forall x(y)'.
+fun gforall(x, y) =
+  concatl([seq(9), seq(x), paren(y)])
+
+# Create the number for x with n invocations of the primitive
+# successor function.
+fun succn(0, x) = x
+fun succn(n, x) = concat(seq(3), succn(n - 1, x))
+
+# Create the number n using successor and 0.
+fun gnumber(n) = succn(n, seq(1))
+
+# Check if a statement is type-1.
+pred stype_one(x) = {
+  some m in 1 to x {
+     m == 1 or (vtype(1, m) and x == succn(n, seq(m))
+  }
+}
+
+# Check if a statement is type n.
+pred fstype(1, x) = stype_one(x)
+pred fstype(n, x) =
+  some v in 1 to x {
+    vtype(n, v) and R(v)
+  }
+}
+
+</pre>
+<p> That last function contains an error: the translation of G&ouml;del that I'm using says <code>R(v)</code> without defining <code>R</code>. Either I'm missing something, or the translator made an error.</p>
+<h3>Formulae</h3>
+<p> Using what we've defined so far, we're now ready to start defining formulae in the basic Principia logic. Forumlae are strings, but they're strings with a constrained syntax.
+</p>
+<pre>
+pred elFm(x) = {
+  some y in 1 to x {
+    some z in 1 to x {
+      some n in 1 to x {
+        stype(n, y) and stype(n+1, z) and x == concat(z, paren(y))
+      }
+    }
+  }
+}
+
+</pre>
+<p> All this is doing is expressing the grammar rule in arithmetic form: an elementary formula is a predicate: <em>P(x)</em>, where <em>x</em> is a variable on level <em>n</em>, and <em>P</em> is a variable of level <em>x + 1</em>.
+</p>
+<p> The next grammar rule that we encode this way says how we can combine elementary formulae using operators. There are three operators: negation, conjunction, and universal quantification.</p>
+<pre>
+pred op(x, y, z) = {
+  x == gnot(y) or
+  x == gor(y, z) or 
+  (some v in 1 to x { isVar(v) and x == gforall(v, y) })
+}
+
+</pre>
+<p> And now we can start getting complex. We're going to define the idea of a <em>valid sequence</em> of formulae.  <em>x</em> is a valid sequence of formulae when it's formed from a collection of formulae, each of which is either an elementary formula, or is produced from the formulae which occured before it in the sequence using either negation, logical-or, or universal quantification.</p>
+<p> In terms of a more modern way of talking about it, the syntax of the logic is a grammar. A formula sequence, in this system, is another way of writing the parse-tree of a statement: the sequence is the parse-tree of the last statement in the sequence.</p>
+<pre>
+pred fmSeq(x) = {
+  all p in 0 to length(x) { 
+    elFm(item(n, x)) or
+      some p in 0 to (n - 1) {
+        some q in 0 to (n - 1) {
+          op(item(n,x), item(p, x), item(q, x))
+        }
+      }
+  }
+}
+
+</pre>
+<p> The next one bugs me, because it seems wrong, but it isn't really! It's a way of encoding the fact that a formula is the result of a well-defined sequence of formulae. In order to ensure that we're doing primitive recursive formulae, we're always thinking about sequences of formulae, where the later formulae are produced from the earlier ones. The goal of the sequence of formula is to produce the last formula in the sequence. What this predicate is really saying is that a formula is a valid formula if there is some sequence of formulae where this is the last one in the sequence.</p>
+<p> Rephrasing that in grammatical terms, a string is a formula if there is valid parse tree for the grammar that produces the string.</p>
+<pre>
+pred isFm(x) = {
+  some n in 1 to nthPrime(length(x)**2)**(x*length(x)**2) {
+    fmSeq(n)
+  }
+}
+
+</pre>
+<p> So, now, can we say that a statement is valid because it's parsed according to the grammar? Not quite. It's actually a familiar problem for people who write compilers. When you parse a program in some language, the grammar doesn't usually specify variables must be declared before they're used. It's too hard to get that into the grammar. In this logic, we've got almost the same problem: the grammar hasn't restricted us to only use bound variables. So we need to have ways to check whether a variable is bound in a G&ouml;del-encoded formula, and then use that to check the validity of the formula.</p>
+<pre>
+# The variable v is bound in formula x at position n.
+pred bound(v, n, x) = {
+  isVar(v) and isFm(x) and 
+  (some a in 1 to x {
+    some b in 1 to x {
+      some c in 1 to x {
+        x == concatl([a, gforall(v, b), c]) and
+        isFm(b) and
+        length(a) + 1 &le; n &le; length(a) + length(forall(v, b))
+      }
+    }
+  })
+}
+
+# The variable v in free in formula x at position n
+pred free(v, n, x) = {
+  isVar(v) and isFm(x) and
+  (some a in 1 to x {
+    some b in 1 to x {
+      some c in 1 to x {
+        v == item(n, x) and n &le; length(x) and not bound(v, n, x)
+      }
+    }
+  })
+}
+
+pred free(v, x) = {
+  some n in 1 to length(x) {
+    free(v, n, x)
+  }
+}
+
+</pre>
+<p> To do logical inference, we need to be able to do things like replace a variable with a specific infered value. We'll define how to do that:</p>
+<pre>
+# replace the item at position n in x with y.
+fun insert(x, n, y) = {
+  first z in 1 to nthPrime(length(x) + length(y))**(x+y) {
+    some u in 1 to x {
+      some v in 1 to x {
+        x == concatl([u, seq(item(n, x)), v]) and
+        z == concatl([u, y, v]) and
+        n == length(u) + 1
+      }
+    }
+  }
+}
+
+</pre>
+<p> There are inference operations and validity checks that we can only do if we know whether a particular variable is free at a particular position.</p>
+<pre>
+# freePlace(k, v, k) is the k+1st place in x (counting from the end)
+# where v is free.
+fun freePlace(0, v, x) = {
+  first n in 1 to length(x) {
+    free(v, n, x) and 
+    not some p in n to length(x) {
+      free(v, p, x)
+    }
+  }
+}
+
+fun freePlace(k, v, x) = {
+  first n in 1 to freePlace(n, k - 1, v) {
+    free(v, n, x) and 
+    not some p in n to freePlace(n, k - 1, v) {
+      free(v, p, x)
+    }
+  }
+}
+
+# number of places where v is free in x
+fun nFreePlaces(v, x) = {
+  first n in 1 to length(x) {
+    freeplace(n, v, x) == 0
+  }
+}
+
+</pre>
+<p> In the original logic, some inference rules are defined in terms of a primitive substitution operator, which we wrote as <em>subst[v/c](a)</em> to mean substitute the value <em>c</em> for the variable <em>c</em> in the statement <em>a</em>. We'll build that up on a couple of steps, using the <code>freePlaces</code> function that we just defined.</p>
+<pre>
+# Subst1 replaces a single instance of v with y.
+fun subst'(0, x, v, y) = x
+fun subst1(0k, x, v, y) =
+  insert(subst1(k, x, v, y), freePlace(k, v, x), y)
+
+# subst replaces all instances of v with y
+fun subst(x, v, y) = subst'(nFreePlaces(v, x), x, v, y)
+</pre>
+<p> The next thing we're going to do isn't, strictly speaking, absolutely necessary. Some of the harder stuff we want to do will be easier to write using things like implication, which aren't built in primitive of the Principia logic. To write those as clearly as possible, we'll define the full suite of usual logical operators in terms of the primitives.</p>
+<pre>
+# implication
+fun gimp(x, y) = gor(gnot(x), y)
+
+# logical and
+fun gand(x, y) = gnot(gor(gnot(x), gnot(y)))
+
+# if/f
+fun gequiv(x, y) = gand(gimp(x, y), gimp(y, x))
+
+# existential quantification
+fun gexists(v, y) = not(gforall(v, not(y)))
+</pre>
+<h3>Axioms</h3>
+<p> The Peano axioms are valid logical statements, so they have G&ouml;del numbers in this system. We could compute their  value, but why bother? We know that they exist, so we'll just give them names, and define a predicate to check if a value matches them.</p>
+<p> The form of the Peano axioms used in incompleteness are:</p>
+<ol>
+<li> Zero: <em>&not;(succ(x<sub>1</sub>) = 0)</em></li>
+<li> Uniqueness: <em>succ(x<sub>1</sub>) = succ(y<sub>1</sub>) \Rightarrow x = y</em></li>
+<li> Induction: <em>x<sub>2</sub>(0) &and; &forall;x<sub>1</sub>(x<sub>2</sub>(x<sub>1</sub>)&rArr; x<sub>2</sub>(succ(x<sub>1</sub>))) &rArr; &forall;x<sub>1</sub>(x<sub>2</sub>(x<sub>1</sub>))</em></li>
+</ol>
+<pre>
+const pa1 = ...
+const pa2 = ...
+const pa3 = ...
+
+pred peanoAxiom(x) = 
+  (x == pa1) or (x == pa2) or (x == pa3)
+</pre>
+<p> Similarly, we know that the propositional axioms must have numbers. The propositional<br />
+axioms are:
+</p>
+<ol>
+<li> <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_bf1edea090af6d558d5ff31d853bec2a.gif' style=' padding-bottom:1px;' class='tex' alt="p \lor p \Rightarrow p" /></span></li>
+<li> <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_f1a4c08aa277a937134622f2cd9d5c30.gif' style=' padding-bottom:1px;' class='tex' alt="p \Rightarrow p \lor q" /></span></li>
+<li> <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_a39dc7d8114c7e1650bea003b43bd27d.gif' style=' padding-bottom:1px;' class='tex' alt="p \lor q \Rightarrow p \lor q" /></span></li>
+<li> <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_8a02440324118d034085caf81a06f827.gif' style=' ' class='tex' alt="(p \Rightarrow q) \Rightarrow (r \lor p \Rightarrow r \lor q)" /></span></li>
+</ol>
+<p> I'll show the translation of the first - the rest follow the same pattern.</p>
+<pre>
+# Check if x is a statement that is a form of propositional
+# axiom 1: y or y => y
+pred prop1Axiom(x) =
+  some y in 1 to x {
+    isFm(x) and x == imp(or(y, y), y)
+  }
+}
+
+pred prop2Axiom(x) = ...
+pred prop3Axiom(x) = ...
+pred prop4Axiom(x) = ...
+pred propAxiom(x) = prop2Axiom(x) or prop2Axiom(x) or 
+    prop3Axiom(x) or prop4Axiom(x)
+</pre>
+<p> Similarly, all of the other axioms are written out in the same way, and we add a predicate <code>isAxiom</code> to check if something is an axiom. Next is quantifier axioms, which are complicated, so I'll only write out one of them - the other follows the same basic scheme.</p>
+<p> The two quantifier axioms are:</p>
+<ol>
+<li> <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_3abda4e988e864e07726e869f08f6c7b.gif' style=' ' class='tex' alt="\forall v(a) \Rightarrow \text{subst}[v/c](a)" /></span></li>
+<li> <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_e94127e20fb5e4106a45bbb89b60af77.gif' style=' ' class='tex' alt="\forall v(b \lor a) \Rightarrow (b \or \forall v(a))" /></span></li>
+</ol>
+<pre>
+quantifier_axiom1_condition(z, y, v) = {
+  not some n in 1 to length(y) {
+    some m in 1 to length(z) {
+      some w in 1 to z {
+         w == item(m, z) and bound(w, n, y) and free(v, n, y)
+      }
+    }
+  }
+}
+
+pred quantifier1Axiom(x) = {
+  some v in 1 to x {
+    some y in 1 to x {
+      some z in 1 to x {
+        some n in 1 to x {
+          vtype(n, v) and stype(n, z) and
+          isFm(y) and 
+          quantifier_axiom1_condition(z, y, v) and
+          x = gimp(gforall(v, y), subst(y, v, z))
+        }
+      }
+    }
+  }
+}
+      
+quanitifier_axiom2 = ...
+isQuantifierAxiom = quantifier1Axiom(x) or quantifier2Axiom(x)
+</pre>
+<p> We need to define a predicate for the reducibility axiom (basically, the Principia's version of the ZFC axiom of comprehension). The reducibility axiom is a schema: for any predicate <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_0cc175b9c0f1b6a831c399e269772661.gif' style=' padding-bottom:2px;' class='tex' alt="a" /></span>, <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_f692b07cd69fd3fd96a9b45e67d70374.gif' style=' ' class='tex' alt="\exists u (\forall v (u(v) \Leftrightarrow a" /></span>. In our primitive recursive system, we can check if something is an instance of the reducibility axiom schema with:
+</p>
+<pre>
+pred reduAxiom(x) =
+  some u in 1 to x {
+    some v in 1 to x {
+      some y in 1 to x {
+        some n in 1 to x {
+          vtype(n, v) and
+          vtype(n+1, u) and
+          not free(u, y) and
+          isFm(y) and
+          x = gexists(u, gforall(v, gequiv(concat(seq(u), paren(seq(v))), y)))
+        }
+      }
+    }
+  }
+}
+
+</pre>
+<p> Now, the set axiom. In the logic we're using, this is the axiom that defines set equality. It's written as <span class='MathJax_Preview'><img src='http://scientopia.org/blogs/goodmath/wp-content/plugins/latex/cache/tex_30d12639b2ec21ba59bb7b73b38eabae.gif' style=' ' class='tex' alt="\forall x_1 (x_2(x_1) \Leftrightarrow y_2(y_1) \Rightarrow x_2 = x_1)" /></span>. Set equality is defined for all types of sets, so we need to have one version of axiom for each level. We do that using <em>type-lifting</em>: we say that the axiom is true for type-1 sets, and that any type-lift of the level-1 set axiom is also a version of the set axiom.</p>
+<pre>
+fun typeLift(n, x) = {
+  first y in 1 to x**(x**n) {
+    all k in 1 to length(x) {
+      item(k, x) &le; 13 and item(k, y) == item(k, v) or
+      item(k, x) &gt; 13 and item(k, y) = item(k, x) * prFactor(1, item(k, x))**n
+    }
+  }
+}
+
+</pre>
+<p> We haven't defined the type-1 set axiom. But we just saw the axiom above, and it's obviously a simple logical statement. That mean that it's got a G&ouml;del number. Instead of computing it, we'll just say that that number is called <code>sa1</code>. Now we can define a predicate to check if something is a set axiom:</p>
+<pre>
+val sa1 = ... 
+pred setAxiom(x) = 
+  some n in 1 to x {
+    x = typeLift(n, sa)
+  }
+}
+
+</pre>
+<p> We've now defined all of the axioms of the logic, so we can now create a general predicate to see if a statement fits into any of the axiom categories:</p>
+<pre>
+pred isAxiom(x) =
+  peanoAxiom(x) or propAxiom(x) or quantifierAxom(x) or
+  reduAxiom(x) or setAxiom(x)
+</pre>
+<h3>Proofs and Provability!</h3>
+<p> With all of the axioms expressible in primitive recursive terms, we can start on what it means for something to be provable. First, we'll define what it means for some statement <em>x</em> to be an <em>immediate consequence</em> of some statements <em>y</em> and <em>z</em>.  (Back when we talked about the Principia's logic, we said that <em>x</em> is an immediate consequence of <em>y</em> and <em>z</em> if either: y is the formula <em>z &rArr; x</em>, or if <em>c</em> is the formula &forall;v.x).
+</p>
+<pre>
+pred immConseq(x, y, z) = {
+  y = imp(z, x) or 
+  some v in 1 to x {
+    isVar(v) and x = forall(v, y)
+  }
+}
+
+</pre>
+<p> Now, we can use our definition of an immediate consequence to specify when a sequence of formula is a <em>proof figure</em>. A proof figure is a sequence of statements where each statement in it is either an axiom, or an immediate consequence of two of the statements that preceeded it.</p>
+<pre>
+pred isProofFigure(x) = {
+  (all n in 0 to length(x) {
+    isAxiom(item(n, x)) or
+    some p in 0 to n {
+      some q in 0 to n {
+        immConseq(item(n, x), item(p, x), item(q, x))
+      }
+    }
+  }) and
+  length(x) &gt; 0
+}
+
+</pre>
+<p> We can say that <em>x</em> is a proof of <em>y</em> if <em>x</em> is proof figure, and the last statement in <em>x</em> is <em>y</em>.</p>
+<pre>
+pred proofFor(x, y) =
+  isProofFigure(x) and
+  item(length(x), x) == y
+</pre>
+<p> Finally, we can get to the most important thing! We can define what it means for something to be <em>provable</em>! It's provable if there's a proof for it!
+</p>
+<pre>
+pre provable(x) =
+  some y {
+    proofFor(y, x)
+  }
+}
+
+</pre>
+<p> Note that this last one is <em>not</em> primitive recursive! There's no way that we can create a bound for this: a proof can be any length.
+</p>
+<p> At last, we're done with these definition. What we've done here is really amazing: now, every logical statement can be encoded as a number. Every proof in the logic can be encoded as a sequence of numbers: if something is provable in the Principia logic, we can encode that proof as a string of numbers, and check the proof for correctness using nothing but (a whole heck of a lot of) arithmetic!</p>
+<p> Next post, we'll finally get to the most important part of what G&ouml;del did. We've been able to define what it means for a statement to be provable - we'll use that to show that there's a way of creating a number encoding the statement that something is <em>not</em> provable. And we'll show how that means that there is a true statement in the Principia's logic which isn't provable using the Principia's logic, which means that the logic isn't complete.</p>
+<p> In fact, the proof that we'll do shows a bit more than that. It doesn't just show that the Principia's logic is incomplete. It shows that <em>any</em> consistent formal system like the Principia, any system which is powerful enough to encode Peano arithmetic, <em>must</em> be incomplete.</p>
+<p><a class="a2a_dd a2a_target addtoany_share_save" href="http://www.addtoany.com/share_save#url=http%3A%2F%2Fscientopia.org%2Fblogs%2Fgoodmath%2F2013%2F02%2F17%2Fthe-meta-of-gdel%2F&amp;title=The%20Meta%20of%20G%C3%B6del" id="wpa2a_20"><img src="http://scientopia.org/blogs/goodmath/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>http://scientopia.org/blogs/goodmath/2013/02/17/the-meta-of-gdel/feed/</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.806 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2013-04-16 13:06:04 -->

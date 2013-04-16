@@ -67,7 +67,7 @@ public class TestCategoryResource extends BaseJerseyTest {
         WebResource subscriptionResource = resource().path("/subscription");
         subscriptionResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
         postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://korben.info/feed");
+        postParams.add("url", "http://localhost:2501/http/feeds/korben.xml");
         response = subscriptionResource.put(ClientResponse.class, postParams);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
@@ -119,7 +119,7 @@ public class TestCategoryResource extends BaseJerseyTest {
         subscriptionResource = resource().path("/subscription");
         subscriptionResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
         postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://xkcd.com/rss.xml");
+        postParams.add("url", "http://localhost:2501/http/feeds/xkcd.xml");
         response = subscriptionResource.put(ClientResponse.class, postParams);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);

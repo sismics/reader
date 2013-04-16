@@ -31,11 +31,11 @@ public class TestSearchResource extends BaseJerseyTest {
         clientUtil.createUser("search1");
         String subscription1AuthToken = clientUtil.login("search1");
 
-        // Subscribe to a static RSS feed
+        // Subscribe to Korben RSS feed
         WebResource subscriptionResource = resource().path("/subscription");
         subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
         MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://sismics.bgamard.org/reader_test/feed_rss2_korben.xml");
+        postParams.add("url", "http://localhost:2501/http/feeds/korben.xml");
         ClientResponse response = subscriptionResource.put(ClientResponse.class, postParams);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         JSONObject json = response.getEntity(JSONObject.class);

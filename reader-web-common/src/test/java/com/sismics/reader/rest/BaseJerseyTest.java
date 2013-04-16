@@ -1,6 +1,7 @@
 package com.sismics.reader.rest;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
+import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.After;
 import org.junit.Before;
 import org.subethamail.wiser.Wiser;
@@ -30,6 +32,11 @@ public abstract class BaseJerseyTest extends JerseyTest {
     protected Wiser wiser;
     
     /**
+     * Test HTTP server.
+     */
+    HttpServer httpServer;
+    
+    /**
      * Utility class for the REST client.
      */
     protected ClientUtil clientUtil;
@@ -46,9 +53,14 @@ public abstract class BaseJerseyTest extends JerseyTest {
     @Before
     public void setUp() throws Exception {
         super.setUp();
+        
         wiser = new Wiser();
         wiser.setPort(2500);
         wiser.start();
+        
+        String httpRoot = new File(getClass().getResource("/").getFile()).toString();
+        httpServer =  HttpServer.createSimpleServer(httpRoot, "127.0.0.1", 2501);
+        httpServer.start();
     }
 
     @Override
@@ -56,6 +68,7 @@ public abstract class BaseJerseyTest extends JerseyTest {
     public void tearDown() throws Exception {
         super.tearDown();
         wiser.stop();
+        httpServer.stop();
     }
 
     /**
