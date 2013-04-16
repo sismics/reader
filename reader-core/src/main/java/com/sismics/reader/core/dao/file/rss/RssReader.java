@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.google.common.collect.ImmutableList;
@@ -174,6 +175,7 @@ public class RssReader extends DefaultHandler {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             factory.setNamespaceAware(true);
             factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            factory.setFeature("http://apache.org/xml/features/continue-after-fatal-error", true);
             SAXParser parser = factory.newSAXParser();
     
             parser.parse(in, this);
@@ -478,6 +480,11 @@ public class RssReader extends DefaultHandler {
         } else {
             content += newContent;
         }
+    }
+    
+    @Override
+    public void fatalError(SAXParseException e) throws SAXException {
+        log.error("Fatal SAX parse error encountered, trying to resume parsing...", e);
     }
     
     /**

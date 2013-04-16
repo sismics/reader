@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet href="/css/rss.xsl" type="text/xsl"?>
+<rss version="2.0"> 
+<!-- If you're seeing this, you've clicked on a link for ESA's RSS feeds. 
+This file is not meant to be read by a Web browser directly. 
+Instead you're meant to copy the URL for the file, and paste it into your favorite RSS reader. -->
+<channel>
+
+
+
+<category>space</category>
+<language>en-GB</language>
+<ttl>600</ttl>
+<copyright>Copyright 2012 European Space Agency</copyright>
+<managingEditor>rss@esa.int</managingEditor>
+        
+  
+    
+
+<title>ESA Top News</title>
+<description>ESA Top News</description>
+<link>www.esa.int/</link>
+  <pubDate>Thu, 11 Apr 2013 15:02:00 +0200</pubDate>
+<lastBuildDate>Thu, 11 Apr 2013 15:02:00 +0200</lastBuildDate>
+<docs>http://blogs.law.harvard.edu/tech/rss</docs> <item>
+  <title>ATV-4 scheduled for June liftoff</title>
+  <description><![CDATA[
+                <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/03/atv-4_docking_port_and_logo/12577906-6-eng-GB/ATV-4_docking_port_and_logo_small.jpg" width="170" height="96" align="left" hspace="8" /><br />
+    <p>
+ESA's space freighter ATV <i>Albert Einstein</i> will be the heaviest spacecraft ever launched into space by an Ariane rocket when it lifts off to the International Space Station on 5 June.
+</p>
+  ]]></description>
+  <link>http://esa.int/Our_Activities/Human_Spaceflight/ATV/ATV-4_scheduled_for_June_liftoff</link>
+  
+  <guid isPermaLink="false">3e51d4b0e240cd2a2258c64cfc13c6ef</guid>
+  <pubDate>Thu, 11 Apr 2013 15:02:00 +0200</pubDate>
+  
+</item><item>
+  <title>Explosive crater twins on Mars</title>
+  <description><![CDATA[
+                <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/04/arima_twins/12612928-3-eng-GB/Arima_twins_small.jpg" width="170" height="96" align="left" hspace="8" /><br />
+    <p>
+Dramatic underground explosions, perhaps involving ice, are responsible for the pits inside these two large martian impact craters, imaged by ESA’s Mars Express on 4 January.
+</p>
+  ]]></description>
+  <link>http://esa.int/Our_Activities/Space_Science/Mars_Express/Explosive_crater_twins_on_Mars</link>
+  
+  <guid isPermaLink="false">068beb27e359786c8789e8b28a22271a</guid>
+  <pubDate>Thu, 11 Apr 2013 11:00:00 +0200</pubDate>
+  
+</item><item>
+  <title>Down the slopes with space app in your pocket</title>
+  <description><![CDATA[
+                <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/04/snowboarding/12604949-1-eng-GB/Snowboarding_small.jpg" width="170" height="96" align="left" hspace="8" /><br />
+    <p>
+Track your skiing, speed, altitude, slopes and lift kilometres with a nifty phone app from an ESA business incubation start-up. Compete against friends, win prizes and even donate to a children’s charity.
+</p>
+  ]]></description>
+  <link>http://esa.int/Our_Activities/Technology/TTP2/Down_the_slopes_with_space_app_in_your_pocket</link>
+  
+  <guid isPermaLink="false">fa8c7889555f0f439993daf994405561</guid>
+  <pubDate>Wed, 10 Apr 2013 15:40:00 +0200</pubDate>
+  
+</item><item>
+  <title>Retired star found with planets and debris disc</title>
+  <description><![CDATA[
+                <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/04/kappa_coronae_borealis/12608795-1-eng-GB/Kappa_Coronae_Borealis_small.jpg" width="170" height="96" align="left" hspace="8" /><br />
+    <p>
+ESA’s Herschel space observatory has provided the first images of a dust belt – produced by colliding comets or asteroids – orbiting a subgiant star known to host a planetary system.
+</p>
+  ]]></description>
+  <link>http://esa.int/Our_Activities/Space_Science/Herschel/Retired_star_found_with_planets_and_debris_disc</link>
+  
+  <guid isPermaLink="false">cc4b45fedcf842cbd631ae592a41a3fe</guid>
+  <pubDate>Tue, 09 Apr 2013 11:00:00 +0200</pubDate>
+  
+</item><item>
+  <title>Eyes on our Sun: ESA opens new space weather centre in Brussels</title>
+  <description><![CDATA[
+                <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/04/inauguration_of_space_weather_coordination_centre_brussels/12603814-1-eng-GB/Inauguration_of_Space_Weather_Coordination_Centre_Brussels_small.jpg" width="170" height="96" align="left" hspace="8" /><br />
+    <p>
+This week, ESA opened a new Space Weather Coordination Centre to gather up-to-date information on our Sun. It is the first such data coordination centre opened under the Agency’s Space Situational Awareness Programme.
+</p>
+  ]]></description>
+  <link>http://esa.int/Our_Activities/Operations/Space_Situational_Awareness/Eyes_on_our_Sun_ESA_opens_new_space_weather_centre_in_Brussels</link>
+  
+  <guid isPermaLink="false">8d59458a4d1aac54194be8d9dbdf94eb</guid>
+  <pubDate>Fri, 05 Apr 2013 17:15:00 +0200</pubDate>
+  
+</item><item>
+  <title>Shining light on elusive dark matter</title>
+  <description><![CDATA[
+                <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/04/international_space_station_during_sts-134/12602442-1-eng-GB/International_Space_Station_during_STS-134_small.jpg" width="170" height="96" align="left" hspace="8" /><br />
+    <p>
+The antimatter hunter AMS-02 on the International Space Station is searching for the missing pieces of our Universe. The project’s first results published today are hinting at a new phenomenon and revealing more about the invisible ‘dark matter’.
+</p>
+  ]]></description>
+  <link>http://esa.int/Our_Activities/Human_Spaceflight/DAMA_mission/Shining_light_on_elusive_dark_matter</link>
+  
+  <guid isPermaLink="false">86fc7c33e5465d8090f4904938d1c61c</guid>
+  <pubDate>Wed, 03 Apr 2013 17:16:00 +0200</pubDate>
+  
+</item><item>
+  <title>Protecting history with satellites</title>
+  <description><![CDATA[
+                <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/04/samarra_iraq/12598613-1-eng-GB/Samarra_Iraq_small.jpg" width="170" height="96" align="left" hspace="8" /><br />
+    <p>
+Looking down from orbit is an attractive way of monitoring historical sites in remote or politically unstable regions – and can even help archaeologists to make new discoveries.
+</p>
+  ]]></description>
+  <link>http://esa.int/Our_Activities/Observing_the_Earth/Protecting_history_with_satellites</link>
+  
+  <guid isPermaLink="false">af5aa73285687c139574360babb7239e</guid>
+  <pubDate>Wed, 03 Apr 2013 09:21:00 +0200</pubDate>
+  
+</item><item>
+  <title>Black hole wakes up and has a light snack</title>
+  <description><![CDATA[
+                <img src="http://esa.int/var/esa/storage/images/esa_multimedia/videos/2013/03/black_hole_eats_a_super-jupiter/12598578-1-eng-GB/Black_hole_eats_a_super-Jupiter_small.png" width="170" height="96" align="left" hspace="8" /><br />
+    <p>
+Astronomers have watched as a black hole woke up from a decades-long slumber to feed on a low-mass object – either a brown dwarf or a giant planet – that strayed too close. A similar feeding event, albeit on a gas cloud, will soon happen at the black hole at the centre of our own Milky Way Galaxy.
+</p>
+  ]]></description>
+  <link>http://esa.int/Our_Activities/Space_Science/Black_hole_wakes_up_and_has_a_light_snack</link>
+  
+  <guid isPermaLink="false">c1e0d1539d8f9e9f78ad79732a2e7bc4</guid>
+  <pubDate>Tue, 02 Apr 2013 11:00:00 +0200</pubDate>
+  
+</item><item>
+  <title>Watching over you</title>
+  <description><![CDATA[
+                <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/03/caterpillar-2-minus10/12598749-2-eng-GB/Caterpillar-2-minus10_small.jpg" width="170" height="96" align="left" hspace="8" /><br />
+    <p>
+Like astronauts, heavy-equipment operators in remote mines can benefit from long-distance monitoring using space technology. An ESA spin-off company has raised safety for dozens of drivers at the El Brocal mine in Peru by predicting their fatigue.
+</p>
+  ]]></description>
+  <link>http://esa.int/Our_Activities/Technology/TTP2/Watching_over_you</link>
+  
+  <guid isPermaLink="false">3fcf6c4cbe7d404c9c1bd1bb8b5882fc</guid>
+  <pubDate>Thu, 28 Mar 2013 13:24:00 +0100</pubDate>
+  
+</item><item>
+  <title>Hunting high-mass stars with Herschel</title>
+  <description><![CDATA[
+                <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/03/w3/12596104-1-eng-GB/W3_small.jpg" width="170" height="96" align="left" hspace="8" /><br />
+    <p>
+In this new view of a vast star-forming cloud called W3, ESA’s Herschel space observatory tells the story of how massive stars are born.
+</p>
+  ]]></description>
+  <link>http://esa.int/Our_Activities/Space_Science/Herschel/Hunting_high-mass_stars_with_Herschel</link>
+  
+  <guid isPermaLink="false">9bd9f4b689d04f75a840b1a1f18c95f2</guid>
+  <pubDate>Wed, 27 Mar 2013 11:00:00 +0100</pubDate>
+  
+</item><item>
+  <title>The long winter ahead</title>
+  <description><![CDATA[
+                <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/03/the_long_winter_ahead/12592012-17-eng-GB/The_long_winter_ahead_small.jpg" width="170" height="96" align="left" hspace="8" /><br />
+    <p>
+Secluded from civilisation and living in a white desert, the crew at the Concordia research base in Antarctica have settled in to their home and are ready for the cold, long winter ahead.
+</p>
+  ]]></description>
+  <link>http://esa.int/Our_Activities/Human_Spaceflight/Concordia/The_long_winter_ahead</link>
+  
+  <guid isPermaLink="false">fcdc6b8c8c221b9a2ffcab62969f6633</guid>
+  <pubDate>Fri, 22 Mar 2013 15:45:00 +0100</pubDate>
+  
+</item><item>
+  <title>Planck reveals an almost perfect Universe</title>
+  <description><![CDATA[
+                <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/03/planck_cmb/12583927-3-eng-GB/Planck_CMB_small.jpg" width="170" height="96" align="left" hspace="8" /><br />
+    <p>
+Acquired by ESA’s Planck space telescope, the most detailed map ever created of the cosmic microwave background – the relic radiation from the Big Bang – was released today revealing the existence of features that challenge the foundations of our current understanding of the Universe.
+</p>
+  ]]></description>
+  <link>http://esa.int/Our_Activities/Space_Science/Planck/Planck_reveals_an_almost_perfect_Universe</link>
+  
+  <guid isPermaLink="false">8cdf4f06c8d13a0226d0cd5bc4888e89</guid>
+  <pubDate>Thu, 21 Mar 2013 11:00:00 +0100</pubDate>
+  
+</item>
+
+      
+  
+<item>
+  <title>Now on iTunes</title>
+  <description><![CDATA[
+              
+        
+    <img src="http://esa.int/" width="600" /><br />
+    ESA's first iBook, <i>Earth from Space: the Living Beauty</i>, is now available for free download on the iTunes store
+  ]]></description>
+  
+          <link>https://itunes.apple.com/it/book/earth-from-space/id632294005?l=en&mt=11</link>
+  <guid isPermaLink="false">545b523e2bd4ff020907159181eaca1b</guid>
+  <pubDate>Mon, 15 Apr 2013 14:03:00 +0200</pubDate>
+</item>
+      
+  
+<item>
+  <title>Amazing aurora</title>
+  <description><![CDATA[
+              
+        
+    <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/04/aurora_over_norway/12618885-1-eng-GB/Aurora_over_Norway_large.jpg" width="600" /><br />
+    Space science image of the week: ESA’s Cluster mission studies the link between solar activity and stunning auroras on Earth 
+  ]]></description>
+  
+              
+          
+              <link>http://esa.int/Our_Activities/Space_Science/From_solar_activity_to_stunning_aurora</link>
+  <guid isPermaLink="false">9b175e4143dd6ad67b7e88c5038614d7</guid>
+  <pubDate>Mon, 15 Apr 2013 12:00:00 +0200</pubDate>
+</item>
+      
+  
+<item>
+  <title>Did you know</title>
+  <description><![CDATA[
+              
+        
+    <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/04/how_long_does_it_take_to_get_to_mars/12613404-1-eng-GB/How_long_does_it_take_to_get_to_Mars_large.jpg" width="600" /><br />
+    How long does it take to get to Mars?
+  ]]></description>
+  
+              
+        <link>http://esa.int/ESA_Multimedia/Videos/2013/04/Did_you_know_How_long_does_it_take_to_get_to_Mars</link>
+  <guid isPermaLink="false">d88679a74008714f7de38cd2099c9e29</guid>
+  <pubDate>Mon, 15 Apr 2013 11:35:00 +0200</pubDate>
+</item>
+      
+  
+<item>
+  <title>Join the movement</title>
+  <description><![CDATA[
+              
+        
+    <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/03/space_apps_challenge_highlight/12596134-1-eng-GB/Space_Apps_Challenge_HIGHLIGHT_large.jpg" width="600" /><br />
+    Join us to help space exploration and improve life on Earth at the International Space Apps Challenge, 20–21 April
+  ]]></description>
+  
+          <link>http://esa.int/Highlights/Join_the_movement</link>
+  <guid isPermaLink="false">2184c5412444dff5146fa81f546be8f0</guid>
+  <pubDate>Wed, 27 Mar 2013 15:40:00 +0100</pubDate>
+</item>
+      
+  
+<item>
+  <title>Week In Images</title>
+  <description><![CDATA[
+              
+        
+    <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/04/the_palouse_region_highlight/12617228-1-eng-GB/The_Palouse_region_HIGHLIGHT_large.jpg" width="600" /><br />
+    Our week through the lens:<br> 08-12 April 2013
+  ]]></description>
+  
+          <link>http://www.esa.int/Highlights/Week_in_Images_08-12_April_2013 </link>
+  <guid isPermaLink="false">c8048b8f15f4b629b58db206def1e99d</guid>
+  <pubDate>Fri, 12 Apr 2013 11:05:00 +0200</pubDate>
+</item>
+      
+  
+<item>
+  <title>ESA's Proba family</title>
+  <description><![CDATA[
+              
+        
+    <img src="http://esa.int/var/esa/storage/images/esa_multimedia/images/2013/04/proba-v2/12605973-2-eng-GB/Proba-V_large.jpg" width="600" /><br />
+    A new video profiles ESA's Proba family of minisatellites. Proba-V, the latest addition, will be launched on 2 May
+  ]]></description>
+  
+          <link>http://spaceinvideos.esa.int/Videos/2013/03/Proba_Family</link>
+  <guid isPermaLink="false">b68fd4aef0cfb9a977f31d98130f519f</guid>
+  <pubDate>Wed, 10 Apr 2013 10:53:00 +0200</pubDate>
+</item>
+
+
+</channel>
+
+</rss>

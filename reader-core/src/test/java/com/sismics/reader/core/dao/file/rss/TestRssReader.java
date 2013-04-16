@@ -217,4 +217,30 @@ public class TestRssReader {
         Assert.assertTrue(article.getDescription().contains("Over the years, the spacefaring nations of Earth"));
         Assert.assertNotNull(article.getPublicationDate());
     }
+
+    /**
+     * This feed has a invalid URL https://itunes.apple.com/it/book/earth-from-space/id632294005?l=en&mt=11
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void rssReaderEsaTest() throws Exception {
+        String url = new File(getClass().getResource("/feed/feed_rss2_esa.xml").getFile()).toURI().toString();
+        RssReader reader = new RssReader(url);
+        reader.readRssFeed();
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("ESA Top News", feed.getTitle());
+        Assert.assertEquals("www.esa.int/", feed.getUrl());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(18, articleList.size());
+        Article article = articleList.get(12);
+        Assert.assertEquals("Now on iTunes", article.getTitle());
+        Assert.assertEquals("https://itunes.apple.com/it/book/earth-from-space/id632294005?l=en=11", article.getUrl());
+        Assert.assertEquals("545b523e2bd4ff020907159181eaca1b", article.getGuid());
+        Assert.assertNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        Assert.assertTrue(article.getDescription().contains("ESA's first iBook"));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
 }
