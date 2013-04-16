@@ -153,8 +153,8 @@
         
   <modules>
     <module>../reader-core</module>
-    <module>../reader-web</module>
     <module>../reader-web-common</module>
+    <module>../reader-web</module>
   </modules>
   
   <profiles>
