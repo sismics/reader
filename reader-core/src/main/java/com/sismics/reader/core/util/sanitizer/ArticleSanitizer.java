@@ -1,4 +1,4 @@
-package com.sismics.reader.core.util;
+package com.sismics.reader.core.util.sanitizer;
 
 import java.net.MalformedURLException;
 import java.text.MessageFormat;
@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.sismics.util.UrlUtil;
 
 /**
- * Sanitize the contents of an article : removes iframes, JS etc.
+ * Sanitize the contents of an article: removes iframes, JS etc.
  *
  * @author jtremeaux 
  */
