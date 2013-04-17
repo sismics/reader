@@ -12,11 +12,11 @@ import com.sun.jersey.api.client.ClientResponse.Status;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * Test the API resource.
+ * Test the app resource.
  * 
  * @author jtremeaux
  */
-public class TestApiResource extends BaseJerseyTest {
+public class TestAppResource extends BaseJerseyTest {
     /**
      * Test the API resource.
      * 
@@ -25,14 +25,21 @@ public class TestApiResource extends BaseJerseyTest {
     @Test
     public void testApiResource() throws JSONException {
         // Check the API info
-        WebResource activityResource = resource().path("/api/info");
-        ClientResponse response = activityResource.get(ClientResponse.class);
-        response = activityResource.get(ClientResponse.class);
+        WebResource appResource = resource().path("/app/version");
+        ClientResponse response = appResource.get(ClientResponse.class);
+        response = appResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         JSONObject json = response.getEntity(JSONObject.class);
         String currentVersion = json.getString("current_version");
         Assert.assertNotNull(currentVersion);
         String minVersion = json.getString("min_version");
         Assert.assertNotNull(minVersion);
+        
+        // Rebuild articles index
+        appResource = resource().path("/app/batch/reindex");
+        response = appResource.get(ClientResponse.class);
+        response = appResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
     }
 }

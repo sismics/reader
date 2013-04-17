@@ -42,6 +42,18 @@ public class ArticleDao {
     }
     
     /**
+     * Returns the list of all articles.
+     * 
+     * @return List of articles
+     */
+    @SuppressWarnings("unchecked")
+    public List<Article> findAll() {
+        EntityManager em = ThreadLocalContext.get().getEntityManager();
+        Query q = em.createQuery("select a from Article a order by a.id");
+        return q.getResultList();
+    }
+    
+    /**
      * Deletes a article.
      * 
      * @param id Article ID

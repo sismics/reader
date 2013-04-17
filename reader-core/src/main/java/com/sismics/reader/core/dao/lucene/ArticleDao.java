@@ -40,7 +40,40 @@ import com.sismics.reader.core.util.jpa.PaginatedList;
 public class ArticleDao {
 
     /**
+     * Destroy and rebuild index.
+     * 
+     * @param articleList
+     * @throws IOException
+     */
+    public void rebuildIndex(List<Article> articleList) throws IOException {
+        // Standard analyzer
+        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_42, new StandardAnalyzer(Version.LUCENE_42));
+        
+        // Creating index writer
+        Directory directory = AppContext.getInstance().getLuceneDirectory();
+        IndexWriter indexWriter = new IndexWriter(directory, config);
+        
+        // Unlock index if needed
+        if (IndexWriter.isLocked(directory)) {
+            IndexWriter.unlock(directory);
+        }
+        
+        // Empty index
+        indexWriter.deleteAll();
+        
+        // Add all articles
+        for (Article article : articleList) {
+            org.apache.lucene.document.Document document = getDocumentFromArticle(article);
+            indexWriter.addDocument(document);
+        }
+        
+        indexWriter.close();
+    }
+
+    
+    /**
      * Add articles to the index.
+     * 
      * @param articleList
      * @throws IOException
      */
@@ -57,18 +90,10 @@ public class ArticleDao {
             IndexWriter.unlock(directory);
         }
         
+        // Add all articles
         for (Article article : articleList) {
-            // Extracting text from HTML
-            Document doc = Jsoup.parse(article.getDescription());
-            String content = doc.body().text();
-            
-            // Adding document to Lucene index
-            org.apache.lucene.document.Document luceneDocument = new org.apache.lucene.document.Document();
-            luceneDocument.add(new StringField("id", article.getId(), Field.Store.YES));
-            luceneDocument.add(new StringField("feed_id", article.getFeedId(), Field.Store.YES));
-            luceneDocument.add(new TextField("title", article.getTitle(), Field.Store.YES));
-            luceneDocument.add(new TextField("description", content, Field.Store.YES));
-            indexWriter.addDocument(luceneDocument);
+            org.apache.lucene.document.Document document = getDocumentFromArticle(article);
+            indexWriter.addDocument(document);
         }
         
         indexWriter.close();
@@ -76,6 +101,7 @@ public class ArticleDao {
 
     /**
      * Search articles.
+     * 
      * @param paginatedList
      * @param feedList
      * @param searchQuery
@@ -118,5 +144,26 @@ public class ArticleDao {
         }
         
         return articleIdList;
+    }
+    
+    /**
+     * Build Lucene document from article.
+     * 
+     * @param Article
+     * @return Document
+     */
+    private org.apache.lucene.document.Document getDocumentFromArticle(Article article) {
+        // Extracting text from HTML
+        Document doc = Jsoup.parse(article.getDescription());
+        String content = doc.body().text();
+
+        // Building document
+        org.apache.lucene.document.Document document = new org.apache.lucene.document.Document();
+        document.add(new StringField("id", article.getId(), Field.Store.YES));
+        document.add(new StringField("feed_id", article.getFeedId(), Field.Store.YES));
+        document.add(new TextField("title", article.getTitle(), Field.Store.YES));
+        document.add(new TextField("description", content, Field.Store.YES));
+        
+        return document;
     }
 }
