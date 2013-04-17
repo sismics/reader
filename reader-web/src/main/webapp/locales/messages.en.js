@@ -49,6 +49,7 @@
     "category": "Category",
     "back": "&larr; Back",
     "settings": "Settings",
+    "about": "About",
     "logout": "Logout"
   },
   "settings": {

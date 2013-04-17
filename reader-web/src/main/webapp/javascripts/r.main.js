@@ -12,6 +12,7 @@ var r = {
   article: {},
   search: {},
   settings: {},
+  about: {},
   wizard: {},
   theme: {},
   util: {}
@@ -51,6 +52,7 @@ r.main.initModules = function() {
   r.article.init();
   r.search.init();
   r.settings.init();
+  r.about.init();
   r.wizard.init();
   r.theme.init();
   
@@ -70,5 +72,6 @@ r.main.reset = function() {
   
   r.feed.reset();
   r.settings.reset();
+  r.about.reset();
   r.wizard.reset();
 };

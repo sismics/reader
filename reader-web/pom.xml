@@ -329,6 +329,7 @@
                     <jsSourceFile>r.feed.js</jsSourceFile>
                     <jsSourceFile>r.search.js</jsSourceFile>
                     <jsSourceFile>r.settings.js</jsSourceFile>
+                    <jsSourceFile>r.about.js</jsSourceFile>
                     <jsSourceFile>r.wizard.js</jsSourceFile>
                     <jsSourceFile>r.theme.js</jsSourceFile>
                     <jsSourceFile>r.util.js</jsSourceFile>
@@ -405,6 +406,7 @@
                 **/javascripts/r.feed.js,
                 **/javascripts/r.search.js,
                 **/javascripts/r.settings.js,
+                **/javascripts/r.about.js,
                 **/javascripts/r.wizard.js,
                 **/javascripts/r.theme.js,
                 **/javascripts/r.util.js,
