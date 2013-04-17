@@ -187,9 +187,35 @@ public class UserDao {
         Query q = em.createQuery("select u from User u where u.username = :username and u.deleteDate is null");
         q.setParameter("username", username);
         User userFromDb = (User) q.getSingleResult();
-
+        
         // Delete the user
-        userFromDb.setDeleteDate(new Date());
+        Date dateNow = new Date();
+        userFromDb.setDeleteDate(dateNow);
+
+        // Delete linked data
+        q = em.createQuery("delete from AuthenticationToken at where at.userId = :userId");
+        q.setParameter("userId", userFromDb.getId());
+        q.executeUpdate();
+
+        q = em.createQuery("update UserBaseFunction ubf set ubf.deleteDate = :dateNow where ubf.userId = :userId and ubf.deleteDate is null");
+        q.setParameter("userId", userFromDb.getId());
+        q.setParameter("dateNow", dateNow);
+        q.executeUpdate();
+
+        q = em.createQuery("update UserArticle ua set ua.deleteDate = :dateNow where ua.userId = :userId and ua.deleteDate is null");
+        q.setParameter("userId", userFromDb.getId());
+        q.setParameter("dateNow", dateNow);
+        q.executeUpdate();
+
+        q = em.createQuery("update FeedSubscription fs set fs.deleteDate = :dateNow where fs.userId = :userId and fs.deleteDate is null");
+        q.setParameter("userId", userFromDb.getId());
+        q.setParameter("dateNow", dateNow);
+        q.executeUpdate();
+
+        q = em.createQuery("update Category c set c.deleteDate = :dateNow where c.userId = :userId and c.deleteDate is null");
+        q.setParameter("userId", userFromDb.getId());
+        q.setParameter("dateNow", dateNow);
+        q.executeUpdate();
     }
 
     /**
