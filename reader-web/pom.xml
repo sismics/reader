@@ -255,12 +255,6 @@
             <groupId>org.mortbay.jetty</groupId>
             <artifactId>jetty-maven-plugin</artifactId>
             <configuration>
-              <systemProperties>
-                <systemProperty>
-                  <name>sismicsreader_env</name>
-                  <value>dev</value>
-                </systemProperty>
-              </systemProperties>
               <scanIntervalSeconds>0</scanIntervalSeconds>
               <webAppConfig>
                 <contextPath>/reader-web</contextPath>

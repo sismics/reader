@@ -22,6 +22,7 @@ public class JerseyTestWebAppDescriptorFactory {
     public static WebAppDescriptor build() {
         // Target the base path to the Webapp resources
         System.setProperty("user.dir", basePath);
+        System.setProperty("test", "true");
         
         return new WebAppDescriptor.Builder("com.sismics.reader.rest.resource")
             .contextPath("reader")

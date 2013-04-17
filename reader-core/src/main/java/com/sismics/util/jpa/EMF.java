@@ -19,7 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sismics.reader.core.util.DirectoryUtil;
-import com.sismics.util.EnvironmentUtil;
 
 /**
  * Entity manager factory.
@@ -43,11 +42,12 @@ public final class EMF {
                 
                 @Override
                 public void onCreate() throws Exception {
-                    InputStream is = getClass().getResourceAsStream("/db/update/dbupdate-000.sql");
+                    InputStream is = getClass().getResourceAsStream("/db/update/dbupdate-000-0.sql");
                     executeScript(is);
                     
-                    if (EnvironmentUtil.isDev()) {
-                        is = getClass().getResourceAsStream("/db/update/dbupdate-000-test.sql");
+                    is = getClass().getResourceAsStream("/db/update/dbupdate-000-1.sql");
+                    if (is != null) {
+                        // Executed on dev only
                         executeScript(is);
                     }
                 }

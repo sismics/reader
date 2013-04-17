@@ -10,7 +10,7 @@ public class EnvironmentUtil {
 
     private static String OS = System.getProperty("os.name").toLowerCase();
     
-    private static String SISMICS_READER_ENV = System.getProperty("sismicsreader_env");
+    private static String TEST_ENV = System.getProperty("test");
 
     private static String WINDOWS_APPDATA = System.getenv("APPDATA");
 
@@ -51,22 +51,13 @@ public class EnvironmentUtil {
     }
     
     /**
-     * Returns true if we are in a development environment.
-     * 
-     * @return Development environment
-     */
-    public static boolean isDev() {
-        return webappRoot == null ||
-                SISMICS_READER_ENV != null && "dev".equals(SISMICS_READER_ENV);
-    }
-
-    /**
      * Returns true if we are in a unit testing environment.
      * 
      * @return Unit testing environment
      */
     public static boolean isUnitTest() {
-        return webappRoot == null;
+        return webappRoot == null ||
+                TEST_ENV != null && "true".equals(TEST_ENV);
     }
 
     /**
