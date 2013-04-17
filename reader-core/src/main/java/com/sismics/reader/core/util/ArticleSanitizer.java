@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 
 import org.owasp.html.AttributePolicy;
+import org.owasp.html.ElementPolicy;
 import org.owasp.html.HtmlPolicyBuilder;
 import org.owasp.html.PolicyFactory;
 import org.owasp.html.Sanitizers;
@@ -89,6 +90,13 @@ public class ArticleSanitizer {
     * @return Sanitized HTML
     */
     public String sanitize(String html) {
+        // Allow common elements
+        PolicyFactory blocksPolicyFactory = new HtmlPolicyBuilder()
+                .allowElements(ElementPolicy.IDENTITY_ELEMENT_POLICY, 
+                        "p", "div", "h1", "h2", "h3", "h4", "h5", "h6", "ul", "ol", "li",
+                        "blockquote", "pre")
+                .toFactory();
+        
         // Allow iframes for embedded videos
         PolicyFactory videoPolicyFactory = new HtmlPolicyBuilder()
                 .allowStandardUrlProtocols()
@@ -121,7 +129,7 @@ public class ArticleSanitizer {
                 .allowAttributes("border", "height", "width").matching(INTEGER_POLICY).onElements("img")
                 .toFactory();
 
-        PolicyFactory policy = Sanitizers.BLOCKS
+        PolicyFactory policy = blocksPolicyFactory
                 .and(Sanitizers.FORMATTING)
                 .and(imagePolicyFactory)
                 .and(Sanitizers.LINKS)
