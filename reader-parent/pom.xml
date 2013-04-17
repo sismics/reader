@@ -69,6 +69,7 @@
     <org.mortbay.jetty.jetty-maven-plugin.version>8.1.2.v20120308</org.mortbay.jetty.jetty-maven-plugin.version>
     <org.vafer.jdeb.version>1.0.1</org.vafer.jdeb.version>
     <org.codehaus.mojo.rpm-maven-plugin.version>2.1-alpha-2</org.codehaus.mojo.rpm-maven-plugin.version>
+    <org.codehaus.mojo.nsis-maven-plugin.version>1.0-SNAPSHOT</org.codehaus.mojo.nsis-maven-plugin.version>
     <com.samaxes.maven.minify-maven-plugin.version>1.7</com.samaxes.maven.minify-maven-plugin.version>
   </properties> 
   
@@ -141,6 +142,12 @@
       </plugin>
 
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>nsis-maven-plugin</artifactId>
+        <version>${org.codehaus.mojo.nsis-maven-plugin.version}</version>
+      </plugin>
+
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
         <version>${org.apache.maven.plugins.maven-release-plugin.version}</version>
@@ -165,6 +172,29 @@
         <module>../reader-distribution-debian</module>
         <module>../reader-distribution-redhat</module>
       </modules>
+    </profile>
+    
+    <profile>
+      <id>windows</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <properties>
+        <nsis.home>C:\Program Files (x86)\nsis</nsis.home>
+      </properties>
+    </profile>
+    <profile>
+      <id>linux</id>
+      <activation>
+        <os>
+          <family>unix</family>
+        </os>
+      </activation>
+      <properties>
+        <nsis.home>/user/makensis</nsis.home>
+      </properties>
     </profile>
   </profiles>
 
@@ -496,4 +526,18 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+  
+  <pluginRepositories>
+    <!-- Codehause Snapshots (NSIS) -->
+    <pluginRepository>
+      <id>Codehaus Snapshots</id>
+      <url>http://nexus.codehaus.org/snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled> <!-- Workaround for MNG-2974 -->
+      </releases>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
