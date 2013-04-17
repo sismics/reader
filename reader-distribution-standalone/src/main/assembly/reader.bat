@@ -10,8 +10,8 @@ rem #################################################################
 
 rem The directory where reader will create its files (database, index...)
 rem Make sure it is writable.
-rem Leave it empty to use the users's directory (usually C:\Users\<user>\AppData\Roaming)
-rem set READER_HOME=C:\Reader
+rem Leave it empty to use the users's directory (default: %APPDATA%\Sismics\Reader)
+set READER_HOME=%APPDATA%\Sismics\Reader
 
 rem The host name or IP address on which to bind Reader. Only relevant if you have
 rem multiple network interfaces and want to make Reader available on only one of them.

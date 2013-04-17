@@ -89,7 +89,7 @@ public final class EMF {
         props.put("hibernate.connection.username", "sa");
         props.put("hibernate.hbm2ddl.auto", "validate");
         props.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
-        props.put("hibernate.show_sql", EnvironmentUtil.isDev() ? "true" : "false");
+        props.put("hibernate.show_sql", "false");
         props.put("hibernate.format_sql", "false");
         props.put("hibernate.max_fetch_depth", "5");
         props.put("hibernate.cache.use_second_level_cache", "false");
