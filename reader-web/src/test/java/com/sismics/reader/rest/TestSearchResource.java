@@ -54,7 +54,7 @@ public class TestSearchResource extends BaseJerseyTest {
         JSONArray articles = json.getJSONArray("articles");
         Assert.assertEquals(1, articles.length());
         JSONObject article = articles.getJSONObject(0);
-        Assert.assertEquals("Quand Zelda prend les armes", article.getString("title"));
+        Assert.assertEquals("Quand <span class=\"highlight\">Zelda</span> prend les armes", article.getString("title"));
         
         // Search "something"
         searchResource = resource().path("/search/something");
@@ -73,8 +73,8 @@ public class TestSearchResource extends BaseJerseyTest {
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
         Assert.assertEquals(2, articles.length());
-        Assert.assertEquals("Récupérer les clés wifi sur un téléphone Android", articles.getJSONObject(0).getString("title"));
-        Assert.assertEquals("Partagez vos clés WiFi avec vos amis", articles.getJSONObject(1).getString("title"));
+        Assert.assertEquals("Récupérer les clés <span class=\"highlight\">wifi</span> sur un téléphone Android", articles.getJSONObject(0).getString("title"));
+        Assert.assertEquals("Partagez vos clés <span class=\"highlight\">WiFi</span> avec vos amis", articles.getJSONObject(1).getString("title"));
         
         // Search "google keep"
         searchResource = resource().path("/search/google%20keep");

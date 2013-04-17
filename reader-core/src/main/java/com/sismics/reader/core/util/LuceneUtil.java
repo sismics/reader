@@ -2,7 +2,6 @@ package com.sismics.reader.core.util;
 
 import java.io.IOException;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
@@ -10,6 +9,7 @@ import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sismics.reader.core.dao.lucene.ReaderStandardAnalyzer;
 import com.sismics.reader.core.model.context.AppContext;
 
 /**
@@ -31,7 +31,7 @@ public class LuceneUtil {
      */
     public static void handle(LuceneRunnable runnable) {
         // Standard analyzer
-        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_42, new StandardAnalyzer(Version.LUCENE_42));
+        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_42, new ReaderStandardAnalyzer(Version.LUCENE_42));
         
         // Creating index writer
         Directory directory = AppContext.getInstance().getLuceneDirectory();

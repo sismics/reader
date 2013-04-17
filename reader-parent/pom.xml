@@ -484,6 +484,12 @@
       </dependency>
       
       <dependency>
+	      <groupId>org.apache.lucene</groupId>
+	      <artifactId>lucene-highlighter</artifactId>
+	      <version>${org.apache.lucene.version}</version>
+	    </dependency>
+      
+      <dependency>
         <groupId>com.cybozu.labs</groupId>
         <artifactId>langdetect</artifactId>
         <version>${com.cybozu.labs.langdetect.version}</version>

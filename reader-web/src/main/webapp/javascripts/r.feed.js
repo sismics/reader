@@ -270,7 +270,6 @@ r.feed.load = function(next) {
       $(data.articles).each(function(i, article) {
         // Escape some fields
         article.subscription.title = r.util.escape(article.subscription.title);
-        article.title = r.util.escape(article.title);
         article.creator = r.util.escape(article.creator);
         
         // Build article

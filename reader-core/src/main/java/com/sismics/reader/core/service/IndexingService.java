@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.lucene.store.Directory;
@@ -13,6 +14,7 @@ import org.apache.lucene.store.SimpleFSLockFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.AbstractScheduledService;
 import com.sismics.reader.core.constant.ConfigType;
 import com.sismics.reader.core.constant.Constants;
@@ -23,6 +25,7 @@ import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.dao.lucene.ArticleDao;
 import com.sismics.reader.core.event.RebuildIndexAsyncEvent;
 import com.sismics.reader.core.model.context.AppContext;
+import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Config;
 import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.TransactionUtil;
@@ -101,18 +104,28 @@ public class IndexingService extends AbstractScheduledService {
         // Search articles
         ArticleDao articleDao = new ArticleDao();
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, offset);
-        List<String> articleIdList = articleDao.search(paginatedList, feedList, searchQuery);
+        Map<String, Article> articleMap = articleDao.search(paginatedList, feedList, searchQuery);
         
-        if (articleIdList.size() > 0) {
+        if (articleMap.size() > 0) {
             // Get linked UserArticle from database
             UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
             userArticleCriteria.setUserId(userId);
-            userArticleCriteria.setArticleIdIn(articleIdList);
+            userArticleCriteria.setArticleIdIn(Lists.newArrayList(articleMap.keySet()));
             
             UserArticleDao userArticleDao = new UserArticleDao();
             PaginatedList<UserArticleDto> userArticledList = PaginatedLists.create(paginatedList.getLimit(), 0);
             userArticleDao.findByCriteria(userArticleCriteria, userArticledList);
             paginatedList.setResultList(userArticledList.getResultList());
+            
+            for (UserArticleDto userArticleDto : paginatedList.getResultList()) {
+                Article article = articleMap.get(userArticleDto.getArticleId());
+                if (article.getTitle() != null) {
+                    userArticleDto.setArticleTitle(article.getTitle());
+                }
+                if (article.getDescription() != null) {
+                    userArticleDto.setArticleDescription(article.getDescription());
+                }
+            }
         } else {
             paginatedList.setResultList(new ArrayList<UserArticleDto>());
         }

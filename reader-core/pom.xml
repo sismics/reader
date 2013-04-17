@@ -150,6 +150,11 @@
     </dependency>
     
     <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-highlighter</artifactId>
+    </dependency>
+    
+    <dependency>
       <groupId>com.cybozu.labs</groupId>
       <artifactId>langdetect</artifactId>
     </dependency>
