@@ -61,6 +61,11 @@ public class ArticleSanitizer {
         }
     };
 
+    private static final Pattern VIDEO_PATTERN = Pattern.compile(
+            "http://(www.)?youtube.com/embed/.+|" + 
+            "http://player.vimeo.com/video/.+|" +
+            "http://www.dailymotion.com/embed/.+");
+
     private AttributePolicy IMG_SRC_POLICY = new AttributePolicy() {
         
         @Override
@@ -84,16 +89,29 @@ public class ArticleSanitizer {
     * @return Sanitized HTML
     */
     public String sanitize(String html) {
-        // Allow YouTube iframes
+        // Allow iframes for embedded videos
         PolicyFactory videoPolicyFactory = new HtmlPolicyBuilder()
                 .allowStandardUrlProtocols()
-                .allowElements("iframe")
-                .allowAttributes("src")
-                .matching(Pattern.compile("http://(www.)?youtube.com/embed/.+"))
+                .allowAttributes("src", "height", "width")
+                .matching(new AttributePolicy() {
+                    
+                    @Override
+                    public @Nullable
+                    String apply(String elementName, String attributeName, String value) {
+                        if ("height".equals(attributeName) || "width".equals(attributeName)) {
+                            return value;
+                        }
+                        if ("src".equals(attributeName) && VIDEO_PATTERN.matcher(value).matches()) {
+                            return value;
+                        }
+                        return null;
+                    }
+                })
                 .onElements("iframe")
+                .allowElements("iframe")
                 .disallowWithoutAttributes("iframe")
                 .toFactory();
-        
+
         // Allow images and transform relative links to absolute
         PolicyFactory imagePolicyFactory = new HtmlPolicyBuilder()
                 .allowUrlProtocols("http", "https")
