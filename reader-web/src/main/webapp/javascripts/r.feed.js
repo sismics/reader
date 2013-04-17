@@ -102,6 +102,9 @@ r.feed.init = function() {
       $('#toolbar > .search').removeClass('hidden');
     }
     
+    // Focus on articles list
+    $('#feed-container').focus();
+    
     // Loading subscriptions tree
     r.subscription.update();
     
