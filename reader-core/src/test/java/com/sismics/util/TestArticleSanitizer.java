@@ -10,10 +10,10 @@ import org.junit.Test;
 import com.sismics.reader.core.dao.file.rss.RssReader;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
-import com.sismics.reader.core.util.ArticleSanitizer;
+import com.sismics.reader.core.util.sanitizer.ArticleSanitizer;
 
 /**
- * Test of the sanitizer.
+ * Test of the article sanitizer.
  * 
  * @author jtremeaux
  */

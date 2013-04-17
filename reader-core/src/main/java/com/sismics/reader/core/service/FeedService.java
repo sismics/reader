@@ -38,10 +38,11 @@ import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
 import com.sismics.reader.core.model.jpa.UserArticle;
-import com.sismics.reader.core.util.ArticleSanitizer;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
+import com.sismics.reader.core.util.sanitizer.ArticleSanitizer;
+import com.sismics.reader.core.util.sanitizer.TextSanitizer;
 
 /**
  * Feed service.
@@ -169,7 +170,7 @@ public class FeedService extends AbstractScheduledService {
                 Article article = new Article();
                 article.setId(currentArticle.getId());
                 article.setUrl(newArticle.getUrl());
-                article.setTitle(newArticle.getTitle());
+                article.setTitle(TextSanitizer.sanitize(newArticle.getTitle()));
                 article.setCreator(newArticle.getCreator());
                 article.setDescription(sanitizer.sanitize(newArticle.getDescription()));
                 article.setCommentUrl(newArticle.getCommentUrl());
