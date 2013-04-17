@@ -27,30 +27,12 @@ public class DirectoryUtil {
                 if (!baseDataDir.isDirectory()) {
                     baseDataDir.mkdirs();
                 }
-            } else if (EnvironmentUtil.isDev()) {
+            } else {
                 // Use the base of the Webapp directory
                 baseDataDir = new File(EnvironmentUtil.getWebappRoot() + File.separator + "sismicsreader");
                 if (!baseDataDir.isDirectory()) {
                     baseDataDir.mkdirs();
                 }
-            } else {
-                // Use the OS-dependant app directory
-                if (EnvironmentUtil.isWindows()) {
-                    baseDataDir = new File(EnvironmentUtil.getWindowsAppData() + File.separator + "Sismics" + File.separator + "Reader");
-                    if (!baseDataDir.isDirectory()) {
-                        baseDataDir.mkdirs();
-                    }
-                } else if (EnvironmentUtil.isUnix()) {
-                    baseDataDir = new File("/var/reader");
-                    if (!baseDataDir.isDirectory()) {
-                        baseDataDir.mkdirs();
-                    }
-                } else if (EnvironmentUtil.isMacOs()) {
-                    baseDataDir = new File(EnvironmentUtil.getMacOsUserHome() + "/Library/Application Support/Sismics Reader");
-                    if (!baseDataDir.isDirectory()) {
-                        baseDataDir.mkdirs();
-                    }
-                } 
             }
         }
         if (baseDataDir == null) {
