@@ -22,6 +22,7 @@ import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.dao.lucene.ArticleDao;
 import com.sismics.reader.core.model.context.AppContext;
+import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Config;
 import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.TransactionUtil;
@@ -117,6 +118,20 @@ public class IndexingService extends AbstractScheduledService {
         }
         
         return  paginatedList;
+    }
+    
+    /**
+     * Destroy and rebuild Lucene index.
+     * 
+     * @throws Exception 
+     */
+    public void rebuildIndex() throws Exception {
+        // Fetch all articles
+        com.sismics.reader.core.dao.jpa.ArticleDao jpaArticleDao = new com.sismics.reader.core.dao.jpa.ArticleDao();
+        List<Article> articleList = jpaArticleDao.findAll();
+        
+        ArticleDao articleDao = new ArticleDao();
+        articleDao.rebuildIndex(articleList);
     }
 
     /**
