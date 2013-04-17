@@ -98,31 +98,33 @@ r.article.read = function(item, read) {
     return;
   }
   
-  // Update item state
   var articleId = item.attr('data-article-id');
-  read ? item.addClass('read') : item.removeClass('read');
-  
-  // Update tree unread counts
-  var count = read ? -1 : -2;
-  var article = item.data('article');
-  var subscriptionId = article.subscription.id;
-  var subscription = $('#subscription-list li.subscription[data-subscription-id="' + subscriptionId + '"]');
-  r.subscription.updateUnreadCount(subscription, count); // Update article's subscription
-  
-  // Update parent categories (only 1)
-  subscription.parents('li.category').each(function(i, category) {
-    r.subscription.updateUnreadCount($(category), count);
-  });
-  
-  // Update main unread item and title
-  var count = r.subscription.updateUnreadCount($('#unread-feed-button'), count);
-  r.subscription.updateTitle(count);
   
   // Calling API
   var url = read ? r.util.url.article_read : r.util.url.article_unread;
   r.util.ajax({
     url: url.replace('{id}', articleId),
-    type: 'POST'
+    type: 'POST',
+    done: function(data) {
+      // Update item state
+      read ? item.addClass('read') : item.removeClass('read');
+      
+      // Update tree unread counts
+      var count = read ? -1 : -2;
+      var article = item.data('article');
+      var subscriptionId = article.subscription.id;
+      var subscription = $('#subscription-list li.subscription[data-subscription-id="' + subscriptionId + '"]');
+      r.subscription.updateUnreadCount(subscription, count); // Update article's subscription
+      
+      // Update parent categories (only 1)
+      subscription.parents('li.category').each(function(i, category) {
+        r.subscription.updateUnreadCount($(category), count);
+      });
+      
+      // Update main unread item and title
+      var count = r.subscription.updateUnreadCount($('#unread-feed-button'), count);
+      r.subscription.updateTitle(count);
+    }
   });
 };
 
