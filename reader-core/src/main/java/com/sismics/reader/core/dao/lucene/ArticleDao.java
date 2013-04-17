@@ -11,7 +11,6 @@ import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queries.TermsFilter;
 import org.apache.lucene.queryparser.flexible.standard.QueryParserUtil;
@@ -22,7 +21,6 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.Version;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,6 +28,8 @@ import org.jsoup.nodes.Document;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.Article;
+import com.sismics.reader.core.util.LuceneUtil;
+import com.sismics.reader.core.util.LuceneUtil.LuceneRunnable;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 
 /**
@@ -45,29 +45,20 @@ public class ArticleDao {
      * @param articleList
      * @throws IOException
      */
-    public void rebuildIndex(List<Article> articleList) throws IOException {
-        // Standard analyzer
-        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_42, new StandardAnalyzer(Version.LUCENE_42));
-        
-        // Creating index writer
-        Directory directory = AppContext.getInstance().getLuceneDirectory();
-        IndexWriter indexWriter = new IndexWriter(directory, config);
-        
-        // Unlock index if needed
-        if (IndexWriter.isLocked(directory)) {
-            IndexWriter.unlock(directory);
-        }
-        
-        // Empty index
-        indexWriter.deleteAll();
-        
-        // Add all articles
-        for (Article article : articleList) {
-            org.apache.lucene.document.Document document = getDocumentFromArticle(article);
-            indexWriter.addDocument(document);
-        }
-        
-        indexWriter.close();
+    public void rebuildIndex(final List<Article> articleList) {
+        LuceneUtil.handle(new LuceneRunnable() {
+            @Override
+            public void run(IndexWriter indexWriter) throws Exception {
+             // Empty index
+                indexWriter.deleteAll();
+                
+                // Add all articles
+                for (Article article : articleList) {
+                    org.apache.lucene.document.Document document = getDocumentFromArticle(article);
+                    indexWriter.addDocument(document);
+                }
+            }
+        });
     }
 
     
@@ -77,26 +68,17 @@ public class ArticleDao {
      * @param articleList
      * @throws IOException
      */
-    public void create(List<Article> articleList) throws IOException {
-        // Standard analyzer
-        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_42, new StandardAnalyzer(Version.LUCENE_42));
-        
-        // Creating index writer
-        Directory directory = AppContext.getInstance().getLuceneDirectory();
-        IndexWriter indexWriter = new IndexWriter(directory, config);
-        
-        // Unlock index if needed
-        if (IndexWriter.isLocked(directory)) {
-            IndexWriter.unlock(directory);
-        }
-        
-        // Add all articles
-        for (Article article : articleList) {
-            org.apache.lucene.document.Document document = getDocumentFromArticle(article);
-            indexWriter.addDocument(document);
-        }
-        
-        indexWriter.close();
+    public void create(final List<Article> articleList) {
+        LuceneUtil.handle(new LuceneRunnable() {
+            @Override
+            public void run(IndexWriter indexWriter) throws Exception {
+             // Add all articles
+                for (Article article : articleList) {
+                    org.apache.lucene.document.Document document = getDocumentFromArticle(article);
+                    indexWriter.addDocument(document);
+                }
+            }
+        });
     }
 
     /**

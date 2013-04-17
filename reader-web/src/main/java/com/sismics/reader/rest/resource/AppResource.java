@@ -13,6 +13,8 @@ import org.codehaus.jettison.json.JSONObject;
 
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.util.ConfigUtil;
+import com.sismics.reader.rest.constant.BaseFunction;
+import com.sismics.rest.exception.ForbiddenClientException;
 import com.sismics.rest.exception.ServerException;
 
 /**
@@ -61,6 +63,11 @@ public class AppResource extends BaseResource {
     @Path("batch/reindex")
     @Produces(MediaType.APPLICATION_JSON)
     public Response batchReindex() throws JSONException {
+        if (!authenticate()) {
+            throw new ForbiddenClientException();
+        }
+        checkBaseFunction(BaseFunction.ADMIN);
+        
         JSONObject response = new JSONObject();
         try {
             AppContext.getInstance().getIndexingService().rebuildIndex();
