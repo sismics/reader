@@ -151,9 +151,20 @@
         <h1 data-i18n="about.rebuildindex.title">Rebuild search index</h1>
         <p data-i18n="about.rebuildindex.message">Rebuilding search index may take a while, but you can continue using the application.</p>
         <input class="important rebuild-index-button" type="button" value="Rebuild" data-i18n="[value]about.rebuildindex.button" />
-        <h1>Browse logs</h1>
-        <pre id="logs-container">
-        </pre>
+        <h1>
+          Browse logs
+          <select id="logs-level-select">
+            <option value="">All</option>
+            <option class="fatal" value="FATAL">Fatal</option>
+            <option class="error" value="ERROR">Error</option>
+            <option class="warn" value="WARN">Warn</option>
+            <option class="info" value="INFO">Info</option>
+            <option class="debug" value="DEBUG">Debug</option>
+            <option class="trace" value="TRACE">Trace</option>
+          </select>
+        </h1>
+        <div id="logs-container">
+        </div>
       </div>
       
       <div id="wizard-container">

@@ -656,6 +656,68 @@
       color: @main-color;
       border-bottom: 1px solid #ddd;
     }
+    
+    #logs-container {
+      display: block;
+      height: 500px;
+      resize: vertical;
+      background: #eee;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+      overflow-y: auto;
+      overflow-x: hidden;
+      white-space: nowrap;
+      
+      .log-item {
+        display: block;
+        
+        &.fatal {
+          background: #ddbcee;
+          &:hover { background: darken(#ddbcee, 10%); }
+        }
+        
+        &.error {
+          background: #ffafaf;
+          &:hover { background: darken(#ffafaf, 10%); }
+        }
+        
+        &.warn {
+          background: #ffe3a0;
+          &:hover { background: darken(#ffe3a0, 10%); }
+        }
+        
+        &.info {
+          background: #d3e992;
+          &:hover { background: darken(#d3e992, 10%); }
+        }
+        
+        &.debug, &.trace {
+          background: #a8dff4;
+          &:hover { background: darken(#a8dff4, 10%); }
+        }
+        
+        > div {
+          display: inline-block;
+          overflow: hidden;
+          font: 12px monospace;
+          padding: 3px 6px;
+        }
+        
+        > .date {
+          width: 113px;
+        }
+        
+        > .level {
+          width: 91px;
+        }
+        
+        > .tag {
+          width: 230px;
+        }
+        
+        > .message {
+        }
+      }
+    }
   }
   
   #wizard-container {
