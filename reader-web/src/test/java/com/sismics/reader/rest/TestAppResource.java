@@ -2,12 +2,12 @@ package com.sismics.reader.rest;
 
 import junit.framework.Assert;
 
+import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 
 import com.sismics.reader.core.model.context.AppContext;
-import com.sismics.reader.rest.BaseJerseyTest;
 import com.sismics.reader.rest.filter.CookieAuthenticationFilter;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.ClientResponse.Status;
@@ -48,5 +48,26 @@ public class TestAppResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         AppContext.getInstance().waitForAsync();
+    }
+
+    /**
+     * Test the log resource.
+     * 
+     * @throws JSONException
+     */
+    @Test
+    public void testLogResource() throws JSONException {
+        // Login admin
+        String adminAuthenticationToken = clientUtil.login("admin", "admin", false);
+        
+        // Check the logs
+        WebResource appResource = resource().path("/app/log");
+        ClientResponse response = appResource.get(ClientResponse.class);
+        appResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        response = appResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        JSONObject json = response.getEntity(JSONObject.class);
+        JSONArray logs = json.getJSONArray("logs");
+        Assert.assertTrue(logs.length() == 10);
     }
 }
