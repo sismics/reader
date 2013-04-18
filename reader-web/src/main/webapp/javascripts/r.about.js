@@ -21,5 +21,33 @@ r.about.init = function() {
     
     // Configuring contextual toolbar
     $('#toolbar > .about').removeClass('hidden');
+    
+    // Loading logs
+    r.about.loadLogs(false);
+  });
+  
+  // Rebuild index button click
+  $('#about-container .rebuild-index-button').click(function() {
+    r.util.ajax({
+      url: r.util.url.app_batch_reindex,
+      type: 'POST',
+      done: function(data) {
+        $().toastmessage('showSuccessToast', $.t('about.rebuildindex.success'));
+      }
+    });
+  });
+};
+
+/**
+ * Load logs.
+ */
+r.about.loadLogs = function(next) {
+  r.util.ajax({
+    url: r.util.url.app_log,
+    type: 'GET',
+    done: function(data) {
+      var html = data;
+      $('#logs-container').html(html);
+    }
   });
 };

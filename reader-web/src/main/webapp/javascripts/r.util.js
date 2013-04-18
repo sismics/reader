@@ -29,7 +29,9 @@ r.util.url = {
   article_unread: 'api/article/{id}/unread',
   search: 'api/search/{query}',
   locale_list: 'api/locale',
-  theme_list: 'api/theme'
+  theme_list: 'api/theme',
+  app_batch_reindex: 'api/app/batch/reindex',
+  app_log: 'api/app/log'
 };
 
 /**

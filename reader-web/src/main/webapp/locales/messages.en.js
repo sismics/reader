@@ -95,6 +95,14 @@
       }
     }
   },
+  "about": {
+    "rebuildindex": {
+      "title": "Rebuild search index",
+      "message": "Rebuilding search index may take a while, but you can continue using the application.",
+      "button": "Rebuild",
+      "success": "Rebuilding articles index..."
+    }
+  },
   "article": {
     "markasunread": "Mark as unread"
   },
