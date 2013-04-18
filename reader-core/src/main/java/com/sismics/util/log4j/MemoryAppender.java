@@ -1,9 +1,11 @@
 package com.sismics.util.log4j;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.helpers.LogLog;
@@ -26,7 +28,7 @@ public class MemoryAppender extends AppenderSkeleton {
     /**
      * Queue of log entries.
      */
-    private final Queue<LogEntry> logQueue = new ConcurrentLinkedQueue<LogEntry>();
+    private final Deque<LogEntry> logQueue = new ConcurrentLinkedDeque<LogEntry>();
 
     @Override
     public boolean requiresLayout() {
@@ -101,7 +103,8 @@ public class MemoryAppender extends AppenderSkeleton {
         final String tag = criteria.getTag();
         final String message = criteria.getMessage();
         int resultCount = 0;
-        for (LogEntry logEntry : logQueue) {
+        for (Iterator<LogEntry> it = logQueue.descendingIterator(); it.hasNext();) {
+            LogEntry logEntry = it.next();
             if ((level == null || logEntry.getLevel().toLowerCase().equals(level)) &&
                     (tag == null || logEntry.getTag().toLowerCase().equals(tag)) &&
                     (message == null || logEntry.getMessage().toLowerCase().contains(message))) {
