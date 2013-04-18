@@ -37,7 +37,7 @@ public class JsonValidationUtil {
             throw new Exception(MessageFormat.format("{0} must be set", name));
         }
         if (n.has(name) && !n.path(name).isObject()) {
-            throw new Exception(MessageFormat.format("{0} must be a object", name));
+            throw new Exception(MessageFormat.format("{0} must be a JSON object", name));
         }
     }
 
@@ -55,6 +55,40 @@ public class JsonValidationUtil {
         }
         if (n.has(name) && !n.path(name).isNumber()) {
             throw new Exception(MessageFormat.format("{0} must be a number", name));
+        }
+    }
+
+    /**
+     * Checks that the property is a long.
+     * 
+     * @param s JSON node to check
+     * @param name Name of the property
+     * @param required Property required
+     * @throws JSONException
+     */
+    public static void validateJsonLong(JsonNode n, String name, boolean required) throws Exception {
+        if (required && !n.has(name)) {
+            throw new Exception(MessageFormat.format("{0} must be set", name));
+        }
+        if (n.has(name) && !n.path(name).isLong()) {
+            throw new Exception(MessageFormat.format("{0} must be a long", name));
+        }
+    }
+
+    /**
+     * Checks that the property is a string.
+     * 
+     * @param s JSON node to check
+     * @param name Name of the property
+     * @param required Property required
+     * @throws JSONException
+     */
+    public static void validateJsonString(JsonNode n, String name, boolean required) throws Exception {
+        if (required && !n.has(name)) {
+            throw new Exception(MessageFormat.format("{0} must be set", name));
+        }
+        if (n.has(name) && !n.path(name).isTextual()) {
+            throw new Exception(MessageFormat.format("{0} must be a string", name));
         }
     }
 

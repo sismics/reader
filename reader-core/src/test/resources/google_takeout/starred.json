@@ -1,0 +1,79 @@
+{
+  "id" : "user/01785607376183925700/state/com.google/starred",
+  "title" : "Liste de suivi de Naku dans Google Reader",
+  "author" : "Naku",
+  "updated" : 1361814526,
+  "direction" : "ltr",
+  "items" : [ {
+    "crawlTimeMsec" : "1361814526182",
+    "timestampUsec" : "1361814526182413",
+    "id" : "tag:google.com,2005:reader/item/2bc1b12587dd34ff",
+    "categories" : [ "user/01785607376183925700/state/com.google/read", "user/01785607376183925700/state/com.google/starred", "user/01785607376183925700/state/com.google/tracking-item-link-used", "user/01785607376183925700/state/com.google/tracking-mobile-read", "user/01785607376183925700/state/com.google/fresh" ],
+    "title" : "An Appropriate Use of Metrics",
+    "published" : 1361284860,
+    "updated" : 1361284860,
+    "alternate" : [ {
+      "href" : "http://martinfowler.com/articles/useOfMetrics.html",
+      "type" : "text/html"
+    } ],
+    "content" : {
+      "direction" : "ltr",
+      "content" : "<p>Like many of us, my colleague <a href=\"http://thekua.com/atwork\">Patrick Kua</a> has seen a lot of use of metrics. Management love their metrics. The thinking goes something like this, “We need a number to measure how we’re doing. Numbers focus people and help us measure success.” Whilst well intentioned, management by numbers unintuitively leads to problematic behavior and ultimately detracts from broader project and organizational goals. Metrics inherently aren’t a bad thing; just often, inappropriately used. <a href=\"http://martinfowler.com/articles/useOfMetrics.html\">This essay</a> demonstrates many of the issues caused by management’s traditional use of metrics and offers an alternative to address these dysfunctions.</p>"
+    },
+    "comments" : [ ],
+    "annotations" : [ ],
+    "origin" : {
+      "streamId" : "feed/http://martinfowler.com/bliki/bliki.atom",
+      "title" : "Martin Fowler",
+      "htmlUrl" : "http://martinfowler.com"
+    }
+  }, {
+    "isReadStateLocked" : true,
+    "crawlTimeMsec" : "1359547603010",
+    "timestampUsec" : "1359547603010749",
+    "id" : "tag:google.com,2005:reader/item/670ab4bdc6337f44",
+    "categories" : [ "user/01785607376183925700/state/com.google/read", "user/01785607376183925700/state/com.google/starred", "user/01785607376183925700/state/com.google/tracking-mobile-read" ],
+    "title" : "Adrian Rapan: Integration vs Acceptance tests",
+    "published" : 1359505058,
+    "updated" : 1359505058,
+    "alternate" : [ {
+      "href" : "http://www.testfeed.co.uk/integration-vs-acceptance-tests/",
+      "type" : "text/html"
+    } ],
+    "summary" : {
+      "direction" : "ltr",
+      "content" : "<p>Recently at LMAX Exchange, we’ve started using more and more of what we call integration tests which prompted a post on how we use integration tests and how we differentiate them from acceptance tests.</p>\n<p>To start off, a few definitions are in order:</p>\n<ul>\n<li>we define an <em>acceptance test</em> as an external client that encompasses enough information on how to drive the system under test (SUT) in order to bring it to the point of asserting something.</li>\n<li><em>integration tests</em>, on the other hand, are used for testing the internals of the system and are geared towards validating contracts between modules of code.</li>\n</ul>\n<table align=\"left\" border=\"0\" style=\"width:100%\" width=\"100%\">\n<thead>\n<tr><th style=\"text-align:left\">Acceptance Tests</th>\n<th style=\"text-align:left\">Integration Tests</th>\n</tr>\n</thead>\n<tbody>\n<tr></tr>\n\n<tr><td style=\"text-align:left\">used to capture the emergent behaviour that's inherent to a story</td>\n<td style=\"text-align:left\">the code produces emergent behaviour as well; with the help of integration tests the units that drive the emergent behaviour can be tested</td>\n</tr>\n\n<tr><td style=\"text-align:left\">use the business domain language</td>\n<td style=\"text-align:left\">they tend to leak implementation and use more of the code base language since they're targeting lower functional units which don't necessarily translate into business concepts</td>\n</tr>\n\n<tr><td style=\"text-align:left\">usually built on top of several abstraction layers and can be understood by the business users</td>\n<td style=\"text-align:left\">we use abstraction layers in a similar way to our acceptance test framework to get the same efficiency in writing integration tests; business users have a limited interest in them</td>\n</tr>\n\n<tr></tr>\n\n<tr><td style=\"text-align:left\">feedback is slow but more comprehensive</td>\n<td style=\"text-align:left\">quick feedback as the system doesn't need to be brought up</td>\n</tr>\n\n<tr><td style=\"text-align:left\">they will suffer from intermittency due to so many outside factors</td>\n<td style=\"text-align:left\">quick to debug and run as part of every commit; it's hard to introduce any intermittency</td>\n</tr>\n\n<tr></tr>\n\n<tr><td style=\"text-align:left\">have a well defined external API (most probably the same API that clients use) for interacting with the SUT</td>\n<td style=\"text-align:left\">use the internal APIs of the modules under test</td>\n</tr>\n\n<tr><td style=\"text-align:left\">have bigger costs in terms of authoring and maintaining; there's always a judgement call about encoding a specific behaviour in an acceptance test</td>\n<td style=\"text-align:left\">with integration tests you can go nuts and test a lot of edge and negative cases</td>\n</tr>\n\n<tr></tr>\n\n<tr><td style=\"text-align:left\">can successfully be used in proving the functionality to the users through showcases; their side effects are observable and familiar to the users</td>\n<td style=\"text-align:left\">the output from an integration test run will seem cryptic and uninteresting to people outside of the feature teams</td>\n</tr>\n</tbody></table>\n<p>We’ve started using more and more integration tests to validate requirements. This means they’re no longer the lost cousin of unit tests but rather the new kid on the block right up there with the acceptance tests when it comes to testing in an agile environment.</p>\n<p>If you’re using integration tests leave a comment about how you’re using them and how your peers see them.</p>"
+    },
+    "comments" : [ ],
+    "annotations" : [ ],
+    "origin" : {
+      "streamId" : "feed/http://blogs.lmax.com/rss20.xml",
+      "title" : "LMAX Blogs",
+      "htmlUrl" : "http://blogs.lmax.com/"
+    }
+  }, {
+    "isReadStateLocked" : true,
+    "crawlTimeMsec" : "1359522914599",
+    "timestampUsec" : "1359522914599094",
+    "id" : "tag:google.com,2005:reader/item/62e1a12b55793d16",
+    "categories" : [ "user/01785607376183925700/state/com.google/read", "user/01785607376183925700/state/com.google/starred", "user/01785607376183925700/state/com.google/tracking-mobile-read" ],
+    "title" : "Infodeck on Big Data",
+    "published" : 1359473760,
+    "updated" : 1359473760,
+    "alternate" : [ {
+      "href" : "http://martinfowler.com/articles/bigData/",
+      "type" : "text/html"
+    } ],
+    "content" : {
+      "direction" : "ltr",
+      "content" : "<p>“Big Data” has leapt rapidly into one of the most hyped terms in our industry, yet the hype should not blind people to the fact that this is a genuinely important shift about the role of data in the world. The amount, speed, and value of data sources is rapidly increasing. Data management has to change in five broad areas: extraction of data from a wider range of sources, changes to the logistics of data management with new database and integration approaches, the use of agile principles in running analytics projects, an emphasis on techniques for data interpretation to separate signal from noise, and the importance of well-designed visualization to make that signal more comprehensible. Summing up this means we don’t need big analytics projects, instead we want the new data thinking to permeate our regular work. <a href=\"http://martinfowler.com/articles/bigData\">(go to the infodeck)</a></p>"
+    },
+    "comments" : [ ],
+    "annotations" : [ ],
+    "origin" : {
+      "streamId" : "feed/http://martinfowler.com/bliki/bliki.atom",
+      "title" : "Martin Fowler",
+      "htmlUrl" : "http://martinfowler.com"
+    }
+  } ]
+}
