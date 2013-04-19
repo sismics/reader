@@ -25,7 +25,7 @@ public class TestAppResource extends BaseJerseyTest {
      * @throws JSONException
      */
     @Test
-    public void testApiResource() throws JSONException {
+    public void testAppResource() throws JSONException {
         // Check the API info
         WebResource appResource = resource().path("/app/version");
         ClientResponse response = appResource.get(ClientResponse.class);
@@ -43,8 +43,7 @@ public class TestAppResource extends BaseJerseyTest {
         // Rebuild articles index
         appResource = resource().path("/app/batch/reindex");
         appResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        response = appResource.get(ClientResponse.class);
-        response = appResource.get(ClientResponse.class);
+        response = appResource.post(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         AppContext.getInstance().waitForAsync();
