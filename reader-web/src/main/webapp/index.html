@@ -25,13 +25,13 @@
     <script src="javascripts/jquery.ui.js" type="text/javascript"></script>
     <script src="javascripts/jquery.visible.js" type="text/javascript"></script>
     <script src="javascripts/jquery.history.js" type="text/javascript"></script>
-    <script src="javascripts/jquery.timeago.js" type="text/javascript"></script>
     <script src="javascripts/jquery.qtip.js" type="text/javascript"></script>
     <script src="javascripts/jquery.toastmessage.js" type="text/javascript"></script>
     <script src="javascripts/jquery.json.js" type="text/javascript"></script>
     <script src="javascripts/jquery.throttle.js" type="text/javascript"></script>
     <script src="javascripts/jquery.i18next.js" type="text/javascript"></script>
     <script src="javascripts/jquery.validate.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.moment.js" type="text/javascript"></script>
     <script src="javascripts/r.main.js" type="text/javascript"></script>
     <script src="javascripts/r.user.js" type="text/javascript"></script>
     <script src="javascripts/r.subscription.js" type="text/javascript"></script>
@@ -148,22 +148,26 @@
       </div>
       
       <div id="about-container">
-        <h1 data-i18n="about.rebuildindex.title">Rebuild search index</h1>
-        <p data-i18n="about.rebuildindex.message">Rebuilding search index may take a while, but you can continue using the application.</p>
-        <input class="important rebuild-index-button" type="button" value="Rebuild" data-i18n="[value]about.rebuildindex.button" />
-        <h1>
-          Browse logs
-          <select id="logs-level-select">
-            <option value="">All</option>
-            <option class="fatal" value="FATAL">Fatal</option>
-            <option class="error" value="ERROR">Error</option>
-            <option class="warn" value="WARN">Warn</option>
-            <option class="info" value="INFO">Info</option>
-            <option class="debug" value="DEBUG">Debug</option>
-            <option class="trace" value="TRACE">Trace</option>
-          </select>
-        </h1>
-        <div id="logs-container">
+        <div class="admin">
+          <h1 data-i18n="about.rebuildindex.title">Rebuild search index</h1>
+          <p data-i18n="about.rebuildindex.message">Rebuilding search index may take a while, but you can continue using the application.</p>
+          <input class="important rebuild-index-button" type="button" value="Rebuild" data-i18n="[value]about.rebuildindex.button" />
+          <h1>
+            Browse logs
+            <select id="logs-level-select">
+              <option value="">All</option>
+              <option class="fatal" value="FATAL">Fatal</option>
+              <option class="error" value="ERROR">Error</option>
+              <option class="warn" value="WARN">Warn</option>
+              <option class="info" value="INFO">Info</option>
+              <option class="debug" value="DEBUG">Debug</option>
+              <option class="trace" value="TRACE">Trace</option>
+            </select>
+          </h1>
+          <div id="logs-container">
+            <table id="logs-table">
+            </table>
+          </div>
         </div>
       </div>
       

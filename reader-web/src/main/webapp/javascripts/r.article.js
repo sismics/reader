@@ -133,7 +133,7 @@ r.article.read = function(item, read) {
  */
 r.article.build = function(article, classes) {
   var item = $('#template .feed-item').clone();
-  var date = new Date(article.date);
+  var date = moment(article.date);
   
   // Remove collapsed container in full mode
   if (!r.user.isDisplayTitle()) {
@@ -162,9 +162,8 @@ r.article.build = function(article, classes) {
   item.find('.feed-item-title').html(title);
   
   item.find('.feed-item-date')
-    .html(date.toLocaleString())
-    .attr('title', date.toISOString())
-    .timeago();
+    .html(date.fromNow())
+    .attr('title', date.format('L LT'));
   
   if (r.feed.context.subscriptionId == null) {
     item.find('.feed-item-subscription').html('on <a href="#/feed/subscription/' + article.subscription.id + '">' + article.subscription.title + '</a>');

@@ -22,8 +22,13 @@ r.about.init = function() {
     // Configuring contextual toolbar
     $('#toolbar > .about').removeClass('hidden');
     
-    // Loading logs
-    r.about.loadLogs(false);
+    if (r.user.userInfo.is_admin) {
+      // Loading logs
+      r.about.loadLogs(false);
+    } else {
+      // User is not admin, hide related features
+      $('#about-container .admin').hide();
+    }
   });
   
   // Rebuild index button click
@@ -39,7 +44,7 @@ r.about.init = function() {
   
   // Logs infinite scrolling
   $('#logs-container').scroll(function() {
-    if ($('#logs-container .log-item:last').visible(true)) {
+    if ($('#logs-table tr.log-item:last').visible(true)) {
       r.about.loadLogs(true);
     }
   });
@@ -53,32 +58,51 @@ r.about.init = function() {
 /**
  * Load logs.
  */
+r.about.logsLoading = false;
 r.about.loadLogs = function(next) {
+  // Stop if already loading something
+  if (r.about.logsLoading) {
+    return;
+  }
+  
+  // Check if there is more to load
   var count = 0;
   if (next) {
-    var total = $('#logs-container').data('total');
-    count = $('#logs-container .log-item').length;
+    var total = $('#logs-table').data('total');
+    count = $('#logs-table tr.log-item').length;
     if (count >= total) {
       return;
     }
   }
   
+  // Calling API
+  r.about.logsLoading = true;
   r.util.ajax({
     url: r.util.url.app_log,
     type: 'GET',
     data: { limit: 100, offset: next ? count : 0, level: $('#logs-level-select').val() },
     done: function(data) {
+      // Building table rows
       var html = '';
       $(data.logs).each(function(i, log) {
-        html += '<div class="log-item ' + log.level.toLowerCase() + '"><div class="date">' + log.date + '</div><div class="level">' + log.level + '</div><div class="tag">' + log.tag + '</div><div class="message">' + log.message + '</div></div>';
+        html += '<tr class="log-item ' + log.level.toLowerCase() + '">'
+            + '<td class="date">' + moment(log.date).format('YYYY-MM-DD HH:mm:ss') + '</td>'
+            + '<td class="level">' + log.level + '</td>'
+            + '<td class="tag">' + log.tag + '</td>'
+            + '<td class="message">' + log.message + '</td>'
+          '</tr>';
       });
       
+      // Add or replace new rows
       if (next) {
-        $('#logs-container').append(html);
+        $('#logs-table').append(html);
       } else {
-        $('#logs-container').html(html);
-        $('#logs-container').data('total', data.total)
+        $('#logs-table').html(html);
+        $('#logs-table').data('total', data.total)
       }
+    },
+    always: function() {
+      r.about.logsLoading = false;
     }
   });
 };

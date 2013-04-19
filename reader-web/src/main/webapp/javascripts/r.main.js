@@ -45,6 +45,14 @@ r.main.initModules = function() {
   });
   $('html').i18n();
   
+  // Initializing moment.js i18n
+  var language = r.user.userInfo.locale.split('_')[0];
+  if (moment.langData(language)) {
+    moment.lang(language);
+  } else {
+    moment.lang('en');
+  }
+  
   // Load modules together
   r.subscription.init();
   r.feed.init();
