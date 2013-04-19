@@ -1,7 +1,9 @@
 package com.sismics.reader.core.service;
 
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.ConnectException;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
 import com.sismics.reader.core.model.jpa.UserArticle;
+import com.sismics.reader.core.util.ReaderHttpClient;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
@@ -108,8 +111,8 @@ public class FeedService extends AbstractScheduledService {
         
         // Create the feed if necessary (not created and currently in use by another user)
         FeedDao feedDao = new FeedDao();
-        url = rssReader.getUrl().toString();
-        Feed feed = feedDao.getByRssUrl(rssReader.getUrl().toString());
+        url = newFeed.getUrl();
+        Feed feed = feedDao.getByRssUrl(url);
         if (feed == null) {
             feed = new Feed();
             feed.setUrl(newFeed.getUrl());
@@ -212,16 +215,29 @@ public class FeedService extends AbstractScheduledService {
      */
     private RssReader parseFeedOrPage(String url, boolean parsePage) throws Exception {
         try {
-            RssReader reader = new RssReader(url);
-            reader.readRssFeed();
+            final RssReader reader = new RssReader();
+            new ReaderHttpClient() {
+                
+                @Override
+                public void process(InputStream is) throws Exception {
+                    reader.readRssFeed(is);
+                }
+            }.open(new URL(url));
+            reader.getFeed().setRssUrl(url.toString());
             return reader;
         } catch (Exception eRss) {
             boolean recoverable = !(eRss instanceof UnknownHostException ||
                     eRss instanceof FileNotFoundException);
             if (parsePage && recoverable) {
                 try {
-                    RssExtractor extractor = new RssExtractor(url);
-                    extractor.readPage();
+                    final RssExtractor extractor = new RssExtractor(url);
+                    new ReaderHttpClient() {
+                        
+                        @Override
+                        public void process(InputStream is) throws Exception {
+                            extractor.readPage(is);
+                        }
+                    }.open(new URL(url));
                     List<String> feedList = extractor.getFeedList();
                     if (feedList == null || feedList.isEmpty()) {
                         logParsingError(url, eRss);

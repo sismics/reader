@@ -1,6 +1,6 @@
 package com.sismics.reader.core.dao.file.rss;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -18,9 +18,9 @@ import com.sismics.reader.core.model.jpa.Feed;
 public class TestRssReader {
     @Test
     public void rssReaderKorbenTest() throws Exception {
-        String url = new File(getClass().getResource("/feed/feed_rss2_korben.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_korben.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("Korben", feed.getTitle());
         Assert.assertEquals("http://korben.info", feed.getUrl());
@@ -50,9 +50,9 @@ public class TestRssReader {
 
     @Test
     public void rssReaderXkcdTest() throws Exception {
-        String url = new File(getClass().getResource("/feed/feed_rss2_xkcd.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_xkcd.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("xkcd.com", feed.getTitle());
         Assert.assertEquals("http://xkcd.com/", feed.getUrl());
@@ -73,9 +73,9 @@ public class TestRssReader {
 
     @Test
     public void atomReaderXkcdTest() throws Exception {
-        String url = new File(getClass().getResource("/feed/feed_atom_xkcd.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_atom_xkcd.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("xkcd.com", feed.getTitle());
         Assert.assertEquals("http://xkcd.com/", feed.getUrl());
@@ -96,9 +96,9 @@ public class TestRssReader {
 
     @Test
     public void atomReaderWhatifTest() throws Exception {
-        String url = new File(getClass().getResource("/feed/feed_atom_whatif.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_atom_whatif.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("What If?", feed.getTitle());
         Assert.assertEquals("http://what-if.xkcd.com", feed.getUrl());
@@ -110,9 +110,9 @@ public class TestRssReader {
 
     @Test
     public void rssReaderSpaceTest() throws Exception {
-        String url = new File(getClass().getResource("/feed/feed_rss2_space.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_space.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("SPACE.com", feed.getTitle());
         Assert.assertEquals("http://www.space.com/", feed.getUrl());
@@ -138,9 +138,9 @@ public class TestRssReader {
      */
     @Test
     public void rssReaderEsaTest() throws Exception {
-        String url = new File(getClass().getResource("/feed/feed_rss2_esa.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_esa.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("ESA Top News", feed.getTitle());
         Assert.assertEquals("www.esa.int/", feed.getUrl());
@@ -159,9 +159,9 @@ public class TestRssReader {
 
     @Test
     public void atomReaderMakikoTest() throws Exception {
-        String url = new File(getClass().getResource("/feed/feed_atom_makiko.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_atom_makiko.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("Makiko Furuichi Blog", feed.getTitle());
         Assert.assertEquals("http://makiko-f.blogspot.com/", feed.getUrl());
@@ -178,9 +178,9 @@ public class TestRssReader {
     
     @Test
     public void rssReaderPloumTest() throws Exception {
-        String url = new File(getClass().getResource("/feed/feed_rss2_ploum.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_ploum.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("ploum.net", feed.getTitle());
         Assert.assertEquals("http://ploum.net", feed.getUrl());
@@ -201,9 +201,9 @@ public class TestRssReader {
 
     @Test
     public void rssReaderDeveloperWorksTest() throws Exception {
-        String url = new File(getClass().getResource("/feed/feed_rss2_developerworks.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_developerworks.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("IBM developerWorks : Java technology", feed.getTitle());
         Assert.assertEquals("http://www.ibm.com/developerworks/", feed.getUrl());
@@ -224,9 +224,9 @@ public class TestRssReader {
     
     @Test
     public void rssReaderSpaceDailyTest() throws Exception {
-        String url = new File(getClass().getResource("/feed/feed_rss2_spacedaily.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_spacedaily.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("Space News From SpaceDaily.Com", feed.getTitle());
         Assert.assertEquals("http://www.spacedaily.com/index.html", feed.getUrl());

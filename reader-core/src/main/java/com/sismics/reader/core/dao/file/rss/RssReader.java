@@ -1,9 +1,6 @@
 package com.sismics.reader.core.dao.file.rss;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,7 +26,6 @@ import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
-import com.sismics.reader.core.util.StreamUtil;
 import com.sismics.util.DateUtil;
 
 /**
@@ -53,11 +49,6 @@ public class RssReader extends DefaultHandler {
      * Contents of the current element.
      */
     private String content;
-
-    /**
-     * Feed URL.
-     */
-    private final URL url;
 
     private Feed feed;
     
@@ -152,49 +143,32 @@ public class RssReader extends DefaultHandler {
     /**
      * Constructor of RssReader.
      * 
-     * @param feedUrl RSS feed URL
-     * @throws MalformedURLException
      */
-    public RssReader(String feedUrl) throws MalformedURLException {
-        url = new URL(feedUrl);
+    public RssReader() {
         elementStack = new Stack<Element>();
     }
 
     /**
      * Reads an RSS / Atom feed into feed and articles.
      * 
+     * @param is Input stream
      * @throws Exception
      */
-    public void readRssFeed() throws Exception {
-        InputStream in = null;
-        try {
-            in = StreamUtil.openStream(url);
-    //        SAXParserImpl parser = SAXParserImpl.newInstance(null);
-    //        parser.setFeature("http://xml.org/sax/features/namespaces", true);    
-    //        parser.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
-            SAXParserFactory factory = SAXParserFactory.newInstance();
-            factory.setNamespaceAware(true);
-            factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-            factory.setFeature("http://apache.org/xml/features/continue-after-fatal-error", true);
-            SAXParser parser = factory.newSAXParser();
+    public void readRssFeed(InputStream is) throws Exception {
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        factory.setNamespaceAware(true);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        factory.setFeature("http://apache.org/xml/features/continue-after-fatal-error", true);
+        SAXParser parser = factory.newSAXParser();
+
+        parser.parse(is, this);
     
-            parser.parse(in, this);
-        
-            if (atom) {
-                String url = new AtomUrlGuesserStrategy().guess(atomLinkList);
-                feed.setUrl(url);
-            }
-            validateFeed();
-            fixGuid();
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    // NOP
-                }
-            }
+        if (atom) {
+            String url = new AtomUrlGuesserStrategy().guess(atomLinkList);
+            feed.setUrl(url);
         }
+        validateFeed();
+        fixGuid();
     }
     
     @Override
@@ -448,7 +422,7 @@ public class RssReader extends DefaultHandler {
      */
     private void validateFeed() throws Exception {
         if (feed == null) {
-            throw new Exception(MessageFormat.format("No feed found at url {0}", url));
+            throw new Exception("No feed found");
         }
     }
 
@@ -514,14 +488,5 @@ public class RssReader extends DefaultHandler {
      */
     public List<Article> getArticleList() {
         return articleList;
-    }
-
-    /**
-     * Getter of url.
-     *
-     * @return url
-     */
-    public URL getUrl() {
-        return url;
     }
 }

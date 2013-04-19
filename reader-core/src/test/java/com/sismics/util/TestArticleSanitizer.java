@@ -1,6 +1,6 @@
 package com.sismics.util;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -26,9 +26,9 @@ public class TestArticleSanitizer {
     @Test
     public void articleSanitizerImageTest() throws Exception {
         // Load a feed
-        String url = new File(getClass().getResource("/feed/feed_atom_akewea.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_atom_akewea.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("http://blog.akewea.com/", feed.getUrl());
         List<Article> articleList = reader.getArticleList();
@@ -49,9 +49,9 @@ public class TestArticleSanitizer {
     @Test
     public void articleSanitizerIframeVimeoTest() throws Exception {
         // Load a feed
-        String url = new File(getClass().getResource("/feed/feed_rss2_fubiz.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_fubiz.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("http://www.fubiz.net", feed.getUrl());
         List<Article> articleList = reader.getArticleList();
@@ -73,9 +73,9 @@ public class TestArticleSanitizer {
     @Test
     public void articleSanitizerIframeDailymotionTest() throws Exception {
         // Load a feed
-        String url = new File(getClass().getResource("/feed/feed_rss2_korben.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_korben.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("http://korben.info", feed.getUrl());
         List<Article> articleList = reader.getArticleList();
@@ -97,9 +97,9 @@ public class TestArticleSanitizer {
     @Test
     public void articleSanitizerIframeYoutubeTest() throws Exception {
         // Load a feed
-        String url = new File(getClass().getResource("/feed/feed_rss2_korben.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_korben.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("http://korben.info", feed.getUrl());
         List<Article> articleList = reader.getArticleList();
@@ -121,9 +121,9 @@ public class TestArticleSanitizer {
     @Test
     public void articleSanitizerIframeSlashdotTest() throws Exception {
         // Load a feed
-        String url = new File(getClass().getResource("/feed/feed_rss2_slashdot.xml").getFile()).toURI().toString();
-        RssReader reader = new RssReader(url);
-        reader.readRssFeed();
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_slashdot.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("http://slashdot.org/", feed.getUrl());
         List<Article> articleList = reader.getArticleList();

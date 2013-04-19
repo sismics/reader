@@ -17,6 +17,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
+import com.sismics.reader.core.util.ReaderHttpClient;
 import com.sismics.util.mime.MimeTypeUtil;
 
 /**
@@ -55,8 +56,14 @@ public class FaviconDownloader {
         // Try to extract the favicon URL from the page specified in the feed
         String faviconUrl = null;
         try {
-            FaviconExtractor extractor = new FaviconExtractor(pageUrl);
-            extractor.readPage();
+            final FaviconExtractor extractor = new FaviconExtractor(pageUrl);
+            new ReaderHttpClient() {
+                
+                @Override
+                public void process(InputStream is) throws Exception {
+                    extractor.readPage(is);
+                }
+            }.open(new URL(pageUrl));
             faviconUrl = extractor.getFavicon();
         } catch (Exception e) {
             log.error("Error extracting icon from feed HTML page", e);

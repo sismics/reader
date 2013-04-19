@@ -1,6 +1,5 @@
 package com.sismics.reader.core.dao.file.html;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,7 +15,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.sismics.reader.core.util.StreamUtil;
 import com.sismics.util.UrlUtil;
 
 /**
@@ -51,26 +49,15 @@ public class RssExtractor extends DefaultHandler {
     /**
      * Reads an HTML page and extracts RSS / Atom feeds.
      * 
+     * @param is Input stream
      * @throws Exception
      */
-    public void readPage() throws Exception {
-        InputStream in = null;
-        try {
-            in = StreamUtil.openStream(url);
-            SAXParserImpl parser = SAXParserImpl.newInstance(null);
-            parser.setFeature("http://xml.org/sax/features/namespaces", true);    
-            parser.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
-    
-            parser.parse(in, this);
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    // NOP
-                }
-            }
-        }
+    public void readPage(InputStream is) throws Exception {
+        SAXParserImpl parser = SAXParserImpl.newInstance(null);
+        parser.setFeature("http://xml.org/sax/features/namespaces", true);    
+        parser.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
+
+        parser.parse(is, this);
     }
     
     @Override

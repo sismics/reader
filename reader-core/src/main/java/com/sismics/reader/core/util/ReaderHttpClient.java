@@ -5,12 +5,14 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import com.google.common.io.Closer;
+
 /**
- * Stream utilities.
+ * HTTP client.
  *
  * @author jtremeaux 
  */
-public class StreamUtil {
+public abstract class ReaderHttpClient {
     /**
      * User-Agent to use.
      * Note: some servers refuse to talk to the default user-agent and issue a 403 Bad Behavior.
@@ -18,18 +20,29 @@ public class StreamUtil {
     private static final String USER_AGENT = "Mozilla/4.0 (compatible; SismicsReaderBot/1.0;+http://www.sismics.com/reader/)";
 
     /**
-     * Open a stream from a URL.
+     * Open and process a stream from a URL.
      * 
      * @param url URL
-     * @return Stream
+     * @throws Exception
      */
-    public static InputStream openStream(URL url) {
+    public void open(URL url) throws Exception {
+        Closer closer = Closer.create();
         try {
             URLConnection connection = url.openConnection();
             connection.setRequestProperty("User-Agent", USER_AGENT);
-            return connection.getInputStream();
+            InputStream is = closer.register(connection.getInputStream());
+            
+            process(is);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                closer.close();
+            } catch (IOException e) {
+                // NOP
+            }
         }
     }
+    
+    public abstract void process(InputStream is) throws Exception;
 }
