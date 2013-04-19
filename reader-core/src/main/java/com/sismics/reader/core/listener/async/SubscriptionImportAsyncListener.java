@@ -13,11 +13,13 @@ import com.google.common.eventbus.Subscribe;
 import com.sismics.reader.core.dao.file.opml.OpmlFlattener;
 import com.sismics.reader.core.dao.file.opml.Outline;
 import com.sismics.reader.core.dao.jpa.CategoryDao;
+import com.sismics.reader.core.dao.jpa.FeedDao;
 import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
 import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
 import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
-import com.sismics.reader.core.event.OpmlImportedEvent;
+import com.sismics.reader.core.event.SubscriptionImportedEvent;
 import com.sismics.reader.core.model.context.AppContext;
+import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Category;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
@@ -27,30 +29,32 @@ import com.sismics.reader.core.util.EntityManagerUtil;
 import com.sismics.reader.core.util.TransactionUtil;
 
 /**
- * Listener on OPML import request.
+ * Listener on subscriptions import request.
  * 
  * @author jtremeaux
  */
-public class OpmlImportAsyncListener {
+public class SubscriptionImportAsyncListener {
     /**
      * Logger.
      */
-    private static final Logger log = LoggerFactory.getLogger(OpmlImportAsyncListener.class);
+    private static final Logger log = LoggerFactory.getLogger(SubscriptionImportAsyncListener.class);
 
     /**
      * Process the event.
      * 
-     * @param opmlImportedEvent OPML imported event
+     * @param subscriptionImportedEvent OPML imported event
      * @throws Exception
      */
     @Subscribe
-    public void onOpmlImport(final OpmlImportedEvent opmlImportedEvent) throws Exception {
+    public void onSubscriptionImport(final SubscriptionImportedEvent subscriptionImportedEvent) throws Exception {
         if (log.isInfoEnabled()) {
-            log.info(MessageFormat.format("OPML import requested event: {0}", opmlImportedEvent.toString()));
+            log.info(MessageFormat.format("OPML import requested event: {0}", subscriptionImportedEvent.toString()));
         }
         
-        final User user = opmlImportedEvent.getUser();
-        final List<Outline> outlineList = opmlImportedEvent.getOutlineList();
+        final User user = subscriptionImportedEvent.getUser();
+        final List<Outline> outlineList = subscriptionImportedEvent.getOutlineList();
+        final Map<String, List<Article>> articleMap = subscriptionImportedEvent.getArticleMap();
+        final List<Feed> feedList = subscriptionImportedEvent.getFeedList();
        
         TransactionUtil.handle(new Runnable() {
             @Override
@@ -75,7 +79,7 @@ public class OpmlImportAsyncListener {
                 FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
                 for (Entry<String, List<Outline>> entry : outlineMap.entrySet()) {
                     String categoryName = entry.getKey();
-                    List<Outline> feedList = entry.getValue();
+                    List<Outline> categoryOutlineList = entry.getValue();
                     
                     // Create a new category if necessary 
                     Category category = categoryMap.get(categoryName);
@@ -96,7 +100,7 @@ public class OpmlImportAsyncListener {
                     
                     // Create the subscriptions
                     EntityManagerUtil.flush();
-                    for (Outline outline : feedList) {
+                    for (Outline outline : categoryOutlineList) {
                         String feedTitle = outline.getText() != null ? outline.getText() : outline.getTitle();
                         String feedUrl = outline.getXmlUrl();
 
@@ -113,7 +117,7 @@ public class OpmlImportAsyncListener {
                             continue;
                         }
 
-                        // Get feed and articles
+                        // Synchronize feed and articles
                         Feed feed = null;
                         final FeedService feedService = AppContext.getInstance().getFeedService();
                         try {
@@ -146,6 +150,41 @@ public class OpmlImportAsyncListener {
                             }
                         }
                     }
+                }
+                
+                // Create the feed for user's starred articles
+                if (feedList != null) {
+                    EntityManagerUtil.flush();
+                    for (Feed feed : feedList) {
+                        String rssUrl = feed.getRssUrl();
+                        
+                        // Synchronize feed and articles
+                        final FeedService feedService = AppContext.getInstance().getFeedService();
+                        try {
+                            feedService.synchronize(rssUrl);
+                        } catch (Exception e) {
+                            // Add the feed with the old data if it is not valid anymore
+                            FeedDao feedDao = new FeedDao();
+                            Feed feedFromDb = feedDao.getByRssUrl(rssUrl.toString());
+                            if (feedFromDb == null) {
+                                feed = new Feed();
+                                feed.setUrl(feed.getUrl());
+                                feed.setRssUrl(rssUrl);
+                                feed.setTitle(feed.getTitle());
+                                feedDao.create(feed);
+                            }
+                            
+                            if (log.isErrorEnabled()) {
+                                log.error(MessageFormat.format("Error importing the feed at URL {0} for user {1}''s stared articles", rssUrl, user.getId()), e);
+                            }
+                            continue;
+                        }
+                    }
+                }
+                
+                // TODO Create the user's starred articles
+                if (articleMap != null) {
+                    EntityManagerUtil.flush();
                 }
             }
         });

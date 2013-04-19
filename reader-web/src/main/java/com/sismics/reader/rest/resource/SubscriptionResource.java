@@ -12,6 +12,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import javax.persistence.NoResultException;
 import javax.ws.rs.Consumes;
@@ -43,8 +46,12 @@ import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.google.common.base.Charsets;
 import com.google.common.io.ByteStreams;
+import com.google.common.io.Closer;
+import com.sismics.reader.core.dao.file.json.StarredReader;
 import com.sismics.reader.core.dao.file.opml.OpmlReader;
+import com.sismics.reader.core.dao.file.opml.Outline;
 import com.sismics.reader.core.dao.jpa.CategoryDao;
 import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
@@ -53,8 +60,9 @@ import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
-import com.sismics.reader.core.event.OpmlImportedEvent;
+import com.sismics.reader.core.event.SubscriptionImportedEvent;
 import com.sismics.reader.core.model.context.AppContext;
+import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Category;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
@@ -72,6 +80,8 @@ import com.sismics.rest.exception.ServerException;
 import com.sismics.rest.util.JsonUtil;
 import com.sismics.rest.util.ValidationUtil;
 import com.sismics.util.MessageUtil;
+import com.sismics.util.mime.MimeType;
+import com.sismics.util.mime.MimeTypeUtil;
 import com.sun.jersey.multipart.FormDataBodyPart;
 import com.sun.jersey.multipart.FormDataParam;
 
@@ -506,18 +516,18 @@ public class SubscriptionResource extends BaseResource {
     }
 
     /**
-     * Imports feeds from an OPML file into the user's subscriptions.
-     * The content of the OPML must be PUT as multipart/form-data.
+     * Imports some data into the user's account.
+     * The content of the file to import must be PUT as multipart/form-data.
+     * The file can be either a OPML file, or a ZIP containing an OPML file and some Google Takeout data.
      * 
-     * @param url URL of a feed, or a web page referencing a feed 
-     * @param title Feed title
+     * @param fileBodyPart File to import
      * @return Response
      * @throws JSONException
      */
     @PUT
     @Consumes("multipart/form-data") 
     @Path("import")
-    public Response importOpml(
+    public Response importFile(
             @FormDataParam("file") FormDataBodyPart fileBodyPart) throws JSONException {
         if (!authenticate()) {
             throw new ForbiddenClientException();
@@ -526,26 +536,78 @@ public class SubscriptionResource extends BaseResource {
         // Validate input data
         ValidationUtil.validateRequired(fileBodyPart, "file");
 
+        UserDao userDao = new UserDao();
+        User user = userDao.getById(principal.getId());
+        
         InputStream in = fileBodyPart.getValueAs(InputStream.class);
         File tmpFile = null;
+        List<Outline> outlineList = null;
+        Map<String, List<Article>> articleMap = null;
+        List<Feed> feedList = null;
+        Closer closer = Closer.create();
         try {
             // Loads the incoming stream into a temporary file
             tmpFile = File.createTempFile("reader_opml_import", null);
             IOUtils.copy(in, new FileOutputStream(tmpFile));
             
-            // Parse the file
-            OpmlReader opmlReader = new OpmlReader(tmpFile.toURI().toString());
-            opmlReader.readOpml();
+            // Guess the file type
+            String mimeType = MimeTypeUtil.guessMimeType(tmpFile);
+            if (MimeType.APPLICATION_ZIP.equals(mimeType)) {
+                // Assume the file is a Google Takeout ZIP archive
+                ZipInputStream zipInputStream = null;
+                zipInputStream = closer.register(new ZipInputStream(new FileInputStream(tmpFile), Charsets.ISO_8859_1));
+                ZipEntry zipEntry = zipInputStream.getNextEntry();
+                while (zipEntry != null) {
+                    File outputFile = null;
+                    try {
+                        if (zipEntry.getName().endsWith("subscriptions.xml")) {
+                            outputFile = File.createTempFile("subscriptions", "xml");
+                            ByteStreams.copy(zipInputStream, new FileOutputStream(outputFile));
+    
+                            // Read the OPML file
+                            OpmlReader opmlReader = new OpmlReader();
+                            opmlReader.read(new FileInputStream(outputFile));
+                            outlineList = opmlReader.getOutlineList();
+                        } else if (zipEntry.getName().endsWith("starred.json")) {
+                            outputFile = File.createTempFile("starred", "json");
+                            ByteStreams.copy(zipInputStream, new FileOutputStream(outputFile));
+
+                            // Read the starred file
+                            StarredReader starredReader = new StarredReader();
+                            starredReader.read(new FileInputStream(outputFile));
+                            articleMap = starredReader.getArticleMap();
+                            feedList = starredReader.getFeedList();
+                        }
+                    } finally {
+                        if (outputFile != null) {
+                            try {
+                                outputFile.delete();
+                            } catch (Exception e) {
+                                // NOP
+                            }
+                        }
+                    }
+
+                    zipEntry = zipInputStream.getNextEntry();
+                }
+            } else {
+                // Assume the file is an OPML file
+                InputStream is = closer.register(new FileInputStream(tmpFile));
+                OpmlReader opmlReader = new OpmlReader();
+                opmlReader.read(is);
+                outlineList = opmlReader.getOutlineList();
+            }
             
-            // Raise an import asynchronous event
-            UserDao userDao = new UserDao();
-            User user = userDao.getById(principal.getId());
-            
-            OpmlImportedEvent event = new OpmlImportedEvent();
-            event.setUser(user);
-            event.setOutlineList(opmlReader.getOutlineList());
-            AppContext.getInstance().getImportEventBus().post(event);
-            
+            // Raise an asynchronous import event
+            if (outlineList != null) {
+                SubscriptionImportedEvent event = new SubscriptionImportedEvent();
+                event.setUser(user);
+                event.setOutlineList(outlineList);
+                event.setArticleMap(articleMap);
+                event.setFeedList(feedList);
+                AppContext.getInstance().getImportEventBus().post(event);
+            }
+
             // Always return ok
             JSONObject response = new JSONObject();
             response.put("status", "ok");
@@ -553,6 +615,11 @@ public class SubscriptionResource extends BaseResource {
         } catch (Exception e) {
             throw new ServerException("ImportError", "Error importing OPML file", e);
         } finally {
+            try { 
+                closer.close();
+            } catch (IOException e) {
+                // NOP
+            }
             if (tmpFile != null) {
                 tmpFile.delete();
             }

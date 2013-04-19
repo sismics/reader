@@ -65,6 +65,9 @@ public class StarredReader {
             
             JsonValidationUtil.validateJsonString(origin, "streamId", true);
             String feedRssUrl = origin.path("streamId").getTextValue();
+            if (feedRssUrl.startsWith("feed/")) {
+                feedRssUrl = feedRssUrl.substring("feed/".length());
+            }
             
             JsonValidationUtil.validateJsonString(origin, "title", true);
             String feedTitle = origin.path("title").getTextValue();
@@ -105,7 +108,7 @@ public class StarredReader {
             List<Article> articleList = articleMap.get(feedRssUrl);
             if (articleList == null) {
                 articleList = new ArrayList<Article>();
-                articleMap.put(feedUrl, articleList);
+                articleMap.put(feedRssUrl, articleList);
             }
             
             Article article = new Article();
@@ -126,11 +129,11 @@ public class StarredReader {
     }
 
     /**
-     * Getter of feedMap.
+     * Returns the list of feeds referenced by starred articles.
      *
-     * @return feedMap
+     * @return List of feeds
      */
-    public Map<String, Feed> getFeedMap() {
-        return feedMap;
+    public List<Feed> getFeedList() {
+        return new ArrayList<Feed>(feedMap.values());
     }
 }

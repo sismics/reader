@@ -1,4 +1,4 @@
-package com.sismics.reader.core.util;
+package com.sismics.util.mime;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,15 +28,17 @@ public class MimeTypeUtil {
             }
             String header = new String(headerBytes, "US-ASCII");
             
-            if (header.startsWith("GIF87a") || header.startsWith("GIF89a")) {
-                return "image/gif";
-            } else  if (headerBytes[0] == ((byte) 0xff) && headerBytes[1] == ((byte) 0xd8)) {
-                return "image/jpeg";
+            if (header.startsWith("PK")) {
+                return MimeType.APPLICATION_ZIP;
+            } else if (header.startsWith("GIF87a") || header.startsWith("GIF89a")) {
+                return MimeType.IMAGE_GIF;
+            } else if (headerBytes[0] == ((byte) 0xff) && headerBytes[1] == ((byte) 0xd8)) {
+                return MimeType.IMAGE_JPEG;
             } else if (headerBytes[0] == ((byte) 0x89) && headerBytes[1] == ((byte) 0x50) && headerBytes[2] == ((byte) 0x4e) && headerBytes[3] == ((byte) 0x47) &&
                     headerBytes[4] == ((byte) 0x0d) && headerBytes[5] == ((byte) 0x0a) && headerBytes[6] == ((byte) 0x1a) && headerBytes[7] == ((byte) 0x0a)) {
-                return "image/png";
+                return MimeType.IMAGE_PNG;
             } else if (headerBytes[0] == ((byte) 0x00) && headerBytes[1] == ((byte) 0x00) && headerBytes[2] == ((byte) 0x01) && headerBytes[3] == ((byte) 0x00)) {
-                return "image/x-icon";
+                return MimeType.IMAGE_X_ICON;
             }
         } finally {
             if (is != null) {

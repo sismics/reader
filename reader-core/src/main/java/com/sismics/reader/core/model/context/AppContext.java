@@ -13,7 +13,7 @@ import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 import com.sismics.reader.core.listener.async.ArticleCreatedAsyncListener;
 import com.sismics.reader.core.listener.async.FaviconUpdateRequestedAsyncListener;
-import com.sismics.reader.core.listener.async.OpmlImportAsyncListener;
+import com.sismics.reader.core.listener.async.SubscriptionImportAsyncListener;
 import com.sismics.reader.core.listener.async.RebuildIndexAsyncListener;
 import com.sismics.reader.core.listener.sync.DeadEventListener;
 import com.sismics.reader.core.service.FeedService;
@@ -103,7 +103,7 @@ public class AppContext {
         mailEventBus = newAsyncEventBus();
 
         importEventBus = newAsyncEventBus();
-        importEventBus.register(new OpmlImportAsyncListener());
+        importEventBus.register(new SubscriptionImportAsyncListener());
     }
 
     /**

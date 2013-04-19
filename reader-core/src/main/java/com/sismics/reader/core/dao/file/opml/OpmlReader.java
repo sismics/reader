@@ -1,9 +1,7 @@
 package com.sismics.reader.core.dao.file.opml;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Stack;
@@ -30,8 +28,6 @@ public class OpmlReader extends DefaultHandler {
      * Contents of the current element.
      */
     private String content;
-
-    private final URL url;
 
     /**
      * Root outline.
@@ -62,11 +58,9 @@ public class OpmlReader extends DefaultHandler {
     /**
      * Constructor of OpmlReader.
      * 
-     * @param opmlUrl OPML URL
      * @throws MalformedURLException
      */
-    public OpmlReader(String opmlUrl) throws MalformedURLException {
-        url = new URL(opmlUrl);
+    public OpmlReader() throws MalformedURLException {
         elementStack = new Stack<Element>();
         outlineStack = new Stack<Outline>();
     }
@@ -74,17 +68,16 @@ public class OpmlReader extends DefaultHandler {
     /**
      * Reads an OPML into a tree structure.
      * 
+     * @param is Input stream
      * @throws Exception
      */
-    public void readOpml() throws Exception {
-        InputStream in = read();
-        
+    public void read(InputStream is) throws Exception {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         factory.setNamespaceAware(true);
         factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
         SAXParser parser = factory.newSAXParser();
 
-        parser.parse(in, this);
+        parser.parse(is, this);
     }
     
     @Override
@@ -173,14 +166,6 @@ public class OpmlReader extends DefaultHandler {
         }
     }
     
-    private InputStream read() {
-        try {
-            return url.openStream();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * Getter of outlineList.
      *

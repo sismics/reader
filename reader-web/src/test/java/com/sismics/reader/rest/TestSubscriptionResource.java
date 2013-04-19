@@ -213,16 +213,16 @@ public class TestSubscriptionResource extends BaseJerseyTest {
      * @throws Exception
      */
     @Test
-    public void testSubscriptionImport() throws Exception {
-        // Create user subscription1
-        clientUtil.createUser("import1");
-        String import1AuthToken = clientUtil.login("import1");
+    public void testSubscriptionImportOpml() throws Exception {
+        // Create user import_opml1
+        clientUtil.createUser("import_opml1");
+        String importOpml1AuthToken = clientUtil.login("import_opml1");
 
         // Import an OPML file
         WebResource trackResource = resource().path("/subscription/import");
-        trackResource.addFilter(new CookieAuthenticationFilter(import1AuthToken));
+        trackResource.addFilter(new CookieAuthenticationFilter(importOpml1AuthToken));
         FormDataMultiPart form = new FormDataMultiPart();
-        InputStream track = this.getClass().getResourceAsStream("/opml/greader_subscriptions.xml");
+        InputStream track = this.getClass().getResourceAsStream("/import/greader_subscriptions.xml");
         FormDataBodyPart fdp = new FormDataBodyPart("file",
                 new BufferedInputStream(track),
                 MediaType.APPLICATION_OCTET_STREAM_TYPE);
@@ -233,7 +233,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         // List all subscriptions
         AppContext.getInstance().waitForAsync();
         WebResource subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(import1AuthToken));
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(importOpml1AuthToken));
         response = subscriptionResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         JSONObject json = response.getEntity(JSONObject.class);
@@ -253,11 +253,55 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         // Export all subscriptions
         AppContext.getInstance().waitForAsync();
         subscriptionResource = resource().path("/subscription/export");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(import1AuthToken));
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(importOpml1AuthToken));
         response = subscriptionResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         String text = CharStreams.toString(new InputStreamReader(response.getEntityInputStream(), Charsets.UTF_8));
         Assert.assertTrue(text.contains("Comics / Sub"));
         Assert.assertTrue(text.contains("Good Math, Bad Math"));
+    }
+
+    /**
+     * Test of the import resource.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void testSubscriptionImportTakeout() throws Exception {
+        // Create user import_takeout1
+        clientUtil.createUser("import_takeout1");
+        String importTakeout1AuthToken = clientUtil.login("import_takeout1");
+
+        // Import a Takeout file
+        WebResource trackResource = resource().path("/subscription/import");
+        trackResource.addFilter(new CookieAuthenticationFilter(importTakeout1AuthToken));
+        FormDataMultiPart form = new FormDataMultiPart();
+        InputStream track = this.getClass().getResourceAsStream("/import/test@gmail.com-takeout.zip");
+        FormDataBodyPart fdp = new FormDataBodyPart("file",
+                new BufferedInputStream(track),
+                MediaType.APPLICATION_OCTET_STREAM_TYPE);
+        form.bodyPart(fdp);
+        ClientResponse response = trackResource.type(MediaType.MULTIPART_FORM_DATA).put(ClientResponse.class, form);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+
+        // List all subscriptions
+        AppContext.getInstance().waitForAsync();
+        WebResource subscriptionResource = resource().path("/subscription");
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(importTakeout1AuthToken));
+        response = subscriptionResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        JSONObject json = response.getEntity(JSONObject.class);
+        int unreadCount = json.optInt("unread_count");
+        Assert.assertTrue(unreadCount > 0);
+        JSONArray categories = json.optJSONArray("categories");
+        Assert.assertNotNull(categories);
+        Assert.assertEquals(1, categories.length());
+        JSONObject rootCategory = categories.optJSONObject(0);
+        categories = rootCategory.getJSONArray("categories");
+        Assert.assertEquals(2, categories.length());
+        JSONObject comicsCategory = categories.optJSONObject(0);
+        Assert.assertEquals("Blogs", comicsCategory.getString("name"));
+        JSONArray subscriptions = comicsCategory.optJSONArray("subscriptions");
+        Assert.assertEquals(1, subscriptions.length());
     }
 }

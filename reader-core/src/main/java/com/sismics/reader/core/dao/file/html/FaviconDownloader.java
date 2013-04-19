@@ -17,7 +17,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
-import com.sismics.reader.core.util.MimeTypeUtil;
+import com.sismics.util.mime.MimeTypeUtil;
 
 /**
  * Utility to download a favicon from a website.
