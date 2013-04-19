@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -58,7 +59,7 @@ public abstract class BaseJerseyTest extends JerseyTest {
         wiser.setPort(2500);
         wiser.start();
         
-        String httpRoot = new File(getClass().getResource("/").getFile()).toString();
+        String httpRoot = URLDecoder.decode(new File(getClass().getResource("/").getFile()).getAbsolutePath(), "utf-8");
         httpServer =  HttpServer.createSimpleServer(httpRoot, "localhost", 9997);
         httpServer.start();
     }
