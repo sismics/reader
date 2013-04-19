@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Strings;
 import com.google.common.eventbus.Subscribe;
 import com.sismics.reader.core.dao.file.opml.OpmlFlattener;
 import com.sismics.reader.core.dao.file.opml.Outline;
@@ -101,7 +102,7 @@ public class SubscriptionImportAsyncListener {
                     // Create the subscriptions
                     EntityManagerUtil.flush();
                     for (Outline outline : categoryOutlineList) {
-                        String feedTitle = outline.getText() != null ? outline.getText() : outline.getTitle();
+                        String feedTitle = !Strings.isNullOrEmpty(outline.getText()) ? outline.getText() : outline.getTitle();
                         String feedUrl = outline.getXmlUrl();
 
                         // Check if the user is already subscribed to this feed
