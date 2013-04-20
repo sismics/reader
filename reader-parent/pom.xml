@@ -21,38 +21,28 @@
     <!-- Dependencies version (external) -->
     <commons-lang.commons-lang.version>2.6</commons-lang.commons-lang.version>
     <commons-io.commons-io.version>2.1</commons-io.commons-io.version>
-    <org.apache.commons.commons-email.version>1.2</org.apache.commons.commons-email.version>
     <com.google.guava.guava.version>14.0</com.google.guava.guava.version>
-    <log4j.log4j.version>1.2.14</log4j.log4j.version>
+    <log4j.log4j.version>1.2.16</log4j.log4j.version>
     <org.slf4j.version>1.6.4</org.slf4j.version>
     <org.slf4j.jcl-over-slf4j.version>1.6.6</org.slf4j.jcl-over-slf4j.version>
     <junit.junit.version>4.7</junit.junit.version>
     <hsqldb.hsqldb.version>1.8.0.1</hsqldb.hsqldb.version>
     <com.sun.jersey.version>1.17</com.sun.jersey.version>
     <org.mindrot.jbcrypt>0.3m</org.mindrot.jbcrypt>
-    <org.freemarker.freemarker.version>2.3.19</org.freemarker.freemarker.version>
     <org.subethamail.subethasmtp.version>3.1.6</org.subethamail.subethasmtp.version>
     <org.subethamail.subethasmtp-wiser.version>1.2</org.subethamail.subethasmtp-wiser.version>
-    <com.drewnoakes.metadata-extractor.version>2.4.0-beta-1</com.drewnoakes.metadata-extractor.version>
     <org.codehaus.jettison.jettison.version>1.1</org.codehaus.jettison.jettison.version>
-    <java3d.j3d-core.version>1.3.1</java3d.j3d-core.version>
-    <org.imgscalr.imgscalr-lib.version>4.2</org.imgscalr.imgscalr-lib.version>
     <org.ccil.cowan.tagsoup.tagsoup.version>1.2.1</org.ccil.cowan.tagsoup.tagsoup.version>
     <com.googlecode.owasp-java-html-sanitizer.owasp-java-html-sanitizer.version>r156</com.googlecode.owasp-java-html-sanitizer.owasp-java-html-sanitizer.version>
     <org.apache.lucene.version>4.2.0</org.apache.lucene.version>
-    <com.cybozu.labs.langdetect.version>1.1-20120112</com.cybozu.labs.langdetect.version>
-    <org.json.jsoup.version>1.7.2</org.json.jsoup.version>
 
     <com.sun.grizzly.version>1.9.18-m</com.sun.grizzly.version>
     <javax.transaction.jta.version>1.1</javax.transaction.jta.version>
     <org.hibernate.hibernate.version>4.1.0.Final</org.hibernate.hibernate.version>
     <commons-dbcp.version>1.4</commons-dbcp.version>
-    <org.simpleframework.simple-xml.version>2.6.1</org.simpleframework.simple-xml.version>
     <joda-time.joda-time.version>2.2</joda-time.joda-time.version>
     <org.codehaus.jackson.jackson.version>1.7.1</org.codehaus.jackson.jackson.version>
 
-    <mysql.mysql-connector-java.version>5.1.15</mysql.mysql-connector-java.version>
-    
     <org.eclipse.jetty.jetty-server.version>8.1.10.v20130312</org.eclipse.jetty.jetty-server.version>
     <org.eclipse.jetty.jetty-webapp.version>8.1.10.v20130312</org.eclipse.jetty.jetty-webapp.version>
     <org.eclipse.jetty.jetty-servlet.version>8.1.10.v20130312</org.eclipse.jetty.jetty-servlet.version>
@@ -171,6 +161,7 @@
         <module>../reader-distribution-standalone</module>
         <module>../reader-distribution-debian</module>
         <module>../reader-distribution-redhat</module>
+        <module>../reader-distribution-windows</module>
       </modules>
     </profile>
     
@@ -274,12 +265,6 @@
       </dependency>
       
       <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-email</artifactId>
-        <version>${org.apache.commons.commons-email.version}</version>
-      </dependency>
-    
-      <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
         <version>${com.google.guava.guava.version}</version>
@@ -297,12 +282,6 @@
         <version>${org.codehaus.jackson.jackson.version}</version>
       </dependency>
       
-      <dependency>
-        <groupId>org.freemarker</groupId>
-        <artifactId>freemarker</artifactId>
-        <version>${org.freemarker.freemarker.version}</version>
-      </dependency>
-            
       <dependency>
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>
@@ -389,12 +368,6 @@
       
       <dependency>
         <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-validator</artifactId>
-        <version>${org.hibernate.hibernate.version}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>org.hibernate</groupId>
         <artifactId>hibernate-entitymanager</artifactId>
         <version>${org.hibernate.hibernate.version}</version>
       </dependency>
@@ -406,21 +379,9 @@
       </dependency>
       
       <dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
-        <version>${mysql.mysql-connector-java.version}</version>
-      </dependency>
-      
-      <dependency>
         <groupId>commons-dbcp</groupId>
         <artifactId>commons-dbcp</artifactId>
         <version>${commons-dbcp.version}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>org.simpleframework</groupId>
-        <artifactId>simple-xml</artifactId>
-        <version>${org.simpleframework.simple-xml.version}</version>
       </dependency>
       
       <dependency>
@@ -436,23 +397,11 @@
       </dependency>
       
       <dependency>
-        <groupId>com.drewnoakes</groupId>
-        <artifactId>metadata-extractor</artifactId>
-        <version>${com.drewnoakes.metadata-extractor.version}</version>
-      </dependency>
-      
-      <dependency>
         <groupId>org.codehaus.jettison</groupId>
         <artifactId>jettison</artifactId>
         <version>${org.codehaus.jettison.jettison.version}</version>
       </dependency>
       
-      <dependency>
-        <groupId>java3d</groupId>
-        <artifactId>j3d-core</artifactId>
-        <version>${java3d.j3d-core.version}</version>
-      </dependency>
-
       <dependency>
         <groupId>com.google.oauth-client</groupId>
         <artifactId>google-oauth-client</artifactId>
@@ -469,18 +418,6 @@
         <groupId>com.google.http-client</groupId>
         <artifactId>google-http-client-jackson2</artifactId>
         <version>${com.google.http-client.google-http-client-jackson2.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.google.apis</groupId>
-        <artifactId>google-api-services-plus</artifactId>
-        <version>${com.google.apis.google-api-services-plus.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.imgscalr</groupId>
-        <artifactId>imgscalr-lib</artifactId>
-        <version>${org.imgscalr.imgscalr-lib.version}</version>
       </dependency>
 
       <dependency>
@@ -514,22 +451,11 @@
       </dependency>
       
       <dependency>
-	      <groupId>org.apache.lucene</groupId>
-	      <artifactId>lucene-highlighter</artifactId>
-	      <version>${org.apache.lucene.version}</version>
-	    </dependency>
-      
-      <dependency>
-        <groupId>com.cybozu.labs</groupId>
-        <artifactId>langdetect</artifactId>
-        <version>${com.cybozu.labs.langdetect.version}</version>
+        <groupId>org.apache.lucene</groupId>
+        <artifactId>lucene-highlighter</artifactId>
+        <version>${org.apache.lucene.version}</version>
       </dependency>
       
-      <dependency>
-        <groupId>org.jsoup</groupId>
-        <artifactId>jsoup</artifactId>
-        <version>${org.json.jsoup.version}</version>
-      </dependency>
     </dependencies>
   </dependencyManagement>
   
