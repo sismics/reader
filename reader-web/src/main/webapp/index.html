@@ -119,7 +119,7 @@
           </div>
           <div id="settings-tab-import">
             <h1 data-i18n="settings.import.title">Import</h1>
-            <p data-i18n="settings.import.opml">Only OPML format is accepted.</p>
+            <p data-i18n="[html]settings.import.explain">Only OPML format is accepted.</p>
             <form id="settings-import-form">
 							<p><input type="file" name="file"></p>
 							<p><input class="important" type="submit" value="Import" data-i18n="settings.import.submit" /> <span class="ajax-loader hidden"></span></p>
@@ -163,6 +163,7 @@
               <option class="debug" value="DEBUG">Debug</option>
               <option class="trace" value="TRACE">Trace</option>
             </select>
+            <div class="button" id="logs-refresh-button"><img src="images/refresh.png" class="icon" /></div>
           </h1>
           <div id="logs-container">
             <table id="logs-table">

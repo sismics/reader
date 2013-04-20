@@ -73,9 +73,9 @@
     },
     "import": {
       "title": "Import",
-      "opml": "Only OPML format is accepted.",
-      "success": "OPML file import successful. Your subscriptions will appear shortly.",
-      "error": "Error importing OPML file"
+      "explain": "Upload a <a href=\"https://www.google.com/takeout/\" target=\"_blank\">Google Takeout</a> ZIP or OPML format file to import your feeds.",
+      "success": "Import successful. Your subscriptions will appear shortly.",
+      "error": "Error while importing"
     },
     "export": {
       "title": "Export",

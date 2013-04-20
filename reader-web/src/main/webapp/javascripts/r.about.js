@@ -53,6 +53,11 @@ r.about.init = function() {
   $('#logs-level-select').change(function() {
     r.about.loadLogs(false);
   });
+  
+  // Reload logs on refresh button click
+  $('#logs-refresh-button').click(function() {
+    r.about.loadLogs(false);
+  });
 };
 
 /**
