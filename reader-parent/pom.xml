@@ -184,7 +184,7 @@
         </os>
       </activation>
       <properties>
-        <nsis.home>/user/makensis</nsis.home>
+        <nsis.home>/usr/bin</nsis.home>
       </properties>
     </profile>
   </profiles>
