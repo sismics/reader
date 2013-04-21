@@ -1,5 +1,5 @@
 Package: reader
-Version: 1.0
+Version: ${reader.version}
 Section: net
 Priority: optional
 Architecture: all

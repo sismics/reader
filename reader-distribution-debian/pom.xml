@@ -22,6 +22,13 @@
   </dependencies>
   
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/deb</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -61,7 +68,7 @@
             </goals>
             <configuration>
               <verbose>true</verbose>
-              <controlDir>${basedir}/src/main/deb/control</controlDir>
+              <controlDir>${basedir}/target/classes/control</controlDir>
               <dataSet>
                 <data>
                   <src>${basedir}/src/main/package/etc/init.d/reader</src>
