@@ -26,12 +26,15 @@ import com.sismics.reader.core.dao.file.html.RssExtractor;
 import com.sismics.reader.core.dao.file.rss.RssReader;
 import com.sismics.reader.core.dao.jpa.ArticleDao;
 import com.sismics.reader.core.dao.jpa.FeedDao;
+import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
 import com.sismics.reader.core.dao.jpa.criteria.ArticleCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.FeedCriteria;
+import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.ArticleDto;
 import com.sismics.reader.core.dao.jpa.dto.FeedDto;
+import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.event.ArticleCreatedAsyncEvent;
 import com.sismics.reader.core.event.FaviconUpdateRequestedEvent;
@@ -111,12 +114,12 @@ public class FeedService extends AbstractScheduledService {
         
         // Create the feed if necessary (not created and currently in use by another user)
         FeedDao feedDao = new FeedDao();
-        url = newFeed.getUrl();
-        Feed feed = feedDao.getByRssUrl(url);
+        String rssUrl = newFeed.getRssUrl();
+        Feed feed = feedDao.getByRssUrl(rssUrl);
         if (feed == null) {
             feed = new Feed();
             feed.setUrl(newFeed.getUrl());
-            feed.setRssUrl(url);
+            feed.setRssUrl(rssUrl);
             feed.setTitle(newFeed.getTitle());
             feed.setLanguage(newFeed.getLanguage());
             feed.setDescription(newFeed.getDescription());
@@ -188,13 +191,31 @@ public class FeedService extends AbstractScheduledService {
         }
         
         // Create new articles
-        for (Article article : articleMap.values()) {
-            article.setFeedId(feed.getId());
-            article.setDescription(sanitizer.sanitize(article.getDescription()));
-            if (article.getPublicationDate() == null) {
-                article.setPublicationDate(new Date());
+        if (!articleMap.isEmpty()) {
+            FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
+            feedSubscriptionCriteria.setFeedId(feed.getId());
+            
+            FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+            List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
+            
+            UserArticleDao userArticleDao = new UserArticleDao();
+            for (Article article : articleMap.values()) {
+                // Create the new article
+                article.setFeedId(feed.getId());
+                article.setDescription(sanitizer.sanitize(article.getDescription()));
+                if (article.getPublicationDate() == null) {
+                    article.setPublicationDate(new Date());
+                }
+                articleDao.create(article);
+    
+                // Create the user articles eagerly for users already subscribed
+                for (FeedSubscriptionDto feedSubscription : feedSubscriptionList) {
+                    UserArticle userArticle = new UserArticle();
+                    userArticle.setArticleId(article.getId());
+                    userArticle.setUserId(feedSubscription.getUserId());
+                    userArticleDao.create(userArticle);
+                }
             }
-            articleDao.create(article);
         }
         
         // Add new articles to the index
@@ -288,8 +309,7 @@ public class FeedService extends AbstractScheduledService {
                 UserArticle userArticle = new UserArticle();
                 userArticle.setArticleId(userArticleDto.getArticleId());
                 userArticle.setUserId(userId);
-                String userArticleId = userArticleDao.create(userArticle);
-                userArticleDto.setId(userArticleId);
+                userArticleDao.create(userArticle);
             }
         }
     }

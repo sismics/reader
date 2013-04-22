@@ -154,12 +154,12 @@ public class FeedSubscriptionDao {
     public List<FeedSubscriptionDto> findByCriteria(FeedSubscriptionCriteria criteria) {
         Map<String, Object> parameterMap = new HashMap<String, Object>();
         
-        StringBuilder sb = new StringBuilder("select fs.FES_ID_C, fs.FES_TITLE_C, f.FED_ID_C, f.FED_TITLE_C, f.FED_RSSURL_C, f.FED_URL_C, f.FED_DESCRIPTION_C, c.CAT_ID_C, c.CAT_IDPARENT_C, c.CAT_NAME_C, c.CAT_FOLDED_B");
+        StringBuilder sb = new StringBuilder("select fs.FES_ID_C, fs.FES_TITLE_C, fs.FES_IDUSER_C, f.FED_ID_C, f.FED_TITLE_C, f.FED_RSSURL_C, f.FED_URL_C, f.FED_DESCRIPTION_C, c.CAT_ID_C, c.CAT_IDPARENT_C, c.CAT_NAME_C, c.CAT_FOLDED_B");
         if (criteria.getUserId() != null) {
             sb.append(", (select count(a.ART_ID_C)");
             sb.append("     from T_ARTICLE a");
             sb.append("     left join T_USER_ARTICLE ua on(ua.USA_IDUSER_C = :userId and ua.USA_IDARTICLE_C = a.ART_ID_C and ua.USA_DELETEDATE_D is null) ");
-            sb.append("     where a.ART_IDFEED_C = f.FED_ID_C and a.ART_DELETEDATE_D is null and ua.USA_READDATE_D is null and (a.ART_CREATEDATE_D >= fs.FES_CREATEDATE_D or ua.USA_ID_C is not null))");
+            sb.append("     where a.ART_IDFEED_C = f.FED_ID_C and a.ART_DELETEDATE_D is null and ua.USA_READDATE_D is null and ua.USA_ID_C is not null)");
             sb.append("  as unreadUserArticleCount");
         }
         sb.append(" from T_FEED_SUBSCRIPTION fs ");
@@ -175,6 +175,10 @@ public class FeedSubscriptionDao {
         if (criteria.getUserId() != null) {
             criteriaList.add("fs.FES_IDUSER_C = :userId");
             parameterMap.put("userId", criteria.getUserId());
+        }
+        if (criteria.getFeedId() != null) {
+            criteriaList.add("fs.FES_IDFEED_C = :feedId");
+            parameterMap.put("feedId", criteria.getFeedId());
         }
         if (criteria.getFeedUrl() != null) {
             criteriaList.add("f.FED_RSSURL_C = :feedUrl");
@@ -207,6 +211,7 @@ public class FeedSubscriptionDao {
             FeedSubscriptionDto feedSubscriptionDto = new FeedSubscriptionDto();
             feedSubscriptionDto.setId((String) o[i++]);
             String feedSubscriptionTitle = (String) o[i++];
+            feedSubscriptionDto.setUserId((String) o[i++]);
             feedSubscriptionDto.setFeedId((String) o[i++]);
             String feedTitle = (String) o[i++];
             feedSubscriptionDto.setFeedSubscriptionTitle(feedSubscriptionTitle != null ? feedSubscriptionTitle : feedTitle);

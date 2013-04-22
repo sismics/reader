@@ -67,7 +67,6 @@ import com.sismics.reader.core.model.jpa.Category;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
 import com.sismics.reader.core.model.jpa.User;
-import com.sismics.reader.core.model.jpa.UserArticle;
 import com.sismics.reader.core.service.FeedService;
 import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.EntityManagerUtil;
@@ -233,17 +232,6 @@ public class SubscriptionResource extends BaseResource {
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, offset);
         userArticleDao.findByCriteria(userArticleCriteria, paginatedList);
         
-        // Create article subscriptions for this user
-        for (UserArticleDto userArticleDto : paginatedList.getResultList()) {
-            if (userArticleDto.getId() == null) {
-                UserArticle userArticle = new UserArticle();
-                userArticle.setArticleId(userArticleDto.getArticleId());
-                userArticle.setUserId(principal.getId());
-                String userArticleId = userArticleDao.create(userArticle);
-                userArticleDto.setId(userArticleId);
-            }
-        }
-        
         // Build the response
         JSONObject response = new JSONObject();
 
@@ -305,7 +293,7 @@ public class SubscriptionResource extends BaseResource {
             // TODO NoFeedFound if it isn't a feed or a page referencing a feed
         }
         
-        // Check again that we are not subscribed, if the page URL was replaced by the feed URL
+        // Check again that we are not subscribed, in case the page URL was replaced by the feed URL
         feedSubscriptionCriteria = new FeedSubscriptionCriteria();
         feedSubscriptionCriteria.setUserId(principal.getId());
         feedSubscriptionCriteria.setFeedUrl(feed.getRssUrl());

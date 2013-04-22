@@ -15,12 +15,10 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
-import com.sismics.reader.core.dao.jpa.UserArticleDao;
 import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
 import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.model.context.AppContext;
-import com.sismics.reader.core.model.jpa.UserArticle;
 import com.sismics.reader.core.service.IndexingService;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.rest.assembler.ArticleAssembler;
@@ -77,18 +75,6 @@ public class SearchResource extends BaseResource {
             paginatedList = indexingService.searchArticles(principal.getId(), feeds, query, offset, limit);
         } catch (Exception e) {
             throw new ServerException("SearchError", "Error searching articles", e);
-        }
-        
-        // Create article subscriptions for this user
-        UserArticleDao userArticleDao = new UserArticleDao();
-        for (UserArticleDto userArticleDto : paginatedList.getResultList()) {
-            if (userArticleDto.getId() == null) {
-                UserArticle userArticle = new UserArticle();
-                userArticle.setArticleId(userArticleDto.getArticleId());
-                userArticle.setUserId(principal.getId());
-                String userArticleId = userArticleDao.create(userArticle);
-                userArticleDto.setId(userArticleId);
-            }
         }
         
         // Build the response

@@ -17,6 +17,11 @@ public class FeedSubscriptionCriteria {
     private String userId;
     
     /**
+     * Feed ID.
+     */
+    private String feedId;
+    
+    /**
      * Feed URL.
      */
     private String feedUrl;
@@ -60,6 +65,24 @@ public class FeedSubscriptionCriteria {
      */
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    /**
+     * Getter of feedId.
+     *
+     * @return feedId
+     */
+    public String getFeedId() {
+        return feedId;
+    }
+
+    /**
+     * Setter of feedId.
+     *
+     * @param feedId feedId
+     */
+    public void setFeedId(String feedId) {
+        this.feedId = feedId;
     }
 
     /**

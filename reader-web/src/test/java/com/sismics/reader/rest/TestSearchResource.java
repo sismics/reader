@@ -26,7 +26,7 @@ public class TestSearchResource extends BaseJerseyTest {
      * @throws JSONException
      */
     @Test
-    public void testSearchSearchResource() throws JSONException {
+    public void testSearchResource() throws JSONException {
         // Create user search1
         clientUtil.createUser("search1");
         String subscription1AuthToken = clientUtil.login("search1");

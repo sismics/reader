@@ -61,17 +61,6 @@ public class StarredResource extends BaseResource {
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, offset);
         userArticleDao.findByCriteria(userArticleCriteria, paginatedList);
         
-        // Create article subscriptions for this user
-        for (UserArticleDto userArticleDto : paginatedList.getResultList()) {
-            if (userArticleDto.getId() == null) {
-                UserArticle userArticle = new UserArticle();
-                userArticle.setArticleId(userArticleDto.getArticleId());
-                userArticle.setUserId(principal.getId());
-                String userArticleId = userArticleDao.create(userArticle);
-                userArticleDto.setId(userArticleId);
-            }
-        }
-        
         // Build the response
         JSONObject response = new JSONObject();
 

@@ -17,7 +17,6 @@ import org.codehaus.jettison.json.JSONObject;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
-import com.sismics.reader.core.model.jpa.UserArticle;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
 import com.sismics.reader.rest.assembler.ArticleAssembler;
@@ -57,17 +56,6 @@ public class AllResource extends BaseResource {
         UserArticleDao userArticleDao = new UserArticleDao();
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, offset);
         userArticleDao.findByCriteria(userArticleCriteria, paginatedList);
-        
-        // Create article subscriptions for this user
-        for (UserArticleDto userArticleDto : paginatedList.getResultList()) {
-            if (userArticleDto.getId() == null) {
-                UserArticle userArticle = new UserArticle();
-                userArticle.setArticleId(userArticleDto.getArticleId());
-                userArticle.setUserId(principal.getId());
-                String userArticleId = userArticleDao.create(userArticle);
-                userArticleDto.setId(userArticleId);
-            }
-        }
         
         // Build the response
         JSONObject response = new JSONObject();

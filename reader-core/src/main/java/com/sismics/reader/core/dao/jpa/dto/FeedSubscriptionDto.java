@@ -17,6 +17,11 @@ public class FeedSubscriptionDto {
     private String feedSubscriptionTitle;
 
     /**
+     * User ID.
+     */
+    private String userId;
+
+    /**
      * Feed ID.
      */
     private String feedId;
@@ -98,12 +103,39 @@ public class FeedSubscriptionDto {
     }
 
     /**
+     * Getter of userId.
+     *
+     * @return userId
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * Setter of userId.
+     *
+     * @param userId userId
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    /**
      * Getter of feedId.
      *
      * @return feedId
      */
     public String getFeedId() {
         return feedId;
+    }
+
+    /**
+     * Setter of feedId.
+     *
+     * @param feedId feedId
+     */
+    public void setFeedId(String feedId) {
+        this.feedId = feedId;
     }
 
     /**
@@ -176,15 +208,6 @@ public class FeedSubscriptionDto {
      */
     public void setUnreadUserArticleCount(Integer unreadUserArticleCount) {
         this.unreadUserArticleCount = unreadUserArticleCount;
-    }
-
-    /**
-     * Setter of feedId.
-     *
-     * @param feedId feedId
-     */
-    public void setFeedId(String feedId) {
-        this.feedId = feedId;
     }
 
     /**
