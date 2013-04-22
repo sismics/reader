@@ -101,6 +101,18 @@
       "message": "Rebuilding search index may take a while, but you can continue using the application.",
       "button": "Rebuild",
       "success": "Rebuilding articles index..."
+    },
+    "logs": {
+      "title": "Browse logs",
+      "level": {
+        "all": "All",
+        "fatal": "Fatal",
+        "error": "Error",
+        "warn": "Warn",
+        "info": "Info",
+        "debug": "Debug",
+        "trace": "Trace"
+      }
     }
   },
   "article": {

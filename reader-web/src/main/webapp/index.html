@@ -86,7 +86,7 @@
         <div class="button unread subscription category hidden all-button" data-i18n="toolbar.showall">Show all</div>
         <div class="button all unread subscription category hidden all-read-button" data-i18n="toolbar.allread">All read</div>
         
-        <div class="button feed settings hidden settings-button"><img src="images/settings.png" class="icon" />&nbsp;</div>
+        <div class="button feed settings wizard about hidden settings-button"><img src="images/settings.png" class="icon" />&nbsp;</div>
         <div class="button feed hidden full-button"><img src="images/full.png" class="icon" />&nbsp;</div>
         <div class="button feed hidden list-button"><img src="images/list.png" class="icon" />&nbsp;</div>
         <div class="button subscription category-button hidden" data-i18n="toolbar.category">Category</div>
@@ -153,15 +153,15 @@
           <p data-i18n="about.rebuildindex.message">Rebuilding search index may take a while, but you can continue using the application.</p>
           <input class="important rebuild-index-button" type="button" value="Rebuild" data-i18n="[value]about.rebuildindex.button" />
           <h1>
-            Browse logs
+            <span data-18n="about.logs.title">Browse logs</span>
             <select id="logs-level-select">
-              <option value="">All</option>
-              <option class="fatal" value="FATAL">Fatal</option>
-              <option class="error" value="ERROR">Error</option>
-              <option class="warn" value="WARN">Warn</option>
-              <option class="info" value="INFO">Info</option>
-              <option class="debug" value="DEBUG">Debug</option>
-              <option class="trace" value="TRACE">Trace</option>
+              <option value="" data-18n="about.logs.level.all">All</option>
+              <option class="fatal" value="FATAL" data-18n="about.logs.level.fatal">Fatal</option>
+              <option class="error" value="ERROR" data-18n="about.logs.level.error">Error</option>
+              <option class="warn" value="WARN" data-18n="about.logs.level.warn">Warn</option>
+              <option class="info" value="INFO" data-18n="about.logs.level.info">Info</option>
+              <option class="debug" value="DEBUG" data-18n="about.logs.level.debug">Debug</option>
+              <option class="trace" value="TRACE" data-18n="about.logs.level.trace">Trace</option>
             </select>
             <div class="button" id="logs-refresh-button"><img src="images/refresh.png" class="icon" /></div>
           </h1>
