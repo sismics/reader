@@ -58,6 +58,66 @@ r.about.init = function() {
   $('#logs-refresh-button').click(function() {
     r.about.loadLogs(false);
   });
+  
+  // Current application version
+  r.util.ajax({
+    url: r.util.url.app_version,
+    type: 'GET',
+    done: function(data) {
+      var currentVersion = data.current_version;
+
+      // Get cookie
+      $.cookie.json = true;
+      var cookie = $.cookie('update_check');
+      $.cookie.json = false;
+      
+      if (cookie === undefined) {
+        // Last version from GitHub
+        r.util.ajax({
+          url: r.util.url.github_tags,
+          type: 'GET',
+          dataType: 'jsonp',
+          done: function(data) {
+            var tag = data[0];
+            
+            if (tag) {
+              // Fetch commit data
+              r.util.ajax({
+                url: tag.commit.url,
+                type: 'GET',
+                dataType: 'jsonp',
+                done: function(commit) {
+                  r.about.showUpdate(currentVersion, tag.name, commit.commit.author.date);
+                  
+                  // Set cookie
+                  $.cookie.json = true;
+                  $.cookie('update_check', { 'tag': tag.name, 'date': commit.commit.author.date }, { expires: 1 });
+                  $.cookie.json = false;
+                }
+              });
+            }
+          }
+        });
+      } else {
+        // Show update with cached GitHub data
+        r.about.showUpdate(currentVersion, cookie.tag, cookie.date);
+      }
+    }
+  });
+};
+
+/**
+ * Show update label if needed.
+ */
+r.about.showUpdate = function(currentVersion, tag, tagDate) {
+  var date = moment(tagDate);
+  var diff = moment().diff(date);
+  
+  if (diff > 3600000 * 24 && currentVersion != tag) {
+    $('#subscriptions .update')
+      .show()
+      .html('<a href="http://www.sismics.com/reader/" target="_blank">' + $.t('about.newupdate') + ': ' + tag + '</a>');
+  }
 };
 
 /**

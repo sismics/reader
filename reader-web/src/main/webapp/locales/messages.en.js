@@ -96,6 +96,7 @@
     }
   },
   "about": {
+    "newupdate": "New update available",
     "rebuildindex": {
       "title": "Rebuild search index",
       "message": "Rebuilding search index may take a while, but you can continue using the application.",
