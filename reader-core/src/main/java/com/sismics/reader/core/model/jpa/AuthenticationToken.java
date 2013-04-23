@@ -121,7 +121,7 @@ public class AuthenticationToken {
     }
 
     /**
-     * Getter de lastConnectionDate.
+     * Getter of lastConnectionDate.
      *
      * @return lastConnectionDate
      */
@@ -130,7 +130,7 @@ public class AuthenticationToken {
     }
 
     /**
-     * Setter de lastConnectionDate.
+     * Setter of lastConnectionDate.
      *
      * @param lastConnectionDate lastConnectionDate
      */

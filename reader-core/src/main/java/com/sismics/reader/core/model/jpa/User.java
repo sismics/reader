@@ -277,7 +277,7 @@ public class User {
     }
 
     /**
-     * Getter de firstConnection.
+     * Getter of firstConnection.
      *
      * @return firstConnection
      */
@@ -286,7 +286,7 @@ public class User {
     }
 
     /**
-     * Setter de firstConnection.
+     * Setter of firstConnection.
      *
      * @param firstConnection firstConnection
      */
