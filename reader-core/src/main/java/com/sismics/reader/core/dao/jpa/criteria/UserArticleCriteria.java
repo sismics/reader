@@ -19,6 +19,11 @@ public class UserArticleCriteria {
     private String feedId;
     
     /**
+     * The user must be subscribed to this feed.
+     */
+    private boolean subscribed;
+    
+    /**
      * Feed subscription ID.
      */
     private String feedSubscriptionId;
@@ -39,9 +44,14 @@ public class UserArticleCriteria {
     private boolean starred;
 
     /**
+     * Article ID.
+     */
+    private String articleId;
+
+    /**
      * Article ID (inclusive).
      */
-    List<String> articleIdIn;
+    private List<String> articleIdIn;
     
     /**
      * Getter of userId.
@@ -77,6 +87,24 @@ public class UserArticleCriteria {
      */
     public void setFeedId(String feedId) {
         this.feedId = feedId;
+    }
+
+    /**
+     * Getter of subscribed.
+     *
+     * @return subscribed
+     */
+    public boolean isSubscribed() {
+        return subscribed;
+    }
+
+    /**
+     * Setter of subscribed.
+     *
+     * @param subscribed subscribed
+     */
+    public void setSubscribed(boolean subscribed) {
+        this.subscribed = subscribed;
     }
 
     /**
@@ -149,6 +177,24 @@ public class UserArticleCriteria {
      */
     public void setStarred(boolean starred) {
         this.starred = starred;
+    }
+
+    /**
+     * Getter of articleId.
+     *
+     * @return articleId
+     */
+    public String getArticleId() {
+        return articleId;
+    }
+
+    /**
+     * Setter of articleId.
+     *
+     * @param articleId articleId
+     */
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 
     /**

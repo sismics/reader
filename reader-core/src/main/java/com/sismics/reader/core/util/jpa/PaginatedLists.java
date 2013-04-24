@@ -1,13 +1,8 @@
 package com.sismics.reader.core.util.jpa;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import com.sismics.util.context.ThreadLocalContext;
 
 /**
  * Utilities for paginated lists.
@@ -58,19 +53,16 @@ public class PaginatedLists {
      * Executes a native count(*) request to count the number of results.
      * 
      * @param paginatedList Paginated list object containing parameters, and into which results are added by side effects
-     * @param queryString Query string
-     * @param parameterMap Request parameters
+     * @param queryParam Query parameters
      */
-    private static <E> void executeCountQuery(PaginatedList<E> paginatedList, String queryString, Map<String, Object> parameterMap) {
+    private static <E> void executeCountQuery(PaginatedList<E> paginatedList, QueryParam queryParam) {
         StringBuilder sb = new StringBuilder("select count(*) as result_count from (");
-        sb.append(queryString);
+        sb.append(queryParam.getQueryString());
         sb.append(") as t1");
         
-        EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createNativeQuery(sb.toString());
-        for (Entry<String, Object> entry : parameterMap.entrySet()) {
-            q.setParameter(entry.getKey(), entry.getValue());
-        }
+        QueryParam countQueryParam = new QueryParam(sb.toString(), queryParam.getParameterMap());
+        
+        Query q = QueryUtil.getNativeQuery(countQueryParam);
         
         Number resultCount = (Number) q.getSingleResult();
         paginatedList.setResultCount(resultCount.intValue());
@@ -81,17 +73,12 @@ public class PaginatedLists {
      * 
      * @param em EntityManager
      * @param paginatedList Paginated list object containing parameters, and into which results are added by side effects
-     * @param queryString Query string
-     * @param parameterMap Request parameters
+     * @param queryParam Query parameters
      * @return List of results
      */
     @SuppressWarnings("unchecked")
-    private static <E> List<Object[]> executeResultQuery(PaginatedList<E> paginatedList, String queryString, Map<String, Object> parameterMap) {
-        EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createNativeQuery(queryString);
-        for (Entry<String, Object> entry : parameterMap.entrySet()) {
-            q.setParameter(entry.getKey(), entry.getValue());
-        }
+    private static <E> List<Object[]> executeResultQuery(PaginatedList<E> paginatedList, QueryParam queryParam) {
+        Query q = QueryUtil.getNativeQuery(queryParam);
         
         q.setFirstResult(paginatedList.getOffset());
         q.setMaxResults(paginatedList.getLimit());
@@ -102,32 +89,31 @@ public class PaginatedLists {
      * Executes a paginated request with 2 native queries (one to count the number of results, and one to return the page).
      * 
      * @param paginatedList Paginated list object containing parameters, and into which results are added by side effects
-     * @param queryString Query string
-     * @param parameterMap Request parameters
+     * @param queryParam Query parameters
      * @return List of results
      */
-    public static <E> List<Object[]> executePaginatedQuery(PaginatedList<E> paginatedList, String queryString, Map<String, Object> parameterMap) {
-        executeCountQuery(paginatedList, queryString, parameterMap);
-        return executeResultQuery(paginatedList, queryString, parameterMap);
+    public static <E> List<Object[]> executePaginatedQuery(PaginatedList<E> paginatedList, QueryParam queryParam) {
+        executeCountQuery(paginatedList, queryParam);
+        return executeResultQuery(paginatedList, queryParam);
     }
 
     /**
      * Executes a paginated request with 2 native queries (one to count the number of results, and one to return the page).
      * 
      * @param paginatedList Paginated list object containing parameters, and into which results are added by side effects
-     * @param queryString Query string
-     * @param parameterMap Request parameters
+     * @param queryParam Query parameters
      * @param sortCriteria Sort criteria
      * @return List of results
      */
-    public static <E> List<Object[]> executePaginatedQuery(PaginatedList<E> paginatedList, String queryString, Map<String, Object> parameterMap, SortCriteria sortCriteria) {
-        StringBuilder sb = new StringBuilder(queryString);
+    public static <E> List<Object[]> executePaginatedQuery(PaginatedList<E> paginatedList, QueryParam queryParam, SortCriteria sortCriteria) {
+        StringBuilder sb = new StringBuilder(queryParam.getQueryString());
         sb.append(" order by c");
         sb.append(sortCriteria.getColumn());
         sb.append(sortCriteria.isAsc() ? " asc" : " desc");
-        String sortedQueryString = sb.toString();
         
-        executeCountQuery(paginatedList, sortedQueryString, parameterMap);
-        return executeResultQuery(paginatedList, sortedQueryString, parameterMap);
+        QueryParam sortedQueryParam = new QueryParam(sb.toString(), queryParam.getParameterMap());
+        
+        executeCountQuery(paginatedList, sortedQueryParam);
+        return executeResultQuery(paginatedList, sortedQueryParam);
     }
 }

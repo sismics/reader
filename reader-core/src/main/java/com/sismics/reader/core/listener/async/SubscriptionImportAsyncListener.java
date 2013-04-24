@@ -1,11 +1,13 @@
 package com.sismics.reader.core.listener.async;
 
 import java.text.MessageFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,11 +15,17 @@ import com.google.common.base.Strings;
 import com.google.common.eventbus.Subscribe;
 import com.sismics.reader.core.dao.file.opml.OpmlFlattener;
 import com.sismics.reader.core.dao.file.opml.Outline;
+import com.sismics.reader.core.dao.jpa.ArticleDao;
 import com.sismics.reader.core.dao.jpa.CategoryDao;
 import com.sismics.reader.core.dao.jpa.FeedDao;
 import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
+import com.sismics.reader.core.dao.jpa.UserArticleDao;
+import com.sismics.reader.core.dao.jpa.criteria.ArticleCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
+import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
+import com.sismics.reader.core.dao.jpa.dto.ArticleDto;
 import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
+import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.event.SubscriptionImportedEvent;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.Article;
@@ -25,6 +33,7 @@ import com.sismics.reader.core.model.jpa.Category;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
 import com.sismics.reader.core.model.jpa.User;
+import com.sismics.reader.core.model.jpa.UserArticle;
 import com.sismics.reader.core.service.FeedService;
 import com.sismics.reader.core.util.EntityManagerUtil;
 import com.sismics.reader.core.util.TransactionUtil;
@@ -183,9 +192,71 @@ public class SubscriptionImportAsyncListener {
                     }
                 }
                 
-                // TODO Create the user's starred articles
+                // Create the user's starred articles
                 if (articleMap != null) {
                     EntityManagerUtil.flush();
+                    
+                    for (Entry<String, List<Article>> entry : articleMap.entrySet()) {
+                        String rssUrl = entry.getKey();
+                        List<Article> articleList = entry.getValue();
+                        
+                        // Get the feed
+                        FeedDao feedDao = new FeedDao();
+                        Feed feed = feedDao.getByRssUrl(rssUrl);
+                        if (feed == null) {
+                            log.error(MessageFormat.format("Feed not found: {0}", rssUrl));
+                            continue;
+                        }
+                        
+                        for (Article article : articleList) {
+                            // Check if the article already exists
+                            String title = article.getTitle();
+                            if (StringUtils.isBlank(title)) {
+                                log.info(MessageFormat.format("Cannot import starred article with an empty title for feed {0}", rssUrl));
+                                continue;
+                            }
+                            ArticleCriteria articleCriteria = new ArticleCriteria();
+                            articleCriteria.setTitle(title);
+                            articleCriteria.setFeedId(feed.getId());
+                            
+                            ArticleDao articleDao = new ArticleDao();
+                            List<ArticleDto> currentArticleList = articleDao.findByCriteria(articleCriteria);
+                            if (!currentArticleList.isEmpty()) {
+                                String articleId = currentArticleList.iterator().next().getId();
+                                article.setId(articleId);
+                            } else {
+                                // Create the article if needed
+                                article.setFeedId(feed.getId());
+                                articleDao.create(article);
+                            }
+                            
+                            // Check if the user is already subscribed to this article
+                            UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
+                            userArticleCriteria.setUserId(user.getId());
+                            userArticleCriteria.setArticleId(article.getId());
+                            
+                            UserArticleDao userArticleDao = new UserArticleDao();
+                            List<UserArticleDto> userArticleList = userArticleDao.findByCriteria(userArticleCriteria);
+                            UserArticleDto currentUserArticle = null;
+                            if (userArticleList.size() > 0) {
+                                currentUserArticle = userArticleList.iterator().next();
+                            }
+                            if (currentUserArticle == null || currentUserArticle.getId() == null) {
+                                // Subscribe the user to this article
+                                UserArticle userArticle = new UserArticle();
+                                userArticle.setUserId(user.getId());
+                                userArticle.setArticleId(article.getId());
+                                userArticle.setStarredDate(new Date());
+                                userArticleDao.create(userArticle);
+                            } else if (currentUserArticle.getId() != null && currentUserArticle.getStarTimestamp() == null) {
+                                // Mark the user article as starred
+                                UserArticle userArticle = new UserArticle();
+                                userArticle.setId(currentUserArticle.getId());
+                                userArticle.setStarredDate(new Date());
+                                userArticleDao.update(userArticle);
+                            }
+                        }
+                    }
                 }
             }
         });

@@ -49,7 +49,7 @@ public class ArticleDao {
     @SuppressWarnings("unchecked")
     public List<Article> findAll() {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select a from Article a order by a.id");
+        Query q = em.createQuery("select a from Article a order by a.id where a.deleteDate is null");
         return q.getResultList();
     }
     
@@ -88,6 +88,14 @@ public class ArticleDao {
         if (criteria.getGuidIn() != null) {
             criteriaList.add("a.ART_GUID_C in :guidIn");
             parameterMap.put("guidIn", criteria.getGuidIn());
+        }
+        if (criteria.getTitle() != null) {
+            criteriaList.add("a.ART_TITLE_C = :title");
+            parameterMap.put("title", criteria.getTitle());
+        }
+        if (criteria.getFeedId() != null) {
+            criteriaList.add("a.ART_IDFEED_C = :feedId");
+            parameterMap.put("feedId", criteria.getFeedId());
         }
         criteriaList.add("a.ART_DELETEDATE_D is null");
         

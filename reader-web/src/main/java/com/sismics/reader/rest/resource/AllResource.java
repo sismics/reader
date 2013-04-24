@@ -52,6 +52,7 @@ public class AllResource extends BaseResource {
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUnread(unread);
         userArticleCriteria.setUserId(principal.getId());
+        userArticleCriteria.setSubscribed(true);
 
         UserArticleDao userArticleDao = new UserArticleDao();
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, offset);
@@ -87,6 +88,7 @@ public class AllResource extends BaseResource {
         // Marks all articles of this user as read
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUserId(principal.getId());
+        userArticleCriteria.setSubscribed(true);
 
         UserArticleDao userArticleDao = new UserArticleDao();
         userArticleDao.markAsRead(userArticleCriteria);

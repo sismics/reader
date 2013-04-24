@@ -115,6 +115,7 @@ public class CategoryResource extends BaseResource {
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUnread(unread);
         userArticleCriteria.setUserId(principal.getId());
+        userArticleCriteria.setSubscribed(true);
         if (category.getParentId() != null) {
             userArticleCriteria.setCategoryId(id);
         }
@@ -235,6 +236,7 @@ public class CategoryResource extends BaseResource {
         // Marks all articles as read in this category
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUserId(principal.getId());
+        userArticleCriteria.setSubscribed(true);
         userArticleCriteria.setCategoryId(id);
 
         UserArticleDao userArticleDao = new UserArticleDao();

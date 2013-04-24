@@ -20,6 +20,7 @@ import com.sismics.reader.core.dao.jpa.dto.UserDto;
 import com.sismics.reader.core.model.jpa.User;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
+import com.sismics.reader.core.util.jpa.QueryParam;
 import com.sismics.reader.core.util.jpa.SortCriteria;
 import com.sismics.util.context.ThreadLocalContext;
 
@@ -249,7 +250,8 @@ public class UserDao {
         }
         
         // Perform the search
-        List<Object[]> l = PaginatedLists.executePaginatedQuery(paginatedList, sb.toString(), parameterMap, sortCriteria);
+        QueryParam queryParam = new QueryParam(sb.toString(), parameterMap);
+        List<Object[]> l = PaginatedLists.executePaginatedQuery(paginatedList, queryParam, sortCriteria);
         
         // Assemble results
         List<UserDto> userDtoList = new ArrayList<UserDto>();

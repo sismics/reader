@@ -22,8 +22,6 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.hash.Hasher;
-import com.google.common.hash.Hashing;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.util.DateUtil;
@@ -430,18 +428,9 @@ public class RssReader extends DefaultHandler {
      * Try to guess a value for GUID element values in RSS feeds.
      */
     private void fixGuid() {
-        if (articleList == null) {
-            return;
-        }
-        for (Article article: articleList) {
-            if (StringUtils.isBlank(article.getGuid())) {
-                Hasher hasher = Hashing.sha1().newHasher();
-                if (StringUtils.isNotBlank(article.getTitle())) {
-                    hasher.putString(article.getTitle());
-                } else if (StringUtils.isNotBlank(article.getDescription())) {
-                    hasher.putString(article.getDescription());
-                }
-                article.setGuid(hasher.hash().toString());
+        if (articleList != null) {
+            for (Article article: articleList) {
+                GuidFixer.fixGuid(article);
             }
         }
     }
