@@ -93,10 +93,12 @@ r.about.init = function() {
                   $.cookie.json = true;
                   $.cookie('update_check', { 'tag': tag.name, 'date': commit.commit.author.date }, { expires: 1 });
                   $.cookie.json = false;
-                }
+                },
+                fail: function() {} // Ignore failing
               });
             }
-          }
+          },
+          fail: function() {} // Ignore failing
         });
       } else {
         // Show update with cached GitHub data

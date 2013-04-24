@@ -22,17 +22,13 @@ r.article.init = function() {
     var article = item.data('article');
     article.is_starred = !article.is_starred;
     
-    // Update local star
+    // Update local star and item state
     if (article.is_starred) {
       $(this).addClass('starred');
+      item.addClass('starred');
     } else {
       $(this).removeClass('starred');
-      
-      // Remove item from articles list if in /starred context
-      if (r.feed.context.url == r.util.url.starred) {
-        r.feed.context.total--;
-        item.remove();
-      }
+      item.removeClass('starred');
     }
     
     // Calling API
@@ -147,6 +143,9 @@ r.article.build = function(article, classes) {
   item.attr('data-article-id', article.id);
   if (article.is_read) {
     item.addClass('read');
+  }
+  if (article.is_starred) {
+    item.addClass('starred');
   }
   
   // Copy provided classes

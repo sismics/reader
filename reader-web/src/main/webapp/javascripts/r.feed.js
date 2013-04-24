@@ -73,6 +73,7 @@ r.feed.init = function() {
     } else if (target == 'starred') {
       // Configuring context for /starred
       r.feed.context.url = r.util.url.starred;
+      r.feed.context.unread = false;
       $('#starred-feed-button').addClass('active');
       
       // Specific toolbar actions for starred
@@ -224,6 +225,11 @@ r.feed.load = function(next) {
     actualOffset -= articlesRead;
   }
   
+  // Actual offset according to starred articles
+  if (r.feed.context.url == r.util.url.starred) {
+    actualOffset = $('#feed-container .feed-item.starred').length;;
+  }
+  
   if (!next) {
     // Loading animation
     $('#feed-container').html(r.util.buildLoader());
@@ -248,7 +254,6 @@ r.feed.load = function(next) {
     },
     done: function(data) {
       // Pre article build
-      
       if (!next) {
         $('#feed-container').html('');
         

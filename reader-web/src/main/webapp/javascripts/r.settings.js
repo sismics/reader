@@ -94,6 +94,7 @@ r.settings.init = function() {
       always: function() {
         // Enabling button
         _this.removeAttr('disabled');
+        $('#settings-import-form input[type="file"]').val('');
         $('#settings-import-form .ajax-loader').addClass('hidden');
       }
     });
