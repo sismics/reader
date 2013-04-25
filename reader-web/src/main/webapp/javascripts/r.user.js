@@ -46,6 +46,9 @@ r.user.boot = function() {
         $('#default-password-info').show();
       }
       
+      // Load i18n synchronously
+      r.user.initI18n(data.locale.split('_')[0]);
+      
       if (data.anonymous) {
         // Current user is anonymous, displaying login
         $('#login-page').show();
@@ -65,6 +68,29 @@ r.user.boot = function() {
       }
     }
   });
+};
+
+/**
+ * Load i18n strings with 2-letters ISO language.
+ */
+r.user.initI18n = function(language) {
+  // Load i18next synchronously
+  i18n.init({
+    fallbackLng: 'en',
+    lng: language,
+    useCookie: false,
+    getAsync: false,
+    resGetPath: 'locales/messages.__lng__.js',
+    debug: true
+  });
+  $('html').i18n();
+  
+  // Initializing moment.js i18n
+  if (moment.langData(language)) {
+    moment.lang(language);
+  } else {
+    moment.lang('en');
+  }
 };
 
 /**

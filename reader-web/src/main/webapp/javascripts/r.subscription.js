@@ -137,9 +137,10 @@ r.subscription.update = function() {
         $('#subscription-list').html(html);
       } else {
         // Empty placeholder
-        var html = '<p>No' + (unread ? ' unread' : '') + ' subscriptions</p>';
+        var html = '<p>' + $.t('subscription.empty') + '</p>';
         if (unread) {
-          html += '<p><a href="#">' + $.t('subscription.showall') + '</a></p>';
+          html = '<p>' + $.t('subscription.emptyunread') + '</p>'
+            + '<p><a href="#">' + $.t('subscription.showall') + '</a></p>';
         }
         $('#subscription-list').html(html);
         $('#subscription-list p a').click(function() {

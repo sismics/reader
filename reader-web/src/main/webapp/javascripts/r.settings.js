@@ -372,7 +372,7 @@ r.settings.onTabUsers = function(panel, initialize) {
       type: 'GET',
       data: { offset: 0, limit: 100 },
       done: function(data) {
-        var html = '<option value="">New user</option>';
+        var html = '<option value="">' + $.t('settings.users.edit.newtitle') + '</option>';
         $(data.users).each(function(i, user) {
           html += '<option value="' + user.username + '">' + user.username + '</option>';
         });
