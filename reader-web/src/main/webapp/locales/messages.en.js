@@ -1,5 +1,11 @@
 {
   "app": "Sismics Reader",
+  "login": {
+    "username": "Username",
+    "password": "Password",
+    "remember": "Remember me",
+    "submit": "Login"
+  },
   "defaultpassword": {
     "info": "Reader is not secured. Please log in with username and password \"admin\", then change password immediately.",
     "warning": "You haven't changed your default admin password. Secure your server by changing the default password now.",
@@ -11,6 +17,8 @@
     "all": "All",
     "starred": "Starred",
     "subscriptions": "Subscriptions",
+    "empty": "No subscription",
+    "emptyunread": "No unread subscription",
     "showall": "Show all",
     "toggleunread": "Toggle all/unread subscriptions",
     "add": {
@@ -73,16 +81,18 @@
     },
     "import": {
       "title": "Import",
+      "submit": "Import",
       "explain": "Upload a <a href=\"https://www.google.com/takeout/\" target=\"_blank\">Google Takeout</a> ZIP or OPML format file to import your feeds.",
       "success": "Import successful. Your subscriptions will appear shortly.",
       "error": "Error while importing"
     },
     "export": {
       "title": "Export",
+      "submit": "Export",
       "explain": "Export your categories and subscriptions."
     },
     "users": {
-      "users": "Users Administration",
+      "title": "Users Administration",
       "select": "Select a user",
       "edit": {
         "newtitle": "New user",
@@ -122,11 +132,16 @@
   "feed": {
     "nomorearticles": "No more articles",
     "nomoreunreadarticles": "No more unread articles",
+    "noarticle": "No article",
+    "nonewarticle": "No new article",
     "showall": "Show all"
   },
   "wizard": {
     "title": "Sismics Reader installation wizard",
-    "subtitle": "Just a few setup steps before adding your first feed",
+    "subtitle": "Just a few setup steps before adding your first feed.",
+    "step0title": "Change admin password",
+    "step1title": "Setup network",
+    "step2title": "Add first user",
     "step0explain": "You should change the default admin password, especially if you plan to use your Reader installation on an open network.",
     "step1explain": "Tick \"UPnP\" if you want Reader to try to open port 8080 on your router.",
     "step2explain": "It's nearly over! Add your first user and start using Sismics Reader.",

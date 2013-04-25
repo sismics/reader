@@ -125,11 +125,11 @@
             <p data-i18n="[html]settings.import.explain">Only OPML format is accepted.</p>
             <form id="settings-import-form">
 							<p><input type="file" name="file"></p>
-							<p><input class="important" type="submit" value="Import" data-i18n="settings.import.submit" /> <span class="ajax-loader hidden"></span></p>
+							<p><input class="important" type="submit" value="Import" data-i18n="[value]settings.import.submit" /> <span class="ajax-loader hidden"></span></p>
 						</form>
 						<h1 data-i18n="settings.export.title">Export</h1>
 						<p data-i18n="settings.export.explain">Export your categories and subscriptions.</p>
-						<input type="button" class="important" id="settings-export-button" value="Export" />
+						<input type="button" class="important" id="settings-export-button" value="Export" data-i18n="[value]settings.export.submit" />
           </div>
           <div id="settings-tab-users">
             <h1 data-i18n="settings.users.title">Users Administration</h1>
@@ -156,15 +156,15 @@
           <p data-i18n="about.rebuildindex.message">Rebuilding search index may take a while, but you can continue using the application.</p>
           <input class="important rebuild-index-button" type="button" value="Rebuild" data-i18n="[value]about.rebuildindex.button" />
           <h1>
-            <span data-18n="about.logs.title">Browse logs</span>
+            <span data-i18n="about.logs.title">Browse logs</span>
             <select id="logs-level-select">
-              <option value="" data-18n="about.logs.level.all">All</option>
-              <option class="fatal" value="FATAL" data-18n="about.logs.level.fatal">Fatal</option>
-              <option class="error" value="ERROR" data-18n="about.logs.level.error">Error</option>
-              <option class="warn" value="WARN" data-18n="about.logs.level.warn">Warn</option>
-              <option class="info" value="INFO" data-18n="about.logs.level.info">Info</option>
-              <option class="debug" value="DEBUG" data-18n="about.logs.level.debug">Debug</option>
-              <option class="trace" value="TRACE" data-18n="about.logs.level.trace">Trace</option>
+              <option value="" data-i18n="about.logs.level.all">All</option>
+              <option class="fatal" value="FATAL" data-i18n="about.logs.level.fatal">Fatal</option>
+              <option class="error" value="ERROR" data-i18n="about.logs.level.error">Error</option>
+              <option class="warn" value="WARN" data-i18n="about.logs.level.warn">Warn</option>
+              <option class="info" value="INFO" data-i18n="about.logs.level.info">Info</option>
+              <option class="debug" value="DEBUG" data-i18n="about.logs.level.debug">Debug</option>
+              <option class="trace" value="TRACE" data-i18n="about.logs.level.trace">Trace</option>
             </select>
             <div class="button" id="logs-refresh-button"><img src="images/refresh.png" class="icon" /></div>
           </h1>
@@ -180,9 +180,9 @@
         <p data-i18n="wizard.subtitle">Just a few setup steps before adding your first feed</p>
       
         <ul>
-          <li data-wizard-container="#wizard-step-0-container" onclick="javascript:r.wizard.changePage(0);">Change admin password</li>
-          <li data-wizard-container="#wizard-step-1-container" onclick="javascript:r.wizard.changePage(1);">Setup network</li>
-          <li data-wizard-container="#wizard-step-2-container" onclick="javascript:r.wizard.changePage(2);">Add first user</li>
+          <li data-wizard-container="#wizard-step-0-container" onclick="javascript:r.wizard.changePage(0);" data-i18n="wizard.step0title">Change admin password</li>
+          <li data-wizard-container="#wizard-step-1-container" onclick="javascript:r.wizard.changePage(1);" data-i18n="wizard.step1title">Setup network</li>
+          <li data-wizard-container="#wizard-step-2-container" onclick="javascript:r.wizard.changePage(2);" data-i18n="wizard.step2title">Add first user</li>
         </ul>
 	      
         <div class="wizard-container" id="wizard-step-0-container">

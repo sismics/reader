@@ -322,9 +322,11 @@ r.feed.triggerPaging = function() {
  * Build empty placeholder according to feed context.
  */
 r.feed.buildEmpty = function() {
-  return $('<div class="empty">No'
-    + ((r.feed.context.unread && r.feed.context.url.substring(0, 11) != r.util.url.search.substring(0, 11)) ? ' new' : '')
-    + ' articles</div>');
+  var message = $.t('feed.noarticle');
+  if (r.feed.context.unread) {
+    message = $.t('feed.nonewarticle');
+  }
+  return $('<div class="empty">' + message + '</div>');
 };
 
 /**
