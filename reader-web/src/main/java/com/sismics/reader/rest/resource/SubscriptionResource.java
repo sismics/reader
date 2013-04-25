@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 import javax.persistence.NoResultException;
 import javax.ws.rs.Consumes;
@@ -37,6 +35,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 
+import org.apache.commons.compress.archivers.ArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jettison.json.JSONArray;
@@ -544,23 +544,23 @@ public class SubscriptionResource extends BaseResource {
             String mimeType = MimeTypeUtil.guessMimeType(tmpFile);
             if (MimeType.APPLICATION_ZIP.equals(mimeType)) {
                 // Assume the file is a Google Takeout ZIP archive
-                ZipInputStream zipInputStream = null;
-                zipInputStream = closer.register(new ZipInputStream(new FileInputStream(tmpFile), Charsets.ISO_8859_1));
-                ZipEntry zipEntry = zipInputStream.getNextEntry();
-                while (zipEntry != null) {
+                ZipArchiveInputStream archiveInputStream = null;
+                archiveInputStream = closer.register(new ZipArchiveInputStream(new FileInputStream(tmpFile), Charsets.ISO_8859_1.name()));
+                ArchiveEntry archiveEntry = archiveInputStream.getNextEntry();
+                while (archiveEntry != null) {
                     File outputFile = null;
                     try {
-                        if (zipEntry.getName().endsWith("subscriptions.xml")) {
+                        if (archiveEntry.getName().endsWith("subscriptions.xml")) {
                             outputFile = File.createTempFile("subscriptions", "xml");
-                            ByteStreams.copy(zipInputStream, new FileOutputStream(outputFile));
+                            ByteStreams.copy(archiveInputStream, new FileOutputStream(outputFile));
     
                             // Read the OPML file
                             OpmlReader opmlReader = new OpmlReader();
                             opmlReader.read(new FileInputStream(outputFile));
                             outlineList = opmlReader.getOutlineList();
-                        } else if (zipEntry.getName().endsWith("starred.json")) {
+                        } else if (archiveEntry.getName().endsWith("starred.json")) {
                             outputFile = File.createTempFile("starred", "json");
-                            ByteStreams.copy(zipInputStream, new FileOutputStream(outputFile));
+                            ByteStreams.copy(archiveInputStream, new FileOutputStream(outputFile));
 
                             // Read the starred file
                             StarredReader starredReader = new StarredReader();
@@ -578,7 +578,7 @@ public class SubscriptionResource extends BaseResource {
                         }
                     }
 
-                    zipEntry = zipInputStream.getNextEntry();
+                    archiveEntry = archiveInputStream.getNextEntry();
                 }
             } else {
                 // Assume the file is an OPML file

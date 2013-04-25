@@ -19,6 +19,7 @@
     <reader.version>1.0-SNAPSHOT</reader.version>
 
     <!-- Dependencies version (external) -->
+    <org.apache.commons.commons-compress.version>1.5</org.apache.commons.commons-compress.version>
     <commons-lang.commons-lang.version>2.6</commons-lang.commons-lang.version>
     <commons-io.commons-io.version>2.1</commons-io.commons-io.version>
     <com.google.guava.guava.version>14.0</com.google.guava.guava.version>
@@ -252,6 +253,12 @@
         <version>${org.mortbay.jetty.servlet-api.version}</version>
       </dependency>
       
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-compress</artifactId>
+        <version>${org.apache.commons.commons-compress.version}</version>
+      </dependency>
+            
       <dependency>
         <groupId>commons-lang</groupId>
         <artifactId>commons-lang</artifactId>

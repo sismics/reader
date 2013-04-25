@@ -1,11 +1,9 @@
 package com.sismics.util.log4j;
 
-import java.util.ArrayList;
-import java.util.Deque;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.helpers.LogLog;
@@ -28,7 +26,7 @@ public class MemoryAppender extends AppenderSkeleton {
     /**
      * Queue of log entries.
      */
-    private final Deque<LogEntry> logQueue = new ConcurrentLinkedDeque<LogEntry>();
+    private final Queue<LogEntry> logQueue = new ConcurrentLinkedQueue<LogEntry>();
 
     @Override
     public boolean requiresLayout() {
@@ -98,18 +96,18 @@ public class MemoryAppender extends AppenderSkeleton {
      * @param list Paginated list (modified by side effect)
      */
     public void find(LogCriteria criteria, PaginatedList<LogEntry> list) {
-        List<LogEntry> logEntryList = new ArrayList<LogEntry>();
+        LinkedList<LogEntry> logEntryList = new LinkedList<LogEntry>();
         final String level = criteria.getLevel();
         final String tag = criteria.getTag();
         final String message = criteria.getMessage();
         int resultCount = 0;
-        for (Iterator<LogEntry> it = logQueue.descendingIterator(); it.hasNext();) {
+        for (Iterator<LogEntry> it = logQueue.iterator(); it.hasNext();) {
             LogEntry logEntry = it.next();
             if ((level == null || logEntry.getLevel().toLowerCase().equals(level)) &&
                     (tag == null || logEntry.getTag().toLowerCase().equals(tag)) &&
                     (message == null || logEntry.getMessage().toLowerCase().contains(message))) {
                 if (resultCount >= list.getOffset() && resultCount < list.getOffset() + list.getLimit()) {
-                    logEntryList.add(logEntry);
+                    logEntryList.addFirst(logEntry);
                 }
                 resultCount++;
             }
