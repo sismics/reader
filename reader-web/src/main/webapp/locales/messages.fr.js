@@ -47,7 +47,7 @@
       "placeholder": "Nom",
       "submit": "OK",
       "delete": "Supprimer",
-      "deleteconfirm": "Êtes-vous sûr de vouloir supprimer cet abonnement?"
+      "deleteconfirm": "Êtes-vous sûr de vouloir supprimer cet abonnement ?"
     }
   },
   "toolbar": {
