@@ -19,6 +19,6 @@ READER_ARGS="--max-memory=150"
 # The user which should run the Reader process. Default "root".
 # Note that non-root users are by default not allowed to use ports
 # below 1024. Also make sure to grant the user write permissions in
-# the music directories, otherwise changing album art and tags will fail.
+# the /var/reader directory, otherwise starting Reader will fail.
 
 READER_USER=root
