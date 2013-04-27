@@ -307,6 +307,7 @@
                     <jsSourceFile>jquery.less.js</jsSourceFile>
                     <jsSourceFile>jquery.ui.js</jsSourceFile>
                     <jsSourceFile>jquery.visible.js</jsSourceFile>
+                    <jsSourceFile>jquery.cookie.js</jsSourceFile>
                     <jsSourceFile>jquery.history.js</jsSourceFile>
                     <jsSourceFile>jquery.moment.js</jsSourceFile>
                     <jsSourceFile>jquery.cookie.js</jsSourceFile>
@@ -384,6 +385,7 @@
               <warSourceExcludes>
                 **/javascripts/jquery.less.js,
                 **/javascripts/jquery.ui.js,
+                **/javascripts/jquery.cookie.js,
                 **/javascripts/jquery.visible.js,
                 **/javascripts/jquery.history.js,
                 **/javascripts/jquery.moment.js,
