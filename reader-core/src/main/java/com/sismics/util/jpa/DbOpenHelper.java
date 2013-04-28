@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +103,7 @@ public abstract class DbOpenHelper {
                 onCreate();
             } else {
                 // Execute update script
-                log.info("Executing database inscremental update scripts");
+                log.info(MessageFormat.format("Found database version {0}, executing database incremental update scripts", oldVersion));
                 onUpgrade(oldVersion, 42); // TODO complete upgrade scripting
                 log.info("Database upgrade complete");
             }

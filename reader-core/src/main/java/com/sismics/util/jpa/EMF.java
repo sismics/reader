@@ -71,6 +71,8 @@ public final class EMF {
         try {
             URL hibernatePropertiesUrl = EMF.class.getResource("/hibernate.properties");
             if (hibernatePropertiesUrl != null) {
+                log.info("Configuring EntityManager from hibernate.properties");
+                
                 InputStream is = hibernatePropertiesUrl.openStream();
                 Properties properties = new Properties();
                 properties.load(is);
@@ -81,6 +83,7 @@ public final class EMF {
         }
         
         // Use environment parameters
+        log.info("Configuring EntityManager from environment parameters");
         Map<Object, Object> props = new HashMap<Object, Object>();
         props.put("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver");
         File dbDirectory = DirectoryUtil.getDbDirectory();
