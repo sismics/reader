@@ -1,0 +1,34 @@
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>${project.build.directory}/reader-agent-${reader.version}-jar-with-dependencies.jar</jar>
+  <outfile>${project.build.directory}/reader-agent-elevated.exe</outfile>
+  <errTitle>Reader</errTitle>
+  <cmdLine>-agent -elevated -Xmx150M -XX:MaxPermSize=128M</cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://www.java.com/download/</downloadUrl>
+  <supportUrl>url</supportUrl>
+  <customProcName>false</customProcName>
+  <stayAlive>false</stayAlive>
+  <manifest>${basedir}/src/main/launch4j/reader-agent-elevated.manifest</manifest>
+  <icon>${basedir}/src/main/launch4j/reader-16.ico</icon>
+  <classPath>
+    <mainClass>com.sismics.reader.agent.WindowsAgent</mainClass>
+    <cp>./reader-agent-${reader.version}-jar-with-dependencies.jar</cp>
+  </classPath>
+  <jre>
+    <path></path>
+    <minVersion>1.6.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <maxHeapSize>16</maxHeapSize>
+  </jre>
+  <messages>
+    <startupErr>Startup error</startupErr>
+    <bundledJreErr>Bundled JRE error</bundledJreErr>
+    <jreVersionErr>JRE version error</jreVersionErr>
+    <launcherErr>Launcher error</launcherErr>
+    <instanceAlreadyExistsMsg>An application instance is already running.</instanceAlreadyExistsMsg>
+  </messages>
+</launch4jConfig>

@@ -55,9 +55,10 @@ Section "Reader"
   SetOutPath $INSTDIR
 
   # Write files.
-  File ..\reader-distribution-standalone-${reader.version}\reader.bat
-  File ..\reader-distribution-standalone-${reader.version}\reader-standalone.jar
-  File ..\reader-distribution-standalone-${reader.version}\sismicsreader.war
+  File reader-agent.exe
+  File reader-agent.properties
+  File reader-agent-elevated.exe
+  File reader.war
 
   # Write the installation path into the registry
   WriteRegStr HKLM SOFTWARE\Reader "Install_Dir" "$INSTDIR"
@@ -69,14 +70,31 @@ Section "Reader"
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Reader" "NoRepair" 1
   WriteUninstaller "uninstall.exe"
 
+  # Restore Reader Agent properties
+  CopyFiles /SILENT  $TEMP\reader-agent.properties $INSTDIR\reader-agent.properties
+  Delete $TEMP\reader-agent.properties
+
+  # Add Windows Firewall exception.
+  # (Requires NSIS plugin found on http://nsis.sourceforge.net/NSIS_Simple_Firewall_Plugin to be installed
+  # as NSIS_HOME/Plugins/SimpleFC.dll)
+  SimpleFC::AddApplication "Reader Agent" "$INSTDIR\reader-agent.exe" 0 2 "" 1
+  SimpleFC::AddApplication "Reader Agent (Elevated)" "$INSTDIR\reader-agent-elevated.exe" 0 2 "" 1
+
+  # Start agent.
+  Exec '"$INSTDIR\reader-agent-elevated.exe" -balloon'
+
 SectionEnd
 
 
 Section "Start Menu Shortcuts"
 
   CreateDirectory "$SMPROGRAMS\Reader"
-  CreateShortCut "$SMPROGRAMS\Reader\Open Reader.lnk"          "$INSTDIR\reader.url"         ""         "$INSTDIR\reader.bat"  0
+  CreateShortCut "$SMPROGRAMS\Reader\Open Reader.lnk"          "$INSTDIR\reader.url"         ""         "$INSTDIR\reader-agent.exe"  0
+  CreateShortCut "$SMPROGRAMS\Reader\Reader Tray Icon.lnk"     "$INSTDIR\reader-agent.exe"   "-balloon" "$INSTDIR\reader-agent.exe"  0
+  CreateShortCut "$SMPROGRAMS\Reader\Start Reader.lnk" "$INSTDIR\reader-agent-elevated.exe" "-start"   "$INSTDIR\reader-agent-elevated.exe"  0
+  CreateShortCut "$SMPROGRAMS\Reader\Stop Reader.lnk"  "$INSTDIR\reader-agent-elevated.exe" "-stop"    "$INSTDIR\reader-agent-elevated.exe"  0
   CreateShortCut "$SMPROGRAMS\Reader\Uninstall Reader.lnk"     "$INSTDIR\uninstall.exe"        ""         "$INSTDIR\uninstall.exe" 0
+  CreateShortCut "$SMPROGRAMS\Reader\Getting Started.lnk"        "$INSTDIR\Getting Started.html" ""         "$INSTDIR\Getting Started.html" 0
 
 SectionEnd
 
@@ -95,12 +113,18 @@ Section "Uninstall"
   # Remove files.
   Delete "$SMSTARTUP\Reader.lnk"
   RMDir /r "$SMPROGRAMS\Reader"
-  Delete "$INSTDIR\reader.bat"
-  Delete "$INSTDIR\reader-standalone.jar"
-  Delete "$INSTDIR\sismicsreader.war"
+  Delete "$INSTDIR\reader-agent.exe"
+  Delete "$INSTDIR\reader-agent.properties"
+  Delete "$INSTDIR\reader-agent-elevated.exe"
+  Delete "$INSTDIR\reader.war"
   Delete "$INSTDIR\uninstall.exe"
-  RMDir /r "$INSTDIR\log"
   RMDir "$INSTDIR"
+
+  # Remove Windows Firewall exception.
+  # (Requires NSIS plugin found on http://nsis.sourceforge.net/NSIS_Simple_Firewall_Plugin to be installed
+  # as NSIS_HOME/Plugins/SimpleFC.dll)
+  SimpleFC::RemoveApplication "$INSTDIR\reader-agent.exe"
+  SimpleFC::RemoveApplication "$INSTDIR\reader-agent-elevated.exe"
 
 SectionEnd
 

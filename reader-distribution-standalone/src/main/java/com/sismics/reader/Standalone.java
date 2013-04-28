@@ -7,7 +7,7 @@ import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 /**
- * Reader standalone launcher with embedded Jetty.
+ * Reader standalone launcher with an embedded Jetty.
  *
  * @author jtremeaux
  */
@@ -15,7 +15,7 @@ public class Standalone {
     /**
      * Default port.
      */
-    private final static int DEFAULT_PORT = 4001;
+    private static final int DEFAULT_PORT = 4001;
     
     /**
      * Default context path.

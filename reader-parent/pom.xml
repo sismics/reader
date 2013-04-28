@@ -36,6 +36,7 @@
     <org.ccil.cowan.tagsoup.tagsoup.version>1.2.1</org.ccil.cowan.tagsoup.tagsoup.version>
     <com.googlecode.owasp-java-html-sanitizer.owasp-java-html-sanitizer.version>r156</com.googlecode.owasp-java-html-sanitizer.owasp-java-html-sanitizer.version>
     <org.apache.lucene.version>4.2.0</org.apache.lucene.version>
+    <jgoodies.forms.version>1.0.5</jgoodies.forms.version>
 
     <com.sun.grizzly.version>1.9.18-m</com.sun.grizzly.version>
     <javax.transaction.jta.version>1.1</javax.transaction.jta.version>
@@ -159,6 +160,7 @@
     <profile>
       <id>prod</id>
       <modules>
+        <module>../reader-agent</module>
         <module>../reader-distribution-standalone</module>
         <module>../reader-distribution-debian</module>
         <module>../reader-distribution-redhat</module>
@@ -175,6 +177,7 @@
       </activation>
       <properties>
         <nsis.home>C:\Program Files (x86)\nsis</nsis.home>
+        <launch4j.home>C:\app\launch4j</launch4j.home>
       </properties>
     </profile>
     <profile>
@@ -186,6 +189,7 @@
       </activation>
       <properties>
         <nsis.home>/usr/bin</nsis.home>
+        <launch4j.home>/opt/launch4j</launch4j.home>
       </properties>
     </profile>
   </profiles>
@@ -220,6 +224,12 @@
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-distribution-standalone</artifactId>
+        <version>${reader.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>com.sismics.reader</groupId>
+        <artifactId>reader-agent</artifactId>
         <version>${reader.version}</version>
       </dependency>
     
@@ -463,6 +473,11 @@
         <version>${org.apache.lucene.version}</version>
       </dependency>
       
+      <dependency>
+        <groupId>jgoodies</groupId>
+        <artifactId>forms</artifactId>
+        <version>${jgoodies.forms.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   

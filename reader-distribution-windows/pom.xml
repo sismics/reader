@@ -17,6 +17,11 @@
   <dependencies>
     <dependency>
       <groupId>com.sismics.reader</groupId>
+      <artifactId>reader-agent</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.sismics.reader</groupId>
       <artifactId>reader-distribution-standalone</artifactId>
     </dependency>
   </dependencies>
@@ -27,31 +32,87 @@
         <directory>src/main/nsis</directory>
         <filtering>true</filtering>
       </resource>
+      <resource>
+        <directory>src/main/launch4j</directory>
+        <filtering>true</filtering>
+      </resource>
     </resources>
 
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <outputDirectory>target</outputDirectory>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
           <execution>
-            <id>unpack</id>
-            <phase>package</phase>
+            <id>copy-reader-agent</id>
+            <phase>prepare-package</phase>
             <goals>
-              <goal>unpack</goal>
+              <goal>copy</goal>
             </goals>
             <configuration>
               <artifactItems>
                 <artifactItem>
                   <groupId>com.sismics.reader</groupId>
-                  <artifactId>reader-distribution-standalone</artifactId>
+                  <artifactId>reader-agent</artifactId>
                   <version>${reader.version}</version>
-                  <type>tar.gz</type>
-                  <classifier>dist</classifier>
+                  <classifier>jar-with-dependencies</classifier>
                   <overWrite>false</overWrite>
                   <outputDirectory>${project.build.directory}</outputDirectory>
                 </artifactItem>
               </artifactItems>
+            </configuration>
+          </execution>
+          
+          <execution>
+            <id>copy-reader-web</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.sismics.reader</groupId>
+                  <artifactId>reader-web</artifactId>
+                  <version>1.0-SNAPSHOT</version>
+                  <type>war</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${project.build.directory}</outputDirectory>
+                  <destFileName>reader.war</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>launch4j</id>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <exec executable="${launch4j.home}/launch4jc" dir="${launch4j.home}">
+                  <arg value="${project.build.directory}/reader-agent.xml" />
+                </exec> -->
+                <exec executable="${launch4j.home}/launch4jc" dir="${launch4j.home}">
+                  <arg value="${project.build.directory}/reader-agent-elevated.xml" />
+                </exec>
+              </target>
             </configuration>
           </execution>
         </executions>
@@ -69,12 +130,42 @@
             </goals>
             <configuration>
               <makensisBin>${nsis.home}/makensis</makensisBin>
-              <setupScript>target/classes/reader.nsi</setupScript>
+              <setupScript>${project.build.directory}/reader.nsi</setupScript>
               <outputFile>${project.build.directory}/${project.build.finalName}.exe</outputFile>
             </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
+    
+    <pluginManagement>
+      <plugins>
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <versionRange>[1.7,)</versionRange>
+                    <goals>
+                      <goal>run</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 </project>
