@@ -286,11 +286,12 @@ public class UserResource extends BaseResource {
         user = userDao.update(user);
         
         if (StringUtils.isNotBlank(password)) {
+            checkBaseFunction(BaseFunction.PASSWORD);
+            
+            // Change the password
             user.setPassword(password);
             user = userDao.updatePassword(user);
-        }
-        
-        if (StringUtils.isNotBlank(password)) {
+
             // Raise a password updated event
             PasswordChangedEvent passwordChangedEvent = new PasswordChangedEvent();
             passwordChangedEvent.setUser(user);

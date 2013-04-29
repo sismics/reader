@@ -73,6 +73,7 @@ import com.sismics.reader.core.util.EntityManagerUtil;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
 import com.sismics.reader.rest.assembler.ArticleAssembler;
+import com.sismics.reader.rest.constant.BaseFunction;
 import com.sismics.rest.exception.ClientException;
 import com.sismics.rest.exception.ForbiddenClientException;
 import com.sismics.rest.exception.ServerException;
@@ -522,6 +523,7 @@ public class SubscriptionResource extends BaseResource {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
+        checkBaseFunction(BaseFunction.IMPORT);
         
         // Validate input data
         ValidationUtil.validateRequired(fileBodyPart, "file");
