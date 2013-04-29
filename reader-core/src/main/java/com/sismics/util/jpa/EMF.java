@@ -36,20 +36,13 @@ public final class EMF {
 
             Environment.verifyProperties(properties);
             ConfigurationHelper.resolvePlaceHolders(properties);
-            ServiceRegistry reg = new ServiceRegistryBuilder().applySettings( properties ).buildServiceRegistry();
+            ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(properties).buildServiceRegistry();
 
             DbOpenHelper openHelper = new DbOpenHelper(reg) {
                 
                 @Override
                 public void onCreate() throws Exception {
-                    InputStream is = getClass().getResourceAsStream("/db/update/dbupdate-000-0.sql");
-                    executeScript(is);
-                    
-                    is = getClass().getResourceAsStream("/db/update/dbupdate-000-1.sql");
-                    if (is != null) {
-                        // Executed on dev only
-                        executeScript(is);
-                    }
+                    executeAllScript(0);
                 }
 
                 @Override

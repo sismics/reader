@@ -1,5 +1,7 @@
 package com.sismics.util.jpa;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -24,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.io.CharStreams;
+import com.sismics.util.ResourceUtil;
 
 /**
  * A helper to update the database incrementally.
@@ -132,6 +136,31 @@ public abstract class DbOpenHelper {
         }
     }
 
+    /**
+     * Execute all upgrade scripts in ascending order for a given version.
+     * 
+     * @param version Version number
+     * @throws Exception
+     */
+    protected void executeAllScript(final int version) throws Exception {
+        List<String> fileNameList = ResourceUtil.list(getClass(), "/db/update/", new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                String versionString = String.format("%03d", version);
+                return name.matches("dbupdate-" + versionString + "-\\d+\\.sql");
+            }
+        });
+        Collections.sort(fileNameList);
+        
+        for (String fileName : fileNameList) {
+            if (log.isInfoEnabled()) {
+                log.info(MessageFormat.format("Executing script: {0}", fileName));
+            }
+            InputStream is = getClass().getResourceAsStream("/db/update/" + fileName);
+            executeScript(is);
+        }
+    }
+    
     /**
      * Execute a SQL script. All statements must be one line only.
      * 
