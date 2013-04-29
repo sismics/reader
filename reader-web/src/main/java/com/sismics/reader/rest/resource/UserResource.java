@@ -81,6 +81,7 @@ public class UserResource extends BaseResource {
         
         // Create the user
         User user = new User();
+        user.setRoleId(Constants.DEFAULT_USER_ROLE);
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);

@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.dao.jpa.AuthenticationTokenDao;
-import com.sismics.reader.core.dao.jpa.UserBaseFunctionDao;
+import com.sismics.reader.core.dao.jpa.RoleBaseFunctionDao;
 import com.sismics.reader.core.dao.jpa.UserDao;
 import com.sismics.reader.core.model.jpa.AuthenticationToken;
 import com.sismics.reader.core.model.jpa.User;
@@ -158,8 +158,8 @@ public class TokenBasedSecurityFilter implements Filter {
         userPrincipal.setLocale(locale);
         
         // Add base functions
-        UserBaseFunctionDao userBaseFuction = new UserBaseFunctionDao();
-        Set<String> baseFunctionSet = userBaseFuction.findByUserId(user.getId());
+        RoleBaseFunctionDao userBaseFuction = new RoleBaseFunctionDao();
+        Set<String> baseFunctionSet = userBaseFuction.findByRoleId(user.getRoleId());
         userPrincipal.setBaseFunctionSet(baseFunctionSet);
         
         request.setAttribute(PRINCIPAL_ATTRIBUTE, userPrincipal);

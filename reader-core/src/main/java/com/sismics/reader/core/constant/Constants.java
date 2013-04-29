@@ -35,4 +35,9 @@ public class Constants {
      * File Lucene directory storage.
      */
     public static final String LUCENE_DIRECTORY_STORAGE_FILE = "FILE";
+    
+    /**
+     * Default generic user role.
+     */
+    public static final String DEFAULT_USER_ROLE = "user";
 }

@@ -10,42 +10,42 @@ import javax.persistence.Table;
 import com.google.common.base.Objects;
 
 /**
- * User base function.
+ * Role base function.
  * 
  * @author jtremeaux
  */
 @Entity
-@Table(name = "T_USER_BASE_FUNCTION")
-public class UserBaseFunction {
+@Table(name = "T_ROLE_BASE_FUNCTION")
+public class RoleBaseFunction {
     /**
-     * Subscription ID.
+     * Role base function ID.
      */
     @Id
-    @Column(name = "UBF_ID_C", length = 36)
+    @Column(name = "RBF_ID_C", length = 36)
     private String id;
     
     /**
-     * User ID.
+     * Role ID.
      */
-    @Column(name = "UBF_IDUSER_C", nullable = false, length = 36)
-    private String userId;
+    @Column(name = "RBF_IDROLE_C", nullable = false, length = 36)
+    private String roleId;
     
     /**
      * Base function ID.
      */
-    @Column(name = "UBF_IDBASEFUNCTION_C", nullable = false, length = 36)
+    @Column(name = "RBF_IDBASEFUNCTION_C", nullable = false, length = 36)
     private String baseFunctionId;
     
     /**
      * Creation date.
      */
-    @Column(name = "UBF_CREATEDATE_D", nullable = false)
+    @Column(name = "RBF_CREATEDATE_D", nullable = false)
     private Date createDate;
     
     /**
      * Deletion date.
      */
-    @Column(name = "UBF_DELETEDATE_D")
+    @Column(name = "RBF_DELETEDATE_D")
     private Date deleteDate;
 
     /**
@@ -67,21 +67,21 @@ public class UserBaseFunction {
     }
 
     /**
-     * Getter of userId.
+     * Getter of roleId.
      *
-     * @return userId
+     * @return roleId
      */
-    public String getUserId() {
-        return userId;
+    public String getRoleId() {
+        return roleId;
     }
 
     /**
-     * Setter of userId.
+     * Setter of roleId.
      *
-     * @param userId userId
+     * @param roleId roleId
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 
     /**
@@ -142,7 +142,7 @@ public class UserBaseFunction {
     public String toString() {
         return Objects.toStringHelper(this)
                 .add("id", id)
-                .add("userId", userId)
+                .add("userId", roleId)
                 .add("baseFunctionId", baseFunctionId)
                 .toString();
     }

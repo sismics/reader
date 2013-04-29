@@ -16,6 +16,6 @@
     <class>com.sismics.reader.core.model.jpa.Locale</class>
     <class>com.sismics.reader.core.model.jpa.User</class>
     <class>com.sismics.reader.core.model.jpa.UserArticle</class>
-    <class>com.sismics.reader.core.model.jpa.UserBaseFunction</class>
+    <class>com.sismics.reader.core.model.jpa.RoleBaseFunction</class>
   </persistence-unit>
 </persistence>

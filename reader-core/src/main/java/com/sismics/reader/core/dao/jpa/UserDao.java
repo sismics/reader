@@ -198,11 +198,6 @@ public class UserDao {
         q.setParameter("userId", userFromDb.getId());
         q.executeUpdate();
 
-        q = em.createQuery("update UserBaseFunction ubf set ubf.deleteDate = :dateNow where ubf.userId = :userId and ubf.deleteDate is null");
-        q.setParameter("userId", userFromDb.getId());
-        q.setParameter("dateNow", dateNow);
-        q.executeUpdate();
-
         q = em.createQuery("update UserArticle ua set ua.deleteDate = :dateNow where ua.userId = :userId and ua.deleteDate is null");
         q.setParameter("userId", userFromDb.getId());
         q.setParameter("dateNow", dateNow);

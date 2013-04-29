@@ -31,6 +31,12 @@ public class User {
     private String localeId;
     
     /**
+     * Locale ID.
+     */
+    @Column(name = "USE_IDROLE_C", nullable = false, length = 36)
+    private String roleId;
+    
+    /**
      * User's username.
      */
     @Column(name = "USE_USERNAME_C", nullable = false, length = 50)
@@ -130,6 +136,24 @@ public class User {
      */
     public void setLocaleId(String localeId) {
         this.localeId = localeId;
+    }
+
+    /**
+     * Getter of roleId.
+     *
+     * @return roleId
+     */
+    public String getRoleId() {
+        return roleId;
+    }
+
+    /**
+     * Setter of roleId.
+     *
+     * @param roleId roleId
+     */
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 
     /**
