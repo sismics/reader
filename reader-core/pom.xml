@@ -141,11 +141,26 @@
       <build>
         <resources>
           <resource>
-            <directory>src/main/resources</directory>
-            <filtering>false</filtering>
-          </resource>
-          <resource>
             <directory>src/dev/resources</directory>
+            <filtering>true</filtering>
+          </resource>
+        </resources>
+      </build>
+    </profile>
+
+    <!-- Production profile -->
+    <profile>
+      <id>prod</id>
+    </profile>
+
+    <!-- Demo profile -->
+    <profile>
+      <id>demo</id>
+      
+      <build>
+        <resources>
+          <resource>
+            <directory>src/demo/resources</directory>
             <filtering>true</filtering>
           </resource>
         </resources>
@@ -154,6 +169,13 @@
   </profiles>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+      </resource>
+    </resources>
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
