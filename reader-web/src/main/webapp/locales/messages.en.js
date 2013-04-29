@@ -4,7 +4,8 @@
     "username": "Username",
     "password": "Password",
     "remember": "Remember me",
-    "submit": "Login"
+    "submit": "Login",
+    "error": "Base username or password"
   },
   "defaultpassword": {
     "info": "Reader is not secured. Please log in with username and password \"admin\", then change password immediately.",

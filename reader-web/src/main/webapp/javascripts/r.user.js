@@ -23,7 +23,7 @@ r.user.init = function() {
       },
       fail: function(data) {
         // Login fail
-        alert('Bad username or password');
+        alert($.t('login.error'));
       }
     });
     

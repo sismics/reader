@@ -4,7 +4,8 @@
     "username": "Nom d'utilisateur",
     "password": "Mot de passe",
     "remember": "Se souvenir de moi",
-    "submit": "Connexion"
+    "submit": "Connexion",
+    "error": "Mauvais nom d'utilisateur ou mot de passe"
   },
   "defaultpassword": {
     "info": "Reader n'est pas sécurisé. Veuillez vous connecter en utilisant \"admin\" comme nom d'utilisateur et mot de passe, puis changez le mot de passe immédiatement.",
