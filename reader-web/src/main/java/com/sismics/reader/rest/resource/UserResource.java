@@ -19,6 +19,7 @@ import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
+import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -511,8 +512,8 @@ public class UserResource extends BaseResource {
             response.put("display_unread_web", user.isDisplayUnreadWeb());
             response.put("display_unread_mobile", user.isDisplayUnreadMobile());
             response.put("first_connection", user.isFirstConnection());
-            String[] baseFunctionArray = ((UserPrincipal) principal).getBaseFunctionSet().toArray(new String[0]);
-            response.put("base_functions", baseFunctionArray);
+            JSONArray baseFunctions = new JSONArray(((UserPrincipal) principal).getBaseFunctionSet());
+            response.put("base_functions", baseFunctions);
             response.put("is_default_password", hasBaseFunction(BaseFunction.ADMIN) && Constants.DEFAULT_ADMIN_PASSWORD.equals(user.getPassword()));
         }
         

@@ -81,7 +81,7 @@ r.user.initI18n = function(language) {
     useCookie: false,
     getAsync: false,
     resGetPath: 'locales/messages.__lng__.js',
-    debug: true
+    debug: false
   });
   $('html').i18n();
   
@@ -104,6 +104,24 @@ r.user.logout = function() {
       window.location.reload();
     }
   });
+};
+
+/**
+ * Returns true if the connected user has a base function.
+ */
+r.user.hasBaseFunction = function(baseFunction) {
+  if (r.user.userInfo == null) {
+    return false;
+  }
+  
+  var found = false;
+  $(r.user.userInfo.base_functions).each(function(i, base) {
+    if (base == baseFunction) {
+      found = true;
+    }
+  });
+  
+  return found;
 };
 
 /**

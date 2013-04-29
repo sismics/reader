@@ -23,7 +23,7 @@ r.settings.init = function() {
     $('#toolbar > .settings').removeClass('hidden');
     
     // Removing admin tab if necessary
-    if (!r.user.userInfo.is_admin) {
+    if (!r.user.hasBaseFunction('ADMIN')) {
       $('#settings-tab-users').remove();
       $('#settings-tabs a[href="#settings-tab-users"]').parent().remove();
     }
@@ -122,12 +122,25 @@ r.settings.onTabActivated = function(panel) {
     r.settings.onTabAccount(panel, !initialized);
     break;
   case 'settings-tab-import':
+    r.settings.onTabImport(panel, !initialized);
     break;
   case 'settings-tab-users':
     r.settings.onTabUsers(panel, !initialized);
     break;
   }
 };
+
+/**
+ * Triggers when import tab is activated.
+ */
+r.settings.onTabImport = function(panel, initialize) {
+  if (initialize) {
+    // Hide import base function if current user don't have
+    if(!r.user.hasBaseFunction('IMPORT')) {
+      $('#settings-tab-import .import-base-function').hide();
+    }
+  }
+}
 
 /**
  * Triggers when account tab is activated.
@@ -186,6 +199,11 @@ r.settings.onTabAccount = function(panel, initialize) {
         form.find('.edit-locale-input').html(html);
       }
     });
+    
+    // Hide password base function if current user don't have
+    if(!r.user.hasBaseFunction('PASSWORD')) {
+      $('#settings-account-edit-form .password-base-function').hide();
+    }
     
     // Account edit form validation
     form.validate({

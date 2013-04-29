@@ -46,7 +46,7 @@ r.main.initModules = function() {
   r.theme.init();
   
   // First page
-  if (r.user.userInfo.is_admin && r.user.userInfo.first_connection) {
+  if (r.user.hasBaseFunction('ADMIN') && r.user.userInfo.first_connection) {
     window.location.hash = '#/wizard/';
   } else if (window.location.hash.length == 0) {
     window.location.hash = '#/feed/unread';

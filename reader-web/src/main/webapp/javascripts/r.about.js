@@ -22,7 +22,7 @@ r.about.init = function() {
     // Configuring contextual toolbar
     $('#toolbar > .about').removeClass('hidden');
     
-    if (r.user.userInfo.is_admin) {
+    if (r.user.hasBaseFunction('ADMIN')) {
       // Loading logs
       r.about.loadLogs(false);
     } else {
