@@ -26,11 +26,6 @@
       <artifactId>hibernate-entitymanager</artifactId>
     </dependency>
     
-    <dependency>
-      <groupId>javax.transaction</groupId>
-      <artifactId>jta</artifactId>
-    </dependency>
-    
     <!-- Other external dependencies -->
     <dependency>
       <groupId>joda-time</groupId>

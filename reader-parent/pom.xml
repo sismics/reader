@@ -39,7 +39,6 @@
     <jgoodies.forms.version>1.0.5</jgoodies.forms.version>
 
     <com.sun.grizzly.version>1.9.18-m</com.sun.grizzly.version>
-    <javax.transaction.jta.version>1.1</javax.transaction.jta.version>
     <org.hibernate.hibernate.version>4.1.0.Final</org.hibernate.hibernate.version>
     <commons-dbcp.version>1.4</commons-dbcp.version>
     <joda-time.joda-time.version>2.2</joda-time.joda-time.version>
@@ -387,12 +386,6 @@
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-entitymanager</artifactId>
         <version>${org.hibernate.hibernate.version}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>javax.transaction</groupId>
-        <artifactId>jta</artifactId>
-        <version>${javax.transaction.jta.version}</version>
       </dependency>
       
       <dependency>
