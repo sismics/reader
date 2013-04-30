@@ -42,6 +42,7 @@ public class ArticleSanitizer {
     }
 
     private static final AttributePolicy INTEGER_POLICY = new AttributePolicy() {
+        @Override
         public String apply(String elementName, String attributeName, String value) {
             int n = value.length();
             if (n == 0) {
