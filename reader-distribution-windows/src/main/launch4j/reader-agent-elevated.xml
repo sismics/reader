@@ -1,7 +1,7 @@
 <launch4jConfig>
-  <dontWrapJar>false</dontWrapJar>
+  <dontWrapJar>true</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>${project.build.directory}/reader-agent-${reader.version}-jar-with-dependencies.jar</jar>
+  <jar>reader-agent.jar</jar>
   <outfile>${project.build.directory}/reader-agent-elevated.exe</outfile>
   <errTitle>Reader</errTitle>
   <cmdLine>-agent -elevated -Xmx150M -XX:MaxPermSize=128M</cmdLine>

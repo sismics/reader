@@ -55,6 +55,7 @@ Section "Reader"
   SetOutPath $INSTDIR
 
   # Write files.
+  File reader-agent.jar
   File reader-agent.exe
   File reader-agent.properties
   File reader-agent-elevated.exe
@@ -113,6 +114,7 @@ Section "Uninstall"
   # Remove files.
   Delete "$SMSTARTUP\Reader.lnk"
   RMDir /r "$SMPROGRAMS\Reader"
+  Delete "$INSTDIR\reader-agent.jar"
   Delete "$INSTDIR\reader-agent.exe"
   Delete "$INSTDIR\reader-agent.properties"
   Delete "$INSTDIR\reader-agent-elevated.exe"

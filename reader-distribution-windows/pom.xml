@@ -66,6 +66,7 @@
                   <classifier>jar-with-dependencies</classifier>
                   <overWrite>false</overWrite>
                   <outputDirectory>${project.build.directory}</outputDirectory>
+                  <destFileName>reader-agent.jar</destFileName>
                 </artifactItem>
               </artifactItems>
             </configuration>
