@@ -495,10 +495,9 @@ public class UserResource extends BaseResource {
             // Check if admin has the default password
             UserDao userDao = new UserDao();
             User adminUser = userDao.getById("admin");
-            if (adminUser == null) {
-                throw new ServerException("DatabaseError", "Admin user not found. Check your database.");
+            if (adminUser != null && adminUser.getDeleteDate() == null) {
+                response.put("is_default_password", Constants.DEFAULT_ADMIN_PASSWORD.equals(adminUser.getPassword()));
             }
-            response.put("is_default_password", Constants.DEFAULT_ADMIN_PASSWORD.equals(adminUser.getPassword()));
         } else {
             response.put("anonymous", false);
             UserDao userDao = new UserDao();
