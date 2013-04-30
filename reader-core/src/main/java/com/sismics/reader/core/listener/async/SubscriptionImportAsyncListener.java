@@ -15,6 +15,7 @@ import com.google.common.base.Strings;
 import com.google.common.eventbus.Subscribe;
 import com.sismics.reader.core.dao.file.opml.OpmlFlattener;
 import com.sismics.reader.core.dao.file.opml.Outline;
+import com.sismics.reader.core.dao.file.rss.GuidFixer;
 import com.sismics.reader.core.dao.jpa.ArticleDao;
 import com.sismics.reader.core.dao.jpa.CategoryDao;
 import com.sismics.reader.core.dao.jpa.FeedDao;
@@ -227,6 +228,7 @@ public class SubscriptionImportAsyncListener {
                             } else {
                                 // Create the article if needed
                                 article.setFeedId(feed.getId());
+                                GuidFixer.fixGuid(article);
                                 articleDao.create(article);
                             }
                             
