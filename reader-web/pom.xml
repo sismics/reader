@@ -318,6 +318,7 @@
                     <jsSourceFile>jquery.i18next.js</jsSourceFile>
                     <jsSourceFile>jquery.visible.js</jsSourceFile>
                     <jsSourceFile>jquery.validate.js</jsSourceFile>
+                    <jsSourceFile>jquery.numeral.js</jsSourceFile>
                     <jsSourceFile>r.main.js</jsSourceFile>
                     <jsSourceFile>r.user.js</jsSourceFile>
                     <jsSourceFile>r.subscription.js</jsSourceFile>
@@ -397,6 +398,7 @@
                 **/javascripts/jquery.i18next.js,
                 **/javascripts/jquery.visible.js,
                 **/javascripts/jquery.validate.js,
+                **/javascripts/jquery.numeral.js,
                 **/javascripts/r.main.js,
                 **/javascripts/r.user.js,
                 **/javascripts/r.subscription.js,

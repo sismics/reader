@@ -65,7 +65,11 @@ r.about.init = function() {
     type: 'GET',
     done: function(data) {
       var currentVersion = data.current_version;
+      
+      // Populate application informations
       $('#about-version').html(currentVersion);
+      $('#about-used-memory').html(numeral(data.total_memory - data.free_memory).format('0b'));
+      $('#about-total-memory').html(numeral(data.total_memory).format('0b'));
 
       // Get cookie
       $.cookie.json = true;

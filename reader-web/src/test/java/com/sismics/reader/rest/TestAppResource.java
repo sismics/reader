@@ -26,8 +26,8 @@ public class TestAppResource extends BaseJerseyTest {
      */
     @Test
     public void testAppResource() throws JSONException {
-        // Check the API info
-        WebResource appResource = resource().path("/app/version");
+        // Check the application info
+        WebResource appResource = resource().path("/app");
         ClientResponse response = appResource.get(ClientResponse.class);
         response = appResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
@@ -36,6 +36,10 @@ public class TestAppResource extends BaseJerseyTest {
         Assert.assertNotNull(currentVersion);
         String minVersion = json.getString("min_version");
         Assert.assertNotNull(minVersion);
+        Long freeMemory = json.getLong("free_memory");
+        Assert.assertTrue(freeMemory > 0);
+        Long totalMemory = json.getLong("total_memory");
+        Assert.assertTrue(totalMemory > 0 && totalMemory > freeMemory);
         
         // Login admin
         String adminAuthenticationToken = clientUtil.login("admin", "admin", false);

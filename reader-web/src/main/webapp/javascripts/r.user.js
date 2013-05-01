@@ -91,6 +91,13 @@ r.user.initI18n = function(language) {
   } else {
     moment.lang('en');
   }
+  
+  // Initializing numeral.js i18n
+  try {
+    numeral.language(language);
+  } catch (e) {
+    numeral.language('en');
+  }
 };
 
 /**

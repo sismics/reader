@@ -37,13 +37,12 @@ import com.sismics.util.log4j.MemoryAppender;
 @Path("/app")
 public class AppResource extends BaseResource {
     /**
-     * Return the information about the API.
+     * Return the information about the application.
      * 
      * @return Response
      * @throws JSONException
      */
     @GET
-    @Path("version")
     @Produces(MediaType.APPLICATION_JSON)
     public Response version() throws JSONException {
         ResourceBundle configBundle = ConfigUtil.getConfigBundle();
@@ -53,6 +52,8 @@ public class AppResource extends BaseResource {
         JSONObject response = new JSONObject();
         response.put("current_version", currentVersion.replace("-SNAPSHOT", ""));
         response.put("min_version", minVersion);
+        response.put("total_memory", Runtime.getRuntime().totalMemory());
+        response.put("free_memory", Runtime.getRuntime().freeMemory());
         return Response.ok().entity(response).build();
     }
     

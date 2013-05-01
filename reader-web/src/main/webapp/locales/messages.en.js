@@ -133,6 +133,7 @@
     "informations": {
       "title": "More informations",
       "version": "Version:",
+      "memory": "Memory:",
       "website": "Website:",
       "contact": "Contact:"
     }

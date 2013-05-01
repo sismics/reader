@@ -132,9 +132,10 @@
     },
     "informations": {
       "title": "Plus d'informations",
-      "version": "Version:",
-      "website": "Site internet:",
-      "contact": "Contact:"
+      "memory": "Mémoire :",
+      "version": "Version :",
+      "website": "Site internet :",
+      "contact": "Contact :"
     }
   },
   "article": {

@@ -49,7 +49,7 @@ public class ArticleDao {
     @SuppressWarnings("unchecked")
     public List<Article> findAll() {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select a from Article a order by a.id where a.deleteDate is null");
+        Query q = em.createQuery("select a from Article a where a.deleteDate is null order by a.id");
         return q.getResultList();
     }
     

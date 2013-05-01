@@ -32,7 +32,7 @@ r.util.url = {
   theme_list: 'api/theme',
   app_batch_reindex: 'api/app/batch/reindex',
   app_log: 'api/app/log',
-  app_version: 'api/app/version',
+  app_version: 'api/app',
   github_tags: 'https://api.github.com/repos/sismics/reader/tags'
 };
 
