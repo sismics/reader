@@ -3,6 +3,7 @@ package com.sismics.reader.rest.resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.ws.rs.DELETE;
@@ -26,6 +27,7 @@ import org.codehaus.jettison.json.JSONObject;
 import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.dao.jpa.AuthenticationTokenDao;
 import com.sismics.reader.core.dao.jpa.CategoryDao;
+import com.sismics.reader.core.dao.jpa.RoleBaseFunctionDao;
 import com.sismics.reader.core.dao.jpa.UserDao;
 import com.sismics.reader.core.dao.jpa.dto.UserDto;
 import com.sismics.reader.core.event.PasswordChangedEvent;
@@ -435,6 +437,11 @@ public class UserResource extends BaseResource {
             throw new ForbiddenClientException();
         }
         
+        // Ensure that the admin user is not deleted
+        if (hasBaseFunction(BaseFunction.ADMIN)) {
+            throw new ClientException("ForbiddenError", "The admin user cannot be deleted");
+        }
+        
         // Delete the user
         UserDao userDao = new UserDao();
         userDao.delete(principal.getName());
@@ -466,6 +473,13 @@ public class UserResource extends BaseResource {
         User user = userDao.getActiveByUsername(username);
         if (user == null) {
             throw new ClientException("UserNotFound", "The user doesn't exist");
+        }
+        
+        // Ensure that the admin user is not deleted
+        RoleBaseFunctionDao userBaseFuction = new RoleBaseFunctionDao();
+        Set<String> baseFunctionSet = userBaseFuction.findByRoleId(user.getRoleId());
+        if (baseFunctionSet.contains(BaseFunction.ADMIN.name())) {
+            throw new ClientException("ForbiddenError", "The admin user cannot be deleted");
         }
         
         // Delete the user

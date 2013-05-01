@@ -275,6 +275,22 @@ public class TestUserResource extends BaseJerseyTest {
         json = response.getEntity(JSONObject.class);
         Assert.assertEquals("ok", json.getString("status"));
         
+        // User admin deletes himself: forbidden
+        userResource = resource().path("/user");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        response = userResource.delete(ClientResponse.class);
+        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ForbiddenError", json.getString("type"));
+
+        // User admin deletes himself: forbidden
+        userResource = resource().path("/user/admin");
+        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        response = userResource.delete(ClientResponse.class);
+        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ForbiddenError", json.getString("type"));
+
         // User admin deletes user admin_user1
         userResource = resource().path("/user/admin_user1");
         userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
