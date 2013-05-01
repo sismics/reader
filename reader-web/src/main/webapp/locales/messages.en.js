@@ -125,6 +125,16 @@
         "debug": "Debug",
         "trace": "Trace"
       }
+    },
+    "license": {
+      "title": "License",
+      "content": "Reader is released under the terms of the GPL license. See <a href=\"http://opensource.org/licenses/GPL-2.0\" target=\"_blank\">http://opensource.org/licenses/GPL-2.0</a> for more information."
+    },
+    "informations": {
+      "title": "More informations",
+      "version": "Version:",
+      "website": "Website:",
+      "contact": "Contact:"
     }
   },
   "article": {

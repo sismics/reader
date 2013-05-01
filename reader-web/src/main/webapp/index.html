@@ -152,9 +152,11 @@
       
       <div id="about-container">
         <div class="admin">
+        
           <h1 data-i18n="about.rebuildindex.title">Rebuild search index</h1>
           <p data-i18n="about.rebuildindex.message">Rebuilding search index may take a while, but you can continue using the application.</p>
           <input class="important rebuild-index-button" type="button" value="Rebuild" data-i18n="[value]about.rebuildindex.button" />
+          
           <h1>
             <span data-i18n="about.logs.title">Browse logs</span>
             <select id="logs-level-select">
@@ -167,12 +169,26 @@
               <option class="trace" value="TRACE" data-i18n="about.logs.level.trace">Trace</option>
             </select>
             <div class="button" id="logs-refresh-button"><img src="images/refresh.png" class="icon" /></div>
+          
           </h1>
           <div id="logs-container">
             <table id="logs-table">
             </table>
           </div>
+          
         </div>
+        
+        <h1 data-i18n="about.license.title">License</h1>
+        <p data-i18n="[html]about.license.content">Reader is released under the terms of the GPL license. See <a href="http://opensource.org/licenses/GPL-2.0" target="_blank">http://opensource.org/licenses/GPL-2.0</a> for more information.</p>
+        
+        <h1 data-i18n="about.informations.title">More information</h1>
+        <ul>
+          <li><strong data-i18n="about.informations.version">Version:</strong> <span id="about-version"></span> <span id="about-version-new"></span></li>
+          <li><strong data-i18n="about.informations.website">Website:</strong> <a href="http://www.sismics.com/reader" target="_blank">www.sismics.com/reader</a></li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/sismics/reader" target="_blank">github.com/sismics/reader</a></li>
+          <li><strong data-i18n="about.informations.contact">Contact:</strong> <a href="mailto:reader@sismics.com">reader@sismics.com</a></li>
+        </ul>
+        
       </div>
       
       <div id="wizard-container">

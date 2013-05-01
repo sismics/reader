@@ -65,6 +65,7 @@ r.about.init = function() {
     type: 'GET',
     done: function(data) {
       var currentVersion = data.current_version;
+      $('#about-version').html(currentVersion);
 
       // Get cookie
       $.cookie.json = true;
@@ -116,7 +117,7 @@ r.about.showUpdate = function(currentVersion, tag, tagDate) {
   var diff = moment().diff(date);
   
   if (diff > 3600000 * 24 && currentVersion != tag) {
-    $('#subscriptions .update')
+    $('#subscriptions .update, #about-version-new')
       .show()
       .html('<a href="http://www.sismics.com/reader/" target="_blank">' + $.t('about.newupdate') + ': ' + tag + '</a>');
   }
