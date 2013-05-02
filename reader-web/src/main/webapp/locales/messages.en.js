@@ -1,5 +1,9 @@
 {
   "app": "Sismics Reader",
+  "error": {
+    "unknown": "Error accessing Reader, try again",
+    "feed": "Error loading feed, try again"
+  },
   "login": {
     "username": "Username",
     "password": "Password",

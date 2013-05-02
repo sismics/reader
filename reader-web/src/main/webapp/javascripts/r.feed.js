@@ -288,7 +288,6 @@ r.feed.load = function(next) {
       });
       
       // Post article build
-      
       if (!next) {
         // Scrolling to top
         r.feed.scrollTop(0);
@@ -302,7 +301,8 @@ r.feed.load = function(next) {
     },
     fail: function() {
       r.feed.context.loading = false;
-      r.feed.context.bumper.find('.loader').hide();
+      $('#feed-container .loader').hide();
+      $().toastmessage('showErrorToast', $.t('error.feed'));
     }
   });
 };

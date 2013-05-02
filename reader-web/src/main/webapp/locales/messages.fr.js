@@ -1,5 +1,9 @@
 {
   "app": "Sismics Reader",
+  "error": {
+    "unknown": "Impossible d'accéder à Reader, veuillez réessayer",
+    "feed": "Impossible de charger les articles, veuillez réessayer"
+  },
   "login": {
     "username": "Nom d'utilisateur",
     "password": "Mot de passe",

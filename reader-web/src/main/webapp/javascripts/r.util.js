@@ -66,7 +66,7 @@ r.util.ajax = function(args) {
       if (jqxhr.responseText) {
         console.log(jqxhr.responseText);
       }
-      $().toastmessage('showErrorToast', 'Error accessing Reader, try again');
+      $().toastmessage('showErrorToast', $.t('error.unknown'));
     }
   }
   
