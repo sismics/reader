@@ -1,0 +1,63 @@
+<rss version="2.0"> 
+  <channel>
+    <title>APOD</title>
+    <link>http://antwrp.gsfc.nasa.gov/</link>
+    <description>Astronomy Picture of the Day</description>
+    <language>en-us</language>
+    <image>
+      <title>APOD</title>
+      <url>http://antwrp.gsfc.nasa.gov/favicon.ico</url>
+      <link>http://antwrp.gsfc.nasa.gov/</link>
+    </image>
+
+    <item>
+    <title>Saturn Hurricane</title>
+    <link>http://antwrp.gsfc.nasa.gov/apod/astropix.html</link>
+<description>&#60;p>&#60;a href="http://antwrp.gsfc.nasa.gov/apod/astropix.html">&#60;img src="http://antwrp.gsfc.nasa.gov/apod/calendar/S_130502.jpg" align="left" alt="Saturn Hurricane" border="0" />&#60;/a> Saturn Hurricane&#60;/p>&#60;br clear="all"/></description>
+    </item>
+
+    <item>
+    <title>Omega Centauri: The Brightest Globular Cluster </title>
+    <link>http://antwrp.gsfc.nasa.gov/apod/ap130501.html</link>
+<description>&#60;p>&#60;a href="http://antwrp.gsfc.nasa.gov/apod/ap130501.html">&#60;img src="http://antwrp.gsfc.nasa.gov/apod/calendar/S_130501.jpg" align="left" alt="This huge ball of stars predates our Sun." border="0" />&#60;/a> This huge ball of stars predates our Sun.&#60;/p>&#60;br clear="all"/></description>
+    </item>
+
+    <item>
+    <title>Humanity Explores the Solar System     </title>
+    <link>http://antwrp.gsfc.nasa.gov/apod/ap130430.html</link>
+<description>&#60;p>&#60;a href="http://antwrp.gsfc.nasa.gov/apod/ap130430.html">&#60;img src="http://antwrp.gsfc.nasa.gov/apod/calendar/S_130430.jpg" align="left" alt="What spacecraft is humanity currently using to explore our " border="0" />&#60;/a> What spacecraft is humanity currently using to explore our &#60;/p>&#60;br clear="all"/></description>
+    </item>
+
+    <item>
+    <title>Milky Way and Stone Tree    </title>
+    <link>http://antwrp.gsfc.nasa.gov/apod/ap130429.html</link>
+<description>&#60;p>&#60;a href="http://antwrp.gsfc.nasa.gov/apod/ap130429.html">&#60;img src="http://antwrp.gsfc.nasa.gov/apod/calendar/S_130429.jpg" align="left" alt="What's that next to the Milky Way?" border="0" />&#60;/a> What's that next to the Milky Way?&#60;/p>&#60;br clear="all"/></description>
+    </item>
+
+    <item>
+    <title>A Raging Storm System on Saturn    </title>
+    <link>http://antwrp.gsfc.nasa.gov/apod/ap130428.html</link>
+<description>&#60;p>&#60;a href="http://antwrp.gsfc.nasa.gov/apod/ap130428.html">&#60;img src="http://antwrp.gsfc.nasa.gov/apod/calendar/S_130428.jpg" align="left" alt="It was one of the largest and longest lived storms ever recorded in our Solar System. �" border="0" />&#60;/a> It was one of the largest and longest lived storms ever recorded in our Solar System. �&#60;/p>&#60;br clear="all"/></description>
+    </item>
+
+    <item>
+    <title>Sharp Stereo</title>
+    <link>http://antwrp.gsfc.nasa.gov/apod/ap130427.html</link>
+<description>&#60;p>&#60;a href="http://antwrp.gsfc.nasa.gov/apod/ap130427.html">&#60;img src="http://antwrp.gsfc.nasa.gov/apod/calendar/S_130427.jpg" align="left" alt="Get out your" border="0" />&#60;/a> Get out your&#60;/p>&#60;br clear="all"/></description>
+    </item>
+
+    <item>
+    <title>A Year on the Sun</title>
+    <link>http://antwrp.gsfc.nasa.gov/apod/ap130426.html</link>
+<description>&#60;p>&#60;a href="http://antwrp.gsfc.nasa.gov/apod/ap130426.html">&#60;img src="http://antwrp.gsfc.nasa.gov/apod/calendar/S_130426.jpg" align="left" alt="Our solar system's" border="0" />&#60;/a> Our solar system's&#60;/p>&#60;br clear="all"/></description>
+    </item>
+
+    <textInput>
+    <title>Search APOD</title>
+    <description>Search APOD</description>
+    <name>query</name>
+    <link>http://antwrp.gsfc.nasa.gov/cgi-bin/apod/apod_search
+    </link>
+    </textInput>
+  </channel>
+</rss>

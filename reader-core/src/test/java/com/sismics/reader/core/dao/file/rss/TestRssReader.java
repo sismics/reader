@@ -17,6 +17,29 @@ import com.sismics.reader.core.model.jpa.Feed;
  */
 public class TestRssReader {
     @Test
+    public void rssReaderApodTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_apod.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("APOD", feed.getTitle());
+        Assert.assertEquals("http://antwrp.gsfc.nasa.gov/", feed.getUrl());
+        Assert.assertEquals("en-us", feed.getLanguage());
+        Assert.assertEquals("Astronomy Picture of the Day", feed.getDescription());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(7, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("Saturn Hurricane", article.getTitle());
+        Assert.assertEquals("http://antwrp.gsfc.nasa.gov/apod/astropix.html", article.getUrl());
+        Assert.assertEquals("df76e0dea896571b342c3d2d1881c1adc645f37a", article.getGuid());
+        Assert.assertNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        Assert.assertTrue(article.getDescription().contains("http://antwrp.gsfc.nasa.gov/apod/calendar/S_130502.jpg"));
+        Assert.assertNull(article.getPublicationDate());
+    }
+
+    @Test
     public void rssReaderKorbenTest() throws Exception {
         InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_korben.xml");
         RssReader reader = new RssReader();
@@ -49,7 +72,7 @@ public class TestRssReader {
     }
 
     @Test
-    public void rssReaderRottenTomatoesdTest() throws Exception {
+    public void rssReaderRottenTomatoesTest() throws Exception {
         InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_rottentomatoes.xml");
         RssReader reader = new RssReader();
         reader.readRssFeed(is);

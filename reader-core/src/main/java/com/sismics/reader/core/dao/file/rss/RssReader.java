@@ -1,6 +1,7 @@
 package com.sismics.reader.core.dao.file.rss;
 
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +18,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -166,7 +168,11 @@ public class RssReader extends DefaultHandler {
         factory.setFeature("http://apache.org/xml/features/continue-after-fatal-error", true);
         SAXParser parser = factory.newSAXParser();
 
-        parser.parse(is, this);
+        // Pass a character stream to the parser for it to pick-up the correct encoding.
+        // See http://stackoverflow.com/questions/3482494/
+        InputSource source = new InputSource();
+        source.setCharacterStream(new InputStreamReader(is));
+        parser.parse(source, this);
     
         if (atom) {
             String url = new AtomUrlGuesserStrategy().guess(atomLinkList);
