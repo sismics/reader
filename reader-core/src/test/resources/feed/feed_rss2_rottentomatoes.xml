@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<rss version="2.0" xmlns:RTgame="http://www.rottentomatoes.com/xmlns/rtnews/" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<atom:link rel="thumbnail" type="image/*" href="http://content5.flixster.com/static/images/rt/logos/rottentomatoes_logo.png" />
+
+
+
+
+<title>Rotten Tomatoes: News</title>
+<link>http://www.rottentomatoes.com/news/</link>
+<description>Entertainment news and headlines compiled by the editors of Rotten Tomatoes</description>
+<language>en-us</language>
+
+
+
+<pubDate>Thu, 02 May 2013 10:31:40 PDT</pubDate>
+<lastBuildDate>Thu, 02 May 2013 10:31:40 PDT</lastBuildDate>
+<ttl>60</ttl>
+<image>
+	<title>Rotten Tomatoes: News</title>
+	<width>180</width>
+	<height>58</height>
+	<link>http://www.rottentomatoes.com/</link>
+	<url>http://content5.flixster.com/static/images/rt/logos/rottentomatoes_logo.png</url>
+</image>
+
+
+
+	<item>
+		<pubDate>2013-05-02 09:48:21</pubDate>
+		<title>Parental Guidance: Iron Man 3 and The Guilt Trip</title>
+		<link>http://www.rottentomatoes.com/m/1927377/news/1927377/</link>
+		<description><![CDATA[This week in family filmgoing, we've got an action-packed superhero adventure (<em><a href="/m/iron_man_3/">Iron Man 3</a></em>) and a tale of mother-son bonding (<em><a href="/m/the_guilt_trip/">The Guilt Trip</a></em>). Read on to find out what's appropriate for family viewing.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927377/news/1927377/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content8.flixster.com/movie/11/17/05/11170594_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-02 09:47:58</pubDate>
+		<title>Total Recall: Robert Downey, Jr.'s Best Movies</title>
+		<link>http://www.rottentomatoes.com/m/1927363/news/1927363/</link>
+		<description><![CDATA[With more than 50 movies listed in his filmography, <em><a href="/m/iron_man_3/">Iron Man 3</a></em> star <a href="/celebrity/robert_downey_jr/">Robert Downey, Jr.</a> has obviously had his share of ups and downs, but we'd argue that the positives outnumber the negatives; in fact, the lowest-rated film on the top 10 we assembled for this week's Total Recall boasts an 83 percent Tomatometer rating. With so many well-reviewed films jostling for a spot, there are bound to be some surprising omissions, as well as a few obscure inclusions -- so what say we get down to business and find out what they are by taking a look at the cream of the crop, shall we?]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927363/news/1927363/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content8.flixster.com/movie/11/17/05/11170594_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-02 09:42:54</pubDate>
+		<title>Scarlet Witch and Quicksilver Rumored for Avengers 2</title>
+		<link>http://www.rottentomatoes.com/m/1927387/news/1927387/</link>
+		<description><![CDATA[The rumor, which started with a comment made by Joss Whedon, has been confirmed by Entertainment Weekly's sources -- although Marvel chief Kevin Feige says the current script "could change six months from now."]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927387/news/1927387/</guid>
+		
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-02 09:42:04</pubDate>
+		<title>Michael B. Jordan in Talks for Fantastic Four</title>
+		<link>http://www.rottentomatoes.com/m/1927386/news/1927386/</link>
+		<description><![CDATA[Could he be the new Human Torch?]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927386/news/1927386/</guid>
+		
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-02 09:37:43</pubDate>
+		<title>Pride and Prejudice and Zombies Lives Again</title>
+		<link>http://www.rottentomatoes.com/m/1927385/news/1927385/</link>
+		<description><![CDATA[Director Burr Steers is set to go, with Lily Collins in the lead.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927385/news/1927385/</guid>
+		
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-02 09:35:44</pubDate>
+		<title>Ian McDiarmid Remembers His First Day as the Star Wars Emperor</title>
+		<link>http://www.rottentomatoes.com/m/1927384/news/1927384/</link>
+		<description><![CDATA["It was all shrouded in mystery, really."]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927384/news/1927384/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content7.flixster.com/movie/10/94/47/10944709_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-02 09:34:46</pubDate>
+		<title>Study Suggests Movie Trailers Reveal Too Much</title>
+		<link>http://www.rottentomatoes.com/m/1927383/news/1927383/</link>
+		<description><![CDATA[Surprise!]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927383/news/1927383/</guid>
+		
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-02 09:32:34</pubDate>
+		<title>Bradley Cooper Departs Jane Got a Gun</title>
+		<link>http://www.rottentomatoes.com/m/1927382/news/1927382/</link>
+		<description><![CDATA[This movie is having one heck of a time hanging on to its cast.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927382/news/1927382/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content8.flixster.com/movie/10/20/45/10204554_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-02 09:30:52</pubDate>
+		<title>Al Pacino Has Manglehorn</title>
+		<link>http://www.rottentomatoes.com/m/1927381/news/1927381/</link>
+		<description><![CDATA[Sounds potentially painful.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927381/news/1927381/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content6.flixster.com/movie/11/15/53/11155316_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-01 14:36:44</pubDate>
+		<title>Scenes to Skip</title>
+		<link>http://www.rottentomatoes.com/m/1927306/news/1927306/</link>
+		<description><![CDATA[Let's get one thing straight, right off the bat: making a movie can be insanely difficult work.  Making a <em>good</em> one is even harder, and sometimes, even the films we love contain a scene or two we wish had never made it into the final cut.  With that in mind, we on the RT editorial staff decided to put together a little list of scenes that, if only removed, would have made some bad movies good and some good movies great.  Be forewarned: spoilers will abound here, so proceed with caution if you haven't seen some of these films.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927306/news/1927306/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content6.flixster.com/movie/11/16/52/11165292_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-01 14:36:22</pubDate>
+		<title>Iron Man 3 Interviews:  Gwyneth Paltrow</title>
+		<link>http://www.rottentomatoes.com/m/1927365/news/1927365/</link>
+		<description><![CDATA[In the third installment of our special five-part series, Gwyneth Paltrow ruminates on Pepper Potts' many virtues, how her co-stars might need to train with her physical fitness guru Tracy Anderson, and how avoiding gluten might have changed the entire outcome of this trilogy.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927365/news/1927365/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content8.flixster.com/movie/11/17/05/11170594_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-01 14:35:57</pubDate>
+		<title>Iron Man 3 Interviews:  Don Cheadle</title>
+		<link>http://www.rottentomatoes.com/m/1927362/news/1927362/</link>
+		<description><![CDATA[In the second installment of our special five part series celebrating the release of <em>Iron Man 3</em>, Senior Editor Grae Drake talks to Don Cheadle.  In a bid to blackmail Robert Downey Jr. into continuing to play the role of Tony Stark, Cheadle reveals all of RDJ's secrets.  And they talk about how Grae is short one arc reactor.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927362/news/1927362/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content8.flixster.com/movie/11/17/05/11170594_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-01 14:35:36</pubDate>
+		<title>Iron Man 3 Interviews:  Rebecca Hall &amp; Guy Pearce</title>
+		<link>http://www.rottentomatoes.com/m/1927349/news/1927349/</link>
+		<description><![CDATA[Grae Drake powers up her own personal arc reactor to speak to the cast of <em>Iron Man 3</em>.  In the first installment of our special five part series, Guy Pearce discusses what he does in his front yard that perplexes the neighbors, and Rebecca Hall shares what she thinks the inside of her brain looks like.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927349/news/1927349/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content8.flixster.com/movie/11/17/05/11170594_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-01 14:33:25</pubDate>
+		<title>Kelsey Grammer Joins Transformers 4</title>
+		<link>http://www.rottentomatoes.com/m/1927376/news/1927376/</link>
+		<description><![CDATA[He'll give the franchise's latest sequel a villainous human element.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927376/news/1927376/</guid>
+		
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-01 14:31:35</pubDate>
+		<title>Robert Downey Jr. on His Iron Man Future: "We're Gonna Renegotiate"</title>
+		<link>http://www.rottentomatoes.com/m/1927375/news/1927375/</link>
+		<description><![CDATA[Downey plays coy during an appearance on "The Daily Show."]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927375/news/1927375/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content8.flixster.com/movie/11/17/05/11170594_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-01 14:30:53</pubDate>
+		<title>The Internship Set Visit Report</title>
+		<link>http://www.rottentomatoes.com/m/1927374/news/1927374/</link>
+		<description><![CDATA[20 things to know about the upcoming Vince Vaughn/Owen Wilson comedy.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927374/news/1927374/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content8.flixster.com/movie/11/16/87/11168746_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-01 14:29:55</pubDate>
+		<title>How Actors Navigate Stereotypes</title>
+		<link>http://www.rottentomatoes.com/m/1927373/news/1927373/</link>
+		<description><![CDATA[To avoid, or to embrace? That is the question.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927373/news/1927373/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content8.flixster.com/movie/11/03/38/11033878_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-01 14:29:07</pubDate>
+		<title>Watch the World's Smallest Movie</title>
+		<link>http://www.rottentomatoes.com/m/1927372/news/1927372/</link>
+		<description><![CDATA[Starring...atoms!]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927372/news/1927372/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content6.flixster.com/movie/10/91/75/10917560_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-01 14:26:29</pubDate>
+		<title>10 Comeback Movies That Revived Their Stars' Careers</title>
+		<link>http://www.rottentomatoes.com/m/1927371/news/1927371/</link>
+		<description><![CDATA[In honor of "Iron Man" star and career resuscitator Robert Downey Jr., here are some movies that helped bring actors' job security back from the brink.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927371/news/1927371/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content8.flixster.com/movie/11/17/05/11170594_tmb.jpg" />
+		
+	</item>
+
+	<item>
+		<pubDate>2013-05-01 14:25:12</pubDate>
+		<title>The Great Gatsby, Then and Now</title>
+		<link>http://www.rottentomatoes.com/m/1927370/news/1927370/</link>
+		<description><![CDATA[With Baz Luhrmann's adaptation nearing its debut, here's a look back at the other times F. Scott Fitzgerald's classic novel made its way to the screen.]]></description>
+		<guid>http://www.rottentomatoes.com/m/1927370/news/1927370/</guid>
+		<atom:link rel="thumbnail" type="image/*" href="http://content9.flixster.com/movie/11/16/53/11165363_tmb.jpg" />
+		
+	</item>
+
+
+</channel>
+</rss> 

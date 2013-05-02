@@ -49,6 +49,29 @@ public class TestRssReader {
     }
 
     @Test
+    public void rssReaderRottenTomatoesdTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_rottentomatoes.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("Rotten Tomatoes: News", feed.getTitle());
+        Assert.assertEquals("http://www.rottentomatoes.com/news/", feed.getUrl());
+        Assert.assertEquals("en-us", feed.getLanguage());
+        Assert.assertEquals("Entertainment news and headlines compiled by the editors of Rotten Tomatoes", feed.getDescription());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(20, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("Parental Guidance: Iron Man 3 and The Guilt Trip", article.getTitle());
+        Assert.assertEquals("http://www.rottentomatoes.com/m/1927377/news/1927377/", article.getUrl());
+        Assert.assertEquals("http://www.rottentomatoes.com/m/1927377/news/1927377/", article.getGuid());
+        Assert.assertNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        Assert.assertTrue(article.getDescription().contains("This week in family filmgoing"));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
+
+    @Test
     public void rssReaderXkcdTest() throws Exception {
         InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_xkcd.xml");
         RssReader reader = new RssReader();

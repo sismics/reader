@@ -34,11 +34,18 @@ import com.sismics.util.DateUtil;
 public class RssReader extends DefaultHandler {
     private static final Logger log = LoggerFactory.getLogger(RssReader.class);
 
+    /**
+     * A list of common date formats used in RSS feeds.
+     */
     private static final List<DateTimeFormatter> DF_RSS = ImmutableList.of(
             DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss Z").withOffsetParsed().withLocale(Locale.ENGLISH),
             DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss zzz").withOffsetParsed().withLocale(Locale.ENGLISH),
-            DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss Z").withOffsetParsed().withLocale(Locale.ENGLISH));
+            DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss Z").withOffsetParsed().withLocale(Locale.ENGLISH),
+            DateTimeFormat.forPattern("yyyy-mm-dd HH:mm:ss").withOffsetParsed().withLocale(Locale.ENGLISH));
     
+    /**
+     * A list of common date formats used in Atom feeds.
+     */
     private static final List<DateTimeFormatter> DF_ATOM = ImmutableList.of(
             DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").withOffsetParsed().withLocale(Locale.ENGLISH),
             DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withOffsetParsed().withLocale(Locale.ENGLISH));
