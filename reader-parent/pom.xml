@@ -54,14 +54,15 @@
     <org.apache.maven.plugins.maven-dependency-plugin.version>2.7</org.apache.maven.plugins.maven-dependency-plugin.version>
     <org.apache.maven.plugins.maven-eclipse-plugin.version>2.8</org.apache.maven.plugins.maven-eclipse-plugin.version>
     <org.apache.maven.plugins.maven-jar-plugin.version>2.4</org.apache.maven.plugins.maven-jar-plugin.version>
-    <org.apache.maven.plugins.maven-resources-plugin.version>2.6</org.apache.maven.plugins.maven-resources-plugin.version>
     <org.apache.maven.plugins.maven-release-plugin.version>2.4.1</org.apache.maven.plugins.maven-release-plugin.version>
+    <org.apache.maven.plugins.maven-resources-plugin.version>2.6</org.apache.maven.plugins.maven-resources-plugin.version>
     <org.apache.maven.plugins.maven-war-plugin.version>2.2</org.apache.maven.plugins.maven-war-plugin.version>
     <org.codehaus.cargo.cargo-maven2-plugin.version>1.2.0</org.codehaus.cargo.cargo-maven2-plugin.version>
-    <org.mortbay.jetty.jetty-maven-plugin.version>8.1.2.v20120308</org.mortbay.jetty.jetty-maven-plugin.version>
-    <org.vafer.jdeb.version>1.0.1</org.vafer.jdeb.version>
     <org.codehaus.mojo.rpm-maven-plugin.version>2.1-alpha-2</org.codehaus.mojo.rpm-maven-plugin.version>
     <org.codehaus.mojo.nsis-maven-plugin.version>1.0-SNAPSHOT</org.codehaus.mojo.nsis-maven-plugin.version>
+    <org.codehaus.mojo.osxappbundle-maven-plugin.version>1.0-alpha-2</org.codehaus.mojo.osxappbundle-maven-plugin.version>
+    <org.mortbay.jetty.jetty-maven-plugin.version>8.1.2.v20120308</org.mortbay.jetty.jetty-maven-plugin.version>
+    <org.vafer.jdeb.version>1.0.1</org.vafer.jdeb.version>
     <com.samaxes.maven.minify-maven-plugin.version>1.7</com.samaxes.maven.minify-maven-plugin.version>
   </properties> 
   
@@ -97,6 +98,15 @@
         <version>${org.apache.maven.plugins.maven-jar-plugin.version}</version>
       </plugin>
       
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>${org.apache.maven.plugins.maven-release-plugin.version}</version>
+        <configuration>
+          <tagNameFormat>v@{project.version}</tagNameFormat>
+        </configuration>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
@@ -146,12 +156,9 @@
       </plugin>
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>${org.apache.maven.plugins.maven-release-plugin.version}</version>
-        <configuration>
-          <tagNameFormat>v@{project.version}</tagNameFormat>
-        </configuration>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>osxappbundle-maven-plugin</artifactId>
+        <version>${org.codehaus.mojo.osxappbundle-maven-plugin.version}</version>
       </plugin>
     </plugins>
   </build>
@@ -170,6 +177,7 @@
         <module>../reader-distribution-standalone</module>
         <module>../reader-distribution-debian</module>
         <module>../reader-distribution-redhat</module>
+        <module>../reader-distribution-mac</module>
         <module>../reader-distribution-windows</module>
       </modules>
     </profile>

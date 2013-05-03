@@ -15,13 +15,14 @@ import com.sismics.reader.agent.deployer.ReaderDeployer;
 import com.sismics.reader.agent.model.Setting;
 import com.sismics.reader.agent.ui.AgentFrame;
 import com.sismics.reader.agent.ui.TrayController;
+import com.sismics.util.EnvironmentUtil;
 
 /**
  * Windows Agent to configure and launch the Reader application.
  *
  * @author jtremeaux
  */
-public class WindowsAgent {
+public class ReaderAgent {
 
     private final List<DeploymentStatusListener> listeners = new ArrayList<DeploymentStatusListener>();
     
@@ -36,9 +37,9 @@ public class WindowsAgent {
     private final Setting setting;
     
     /**
-     * Constructor of WindowsAgent.
+     * Constructor of ReaderAgent.
      */
-    public WindowsAgent() {
+    public ReaderAgent() {
         setting = new Setting();
         
         readerDeployer = new ReaderDeployer(this);
@@ -57,8 +58,7 @@ public class WindowsAgent {
     
     private void setLookAndFeel() {
         try {
-            String os = System.getProperty("os.name").toLowerCase();
-            if (os.indexOf("win") >= 0) {
+            if (EnvironmentUtil.isWindows()) {
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             }
         } catch (Throwable e) {
@@ -95,17 +95,22 @@ public class WindowsAgent {
 
     /**
      * Returns whether UAC elevation is necessary (to start/stop services etc).
+     * 
+     * @return Elevation needed
      */
     private boolean isElevationNeeded() {
-
-        String osVersion = System.getProperty("os.version");
+        if (!EnvironmentUtil.isWindows()) {
+            return false;
+        }
+        
+        final String osVersion = EnvironmentUtil.getOsVersion();
         try {
             int majorVersion = Integer.parseInt(osVersion.substring(0, osVersion.indexOf(".")));
 
             // Elevation is necessary in Windows Vista (os.version=6.1) and later.
             return majorVersion >= 6;
-        } catch (Exception x) {
-            System.err.println("Failed to resolve OS version from '" + osVersion + "'\n" + x);
+        } catch (Exception e) {
+            System.err.println("Failed to resolve OS version from '" + osVersion + "'\n" + e);
             return false;
         }
     }
@@ -178,7 +183,7 @@ public class WindowsAgent {
     public static void main(String[] args) {
         System.out.println("Starting up Windows agent");
 
-        WindowsAgent agent = new WindowsAgent();
+        ReaderAgent agent = new ReaderAgent();
         agent.start(Arrays.asList(args));
     }
 

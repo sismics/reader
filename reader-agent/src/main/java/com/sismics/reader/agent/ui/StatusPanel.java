@@ -15,7 +15,7 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.factories.ButtonBarFactory;
 import com.jgoodies.forms.layout.FormLayout;
-import com.sismics.reader.agent.WindowsAgent;
+import com.sismics.reader.agent.ReaderAgent;
 import com.sismics.reader.agent.deployer.DeploymentStatus;
 import com.sismics.reader.agent.deployer.DeploymentStatus.ServerState;
 import com.sismics.reader.agent.deployer.DeploymentStatusListener;
@@ -35,7 +35,7 @@ public class StatusPanel extends JPanel implements DeploymentStatusListener {
 
     private static final DateFormat DATE_FORMAT = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
 
-    private final WindowsAgent windowsAgent;
+    private final ReaderAgent readerAgent;
 
     private JTextField statusTextField;
     
@@ -54,12 +54,12 @@ public class StatusPanel extends JPanel implements DeploymentStatusListener {
     /**
      * Constructor of StatusPanel.
      * 
-     * @param windowsAgent Windows agent
+     * @param readerAgent Windows agent
      */
-    public StatusPanel(WindowsAgent windowsAgent) {
-        this.windowsAgent = windowsAgent;
+    public StatusPanel(ReaderAgent readerAgent) {
+        this.readerAgent = readerAgent;
         initComponent();
-        windowsAgent.addListener(this);
+        readerAgent.addListener(this);
     }
 
     /**
@@ -84,8 +84,8 @@ public class StatusPanel extends JPanel implements DeploymentStatusListener {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                windowsAgent.checkElevation("-start");
-                windowsAgent.getReaderDeployer().start();
+                readerAgent.checkElevation("-start");
+                readerAgent.getReaderDeployer().start();
             }
         });
         
@@ -93,8 +93,8 @@ public class StatusPanel extends JPanel implements DeploymentStatusListener {
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                windowsAgent.checkElevation("-stop");
-                windowsAgent.getReaderDeployer().stop();
+                readerAgent.checkElevation("-stop");
+                readerAgent.getReaderDeployer().stop();
             }
         });
         
@@ -106,7 +106,7 @@ public class StatusPanel extends JPanel implements DeploymentStatusListener {
         urlButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                windowsAgent.openBrowser();
+                readerAgent.openBrowser();
             }
         });
 

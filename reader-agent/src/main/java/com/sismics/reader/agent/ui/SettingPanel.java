@@ -19,7 +19,7 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.factories.ButtonBarFactory;
 import com.jgoodies.forms.layout.FormLayout;
-import com.sismics.reader.agent.WindowsAgent;
+import com.sismics.reader.agent.ReaderAgent;
 import com.sismics.reader.agent.model.Setting;
 import com.sismics.util.MessageUtil;
 
@@ -47,15 +47,15 @@ public class SettingPanel extends JPanel {
     
     private JButton saveButton;
     
-    private WindowsAgent windowsAgent;
+    private ReaderAgent readerAgent;
     
     /**
      * Constructor of SettingPanel.
      * 
-     * @param windowsAgent Reader agent
+     * @param readerAgent Reader agent
      */
-    public SettingPanel(WindowsAgent windowsAgent) {
-        this.windowsAgent = windowsAgent;
+    public SettingPanel(ReaderAgent readerAgent) {
+        this.readerAgent = readerAgent;
         
         initComponent();
         readSetting();
@@ -65,7 +65,7 @@ public class SettingPanel extends JPanel {
      * Read the settings from the properties file, and initialize the panel fields.
      */
     public void readSetting() {
-        final Setting setting = windowsAgent.getSetting();
+        final Setting setting = readerAgent.getSetting();
         setting.read();
         portTextField.setValue(setting.getPort());
         contextPathComboBox.setSelectedItem(setting.getContextPath());
@@ -78,7 +78,7 @@ public class SettingPanel extends JPanel {
      * @throws Exception
      */
     public void saveSetting() throws Exception {
-        final Setting setting = windowsAgent.getSetting();
+        final Setting setting = readerAgent.getSetting();
         setting.setPort(getPort());
         setting.setContextPath(getContextPath());
         setting.setAutoStart(autoStartCheckBox.isSelected());

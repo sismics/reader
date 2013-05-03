@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.util.Properties;
 
 import com.google.common.io.Closer;
+import com.sismics.util.EnvironmentUtil;
 import com.sismics.util.MessageUtil;
 
 /**
@@ -58,6 +59,11 @@ public class Setting {
     private String contextPath;
     
     /**
+     * Reader home.
+     */
+    private String readerHome;
+    
+    /**
      * Start server automatically.
      */
     private boolean autoStart;
@@ -70,6 +76,14 @@ public class Setting {
         port = DEFAULT_PORT;
         contextPath = DEFAULT_CONTEXT_PATH;
         autoStart = DEFAULT_AUTO_START;
+        
+        if (EnvironmentUtil.isWindows()) {
+            readerHome = EnvironmentUtil.getWindowsAppData() + "\\Sismics\\Reader";
+        } else if (EnvironmentUtil.isMacOs()) {
+            readerHome = EnvironmentUtil.getMacOsUserHome() + "/Library/Sismics/Reader";
+        } else {
+            readerHome = ".";
+        }
     }
     
     /**
@@ -182,6 +196,24 @@ public class Setting {
      */
     public void setContextPath(String contextPath) {
         this.contextPath = contextPath;
+    }
+
+    /**
+     * Getter of readerHome.
+     *
+     * @return readerHome
+     */
+    public String getReaderHome() {
+        return readerHome;
+    }
+
+    /**
+     * Setter of readerHome.
+     *
+     * @param readerHome readerHome
+     */
+    public void setReaderHome(String readerHome) {
+        this.readerHome = readerHome;
     }
 
     /**

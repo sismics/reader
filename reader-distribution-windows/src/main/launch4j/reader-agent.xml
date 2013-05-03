@@ -4,7 +4,7 @@
   <jar>reader-agent.jar</jar>
   <outfile>${project.build.directory}/reader-agent.exe</outfile>
   <errTitle>Reader</errTitle>
-  <cmdLine>-agent -Xmx150M -XX:MaxPermSize=128M</cmdLine>
+  <cmdLine>-Xmx150M -XX:MaxPermSize=128M</cmdLine>
   <chdir>.</chdir>
   <priority>normal</priority>
   <downloadUrl>http://www.java.com/download/</downloadUrl>
@@ -14,7 +14,7 @@
   <manifest>${basedir}/src/main/launch4j/reader-agent-elevated.manifest</manifest>
   <icon>${basedir}/src/main/launch4j/reader-16.ico</icon>
   <classPath>
-    <mainClass>com.sismics.reader.agent.WindowsAgent</mainClass>
+    <mainClass>com.sismics.reader.agent.ReaderAgent</mainClass>
     <cp>./reader-agent-${reader.version}-jar-with-dependencies.jar</cp>
   </classPath>
   <jre>

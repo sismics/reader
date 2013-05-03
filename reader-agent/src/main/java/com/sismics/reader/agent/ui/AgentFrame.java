@@ -14,7 +14,7 @@ import javax.swing.JTabbedPane;
 
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.factories.ButtonBarFactory;
-import com.sismics.reader.agent.WindowsAgent;
+import com.sismics.reader.agent.ReaderAgent;
 import com.sismics.reader.agent.deployer.DeploymentStatusListener;
 import com.sismics.reader.agent.deployer.DeploymentStatus;
 import com.sismics.util.MessageUtil;
@@ -52,13 +52,13 @@ public class AgentFrame extends JFrame implements DeploymentStatusListener {
     /**
      * Constructor of AgentFrame.
      * 
-     * @param windowsAgent Windows agent
+     * @param readerAgent Reader agent
      */
-    public AgentFrame(WindowsAgent windowsAgent) {
+    public AgentFrame(ReaderAgent readerAgent) {
         super(MessageUtil.getMessage("agent.frame.title"));
         
-        settingPanel = new SettingPanel(windowsAgent);
-        statusPanel = new StatusPanel(windowsAgent);
+        settingPanel = new SettingPanel(readerAgent);
+        statusPanel = new StatusPanel(readerAgent);
         
         initComponent();
         
@@ -71,7 +71,7 @@ public class AgentFrame extends JFrame implements DeploymentStatusListener {
         pack();
         centerComponent();
         
-        windowsAgent.addListener(this);
+        readerAgent.addListener(this);
     }
 
     /**

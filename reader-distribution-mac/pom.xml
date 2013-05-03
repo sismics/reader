@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <groupId>com.sismics.reader</groupId>
+    <artifactId>reader-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../reader-parent</relativePath>
+  </parent>
+  
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>reader-distribution-mac</artifactId>
+  <packaging>jar</packaging>
+  <name>Reader Mac Distribution</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.sismics.reader</groupId>
+      <artifactId>reader-agent</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <outputDirectory>target</outputDirectory>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-reader-web</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.sismics.reader</groupId>
+                  <artifactId>reader-web</artifactId>
+                  <version>${reader.version}</version>
+                  <type>war</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${project.build.directory}</outputDirectory>
+                  <destFileName>reader.war</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>osxappbundle-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>com.sismics.reader.agent.ReaderAgent</mainClass>
+          <bundleName>Reader</bundleName>
+          <additionalResources>
+            <fileSet>
+              <directory>${project.build.directory}</directory>
+              <includes>
+               <include>reader.war</include>
+              </includes>
+            </fileSet>
+          </additionalResources>
+          <additionalClasspath>
+            <path>reader-agent.jar</path>
+          </additionalClasspath>
+          <javaApplicationStub>src/main/osxappbundle/JavaApplicationStub</javaApplicationStub>
+          <jvmVersion>1.6+</jvmVersion>
+          <vmOptions>-Xmx150M -XX:MaxPermSize=128M</vmOptions>
+          <iconFile>src/main/osxappbundle/reader-512.icns</iconFile>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>bundle</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

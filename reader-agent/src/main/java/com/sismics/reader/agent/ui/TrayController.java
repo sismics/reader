@@ -12,7 +12,7 @@ import java.net.URL;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
-import com.sismics.reader.agent.WindowsAgent;
+import com.sismics.reader.agent.ReaderAgent;
 import com.sismics.reader.agent.deployer.DeploymentStatusListener;
 import com.sismics.reader.agent.deployer.DeploymentStatus;
 import com.sismics.reader.agent.deployer.DeploymentStatus.ServerState;
@@ -25,7 +25,7 @@ import com.sismics.util.MessageUtil;
  */
 public class TrayController implements DeploymentStatusListener {
 
-    private final WindowsAgent readerAgent;
+    private final ReaderAgent readerAgent;
     
     private TrayIcon trayIcon;
 
@@ -42,23 +42,23 @@ public class TrayController implements DeploymentStatusListener {
     /**
      * Constructor of TrayController.
      * 
-     * @param windowsAgent
+     * @param readerAgent
      */
     @SuppressWarnings("serial")
-    public TrayController(WindowsAgent windowsAgent) {
-        this.readerAgent = windowsAgent;
+    public TrayController(ReaderAgent readerAgent) {
+        this.readerAgent = readerAgent;
         try {
             openAction = new AbstractAction(MessageUtil.getMessage("agent.systray.open")) {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    readerAgent.openBrowser();
+                    TrayController.this.readerAgent.openBrowser();
                 }
             };
 
             controlPanelAction = new AbstractAction(MessageUtil.getMessage("agent.systray.frame")) {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    readerAgent.showStatusPanel();
+                    TrayController.this.readerAgent.showStatusPanel();
                 }
             };
 
@@ -67,7 +67,7 @@ public class TrayController implements DeploymentStatusListener {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     //TODO Confirm if reader is running
-                    readerAgent.exit();
+                    TrayController.this.readerAgent.exit();
                 }
             };
             startedImage = createImage("/images/reader-started-16.png");
@@ -84,7 +84,7 @@ public class TrayController implements DeploymentStatusListener {
             trayIcon.addActionListener(controlPanelAction);
             SystemTray.getSystemTray().add(trayIcon);
             
-            windowsAgent.addListener(this);
+            readerAgent.addListener(this);
         } catch (Throwable e) {
             System.err.println("Disabling tray support.");
         }

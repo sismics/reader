@@ -8,7 +8,7 @@ import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.util.component.LifeCycle;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-import com.sismics.reader.agent.WindowsAgent;
+import com.sismics.reader.agent.ReaderAgent;
 import com.sismics.reader.agent.deployer.DeploymentStatus.ServerState;
 import com.sismics.reader.agent.model.Setting;
 import com.sismics.util.MessageUtil;
@@ -38,7 +38,7 @@ public class ReaderDeployer implements LifeCycle.Listener {
     /**
      * Windows agent.
      */
-    private WindowsAgent windowsAgent;
+    private ReaderAgent readerAgent;
     
     /**
      * Exception occuring during server startup.
@@ -55,15 +55,16 @@ public class ReaderDeployer implements LifeCycle.Listener {
      * 
      * @param setting Settings
      */
-    public ReaderDeployer(WindowsAgent windowsAgent) {
-        this.windowsAgent = windowsAgent;
+    public ReaderDeployer(ReaderAgent readerAgent) {
+        this.readerAgent = readerAgent;
     }
     
     /**
      * Start the server.
      */
     public void start() {
-        System.setProperty("reader.home", System.getenv("APPDATA") + "\\Sismics\\Reader");
+        final Setting setting = readerAgent.getSetting();
+        System.setProperty("reader.home", setting.getReaderHome());
         
         startTime = new Date();
         try {
@@ -71,7 +72,6 @@ public class ReaderDeployer implements LifeCycle.Listener {
 
             server = new Server();
             SelectChannelConnector connector = new SelectChannelConnector();
-            final Setting setting = windowsAgent.getSetting();
             connector.setHost(setting.getHost());
             connector.setPort(setting.getPort());
             server.addConnector(connector);
@@ -145,7 +145,7 @@ public class ReaderDeployer implements LifeCycle.Listener {
      * @return URL
      */
     public String getUrl() {
-        final Setting setting = windowsAgent.getSetting();
+        final Setting setting = readerAgent.getSetting();
         StringBuilder sb = new StringBuilder("http://");
         sb.append(Setting.DEFAULT_HOST.equals(setting.getHost()) ? "localhost" : setting.getHost());
         if (setting.getPort() != 80) {
@@ -168,30 +168,30 @@ public class ReaderDeployer implements LifeCycle.Listener {
     @Override
     public void lifeCycleStopping(LifeCycle event) {
         serverState = ServerState.STOPPING;
-        windowsAgent.notifyDeploymentInfo();
+        readerAgent.notifyDeploymentInfo();
     }
 
     @Override
     public void lifeCycleStopped(LifeCycle event) {
         serverState = ServerState.STOPPED;
-        windowsAgent.notifyDeploymentInfo();
+        readerAgent.notifyDeploymentInfo();
     }
 
     @Override
     public void lifeCycleStarting(LifeCycle event) {
         serverState = ServerState.STARTING;
-        windowsAgent.notifyDeploymentInfo();
+        readerAgent.notifyDeploymentInfo();
     }
 
     @Override
     public void lifeCycleStarted(LifeCycle event) {
         serverState = ServerState.STARTED;
-        windowsAgent.notifyDeploymentInfo();
+        readerAgent.notifyDeploymentInfo();
     }
 
     @Override
     public void lifeCycleFailure(LifeCycle event, Throwable cause) {
         serverState = ServerState.STOPPED;
-        windowsAgent.notifyDeploymentInfo();
+        readerAgent.notifyDeploymentInfo();
     }
 }
