@@ -8,7 +8,6 @@ import org.codehaus.jettison.json.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.rest.filter.CookieAuthenticationFilter;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.ClientResponse.Status;
@@ -51,7 +50,6 @@ public class TestAppResource extends BaseJerseyTest {
         response = appResource.post(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
-        AppContext.getInstance().waitForAsync();
     }
 
     /**

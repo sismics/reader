@@ -37,6 +37,7 @@ import com.sismics.reader.core.dao.jpa.dto.FeedDto;
 import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.event.ArticleCreatedAsyncEvent;
+import com.sismics.reader.core.event.ArticleUpdatedAsyncEvent;
 import com.sismics.reader.core.event.FaviconUpdateRequestedEvent;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.Article;
@@ -175,6 +176,7 @@ public class FeedService extends AbstractScheduledService {
                 
                 Article article = new Article();
                 article.setId(currentArticle.getId());
+                article.setFeedId(feed.getId());
                 article.setUrl(newArticle.getUrl());
                 article.setTitle(TextSanitizer.sanitize(newArticle.getTitle()));
                 article.setCreator(newArticle.getCreator());
@@ -185,8 +187,12 @@ public class FeedService extends AbstractScheduledService {
                 article.setEnclosureLength(newArticle.getEnclosureLength());
                 article.setEnclosureType(newArticle.getEnclosureType());
                 
-                // TODO Update Lucene index
                 articleDao.update(article);
+                
+                // Update indexed article
+                ArticleUpdatedAsyncEvent articleUpdatedAsyncEvent = new ArticleUpdatedAsyncEvent();
+                articleUpdatedAsyncEvent.setArticle(article);
+                AppContext.getInstance().getAsyncEventBus().post(articleUpdatedAsyncEvent);
             }
         }
         

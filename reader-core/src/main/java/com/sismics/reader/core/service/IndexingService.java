@@ -104,9 +104,12 @@ public class IndexingService extends AbstractScheduledService {
         // Search articles
         ArticleDao articleDao = new ArticleDao();
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, offset);
-        Map<String, Article> articleMap = articleDao.search(paginatedList, feedList, searchQuery);
+        Map<String, Article> articleMap = null;
+        if (feedList.size() > 0) {
+            articleMap = articleDao.search(paginatedList, feedList, searchQuery);
+        }
         
-        if (articleMap.size() > 0) {
+        if (articleMap != null && articleMap.size() > 0) {
             // Get linked UserArticle from database
             UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
             userArticleCriteria.setUserId(userId);
@@ -131,7 +134,7 @@ public class IndexingService extends AbstractScheduledService {
             paginatedList.setResultList(new ArrayList<UserArticleDto>());
         }
         
-        return  paginatedList;
+        return paginatedList;
     }
     
     /**

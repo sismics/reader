@@ -1,6 +1,5 @@
 package com.sismics.reader.core.dao.lucene;
 
-import java.io.IOException;
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +49,6 @@ public class ArticleDao {
      * Destroy and rebuild index.
      * 
      * @param articleList
-     * @throws IOException
      */
     public void rebuildIndex(final List<Article> articleList) {
         LuceneUtil.handle(new LuceneRunnable() {
@@ -73,7 +71,6 @@ public class ArticleDao {
      * Add articles to the index.
      * 
      * @param articleList
-     * @throws IOException
      */
     public void create(final List<Article> articleList) {
         LuceneUtil.handle(new LuceneRunnable() {
@@ -84,6 +81,21 @@ public class ArticleDao {
                     org.apache.lucene.document.Document document = getDocumentFromArticle(article);
                     indexWriter.addDocument(document);
                 }
+            }
+        });
+    }
+    
+    /**
+     * Update index.
+     * 
+     * @param article
+     */
+    public void update(final Article article) {
+        LuceneUtil.handle(new LuceneRunnable() {
+            @Override
+            public void run(IndexWriter indexWriter) throws Exception {
+                org.apache.lucene.document.Document document = getDocumentFromArticle(article);
+                indexWriter.updateDocument(new Term("id", article.getId()), document);
             }
         });
     }
