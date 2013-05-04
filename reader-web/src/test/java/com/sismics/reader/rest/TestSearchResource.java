@@ -98,5 +98,18 @@ public class TestSearchResource extends BaseJerseyTest {
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
         Assert.assertEquals(2, articles.length());
+        
+        // Create user search3
+        clientUtil.createUser("search3");
+        String search3AuthToken = clientUtil.login("search3");
+        
+        // Search "something"
+        searchResource = resource().path("/search/something");
+        searchResource.addFilter(new CookieAuthenticationFilter(search3AuthToken));
+        response = searchResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        articles = json.getJSONArray("articles");
+        Assert.assertEquals(0, articles.length());
     }
 }

@@ -1,41 +1,43 @@
 package com.sismics.reader.core.event;
 
+import java.util.List;
+
 import com.google.common.base.Objects;
 import com.sismics.reader.core.model.jpa.Article;
 
 /**
- * Article updated event.
+ * Articles updated event.
  *
  * @author bgamard
  */
 public class ArticleUpdatedAsyncEvent {
     /**
-     * Updated article.
+     * List of updated articles.
      */
-    private Article article;
+    private List<Article> articleList;
     
     /**
-     * Getter of article.
+     * Getter of articleList.
      *
-     * @return article
+     * @return articleList
      */
-    public Article getArticle() {
-        return article;
+    public List<Article> getArticleList() {
+        return articleList;
     }
 
     /**
-     * Setter of article.
+     * Setter of articleList.
      *
-     * @param article article
+     * @param articleList articleList
      */
-    public void setArticle(Article article) {
-        this.article = article;
+    public void setArticleList(List<Article> articleList) {
+        this.articleList = articleList;
     }
 
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
-                .add("article", article)
+                .add("articles", (articleList != null ? articleList.size() : "0") + " articles")
                 .toString();
     }
 }

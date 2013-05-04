@@ -76,7 +76,7 @@ public class ArticleDao {
         LuceneUtil.handle(new LuceneRunnable() {
             @Override
             public void run(IndexWriter indexWriter) throws Exception {
-             // Add all articles
+                // Add all articles
                 for (Article article : articleList) {
                     org.apache.lucene.document.Document document = getDocumentFromArticle(article);
                     indexWriter.addDocument(document);
@@ -90,12 +90,15 @@ public class ArticleDao {
      * 
      * @param article
      */
-    public void update(final Article article) {
+    public void update(final List<Article> articleList) {
         LuceneUtil.handle(new LuceneRunnable() {
             @Override
             public void run(IndexWriter indexWriter) throws Exception {
-                org.apache.lucene.document.Document document = getDocumentFromArticle(article);
-                indexWriter.updateDocument(new Term("id", article.getId()), document);
+                // Update all articles
+                for (Article article : articleList) {
+                    org.apache.lucene.document.Document document = getDocumentFromArticle(article);
+                    indexWriter.updateDocument(new Term("id", article.getId()), document);
+                }
             }
         });
     }

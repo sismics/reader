@@ -8,7 +8,7 @@ import com.sismics.reader.core.dao.lucene.ArticleDao;
 import com.sismics.reader.core.event.ArticleUpdatedAsyncEvent;
 
 /**
- * Listener on updated article.
+ * Listener on updated articles.
  * 
  * @author bgamard
  */
@@ -19,9 +19,9 @@ public class ArticleUpdatedAsyncListener {
     private static final Logger log = LoggerFactory.getLogger(ArticleUpdatedAsyncListener.class);
 
     /**
-     * Process updated article.
+     * Process updated articles.
      * 
-     * @param articlesUpdatedAsyncEvent Updated article event
+     * @param articlesUpdatedAsyncEvent Updated articles event
      * @throws Exception
      */
     @Subscribe
@@ -32,6 +32,6 @@ public class ArticleUpdatedAsyncListener {
         
         // Update index
         ArticleDao articleDao = new ArticleDao();
-        articleDao.update(articlesUpdatedAsyncEvent.getArticle());
+        articleDao.update(articlesUpdatedAsyncEvent.getArticleList());
     }
 }
