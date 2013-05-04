@@ -1,0 +1,19 @@
+What is Reader?
+---------------
+
+Reader is an open source, Web-based aggregator of content served by Web Feeds (RSS, Atom).
+
+Reader is written in Java, and may be run on any operating system with Java support.
+
+See <http://www.sismics.com/reader/> for a list of features and benefits.
+
+Requirements:
+-------------
+
+* Java Runtime Environment (JRE) 6.0 or greater
+
+Reporting issues:
+---------------
+
+Issues should be reported to the GitHub project page <https://github.com/sismics/reader/>.
+

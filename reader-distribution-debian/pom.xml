@@ -14,17 +14,19 @@
   <packaging>jar</packaging>
   <name>Reader Debian Distribution</name>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.sismics.reader</groupId>
-      <artifactId>reader-distribution-standalone</artifactId>
-    </dependency>
-  </dependencies>
+  <properties>
+    <timestamp>${maven.build.timestamp}</timestamp>
+    <maven.build.timestamp.format>EEE, d MMM yyyy HH:mm:ss Z</maven.build.timestamp.format>
+  </properties>
   
   <build>
     <resources>
       <resource>
         <directory>src/main/deb</directory>
+        <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/package</directory>
         <filtering>true</filtering>
       </resource>
     </resources>
@@ -68,10 +70,24 @@
             </goals>
             <configuration>
               <verbose>true</verbose>
-              <controlDir>${basedir}/target/classes/control</controlDir>
+              <controlDir>${project.build.outputDirectory}/control</controlDir>
+              <deb>${project.build.directory}/reader-${reader.version}.deb</deb>
               <dataSet>
                 <data>
-                  <src>${basedir}/src/main/package/etc/init.d/reader</src>
+                  <type>template</type>
+                  <paths>
+                    <path>usr/share/reader</path>
+                    <path>usr/share/doc/reader</path>
+                  </paths>
+                  <mapper>
+                    <type>perm</type>
+                    <user>root</user>
+                    <group>root</group>
+                  </mapper>
+                </data>
+                
+                <data>
+                  <src>${project.build.outputDirectory}/etc/init.d/reader</src>
                   <type>file</type>
                   <mapper>
                     <type>perm</type>
@@ -83,7 +99,7 @@
                 </data>
       
                 <data>
-                  <src>${basedir}/src/main/package/etc/default/reader</src>
+                  <src>${project.build.outputDirectory}/etc/default/reader</src>
                   <type>file</type>
                   <mapper>
                     <type>perm</type>
@@ -93,6 +109,17 @@
                   </mapper>
                 </data>
       
+                <data>
+                  <src>${project.build.outputDirectory}/usr/share/doc/reader</src>
+                  <type>directory</type>
+                  <mapper>
+                    <type>perm</type>
+                    <prefix>/usr/share/doc/reader</prefix>
+                    <user>root</user>
+                    <group>root</group>
+                  </mapper>
+                </data>
+
                 <data>
                   <src>${project.build.directory}/reader-distribution-standalone-${reader.version}</src>
                   <type>directory</type>
