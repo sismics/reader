@@ -171,7 +171,7 @@ public class FeedService extends AbstractScheduledService {
             ArticleCriteria articleCriteria = new ArticleCriteria();
             articleCriteria.setGuidIn(guidIn);
             List<ArticleDto> currentArticleDtoList = articleDao.findByCriteria(articleCriteria);
-            List<Article> currentArticleList = new ArrayList<Article>();
+            List<Article> articleUpdatedList = new ArrayList<Article>();
             for (ArticleDto currentArticle : currentArticleDtoList) {
                 Article newArticle = articleMap.remove(currentArticle.getGuid());
                 
@@ -188,13 +188,15 @@ public class FeedService extends AbstractScheduledService {
                 article.setEnclosureLength(newArticle.getEnclosureLength());
                 article.setEnclosureType(newArticle.getEnclosureType());
                 
-                articleDao.update(article);
-                currentArticleList.add(article);
+                if (!currentArticle.getTitle().equals(article.getTitle()) || !currentArticle.getDescription().equals(article.getDescription())) {
+                    articleDao.update(article);
+                    articleUpdatedList.add(article);
+                }
             }
             
             // Update indexed article
             ArticleUpdatedAsyncEvent articleUpdatedAsyncEvent = new ArticleUpdatedAsyncEvent();
-            articleUpdatedAsyncEvent.setArticleList(currentArticleList);
+            articleUpdatedAsyncEvent.setArticleList(articleUpdatedList);
             AppContext.getInstance().getAsyncEventBus().post(articleUpdatedAsyncEvent);
         }
         
