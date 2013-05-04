@@ -107,6 +107,11 @@
       <artifactId>lucene-highlighter</artifactId>
     </dependency>
     
+    <dependency>
+      <groupId>org.bitlet</groupId>
+      <artifactId>weupnp</artifactId>
+    </dependency>
+    
     <!-- Test dependencies -->
     <dependency>
       <groupId>junit</groupId>

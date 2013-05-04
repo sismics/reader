@@ -5,6 +5,7 @@ import junit.framework.Assert;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sismics.reader.core.model.context.AppContext;
@@ -53,6 +54,23 @@ public class TestAppResource extends BaseJerseyTest {
         AppContext.getInstance().waitForAsync();
     }
 
+    /**
+     * Test the map port resource.
+     * 
+     * @throws JSONException
+     */
+    @Test
+    @Ignore
+    public void testMapPortResource() throws JSONException {
+        // Login admin
+        String adminAuthenticationToken = clientUtil.login("admin", "admin", false);
+        
+        // Map port using UPnP
+        WebResource appResource = resource().path("/app/map_port");
+        appResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        appResource.post(ClientResponse.class);
+    }
+    
     /**
      * Test the log resource.
      * 
