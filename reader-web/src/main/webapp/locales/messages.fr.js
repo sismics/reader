@@ -150,7 +150,8 @@
     "nomoreunreadarticles": "Pas plus d'articles non-lus",
     "noarticle": "Aucun articles",
     "nonewarticle": "Aucun articles non-lus",
-    "showall": "Tout afficher"
+    "showall": "Tout afficher",
+    "retry": "Réessayer"
   },
   "wizard": {
     "title": "Assistant d'installation Sismics Reader",

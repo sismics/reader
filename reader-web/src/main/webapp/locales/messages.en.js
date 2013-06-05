@@ -150,7 +150,8 @@
     "nomoreunreadarticles": "No more unread articles",
     "noarticle": "No article",
     "nonewarticle": "No new article",
-    "showall": "Show all"
+    "showall": "Show all",
+    "retry": "Retry"
   },
   "wizard": {
     "title": "Sismics Reader installation wizard",
