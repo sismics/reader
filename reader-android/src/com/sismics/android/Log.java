@@ -1,17 +1,17 @@
 package com.sismics.android;
 
 /**
- * Logger qui encapsule l'activation / désactivation des debug.
- * Les logs sont au niveau WARN par défaut.
- * Pour les activer : adb shell setprop log.tag.TAG_NAME DEBUG
+ * Wrapper around Android logger.
+ * Logs are WARN level by default.
+ * To activate them : adb shell setprop log.tag.TAG_NAME DEBUG
  * 
- * @author naku
+ * @author jtremeaux
  */
 public class Log {
     /**
-     * Affiche un message de débug.
+     * Display a debug message.
      * 
-     * @param tag Balise
+     * @param tag Tag
      * @param msg Message
      */
     public static void d(final String tag, final String msg) {
@@ -21,9 +21,9 @@ public class Log {
     }
     
     /**
-     * Affiche un message d'information.
+     * Display an info message.
      * 
-     * @param tag Balise
+     * @param tag Tag
      * @param msg Message
      */
     public static void w(final String tag, final String msg) {
@@ -33,9 +33,9 @@ public class Log {
     }
     
     /**
-     * Affiche un message d'erreur.
+     * Display an error message.
      * 
-     * @param tag Balise
+     * @param tag Tag
      * @param msg Message
      * @param t Exception
      */
@@ -46,9 +46,9 @@ public class Log {
     }
     
     /**
-     * Affiche un message d'erreur.
+     * Display an error message.
      * 
-     * @param tag Balise
+     * @param tag Tag
      * @param msg Message
      */
     public static void e(final String tag, final String msg) {

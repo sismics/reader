@@ -5,20 +5,19 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 /**
- * Classe utilitaire pour la connectivité réseau.
+ * Utility class for network connectivity.
  * 
  * @author bgamard
  */
 public class ConnectivityUtil {
     
     /**
-     * Vérifie la connectivité avant d'effectuer une opération nécessitant le réseau.
+     * Check if a network connection is available.
      * 
-     * @param context Contexte
-     * @return Connectivité présente
+     * @param context Context
+     * @return Network connection available
      */
     public static boolean checkConnectivity(Context context) {
-        // Vérifie la connectivité
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnected()) {

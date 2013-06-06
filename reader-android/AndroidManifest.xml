@@ -13,22 +13,14 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
-    <uses-feature
-        android:name="android.hardware.touchscreen"
-        android:required="false" />
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
-
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/application_name"
         android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
-
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.LoginActivity"
             android:label="@string/application_name"
             android:logo="@drawable/ic_launcher"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
@@ -38,6 +30,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/application_name"
+            android:logo="@drawable/ic_launcher" >
         </activity>
     </application>
 
