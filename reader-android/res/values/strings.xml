@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="application_name">Sismics Reader</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="crash_toast_text">A crash occurred, a report has been sent to resolve this problem</string>
+    
+</resources>
