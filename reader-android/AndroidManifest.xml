@@ -18,12 +18,12 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/application_name"
-        android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
+        android:theme="@android:style/Theme.Holo.Light" >
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/application_name"
             android:logo="@drawable/ic_launcher"
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
+            android:theme="@android:style/Theme.Holo.Light" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
