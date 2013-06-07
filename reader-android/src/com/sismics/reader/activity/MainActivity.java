@@ -16,14 +16,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.R;
 import com.sismics.reader.fragment.NavigationFragment;
 import com.sismics.reader.model.application.ApplicationContext;
+import com.sismics.reader.resource.SubscriptionResource;
 import com.sismics.reader.resource.UserResource;
+import com.sismics.reader.ui.adapter.SubscriptionAdapter;
 
 /**
  * Main activity.
@@ -53,15 +54,22 @@ public class MainActivity extends Activity {
 
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        
         // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, new String[] { "Main menu" }));
+        SubscriptionResource.list(this, false, new SismicsHttpResponseHandler() {
+            @Override
+            public void onSuccess(JSONObject json) {
+                mDrawerList.setAdapter(new SubscriptionAdapter(MainActivity.this, json));
+            }
+        });
+
         mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectItem(position);
             }
         });
-
+        
         // enable ActionBar app icon to behave as action to toggle nav drawer
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
