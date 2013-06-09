@@ -90,5 +90,6 @@ public class ArticlesFragment extends NavigationFragment {
     @Override
     public void onDestroyView() {
         ApplicationContext.getInstance().removeOnArticleItemsChanged(articleList.getAdapter());
+        super.onDestroyView();
     }
 }
