@@ -36,6 +36,11 @@
             android:label="@string/application_name"
             android:logo="@drawable/ic_launcher" >
         </activity>
+        <activity
+            android:name=".activity.ArticleActivity"
+            android:label=""
+            android:logo="@drawable/ic_launcher" >
+        </activity>
     </application>
 
 </manifest>

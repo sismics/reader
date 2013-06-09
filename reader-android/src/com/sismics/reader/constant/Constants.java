@@ -18,4 +18,9 @@ public class Constants {
      * URL to Reader API.
      */
     public static final String READER_API_URL = READER_URL + "/api";
+    
+    /**
+     * Request code from articles list.
+     */
+    public static final int REQUEST_CODE_ARTICLES = 1;
 }

@@ -24,7 +24,7 @@ public class SubscriptionResource extends BaseResource {
     }
 
     /**
-     * GET /subscription
+     * GET /subscription.
      * @param context
      * @param responseHandler
      */
@@ -34,5 +34,28 @@ public class SubscriptionResource extends BaseResource {
         RequestParams params = new RequestParams();
         params.put("unread", Boolean.toString(unread));
         client.get(Constants.READER_API_URL + "/subscription", params, responseHandler);
+    }
+    
+    /**
+     * GET articles feed.
+     * @param context
+     * @param responseHandler
+     */
+    public static void feed(Context context, String url, boolean unread, int limit, int offset, SismicsHttpResponseHandler responseHandler) {
+        init(context);
+        
+        RequestParams params = new RequestParams();
+        params.put("unread", Boolean.toString(unread));
+        params.put("limit", Integer.toString(limit));
+        params.put("offset", Integer.toString(offset));
+        client.get(Constants.READER_API_URL + url, params, responseHandler);
+    }
+    
+    /**
+     * Cancel pending requests.
+     * @param context
+     */
+    public static void cancel(Context context) {
+        client.cancelRequests(context, true);
     }
 }

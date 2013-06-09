@@ -2,13 +2,13 @@ package com.sismics.reader.activity;
 
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -20,26 +20,27 @@ import android.widget.ListView;
 
 import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.R;
-import com.sismics.reader.fragment.NavigationFragment;
+import com.sismics.reader.fragment.ArticlesFragment;
 import com.sismics.reader.model.application.ApplicationContext;
 import com.sismics.reader.resource.SubscriptionResource;
 import com.sismics.reader.resource.UserResource;
 import com.sismics.reader.ui.adapter.SubscriptionAdapter;
+import com.sismics.reader.ui.adapter.SubscriptionAdapter.SubscriptionItem;
 
 /**
  * Main activity.
  * 
  * @author bgamard
  */
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
     
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(final Bundle args) {
+        super.onCreate(args);
         
         if (!ApplicationContext.getInstance().isLoggedIn()) {
             startActivity(new Intent(this, LoginActivity.class));
@@ -60,6 +61,10 @@ public class MainActivity extends Activity {
             @Override
             public void onSuccess(JSONObject json) {
                 mDrawerList.setAdapter(new SubscriptionAdapter(MainActivity.this, json));
+                
+                if (args == null) {
+                    selectItem(1);
+                }
             }
         });
 
@@ -84,10 +89,6 @@ public class MainActivity extends Activity {
                 R.string.drawer_close  /* "close drawer" description for accessibility */
                 );
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        if (savedInstanceState == null) {
-            selectItem(0);
-        }
     }
 
     @Override
@@ -141,13 +142,20 @@ public class MainActivity extends Activity {
     }
 
     private void selectItem(int position) {
-        // update the main content by replacing fragments
-        Fragment fragment = new NavigationFragment();
+        // Create a new fragment with articles context
+        SubscriptionAdapter adapter = (SubscriptionAdapter) mDrawerList.getAdapter();
+        SubscriptionItem item = adapter.getItem(position);
+        Fragment fragment = new ArticlesFragment();
+        Bundle args = new Bundle();
+        args.putString("url", item.getUrl());
+        args.putBoolean("unread", item.isUnread());
+        fragment.setArguments(args);
 
-        FragmentManager fragmentManager = getFragmentManager();
+        // Update the main content by replacing fragments
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
-        // update selected item and title, then close the drawer
+        // Update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
         mDrawerLayout.closeDrawer(mDrawerList);
     }

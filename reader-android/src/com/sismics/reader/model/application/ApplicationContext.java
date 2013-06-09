@@ -1,9 +1,16 @@
 package com.sismics.reader.model.application;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.view.PagerAdapter;
+import android.widget.BaseAdapter;
 
 import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.listener.CallbackListener;
@@ -25,6 +32,11 @@ public class ApplicationContext {
      * Response of /user/info
      */
     private JSONObject userInfo;
+    
+    /**
+     * Articles list of current feed context.
+     */
+    private List<JSONObject> articleItems;
     
     /**
      * Private constructor.
@@ -91,5 +103,39 @@ public class ApplicationContext {
                 }
             }
         });
+    }
+    
+    // TODO Move next to a shared adapter list pattern class
+    
+    /**
+     * Getter of articleItems.
+     * @return articleItems
+     */
+    public List<JSONObject> getArticleItems() {
+        if (articleItems == null) {
+            articleItems = new ArrayList<JSONObject>();
+        }
+        return articleItems;
+    }
+    
+    Set<Object> adapters = new HashSet<Object>();
+    
+    public void addOnArticleItemsChanged(Object adapter) {
+        adapters.add(adapter);
+    }
+    
+    public void removeOnArticleItemsChanged(Object adapter) {
+        adapters.remove(adapter);
+    }
+    
+    public void onArticleItemsChanged() {
+        for (Object adapter : adapters) {
+            if (adapter instanceof BaseAdapter) {
+                ((BaseAdapter) adapter).notifyDataSetChanged();
+            }
+            if (adapter instanceof PagerAdapter) {
+                ((PagerAdapter) adapter).notifyDataSetChanged();
+            }
+        }
     }
 }

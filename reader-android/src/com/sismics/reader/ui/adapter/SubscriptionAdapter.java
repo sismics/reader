@@ -65,16 +65,21 @@ public class SubscriptionAdapter extends BaseAdapter {
         item = new SubscriptionItem();
         item.type = SUBSCRIPTION_ITEM;
         item.title = "Unread";
+        item.url = "/all";
+        item.unread = true;
         items.add(item);
         
         item = new SubscriptionItem();
         item.type = SUBSCRIPTION_ITEM;
         item.title = "All";
+        item.url = "/all";
+        item.unread = false;
         items.add(item);
         
         item = new SubscriptionItem();
         item.type = SUBSCRIPTION_ITEM;
         item.title = "Starred";
+        item.url = "/starred";
         items.add(item);
         
         // Adding categories and subscriptions
@@ -87,6 +92,7 @@ public class SubscriptionAdapter extends BaseAdapter {
             item.type = CATEGORY_ITEM;
             item.id = category.optString("id");
             item.title = category.optString("name");
+            item.url = "/category/" + item.id;
             items.add(item);
             
             JSONArray subscriptions = category.optJSONArray("subscriptions");
@@ -97,6 +103,7 @@ public class SubscriptionAdapter extends BaseAdapter {
                 item.type = SUBSCRIPTION_ITEM;
                 item.id = subscription.optString("id");
                 item.title = subscription.optString("title");
+                item.url = "/subscription/" + item.id;
                 items.add(item);
             }
         }
@@ -110,6 +117,7 @@ public class SubscriptionAdapter extends BaseAdapter {
             item.type = SUBSCRIPTION_ITEM;
             item.id = subscription.optString("id");
             item.title = subscription.optString("title");
+            item.url = "/subscription/" + item.id;
             items.add(item);
         }
     }
@@ -168,5 +176,23 @@ public class SubscriptionAdapter extends BaseAdapter {
         private int type;
         private String id;
         private String title;
+        private String url;
+        private boolean unread = false;
+        
+        /**
+         * Getter of url.
+         * @return url
+         */
+        public String getUrl() {
+            return url;
+        }
+        
+        /**
+         * Getter of unread.
+         * @return unread
+         */
+        public boolean isUnread() {
+            return unread;
+        }
     }
 }
