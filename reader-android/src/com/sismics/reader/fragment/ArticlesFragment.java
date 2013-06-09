@@ -50,6 +50,7 @@ public class ArticlesFragment extends NavigationFragment {
      * @param url
      */
     private void initAdapter(final String url, final boolean unread) {
+        ApplicationContext.getInstance().clearArticleItems();
         final ArticlesAdapter adapter = new ArticlesAdapter(getActivity(), url, unread);
         ApplicationContext.getInstance().addOnArticleItemsChanged(adapter);
         articleList.setAdapter(adapter);

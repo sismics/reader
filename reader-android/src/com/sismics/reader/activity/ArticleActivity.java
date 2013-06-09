@@ -62,16 +62,12 @@ public class ArticleActivity extends FragmentActivity {
     }
     
     @Override
-    protected void onDestroy() {
-        ApplicationContext.getInstance().removeOnArticleItemsChanged(viewPager.getAdapter());
-        super.onDestroy();
-    }
-    
-    @Override
     public void finish() {
         Intent data = new Intent();
         data.putExtra("position", viewPager.getCurrentItem());
         setResult(RESULT_OK, data);
+        
+        ApplicationContext.getInstance().removeOnArticleItemsChanged(viewPager.getAdapter());
         
         super.finish();
     }

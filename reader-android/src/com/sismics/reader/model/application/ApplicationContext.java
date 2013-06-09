@@ -12,6 +12,7 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.widget.BaseAdapter;
 
+import com.sismics.android.Log;
 import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.listener.CallbackListener;
 import com.sismics.reader.resource.UserResource;
@@ -32,11 +33,6 @@ public class ApplicationContext {
      * Response of /user/info
      */
     private JSONObject userInfo;
-    
-    /**
-     * Articles list of current feed context.
-     */
-    private List<JSONObject> articleItems;
     
     /**
      * Private constructor.
@@ -107,14 +103,9 @@ public class ApplicationContext {
     
     // TODO Move next to a shared adapter list pattern class
     
-    /**
-     * Getter of articleItems.
-     * @return articleItems
-     */
+    private List<JSONObject> articleItems = new ArrayList<JSONObject>();
+    
     public List<JSONObject> getArticleItems() {
-        if (articleItems == null) {
-            articleItems = new ArrayList<JSONObject>();
-        }
         return articleItems;
     }
     
@@ -137,5 +128,13 @@ public class ApplicationContext {
                 ((PagerAdapter) adapter).notifyDataSetChanged();
             }
         }
+    }
+
+    public void clearArticleItems() {
+        if (adapters.size() > 0) {
+            Log.e("ApplicationContext", "Adapters list not empty!!");
+        }
+        adapters.clear();
+        articleItems = new ArrayList<JSONObject>();
     }
 }
