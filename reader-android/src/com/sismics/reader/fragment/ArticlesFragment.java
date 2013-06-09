@@ -38,7 +38,7 @@ public class ArticlesFragment extends NavigationFragment {
             String url = args.getString("url");
             boolean unread = args.getBoolean("unread");
             if (url != null) {
-                initAdapter(url, unread);
+                initAdapter(url, unread, savedInstanceState);
             }
         }
         
@@ -49,9 +49,13 @@ public class ArticlesFragment extends NavigationFragment {
      * Load articles.
      * @param url
      */
-    private void initAdapter(final String url, final boolean unread) {
-        SharedAdapterHelper.getInstance().clearData();
-        final ArticlesAdapter adapter = new ArticlesAdapter(getActivity(), url, unread);
+    private void initAdapter(final String url, final boolean unread, Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            SharedAdapterHelper.getInstance().restart(url, unread);
+            SharedAdapterHelper.getInstance().load(getActivity());
+        }
+        
+        final ArticlesAdapter adapter = new ArticlesAdapter(getActivity());
         SharedAdapterHelper.getInstance().addAdapter(adapter);
         articleList.setAdapter(adapter);
         
@@ -63,7 +67,7 @@ public class ArticlesFragment extends NavigationFragment {
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (firstVisibleItem + visibleItemCount >= totalItemCount - 2) {
-                    adapter.loadArticles();
+                    SharedAdapterHelper.getInstance().load(getActivity());
                 }
             }
         });
@@ -72,9 +76,6 @@ public class ArticlesFragment extends NavigationFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), ArticleActivity.class);
-                intent.putExtra("url", url);
-                intent.putExtra("unread", unread);
-                intent.putExtra("total", adapter.getTotal());
                 intent.putExtra("position", position);
                 startActivityForResult(intent, Constants.REQUEST_CODE_ARTICLES);
             }

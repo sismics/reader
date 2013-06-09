@@ -29,23 +29,14 @@ public class ArticleActivity extends FragmentActivity {
         
         viewPager = (ViewPager) findViewById(R.id.viewPager);
             
-        String url = getIntent().getStringExtra("url");
-        boolean unread = getIntent().getBooleanExtra("unread", false);
-        int total = getIntent().getIntExtra("total", 0);
-        
-        if (url == null) {
-            finish();
-            return;
-        }
-        
-        final ArticlesPagerAdapter adapter = new ArticlesPagerAdapter(this, getSupportFragmentManager(), total, url, unread);
+        final ArticlesPagerAdapter adapter = new ArticlesPagerAdapter(getSupportFragmentManager());
         SharedAdapterHelper.getInstance().addAdapter(adapter);
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                if (position + 1 == adapter.getCount()) {
-                    adapter.loadArticles();
+                if (position + 1 >= SharedAdapterHelper.getInstance().getArticleItems().size()) {
+                    SharedAdapterHelper.getInstance().load(ArticleActivity.this);
                 }
             }
             

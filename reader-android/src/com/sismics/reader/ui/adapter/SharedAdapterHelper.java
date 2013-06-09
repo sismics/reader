@@ -5,12 +5,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.widget.BaseAdapter;
 
-import com.sismics.android.Log;
+import com.sismics.android.SismicsHttpResponseHandler;
+import com.sismics.reader.resource.SubscriptionResource;
 
 /**
  * Helper to use the same data between multiples adapters.
@@ -32,6 +35,14 @@ public class SharedAdapterHelper {
      * Adapters sharing the same data.
      */
     private Set<Object> adapters = new HashSet<Object>();
+    
+    private String url;
+    
+    private boolean unread;
+    
+    private boolean loading;
+    
+    private int total;
     
     /**
      * Returns an instance.
@@ -83,13 +94,53 @@ public class SharedAdapterHelper {
     }
 
     /**
-     * Clear shared data.
+     * Restart shared data on a new context.
      */
-    public void clearData() {
-        if (adapters.size() > 0) {
-            Log.e("ApplicationContext", "Adapters list not empty!!");
-        }
+    public void restart(String url, boolean unread) {
         adapters.clear();
         articleItems = new ArrayList<JSONObject>();
+        this.url = url;
+        this.unread = unread;
+        this.loading = false;
+        this.total = 0;
+    }
+    
+    /**
+     * Load more articles.
+     * @param context
+     */
+    public void load(Context context) {
+        final List<JSONObject> items = articleItems;
+        
+        if (loading || items.size() >= total && total != 0) {
+            return;
+        }
+        
+        loading = true;
+        SubscriptionResource.feed(context, url, unread, 10, items.size(), new SismicsHttpResponseHandler() {
+            @Override
+            public void onSuccess(JSONObject json) {
+                // if reference has not changed, let's update the shared data
+                if (items != articleItems) {
+                    return;
+                }
+                
+                if (total == 0) {
+                    total = json.optInt("total");
+                }
+                
+                JSONArray articles = json.optJSONArray("articles");
+                for (int i = 0; i < articles.length(); i++) {
+                    items.add(articles.optJSONObject(i));
+                }
+                
+                onDataChanged();
+            }
+            
+            @Override
+            public void onFinish() {
+                loading = false;
+            }
+        });
     }
 }
