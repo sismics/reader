@@ -12,7 +12,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.fragment.ArticleFragment;
-import com.sismics.reader.model.application.ApplicationContext;
 import com.sismics.reader.resource.SubscriptionResource;
 
 
@@ -63,7 +62,7 @@ public class ArticlesPagerAdapter extends FragmentStatePagerAdapter {
         this.url = url;
         this.unread = unread;
         this.total = total;
-        this.items = ApplicationContext.getInstance().getArticleItems();
+        this.items = SharedAdapterHelper.getInstance().getArticleItems();
     }
 
     /**
@@ -88,7 +87,7 @@ public class ArticlesPagerAdapter extends FragmentStatePagerAdapter {
                     items.add(articles.optJSONObject(i));
                 }
                 
-                ApplicationContext.getInstance().onArticleItemsChanged();
+                SharedAdapterHelper.getInstance().onDataChanged();
             }
             
             @Override

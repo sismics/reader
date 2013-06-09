@@ -1,18 +1,10 @@
 package com.sismics.reader.model.application;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
-import android.widget.BaseAdapter;
 
-import com.sismics.android.Log;
 import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.listener.CallbackListener;
 import com.sismics.reader.resource.UserResource;
@@ -99,42 +91,5 @@ public class ApplicationContext {
                 }
             }
         });
-    }
-    
-    // TODO Move next to a shared adapter list pattern class
-    
-    private List<JSONObject> articleItems = new ArrayList<JSONObject>();
-    
-    public List<JSONObject> getArticleItems() {
-        return articleItems;
-    }
-    
-    Set<Object> adapters = new HashSet<Object>();
-    
-    public void addOnArticleItemsChanged(Object adapter) {
-        adapters.add(adapter);
-    }
-    
-    public void removeOnArticleItemsChanged(Object adapter) {
-        adapters.remove(adapter);
-    }
-    
-    public void onArticleItemsChanged() {
-        for (Object adapter : adapters) {
-            if (adapter instanceof BaseAdapter) {
-                ((BaseAdapter) adapter).notifyDataSetChanged();
-            }
-            if (adapter instanceof PagerAdapter) {
-                ((PagerAdapter) adapter).notifyDataSetChanged();
-            }
-        }
-    }
-
-    public void clearArticleItems() {
-        if (adapters.size() > 0) {
-            Log.e("ApplicationContext", "Adapters list not empty!!");
-        }
-        adapters.clear();
-        articleItems = new ArrayList<JSONObject>();
     }
 }

@@ -15,8 +15,8 @@ import android.widget.ListView;
 import com.sismics.reader.R;
 import com.sismics.reader.activity.ArticleActivity;
 import com.sismics.reader.constant.Constants;
-import com.sismics.reader.model.application.ApplicationContext;
 import com.sismics.reader.ui.adapter.ArticlesAdapter;
+import com.sismics.reader.ui.adapter.SharedAdapterHelper;
 
 /**
  * Articles list fragment.
@@ -50,9 +50,9 @@ public class ArticlesFragment extends NavigationFragment {
      * @param url
      */
     private void initAdapter(final String url, final boolean unread) {
-        ApplicationContext.getInstance().clearArticleItems();
+        SharedAdapterHelper.getInstance().clearData();
         final ArticlesAdapter adapter = new ArticlesAdapter(getActivity(), url, unread);
-        ApplicationContext.getInstance().addOnArticleItemsChanged(adapter);
+        SharedAdapterHelper.getInstance().addAdapter(adapter);
         articleList.setAdapter(adapter);
         
         articleList.setOnScrollListener(new OnScrollListener() {
@@ -90,7 +90,7 @@ public class ArticlesFragment extends NavigationFragment {
     
     @Override
     public void onDestroyView() {
-        ApplicationContext.getInstance().removeOnArticleItemsChanged(articleList.getAdapter());
+        SharedAdapterHelper.getInstance().removeAdapter(articleList.getAdapter());
         super.onDestroyView();
     }
 }

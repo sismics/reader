@@ -7,8 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 import com.sismics.reader.R;
-import com.sismics.reader.model.application.ApplicationContext;
 import com.sismics.reader.ui.adapter.ArticlesPagerAdapter;
+import com.sismics.reader.ui.adapter.SharedAdapterHelper;
 
 /**
  * Activity displaying articles.
@@ -39,7 +39,7 @@ public class ArticleActivity extends FragmentActivity {
         }
         
         final ArticlesPagerAdapter adapter = new ArticlesPagerAdapter(this, getSupportFragmentManager(), total, url, unread);
-        ApplicationContext.getInstance().addOnArticleItemsChanged(adapter);
+        SharedAdapterHelper.getInstance().addAdapter(adapter);
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new OnPageChangeListener() {
             @Override
@@ -67,7 +67,7 @@ public class ArticleActivity extends FragmentActivity {
         data.putExtra("position", viewPager.getCurrentItem());
         setResult(RESULT_OK, data);
         
-        ApplicationContext.getInstance().removeOnArticleItemsChanged(viewPager.getAdapter());
+        SharedAdapterHelper.getInstance().removeAdapter(viewPager.getAdapter());
         
         super.finish();
     }

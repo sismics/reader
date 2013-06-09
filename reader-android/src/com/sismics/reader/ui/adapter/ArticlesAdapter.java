@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.sismics.android.SismicsHttpResponseHandler;
-import com.sismics.reader.model.application.ApplicationContext;
 import com.sismics.reader.resource.SubscriptionResource;
 
 /**
@@ -67,7 +66,7 @@ public class ArticlesAdapter extends BaseAdapter {
         this.aq = new AQuery(activity);
         this.url = url;
         this.unread = unread;
-        items = ApplicationContext.getInstance().getArticleItems();
+        items = SharedAdapterHelper.getInstance().getArticleItems();
         loadArticles();
     }
 
@@ -92,7 +91,7 @@ public class ArticlesAdapter extends BaseAdapter {
                     items.add(articles.optJSONObject(i));
                 }
                 
-                ApplicationContext.getInstance().onArticleItemsChanged();
+                SharedAdapterHelper.getInstance().onDataChanged();
             }
             
             @Override
