@@ -227,7 +227,7 @@ r.feed.load = function(next) {
   
   // Actual offset according to starred articles
   if (r.feed.context.url == r.util.url.starred) {
-    actualOffset = $('#feed-container .feed-item.starred').length;;
+    actualOffset = $('#feed-container .feed-item.starred').length;
   }
   
   if (!next) {

@@ -1,12 +1,18 @@
 package com.sismics.reader.activity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
+import com.sismics.android.Log;
+import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.R;
+import com.sismics.reader.resource.ArticleResource;
 import com.sismics.reader.ui.adapter.ArticlesPagerAdapter;
 import com.sismics.reader.ui.adapter.SharedAdapterHelper;
 
@@ -35,8 +41,23 @@ public class ArticleActivity extends FragmentActivity {
         viewPager.setOnPageChangeListener(new OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                if (position + 1 >= SharedAdapterHelper.getInstance().getArticleItems().size()) {
-                    SharedAdapterHelper.getInstance().load(ArticleActivity.this);
+                SharedAdapterHelper sharedAdapterHelper = SharedAdapterHelper.getInstance();
+                if (position + 1 >= sharedAdapterHelper.getArticleItems().size()) {
+                    sharedAdapterHelper.load(ArticleActivity.this);
+                }
+                
+                // Mark article as read
+                final JSONObject article = sharedAdapterHelper.getArticleItems().get(position);
+                if (!article.optBoolean("is_read")) {
+                    ArticleResource.read(ArticleActivity.this, article.optString("id"), new SismicsHttpResponseHandler() {
+                        public void onSuccess(JSONObject json) {
+                            try {
+                                article.put("is_read", true);
+                            } catch (JSONException e) {
+                                Log.e("ArticleActivity", "Error changing read state", e);
+                            }
+                        }
+                    });
                 }
             }
             

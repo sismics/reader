@@ -117,10 +117,31 @@ public class SharedAdapterHelper {
         }
         
         loading = true;
-        SubscriptionResource.feed(context, url, unread, 10, items.size(), new SismicsHttpResponseHandler() {
+        int offset = items.size();
+
+        // Remove read articles in unread context
+        if (unread) {
+            for (JSONObject article : articleItems) {
+                if (article.optBoolean("is_read")) {
+                    offset--;
+                }
+            }
+        }
+        
+        // Remove unstarred articles in starred context
+        if (url.equals("/starred")) {
+            for (JSONObject article : articleItems) {
+                if (article.optBoolean("is_starred")) {
+                    offset--;
+                }
+            }
+        }
+        
+        
+        SubscriptionResource.feed(context, url, unread, 10, offset, new SismicsHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
-                // if reference has not changed, let's update the shared data
+                // If reference has not changed, let's update the shared data
                 if (items != articleItems) {
                     return;
                 }
