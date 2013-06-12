@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/item_logout"
+        android:id="@+id/logout"
         android:showAsAction="collapseActionView"
         android:title="@string/logout">
     </item>
     <item
-        android:id="@+id/item_settings"
+        android:id="@+id/settings"
         android:showAsAction="collapseActionView"
         android:title="@string/settings">
     </item>
     <item
-        android:id="@+id/item_about"
+        android:id="@+id/about"
         android:showAsAction="collapseActionView"
         android:title="@string/about">
     </item>

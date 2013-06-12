@@ -33,7 +33,7 @@ public class ArticleResource extends BaseResource {
         init(context);
         
         RequestParams params = new RequestParams();
-        client.get(Constants.READER_API_URL + "/article/" + id + "/read", params, responseHandler);
+        client.post(Constants.READER_API_URL + "/article/" + id + "/read", params, responseHandler);
     }
     
     /**
@@ -46,6 +46,6 @@ public class ArticleResource extends BaseResource {
         init(context);
         
         RequestParams params = new RequestParams();
-        client.get(Constants.READER_API_URL + "/article/" + id + "/unread", params, responseHandler);
+        client.post(Constants.READER_API_URL + "/article/" + id + "/unread", params, responseHandler);
     }
 }

@@ -16,15 +16,15 @@ import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.resource.SubscriptionResource;
 
 /**
- * Helper to use the same data between multiples adapters.
+ * Static helper to use the same articles between multiples adapters.
  * 
  * @author bgamard
  */
-public class SharedAdapterHelper {
+public class SharedArticlesAdapterHelper {
     /**
      * Current instance.
      */
-    private static SharedAdapterHelper instance;
+    private static SharedArticlesAdapterHelper instance;
     
     /**
      * Shared data.
@@ -48,9 +48,9 @@ public class SharedAdapterHelper {
      * Returns an instance.
      * @return
      */
-    public static SharedAdapterHelper getInstance() {
+    public static SharedArticlesAdapterHelper getInstance() {
         if (instance == null) {
-            instance = new SharedAdapterHelper();
+            instance = new SharedArticlesAdapterHelper();
         }
         return instance;
     }
@@ -136,7 +136,6 @@ public class SharedAdapterHelper {
                 }
             }
         }
-        
         
         SubscriptionResource.feed(context, url, unread, 10, offset, new SismicsHttpResponseHandler() {
             @Override

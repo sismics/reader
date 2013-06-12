@@ -29,7 +29,7 @@ public class ArticlesPagerAdapter extends FragmentStatePagerAdapter {
      */
     public ArticlesPagerAdapter(FragmentManager fm) {
         super(fm);
-        this.items = SharedAdapterHelper.getInstance().getArticleItems();
+        this.items = SharedArticlesAdapterHelper.getInstance().getArticleItems();
     }
 
     @Override

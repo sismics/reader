@@ -16,7 +16,7 @@ import com.sismics.reader.R;
 import com.sismics.reader.activity.ArticleActivity;
 import com.sismics.reader.constant.Constants;
 import com.sismics.reader.ui.adapter.ArticlesAdapter;
-import com.sismics.reader.ui.adapter.SharedAdapterHelper;
+import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
 
 /**
  * Articles list fragment.
@@ -51,12 +51,12 @@ public class ArticlesFragment extends NavigationFragment {
      */
     private void initAdapter(final String url, final boolean unread, Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            SharedAdapterHelper.getInstance().restart(url, unread);
-            SharedAdapterHelper.getInstance().load(getActivity());
+            SharedArticlesAdapterHelper.getInstance().restart(url, unread);
+            SharedArticlesAdapterHelper.getInstance().load(getActivity());
         }
         
         final ArticlesAdapter adapter = new ArticlesAdapter(getActivity());
-        SharedAdapterHelper.getInstance().addAdapter(adapter);
+        SharedArticlesAdapterHelper.getInstance().addAdapter(adapter);
         articleList.setAdapter(adapter);
         
         articleList.setOnScrollListener(new OnScrollListener() {
@@ -67,7 +67,7 @@ public class ArticlesFragment extends NavigationFragment {
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (firstVisibleItem + visibleItemCount >= totalItemCount - 2) {
-                    SharedAdapterHelper.getInstance().load(getActivity());
+                    SharedArticlesAdapterHelper.getInstance().load(getActivity());
                 }
             }
         });
@@ -91,7 +91,7 @@ public class ArticlesFragment extends NavigationFragment {
     
     @Override
     public void onDestroyView() {
-        SharedAdapterHelper.getInstance().removeAdapter(articleList.getAdapter());
+        SharedArticlesAdapterHelper.getInstance().removeAdapter(articleList.getAdapter());
         super.onDestroyView();
     }
 }

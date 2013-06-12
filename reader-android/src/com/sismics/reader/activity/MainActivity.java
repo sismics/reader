@@ -109,7 +109,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.item_logout:
+        case R.id.logout:
             UserResource.logout(getApplicationContext(), new SismicsHttpResponseHandler() {
                 @Override
                 public void onSuccess(JSONObject json) {
@@ -120,11 +120,11 @@ public class MainActivity extends FragmentActivity {
             });
             return true;
             
-        case R.id.item_settings:
+        case R.id.settings:
 //            startActivity(new Intent(NavigationActivity.this, SettingsActivity.class));
             return true;
             
-        case R.id.item_about:
+        case R.id.about:
 //            startActivity(new Intent(NavigationActivity.this, AboutActivity.class));
             return true;
             

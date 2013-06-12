@@ -41,7 +41,7 @@ public class ArticlesAdapter extends BaseAdapter {
     public ArticlesAdapter(Activity activity) {
         this.activity = activity;
         this.aq = new AQuery(activity);
-        items = SharedAdapterHelper.getInstance().getArticleItems();
+        items = SharedArticlesAdapterHelper.getInstance().getArticleItems();
     }
 
     @Override

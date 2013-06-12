@@ -16,6 +16,8 @@
     <string name="logout">Logout</string>
     <string name="settings">Settings</string>
     <string name="about">About</string>
+    <string name="mark_as_unread">Mark as unread</string>
+    <string name="marked_as_unread">Marked as unread</string>
     <string name="crash_toast_text">A crash occurred, a report has been sent to resolve this problem</string>
 
     <!-- Préférences -->
