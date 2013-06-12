@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.text.Html;
 import android.widget.BaseAdapter;
 
+import com.sismics.android.Log;
 import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.resource.SubscriptionResource;
 
@@ -36,13 +41,30 @@ public class SharedArticlesAdapterHelper {
      */
     private Set<Object> adapters = new HashSet<Object>();
     
+    /**
+     * API URL.
+     */
     private String url;
     
+    /**
+     * Unread state.
+     */
     private boolean unread;
     
+    /**
+     * Is loading.
+     */
     private boolean loading;
     
+    /**
+     * Total number of articles.
+     */
     private int total;
+    
+    /**
+     * Regexp to extract images URL.
+     */
+    private static final Pattern IMG_PATTERN = Pattern.compile("<img(.*?)src=\"(.*?)\"(.*?)>");
     
     /**
      * Returns an instance.
@@ -151,7 +173,25 @@ public class SharedArticlesAdapterHelper {
                 
                 JSONArray articles = json.optJSONArray("articles");
                 for (int i = 0; i < articles.length(); i++) {
-                    items.add(articles.optJSONObject(i));
+                    JSONObject article = articles.optJSONObject(i);
+                    
+                    // Precompute some data
+                    try {
+                        // TODO Use Apache's commons lang 2.6 StringEscapeUtils.unescapeHtml
+                        String description = article.optString("description");
+                        Matcher matcher = IMG_PATTERN.matcher(description);
+                        if (matcher.find()) {
+                            article.put("image_url", Html.fromHtml(matcher.group(2)).toString());
+                        }
+                        String cleanedDescription = description.replaceAll("\\<.*?>", "");
+                        int length = cleanedDescription.length();
+                        String summary = cleanedDescription.substring(0, length < 300 ? length : 300);
+                        article.put("summary", summary);
+                    } catch (JSONException e) {
+                        Log.e("ArticlesAdapter", "Cannot precompute article", e);
+                    }
+                    
+                    items.add(article);
                 }
                 
                 onDataChanged();

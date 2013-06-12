@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
 import com.sismics.reader.fragment.ArticleFragment;
 
@@ -16,7 +16,7 @@ import com.sismics.reader.fragment.ArticleFragment;
  * 
  * @author bgamard
  */
-public class ArticlesPagerAdapter extends FragmentStatePagerAdapter {
+public class ArticlesPagerAdapter extends FragmentPagerAdapter {
     /**
      * Articles from server.
      */

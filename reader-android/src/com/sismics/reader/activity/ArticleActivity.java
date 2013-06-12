@@ -11,6 +11,8 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.sismics.android.Log;
@@ -44,6 +46,14 @@ public class ArticleActivity extends FragmentActivity {
                 SharedArticlesAdapterHelper sharedAdapterHelper = SharedArticlesAdapterHelper.getInstance();
                 if (position + 1 >= sharedAdapterHelper.getArticleItems().size()) {
                     sharedAdapterHelper.load(ArticleActivity.this);
+                }
+                
+                // Reset WebView scroll
+                // TODO Try to get ArticleFragment and delegate this
+                View view = viewPager.getChildAt(position);
+                if (view != null) {
+                    WebView webView = (WebView) view.findViewById(R.id.articleWebView);
+                    webView.scrollTo(0, 0);
                 }
                 
                 // Mark article as read

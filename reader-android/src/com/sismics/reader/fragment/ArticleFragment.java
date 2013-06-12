@@ -44,12 +44,20 @@ public class ArticleFragment extends Fragment {
             if (jsonStr != null) {
                 try {
                     JSONObject json = new JSONObject(jsonStr);
-                    webView.loadData(json.optString("description"), "text/html", "utf-8");
+                    webView.loadData(json.optString("description"), "text/html; charset=UTF-8", null);
                 } catch (JSONException e) {
                     Log.e("ArticleFragment", "Unable to parse JSON", e);
                 }
             }
         }
         return view;
+    }
+
+    public void onPageSelected() {
+        View view = getView();
+        if (view != null) {
+            WebView webView = (WebView) view.findViewById(R.id.articleWebView);
+            webView.scrollTo(0, 0);
+        }
     }
 }

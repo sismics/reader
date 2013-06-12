@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="60dip"
+    android:padding="6dip" >
+
+    <ImageView
+        android:id="@+id/imgThumbnail"
+        android:layout_width="48dip"
+        android:layout_height="48dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="6dip"
+        android:layout_toRightOf="@+id/imgThumbnail"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-light"
+        android:lines="1"
+        android:maxLines="1"
+        android:text="Gravity Suddenly Switched Off"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/txtSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTitle"
+        android:layout_marginLeft="6dip"
+        android:layout_toRightOf="@+id/imgThumbnail"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-light"
+        android:lines="2"
+        android:maxLines="2"
+        android:text="Lorem ipsum dolor sit amen lorem ipsum dolor sit amen lorem ipsum dolor sit amen lorem ipsum dolor sit amen lorem ipsum dolor sit amen lorem ipsum dolor sit amen lorem ipsum dolor sit amen"
+        android:textSize="12sp" />
+
+</RelativeLayout>
