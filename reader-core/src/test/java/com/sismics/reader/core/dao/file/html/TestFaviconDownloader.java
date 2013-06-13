@@ -67,4 +67,14 @@ public class TestFaviconDownloader {
         Assert.assertNotNull(filename);
         Assert.assertTrue(new File(filename).exists());
     }
+    
+    @Test
+    public void faviconDownloaderDoubleFineTest() throws Exception {
+        // Download from page
+        FaviconDownloader downloader = new FaviconDownloader();
+        String tempDir = System.getProperty("java.io.tmpdir");
+        String filename = downloader.downloadFaviconFromPage("http://www.kickstarter.com/projects/66710809/double-fine-adventure/posts.atom", tempDir, "favicon");
+        Assert.assertNotNull(filename);
+        Assert.assertTrue(new File(filename).exists());
+    }
 }
