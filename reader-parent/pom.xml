@@ -15,9 +15,6 @@
     <maven.compiler.target>1.6</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <!-- Dependencies version (internal) -->
-    <reader.version>1.0-SNAPSHOT</reader.version>
-
     <!-- Dependencies version (external) -->
     <org.apache.commons.commons-compress.version>1.5</org.apache.commons.commons-compress.version>
     <commons-lang.commons-lang.version>2.6</commons-lang.commons-lang.version>
@@ -104,7 +101,7 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>${org.apache.maven.plugins.maven-release-plugin.version}</version>
         <configuration>
-          <tagNameFormat>v@{project.version}</tagNameFormat>
+          <tagNameFormat>@{project.version}</tagNameFormat>
         </configuration>
       </plugin>
 
@@ -214,44 +211,44 @@
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-core</artifactId>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-web-common</artifactId>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-web-common</artifactId>
         <type>test-jar</type>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-web</artifactId>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-distribution-standalone</artifactId>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-agent</artifactId>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-distribution-debian</artifactId>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
