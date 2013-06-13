@@ -289,4 +289,26 @@ public class TestRssReader {
         Assert.assertTrue(article.getDescription().contains("Over the years, the spacefaring nations of Earth"));
         Assert.assertNotNull(article.getPublicationDate());
     }
+    
+    @Test
+    public void rssReaderDeveloppezTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_developpez.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("Developpez.com Développement Web", feed.getTitle());
+        Assert.assertEquals("http://web.developpez.com/index/rss", feed.getUrl());
+        Assert.assertEquals("fr-FR", feed.getLanguage());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(20, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("Cube Slam : un hybride 3D de Pong par Google fait l'apologie de Web RTC, Web Audio, WebGL et des nouveaux standards du Web", article.getTitle());
+        Assert.assertEquals("http://www.developpez.com/actu/56750/Cube-Slam-un-hybride-3D-de-Pong-par-Google-fait-l-apologie-de-Web-RTC-Web-Audio-WebGL-et-des-nouveaux-standards-du-Web/", article.getUrl());
+        Assert.assertEquals("http://www.developpez.com/actu/56750/Cube-Slam-un-hybride-3D-de-Pong-par-Google-fait-l-apologie-de-Web-RTC-Web-Audio-WebGL-et-des-nouveaux-standards-du-Web/", article.getGuid());
+        Assert.assertNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        Assert.assertTrue(article.getDescription().contains("Fait la démo de Web RTC, Web Audio, WebGL et l'apologie des nouveaux standards"));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
 }
