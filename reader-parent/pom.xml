@@ -66,8 +66,8 @@
   
   <scm>
     <connection>scm:git:git://github.com/sismics/reader.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:reader/reader.git</developerConnection>
-    <url>https://github.com/sismics/reader</url>
+    <developerConnection>scm:git:git://github.com/reader/reader.git</developerConnection>
+    <url>scm:git:git://github.com/sismics/reader.git</url>
   </scm>
 
   <build>
