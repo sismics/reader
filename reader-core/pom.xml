@@ -193,7 +193,7 @@
           <dependency>
             <groupId>com.sismics.reader</groupId>
             <artifactId>reader-core</artifactId>
-            <version>${reader.version}</version>
+            <version>${project.version}</version>
           </dependency> -->
         </dependencies>
       </plugin>

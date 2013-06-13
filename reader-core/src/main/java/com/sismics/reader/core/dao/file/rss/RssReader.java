@@ -172,7 +172,13 @@ public class RssReader extends DefaultHandler {
         // See http://stackoverflow.com/questions/3482494/
         InputSource source = new InputSource();
         source.setCharacterStream(new InputStreamReader(is));
-        parser.parse(source, this);
+        
+        try {
+            parser.parse(source, this);
+        } catch (InternalError e) {
+            // Fix for Oracle code throwing java.lang.InternalError disgracefully
+            throw new Exception(e);
+        }
     
         if (atom) {
             String url = new AtomUrlGuesserStrategy().guess(atomLinkList);
