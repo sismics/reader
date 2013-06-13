@@ -227,7 +227,7 @@ public class SubscriptionResource extends BaseResource {
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUnread(unread);
         userArticleCriteria.setUserId(principal.getId());
-        userArticleCriteria.setSubscribed(true);
+        userArticleCriteria.setVisible(true);
         userArticleCriteria.setFeedId(feedSubscription.getFeedId());
 
         UserArticleDao userArticleDao = new UserArticleDao();
@@ -462,7 +462,6 @@ public class SubscriptionResource extends BaseResource {
         // Marks all articles as read in this subscription
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUserId(principal.getId());
-        userArticleCriteria.setSubscribed(true);
         userArticleCriteria.setFeedSubscriptionId(id);
 
         UserArticleDao userArticleDao = new UserArticleDao();

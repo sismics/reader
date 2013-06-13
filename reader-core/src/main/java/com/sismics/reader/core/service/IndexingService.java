@@ -113,7 +113,7 @@ public class IndexingService extends AbstractScheduledService {
             // Get linked UserArticle from database
             UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
             userArticleCriteria.setUserId(userId);
-            userArticleCriteria.setSubscribed(true);
+            userArticleCriteria.setVisible(true);
             userArticleCriteria.setArticleIdIn(Lists.newArrayList(articleMap.keySet()));
             
             UserArticleDao userArticleDao = new UserArticleDao();

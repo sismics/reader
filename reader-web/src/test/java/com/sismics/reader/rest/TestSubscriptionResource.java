@@ -156,6 +156,16 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         Assert.assertEquals(9, json.optInt("total"));
+        
+        // Check the subscription data
+        subscriptionResource = resource().path("/subscription/" + subscription1Id);
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
+        queryParams = new MultivaluedMapImpl();
+        queryParams.add("unread", "false");
+        response = subscriptionResource.queryParams(queryParams).get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals(10, json.optInt("total"));
 
         // Check all subscriptions for unread articles
         subscriptionResource = resource().path("/subscription");
