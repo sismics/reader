@@ -47,7 +47,7 @@
                 <artifactItem>
                   <groupId>com.sismics.reader</groupId>
                   <artifactId>reader-distribution-standalone</artifactId>
-                  <version>${reader.version}</version>
+                  <version>${project.version}</version>
                   <type>tar.gz</type>
                   <classifier>dist</classifier>
                   <overWrite>false</overWrite>
@@ -71,7 +71,7 @@
             <configuration>
               <verbose>true</verbose>
               <controlDir>${project.build.outputDirectory}/control</controlDir>
-              <deb>${project.build.directory}/reader-${reader.version}.deb</deb>
+              <deb>${project.build.directory}/reader-${project.version}.deb</deb>
               <dataSet>
                 <data>
                   <type>template</type>
@@ -121,7 +121,7 @@
                 </data>
 
                 <data>
-                  <src>${project.build.directory}/reader-distribution-standalone-${reader.version}</src>
+                  <src>${project.build.directory}/reader-distribution-standalone-${project.version}</src>
                   <type>directory</type>
                   <excludes>reader.sh</excludes>
                   <mapper>
@@ -133,7 +133,7 @@
                 </data>
       
                 <data>
-                  <src>${project.build.directory}/reader-distribution-standalone-${reader.version}/reader.sh</src>
+                  <src>${project.build.directory}/reader-distribution-standalone-${project.version}/reader.sh</src>
                   <type>file</type>
                   <mapper>
                     <type>perm</type>
