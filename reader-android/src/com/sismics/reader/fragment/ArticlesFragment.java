@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.androidquery.AQuery;
 import com.sismics.reader.R;
 import com.sismics.reader.activity.ArticleActivity;
 import com.sismics.reader.constant.Constants;
@@ -25,13 +27,15 @@ import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
  */
 public class ArticlesFragment extends NavigationFragment {
     
-    // Interface
-    private ListView articleList;
+    /**
+     * AQuery.
+     */
+    private AQuery aq;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.articles_fragment, container, false);
-        articleList = (ListView) view.findViewById(R.id.articleList);
+        aq = new AQuery(view);
         
         Bundle args = getArguments();
         if (args != null) {
@@ -57,41 +61,44 @@ public class ArticlesFragment extends NavigationFragment {
         
         final ArticlesAdapter adapter = new ArticlesAdapter(getActivity());
         SharedArticlesAdapterHelper.getInstance().addAdapter(adapter);
-        articleList.setAdapter(adapter);
         
-        articleList.setOnScrollListener(new OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-            }
-            
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (firstVisibleItem + visibleItemCount >= totalItemCount - 2) {
-                    SharedArticlesAdapterHelper.getInstance().load(getActivity());
+        aq.id(R.id.articleList)
+            .adapter(adapter)
+            .scrolled(new OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
                 }
-            }
-        });
-        
-        articleList.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ArticleActivity.class);
-                intent.putExtra("position", position);
-                startActivityForResult(intent, Constants.REQUEST_CODE_ARTICLES);
-            }
-        });
+                
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                    if (firstVisibleItem + visibleItemCount >= totalItemCount - 2) {
+                        SharedArticlesAdapterHelper.getInstance().load(getActivity());
+                    }
+                }
+            })
+            .itemClicked(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(), ArticleActivity.class);
+                    intent.putExtra("position", position);
+                    startActivityForResult(intent, Constants.REQUEST_CODE_ARTICLES);
+                }
+            });
     }
     
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.REQUEST_CODE_ARTICLES && resultCode == Activity.RESULT_OK) {
+            ListView articleList = aq.id(R.id.articleList).getListView();
             articleList.smoothScrollToPosition(data.getIntExtra("position", 0));
+            ((ArticlesAdapter)articleList.getAdapter()).notifyDataSetChanged();
         }
     }
     
     @Override
     public void onDestroyView() {
-        SharedArticlesAdapterHelper.getInstance().removeAdapter(articleList.getAdapter());
+        Adapter adapter = aq.id(R.id.articleList).getListView().getAdapter();
+        SharedArticlesAdapterHelper.getInstance().removeAdapter(adapter);
         super.onDestroyView();
     }
 }

@@ -1,8 +1,6 @@
 package com.sismics.reader.ui.adapter;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 
@@ -75,11 +73,11 @@ public class ArticlesAdapter extends BaseAdapter {
         String imageUrl = article.optString("image_url");
         if (imageUrl != null) {
             Bitmap placeHolder = aq.getCachedImage(R.drawable.ic_launcher);
-//            if (aq.shouldDelay(position, view, parent, imageUrl)) {
-//                aq.id(R.id.imgThumbnail).image(placeHolder);
-//            } else {
-            aq.id(R.id.imgThumbnail).image(imageUrl, true, true, 200, AQuery.INVISIBLE, placeHolder, AQuery.FADE_IN_NETWORK);
-//            }
+            if (aq.shouldDelay(position, view, parent, imageUrl)) {
+                aq.id(R.id.imgThumbnail).image(placeHolder);
+            } else {
+                aq.id(R.id.imgThumbnail).image(imageUrl, true, true, 200, AQuery.INVISIBLE, placeHolder, AQuery.FADE_IN_NETWORK);
+            }
         } else {
             aq.id(R.id.imgThumbnail).invisible();
         }

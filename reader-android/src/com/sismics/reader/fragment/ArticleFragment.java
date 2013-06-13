@@ -52,12 +52,4 @@ public class ArticleFragment extends Fragment {
         }
         return view;
     }
-
-    public void onPageSelected() {
-        View view = getView();
-        if (view != null) {
-            WebView webView = (WebView) view.findViewById(R.id.articleWebView);
-            webView.scrollTo(0, 0);
-        }
-    }
 }
