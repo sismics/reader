@@ -64,9 +64,8 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
-        Assert.assertEquals(2, articles.length());
+        Assert.assertEquals(1, articles.length());
         Assert.assertEquals("Récupérer les clés <span class=\"highlight\">wifi</span> sur un téléphone Android", articles.getJSONObject(0).getString("title"));
-        Assert.assertEquals("Partagez vos clés <span class=\"highlight\">WiFi</span> avec vos amis", articles.getJSONObject(1).getString("title"));
         
         // Search "google keep"
         searchResource = resource().path("/search/google%20keep");
