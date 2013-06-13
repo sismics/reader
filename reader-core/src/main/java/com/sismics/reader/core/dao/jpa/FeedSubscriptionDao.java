@@ -130,6 +130,21 @@ public class FeedSubscriptionDao {
     }
 
     /**
+     * Returns active subscriptions in a category.
+     * 
+     * @param id Subscription ID
+     * @param userId User ID
+     * @return Feed subscription
+     */
+    @SuppressWarnings("unchecked")
+    public List<FeedSubscription> findByCategory(String categoryId) {
+        EntityManager em = ThreadLocalContext.get().getEntityManager();
+        Query q = em.createQuery("select fs from FeedSubscription fs where fs.categoryId = :categoryId and fs.deleteDate is null");
+        q.setParameter("categoryId", categoryId);
+        return q.getResultList();
+    }
+    
+    /**
      * Returns the number of feed subscriptions in a category.
      * 
      * @param categoryId Category ID
