@@ -65,9 +65,9 @@
   </properties> 
   
   <scm>
-    <connection>scm:git:git://github.com/sismics/reader.git</connection>
-    <developerConnection>scm:git:git://github.com/reader/reader.git</developerConnection>
-    <url>scm:git:git://github.com/sismics/reader.git</url>
+    <connection>scm:git:https://github.com/sismics/reader.git</connection>
+    <developerConnection>scm:git:https://github.com/reader/reader.git</developerConnection>
+    <url>scm:git:https://github.com/sismics/reader.git</url>
   </scm>
 
   <build>
