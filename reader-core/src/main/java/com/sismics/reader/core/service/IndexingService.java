@@ -3,6 +3,7 @@ package com.sismics.reader.core.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +28,7 @@ import com.sismics.reader.core.event.RebuildIndexAsyncEvent;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Config;
+import com.sismics.reader.core.model.jpa.UserArticle;
 import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.reader.core.util.jpa.PaginatedList;
@@ -113,7 +115,7 @@ public class IndexingService extends AbstractScheduledService {
             // Get linked UserArticle from database
             UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
             userArticleCriteria.setUserId(userId);
-            userArticleCriteria.setVisible(true);
+            userArticleCriteria.setVisible(false);
             userArticleCriteria.setArticleIdIn(Lists.newArrayList(articleMap.keySet()));
             
             UserArticleDao userArticleDao = new UserArticleDao();
@@ -128,6 +130,17 @@ public class IndexingService extends AbstractScheduledService {
                 }
                 if (article.getDescription() != null) {
                     userArticleDto.setArticleDescription(article.getDescription());
+                }
+                
+                // Create UserArticle if it does not exists
+                if (userArticleDto.getId() == null) {
+                    UserArticle userArticle = new UserArticle();
+                    userArticle.setArticleId(userArticleDto.getArticleId());
+                    userArticle.setUserId(userId);
+                    userArticle.setReadDate(new Date());
+                    String userArticleId = userArticleDao.create(userArticle);
+                    userArticleDto.setId(userArticleId);
+                    userArticleDto.setReadTimestamp(userArticle.getReadDate().getTime());
                 }
             }
         } else {
