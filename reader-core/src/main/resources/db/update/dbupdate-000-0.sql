@@ -25,7 +25,7 @@ alter table T_USER_ARTICLE add constraint FK_USA_IDUSER_C foreign key (USA_IDUSE
 alter table T_ROLE_BASE_FUNCTION add constraint FK_RBF_IDROLE_C foreign key (RBF_IDROLE_C) references T_ROLE (ROL_ID_C) on delete restrict on update restrict;
 alter table T_ROLE_BASE_FUNCTION add constraint FK_RBF_IDBASEFUNCTION_C foreign key (RBF_IDBASEFUNCTION_C) references T_BASE_FUNCTION (BAF_ID_C) on delete restrict on update restrict;
 insert into T_CONFIG(CFG_ID_C, CFG_VALUE_C) values('DB_VERSION', '0');
-update T_CONFIG set CFG_VALUE_C = 'FILE' where CFG_ID_C = 'LUCENE_DIRECTOY_STORAGE';
+insert into T_CONFIG(CFG_ID_C, CFG_VALUE_C) values('LUCENE_DIRECTORY_STORAGE', 'FILE');
 insert into T_BASE_FUNCTION(BAF_ID_C) values('ADMIN');
 insert into T_BASE_FUNCTION(BAF_ID_C) values('PASSWORD');
 insert into T_BASE_FUNCTION(BAF_ID_C) values('IMPORT');

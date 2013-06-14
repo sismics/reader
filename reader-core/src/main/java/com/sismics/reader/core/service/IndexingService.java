@@ -53,7 +53,7 @@ public class IndexingService extends AbstractScheduledService {
     @Override
     protected void startUp() {
         ConfigDao configDao = new ConfigDao();
-        Config luceneStorageConfig = configDao.getById(ConfigType.LUCENE_DIRECTOY_STORAGE);
+        Config luceneStorageConfig = configDao.getById(ConfigType.LUCENE_DIRECTORY_STORAGE);
         
         // RAM directory storage by default
         if (luceneStorageConfig == null || luceneStorageConfig.getValue().equals(Constants.LUCENE_DIRECTORY_STORAGE_RAM)) {
