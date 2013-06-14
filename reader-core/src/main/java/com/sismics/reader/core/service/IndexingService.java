@@ -17,9 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.AbstractScheduledService;
-import com.sismics.reader.core.constant.ConfigType;
 import com.sismics.reader.core.constant.Constants;
-import com.sismics.reader.core.dao.jpa.ConfigDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
@@ -27,7 +25,6 @@ import com.sismics.reader.core.dao.lucene.ArticleDao;
 import com.sismics.reader.core.event.RebuildIndexAsyncEvent;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.Article;
-import com.sismics.reader.core.model.jpa.Config;
 import com.sismics.reader.core.model.jpa.UserArticle;
 import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.TransactionUtil;
@@ -50,16 +47,24 @@ public class IndexingService extends AbstractScheduledService {
      */
     private Directory directory;
     
+    /**
+     * Lucene storage config.
+     */
+    private String luceneStorageConfig;
+    
+    public IndexingService(String luceneStorageConfig) {
+        this.luceneStorageConfig = luceneStorageConfig;
+    }
+
     @Override
     protected void startUp() {
-        ConfigDao configDao = new ConfigDao();
-        Config luceneStorageConfig = configDao.getById(ConfigType.LUCENE_DIRECTORY_STORAGE);
-        
         // RAM directory storage by default
-        if (luceneStorageConfig == null || luceneStorageConfig.getValue().equals(Constants.LUCENE_DIRECTORY_STORAGE_RAM)) {
+        if (luceneStorageConfig == null || luceneStorageConfig.equals(Constants.LUCENE_DIRECTORY_STORAGE_RAM)) {
             directory = new RAMDirectory();
-        } else if (luceneStorageConfig.getValue().equals(Constants.LUCENE_DIRECTORY_STORAGE_FILE)) {
+            log.info("Using RAM Lucene storage");
+        } else if (luceneStorageConfig.equals(Constants.LUCENE_DIRECTORY_STORAGE_FILE)) {
             File luceneDirectory = DirectoryUtil.getLuceneDirectory();
+            log.info("Using file Lucene storage: {}", luceneDirectory);
             try {
                 directory = new SimpleFSDirectory(luceneDirectory, new SimpleFSLockFactory());
             } catch (IOException e) {
