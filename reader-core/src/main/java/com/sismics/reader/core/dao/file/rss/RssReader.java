@@ -2,6 +2,7 @@ package com.sismics.reader.core.dao.file.rss;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,7 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.io.CharStreams;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.util.DateUtil;
@@ -170,10 +172,11 @@ public class RssReader extends DefaultHandler {
 
         // Pass a character stream to the parser for it to pick-up the correct encoding.
         // See http://stackoverflow.com/questions/3482494/
-        InputSource source = new InputSource();
-        source.setCharacterStream(new InputStreamReader(is));
+        String xml = CharStreams.toString(new InputStreamReader(is));
+        xml = xml.replaceFirst("^([\\W]+)<","<");  //$NON-NLS-1$ //$NON-NLS-2$
         
         try {
+            InputSource source = new InputSource(new StringReader(xml));
             parser.parse(source, this);
         } catch (InternalError e) {
             // Fix for Oracle code throwing java.lang.InternalError disgracefully

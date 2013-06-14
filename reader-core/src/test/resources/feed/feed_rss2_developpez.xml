@@ -1,12 +1,11 @@
-
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <rss xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
   <channel>
     <title><![CDATA[Developpez.com Développement Web]]></title>
     <link>http://web.developpez.com/index/rss</link>
     <description><![CDATA[Club des développeurs et IT Pro]]></description>
-    <pubDate>Thu, 13 Jun 2013 23:41:48 +0200</pubDate>
-    <lastBuildDate>Thu, 13 Jun 2013 23:41:48 +0200</lastBuildDate>
+    <pubDate>Sat, 15 Jun 2013 00:07:27 +0200</pubDate>
+    <lastBuildDate>Sat, 15 Jun 2013 00:07:27 +0200</lastBuildDate>
     <managingEditor>(web.developpez.com)</managingEditor>
     <copyright>Copyright © 2000-2013 www.developpez.com</copyright>
     <image>
@@ -17,6 +16,23 @@
     <generator>www.developpez.com</generator>
     <language>fr-FR</language>
     <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <item>
+      <title><![CDATA[Quel navigateur Web recommandez-vous en 2013 ? Participez au débat sur le meilleur navigateur grand public]]></title>
+      <link>http://web.developpez.com/actu/56767/Quel-navigateur-Web-recommandez-vous-en-2013-Participez-au-debat-sur-le-meilleur-navigateur-grand-public/</link>
+      <guid>http://web.developpez.com/actu/56767/Quel-navigateur-Web-recommandez-vous-en-2013-Participez-au-debat-sur-le-meilleur-navigateur-grand-public/</guid>
+      <description><![CDATA[Chers membres du club.Lors de notre précédent sondage de 2011, qui vous demandait votre navigateur préféré, Firefox arrivait en tête avec 52,88 % de votes devant Chrome (25,96 %) et Opera (10,82 %).
+Depuis, les choses ont encore beaucoup évolué et nous aimerions connaitre votre avis actuel.Notez cependant que la question a quelque peu évolué : nous ne vous demandons plus quel est votre navigateur préféré mais celui que vous recommanderiez.
+En effet, en tant que développeur (débutant, amateur, professionnel, qu'importe), vous êtes probablement un internaute a...]]></description>
+      <pubDate>Fri, 14 Jun 2013 09:00:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Nouvelle version pour le Framework DHTMLX, la version 3.6 de la bibliothèque JavaScript apporte un composant popup]]></title>
+      <link>http://javascript.developpez.com/actu/56786/Nouvelle-version-pour-le-Framework-DHTMLX-la-version-3-6-de-la-bibliotheque-JavaScript-apporte-un-composant-popup/</link>
+      <guid>http://javascript.developpez.com/actu/56786/Nouvelle-version-pour-le-Framework-DHTMLX-la-version-3-6-de-la-bibliotheque-JavaScript-apporte-un-composant-popup/</guid>
+      <description><![CDATA[Une nouvelle version vient de voir le jour pour le Framework DHTMLX : il s'agit de DHTMLX 3.6.DHTMLX est un framework AJAX de la société du même nom basée en Russie. Elle est spécialisée dans le développement logiciel et plus particulièrement le développement des  applications Web à interface riche. Pour se faire elle a développé un ensemble d'outils dont une bonne partie est disponible en Open Source notamment la bibliothèque DHTMLX dont la version 3.6 est désormais disponible. Il s'agit d'un ensemble de composants  basés sur les technologies  web notamment AJAX pour le développement d'interface utilisateur web avec des fonctionnalités améliorées. Nous avons entre autres comme composants disponiblent dans ce Framework :
+Tree : p...]]></description>
+      <pubDate>Fri, 14 Jun 2013 07:37:00 +0200</pubDate>
+    </item>
     <item>
       <title><![CDATA[Cube Slam : un hybride 3D de Pong par Google fait l'apologie de Web RTC, Web Audio, WebGL et des nouveaux standards du Web]]></title>
       <link>http://www.developpez.com/actu/56750/Cube-Slam-un-hybride-3D-de-Pong-par-Google-fait-l-apologie-de-Web-RTC-Web-Audio-WebGL-et-des-nouveaux-standards-du-Web/</link>
@@ -62,7 +78,7 @@ Elle présentera ses avancées techniques, à SUP'Internet avec l'AFUP Le 4 juin
       <link>http://javascript.developpez.com/actu/56728/Sortie-de-Pure-0-2-0/</link>
       <guid>http://javascript.developpez.com/actu/56728/Sortie-de-Pure-0-2-0/</guid>
       <description><![CDATA[Pure : ensemble de petits modules CSS pensés pour les applications Web mobilesPure est un ensemble de petits modules CSS (responsive) que vous pouvez utiliser dans chaque projet Web.Conçu avant tout pour des appareils mobiles, l'entièreté des modules ne fait que 5,7 Ko (minimisé et gzippé) malgré l'implémentation des styles responsive, le design et sa facilité d'utilisation.  Toutes les lignes de CSS ont été examinées attentivement. Il est d'ailleurs possible d'utiliser uniquement un sous-ensemble de ces modules, vous économiserez donc encore plus d'octets.Pour l'utiliser, rien de plus simple :
-  Code html ...]]></description>
+	Code html ...]]></description>
       <pubDate>Thu, 13 Jun 2013 08:50:00 +0200</pubDate>
     </item>
     <item>
@@ -180,22 +196,6 @@ pour faciliter la création, le partage et la publication de cartes personnalis�
       <guid>http://christele.developpez.com/tutoriels/javascript/visualiseur-de-parties-d-echec/</guid>
       <description><![CDATA[Cet article décrit une méthode simple pour générer et faire jouer sur une page Web, une partie d'échecs, en préservant une compatibilité avec la plupart des navigateurs.]]></description>
       <pubDate>Thu, 06 Jun 2013 08:00:00 +0200</pubDate>
-    </item>
-    <item>
-      <title><![CDATA[Comprendre les filtres de texture en WebGL, la septième traduction des tutoriels de Giles Thomas, par Alexandre Laurent]]></title>
-      <link>http://jeux.developpez.com/tutoriels/OpenGL/WebGL/6-filtres-de-textures/</link>
-      <guid>http://jeux.developpez.com/tutoriels/OpenGL/WebGL/6-filtres-de-textures/</guid>
-      <description><![CDATA[Suite au tutoriel pour ajouter une texture à un objet 3D en WebGL, vous pouvez maintenant découvrir comment utiliser le clavier pour interagir avec l'application 3D ainsi que les différents filtres de texture WebGL.Voici donc la sixième leçon de la série « Learning WebGL ».Bonne lectureVous pouvez retrouver les autres tutoriels de la série dans ]]></description>
-      <pubDate>Thu, 06 Jun 2013 08:00:00 +0200</pubDate>
-    </item>
-    <item>
-      <title><![CDATA[Le nouveau Gmail débarque sur iOS et Android : nouvelles options de notifications, meilleure gestion des courriels]]></title>
-      <link>http://www.developpez.com/actu/56491/Le-nouveau-Gmail-debarque-sur-iOS-et-Android-nouvelles-options-de-notifications-meilleure-gestion-des-courriels/</link>
-      <guid>http://www.developpez.com/actu/56491/Le-nouveau-Gmail-debarque-sur-iOS-et-Android-nouvelles-options-de-notifications-meilleure-gestion-des-courriels/</guid>
-      <description><![CDATA[Le nouveau Gmail débarque sur iOS et Android
-nouvelles options de notifications, meilleure gestion des courrielsC'est en avance que les mises à jour des fonctionnalités du service de messagerie de Google sont arrivées sur Android et iOS. Google avait en effet initialement prévu la semaine dernière de les déployer « dans les semaines qui viennent » mais Gmail est arrivé respectivement hier et avant hier sur les systèmes d'exploitation mobiles iOS et Android.
-L'utilisateur pourra gérer plusieurs comptes Gmail à la fois (jusqu'à 5 pour ceux qui sont sur iOS), afficher et enregistr...]]></description>
-      <pubDate>Wed, 05 Jun 2013 19:28:00 +0200</pubDate>
     </item>
   </channel>
 </rss>

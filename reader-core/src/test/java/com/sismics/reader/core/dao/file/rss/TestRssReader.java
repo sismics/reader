@@ -302,13 +302,13 @@ public class TestRssReader {
         List<Article> articleList = reader.getArticleList();
         Assert.assertEquals(20, articleList.size());
         Article article = articleList.get(0);
-        Assert.assertEquals("Cube Slam : un hybride 3D de Pong par Google fait l'apologie de Web RTC, Web Audio, WebGL et des nouveaux standards du Web", article.getTitle());
-        Assert.assertEquals("http://www.developpez.com/actu/56750/Cube-Slam-un-hybride-3D-de-Pong-par-Google-fait-l-apologie-de-Web-RTC-Web-Audio-WebGL-et-des-nouveaux-standards-du-Web/", article.getUrl());
-        Assert.assertEquals("http://www.developpez.com/actu/56750/Cube-Slam-un-hybride-3D-de-Pong-par-Google-fait-l-apologie-de-Web-RTC-Web-Audio-WebGL-et-des-nouveaux-standards-du-Web/", article.getGuid());
+        Assert.assertEquals("Quel navigateur Web recommandez-vous en 2013 ? Participez au débat sur le meilleur navigateur grand public", article.getTitle());
+        Assert.assertEquals("http://web.developpez.com/actu/56767/Quel-navigateur-Web-recommandez-vous-en-2013-Participez-au-debat-sur-le-meilleur-navigateur-grand-public/", article.getUrl());
+        Assert.assertEquals("http://web.developpez.com/actu/56767/Quel-navigateur-Web-recommandez-vous-en-2013-Participez-au-debat-sur-le-meilleur-navigateur-grand-public/", article.getGuid());
         Assert.assertNull(article.getCreator());
         Assert.assertNull(article.getCommentUrl());
         Assert.assertNull(article.getCommentCount());
-        Assert.assertTrue(article.getDescription().contains("Fait la démo de Web RTC, Web Audio, WebGL et l'apologie des nouveaux standards"));
+        Assert.assertTrue(article.getDescription().contains("Depuis, les choses ont encore beaucoup évolué et nous aimerions connaitre votre avis actuel"));
         Assert.assertNotNull(article.getPublicationDate());
     }
 }
