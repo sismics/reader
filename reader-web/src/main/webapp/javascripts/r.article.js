@@ -94,6 +94,9 @@ r.article.read = function(item, read) {
     return;
   }
   
+  // Update item state
+  read ? item.addClass('read') : item.removeClass('read');
+  
   var articleId = item.attr('data-article-id');
   
   // Calling API
@@ -102,9 +105,6 @@ r.article.read = function(item, read) {
     url: url.replace('{id}', articleId),
     type: 'POST',
     done: function(data) {
-      // Update item state
-      read ? item.addClass('read') : item.removeClass('read');
-      
       // Update tree unread counts
       var count = read ? -1 : -2;
       var article = item.data('article');
