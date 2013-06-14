@@ -87,6 +87,11 @@ r.article.init = function() {
  * Mark an article as read or unread.
  */
 r.article.read = function(item, read) {
+  // Stop if ajax in progress
+  if (r.util.ajaxQueued('feed')) {
+    return;
+  }
+  
   var current = item.hasClass('read');
   
   // Do nothing if read state has not changed
@@ -121,7 +126,7 @@ r.article.read = function(item, read) {
       var count = r.subscription.updateUnreadCount($('#unread-feed-button'), count);
       r.subscription.updateTitle(count);
     }
-  });
+  }, 'feed');
 };
 
 /**

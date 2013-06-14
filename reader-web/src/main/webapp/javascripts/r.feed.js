@@ -209,6 +209,11 @@ r.feed.load = function(next) {
     return;
   }
   
+  // Stop if ajax in progress
+  if (r.util.ajaxQueued('feed')) {
+    return;
+  }
+  
   var articlesLoaded = 0;
   if (next) {
     articlesLoaded = $('#feed-container .feed-item').length;
@@ -306,7 +311,7 @@ r.feed.load = function(next) {
       r.feed.context.bumper.find('.retry').show();
       $().toastmessage('showErrorToast', $.t('error.feed'));
     }
-  });
+  }, 'feed');
 };
 
 /**

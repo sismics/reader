@@ -59,7 +59,11 @@ r.util.init = function() {
 /**
  * Wrapper around $.ajax().
  */
-r.util.ajax = function(args) {
+r.util.ajaxQueue = [];
+r.util.ajaxQueued = function(queue) {
+  return r.util.ajaxQueue.indexOf(queue) != -1;
+};
+r.util.ajax = function(args, queue) {
   args.dataType = 'json';
   args.cache = false;
   if (!args.fail) {
@@ -71,9 +75,23 @@ r.util.ajax = function(args) {
     }
   }
   
+  if (queue) {
+    r.util.ajaxQueue.push(queue);
+  }
+  
   $.ajax(args)
-    .done(args.done)
-    .fail(args.fail)
+    .done(function(data, textStatus, jqXHR) {
+      if (queue) {
+        r.util.ajaxQueue.splice(r.util.ajaxQueue.indexOf(queue), 1);
+      }
+      args.done(data, textStatus, jqXHR);
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      if (queue) {
+        r.util.ajaxQueue.splice(r.util.ajaxQueue.indexOf(queue), 1);
+      }
+      args.fail(jqXHR, textStatus, errorThrown);
+    })
     .always(args.always);
 };
 
