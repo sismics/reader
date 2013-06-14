@@ -57,7 +57,7 @@ r.util.init = function() {
 };
 
 /**
- * Wrapper around $.ajax().
+ * Wrapper around $.ajax() and basic queue system.
  */
 r.util.ajaxQueue = [];
 r.util.ajaxQueued = function(queue) {
@@ -75,6 +75,7 @@ r.util.ajax = function(args, queue) {
     }
   }
   
+  // Add to queue
   if (queue) {
     r.util.ajaxQueue.push(queue);
   }
@@ -84,13 +85,17 @@ r.util.ajax = function(args, queue) {
       if (queue) {
         r.util.ajaxQueue.splice(r.util.ajaxQueue.indexOf(queue), 1);
       }
-      args.done(data, textStatus, jqXHR);
+      if (args.done) {
+        args.done(data, textStatus, jqXHR);
+      }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
       if (queue) {
         r.util.ajaxQueue.splice(r.util.ajaxQueue.indexOf(queue), 1);
       }
-      args.fail(jqXHR, textStatus, errorThrown);
+      if (args.fail) {
+        args.fail(jqXHR, textStatus, errorThrown);
+      }
     })
     .always(args.always);
 };
