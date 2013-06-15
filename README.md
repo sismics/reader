@@ -18,6 +18,7 @@ Features
 - Full text search
 - OPML import / export
 - Skinnable
+- Android application
 
 See <http://www.sismics.com/reader/> for a list of features and benefits.
 
@@ -43,6 +44,7 @@ Reader is organized in several Maven modules:
   - reader-core
   - reader-web
   - reader-web-common
+  - reader-android
 
 First off, clone the repository: `git clone git://github.com/sismics/reader.git`
 or download the sources from GitHub.
@@ -65,4 +67,4 @@ From the `reader-web` directory:
 
     mvn -Pprod -DskipTests clean install
 
-You will get your deployable WAR in the target directory.
+You will get your deployable WAR in the `target` directory.
