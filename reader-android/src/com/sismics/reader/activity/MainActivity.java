@@ -53,7 +53,8 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.main_activity);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerList = (ListView) findViewById(R.id.drawer_list);
+        mDrawerList.setEmptyView(findViewById(R.id.progressBarDrawer));
 
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -159,7 +160,7 @@ public class MainActivity extends FragmentActivity {
 
         // Update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
-        mDrawerLayout.closeDrawer(mDrawerList);
+        mDrawerLayout.closeDrawer(findViewById(R.id.left_drawer));
     }
 
     /**

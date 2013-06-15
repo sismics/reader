@@ -7,13 +7,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
+import com.androidquery.AQuery;
+import com.androidquery.callback.BitmapAjaxCallback;
 import com.sismics.reader.R;
+import com.sismics.reader.constant.Constants;
+import com.sismics.reader.util.PreferenceUtil;
 
 /**
  * Adapter for subscriptions list.
@@ -48,38 +52,55 @@ public class SubscriptionAdapter extends BaseAdapter {
     private static final int SUBSCRIPTION_ITEM = 2;
     
     /**
+     * Auth token used to download favicons.
+     */
+    private String authToken;
+    
+    /**
+     * AQuery.
+     */
+    private AQuery aq;
+    
+    /**
      * Constructor.
      * @param context
      * @param input
      */
     public SubscriptionAdapter(Context context, JSONObject input) {
         this.context = context;
+        this.aq = new AQuery(context);
+        this.authToken = PreferenceUtil.getAuthToken(context);
         SubscriptionItem item = null;
         
         // Adding fixed items
         item = new SubscriptionItem();
         item.type = HEADER_ITEM;
-        item.title = "Latest";
+        item.title = context.getString(R.string.latest);
         items.add(item);
         
         item = new SubscriptionItem();
         item.type = SUBSCRIPTION_ITEM;
-        item.title = "Unread";
+        item.title = context.getString(R.string.unread);
         item.url = "/all";
         item.unread = true;
         items.add(item);
         
         item = new SubscriptionItem();
         item.type = SUBSCRIPTION_ITEM;
-        item.title = "All";
+        item.title = context.getString(R.string.all);
         item.url = "/all";
         item.unread = false;
         items.add(item);
         
         item = new SubscriptionItem();
         item.type = SUBSCRIPTION_ITEM;
-        item.title = "Starred";
+        item.title = context.getString(R.string.starred);
         item.url = "/starred";
+        items.add(item);
+        
+        item = new SubscriptionItem();
+        item.type = HEADER_ITEM;
+        item.title = context.getString(R.string.subscriptions);
         items.add(item);
         
         // Adding categories and subscriptions
@@ -118,21 +139,55 @@ public class SubscriptionAdapter extends BaseAdapter {
             item.id = subscription.optString("id");
             item.title = subscription.optString("title");
             item.url = "/subscription/" + item.id;
+            item.root = true;
             items.add(item);
         }
     }
 
     @Override
-    public View getView(int position, View v, ViewGroup parent) {
-        if (v == null) {
+    public View getView(int position, View view, ViewGroup parent) {
+        SubscriptionItem item = getItem(position);
+        
+        // Inflating the right layout
+        if (view == null) {
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.drawer_list_item, null);
+            int layout = R.layout.drawer_list_item_header;
+            if (item.type == SUBSCRIPTION_ITEM) layout = R.layout.drawer_list_item_subscription;
+            if (item.type == CATEGORY_ITEM) layout = R.layout.drawer_list_item_category;
+            view = vi.inflate(layout, null);
         }
         
-        SubscriptionItem item = getItem(position);
-        ((TextView) v).setText(item.title);
+        // Recycling AQuery
+        aq.recycle(view);
         
-        return v;
+        // Type specific layout data
+        switch (item.type) {
+        case HEADER_ITEM:
+            break;
+        case SUBSCRIPTION_ITEM:
+            if (item.id != null) {
+                String faviconUrl = Constants.READER_API_URL + "/subscription/" + item.id + "/favicon";
+                Bitmap placeHolder = aq.getCachedImage(R.drawable.ic_launcher);
+                aq.id(R.id.imgFavicon)
+                    .image(new BitmapAjaxCallback()
+                        .url(faviconUrl)
+                        .fallback(R.drawable.ic_launcher)
+                        .preset(placeHolder)
+                        .animation(AQuery.FADE_IN_NETWORK)
+                        .cookie("auth_token", authToken))
+                    .margin(item.root ? 16 : 32, 0, 0, 0);
+            } else {
+                aq.id(R.id.imgFavicon).image(0);
+            }
+            break;
+        case CATEGORY_ITEM:
+            break;
+        }
+        
+        // Common layout data
+        aq.id(R.id.content).text(item.title);
+        
+        return view;
     }
 
     @Override
@@ -178,6 +233,7 @@ public class SubscriptionAdapter extends BaseAdapter {
         private String title;
         private String url;
         private boolean unread = false;
+        private boolean root = false;
         
         /**
          * Getter of url.

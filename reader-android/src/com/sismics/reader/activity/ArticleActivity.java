@@ -54,6 +54,7 @@ public class ArticleActivity extends FragmentActivity {
         
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.article_activity);
+        getActionBar().setHomeButtonEnabled(true);
         
         // Building page change listener
         OnPageChangeListener onPageChangeListener = new OnPageChangeListener() {
