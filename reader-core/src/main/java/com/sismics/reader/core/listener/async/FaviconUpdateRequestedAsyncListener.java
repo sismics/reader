@@ -42,7 +42,7 @@ public class FaviconUpdateRequestedAsyncListener {
             public void run() {
                 String faviconDirectory = DirectoryUtil.getFaviconDirectory().getPath();
                 FaviconDownloader downloader = new FaviconDownloader();
-                downloader.downloadFaviconFromPage(feed.getRssUrl(), faviconDirectory, feed.getId());
+                downloader.downloadFaviconFromPage(feed.getUrl(), faviconDirectory, feed.getId());
             }
         });
     }

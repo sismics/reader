@@ -69,7 +69,6 @@ public class ArticleSanitizer {
             "http://www.dailymotion.com/embed/.+");
 
     private AttributePolicy IMG_SRC_POLICY = new AttributePolicy() {
-        
         @Override
         public @Nullable
         String apply(String elementName, String attributeName, String value) {
@@ -123,7 +122,7 @@ public class ArticleSanitizer {
 
         // Allow images and transform relative links to absolute
         PolicyFactory imagePolicyFactory = new HtmlPolicyBuilder()
-                .allowUrlProtocols("http", "https")
+                .allowUrlProtocols("http", "https", " http", " https")
                 .allowElements("img")
                 .allowAttributes("alt").onElements("img")
                 .allowAttributes("src").matching(IMG_SRC_POLICY).onElements("img")
