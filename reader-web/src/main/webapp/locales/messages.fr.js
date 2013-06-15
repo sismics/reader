@@ -76,7 +76,7 @@
         "title": "Préférences",
         "username": "Nom d'utilisateur",
         "locale": "Langue",
-        "theme": "Thàme",
+        "theme": "Thème",
         "password": "Mot de passe",
         "passwordconfirm": "Mot de passe (confirmation)",
         "submit": "Enregistrer",
