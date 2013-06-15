@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,11 +11,11 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.text.Html;
 import android.widget.BaseAdapter;
 
 import com.sismics.android.Log;
 import com.sismics.android.SismicsHttpResponseHandler;
+import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.SubscriptionResource;
 
 /**
@@ -42,6 +40,11 @@ public class SharedArticlesAdapterHelper {
     private Set<Object> adapters = new HashSet<Object>();
     
     /**
+     * Listeners on articles loading.
+     */
+    private Set<ArticlesHelperListener> listeners = new HashSet<ArticlesHelperListener>();
+    
+    /**
      * API URL.
      */
     private String url;
@@ -60,11 +63,6 @@ public class SharedArticlesAdapterHelper {
      * Total number of articles.
      */
     private int total;
-    
-    /**
-     * Regexp to extract images URL.
-     */
-    private static final Pattern IMG_PATTERN = Pattern.compile("<img(.*?)src=\"(.*?)\"(.*?)>");
     
     /**
      * Returns an instance.
@@ -89,16 +87,18 @@ public class SharedArticlesAdapterHelper {
      * Add adapter.
      * @param adapter
      */
-    public void addAdapter(Object adapter) {
+    public void addAdapter(Object adapter, ArticlesHelperListener listener) {
         adapters.add(adapter);
+        listeners.add(listener);
     }
     
     /**
      * Remove adapter.
      * @param adapter
      */
-    public void removeAdapter(Object adapter) {
+    public void removeAdapter(Object adapter, ArticlesHelperListener listener) {
         adapters.remove(adapter);
+        listeners.remove(listener);
     }
     
     /**
@@ -159,6 +159,9 @@ public class SharedArticlesAdapterHelper {
             }
         }
         
+        for (ArticlesHelperListener listener : listeners) {
+            listener.onStart();
+        }
         SubscriptionResource.feed(context, url, unread, 10, offset, new SismicsHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
@@ -177,12 +180,7 @@ public class SharedArticlesAdapterHelper {
                     
                     // Precompute some data
                     try {
-                        // TODO Use Apache's commons lang 2.6 StringEscapeUtils.unescapeHtml
                         String description = article.optString("description");
-                        Matcher matcher = IMG_PATTERN.matcher(description);
-                        if (matcher.find()) {
-                            article.put("image_url", Html.fromHtml(matcher.group(2)).toString());
-                        }
                         String cleanedDescription = description.replaceAll("\\<.*?>", "");
                         int length = cleanedDescription.length();
                         String summary = cleanedDescription.substring(0, length < 300 ? length : 300);
@@ -200,6 +198,10 @@ public class SharedArticlesAdapterHelper {
             @Override
             public void onFinish() {
                 loading = false;
+                
+                for (ArticlesHelperListener listener : listeners) {
+                    listener.onEnd();
+                }
             }
         });
     }

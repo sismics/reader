@@ -17,6 +17,7 @@ import com.androidquery.AQuery;
 import com.sismics.reader.R;
 import com.sismics.reader.activity.ArticleActivity;
 import com.sismics.reader.constant.Constants;
+import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.ui.adapter.ArticlesAdapter;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
 
@@ -32,6 +33,23 @@ public class ArticlesFragment extends NavigationFragment {
      */
     private AQuery aq;
     
+    /**
+     * Articles loading listener.
+     */
+    private ArticlesHelperListener articlesHelperListener = new ArticlesHelperListener() {
+        @Override
+        public void onStart() {
+            getActivity().setProgressBarIndeterminateVisibility(true);
+        }
+        
+        @Override
+        public void onEnd() {
+            getActivity().setProgressBarIndeterminateVisibility(false);
+            aq.id(R.id.articleList).getListView().setEmptyView(aq.id(R.id.emptyList).getView());
+            aq.id(R.id.progressBar).gone();
+        }
+    };
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.articles_fragment, container, false);
@@ -42,7 +60,7 @@ public class ArticlesFragment extends NavigationFragment {
             String url = args.getString("url");
             boolean unread = args.getBoolean("unread");
             if (url != null) {
-                initAdapter(url, unread, savedInstanceState);
+                initFragment(url, unread, savedInstanceState);
             }
         }
         
@@ -53,14 +71,18 @@ public class ArticlesFragment extends NavigationFragment {
      * Load articles.
      * @param url
      */
-    private void initAdapter(final String url, final boolean unread, Bundle savedInstanceState) {
+    private void initFragment(final String url, final boolean unread, Bundle savedInstanceState) {
+        aq.id(R.id.articleList).getListView().setEmptyView(aq.id(R.id.progressBar).getView());
+        
         if (savedInstanceState == null) {
             SharedArticlesAdapterHelper.getInstance().restart(url, unread);
             SharedArticlesAdapterHelper.getInstance().load(getActivity());
+        } else {
+            articlesHelperListener.onEnd();
         }
         
         final ArticlesAdapter adapter = new ArticlesAdapter(getActivity());
-        SharedArticlesAdapterHelper.getInstance().addAdapter(adapter);
+        SharedArticlesAdapterHelper.getInstance().addAdapter(adapter, articlesHelperListener);
         
         aq.id(R.id.articleList)
             .adapter(adapter)
@@ -98,7 +120,7 @@ public class ArticlesFragment extends NavigationFragment {
     @Override
     public void onDestroyView() {
         Adapter adapter = aq.id(R.id.articleList).getListView().getAdapter();
-        SharedArticlesAdapterHelper.getInstance().removeAdapter(adapter);
+        SharedArticlesAdapterHelper.getInstance().removeAdapter(adapter, articlesHelperListener);
         super.onDestroyView();
     }
 }

@@ -11,11 +11,13 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.sismics.android.Log;
 import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.R;
+import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.ArticleResource;
 import com.sismics.reader.ui.adapter.ArticlesPagerAdapter;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
@@ -31,10 +33,26 @@ public class ArticleActivity extends FragmentActivity {
      */
     private ViewPager viewPager;
     
+    /**
+     * Articles loading listener.
+     */
+    private ArticlesHelperListener articlesHelperListener = new ArticlesHelperListener() {
+        @Override
+        public void onStart() {
+            setProgressBarIndeterminateVisibility(true);
+        }
+        
+        @Override
+        public void onEnd() {
+            setProgressBarIndeterminateVisibility(false);
+        }
+    };
+    
     @Override
     protected void onCreate(Bundle args) {
         super.onCreate(args);
         
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.article_activity);
         
         // Building page change listener
@@ -74,7 +92,7 @@ public class ArticleActivity extends FragmentActivity {
         // Configuring ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         final ArticlesPagerAdapter adapter = new ArticlesPagerAdapter(getSupportFragmentManager());
-        SharedArticlesAdapterHelper.getInstance().addAdapter(adapter);
+        SharedArticlesAdapterHelper.getInstance().addAdapter(adapter, articlesHelperListener);
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(onPageChangeListener);
         
@@ -92,7 +110,7 @@ public class ArticleActivity extends FragmentActivity {
         data.putExtra("position", viewPager.getCurrentItem());
         setResult(RESULT_OK, data);
         
-        SharedArticlesAdapterHelper.getInstance().removeAdapter(viewPager.getAdapter());
+        SharedArticlesAdapterHelper.getInstance().removeAdapter(viewPager.getAdapter(), articlesHelperListener);
         
         super.finish();
     }

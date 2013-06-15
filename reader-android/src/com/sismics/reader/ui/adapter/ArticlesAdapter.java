@@ -16,7 +16,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
+import com.androidquery.callback.BitmapAjaxCallback;
 import com.sismics.reader.R;
+import com.sismics.reader.constant.Constants;
+import com.sismics.reader.util.PreferenceUtil;
 
 /**
  * Adapter for articles list.
@@ -40,6 +43,11 @@ public class ArticlesAdapter extends BaseAdapter {
     private AQuery aq;
     
     /**
+     * Auth token used to download favicons.
+     */
+    private String authToken;
+    
+    /**
      * Constructeur.
      * @param context
      * @param items
@@ -47,7 +55,8 @@ public class ArticlesAdapter extends BaseAdapter {
     public ArticlesAdapter(Activity activity) {
         this.activity = activity;
         this.aq = new AQuery(activity);
-        items = SharedArticlesAdapterHelper.getInstance().getArticleItems();
+        this.items = SharedArticlesAdapterHelper.getInstance().getArticleItems();
+        this.authToken = PreferenceUtil.getAuthToken(activity);
     }
 
     @Override
@@ -70,16 +79,17 @@ public class ArticlesAdapter extends BaseAdapter {
             txtTitle.setTypeface(null, Typeface.BOLD);
         }
         JSONObject subscription = article.optJSONObject("subscription");
-        String imageUrl = article.optString("image_url");
-        if (imageUrl != null) {
-            Bitmap placeHolder = aq.getCachedImage(R.drawable.ic_launcher);
-            if (aq.shouldDelay(position, view, parent, imageUrl)) {
-                aq.id(R.id.imgThumbnail).image(placeHolder);
-            } else {
-                aq.id(R.id.imgThumbnail).image(imageUrl, true, true, 200, AQuery.INVISIBLE, placeHolder, AQuery.FADE_IN_NETWORK);
-            }
+        Bitmap placeHolder = aq.getCachedImage(R.drawable.ic_launcher);
+        String faviconUrl = Constants.READER_API_URL + "/subscription/" + subscription.optString("id") + "/favicon";
+        if (aq.shouldDelay(position, view, parent, faviconUrl)) {
+            aq.id(R.id.imgFavicon).image(placeHolder);
         } else {
-            aq.id(R.id.imgThumbnail).invisible();
+            aq.id(R.id.imgFavicon).image(new BitmapAjaxCallback()
+                .url(faviconUrl)
+                .fallback(R.drawable.ic_launcher)
+                .preset(placeHolder)
+                .animation(AQuery.FADE_IN_NETWORK)
+                .cookie("auth_token", authToken));
         }
         String summary = "<b>" + subscription.optString("title") + "</b> &mdash; " + article.optString("summary");
         aq.id(R.id.txtSummary).text(Html.fromHtml(summary));

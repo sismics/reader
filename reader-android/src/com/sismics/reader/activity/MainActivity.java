@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -48,6 +49,7 @@ public class MainActivity extends FragmentActivity {
             return;
         }
         
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.main_activity);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -112,7 +114,7 @@ public class MainActivity extends FragmentActivity {
         case R.id.logout:
             UserResource.logout(getApplicationContext(), new SismicsHttpResponseHandler() {
                 @Override
-                public void onSuccess(JSONObject json) {
+                public void onFinish() {
                     ApplicationContext.getInstance().setUserInfo(getApplicationContext(), null);
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     finish();
