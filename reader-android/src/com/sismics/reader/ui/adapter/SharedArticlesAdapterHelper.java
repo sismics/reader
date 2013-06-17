@@ -139,12 +139,13 @@ public class SharedArticlesAdapterHelper {
         }
         
         loading = true;
+        int offset = items.size();
 
         for (ArticlesHelperListener listener : listeners) {
             listener.onStart();
         }
         
-        SubscriptionResource.feed(context, url, unread, 10, items.size(), new SismicsHttpResponseHandler() {
+        SubscriptionResource.feed(context, url, unread, 10, offset, offset > 0 ? total : null, new SismicsHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
                 // If reference has not changed, let's update the shared data

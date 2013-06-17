@@ -238,7 +238,8 @@ r.feed.load = function(next) {
     data: {
       unread: r.feed.context.unread,
       limit: r.feed.context.limit,
-      offset: next ? articlesLoaded : 0
+      offset: next ? articlesLoaded : 0,
+      total: next ? r.feed.context.total : null
     },
     done: function(data) {
       // Pre article build

@@ -41,13 +41,16 @@ public class SubscriptionResource extends BaseResource {
      * @param context
      * @param responseHandler
      */
-    public static void feed(Context context, String url, boolean unread, int limit, int offset, SismicsHttpResponseHandler responseHandler) {
+    public static void feed(Context context, String url, boolean unread, int limit, int offset, Integer total, SismicsHttpResponseHandler responseHandler) {
         init(context);
         
         RequestParams params = new RequestParams();
         params.put("unread", Boolean.toString(unread));
         params.put("limit", Integer.toString(limit));
         params.put("offset", Integer.toString(offset));
+        if (total != null) {
+            params.put("total", total.toString());
+        }
         client.get(Constants.READER_API_URL + url, params, responseHandler);
     }
     
