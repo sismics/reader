@@ -55,7 +55,7 @@ public class PaginatedLists {
      * @param paginatedList Paginated list object containing parameters, and into which results are added by side effects
      * @param queryParam Query parameters
      */
-    private static <E> void executeCountQuery(PaginatedList<E> paginatedList, QueryParam queryParam) {
+    public static <E> void executeCountQuery(PaginatedList<E> paginatedList, QueryParam queryParam) {
         StringBuilder sb = new StringBuilder("select count(*) as result_count from (");
         sb.append(queryParam.getQueryString());
         sb.append(") as t1");

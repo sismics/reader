@@ -151,6 +151,17 @@ public class UserArticleDao {
         List<Object[]> l = q.getResultList();
         return assembleResultList(l);
     }
+    
+    /**
+     * Count user articles by criteria.
+     * 
+     * @param criteria Search criteria
+     * @param paginatedList Paginated list (populated by side effects)
+     */
+    public void countByCriteria(UserArticleCriteria criteria, PaginatedList<UserArticleDto> paginatedList) {
+        QueryParam queryParam = getQueryParam(criteria);
+        PaginatedLists.executeCountQuery(paginatedList, queryParam);
+    }
 
     /**
      * Searches user articles by criteria.
