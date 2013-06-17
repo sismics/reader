@@ -209,11 +209,6 @@ r.feed.load = function(next) {
     return;
   }
   
-  // Stop if ajax in progress
-  if (r.util.ajaxQueued('feed')) {
-    return;
-  }
-  
   var articlesLoaded = 0;
   if (next) {
     articlesLoaded = $('#feed-container .feed-item').length;
@@ -221,18 +216,6 @@ r.feed.load = function(next) {
       // In that case, all articles are loaded
       return;
     }
-  }
-  
-  // Actual offset according to read articles
-  var actualOffset = articlesLoaded;
-  if (r.feed.context.unread) {
-    var articlesRead = $('#feed-container .feed-item.read').length;
-    actualOffset -= articlesRead;
-  }
-  
-  // Actual offset according to starred articles
-  if (r.feed.context.url == r.util.url.starred) {
-    actualOffset = $('#feed-container .feed-item.starred').length;
   }
   
   if (!next) {
@@ -255,7 +238,7 @@ r.feed.load = function(next) {
     data: {
       unread: r.feed.context.unread,
       limit: r.feed.context.limit,
-      offset: next ? actualOffset : 0
+      offset: next ? articlesLoaded : 0
     },
     done: function(data) {
       // Pre article build
@@ -311,7 +294,7 @@ r.feed.load = function(next) {
       r.feed.context.bumper.find('.retry').show();
       $().toastmessage('showErrorToast', $.t('error.feed'));
     }
-  }, 'feed');
+  });
 };
 
 /**
