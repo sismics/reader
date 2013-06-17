@@ -21,6 +21,7 @@ import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.ArticleResource;
 import com.sismics.reader.ui.adapter.ArticlesPagerAdapter;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
+import com.viewpagerindicator.UnderlinePageIndicator;
 
 /**
  * Activity displaying articles.
@@ -54,6 +55,7 @@ public class ArticleActivity extends FragmentActivity {
         
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.article_activity);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         
         // Building page change listener
@@ -79,6 +81,9 @@ public class ArticleActivity extends FragmentActivity {
                         }
                     });
                 }
+                
+                // Update activity title
+                setTitle((position + 1) + "/" + sharedAdapterHelper.getTotal());
             }
             
             @Override
@@ -95,10 +100,14 @@ public class ArticleActivity extends FragmentActivity {
         final ArticlesPagerAdapter adapter = new ArticlesPagerAdapter(getSupportFragmentManager());
         SharedArticlesAdapterHelper.getInstance().addAdapter(adapter, articlesHelperListener);
         viewPager.setAdapter(adapter);
-        viewPager.setOnPageChangeListener(onPageChangeListener);
         
-        // Setting current page
+        // Configuring ViewPagerIndicator
         int position = getIntent().getIntExtra("position", 0);
+        UnderlinePageIndicator indicator = (UnderlinePageIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(viewPager, position, SharedArticlesAdapterHelper.getInstance().getTotal());
+        indicator.setOnPageChangeListener(onPageChangeListener);
+        
+        // Forcing page change listener if needed
         viewPager.setCurrentItem(position);
         if (position == 0) {
             onPageChangeListener.onPageSelected(0);
@@ -148,6 +157,10 @@ public class ArticleActivity extends FragmentActivity {
                     }
                 }
             });
+            return true;
+            
+        case android.R.id.home:
+            finish();
             return true;
             
         default:

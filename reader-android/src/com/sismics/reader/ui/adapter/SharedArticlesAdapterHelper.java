@@ -181,7 +181,7 @@ public class SharedArticlesAdapterHelper {
                     // Precompute some data
                     try {
                         String description = article.optString("description");
-                        String cleanedDescription = description.replaceAll("\\<.*?>", "");
+                        String cleanedDescription = description.replaceAll("\\<.*?>", "").trim();
                         int length = cleanedDescription.length();
                         String summary = cleanedDescription.substring(0, length < 300 ? length : 300);
                         article.put("summary", summary);
@@ -204,5 +204,13 @@ public class SharedArticlesAdapterHelper {
                 }
             }
         });
+    }
+    
+    /**
+     * Getter of total.
+     * @return total
+     */
+    public int getTotal() {
+        return total;
     }
 }

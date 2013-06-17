@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <TextView android:layout_width="match_parent"
+        android:id="@+id/title"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="Gravity Suddenly Switched Off"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_margin="8dp" />
+    
     <WebView
         android:id="@+id/articleWebView"
         android:layout_width="match_parent"

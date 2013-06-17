@@ -8,12 +8,14 @@ import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
+import com.androidquery.AQuery;
 import com.sismics.reader.R;
 
 /**
@@ -22,6 +24,12 @@ import com.sismics.reader.R;
  * @author bgamard
  */
 public class ArticleFragment extends Fragment {
+    
+    /**
+     * AQuery.
+     */
+    private AQuery aq;
+    
     /**
      * Create a new instance of ArticleFragment.
      */
@@ -39,7 +47,9 @@ public class ArticleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.article_fragment, container, false);
-        WebView webView = (WebView) view.findViewById(R.id.articleWebView);
+        aq = new AQuery(view);
+        
+        WebView webView = aq.id(R.id.articleWebView).getWebView();
         webView.getSettings().setUseWideViewPort(true);
         
         Bundle args = getArguments();
@@ -70,6 +80,9 @@ public class ArticleFragment extends Fragment {
                         Log.e("ArticleFragment", "Error modifying article HTML", e);
                     }
                     webView.loadData(html, "text/html; charset=UTF-8", null);
+                    
+                    // Other articles data
+                    aq.id(R.id.title).text(Html.fromHtml(json.optString("title")));
                 } catch (JSONException e) {
                     Log.e("ArticleFragment", "Unable to parse JSON", e);
                 }
