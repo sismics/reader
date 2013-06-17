@@ -39,7 +39,6 @@ public class ArticleAssembler {
             enclosure.put("type", userArticle.getArticleEnclosureType());
             userArticleJson.put("enclosure", enclosure);
         }
-        userArticleJson.put("subscription", subscription);
         userArticleJson.put("is_read", userArticle.getReadTimestamp() != null);
         userArticleJson.put("is_starred", userArticle.getStarTimestamp() != null);
         return userArticleJson;

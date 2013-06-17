@@ -2,16 +2,21 @@ package com.sismics.reader.fragment;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
@@ -57,7 +62,7 @@ public class ArticleFragment extends Fragment {
             String jsonStr = args.getString("json");
             if (jsonStr != null) {
                 try {
-                    JSONObject json = new JSONObject(jsonStr);
+                    final JSONObject json = new JSONObject(jsonStr);
                     
                     // HTML modification to fit the article content in the screen width
                     String html = json.optString("description");
@@ -82,7 +87,23 @@ public class ArticleFragment extends Fragment {
                     webView.loadData(html, "text/html; charset=UTF-8", null);
                     
                     // Other articles data
-                    aq.id(R.id.title).text(Html.fromHtml(json.optString("title")));
+                    aq.id(R.id.title)
+                        .text(Html.fromHtml(json.optString("title")))
+                        .clicked(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(json.optString("url")));
+                                startActivity(intent);
+                            }
+                        });
+                    String subscriptionTitle = json.optJSONObject("subscription").optString("title");
+                    String creator = json.optString("creator");
+                    if (!creator.isEmpty()) {
+                        aq.id(R.id.author).text(getString(R.string.article_subscription_author, subscriptionTitle, creator));
+                    } else {
+                        aq.id(R.id.author).text(getString(R.string.article_subscription, subscriptionTitle));
+                    }
+                    aq.id(R.id.date).text(DateUtils.getRelativeTimeSpanString(json.optLong("date"), new Date().getTime(), 0).toString());
                 } catch (JSONException e) {
                     Log.e("ArticleFragment", "Unable to parse JSON", e);
                 }

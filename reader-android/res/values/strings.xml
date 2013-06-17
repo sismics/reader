@@ -23,6 +23,8 @@
     <string name="all">All</string>
     <string name="starred">Starred</string>
     <string name="subscriptions">Subscriptions</string>
+    <string name="article_subscription">on %1$s</string>
+    <string name="article_subscription_author">on %1$s by %2$s</string>
     <string name="crash_toast_text">A crash occurred, a report has been sent to resolve this problem</string>
 
     <!-- Préférences -->
