@@ -107,11 +107,18 @@ public class TestArticleSanitizer {
         Assert.assertEquals(30, articleList.size());
         Article article = articleList.get(20);
 
-        // Allow iframes to Vimeo
+        // Allow iframes to Youtube
         ArticleSanitizer articleSanitizer = new ArticleSanitizer(feed.getUrl());
         String html = articleSanitizer.sanitize(article.getDescription());
         Assert.assertTrue(html.contains("Y&#39;a pas que XBMC dans la vie"));
         Assert.assertTrue(html.contains("<iframe src=\"http://www.youtube.com/embed/n2d4c8JIT0E?feature&#61;player_embedded\" height=\"360\" width=\"640\">"));
+        
+        // Allow iframes to Youtube HTTPS
+        article = articleList.get(0);
+        articleSanitizer = new ArticleSanitizer(feed.getUrl());
+        html = articleSanitizer.sanitize(article.getDescription());
+        Assert.assertTrue(html.contains("La RetroN 5 sera équipée d&#39;une sortie HDMI"));
+        Assert.assertTrue(html.contains("<iframe src=\"https://www.youtube.com/embed/5OcNy7t17LA?feature&#61;player_embedded\" height=\"360\" width=\"640\">"));
     }
 
     /**

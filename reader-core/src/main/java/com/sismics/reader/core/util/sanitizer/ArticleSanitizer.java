@@ -64,7 +64,7 @@ public class ArticleSanitizer {
     };
 
     private static final Pattern VIDEO_PATTERN = Pattern.compile(
-            "http://(www.)?youtube.com/embed/.+|" + 
+            "http(s)?://(www.)?youtube.com/embed/.+|" + 
             "http://player.vimeo.com/video/.+|" +
             "http://www.dailymotion.com/embed/.+");
 
