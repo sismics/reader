@@ -9,7 +9,7 @@ r.feed.context = {
   loading: false, // True if XHR in progress
   total: 0, // Total number of articles
   limit: function() { // Articles number to fetch each page
-    return $('#feed-container').hasClass('list') ? 15 : 5;
+    return $('#feed-container').hasClass('list') ? 15 : 10;
   }, 
   lastItem: null, // Last article
   bumper: null // Bumper
