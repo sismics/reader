@@ -150,8 +150,12 @@ public class ArticleActivity extends FragmentActivity {
                 Log.e("ArticleActivity", "Error forcing article at unread state", e);
             }
             
+            // Removing from mark as read list
+            String articleId = article.optString("id");
+            readArticleIdList.remove(articleId);
+            
             // Marking article as unread
-            ArticleResource.unread(ArticleActivity.this, article.optString("id"), new SismicsHttpResponseHandler() {
+            ArticleResource.unread(ArticleActivity.this, articleId, new SismicsHttpResponseHandler() {
                 public void onSuccess(JSONObject json) {
                     try {
                         article.put("is_read", false);

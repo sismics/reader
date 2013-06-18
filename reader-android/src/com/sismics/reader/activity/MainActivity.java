@@ -60,14 +60,18 @@ public class MainActivity extends FragmentActivity {
         // Set a custom shadow that overlays the main content when the drawer opens
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         
-        // Load subscriptions
-        refreshSubscriptions(1);
+        // Load subscriptions and select unread item
+        if (args == null) {
+            refreshSubscriptions(1);
+        } else {
+            refreshSubscriptions(args.getInt("drawerItemSelected", 1));
+        }
 
         // Drawer item click listener
         drawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItem(position, true);
+                selectItem(position);
             }
         });
         
@@ -124,7 +128,7 @@ public class MainActivity extends FragmentActivity {
             
         case R.id.refresh:
             // Refresh subscriptions and articles
-            selectItem(drawerList.getCheckedItemPosition(), true);
+            refreshSubscriptions(drawerList.getCheckedItemPosition());
             return true;
             
         case android.R.id.home:
@@ -143,14 +147,8 @@ public class MainActivity extends FragmentActivity {
     /**
      * Select an item from the subscription list.
      * @param position Position to select
-     * @param refreshSubscriptions Refresh subscriptions if true
      */
-    private void selectItem(int position, boolean refreshSubscriptions) {
-        if (refreshSubscriptions) {
-            // Refresh subscriptions
-            refreshSubscriptions(position);
-        }
-        
+    private void selectItem(int position) {
         // Create a new fragment with articles context
         SubscriptionAdapter adapter = (SubscriptionAdapter) drawerList.getAdapter();
         if (adapter == null) {
@@ -179,7 +177,7 @@ public class MainActivity extends FragmentActivity {
 
     /**
      * Refresh subscriptions list from server.
-     * @param position Position to select (or -1 to select nothing)
+     * @param position Position to select
      */
     private void refreshSubscriptions(final int position) {
         // Load subscriptions from server
@@ -202,7 +200,7 @@ public class MainActivity extends FragmentActivity {
                     if (!adapter.isEnabled(pos)) {
                         pos = 1;
                     }
-                    selectItem(pos, false);
+                    selectItem(pos);
                 }
             }
         });
@@ -224,5 +222,11 @@ public class MainActivity extends FragmentActivity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggle
         drawerToggle.onConfigurationChanged(newConfig);
+    }
+    
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("drawerItemSelected", drawerList.getCheckedItemPosition());
     }
 }
