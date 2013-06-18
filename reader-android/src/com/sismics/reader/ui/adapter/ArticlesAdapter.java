@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -61,30 +62,37 @@ public class ArticlesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
+        ViewHolder holder = null;
+        
         if (view == null) {
             LayoutInflater vi = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = vi.inflate(R.layout.article_item, null);
+            aq.recycle(view);
+            holder = new ViewHolder();
+            holder.txtTitle = aq.id(R.id.txtTitle).getTextView();
+            holder.txtSummary = aq.id(R.id.txtSummary).getTextView();
+            holder.imgFavicon = aq.id(R.id.imgFavicon).getImageView();
+            view.setTag(holder);
+        } else {
+            aq.recycle(view);
+            holder = (ViewHolder) view.getTag();
         }
-        
-        aq.recycle(view);
         
         // Filling articles data
         JSONObject article = getItem(position);
-        TextView txtTitle = aq.id(R.id.txtTitle)
-                .text(Html.fromHtml(article.optString("title")))
-                .getTextView();
+        holder.txtTitle.setText(Html.fromHtml(article.optString("title")));
         if (article.optBoolean("is_read")) {
-            txtTitle.setTypeface(null, Typeface.NORMAL);
+            holder.txtTitle.setTypeface(null, Typeface.NORMAL);
         } else {
-            txtTitle.setTypeface(null, Typeface.BOLD);
+            holder.txtTitle.setTypeface(null, Typeface.BOLD);
         }
         JSONObject subscription = article.optJSONObject("subscription");
         Bitmap placeHolder = aq.getCachedImage(R.drawable.ic_launcher);
         String faviconUrl = Constants.READER_API_URL + "/subscription/" + subscription.optString("id") + "/favicon";
         if (aq.shouldDelay(position, view, parent, faviconUrl)) {
-            aq.id(R.id.imgFavicon).image(placeHolder);
+            aq.id(holder.imgFavicon).image(placeHolder);
         } else {
-            aq.id(R.id.imgFavicon).image(new BitmapAjaxCallback()
+            aq.id(holder.imgFavicon).image(new BitmapAjaxCallback()
                 .url(faviconUrl)
                 .fallback(R.drawable.ic_launcher)
                 .preset(placeHolder)
@@ -92,7 +100,7 @@ public class ArticlesAdapter extends BaseAdapter {
                 .cookie("auth_token", authToken));
         }
         String summary = "<b>" + subscription.optString("title") + "</b> &mdash; " + article.optString("summary");
-        aq.id(R.id.txtSummary).text(Html.fromHtml(summary));
+        holder.txtSummary.setText(Html.fromHtml(summary));
         
         return view;
     }
@@ -110,5 +118,16 @@ public class ArticlesAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+    
+    /**
+     * Article ViewHolder.
+     * 
+     * @author bgamard
+     */
+    private static class ViewHolder {
+        TextView txtTitle;
+        TextView txtSummary;
+        ImageView imgFavicon;
     }
 }

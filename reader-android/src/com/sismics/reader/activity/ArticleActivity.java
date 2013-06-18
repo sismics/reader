@@ -1,5 +1,7 @@
 package com.sismics.reader.activity;
 
+import java.util.ArrayList;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,6 +37,16 @@ public class ArticleActivity extends FragmentActivity {
     private ViewPager viewPager;
     
     /**
+     * Articles to mark as read later.
+     */
+    private ArrayList<String> readArticleIdList;
+    
+    /**
+     * Shared articles adapter helper.
+     */
+    private SharedArticlesAdapterHelper sharedAdapterHelper;
+    
+    /**
      * Articles loading listener.
      */
     private ArticlesHelperListener articlesHelperListener = new ArticlesHelperListener() {
@@ -53,6 +65,8 @@ public class ArticleActivity extends FragmentActivity {
     protected void onCreate(Bundle args) {
         super.onCreate(args);
         
+        readArticleIdList = new ArrayList<String>();
+        sharedAdapterHelper = SharedArticlesAdapterHelper.getInstance();
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.article_activity);
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,24 +76,15 @@ public class ArticleActivity extends FragmentActivity {
         OnPageChangeListener onPageChangeListener = new OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                SharedArticlesAdapterHelper sharedAdapterHelper = SharedArticlesAdapterHelper.getInstance();
                 if (position + 1 >= sharedAdapterHelper.getArticleItems().size()) {
                     sharedAdapterHelper.load(ArticleActivity.this);
                 }
                 
-                // Mark article as read
-                // TODO New API needed to mark several articles as read and call onPause
+                // Store article id to mark as read later
                 final JSONObject article = sharedAdapterHelper.getArticleItems().get(position);
-                if (!article.optBoolean("is_read") && !article.optBoolean("force_unread")) {
-                    ArticleResource.read(ArticleActivity.this, article.optString("id"), new SismicsHttpResponseHandler() {
-                        public void onSuccess(JSONObject json) {
-                            try {
-                                article.put("is_read", true);
-                            } catch (JSONException e) {
-                                Log.e("ArticleActivity", "Error changing read state", e);
-                            }
-                        }
-                    });
+                String articleId = article.optString("id");
+                if (!readArticleIdList.contains(articleId) && !article.optBoolean("force_unread")) {
+                    readArticleIdList.add(article.optString("id"));
                 }
                 
                 // Update activity title
@@ -98,13 +103,13 @@ public class ArticleActivity extends FragmentActivity {
         // Configuring ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         final ArticlesPagerAdapter adapter = new ArticlesPagerAdapter(getSupportFragmentManager());
-        SharedArticlesAdapterHelper.getInstance().addAdapter(adapter, articlesHelperListener);
+        sharedAdapterHelper.addAdapter(adapter, articlesHelperListener);
         viewPager.setAdapter(adapter);
         
         // Configuring ViewPagerIndicator
         int position = getIntent().getIntExtra("position", 0);
         UnderlinePageIndicator indicator = (UnderlinePageIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(viewPager, position, SharedArticlesAdapterHelper.getInstance().getTotal());
+        indicator.setViewPager(viewPager, position, sharedAdapterHelper.getTotal());
         indicator.setOnPageChangeListener(onPageChangeListener);
         
         // Forcing page change listener if needed
@@ -120,7 +125,7 @@ public class ArticleActivity extends FragmentActivity {
         data.putExtra("position", viewPager.getCurrentItem());
         setResult(RESULT_OK, data);
         
-        SharedArticlesAdapterHelper.getInstance().removeAdapter(viewPager.getAdapter(), articlesHelperListener);
+        sharedAdapterHelper.removeAdapter(viewPager.getAdapter(), articlesHelperListener);
         
         super.finish();
     }
@@ -136,7 +141,6 @@ public class ArticleActivity extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.unread:
-            SharedArticlesAdapterHelper sharedAdapterHelper = SharedArticlesAdapterHelper.getInstance();
             final JSONObject article = sharedAdapterHelper.getArticleItems().get(viewPager.getCurrentItem());
             
             // Flagging article as unread
@@ -151,6 +155,7 @@ public class ArticleActivity extends FragmentActivity {
                 public void onSuccess(JSONObject json) {
                     try {
                         article.put("is_read", false);
+                        sharedAdapterHelper.onDataChanged();
                         Toast.makeText(ArticleActivity.this, R.string.marked_as_unread, Toast.LENGTH_LONG).show();
                     } catch (JSONException e) {
                         Log.e("ArticleActivity", "Error changing read state", e);
@@ -166,5 +171,30 @@ public class ArticleActivity extends FragmentActivity {
         default:
             return super.onOptionsItemSelected(item);
         }
+    }
+    
+    @Override
+    protected void onPause() {
+        if (readArticleIdList != null && !readArticleIdList.isEmpty()) {
+            ArticleResource.readMultiple(ArticleActivity.this, readArticleIdList, new SismicsHttpResponseHandler() {
+                @Override
+                public void onSuccess(JSONObject json) {
+                    // Mark articles as read on local data
+                    for (JSONObject article : sharedAdapterHelper.getArticleItems()) {
+                        String articleId = article.optString("id");
+                        if (readArticleIdList.contains(articleId)) {
+                            try {
+                                article.put("is_read", true);
+                            } catch (JSONException e) {
+                                Log.e("ArticleActivity", "Error changing read state", e);
+                            }
+                        }
+                    }
+                    
+                    sharedAdapterHelper.onDataChanged();
+                }
+            });
+        }
+        super.onPause();
     }
 }

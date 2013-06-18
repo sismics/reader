@@ -10,6 +10,11 @@ import com.loopj.android.http.AsyncHttpClient;
 public class BaseResource {
     
     /**
+     * User-Agent to use.
+     */
+    protected static String USER_AGENT = null;
+    
+    /**
      * HTTP client.
      */
     protected static AsyncHttpClient client = new AsyncHttpClient();
