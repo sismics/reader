@@ -7,7 +7,6 @@ import android.content.Context;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.sismics.android.SismicsHttpResponseHandler;
-import com.sismics.reader.constant.Constants;
 
 /**
  * Access to /user API.
@@ -41,7 +40,7 @@ public class UserResource extends BaseResource {
         RequestParams params = new RequestParams();
         params.put("username", username);
         params.put("password", password);
-        client.post(Constants.READER_API_URL + "/user/login", params, responseHandler);
+        client.post(getApiUrl(context) + "/user/login", params, responseHandler);
     }
 
     /**
@@ -53,7 +52,7 @@ public class UserResource extends BaseResource {
         init(context);
         
         RequestParams params = new RequestParams();
-        client.get(Constants.READER_API_URL + "/user", params, responseHandler);
+        client.get(getApiUrl(context) + "/user", params, responseHandler);
     }
     
     /**
@@ -65,6 +64,6 @@ public class UserResource extends BaseResource {
         init(context);
         
         RequestParams params = new RequestParams();
-        client.post(Constants.READER_API_URL + "/user/logout", params, responseHandler);
+        client.post(getApiUrl(context) + "/user/logout", params, responseHandler);
     }
 }

@@ -35,14 +35,15 @@ import com.sismics.reader.ui.adapter.SubscriptionAdapter.SubscriptionItem;
  */
 public class MainActivity extends FragmentActivity {
     
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout drawerLayout;
+    private ListView drawerList;
+    private ActionBarDrawerToggle drawerToggle;
     
     @Override
     protected void onCreate(final Bundle args) {
         super.onCreate(args);
         
+        // Check if logged in
         if (!ApplicationContext.getInstance().isLoggedIn()) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
@@ -52,46 +53,35 @@ public class MainActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.main_activity);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.drawer_list);
-        mDrawerList.setEmptyView(findViewById(R.id.progressBarDrawer));
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerList = (ListView) findViewById(R.id.drawer_list);
+        drawerList.setEmptyView(findViewById(R.id.progressBarDrawer));
 
-        // set a custom shadow that overlays the main content when the drawer opens
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        // Set a custom shadow that overlays the main content when the drawer opens
+        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         
-        // set up the drawer's list view with items and click listener
-        SubscriptionResource.list(this, false, new SismicsHttpResponseHandler() {
-            @Override
-            public void onSuccess(JSONObject json) {
-                mDrawerList.setAdapter(new SubscriptionAdapter(MainActivity.this, json));
-                
-                if (args == null) {
-                    selectItem(1);
-                }
-            }
-        });
+        // Load subscriptions
+        refreshSubscriptions(1);
 
-        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
+        // Drawer item click listener
+        drawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItem(position);
+                selectItem(position, true);
             }
         });
         
-        // enable ActionBar app icon to behave as action to toggle nav drawer
+        // Enable ActionBar app icon to behave as action to toggle nav drawer
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the sliding drawer and the action bar app icon
-        mDrawerToggle = new ActionBarDrawerToggle(
+        drawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
-                );
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+                drawerLayout,         /* DrawerLayout object */
+                R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
+        drawerLayout.setDrawerListener(drawerToggle);
     }
 
     @Override
@@ -116,6 +106,7 @@ public class MainActivity extends FragmentActivity {
             UserResource.logout(getApplicationContext(), new SismicsHttpResponseHandler() {
                 @Override
                 public void onFinish() {
+                    // Force logout in all cases, so the user is not stuck in case of network error
                     ApplicationContext.getInstance().setUserInfo(getApplicationContext(), null);
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     finish();
@@ -131,10 +122,15 @@ public class MainActivity extends FragmentActivity {
 //            startActivity(new Intent(NavigationActivity.this, AboutActivity.class));
             return true;
             
+        case R.id.refresh:
+            // Refresh subscriptions and articles
+            selectItem(drawerList.getCheckedItemPosition(), true);
+            return true;
+            
         case android.R.id.home:
             // The action bar home/up action should open or close the drawer.
             // ActionBarDrawerToggle will take care of this.
-            if (mDrawerToggle.onOptionsItemSelected(item)) {
+            if (drawerToggle.onOptionsItemSelected(item)) {
                 return true;
             }
             return true;
@@ -144,10 +140,28 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    private void selectItem(int position) {
+    /**
+     * Select an item from the subscription list.
+     * @param position Position to select
+     * @param refreshSubscriptions Refresh subscriptions if true
+     */
+    private void selectItem(int position, boolean refreshSubscriptions) {
+        if (refreshSubscriptions) {
+            // Refresh subscriptions
+            refreshSubscriptions(position);
+        }
+        
         // Create a new fragment with articles context
-        SubscriptionAdapter adapter = (SubscriptionAdapter) mDrawerList.getAdapter();
+        SubscriptionAdapter adapter = (SubscriptionAdapter) drawerList.getAdapter();
+        if (adapter == null) {
+            return;
+        }
+        
         SubscriptionItem item = adapter.getItem(position);
+        if (item == null) {
+            return;
+        }
+        
         Fragment fragment = new ArticlesFragment();
         Bundle args = new Bundle();
         args.putString("url", item.getUrl());
@@ -156,13 +170,44 @@ public class MainActivity extends FragmentActivity {
 
         // Update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commitAllowingStateLoss();
 
         // Update selected item and title, then close the drawer
-        mDrawerList.setItemChecked(position, true);
-        mDrawerLayout.closeDrawer(findViewById(R.id.left_drawer));
+        drawerList.setItemChecked(position, true);
+        drawerLayout.closeDrawer(findViewById(R.id.left_drawer));
     }
 
+    /**
+     * Refresh subscriptions list from server.
+     * @param position Position to select (or -1 to select nothing)
+     */
+    private void refreshSubscriptions(final int position) {
+        // Load subscriptions from server
+        SubscriptionResource.list(this, false, new SismicsHttpResponseHandler() {
+            @Override
+            public void onSuccess(JSONObject json) {
+                // Update or create adapter
+                SubscriptionAdapter adapter = (SubscriptionAdapter) drawerList.getAdapter();
+                if (adapter == null) {
+                    adapter = new SubscriptionAdapter(MainActivity.this, json);
+                    drawerList.setAdapter(adapter);
+                } else {
+                    adapter.setItems(json);
+                    adapter.notifyDataSetChanged();
+                }
+                
+                if (position != -1) {
+                    int pos = position;
+                    // Check if item exists and is selectable
+                    if (!adapter.isEnabled(pos)) {
+                        pos = 1;
+                    }
+                    selectItem(pos, false);
+                }
+            }
+        });
+    }
+    
     /**
      * When using the ActionBarDrawerToggle, you must call it during
      * onPostCreate() and onConfigurationChanged()...
@@ -171,13 +216,13 @@ public class MainActivity extends FragmentActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
+        drawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggle
-        mDrawerToggle.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 }

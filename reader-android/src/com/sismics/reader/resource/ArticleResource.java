@@ -8,7 +8,6 @@ import android.os.Build;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.sismics.android.SismicsHttpResponseHandler;
-import com.sismics.reader.constant.Constants;
 import com.sismics.reader.util.ApplicationUtil;
 
 /**
@@ -42,7 +41,7 @@ public class ArticleResource extends BaseResource {
         init(context);
         
         RequestParams params = new RequestParams();
-        client.post(Constants.READER_API_URL + "/article/" + id + "/read", params, responseHandler);
+        client.post(getApiUrl(context) + "/article/" + id + "/read", params, responseHandler);
     }
     
     /**
@@ -56,7 +55,7 @@ public class ArticleResource extends BaseResource {
         
         RequestParams params = new RequestParams();
         params.put("id", idList);
-        client.post(Constants.READER_API_URL + "/article/read", params, responseHandler);
+        client.post(getApiUrl(context) + "/article/read", params, responseHandler);
     }
     
     /**
@@ -69,6 +68,6 @@ public class ArticleResource extends BaseResource {
         init(context);
         
         RequestParams params = new RequestParams();
-        client.post(Constants.READER_API_URL + "/article/" + id + "/unread", params, responseHandler);
+        client.post(getApiUrl(context) + "/article/" + id + "/unread", params, responseHandler);
     }
 }

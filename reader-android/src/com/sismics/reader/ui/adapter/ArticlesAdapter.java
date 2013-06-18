@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.BitmapAjaxCallback;
 import com.sismics.reader.R;
-import com.sismics.reader.constant.Constants;
 import com.sismics.reader.util.PreferenceUtil;
 
 /**
@@ -88,7 +87,7 @@ public class ArticlesAdapter extends BaseAdapter {
         }
         JSONObject subscription = article.optJSONObject("subscription");
         Bitmap placeHolder = aq.getCachedImage(R.drawable.ic_launcher);
-        String faviconUrl = Constants.READER_API_URL + "/subscription/" + subscription.optString("id") + "/favicon";
+        String faviconUrl = PreferenceUtil.getServerUrl(activity) + "/api/subscription/" + subscription.optString("id") + "/favicon";
         if (aq.shouldDelay(position, view, parent, faviconUrl)) {
             aq.id(holder.imgFavicon).image(placeHolder);
         } else {

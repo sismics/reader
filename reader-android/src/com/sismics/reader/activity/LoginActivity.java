@@ -13,7 +13,6 @@ import android.widget.EditText;
 
 import com.androidquery.AQuery;
 import com.sismics.android.SismicsHttpResponseHandler;
-import com.sismics.android.util.ConnectivityUtil;
 import com.sismics.android.util.DialogUtil;
 import com.sismics.reader.R;
 import com.sismics.reader.listener.CallbackListener;
@@ -43,6 +42,7 @@ public class LoginActivity extends FragmentActivity {
         
         AQuery aq = new AQuery(this);
         
+        final EditText txtServer = aq.id(R.id.txtServer).getEditText();
         final EditText txtUsername = aq.id(R.id.txtUsername).getEditText();
         final EditText txtPassword = aq.id(R.id.txtPassword).getEditText();
         final Button btnConnect = aq.id(R.id.btnConnect).getButton();
@@ -56,6 +56,7 @@ public class LoginActivity extends FragmentActivity {
         
         // Form validation
         final Validator validator = new Validator(false);
+        validator.addValidable(this, txtServer, new Required());
         validator.addValidable(this, txtUsername, new Required());
         validator.addValidable(this, txtPassword, new Required());
         validator.setOnValidationChanged(new CallbackListener() {
@@ -64,6 +65,12 @@ public class LoginActivity extends FragmentActivity {
                 btnConnect.setEnabled(validator.isValidated());
             }
         });
+
+        // Preset saved server URL
+        String serverUrl = PreferenceUtil.getStringPreference(this, PreferenceUtil.PREF_SERVER_URL);
+        if (serverUrl != null) {
+            txtServer.setText(serverUrl);
+        }
         
         tryConnect();
         
@@ -73,6 +80,8 @@ public class LoginActivity extends FragmentActivity {
             public void onClick(View v) {
                 loginForm.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
+                
+                PreferenceUtil.setServerUrl(LoginActivity.this, txtServer.getText().toString());
                 
                 UserResource.login(getApplicationContext(), txtUsername.getText().toString(), txtPassword.getText().toString(), new SismicsHttpResponseHandler() {
                     @Override
@@ -95,7 +104,12 @@ public class LoginActivity extends FragmentActivity {
                     public void onFailure(Throwable t, String response) {
                         loginForm.setVisibility(View.VISIBLE);
                         progressBar.setVisibility(View.GONE);
-                        DialogUtil.showOkDialog(LoginActivity.this, R.string.login_fail_title, R.string.login_fail);
+                        
+                        if (response != null && response.contains("\"ForbiddenError\"")) {
+                            DialogUtil.showOkDialog(LoginActivity.this, R.string.login_fail_title, R.string.login_fail);
+                        } else {
+                            DialogUtil.showOkDialog(LoginActivity.this, R.string.network_error_title, R.string.network_error);
+                        }
                     }
                 });
             }
@@ -106,9 +120,16 @@ public class LoginActivity extends FragmentActivity {
      * Try to get a "session".
      */
     private void tryConnect() {
-        if (ApplicationContext.getInstance().isLoggedIn() || !ConnectivityUtil.checkConnectivity(this)) {
-            // If there is no network connection
-            // or we are already connected (from cache data)
+        String serverUrl = PreferenceUtil.getStringPreference(this, PreferenceUtil.PREF_SERVER_URL);
+        if (serverUrl == null) {
+            // Server URL is empty
+            loginForm.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+        
+        if (ApplicationContext.getInstance().isLoggedIn()) {
+            // If we are already connected (from cache data)
             // redirecting to main activity
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);

@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/refresh"
+        android:icon="@drawable/navigation_refresh"
+        android:showAsAction="ifRoom"
+        android:title="@string/refresh">
+    </item>
+    <item
         android:id="@+id/logout"
         android:showAsAction="collapseActionView"
         android:title="@string/logout">

@@ -24,6 +24,11 @@ public class PreferenceUtil {
     public static final String PREF_CACHED_USER_INFO_JSON = "pref_cachedUserInfoJson";
     
     /**
+     * Server URL.
+     */
+    public static final String PREF_SERVER_URL = "pref_ServerUrl";
+    
+    /**
      * Returns a preference of boolean type.
      * @param context
      * @param key
@@ -76,6 +81,15 @@ public class PreferenceUtil {
     }
     
     /**
+     * Update server URL.
+     * @param context
+     */
+    public static void setServerUrl(Context context, String serverUrl) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        sharedPreferences.edit().putString(PREF_SERVER_URL, serverUrl).commit();
+    }
+    
+    /**
      * Empty user caches.
      * @param context
      */
@@ -100,5 +114,37 @@ public class PreferenceUtil {
         }
         
         return null;
+    }
+
+    /**
+     * Returns cleaned server URL.
+     * @param context
+     * @return
+     */
+    public static String getServerUrl(Context context) {
+        String serverUrl = getStringPreference(context, PREF_SERVER_URL);
+        if (serverUrl == null) {
+            return null;
+        }
+        
+        // Trim
+        serverUrl = serverUrl.trim();
+        
+        if (!serverUrl.startsWith("http")) {
+            // Try to add http
+            serverUrl = "http://" + serverUrl;
+        }
+        
+        if (serverUrl.endsWith("/")) {
+            // Delete last /
+            serverUrl = serverUrl.substring(0, serverUrl.length() - 1);
+        }
+        
+        // Remove /api
+        if (serverUrl.endsWith("/api")) {
+            serverUrl = serverUrl.substring(0, serverUrl.length() - 4);
+        }
+        
+        return serverUrl;
     }
 }

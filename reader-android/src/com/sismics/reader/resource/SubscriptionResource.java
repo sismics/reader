@@ -5,7 +5,6 @@ import android.content.Context;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.sismics.android.SismicsHttpResponseHandler;
-import com.sismics.reader.constant.Constants;
 
 /**
  * Access to /subscription API.
@@ -33,7 +32,7 @@ public class SubscriptionResource extends BaseResource {
         
         RequestParams params = new RequestParams();
         params.put("unread", Boolean.toString(unread));
-        client.get(Constants.READER_API_URL + "/subscription", params, responseHandler);
+        client.get(getApiUrl(context) + "/subscription", params, responseHandler);
     }
     
     /**
@@ -51,7 +50,7 @@ public class SubscriptionResource extends BaseResource {
         if (total != null) {
             params.put("total", total.toString());
         }
-        client.get(Constants.READER_API_URL + url, params, responseHandler);
+        client.get(getApiUrl(context) + url, params, responseHandler);
     }
     
     /**
