@@ -4,11 +4,11 @@ import java.text.MessageFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -63,15 +63,15 @@ public class ArticleResource extends BaseResource {
     /**
      * Marks multiple articles as read.
      * 
-     * @param id Article ID
+     * @param id List of article ID
      * @return Response
      * @throws JSONException
      */
     @POST
-    @Path("{id: [a-z0-9\\-]+}/read")
+    @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readMultiple(
-            @QueryParam("id") List<String> idList) throws JSONException {
+            @FormParam("id") List<String> idList) throws JSONException {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }

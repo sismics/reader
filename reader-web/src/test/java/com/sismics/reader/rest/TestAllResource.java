@@ -160,24 +160,17 @@ public class TestAllResource extends BaseJerseyTest {
         Assert.assertEquals(10, total2);
         Assert.assertEquals("Imprimer son arme sera bientôt possible", articles2.optJSONObject(0).getString("title"));
         
-        // Marks an article as read
-        WebResource articleResource = resource().path("/article/" + articles1.optJSONObject(1).getString("id") + "/read");
+        // Mark 2 articles as read
+        WebResource articleResource = resource().path("/article/read");
         articleResource.addFilter(new CookieAuthenticationFilter(page1AuthToken));
         postParams = new MultivaluedMapImpl();
+        postParams.add("id", articles1.optJSONObject(1).getString("id"));
+        postParams.add("id", articles1.optJSONObject(2).getString("id"));
         response = articleResource.post(ClientResponse.class, postParams);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         Assert.assertEquals("ok", json.getString("status"));
         
-        // Marks an article as read
-        articleResource = resource().path("/article/" + articles1.optJSONObject(2).getString("id") + "/read");
-        articleResource.addFilter(new CookieAuthenticationFilter(page1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        response = articleResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
-        Assert.assertEquals("ok", json.getString("status"));
-
         // Check the all resource
         allResource = resource()
                 .path("/all")
