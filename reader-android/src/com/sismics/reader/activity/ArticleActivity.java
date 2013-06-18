@@ -112,11 +112,9 @@ public class ArticleActivity extends FragmentActivity {
         indicator.setViewPager(viewPager, position, sharedAdapterHelper.getTotal());
         indicator.setOnPageChangeListener(onPageChangeListener);
         
-        // Forcing page change listener if needed
+        // Forcing page change listener
         viewPager.setCurrentItem(position);
-        if (position == 0) {
-            onPageChangeListener.onPageSelected(0);
-        }
+        onPageChangeListener.onPageSelected(position);
     }
     
     @Override

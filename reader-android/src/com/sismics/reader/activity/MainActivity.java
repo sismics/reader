@@ -61,17 +61,18 @@ public class MainActivity extends FragmentActivity {
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         
         // Load subscriptions and select unread item
+        // TODO Display cached subscriptions before loading fresh data from server
         if (args == null) {
-            refreshSubscriptions(1);
+            refreshSubscriptions(1, false);
         } else {
-            refreshSubscriptions(args.getInt("drawerItemSelected", 1));
+            refreshSubscriptions(args.getInt("drawerItemSelected", 1), false);
         }
 
         // Drawer item click listener
         drawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItem(position);
+                selectItem(position, false);
             }
         });
         
@@ -128,7 +129,7 @@ public class MainActivity extends FragmentActivity {
             
         case R.id.refresh:
             // Refresh subscriptions and articles
-            refreshSubscriptions(drawerList.getCheckedItemPosition());
+            refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
             return true;
             
         case android.R.id.home:
@@ -147,8 +148,9 @@ public class MainActivity extends FragmentActivity {
     /**
      * Select an item from the subscription list.
      * @param position Position to select
+     * @param refresh True to force articles refresh
      */
-    private void selectItem(int position) {
+    private void selectItem(int position, boolean refresh) {
         // Create a new fragment with articles context
         SubscriptionAdapter adapter = (SubscriptionAdapter) drawerList.getAdapter();
         if (adapter == null) {
@@ -166,9 +168,24 @@ public class MainActivity extends FragmentActivity {
         args.putBoolean("unread", item.isUnread());
         fragment.setArguments(args);
 
-        // Update the main content by replacing fragments
+        // Update the main content by replacing fragment if it has different arguments from the previous one
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commitAllowingStateLoss();
+        Fragment oldFragment = fragmentManager.findFragmentByTag("articlesFragment");
+        
+        boolean replace = true;
+        if (oldFragment != null && !refresh) {
+            Bundle oldArgs = oldFragment.getArguments();
+            if (oldArgs != null) {
+                if (args.getString("url").equals(oldArgs.getString("url"))
+                        && args.getBoolean("unread") == oldArgs.getBoolean("unread")) {
+                    replace = false;
+                }
+            }
+        }
+        
+        if (replace) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "articlesFragment").commitAllowingStateLoss();
+        }
 
         // Update selected item and title, then close the drawer
         drawerList.setItemChecked(position, true);
@@ -178,8 +195,9 @@ public class MainActivity extends FragmentActivity {
     /**
      * Refresh subscriptions list from server.
      * @param position Position to select
+     * @param refresh True to force articles refresh
      */
-    private void refreshSubscriptions(final int position) {
+    private void refreshSubscriptions(final int position, final boolean refresh) {
         // Load subscriptions from server
         SubscriptionResource.list(this, false, new SismicsHttpResponseHandler() {
             @Override
@@ -200,7 +218,7 @@ public class MainActivity extends FragmentActivity {
                     if (!adapter.isEnabled(pos)) {
                         pos = 1;
                     }
-                    selectItem(pos);
+                    selectItem(pos, refresh);
                 }
             }
         });
