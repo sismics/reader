@@ -15,6 +15,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.RollingFileAppender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,6 +59,18 @@ public class RequestContextFilter implements Filter {
         if (log.isInfoEnabled()) {
             log.info(MessageFormat.format("Using base data directory: {0}", baseDataDirectory.toString()));
         }
+        
+        // Initialize file logger
+        RollingFileAppender fileAppender = new RollingFileAppender();
+        fileAppender.setName("FILE");
+        fileAppender.setFile(DirectoryUtil.getLogDirectory() + File.separator + "reader.log");
+        fileAppender.setLayout(new PatternLayout("%d{DATE} %p %l %m %n"));
+        fileAppender.setThreshold(Level.INFO);
+        fileAppender.setAppend(true);
+        fileAppender.setMaxFileSize("5MB");
+        fileAppender.setMaxBackupIndex(5);
+        fileAppender.activateOptions();
+        org.apache.log4j.Logger.getRootLogger().addAppender(fileAppender);
         
         // Initialize the application context
         TransactionUtil.handle(new Runnable() {
