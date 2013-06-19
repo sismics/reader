@@ -170,7 +170,7 @@ public class RssReader extends DefaultHandler {
 
         // Pass a character stream to the parser for it to pick-up the correct encoding.
         // See http://stackoverflow.com/questions/3482494/
-        Reader reader = new UnicodeReader(is, null);
+        Reader reader = new UnicodeReader(is, "UTF-8");
         InputSource source = new InputSource(reader);
         
         try {
