@@ -5,7 +5,7 @@
   <groupId>com.sismics.reader</groupId>
   <artifactId>reader-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.2-SNAPSHOT</version>
+  <version>1.1.1</version>
 
   <name>Reader Parent</name>
 
@@ -67,7 +67,7 @@
     <connection>scm:git:https://github.com/sismics/reader.git</connection>
     <developerConnection>scm:git:https://github.com/reader/reader.git</developerConnection>
     <url>scm:git:https://github.com/sismics/reader.git</url>
-    <tag>HEAD</tag>
+    <tag>1.1.1</tag>
   </scm>
 
   <build>
