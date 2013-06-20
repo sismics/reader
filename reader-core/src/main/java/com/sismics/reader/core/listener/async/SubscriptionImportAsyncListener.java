@@ -209,6 +209,16 @@ public class SubscriptionImportAsyncListener {
                             continue;
                         }
                         
+                        // Check if the user is already subscribed to this feed
+                        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
+                        feedSubscriptionCriteria.setUserId(user.getId());
+                        feedSubscriptionCriteria.setFeedUrl(rssUrl);
+                        List<FeedSubscriptionDto> feedSubscriptionDaoList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
+                        if (feedSubscriptionDaoList.size() == 0) {
+                            log.error(MessageFormat.format("User not subscribed to feed: {0}", rssUrl));
+                            continue;
+                        }
+                        
                         for (Article article : articleList) {
                             // Check if the article already exists
                             String title = article.getTitle();
@@ -249,12 +259,14 @@ public class SubscriptionImportAsyncListener {
                                 userArticle.setUserId(user.getId());
                                 userArticle.setArticleId(article.getId());
                                 userArticle.setStarredDate(new Date());
+                                userArticle.setReadDate(new Date());
                                 userArticleDao.create(userArticle);
                             } else if (currentUserArticle.getId() != null && currentUserArticle.getStarTimestamp() == null) {
                                 // Mark the user article as starred
                                 UserArticle userArticle = new UserArticle();
                                 userArticle.setId(currentUserArticle.getId());
                                 userArticle.setStarredDate(new Date());
+                                userArticle.setReadDate(new Date());
                                 userArticleDao.update(userArticle);
                             }
                         }

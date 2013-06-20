@@ -56,6 +56,7 @@ public class StarredResource extends BaseResource {
         // Get the articles
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setStarred(true);
+        userArticleCriteria.setVisible(true);
         userArticleCriteria.setUserId(principal.getId());
 
         UserArticleDao userArticleDao = new UserArticleDao();

@@ -313,5 +313,16 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals("Blogs", comicsCategory.getString("name"));
         JSONArray subscriptions = comicsCategory.optJSONArray("subscriptions");
         Assert.assertEquals(1, subscriptions.length());
+        
+        // Check the starred resource
+        WebResource starredResource = resource().path("/starred");
+        starredResource.addFilter(new CookieAuthenticationFilter(importTakeout1AuthToken));
+        response = starredResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        JSONArray articles = json.optJSONArray("articles");
+        Assert.assertNotNull(articles);
+        Assert.assertEquals(1, articles.length());
+        Assert.assertEquals(1, json.optInt("total"));
     }
 }
