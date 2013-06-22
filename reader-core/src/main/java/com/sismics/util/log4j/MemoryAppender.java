@@ -2,6 +2,7 @@ package com.sismics.util.log4j;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -9,6 +10,7 @@ import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.helpers.LogLog;
 import org.apache.log4j.spi.LoggingEvent;
 
+import com.google.common.collect.Lists;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 
 /**
@@ -96,7 +98,7 @@ public class MemoryAppender extends AppenderSkeleton {
      * @param list Paginated list (modified by side effect)
      */
     public void find(LogCriteria criteria, PaginatedList<LogEntry> list) {
-        LinkedList<LogEntry> logEntryList = new LinkedList<LogEntry>();
+        List<LogEntry> logEntryList = new LinkedList<LogEntry>();
         final String level = criteria.getLevel();
         final String tag = criteria.getTag();
         final String message = criteria.getMessage();
@@ -106,13 +108,13 @@ public class MemoryAppender extends AppenderSkeleton {
             if ((level == null || logEntry.getLevel().toLowerCase().equals(level)) &&
                     (tag == null || logEntry.getTag().toLowerCase().equals(tag)) &&
                     (message == null || logEntry.getMessage().toLowerCase().contains(message))) {
-                if (resultCount >= list.getOffset() && resultCount < list.getOffset() + list.getLimit()) {
-                    logEntryList.addFirst(logEntry);
-                }
+                logEntryList.add(logEntry);
                 resultCount++;
             }
         }
+        
+        List<LogEntry> logEntrySubList = Lists.reverse(logEntryList).subList(list.getOffset(), list.getOffset() + list.getLimit());
         list.setResultCount(resultCount);
-        list.setResultList(logEntryList);
+        list.setResultList(logEntrySubList);
     }
 }

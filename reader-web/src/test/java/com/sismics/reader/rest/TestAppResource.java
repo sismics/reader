@@ -79,8 +79,10 @@ public class TestAppResource extends BaseJerseyTest {
         // Login admin
         String adminAuthenticationToken = clientUtil.login("admin", "admin", false);
         
-        // Check the logs
-        WebResource appResource = resource().path("/app/log");
+        // Check the logs (page 1)
+        WebResource appResource = resource()
+                .path("/app/log")
+                .queryParam("level", "INFO");
         ClientResponse response = appResource.get(ClientResponse.class);
         appResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
         response = appResource.get(ClientResponse.class);
@@ -88,5 +90,25 @@ public class TestAppResource extends BaseJerseyTest {
         JSONObject json = response.getEntity(JSONObject.class);
         JSONArray logs = json.getJSONArray("logs");
         Assert.assertTrue(logs.length() == 10);
+        Long date1 = logs.optJSONObject(0).optLong("date");
+        Long date2 = logs.optJSONObject(9).optLong("date");
+        Assert.assertTrue(date1 > date2);
+        
+        // Check the logs (page 2)
+        appResource = resource()
+                .path("/app/log")
+                .queryParam("offset",  "10")
+                .queryParam("level", "INFO");
+        response = appResource.get(ClientResponse.class);
+        appResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
+        response = appResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        logs = json.getJSONArray("logs");
+        Assert.assertTrue(logs.length() == 10);
+        Long date3 = logs.optJSONObject(0).optLong("date");
+        Long date4 = logs.optJSONObject(9).optLong("date");
+        Assert.assertTrue(date3 > date4);
+        Assert.assertTrue(date2 > date3);
     }
 }
