@@ -420,5 +420,25 @@
         </plugins>
       </build>
     </profile>
+    
+    <!-- Hosted version profile -->
+    <profile>
+      <id>hosted</id>
+      <activation>
+        <property>
+          <name>env</name>
+          <value>hosted</value>
+        </property>
+      </activation>
+      
+      <build>
+        <resources>
+          <resource>
+            <directory>src/hosted/resources</directory>
+            <filtering>false</filtering>
+          </resource>
+        </resources>
+      </build>
+    </profile>
   </profiles>  
 </project>
