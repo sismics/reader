@@ -45,6 +45,7 @@ public class MemoryAppender extends AppenderSkeleton {
 
     @Override
     public synchronized void append(LoggingEvent event) {
+        // TODO Don't use size()
         while (logQueue.size() > size) {
             logQueue.remove();
         }
@@ -113,7 +114,7 @@ public class MemoryAppender extends AppenderSkeleton {
             }
         }
         
-        List<LogEntry> logEntrySubList = Lists.reverse(logEntryList).subList(list.getOffset(), list.getOffset() + list.getLimit());
+        List<LogEntry> logEntrySubList = Lists.reverse(logEntryList.subList(logEntryList.size() - list.getOffset() - list.getLimit(), logEntryList.size() - list.getOffset()));
         list.setResultCount(resultCount);
         list.setResultList(logEntrySubList);
     }
