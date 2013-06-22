@@ -40,6 +40,7 @@ public class UserResource extends BaseResource {
         RequestParams params = new RequestParams();
         params.put("username", username);
         params.put("password", password);
+        params.put("remember", "true");
         client.post(getApiUrl(context) + "/user/login", params, responseHandler);
     }
 
