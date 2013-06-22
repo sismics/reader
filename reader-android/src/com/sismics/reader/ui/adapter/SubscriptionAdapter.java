@@ -115,6 +115,11 @@ public class SubscriptionAdapter extends BaseAdapter {
         
         // Common layout data
         aq.id(R.id.content).text(item.title);
+        if (item.unreadCount == 0) {
+            aq.id(R.id.unreadCount).gone();
+        } else {
+            aq.id(R.id.unreadCount).visible().text("" + item.unreadCount);
+        }
         
         return view;
     }
@@ -168,6 +173,7 @@ public class SubscriptionAdapter extends BaseAdapter {
         private String id;
         private String title;
         private String url;
+        private int unreadCount;
         private boolean unread = false;
         private boolean root = false;
         
@@ -222,6 +228,7 @@ public class SubscriptionAdapter extends BaseAdapter {
         item.title = context.getString(R.string.unread);
         item.url = "/all";
         item.unread = true;
+        item.unreadCount = input.optInt("unread_count");
         items.add(item);
         
         item = new SubscriptionItem();
@@ -253,6 +260,7 @@ public class SubscriptionAdapter extends BaseAdapter {
             item.id = category.optString("id");
             item.title = category.optString("name");
             item.url = "/category/" + item.id;
+            item.unreadCount = category.optInt("unread_count");
             items.add(item);
             
             JSONArray subscriptions = category.optJSONArray("subscriptions");
@@ -264,6 +272,7 @@ public class SubscriptionAdapter extends BaseAdapter {
                 item.id = subscription.optString("id");
                 item.title = subscription.optString("title");
                 item.url = "/subscription/" + item.id;
+                item.unreadCount = subscription.optInt("unread_count");
                 items.add(item);
             }
         }
@@ -278,6 +287,7 @@ public class SubscriptionAdapter extends BaseAdapter {
             item.id = subscription.optString("id");
             item.title = subscription.optString("title");
             item.url = "/subscription/" + item.id;
+            item.unreadCount = subscription.optInt("unread_count");
             item.root = true;
             items.add(item);
         }
