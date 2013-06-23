@@ -82,7 +82,7 @@ public class TestAppResource extends BaseJerseyTest {
         // Check the logs (page 1)
         WebResource appResource = resource()
                 .path("/app/log")
-                .queryParam("level", "INFO");
+                .queryParam("level", "DEBUG");
         ClientResponse response = appResource.get(ClientResponse.class);
         appResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
         response = appResource.get(ClientResponse.class);
@@ -98,7 +98,7 @@ public class TestAppResource extends BaseJerseyTest {
         appResource = resource()
                 .path("/app/log")
                 .queryParam("offset",  "10")
-                .queryParam("level", "INFO");
+                .queryParam("level", "DEBUG");
         response = appResource.get(ClientResponse.class);
         appResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
         response = appResource.get(ClientResponse.class);
@@ -109,6 +109,5 @@ public class TestAppResource extends BaseJerseyTest {
         Long date3 = logs.optJSONObject(0).optLong("date");
         Long date4 = logs.optJSONObject(9).optLong("date");
         Assert.assertTrue(date3 > date4);
-        Assert.assertTrue(date2 > date3);
     }
 }

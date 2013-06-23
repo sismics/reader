@@ -114,7 +114,15 @@ public class MemoryAppender extends AppenderSkeleton {
             }
         }
         
-        List<LogEntry> logEntrySubList = Lists.reverse(logEntryList.subList(logEntryList.size() - list.getOffset() - list.getLimit(), logEntryList.size() - list.getOffset()));
+        int fromIndex = logEntryList.size() - list.getOffset() - list.getLimit();
+        if (fromIndex < 0) {
+            fromIndex = 0;
+        }
+        int toIndex = logEntryList.size() - list.getOffset();
+        if (toIndex > logEntryList.size()) {
+            toIndex = logEntryList.size();
+        }
+        List<LogEntry> logEntrySubList = Lists.reverse(logEntryList.subList(fromIndex, toIndex));
         list.setResultCount(resultCount);
         list.setResultList(logEntrySubList);
     }
