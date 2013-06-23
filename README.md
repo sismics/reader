@@ -33,6 +33,13 @@ License
 Reader is released under the terms of the GPL license. See `COPYING` for more
 information or see <http://opensource.org/licenses/GPL-2.0>.
 
+Translations
+------------
+
+- English
+- French
+- Chinese by Ryan H. Wang
+
 How to build Reader from the sources
 ------------------------------------
 
