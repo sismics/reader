@@ -39,6 +39,7 @@ Translations
 - English
 - French
 - Chinese by Ryan H. Wang
+- Danish by [exaviore](https://github.com/exaviore)
 
 How to build Reader from the sources
 ------------------------------------
