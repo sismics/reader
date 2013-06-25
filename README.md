@@ -40,6 +40,7 @@ Translations
 - French
 - Chinese by Ryan H. Wang
 - Danish by [exaviore](https://github.com/exaviore)
+- Italian by Marco Narco
 
 How to build Reader from the sources
 ------------------------------------
