@@ -9,7 +9,7 @@
     "password": "Password",
     "remember": "Remember me",
     "submit": "Login",
-    "error": "Base username or password"
+    "error": "Bad username or password"
   },
   "defaultpassword": {
     "info": "Reader is not secured. Please log in with username and password \"admin\", then change password immediately.",
