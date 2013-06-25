@@ -71,23 +71,28 @@ public class FeedService extends AbstractScheduledService {
     }
 
     @Override
-    protected void runOneIteration() throws Exception {
-        TransactionUtil.handle(new Runnable() {
-            @Override
-            public void run() {
-                FeedDao feedDao = new FeedDao();
-                FeedCriteria feedCriteria = new FeedCriteria();
-                feedCriteria.setWithUserSubscription(true);
-                List<FeedDto> feedList = feedDao.findByCriteria(feedCriteria);
-                for (FeedDto feed : feedList) {
-                    try {
-                        synchronize(feed.getRssUrl());
-                    } catch (Exception e) {
-                        log.error(MessageFormat.format("Synchronizing feed at URL: {0}", feed.getRssUrl()), e);
+    protected void runOneIteration() {
+        // Don't let Guava manage our exceptions, or they will be swallowed and the service will silently stop
+        try {
+            TransactionUtil.handle(new Runnable() {
+                @Override
+                public void run() {
+                    FeedDao feedDao = new FeedDao();
+                    FeedCriteria feedCriteria = new FeedCriteria();
+                    feedCriteria.setWithUserSubscription(true);
+                    List<FeedDto> feedList = feedDao.findByCriteria(feedCriteria);
+                    for (FeedDto feed : feedList) {
+                        try {
+                            synchronize(feed.getRssUrl());
+                        } catch (Exception e) {
+                            log.error(MessageFormat.format("Error synchronizing feed at URL: {0}", feed.getRssUrl()), e);
+                        }
                     }
                 }
-            }
-        });
+            });
+        } catch (Throwable t) {
+            log.error("Error synchronizing feeds", t);
+        }
     }
     
     @Override
