@@ -31,7 +31,6 @@ import org.apache.lucene.search.postingshighlight.PassageScorer;
 import org.apache.lucene.search.postingshighlight.PostingsHighlighter;
 import org.apache.lucene.util.Version;
 
-import com.google.common.base.Strings;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.Article;
@@ -198,7 +197,7 @@ public class ArticleDao {
         org.apache.lucene.document.Document document = new org.apache.lucene.document.Document();
         document.add(new StringField("id", article.getId(), Field.Store.YES));
         document.add(new StringField("feed_id", article.getFeedId(), Field.Store.YES));
-        document.add(new Field("title", Strings.nullToEmpty(article.getTitle()), fieldType));
+        document.add(new Field("title", article.getTitle(), fieldType));
         document.add(new Field("description", article.getDescription(), fieldType));
         
         return document;

@@ -212,6 +212,7 @@ public class FeedService extends AbstractScheduledService {
             for (Article article : articleMap.values()) {
                 // Create the new article
                 article.setFeedId(feed.getId());
+                article.setTitle(TextSanitizer.sanitize(article.getTitle()));
                 article.setDescription(sanitizer.sanitize(article.getDescription()));
                 if (article.getPublicationDate() == null) {
                     article.setPublicationDate(new Date());
