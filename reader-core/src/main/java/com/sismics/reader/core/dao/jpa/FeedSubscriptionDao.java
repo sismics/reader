@@ -173,7 +173,7 @@ public class FeedSubscriptionDao {
         if (criteria.getUserId() != null) {
             sb.append(", (select count(a.ART_ID_C)");
             sb.append("     from T_ARTICLE a");
-            sb.append("     left join T_USER_ARTICLE ua on(ua.USA_IDUSER_C = :userId and ua.USA_IDARTICLE_C = a.ART_ID_C and ua.USA_DELETEDATE_D is null) ");
+            sb.append("     left join T_USER_ARTICLE ua on(ua.USA_IDARTICLE_C = a.ART_ID_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null) ");
             sb.append("     where a.ART_IDFEED_C = f.FED_ID_C and a.ART_DELETEDATE_D is null and ua.USA_READDATE_D is null and ua.USA_ID_C is not null)");
             sb.append("  as unreadUserArticleCount");
         }
