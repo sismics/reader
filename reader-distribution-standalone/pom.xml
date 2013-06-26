@@ -47,7 +47,7 @@
                 <artifactItem>
                   <groupId>com.sismics.reader</groupId>
                   <artifactId>reader-web</artifactId>
-                  <version>1.0-SNAPSHOT</version>
+                  <version>${project.version}</version>
                   <type>war</type>
                   <overWrite>false</overWrite>
                   <outputDirectory>${project.build.directory}</outputDirectory>
