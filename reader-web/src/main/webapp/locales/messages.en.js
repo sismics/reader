@@ -63,7 +63,8 @@
     "back": "&larr; Back",
     "settings": "Settings",
     "about": "About",
-    "logout": "Logout"
+    "logout": "Logout",
+    "reportbug": "Report a bug"
   },
   "settings": {
     "tabs": {

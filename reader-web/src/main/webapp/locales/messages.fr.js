@@ -63,7 +63,8 @@
     "back": "&larr; Retour",
     "settings": "Paramètres",
     "about": "A propos",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "reportbug": "Rapporter un bug"
   },
   "settings": {
     "tabs": {
