@@ -330,6 +330,7 @@
                     <jsSourceFile>r.wizard.js</jsSourceFile>
                     <jsSourceFile>r.theme.js</jsSourceFile>
                     <jsSourceFile>r.util.js</jsSourceFile>
+                    <jsSourceFile>r.shortcuts.js</jsSourceFile>
                   </jsSourceFiles>
                   <jsFinalFile>reader.js</jsFinalFile>
                 </configuration>
@@ -410,6 +411,7 @@
                 **/javascripts/r.wizard.js,
                 **/javascripts/r.theme.js,
                 **/javascripts/r.util.js,
+                **/javascripts/r.shortcuts.js,
                 test/**,
                 sismicsreader/**,
                 *.html
