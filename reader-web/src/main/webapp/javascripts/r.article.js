@@ -24,10 +24,10 @@ r.article.init = function() {
     
     // Update local star and item state
     if (article.is_starred) {
-      $(this).addClass('starred');
+      item.find('.feed-item-star').addClass('starred');
       item.addClass('starred');
     } else {
-      $(this).removeClass('starred');
+      item.find('.feed-item-star').removeClass('starred');
       item.removeClass('starred');
     }
     
@@ -131,9 +131,12 @@ r.article.build = function(article, classes) {
   var item = $('#template .feed-item').clone();
   var date = moment(article.date);
   
-  // Remove collapsed container in full mode
   if (!r.user.isDisplayTitle()) {
+    // Remove collapsed container in full mode
     item.find('.collapsed').remove();
+  } else {
+    // Remove title header star button in list mode
+    item.find('.header .feed-item-star').remove();
   }
   
   // Store server data in element

@@ -51,7 +51,7 @@ r.shortcuts.init = function() {
             console.log(checkbox.is(':checked'));
             checkbox.prop('checked', !checkbox.is(':checked')).trigger('change');
           } else {
-            selectedItem.find('.feed-item-star').click();
+            selectedItem.find('.feed-item-star:first').click();
           }
         }
       }
