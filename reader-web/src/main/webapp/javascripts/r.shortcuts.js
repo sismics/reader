@@ -8,11 +8,9 @@ r.shortcuts.init = function() {
       // User is typing, disable shortcuts
     }
     
-    console.log(e.which);
-    
     switch (e.which) {
-    case 74: // J key: previous article
-    case 75: // K key: next article
+    case 74: // J key: next article
+    case 75: // K key: previous article
       var container = $('#feed-container');
       if (container.is(':visible')) {
         var selectedItem = container.find('.feed-item.selected');
@@ -21,9 +19,9 @@ r.shortcuts.init = function() {
         // Find the new selected item
         if (selectedItem.length == 1) {
           if (e.which == 74) {
-            newItem = selectedItem.prev('.feed-item');
-          } else {
             newItem = selectedItem.next('.feed-item');
+          } else {
+            newItem = selectedItem.prev('.feed-item');
           }
         } else {
           newItem = container.find('.feed-item:first');
@@ -57,6 +55,16 @@ r.shortcuts.init = function() {
       var refreshButton = $('#toolbar .refresh-button');
       if (refreshButton.is(':visible')) {
         refreshButton.trigger('click');
+      }
+      break;
+      
+    case 86: // V key: open item
+      var container = $('#feed-container');
+      if (container.is(':visible')) {
+        var selectedItem = container.find('.feed-item.selected');
+        if (selectedItem.length == 1) {
+          selectedItem.find('.feed-item-title a').trigger('click');
+        }
       }
       break;
     }
