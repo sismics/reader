@@ -75,8 +75,8 @@ r.article.init = function() {
     }
   });
   
-  // Delegate on link click
-  $('#feed-container').on('click', 'a', function() {
+  // Delegate on link click in content
+  $('#feed-container').on('click', '.feed-item .content a', function() {
     $(this).target = '_blank';
     window.open($(this).prop('href'));
     return false;
