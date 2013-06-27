@@ -29,7 +29,13 @@ r.shortcuts.init = function() {
         
         // Select the new item
         if (newItem.length == 1) {
-          r.feed.scrollTop(newItem.position().top + container.scrollTop() + 1, true);
+          if (newItem.find('.collapsed').length == 1) {
+            // Open collapsed item in list mode
+            newItem.find('.collapsed .container').trigger('click');
+          } else {
+            // Scroll to article otherwise
+            r.feed.scrollTop(newItem.position().top + container.scrollTop() + 1, true);
+          }
         }
       }
       break;
