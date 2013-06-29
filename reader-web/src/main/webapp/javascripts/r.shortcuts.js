@@ -6,6 +6,7 @@ r.shortcuts.init = function() {
     var activeTag = document.activeElement.tagName.toLowerCase();
     if (activeTag == 'input' || activeTag == 'textarea') {
       // User is typing, disable shortcuts
+      return;
     }
     
     switch (e.which) {
@@ -74,5 +75,7 @@ r.shortcuts.init = function() {
       }
       break;
     }
+    
+    e.preventDefault();
   });
 };
