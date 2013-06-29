@@ -41,6 +41,7 @@ Translations
 - Chinese by Ryan H. Wang
 - Danish by [exaviore](https://github.com/exaviore)
 - Italian by Marco Narco
+- Japanese
 
 How to build Reader from the sources
 ------------------------------------
