@@ -9,6 +9,8 @@ r.shortcuts.init = function() {
       return;
     }
     
+    var active = false;
+    
     switch (e.which) {
     case 74: // J key: next article
     case 75: // K key: previous article
@@ -37,6 +39,7 @@ r.shortcuts.init = function() {
             // Scroll to article otherwise
             r.feed.scrollTop(newItem.position().top + container.scrollTop() + 1, true);
           }
+          active = true;
         }
       }
       break;
@@ -49,11 +52,11 @@ r.shortcuts.init = function() {
         if (selectedItem.length == 1) {
           if (e.which == 77) {
             var checkbox = selectedItem.find('.feed-item-unread input[type="checkbox"]');
-            console.log(checkbox.is(':checked'));
             checkbox.prop('checked', !checkbox.is(':checked')).trigger('change');
           } else {
             selectedItem.find('.feed-item-star:first').click();
           }
+          active = true;
         }
       }
       break;
@@ -62,6 +65,7 @@ r.shortcuts.init = function() {
       var refreshButton = $('#toolbar .refresh-button');
       if (refreshButton.is(':visible')) {
         refreshButton.trigger('click');
+        active = true;
       }
       break;
       
@@ -70,12 +74,15 @@ r.shortcuts.init = function() {
       if (container.is(':visible')) {
         var selectedItem = container.find('.feed-item.selected');
         if (selectedItem.length == 1) {
-          selectedItem.find('.feed-item-title a').trigger('click');
+          window.open(selectedItem.find('.feed-item-title a').attr('href'));
+          active = true;
         }
       }
       break;
     }
     
-    e.preventDefault();
+    if (active) {
+      e.preventDefault();
+    }
   });
 };
