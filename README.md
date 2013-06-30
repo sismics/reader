@@ -42,6 +42,7 @@ Translations
 - Danish by [exaviore](https://github.com/exaviore)
 - Italian by Marco Narco
 - Japanese
+- Korean
 
 How to build Reader from the sources
 ------------------------------------
