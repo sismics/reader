@@ -21,13 +21,13 @@
     "unread": "읽지 않음",
     "all": "모두",
     "starred": "즐겨찾기",
-    "subscriptions": "회원가입",
+    "subscriptions": "카테고리",
     "empty": "가입 목록이 없습니다", 
     "emptyunread": "읽지 않은 가입 목록이 없습니다",
     "showall": "모두 보기",
     "toggleunread": "읽음 / 읽지 않음",
     "add": {
-      "button": "회원가입 추가",
+      "button": "카테고리 추가",
       "placeholder": "URL 또는 사이트 주소 붙여넣기",
       "submit": "추가"
     },
