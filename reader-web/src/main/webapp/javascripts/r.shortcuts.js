@@ -15,6 +15,7 @@ r.shortcuts.init = function() {
     case 74: // J key: next article
     case 75: // K key: previous article
       var container = $('#feed-container');
+      active = true;
       if (container.is(':visible')) {
         var selectedItem = container.find('.feed-item.selected');
         var newItem = null;
@@ -39,7 +40,6 @@ r.shortcuts.init = function() {
             // Scroll to article otherwise
             r.feed.scrollTop(newItem.position().top + container.scrollTop() + 1, true);
           }
-          active = true;
         }
       }
       break;
@@ -47,6 +47,7 @@ r.shortcuts.init = function() {
     case 77: // M key: mark as read
     case 83: // S key: star
       var container = $('#feed-container');
+      active = true;
       if (container.is(':visible')) {
         var selectedItem = container.find('.feed-item.selected');
         if (selectedItem.length == 1) {
@@ -56,26 +57,25 @@ r.shortcuts.init = function() {
           } else {
             selectedItem.find('.feed-item-star:first').click();
           }
-          active = true;
         }
       }
       break;
       
     case 82: // R key: refresh feed
       var refreshButton = $('#toolbar .refresh-button');
+      active = true;
       if (refreshButton.is(':visible')) {
         refreshButton.trigger('click');
-        active = true;
       }
       break;
       
     case 86: // V key: open item
       var container = $('#feed-container');
+      active = true;
       if (container.is(':visible')) {
         var selectedItem = container.find('.feed-item.selected');
         if (selectedItem.length == 1) {
           window.open(selectedItem.find('.feed-item-title a').attr('href'));
-          active = true;
         }
       }
       break;
