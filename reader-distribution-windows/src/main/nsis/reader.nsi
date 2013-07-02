@@ -60,6 +60,7 @@ Section "Reader"
   File reader-agent.properties
   File reader-agent-elevated.exe
   File reader.war
+  File LICENSE.txt
 
   # Write the installation path into the registry
   WriteRegStr HKLM SOFTWARE\Reader "Install_Dir" "$INSTDIR"
