@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <parent>
     <groupId>com.sismics.reader</groupId>
     <artifactId>reader-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <relativePath>../reader-parent</relativePath>
   </parent>
   
@@ -38,7 +37,7 @@
                 <artifactItem>
                   <groupId>com.sismics.reader</groupId>
                   <artifactId>reader-distribution-standalone</artifactId>
-                  <version>${reader.version}</version>
+                  <version>${project.version}</version>
                   <type>tar.gz</type>
                   <classifier>dist</classifier>
                   <overWrite>false</overWrite>
@@ -66,7 +65,7 @@
         </executions>
         <configuration>
           <name>reader</name>
-          <version>${reader.version}</version>
+          <version>${project.version}</version>
           <targetOS>linux</targetOS> 
           <copyright>GPLv2</copyright>
           <group>Application/Internet</group>
@@ -115,7 +114,7 @@ More information can be found at http://www.sismics.com/reader/</description>
               <groupname>root</groupname>
               <sources>
                 <source>
-                  <location>target/reader-distribution-standalone-${reader.version}</location>
+                  <location>target/reader-distribution-standalone-${project.version}</location>
                   <excludes>
                     <exclude>reader.sh</exclude>
                     <exclude>reader.bat</exclude>
@@ -131,7 +130,7 @@ More information can be found at http://www.sismics.com/reader/</description>
               <filemode>755</filemode>
               <sources>
                 <source>
-                  <location>target/reader-distribution-standalone-${reader.version}/reader.sh</location>
+                  <location>target/reader-distribution-standalone-${project.version}/reader.sh</location>
                 </source>
               </sources>
             </mapping>

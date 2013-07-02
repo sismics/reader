@@ -9,5 +9,5 @@ public enum ConfigType {
     /**
      * Lucene directory storage type.
      */
-    LUCENE_DIRECTOY_STORAGE,
+    LUCENE_DIRECTORY_STORAGE,
 }

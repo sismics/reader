@@ -24,10 +24,10 @@ r.article.init = function() {
     
     // Update local star and item state
     if (article.is_starred) {
-      $(this).addClass('starred');
+      item.find('.feed-item-star').addClass('starred');
       item.addClass('starred');
     } else {
-      $(this).removeClass('starred');
+      item.find('.feed-item-star').removeClass('starred');
       item.removeClass('starred');
     }
     
@@ -75,8 +75,8 @@ r.article.init = function() {
     }
   });
   
-  // Delegate on link click
-  $('#feed-container').on('click', 'a', function() {
+  // Delegate on link click in content
+  $('#feed-container').on('click', '.feed-item .content a', function() {
     $(this).target = '_blank';
     window.open($(this).prop('href'));
     return false;
@@ -94,6 +94,9 @@ r.article.read = function(item, read) {
     return;
   }
   
+  // Update item state
+  read ? item.addClass('read') : item.removeClass('read');
+  
   var articleId = item.attr('data-article-id');
   
   // Calling API
@@ -102,9 +105,6 @@ r.article.read = function(item, read) {
     url: url.replace('{id}', articleId),
     type: 'POST',
     done: function(data) {
-      // Update item state
-      read ? item.addClass('read') : item.removeClass('read');
-      
       // Update tree unread counts
       var count = read ? -1 : -2;
       var article = item.data('article');
@@ -131,9 +131,12 @@ r.article.build = function(article, classes) {
   var item = $('#template .feed-item').clone();
   var date = moment(article.date);
   
-  // Remove collapsed container in full mode
   if (!r.user.isDisplayTitle()) {
+    // Remove collapsed container in full mode
     item.find('.collapsed').remove();
+  } else {
+    // Remove title header star button in list mode
+    item.find('.header .feed-item-star').remove();
   }
   
   // Store server data in element

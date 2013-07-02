@@ -63,16 +63,16 @@ public class SearchResource extends BaseResource {
         FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
         List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
         
-        List<String> feeds = new ArrayList<String>();
+        List<String> feedList = new ArrayList<String>();
         for (FeedSubscriptionDto feedSubscriptionDto : feedSubscriptionList) {
-            feeds.add(feedSubscriptionDto.getFeedId());
+            feedList.add(feedSubscriptionDto.getFeedId());
         }
         
         // Search in index
         IndexingService indexingService = AppContext.getInstance().getIndexingService();
         PaginatedList<UserArticleDto> paginatedList = null;
         try {
-            paginatedList = indexingService.searchArticles(principal.getId(), feeds, query, offset, limit);
+            paginatedList = indexingService.searchArticles(principal.getId(), feedList, query, offset, limit);
         } catch (Exception e) {
             throw new ServerException("SearchError", "Error searching articles", e);
         }

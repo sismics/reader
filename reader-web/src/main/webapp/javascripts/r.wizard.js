@@ -112,6 +112,20 @@ r.wizard.onNextStep[0] = function () {
  * Validate wizard page 1.
  */
 r.wizard.onNextStep[1] = function () {
+  var form = $('#wizard-step-1-form');
+  var upnpInput = form.find('.wizard-upnp-input');
+  
+  if (upnpInput.is(':checked')) {
+    // Calling API
+    r.util.ajax({
+      url: r.util.url.app_map_port,
+      type: 'POST',
+      fail: function() {
+        alert($.t('wizard.upnperror'));
+      }
+    });
+  }
+  
   return true;
 };
 

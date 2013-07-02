@@ -2,7 +2,9 @@ package com.sismics.reader.rest.resource;
 
 import java.text.MessageFormat;
 import java.util.Date;
+import java.util.List;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -58,6 +60,41 @@ public class ArticleResource extends BaseResource {
         return Response.ok().entity(response).build();
     }
 
+    /**
+     * Marks multiple articles as read.
+     * 
+     * @param id List of article ID
+     * @return Response
+     * @throws JSONException
+     */
+    @POST
+    @Path("read")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response readMultiple(
+            @FormParam("id") List<String> idList) throws JSONException {
+        if (!authenticate()) {
+            throw new ForbiddenClientException();
+        }
+        
+        for (String id : idList) {
+            // Get the article
+            UserArticleDao userArticleDao = new UserArticleDao();
+            UserArticle userArticle = userArticleDao.getUserArticle(id, principal.getId());
+            if (userArticle == null) {
+                throw new ClientException("ArticleNotFound", MessageFormat.format("Article not found: {0}", id));
+            }
+            
+            // Update the article
+            userArticle.setReadDate(new Date());
+            userArticleDao.update(userArticle);
+        }
+        
+        // Always return ok
+        JSONObject response = new JSONObject();
+        response.put("status", "ok");
+        return Response.ok().entity(response).build();
+    }
+    
     /**
      * Marks an article as unread.
      * 

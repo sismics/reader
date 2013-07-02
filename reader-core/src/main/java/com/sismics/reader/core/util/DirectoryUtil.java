@@ -69,6 +69,15 @@ public class DirectoryUtil {
     public static File getLuceneDirectory() {
         return getDataSubDirectory("lucene");
     }
+    
+    /**
+     * Returns the log directory.
+     * 
+     * @return Log directory.
+     */
+    public static File getLogDirectory() {
+        return getDataSubDirectory("log");
+    }
 
     /**
      * Returns the themes directory.

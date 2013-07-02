@@ -43,7 +43,8 @@ public class AllResource extends BaseResource {
     public Response get(
             @QueryParam("unread") boolean unread,
             @QueryParam("limit") Integer limit,
-            @QueryParam("offset") Integer offset) throws JSONException {
+            @QueryParam("offset") Integer offset,
+            @QueryParam("total") Integer total) throws JSONException {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
@@ -52,10 +53,17 @@ public class AllResource extends BaseResource {
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUnread(unread);
         userArticleCriteria.setUserId(principal.getId());
-        userArticleCriteria.setSubscribed(true);
+        userArticleCriteria.setVisible(true);
 
         UserArticleDao userArticleDao = new UserArticleDao();
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, offset);
+        if(total != null) {
+            userArticleDao.countByCriteria(userArticleCriteria, paginatedList);
+            if (paginatedList.getResultCount() != total) {
+                offset += paginatedList.getResultCount() - total;
+                paginatedList = PaginatedLists.create(limit, offset);
+            }
+        }
         userArticleDao.findByCriteria(userArticleCriteria, paginatedList);
         
         // Build the response
@@ -88,7 +96,6 @@ public class AllResource extends BaseResource {
         // Marks all articles of this user as read
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUserId(principal.getId());
-        userArticleCriteria.setSubscribed(true);
 
         UserArticleDao userArticleDao = new UserArticleDao();
         userArticleDao.markAsRead(userArticleCriteria);

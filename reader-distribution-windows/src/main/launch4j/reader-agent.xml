@@ -15,7 +15,7 @@
   <icon>${basedir}/src/main/launch4j/reader-16.ico</icon>
   <classPath>
     <mainClass>com.sismics.reader.agent.ReaderAgent</mainClass>
-    <cp>./reader-agent-${reader.version}-jar-with-dependencies.jar</cp>
+    <cp>./reader-agent-${project.version}-jar-with-dependencies.jar</cp>
   </classPath>
   <jre>
     <path></path>

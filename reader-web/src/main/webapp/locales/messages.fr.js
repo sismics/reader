@@ -63,7 +63,8 @@
     "back": "&larr; Retour",
     "settings": "Paramètres",
     "about": "A propos",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "reportbug": "Rapporter un bug"
   },
   "settings": {
     "tabs": {
@@ -76,7 +77,7 @@
         "title": "Préférences",
         "username": "Nom d'utilisateur",
         "locale": "Langue",
-        "theme": "Thàme",
+        "theme": "Thème",
         "password": "Mot de passe",
         "passwordconfirm": "Mot de passe (confirmation)",
         "submit": "Enregistrer",
@@ -150,7 +151,8 @@
     "nomoreunreadarticles": "Pas plus d'articles non-lus",
     "noarticle": "Aucun articles",
     "nonewarticle": "Aucun articles non-lus",
-    "showall": "Tout afficher"
+    "showall": "Tout afficher",
+    "retry": "Réessayer"
   },
   "wizard": {
     "title": "Assistant d'installation Sismics Reader",
@@ -162,6 +164,7 @@
     "step1explain": "Cochez \"UPnP\" si vous voulez que Reader essaie d'ouvrir le port 8080 de votre routeur.",
     "step2explain": "C'est presque fini ! Ajoutez votre premier utilisateur et commencez à utiliser Sismics Reader.",
     "upnp": "UPnP?",
+    "upnperror": "Erreur à l'ouverture automatique du port, vous devez l'ouvrir manuellement sur votre routeur",
     "previous": "Précédent",
     "next": "Suivant",
     "keepdefaultpassword": "Êtes-vous sûr de vouloir conserver le mot de passe par défaut ? C'est une faille de sécurité potentielle !",

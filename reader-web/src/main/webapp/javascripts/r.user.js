@@ -47,7 +47,7 @@ r.user.boot = function() {
       }
       
       // Load i18n synchronously
-      r.user.initI18n(data.locale.split('_')[0]);
+      r.user.initI18n(data.locale);
       
       if (data.anonymous) {
         // Current user is anonymous, displaying login
@@ -71,9 +71,12 @@ r.user.boot = function() {
 };
 
 /**
- * Load i18n strings with 2-letters ISO language.
+ * Load i18n strings with 2-letters ISO language _ 2-letters ISO country code.
  */
 r.user.initI18n = function(language) {
+  language = language.toLowerCase().replace('_', '-');
+  isoLanguage = language.split('-')[0];
+  
   // Load i18next synchronously
   i18n.init({
     fallbackLng: 'en',

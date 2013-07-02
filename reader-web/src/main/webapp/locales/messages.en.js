@@ -9,7 +9,7 @@
     "password": "Password",
     "remember": "Remember me",
     "submit": "Login",
-    "error": "Base username or password"
+    "error": "Bad username or password"
   },
   "defaultpassword": {
     "info": "Reader is not secured. Please log in with username and password \"admin\", then change password immediately.",
@@ -63,7 +63,8 @@
     "back": "&larr; Back",
     "settings": "Settings",
     "about": "About",
-    "logout": "Logout"
+    "logout": "Logout",
+    "reportbug": "Report a bug"
   },
   "settings": {
     "tabs": {
@@ -150,7 +151,8 @@
     "nomoreunreadarticles": "No more unread articles",
     "noarticle": "No article",
     "nonewarticle": "No new article",
-    "showall": "Show all"
+    "showall": "Show all",
+    "retry": "Retry"
   },
   "wizard": {
     "title": "Sismics Reader installation wizard",
@@ -159,9 +161,10 @@
     "step1title": "Setup network",
     "step2title": "Add first user",
     "step0explain": "You should change the default admin password, especially if you plan to use your Reader installation on an open network.",
-    "step1explain": "Tick \"UPnP\" if you want Reader to try to open port 8080 on your router.",
+    "step1explain": "Tick \"UPnP\" if you want Reader to try to open a port on your router.",
     "step2explain": "It's nearly over! Add your first user and start using Sismics Reader.",
     "upnp": "UPnP?",
+    "upnperror": "Automatic port opening error, you need to open it manually",
     "previous": "Previous",
     "next": "Next",
     "keepdefaultpassword": "Are you sure to keep the default password? It's a potential security risk!",

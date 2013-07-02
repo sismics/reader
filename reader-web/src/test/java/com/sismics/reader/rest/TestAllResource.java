@@ -109,4 +109,83 @@ public class TestAllResource extends BaseJerseyTest {
         Assert.assertEquals(0, articles.length());
         Assert.assertEquals(0, json.optInt("total"));
     }
+    
+    @Test
+    public void testPagination() throws JSONException {
+        // Create user page1
+        clientUtil.createUser("page1");
+        String page1AuthToken = clientUtil.login("page1");
+
+        // Subscribe to korben.info
+        WebResource subscriptionResource = resource().path("/subscription");
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(page1AuthToken));
+        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
+        postParams.add("url", "http://localhost:9997/http/feeds/korben.xml");
+        ClientResponse response = subscriptionResource.put(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        JSONObject json = response.getEntity(JSONObject.class);
+        String subscription1Id = json.optString("id");
+        Assert.assertNotNull(subscription1Id);
+        
+        // Check the all resource
+        WebResource allResource = resource()
+                .path("/all")
+                .queryParam("unread", "true")
+                .queryParam("limit", "4")
+                .queryParam("offset", "0");
+        allResource.addFilter(new CookieAuthenticationFilter(page1AuthToken));
+        response = allResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        JSONArray articles1 = json.optJSONArray("articles");
+        Assert.assertEquals(4, articles1.length());
+        int total1 = json.optInt("total");
+        Assert.assertEquals(10, total1);
+        Assert.assertEquals("RetroN 5 – La console pour les nostalgiques de la cartouche", articles1.optJSONObject(0).getString("title"));
+        
+        // Check the all resource
+        allResource = resource()
+                .path("/all")
+                .queryParam("unread", "true")
+                .queryParam("limit", "4")
+                .queryParam("offset", "4")
+                .queryParam("total", Integer.toString(total1));
+        allResource.addFilter(new CookieAuthenticationFilter(page1AuthToken));
+        response = allResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        JSONArray articles2 = json.optJSONArray("articles");
+        Assert.assertEquals(4, articles2.length());
+        int total2 = json.optInt("total");
+        Assert.assertEquals(10, total2);
+        Assert.assertEquals("Imprimer son arme sera bientôt possible", articles2.optJSONObject(0).getString("title"));
+        
+        // Mark 2 articles as read
+        WebResource articleResource = resource().path("/article/read");
+        articleResource.addFilter(new CookieAuthenticationFilter(page1AuthToken));
+        postParams = new MultivaluedMapImpl();
+        postParams.add("id", articles1.optJSONObject(1).getString("id"));
+        postParams.add("id", articles1.optJSONObject(2).getString("id"));
+        response = articleResource.post(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ok", json.getString("status"));
+        
+        // Check the all resource
+        allResource = resource()
+                .path("/all")
+                .queryParam("unread", "true")
+                .queryParam("limit", "4")
+                .queryParam("offset", "4")
+                .queryParam("total", Integer.toString(total1));
+        allResource.addFilter(new CookieAuthenticationFilter(page1AuthToken));
+        response = allResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        JSONArray articles3 = json.optJSONArray("articles");
+        Assert.assertEquals(4, articles3.length());
+        int total3 = json.optInt("total");
+        Assert.assertEquals(8, total3);
+        Assert.assertEquals("Imprimer son arme sera bientôt possible", articles3.optJSONObject(0).getString("title"));
+    }
 }

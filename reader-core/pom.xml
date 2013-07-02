@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <parent>
     <groupId>com.sismics.reader</groupId>
     <artifactId>reader-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <relativePath>../reader-parent</relativePath>
   </parent>
   
@@ -107,6 +106,11 @@
       <artifactId>lucene-highlighter</artifactId>
     </dependency>
     
+    <dependency>
+      <groupId>org.bitlet</groupId>
+      <artifactId>weupnp</artifactId>
+    </dependency>
+    
     <!-- Test dependencies -->
     <dependency>
       <groupId>junit</groupId>
@@ -189,7 +193,7 @@
           <dependency>
             <groupId>com.sismics.reader</groupId>
             <artifactId>reader-core</artifactId>
-            <version>${reader.version}</version>
+            <version>${project.version}</version>
           </dependency> -->
         </dependencies>
       </plugin>

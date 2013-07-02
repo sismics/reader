@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <parent>
     <groupId>com.sismics.reader</groupId>
     <artifactId>reader-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <relativePath>../reader-parent</relativePath>
   </parent>
   
@@ -204,7 +203,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore></ignore>
+                    <ignore />
                   </action>
                 </pluginExecution>
               </pluginExecutions>
@@ -331,6 +330,7 @@
                     <jsSourceFile>r.wizard.js</jsSourceFile>
                     <jsSourceFile>r.theme.js</jsSourceFile>
                     <jsSourceFile>r.util.js</jsSourceFile>
+                    <jsSourceFile>r.shortcuts.js</jsSourceFile>
                   </jsSourceFiles>
                   <jsFinalFile>reader.js</jsFinalFile>
                 </configuration>
@@ -351,22 +351,22 @@
                 <configuration>
                   <target>
                     
-                    <property name="webapp.dir" location="${basedir}/src/main/webapp"/>
-                    <property name="war.dir" location="${project.build.directory}/${project.artifactId}-${project.version}"/>
+                    <property name="webapp.dir" location="${basedir}/src/main/webapp" />
+                    <property name="war.dir" location="${project.build.directory}/${project.artifactId}-${project.version}" />
                     
                     <!-- Copy HTML files -->
                     <copy todir="${war.dir}">
-                      <fileset dir="${webapp.dir}" includes="*.html"/>
+                      <fileset dir="${webapp.dir}" includes="*.html" />
                     </copy>
                     
                     <!-- Use minified imports -->
                     <replaceregexp match="&lt;!-- MINIFIED (.*) --&gt;" replace="\1" flags="g">
-                      <fileset dir="${war.dir}" includes="*.html"/>
+                      <fileset dir="${war.dir}" includes="*.html" />
                     </replaceregexp>
                     
                     <!-- Delete unminified imports -->
                     <replaceregexp match="&lt;!-- BEGIN NON MINIFIED --&gt;(.*?)&lt;!-- END NON MINIFIED --&gt;" replace="" flags="gs">
-                      <fileset dir="${war.dir}" includes="*.html"/>
+                      <fileset dir="${war.dir}" includes="*.html" />
                     </replaceregexp>
                     
                   </target>
@@ -411,6 +411,7 @@
                 **/javascripts/r.wizard.js,
                 **/javascripts/r.theme.js,
                 **/javascripts/r.util.js,
+                **/javascripts/r.shortcuts.js,
                 test/**,
                 sismicsreader/**,
                 *.html
@@ -419,6 +420,26 @@
             </configuration>
           </plugin>
         </plugins>
+      </build>
+    </profile>
+    
+    <!-- Hosted version profile -->
+    <profile>
+      <id>hosted</id>
+      <activation>
+        <property>
+          <name>env</name>
+          <value>hosted</value>
+        </property>
+      </activation>
+      
+      <build>
+        <resources>
+          <resource>
+            <directory>src/hosted/resources</directory>
+            <filtering>false</filtering>
+          </resource>
+        </resources>
       </build>
     </profile>
   </profiles>  

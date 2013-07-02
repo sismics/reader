@@ -19,6 +19,10 @@ public class UrlUtil {
      * @throws MalformedURLException
      */
     public static String completeUrl(String baseUrl, String relativeUrl) throws MalformedURLException {
+        // Trim URL
+        baseUrl = baseUrl.trim();
+        relativeUrl = relativeUrl.trim();
+        
         // If the URL is already absolute, just validate
         if (relativeUrl.toLowerCase().startsWith("http")) {
             return new URL(relativeUrl).toString();

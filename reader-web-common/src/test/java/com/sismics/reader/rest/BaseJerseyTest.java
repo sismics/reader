@@ -12,6 +12,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.junit.After;
 import org.junit.Before;
 import org.subethamail.wiser.Wiser;
@@ -60,7 +61,9 @@ public abstract class BaseJerseyTest extends JerseyTest {
         wiser.start();
         
         String httpRoot = URLDecoder.decode(new File(getClass().getResource("/").getFile()).getAbsolutePath(), "utf-8");
-        httpServer =  HttpServer.createSimpleServer(httpRoot, "localhost", 9997);
+        httpServer = HttpServer.createSimpleServer(httpRoot, "localhost", 9997);
+        // Disable file cache to fix https://java.net/jira/browse/GRIZZLY-1350
+        ((StaticHttpHandler) httpServer.getServerConfiguration().getHttpHandlers().keySet().iterator().next()).setFileCacheEnabled(false);
         httpServer.start();
     }
 

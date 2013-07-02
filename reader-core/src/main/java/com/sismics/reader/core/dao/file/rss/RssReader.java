@@ -1,7 +1,7 @@
 package com.sismics.reader.core.dao.file.rss;
 
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.Reader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -170,9 +170,15 @@ public class RssReader extends DefaultHandler {
 
         // Pass a character stream to the parser for it to pick-up the correct encoding.
         // See http://stackoverflow.com/questions/3482494/
-        InputSource source = new InputSource();
-        source.setCharacterStream(new InputStreamReader(is));
-        parser.parse(source, this);
+        Reader reader = new UnicodeReader(is, "UTF-8");
+        InputSource source = new InputSource(reader);
+        
+        try {
+            parser.parse(source, this);
+        } catch (InternalError e) {
+            // Fix for Oracle code throwing java.lang.InternalError disgracefully
+            throw new Exception(e);
+        }
     
         if (atom) {
             String url = new AtomUrlGuesserStrategy().guess(atomLinkList);

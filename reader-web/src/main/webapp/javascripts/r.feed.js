@@ -9,7 +9,7 @@ r.feed.context = {
   loading: false, // True if XHR in progress
   total: 0, // Total number of articles
   limit: function() { // Articles number to fetch each page
-    return $('#feed-container').hasClass('list') ? 15 : 5;
+    return $('#feed-container').hasClass('list') ? 15 : 10;
   }, 
   lastItem: null, // Last article
   bumper: null // Bumper
@@ -218,18 +218,6 @@ r.feed.load = function(next) {
     }
   }
   
-  // Actual offset according to read articles
-  var actualOffset = articlesLoaded;
-  if (r.feed.context.unread) {
-    var articlesRead = $('#feed-container .feed-item.read').length;
-    actualOffset -= articlesRead;
-  }
-  
-  // Actual offset according to starred articles
-  if (r.feed.context.url == r.util.url.starred) {
-    actualOffset = $('#feed-container .feed-item.starred').length;;
-  }
-  
   if (!next) {
     // Loading animation
     $('#feed-container').html(r.util.buildLoader());
@@ -250,7 +238,8 @@ r.feed.load = function(next) {
     data: {
       unread: r.feed.context.unread,
       limit: r.feed.context.limit,
-      offset: next ? actualOffset : 0
+      offset: next ? articlesLoaded : 0,
+      total: next ? r.feed.context.total : null
     },
     done: function(data) {
       // Pre article build
@@ -295,6 +284,7 @@ r.feed.load = function(next) {
       
       r.feed.context.loading = false;
       r.feed.context.bumper.find('.loader').hide();
+      r.feed.context.bumper.find('.retry').hide();
       
       // Trigger paging in the case that all newly added articles are visible
       r.feed.triggerPaging();
@@ -302,6 +292,7 @@ r.feed.load = function(next) {
     fail: function() {
       r.feed.context.loading = false;
       $('#feed-container .loader').hide();
+      r.feed.context.bumper.find('.retry').show();
       $().toastmessage('showErrorToast', $.t('error.feed'));
     }
   });
@@ -342,14 +333,23 @@ r.feed.buildBumper = function(data) {
     } else {
       html = $.t('feed.nomoreunreadarticles');
     }
-    html += '<br /><a href="#">' + $.t('feed.showall') + '</a>';
+    html += '<br /><a href="#" class="showall">' + $.t('feed.showall') + '</a>';
   }
-  var bumper = $('<div class="bumper"><img class="loader" src="images/ajax-loader.gif" />' + html + '</div>');
+  
+  var bumper = $('<div class="bumper"><img class="loader" src="images/ajax-loader.gif" />' +
+      '<br /><a href="#" class="retry">' + $.t('feed.retry') + '</a><br />' + html + '</div>');
   
   // Show all link
-  bumper.find('a').click(function() {
+  bumper.find('.showall').click(function() {
     r.feed.context.unread = false;
     r.feed.load(false);
+    return false;
+  });
+  
+  // Retry link
+  bumper.find('.retry').click(function() {
+    r.feed.triggerPaging();
+    $(this).hide();
     return false;
   });
   

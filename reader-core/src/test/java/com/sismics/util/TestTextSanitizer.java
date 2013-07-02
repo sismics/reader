@@ -19,6 +19,7 @@ public class TestTextSanitizer {
      */
     @Test
     public void textSanitizerTest() throws Exception {
+        Assert.assertEquals("", TextSanitizer.sanitize(null));
         Assert.assertEquals("Test title", TextSanitizer.sanitize("Test title"));
         Assert.assertEquals("Test title", TextSanitizer.sanitize("Test <pre>title</pre>"));
         Assert.assertEquals("Test title — a title", TextSanitizer.sanitize("Test title &mdash; a title"));

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.SerialMergeScheduler;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
@@ -33,6 +34,9 @@ public class LuceneUtil {
         // Standard analyzer
         IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_42, new ReaderStandardAnalyzer(Version.LUCENE_42));
         
+        // Merge sequentially, because Lucene writing is already done asynchronously 
+        config.setMergeScheduler(new SerialMergeScheduler());
+        
         // Creating index writer
         Directory directory = AppContext.getInstance().getLuceneDirectory();
         IndexWriter indexWriter = null;
@@ -54,10 +58,11 @@ public class LuceneUtil {
         try {
             runnable.run(indexWriter);
         } catch (Exception e) {
+            log.error("Error in running index writing transaction", e);
             try {
                 indexWriter.rollback();
             } catch (IOException e1) {
-                log.error("Cannot rollback index writing transaction", e);
+                log.error("Cannot rollback index writing transaction", e1);
             }
         }
         

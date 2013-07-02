@@ -289,4 +289,47 @@ public class TestRssReader {
         Assert.assertTrue(article.getDescription().contains("Over the years, the spacefaring nations of Earth"));
         Assert.assertNotNull(article.getPublicationDate());
     }
+    
+    @Test
+    public void rssReaderDeveloppezTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_developpez.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("Developpez.com Développement Web", feed.getTitle());
+        Assert.assertEquals("http://web.developpez.com/index/rss", feed.getUrl());
+        Assert.assertEquals("fr-FR", feed.getLanguage());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(20, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("Quel navigateur Web recommandez-vous en 2013 ? Participez au débat sur le meilleur navigateur grand public", article.getTitle());
+        Assert.assertEquals("http://web.developpez.com/actu/56767/Quel-navigateur-Web-recommandez-vous-en-2013-Participez-au-debat-sur-le-meilleur-navigateur-grand-public/", article.getUrl());
+        Assert.assertEquals("http://web.developpez.com/actu/56767/Quel-navigateur-Web-recommandez-vous-en-2013-Participez-au-debat-sur-le-meilleur-navigateur-grand-public/", article.getGuid());
+        Assert.assertNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        Assert.assertTrue(article.getDescription().contains("Depuis, les choses ont encore beaucoup évolué et nous aimerions connaitre votre avis actuel"));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
+    
+    @Test
+    public void rssReaderHaverbekeTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_atom_haverbeke.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("marijnhaverbeke.nl/blog", feed.getTitle());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(26, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("Tern", article.getTitle());
+        Assert.assertEquals("http://marijnhaverbeke.nl/blog/tern.html", article.getUrl());
+        Assert.assertEquals("http://marijnhaverbeke.nl/blog/tern.html", article.getGuid());
+        Assert.assertNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        // TODO SAX Parser ignore content if not wrapped in CDATA
+        // Assert.assertTrue(article.getDescription().contains("I spend a rather large fraction of my days inside Emacs"));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
 }

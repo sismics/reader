@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title><![CDATA[Developpez.com Développement Web]]></title>
+    <link>http://web.developpez.com/index/rss</link>
+    <description><![CDATA[Club des développeurs et IT Pro]]></description>
+    <pubDate>Sat, 15 Jun 2013 00:07:27 +0200</pubDate>
+    <lastBuildDate>Sat, 15 Jun 2013 00:07:27 +0200</lastBuildDate>
+    <managingEditor>(web.developpez.com)</managingEditor>
+    <copyright>Copyright © 2000-2013 www.developpez.com</copyright>
+    <image>
+      <url>http://www.developpez.com/template/favicon.png</url>
+      <title><![CDATA[Developpez.com Développement Web]]></title>
+      <link>http://web.developpez.com/index/rss</link>
+    </image>
+    <generator>www.developpez.com</generator>
+    <language>fr-FR</language>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <item>
+      <title><![CDATA[Quel navigateur Web recommandez-vous en 2013 ? Participez au débat sur le meilleur navigateur grand public]]></title>
+      <link>http://web.developpez.com/actu/56767/Quel-navigateur-Web-recommandez-vous-en-2013-Participez-au-debat-sur-le-meilleur-navigateur-grand-public/</link>
+      <guid>http://web.developpez.com/actu/56767/Quel-navigateur-Web-recommandez-vous-en-2013-Participez-au-debat-sur-le-meilleur-navigateur-grand-public/</guid>
+      <description><![CDATA[Chers membres du club.Lors de notre précédent sondage de 2011, qui vous demandait votre navigateur préféré, Firefox arrivait en tête avec 52,88 % de votes devant Chrome (25,96 %) et Opera (10,82 %).
+Depuis, les choses ont encore beaucoup évolué et nous aimerions connaitre votre avis actuel.Notez cependant que la question a quelque peu évolué : nous ne vous demandons plus quel est votre navigateur préféré mais celui que vous recommanderiez.
+En effet, en tant que développeur (débutant, amateur, professionnel, qu'importe), vous êtes probablement un internaute a...]]></description>
+      <pubDate>Fri, 14 Jun 2013 09:00:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Nouvelle version pour le Framework DHTMLX, la version 3.6 de la bibliothèque JavaScript apporte un composant popup]]></title>
+      <link>http://javascript.developpez.com/actu/56786/Nouvelle-version-pour-le-Framework-DHTMLX-la-version-3-6-de-la-bibliotheque-JavaScript-apporte-un-composant-popup/</link>
+      <guid>http://javascript.developpez.com/actu/56786/Nouvelle-version-pour-le-Framework-DHTMLX-la-version-3-6-de-la-bibliotheque-JavaScript-apporte-un-composant-popup/</guid>
+      <description><![CDATA[Une nouvelle version vient de voir le jour pour le Framework DHTMLX : il s'agit de DHTMLX 3.6.DHTMLX est un framework AJAX de la société du même nom basée en Russie. Elle est spécialisée dans le développement logiciel et plus particulièrement le développement des  applications Web à interface riche. Pour se faire elle a développé un ensemble d'outils dont une bonne partie est disponible en Open Source notamment la bibliothèque DHTMLX dont la version 3.6 est désormais disponible. Il s'agit d'un ensemble de composants  basés sur les technologies  web notamment AJAX pour le développement d'interface utilisateur web avec des fonctionnalités améliorées. Nous avons entre autres comme composants disponiblent dans ce Framework :
+Tree : p...]]></description>
+      <pubDate>Fri, 14 Jun 2013 07:37:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Cube Slam : un hybride 3D de Pong par Google fait l'apologie de Web RTC, Web Audio, WebGL et des nouveaux standards du Web]]></title>
+      <link>http://www.developpez.com/actu/56750/Cube-Slam-un-hybride-3D-de-Pong-par-Google-fait-l-apologie-de-Web-RTC-Web-Audio-WebGL-et-des-nouveaux-standards-du-Web/</link>
+      <guid>http://www.developpez.com/actu/56750/Cube-Slam-un-hybride-3D-de-Pong-par-Google-fait-l-apologie-de-Web-RTC-Web-Audio-WebGL-et-des-nouveaux-standards-du-Web/</guid>
+      <description><![CDATA[Cube Slam : un hybride 3D de Pong par Google
+Fait la démo de Web RTC, Web Audio, WebGL et l'apologie des nouveaux standards du WebAvec Gordon FowlerL'apparition des nouveaux standards Web a décuplé les fonctionnalités des navigateurs. Il est désormais possible de faire du « chat » vidéo sans plugins, ou de réaliser des jeux uniquement avec des technos Web. L'équipe de Google à l'origine de Cube Slam - un jeu Pong en 3D - vient d'en faire une jolie démonstration dans un projet (un « Chrome Experiment ») qui vise également à faire la promotion du HTML5 et d'autres outils.]]></description>
+      <pubDate>Thu, 13 Jun 2013 13:20:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Sencha Animator 1.5 : nouvelle mouture de l'outil de création d'animations CSS3]]></title>
+      <link>http://xhtml.developpez.com/actu/56741/Sencha-Animator-1-5-nouvelle-mouture-de-l-outil-de-creation-d-animations-CSS3/</link>
+      <guid>http://xhtml.developpez.com/actu/56741/Sencha-Animator-1-5-nouvelle-mouture-de-l-outil-de-creation-d-animations-CSS3/</guid>
+      <description><![CDATA[Sencha Animator 1.5 : nouvelle mouture pour ce puissant outil de création d'animations CSS3.
+Cet outil polyvalent, considéré aujourd'hui comme équivalent à Adobe Flash, est utilisé pour créer des jeux, publicités, livres interactifs pour enfants, interfaces de mockups, études de motion design, présentations, etc.Les fonctionnalités étendues de la nouvelle version se démarquent par une plus grande simplicité d'emploi et permettent donc d'accélérer la création d'animations CSS3 en augmentant la productivité de création.
+]]></description>
+      <pubDate>Thu, 13 Jun 2013 10:48:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Les Jeux Olymgeeks : cinq nouvelles épreuves dont une sur C#, dix autres suivront dans la semaine]]></title>
+      <link>http://www.developpez.com/actu/56736/-Jeux-Olymgeeks-cinq-nouvelles-epreuves-dont-une-sur-C-dix-autres-suivront-dans-la-semaine/</link>
+      <guid>http://www.developpez.com/actu/56736/-Jeux-Olymgeeks-cinq-nouvelles-epreuves-dont-une-sur-C-dix-autres-suivront-dans-la-semaine/</guid>
+      <description><![CDATA[« Les Jeux Olymgeeks » : mesurez-vous à vos confrères développeurs sur une vingtaine de technologies
+Un grand concours de connaissances IT organisé par SkillyEdit 08/06/2013 : liste des technologies liées au concours modifiéeLa fin du printemps semble être la saison des concours pour développeurs. Après celui de Choose Your Boss, voici une autre compétition, proposée cette fois-ci par skilly (une société qui permet « une auto-évaluation objective de son niveau sur une technologie IT du débutant à l'expert confirmé »).Baptisée non sans humour « Jeux Olymgeeks », le but est de se mes...]]></description>
+      <pubDate>Thu, 13 Jun 2013 10:44:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[PHP 5.5 : soirée d'inauguration de la nouvelle version du langage, le 27 juin à SUP'Internet avec l'AFUP]]></title>
+      <link>http://www.developpez.com/actu/56733/PHP-5-5-soiree-d-inauguration-de-la-nouvelle-version-du-langage-le-27-juin-a-SUP-Internet-avec-l-AFUP/</link>
+      <guid>http://www.developpez.com/actu/56733/PHP-5-5-soiree-d-inauguration-de-la-nouvelle-version-du-langage-le-27-juin-a-SUP-Internet-avec-l-AFUP/</guid>
+      <description><![CDATA[PHP 5.5 : soirée d'inauguration de la nouvelle version du langage le 27 juin
+Elle présentera ses avancées techniques, à SUP'Internet avec l'AFUP Le 4 juin 2012, SUP'Internet, aux côtés d'Epitech, recevait Rasmus Ledorf, le créateur de PHP. Suite à cet évènement, l'AFUP (Association Française des Utilisateurs de PHP) a proposé à l'école d'organiser une soirée d'inauguration autour de la nouvelle version (5.5), très attendue par la communauté.Cette soirée se déroulera donc le 27 juin, à partir de 19 heures, en présence de Sophie Beaupuis, experte PHP chez Zend Technologies, et de Julien Pauli, expert PHP chez BlaBlaCar et coordinateur de cette nouvelle version.Ces deux « animateurs » aborderont les...]]></description>
+      <pubDate>Thu, 13 Jun 2013 09:54:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Ajouter une lumière directionnelle à votre scène WebGL, la septième traduction des tutoriels de Giles Thomas, par Jérôme Marsaguet]]></title>
+      <link>http://jeux.developpez.com/tutoriels/OpenGL/WebGL/7-eclairage-directionnel-et-ambiant/</link>
+      <guid>http://jeux.developpez.com/tutoriels/OpenGL/WebGL/7-eclairage-directionnel-et-ambiant/</guid>
+      <description><![CDATA[Suite au tutoriel sur les filtres de texture en WebGL, vous pouvez maintenant découvrir comment ajouter une lumière directionnelle dans votre scène.Voici donc la septième leçon de la série « Learning WebGL ».Bonne lectureVous pouvez retrouver les autres tutoriels de la série dans ]]></description>
+      <pubDate>Thu, 13 Jun 2013 09:00:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Sortie de Pure 0.2.0]]></title>
+      <link>http://javascript.developpez.com/actu/56728/Sortie-de-Pure-0-2-0/</link>
+      <guid>http://javascript.developpez.com/actu/56728/Sortie-de-Pure-0-2-0/</guid>
+      <description><![CDATA[Pure : ensemble de petits modules CSS pensés pour les applications Web mobilesPure est un ensemble de petits modules CSS (responsive) que vous pouvez utiliser dans chaque projet Web.Conçu avant tout pour des appareils mobiles, l'entièreté des modules ne fait que 5,7 Ko (minimisé et gzippé) malgré l'implémentation des styles responsive, le design et sa facilité d'utilisation.  Toutes les lignes de CSS ont été examinées attentivement. Il est d'ailleurs possible d'utiliser uniquement un sous-ensemble de ces modules, vous économiserez donc encore plus d'octets.Pour l'utiliser, rien de plus simple :
+	Code html ...]]></description>
+      <pubDate>Thu, 13 Jun 2013 08:50:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Le webdesign selon les grilles de Kévin Pinto]]></title>
+      <link>http://kpinto.developpez.com/tutoriels/css/webdesign-selon-grilles/</link>
+      <guid>http://kpinto.developpez.com/tutoriels/css/webdesign-selon-grilles/</guid>
+      <description><![CDATA[Tout bon webdesigner sait que l'esprit créatif ne suffit pas à rendre son site professionnel. L'une des bonnes pratiques de base du webdesign est la conception d'un template structuré et celle qui s'apparente le mieux à cela est la grille. Cette méthode de travail pourtant répandue dans le domaine de l'architecture et de la typographie est tout simplement mal connue dans le webdesign.
+
+Le principal souci est que la plupart des webdesigners pensent que la conception d'une grille est une tâche ennuyeuse réservée aux mises en page à largeur fixe. Elle peut certainement l'être dans certains cas. Cela est particulièrement vrai si vous l'utilisez comme un formulaire où chaque case doit être complétée avec des données%u2026]]></description>
+      <pubDate>Thu, 13 Jun 2013 08:00:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Première version Long Term Support (LTS) pour le Framework PHP Symfony2]]></title>
+      <link>http://web.developpez.com/actu/56706/Premiere-version-Long-Term-Support-LTS-pour-le-Framework-PHP-Symfony2/</link>
+      <guid>http://web.developpez.com/actu/56706/Premiere-version-Long-Term-Support-LTS-pour-le-Framework-PHP-Symfony2/</guid>
+      <description><![CDATA[Le mois de Juin chez Symfony rime avec la sortie de la première version LTS de son framework PHP. Il s'agit de la version 2.3.0 de Symfony2 dont la maintenance sera assurée sur  une période de 3 ans, soit jusqu'en mai 2016. En termes de fonctionnalités pour cette nouvelle version, nous avons entre autres :
+les formulaires en HTML5 ;
+schema relative URL ;
+l'amélioration du helperprogress ;
+la sortie console sur plusieurs formats ;
+de nouveau validators ;
+le support des boutons dans les formulaires ;
+le refactoring de l'internationalisation et des sélecteurs CSS ;
+la gestion interactive du fichier parameter.yml ;
+etc.
+
+On note également l'arrivée de 2 nouveaux composants et d'un ...]]></description>
+      <pubDate>Wed, 12 Jun 2013 22:20:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[La sécurité dans vos applications web]]></title>
+      <link>http://web.developpez.com/actu/56687/La-securite-dans-vos-applications-web/</link>
+      <guid>http://web.developpez.com/actu/56687/La-securite-dans-vos-applications-web/</guid>
+      <description><![CDATA[Encore aujourd'hui, bon nombre de sites web contiennent des failles plus ou moins importantes: du Xss/Css* à l'injection sql* en passant par le Xsrf/Csrf* ou le nullbyte*.Certains framework proposent des solutions pour se protéger de quelques une de ses failles (filtres, prepare statement...) mais il faut le plus souvent penser à les utiliser.Même si en tant que développeurs on a plus ou moins connaissance de ce type de failles, nous ne sommes pas à l'abris d'un oubli ou d'une exploitation à laquelle on aurait pas pensé.Afin de se prémunir de ce genre de faille, vous pouvez selon votre budget :
+Demander un audit de sécurit...]]></description>
+      <pubDate>Wed, 12 Jun 2013 15:30:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Google somme les Webmasters d'adapter leurs sites aux terminaux mobiles sous peine d'être déclassés dans le moteur de recherche]]></title>
+      <link>http://www.developpez.com/actu/56673/Google-somme-les-Webmasters-d-adapter-leurs-sites-aux-terminaux-mobiles-sous-peine-d-etre-declasses-dans-le-moteur-de-recherche/</link>
+      <guid>http://www.developpez.com/actu/56673/Google-somme-les-Webmasters-d-adapter-leurs-sites-aux-terminaux-mobiles-sous-peine-d-etre-declasses-dans-le-moteur-de-recherche/</guid>
+      <description><![CDATA[Google recommande aux Webmasters d'améliorer la qualité de leurs sites web mobiles 
+Sous peine d'être exclus des résultats de son moteur de rechercheAvec Gordon FowlerDe plus en plus de personnes se servent de smartphones pour se connecter à internet. Cependant, l'expérience vécue par les utilisateurs mobiles est loin d'être satisfaisante, bien que les développeurs conçoivent souvent des alternatives optimisées pour smartphones.Les utilisateurs se plaignent en effet régulièrement de multiples problèmes comme les temps de chargements interminables des pages, de contenus vidéos qui ne peuvent être lus (surtout lorsqu'il s'agit de format flash), ou des pages qui n...]]></description>
+      <pubDate>Wed, 12 Jun 2013 13:17:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Easel.io : concevoir des sites dans votre navigateur]]></title>
+      <link>http://xhtml.developpez.com/actu/56629/Easel-io-concevoir-des-sites-dans-votre-navigateur/</link>
+      <guid>http://xhtml.developpez.com/actu/56629/Easel-io-concevoir-des-sites-dans-votre-navigateur/</guid>
+      <description><![CDATA[Easel.io : concevoir des sites dans votre navigateurPrévu pour les designers et développeurs, Easel.io est un site qui propose des outils permettant de concevoir rapidement une maquette de site, avec le code HTML et le code CSS générés.L'intérêt :concevoir des sites dans le navigateur au pixel près ;
+simplicité et légèreté d'utilisation ;
+entre Photoshop (trop lourd) et mockup - ou zoning, wireframe - (trop léger).
+
+
+Fonctionnalités :
+une boite à outils avancés avec des propriétés CSS3 ...]]></description>
+      <pubDate>Tue, 11 Jun 2013 14:12:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Sortie de PHP 5.4.16 et de PHP 5.3.26]]></title>
+      <link>http://web.developpez.com/actu/56627/Sortie-de-PHP-5-4-16-et-de-PHP-5-3-26/</link>
+      <guid>http://web.developpez.com/actu/56627/Sortie-de-PHP-5-4-16-et-de-PHP-5-3-26/</guid>
+      <description><![CDATA[Encore de nouvelles versions de PHP au rendez vous cette semaine ; en effet, l'équipe de développement vient d'annoncer la disponibilité immédiate des versions 5.4.16 et 5.3.26 de ce langage. Il s'agit en gros pour ces versions de la correction d'environ 15 bogues dont les principaux sont les suivants :la mauvaise interprétation de certaines adresses IPv6 dans SNMP ;
+l'erreur de segmentation lors de la détection  du mimetype dans les fichiers MP3 ;
+l'échec de la compilation sur les architectures x32 ;
+l'erreur de segmentation lors de l'appel de la méthode fetch_object de MySQLi sur un use_result et de la fermeture du pointeur sur la BD ;
+etc.
+Les développeurs sont donc invités à migrer vers ces nouvelles versions suivant la branche de P...]]></description>
+      <pubDate>Tue, 11 Jun 2013 14:09:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Meteor 0.6.4 est disponible et permet de se connecter facilement à Facebook, GitHub, Google, Twitter, etc.]]></title>
+      <link>http://javascript.developpez.com/actu/56623/Meteor-0-6-4-est-disponible-et-permet-de-se-connecter-facilement-a-Facebook-GitHub-Google-Twitter-etc/</link>
+      <guid>http://javascript.developpez.com/actu/56623/Meteor-0-6-4-est-disponible-et-permet-de-se-connecter-facilement-a-Facebook-GitHub-Google-Twitter-etc/</guid>
+      <description><![CDATA[Meteor 0.6 est disponible
+offrant un nouveau système de distribution, l'utilisation des modules NPM et le support des Linux x86
+Meteor est une plate-forme open source pour créer des applications Web de qualité et cela très rapidement.L'équipe a annoncé début du mois la sortie de la version 0.6. Elle met en avant un tout nouveau système de distribution des révisions de Meteor et de la mise à jour des applications. Elle ajoute également des packages pour les applications spécifiques et un support direct des modules NPM.À partir de maintenant, les applications Meteor sont associées à une rév...]]></description>
+      <pubDate>Tue, 11 Jun 2013 09:05:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Tutoriel AngularJS : gérer les flux RSS, article d'Alex Young traduit par vermine]]></title>
+      <link>http://javascript.developpez.com/tutoriels/javascript/angularjs-4-flux-rss/</link>
+      <guid>http://javascript.developpez.com/tutoriels/javascript/angularjs-4-flux-rss/</guid>
+      <description><![CDATA[Je vous propose une traduction de l'article anglophone Managing Feeds de Alex Young.Ce dernier a décidé de lancer une série d'articles sur AngularJS qui illustre la manière dont fonctionne un flux RSS.
+Le premier article présente différents éléments et interactions entre Google, Twitter et AngularJS : Tutoriel AngularJS : Google, Twitter, et AngularJS.
+...]]></description>
+      <pubDate>Tue, 11 Jun 2013 08:00:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Introduction à Dart, le langage orienté Web de Google,  un tutoriel de Yohan Beschi]]></title>
+      <link>http://soat.developpez.com/tutoriels/dart/langage-web-feedback-devoxx-france2013/</link>
+      <guid>http://soat.developpez.com/tutoriels/dart/langage-web-feedback-devoxx-france2013/</guid>
+      <description><![CDATA[Yohan Beschi de la société SOAT (http://blog.soat.fr/) vous propose un tutoriel sur le langage Dart.Ce  nouveau langage développé par Google a pour objectif d'être tout ce qu'aurait pu être  JavaScript s'il avait été inventé aujourd'hui. En d'autres termes,  garder la nature dynamique du JavaScript, tout en offrant un langage et  des outils facilitant le développement de grosses applications.Le lien du tutoriel : http://soat.developpez.com/tutoriels...xx-france2013/N'hésitez pas à profiter de cette discussion pour laisser vos commentaires.Mickael...]]></description>
+      <pubDate>Mon, 10 Jun 2013 09:00:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[« Jeux Olymgeeks » : mesurez-vous aux autres développeurs sur une vingtaine de technologies, un concours de connaissances IT organisé par Skilly]]></title>
+      <link>http://www.developpez.com/actu/56547/-Jeux-Olymgeeks-mesurez-vous-aux-autres-developpeurs-sur-une-vingtaine-de-technologies-un-concours-de-connaissances-IT-organise-par-Skilly/</link>
+      <guid>http://www.developpez.com/actu/56547/-Jeux-Olymgeeks-mesurez-vous-aux-autres-developpeurs-sur-une-vingtaine-de-technologies-un-concours-de-connaissances-IT-organise-par-Skilly/</guid>
+      <description><![CDATA[« Les Jeux Olymgeeks » : mesurez-vous à vos confrères développeurs sur une vingtaine de technologies
+Un grand concours de connaissances IT organisé par SkillyEdit 08/06/2013 : liste des technologies liées au concours modifiéeLa fin du printemps semble être la saison des concours pour développeurs. Après celui de Choose Your Boss, voici une autre compétition, proposée cette fois-ci par skilly (une société qui permet « une auto-évaluation objective de son niveau sur une technologie IT du débutant à l'expert confirmé »).Baptisée non sans humour « Jeux Olymgeeks », le but est de se mes...]]></description>
+      <pubDate>Fri, 07 Jun 2013 19:08:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Google publie l'API de Google Maps Engine, pour faciliter la création, le partage et la publication de cartes personnalisées en entreprise]]></title>
+      <link>http://www.developpez.com/actu/56503/Google-publie-l-API-de-Google-Maps-Engine-pour-faciliter-la-creation-le-partage-et-la-publication-de-cartes-personnalisees-en-entreprise/</link>
+      <guid>http://www.developpez.com/actu/56503/Google-publie-l-API-de-Google-Maps-Engine-pour-faciliter-la-creation-le-partage-et-la-publication-de-cartes-personnalisees-en-entreprise/</guid>
+      <description><![CDATA[Google publie l'API de Google Maps Engine,
+pour faciliter la création, le partage et la publication de cartes personnalisées en entrepriseGoogle propose désormais aux développeurs des outils adéquats pour travailler plus facilement avec son service de cartographie. L'API de Google Maps Engine leur permet de récupérer les informations de leur choix sur le Cloud, les utiliser à leur convenance à des fins de publications internes ou même plus généralisées. Quelques compagnies comme FedEx en font déjà usage. Depuis le mois de janvier, l'entreprise l'utilise pour alimenter son localisateur de boutiques et a décidé par la suite de revoir son système en entier pour utiliser les services proposés par Google.]]></description>
+      <pubDate>Thu, 06 Jun 2013 12:46:00 +0200</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Visualiseur de parties d'échecs par christele_r]]></title>
+      <link>http://christele.developpez.com/tutoriels/javascript/visualiseur-de-parties-d-echec/</link>
+      <guid>http://christele.developpez.com/tutoriels/javascript/visualiseur-de-parties-d-echec/</guid>
+      <description><![CDATA[Cet article décrit une méthode simple pour générer et faire jouer sur une page Web, une partie d'échecs, en préservant une compatibilité avec la plupart des navigateurs.]]></description>
+      <pubDate>Thu, 06 Jun 2013 08:00:00 +0200</pubDate>
+    </item>
+  </channel>
+</rss>

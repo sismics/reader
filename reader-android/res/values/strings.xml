@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Application -->
+    <string name="application_name">Sismics Reader</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="server">Server</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="ok">OK</string>
+    <string name="login_fail_title">Login fail</string>
+    <string name="login_fail">Wrong username or password</string>
+    <string name="network_error_title">Network error</string>
+    <string name="network_error">Network error, please check internet connectivity and server URL</string>
+    <string name="refresh">Refresh</string>
+    <string name="logout">Logout</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="mark_as_unread">Mark as unread</string>
+    <string name="marked_as_unread">Marked as unread</string>
+    <string name="latest">Latest</string>
+    <string name="unread">Unread</string>
+    <string name="all">All</string>
+    <string name="starred">Starred</string>
+    <string name="subscriptions">Subscriptions</string>
+    <string name="article_subscription">on %1$s</string>
+    <string name="article_subscription_author">on %1$s by %2$s</string>
+    <string name="crash_toast_text">A crash occurred, a report has been sent to resolve this problem</string>
+
+    <!-- Préférences -->
+    <string name="pref_general_category">General preferences</string>
+    <string name="pref_enable_acra">Automatic error reports</string>
+    <string name="pref_acra_enabled">Reporting enabled</string>
+    <string name="pref_acra_disabled">Reporting disabled</string>
+    
+    <!-- Validation -->
+    <string name="validate_error_email">Invalid email</string>
+    <string name="validate_error_length_min">Too short (min. %d)</string>
+    <string name="validate_error_length_max">Too long (max. %d)</string>
+    <string name="validate_error_required">Required</string>
+    <string name="validate_error_alphanumeric">Only letters and numbers</string>
+
+</resources>

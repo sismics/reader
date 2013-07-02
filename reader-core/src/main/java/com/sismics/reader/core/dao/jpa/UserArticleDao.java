@@ -151,6 +151,17 @@ public class UserArticleDao {
         List<Object[]> l = q.getResultList();
         return assembleResultList(l);
     }
+    
+    /**
+     * Count user articles by criteria.
+     * 
+     * @param criteria Search criteria
+     * @param paginatedList Paginated list (populated by side effects)
+     */
+    public void countByCriteria(UserArticleCriteria criteria, PaginatedList<UserArticleDto> paginatedList) {
+        QueryParam queryParam = getQueryParam(criteria);
+        PaginatedLists.executeCountQuery(paginatedList, queryParam);
+    }
 
     /**
      * Searches user articles by criteria.
@@ -217,14 +228,14 @@ public class UserArticleDao {
         
         StringBuilder sb = new StringBuilder("select ua.USA_ID_C, ua.USA_READDATE_D, ua.USA_STARREDDATE_D, f.FED_TITLE_C, fs.FES_ID_C, fs.FES_TITLE_C, a.ART_ID_C, a.ART_URL_C, a.ART_GUID_C, a.ART_TITLE_C, a.ART_CREATOR_C, a.ART_DESCRIPTION_C, a.ART_COMMENTURL_C, a.ART_COMMENTCOUNT_N, a.ART_ENCLOSUREURL_C, a.ART_ENCLOSURELENGTH_N, a.ART_ENCLOSURETYPE_C, a.ART_PUBLICATIONDATE_D");
         sb.append(" from T_ARTICLE a ");
-        sb.append(" left join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null) ");
+        if (criteria.isVisible()) {
+            sb.append(" join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null) ");
+        } else {
+            sb.append(" left join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null) ");
+        }
         if (criteria.getUserId() != null) {
             sb.append(" join T_FEED f on(f.FED_ID_C = a.ART_IDFEED_C and f.FED_DELETEDATE_D is null) ");
-            if (criteria.isSubscribed()) {
-                sb.append(" join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
-            } else {
-                sb.append(" left join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
-            }
+            sb.append(" join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
         }
         
         // Adds search criteria

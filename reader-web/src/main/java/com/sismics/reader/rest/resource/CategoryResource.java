@@ -21,10 +21,12 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.sismics.reader.core.dao.jpa.CategoryDao;
+import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.model.jpa.Category;
+import com.sismics.reader.core.model.jpa.FeedSubscription;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
 import com.sismics.reader.rest.assembler.ArticleAssembler;
@@ -97,7 +99,8 @@ public class CategoryResource extends BaseResource {
             @PathParam("id") String id,
             @QueryParam("unread") boolean unread,
             @QueryParam("limit") Integer limit,
-            @QueryParam("offset") Integer offset) throws JSONException {
+            @QueryParam("offset") Integer offset,
+            @QueryParam("total") Integer total) throws JSONException {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
@@ -115,13 +118,20 @@ public class CategoryResource extends BaseResource {
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUnread(unread);
         userArticleCriteria.setUserId(principal.getId());
-        userArticleCriteria.setSubscribed(true);
+        userArticleCriteria.setVisible(true);
         if (category.getParentId() != null) {
             userArticleCriteria.setCategoryId(id);
         }
 
         UserArticleDao userArticleDao = new UserArticleDao();
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, offset);
+        if(total != null) {
+            userArticleDao.countByCriteria(userArticleCriteria, paginatedList);
+            if (paginatedList.getResultCount() != total) {
+                offset += paginatedList.getResultCount() - total;
+                paginatedList = PaginatedLists.create(limit, offset);
+            }
+        }
         userArticleDao.findByCriteria(userArticleCriteria, paginatedList);
         
         // Build the response
@@ -199,9 +209,18 @@ public class CategoryResource extends BaseResource {
             throw new ClientException("CategoryNotFound", MessageFormat.format("Category not found: {0}", id));
         }
         
+        // Move subscriptions in this category to root
+        FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+        List<FeedSubscription> feedSubscriptionList = feedSubscriptionDao.findByCategory(id);
+        Category rootCategory = categoryDao.getRootCategory(principal.getId());
+        for (FeedSubscription feedSubscription : feedSubscriptionList) {
+            feedSubscription.setCategoryId(rootCategory.getId());
+            feedSubscriptionDao.update(feedSubscription);
+            feedSubscriptionDao.reorder(feedSubscription, 0);
+        }
+        
         // Delete the category
         categoryDao.delete(id);
-        //TODO move subscriptions in this category to root
         
         // Always return ok
         JSONObject response = new JSONObject();
@@ -236,7 +255,6 @@ public class CategoryResource extends BaseResource {
         // Marks all articles as read in this category
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUserId(principal.getId());
-        userArticleCriteria.setSubscribed(true);
         userArticleCriteria.setCategoryId(id);
 
         UserArticleDao userArticleDao = new UserArticleDao();

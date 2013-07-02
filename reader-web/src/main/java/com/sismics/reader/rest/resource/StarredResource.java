@@ -47,7 +47,8 @@ public class StarredResource extends BaseResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response get(
             @QueryParam("limit") Integer limit,
-            @QueryParam("offset") Integer offset) throws JSONException {
+            @QueryParam("offset") Integer offset,
+            @QueryParam("total") Integer total) throws JSONException {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
@@ -55,10 +56,18 @@ public class StarredResource extends BaseResource {
         // Get the articles
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setStarred(true);
+        userArticleCriteria.setVisible(true);
         userArticleCriteria.setUserId(principal.getId());
 
         UserArticleDao userArticleDao = new UserArticleDao();
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, offset);
+        if(total != null) {
+            userArticleDao.countByCriteria(userArticleCriteria, paginatedList);
+            if (paginatedList.getResultCount() != total) {
+                offset += paginatedList.getResultCount() - total;
+                paginatedList = PaginatedLists.create(limit, offset);
+            }
+        }
         userArticleDao.findByCriteria(userArticleCriteria, paginatedList);
         
         // Build the response

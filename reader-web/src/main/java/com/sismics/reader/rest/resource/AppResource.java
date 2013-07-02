@@ -25,6 +25,7 @@ import com.sismics.reader.core.util.jpa.PaginatedLists;
 import com.sismics.reader.rest.constant.BaseFunction;
 import com.sismics.rest.exception.ForbiddenClientException;
 import com.sismics.rest.exception.ServerException;
+import com.sismics.util.NetworkUtil;
 import com.sismics.util.log4j.LogCriteria;
 import com.sismics.util.log4j.LogEntry;
 import com.sismics.util.log4j.MemoryAppender;
@@ -135,6 +136,30 @@ public class AppResource extends BaseResource {
         } catch (Exception e) {
             throw new ServerException("IndexingError", "Error rebuilding index", e);
         }
+        response.put("status", "ok");
+        return Response.ok().entity(response).build();
+    }
+    
+    /**
+     * Attempt to map a port to the gateway.
+     * 
+     * @return Response
+     * @throws JSONException
+     */
+    @POST
+    @Path("map_port")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response mapPort() throws JSONException {
+        if (!authenticate()) {
+            throw new ForbiddenClientException();
+        }
+        checkBaseFunction(BaseFunction.ADMIN);
+        
+        JSONObject response = new JSONObject();
+        if (!NetworkUtil.mapTcpPort(request.getServerPort())) {
+            throw new ServerException("NetworkError", "Error mapping port using UPnP");
+        }
+        
         response.put("status", "ok");
         return Response.ok().entity(response).build();
     }

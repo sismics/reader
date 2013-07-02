@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.sismics.reader</groupId>
   <artifactId>reader-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
 
   <name>Reader Parent</name>
 
@@ -14,9 +13,6 @@
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-    <!-- Dependencies version (internal) -->
-    <reader.version>1.0-SNAPSHOT</reader.version>
 
     <!-- Dependencies version (external) -->
     <org.apache.commons.commons-compress.version>1.5</org.apache.commons.commons-compress.version>
@@ -37,6 +33,7 @@
     <com.googlecode.owasp-java-html-sanitizer.owasp-java-html-sanitizer.version>r156</com.googlecode.owasp-java-html-sanitizer.owasp-java-html-sanitizer.version>
     <org.apache.lucene.version>4.2.0</org.apache.lucene.version>
     <jgoodies.forms.version>1.0.5</jgoodies.forms.version>
+    <org.bitlet.weupnp.version>0.1.2</org.bitlet.weupnp.version>
 
     <com.sun.grizzly.version>1.9.18-m</com.sun.grizzly.version>
     <org.hibernate.hibernate.version>4.1.0.Final</org.hibernate.hibernate.version>
@@ -67,9 +64,10 @@
   </properties> 
   
   <scm>
-    <connection>scm:git:git://github.com/sismics/reader.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:reader/reader.git</developerConnection>
-    <url>https://github.com/sismics/reader</url>
+    <connection>scm:git:https://github.com/sismics/reader.git</connection>
+    <developerConnection>scm:git:https://github.com/reader/reader.git</developerConnection>
+    <url>scm:git:https://github.com/sismics/reader.git</url>
+    <tag>HEAD</tag>
   </scm>
 
   <build>
@@ -103,7 +101,7 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>${org.apache.maven.plugins.maven-release-plugin.version}</version>
         <configuration>
-          <tagNameFormat>v@{project.version}</tagNameFormat>
+          <tagNameFormat>@{project.version}</tagNameFormat>
         </configuration>
       </plugin>
 
@@ -213,44 +211,44 @@
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-core</artifactId>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-web-common</artifactId>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-web-common</artifactId>
         <type>test-jar</type>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-web</artifactId>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-distribution-standalone</artifactId>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-agent</artifactId>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
         <groupId>com.sismics.reader</groupId>
         <artifactId>reader-distribution-debian</artifactId>
-        <version>${reader.version}</version>
+        <version>${project.version}</version>
       </dependency>
     
       <dependency>
@@ -485,6 +483,12 @@
         <groupId>jgoodies</groupId>
         <artifactId>forms</artifactId>
         <version>${jgoodies.forms.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.bitlet</groupId>
+        <artifactId>weupnp</artifactId>
+        <version>${org.bitlet.weupnp.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

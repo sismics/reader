@@ -11,11 +11,15 @@ import org.apache.lucene.store.Directory;
 
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
+import com.sismics.reader.core.constant.ConfigType;
+import com.sismics.reader.core.dao.jpa.ConfigDao;
 import com.sismics.reader.core.listener.async.ArticleCreatedAsyncListener;
+import com.sismics.reader.core.listener.async.ArticleUpdatedAsyncListener;
 import com.sismics.reader.core.listener.async.FaviconUpdateRequestedAsyncListener;
-import com.sismics.reader.core.listener.async.SubscriptionImportAsyncListener;
 import com.sismics.reader.core.listener.async.RebuildIndexAsyncListener;
+import com.sismics.reader.core.listener.async.SubscriptionImportAsyncListener;
 import com.sismics.reader.core.listener.sync.DeadEventListener;
+import com.sismics.reader.core.model.jpa.Config;
 import com.sismics.reader.core.service.FeedService;
 import com.sismics.reader.core.service.IndexingService;
 import com.sismics.util.EnvironmentUtil;
@@ -80,7 +84,9 @@ public class AppContext {
         feedService = new FeedService();
         feedService.startAndWait();
         
-        indexingService = new IndexingService();
+        ConfigDao configDao = new ConfigDao();
+        Config luceneStorageConfig = configDao.getById(ConfigType.LUCENE_DIRECTORY_STORAGE);
+        indexingService = new IndexingService(luceneStorageConfig != null ? luceneStorageConfig.getValue() : null);
         indexingService.startAndWait();
         
         luceneDirectory = indexingService.getDirectory();
@@ -97,6 +103,7 @@ public class AppContext {
         
         asyncEventBus = newAsyncEventBus();
         asyncEventBus.register(new ArticleCreatedAsyncListener());
+        asyncEventBus.register(new ArticleUpdatedAsyncListener());
         asyncEventBus.register(new RebuildIndexAsyncListener());
         asyncEventBus.register(new FaviconUpdateRequestedAsyncListener());
 
