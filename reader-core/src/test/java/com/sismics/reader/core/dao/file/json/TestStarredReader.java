@@ -27,18 +27,29 @@ public class TestStarredReader {
             StarredReader starredReader = new StarredReader();
             starredReader.read(is);
             
-            Map<String, List<Article>> articleMap = starredReader.getArticleMap();
             List<Feed> feedList = starredReader.getFeedList();
-            Assert.assertEquals(2, articleMap.size());
-            List<Article> articleList = articleMap.get("http://blogs.lmax.com/rss20.xml");
-            Assert.assertEquals(1, articleList.size());
-            Article article = articleList.get(0);
-            Assert.assertEquals("Adrian Rapan: Integration vs Acceptance tests", article.getTitle());
             Assert.assertEquals(2, feedList.size());
             Feed feed = feedList.get(0);
             Assert.assertEquals("http://blogs.lmax.com/rss20.xml", feed.getRssUrl());
             Assert.assertEquals("http://blogs.lmax.com/", feed.getUrl());
             Assert.assertEquals("LMAX Blogs", feed.getTitle());
+
+            Map<String, List<Article>> articleMap = starredReader.getArticleMap();
+            Assert.assertEquals(2, articleMap.size());
+            List<Article> articleList = articleMap.get("http://blogs.lmax.com/rss20.xml");
+            Assert.assertEquals(1, articleList.size());
+            Article article = articleList.get(0);
+            Assert.assertEquals("Adrian Rapan: Integration vs Acceptance tests", article.getTitle());
+            Assert.assertNotNull(article.getDescription());
+            Assert.assertTrue(article.getDescription().contains("Recently at LMAX"));
+
+            articleList = articleMap.get("http://martinfowler.com/bliki/bliki.atom");
+            Assert.assertEquals(2, articleList.size());
+            article = articleList.get(0);
+            Assert.assertEquals("An Appropriate Use of Metrics", article.getTitle());
+            Assert.assertNotNull(article.getDescription());
+            Assert.assertTrue(article.getDescription().contains("Like many of us"));
+
         } finally {
             closer.close();
         }

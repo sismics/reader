@@ -1,5 +1,7 @@
 package com.sismics.reader.core.listener.async;
 
+import java.text.MessageFormat;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,9 +31,15 @@ public class ArticleUpdatedAsyncListener {
         if (log.isInfoEnabled()) {
             log.info("Updated article event: " + articlesUpdatedAsyncEvent.toString());
         }
+        long startTime = System.currentTimeMillis();
         
         // Update index
         ArticleDao articleDao = new ArticleDao();
         articleDao.update(articlesUpdatedAsyncEvent.getArticleList());
+
+        long endTime = System.currentTimeMillis();
+        if (log.isInfoEnabled()) {
+            log.info(MessageFormat.format("Index updated in {0}ms", endTime - startTime));
+        }
     }
 }

@@ -112,6 +112,7 @@ public class FeedService extends AbstractScheduledService {
         if (log.isInfoEnabled()) {
             log.info(MessageFormat.format("Synchronizing feed at URL: {0}", url));
         }
+        long startTime = System.currentTimeMillis();
         
         // Parse the feed
         RssReader rssReader = parseFeedOrPage(url, true);
@@ -200,9 +201,11 @@ public class FeedService extends AbstractScheduledService {
             }
             
             // Update indexed article
-            ArticleUpdatedAsyncEvent articleUpdatedAsyncEvent = new ArticleUpdatedAsyncEvent();
-            articleUpdatedAsyncEvent.setArticleList(articleUpdatedList);
-            AppContext.getInstance().getAsyncEventBus().post(articleUpdatedAsyncEvent);
+            if (!articleUpdatedList.isEmpty()) {
+                ArticleUpdatedAsyncEvent articleUpdatedAsyncEvent = new ArticleUpdatedAsyncEvent();
+                articleUpdatedAsyncEvent.setArticleList(articleUpdatedList);
+                AppContext.getInstance().getAsyncEventBus().post(articleUpdatedAsyncEvent);
+            }
         }
         
         // Create new articles
@@ -232,13 +235,17 @@ public class FeedService extends AbstractScheduledService {
                     userArticleDao.create(userArticle);
                 }
             }
-        }
-        
-        // Add new articles to the index
-        ArticleCreatedAsyncEvent articleCreatedAsyncEvent = new ArticleCreatedAsyncEvent();
-        articleCreatedAsyncEvent.setArticleList(Lists.newArrayList(articleMap.values()));
-        AppContext.getInstance().getAsyncEventBus().post(articleCreatedAsyncEvent);
 
+            // Add new articles to the index
+            ArticleCreatedAsyncEvent articleCreatedAsyncEvent = new ArticleCreatedAsyncEvent();
+            articleCreatedAsyncEvent.setArticleList(Lists.newArrayList(articleMap.values()));
+            AppContext.getInstance().getAsyncEventBus().post(articleCreatedAsyncEvent);
+        }
+
+        long endTime = System.currentTimeMillis();
+        if (log.isInfoEnabled()) {
+            log.info(MessageFormat.format("Synchronization done in {0}ms", endTime - startTime));
+        }
         return feed;
     }
     
