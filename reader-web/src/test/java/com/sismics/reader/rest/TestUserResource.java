@@ -103,6 +103,7 @@ public class TestUserResource extends BaseJerseyTest {
         postParams.putSingle("username", " bob ");
         postParams.putSingle("email", " bob@reader.com ");
         postParams.putSingle("password", " 12345678 ");
+        postParams.putSingle("locale", "ko");
         response = userResource.put(ClientResponse.class, postParams);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
 
@@ -162,6 +163,7 @@ public class TestUserResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         Assert.assertEquals("bob@reader.com", json.getString("email"));
+        Assert.assertEquals("ko", json.getString("locale"));
         
         // Test login KO (user not found)
         userResource = resource().path("/user/login");

@@ -61,6 +61,7 @@ public class UserResource extends BaseResource {
      * @param username User's username
      * @param password Password
      * @param email E-Mail
+     * @param localeId Locale ID
      * @return Response
      * @throws JSONException
      */
@@ -69,6 +70,7 @@ public class UserResource extends BaseResource {
     public Response register(
         @FormParam("username") String username,
         @FormParam("password") String password,
+        @FormParam("locale") String localeId,
         @FormParam("email") String email) throws JSONException {
 
         if (!authenticate()) {
@@ -95,8 +97,10 @@ public class UserResource extends BaseResource {
         user.setDisplayUnreadMobile(true);
         user.setCreateDate(new Date());
 
-        // Set the locale from the HTTP headers
-        String localeId = LocaleUtil.getLocaleIdFromAcceptLanguage(request.getHeader("Accept-Language"));
+        if (localeId == null) {
+            // Set the locale from the HTTP headers
+            localeId = LocaleUtil.getLocaleIdFromAcceptLanguage(request.getHeader("Accept-Language"));
+        }
         user.setLocaleId(localeId);
         
         // Create the user
