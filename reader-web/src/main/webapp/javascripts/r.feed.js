@@ -329,7 +329,7 @@ r.feed.buildBumper = function(data) {
   // Build html (note that unread state is irrelevant for searching)
   if (r.feed.context.unread && r.feed.context.url.substring(0, 11) != r.util.url.search.substring(0, 11)) {
     if (data.subscription) {
-      html = '"' + data.subscription.title + '" contains no more unread articles';
+      html = $.t('feed.subscriptionnomoreunreadarticles', {subscription: data.subscription.title});
     } else {
       html = $.t('feed.nomoreunreadarticles');
     }
