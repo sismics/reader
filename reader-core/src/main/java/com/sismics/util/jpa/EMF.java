@@ -83,7 +83,7 @@ public final class EMF {
         String dbFile = dbDirectory.getAbsoluteFile() + File.separator + "reader";
         props.put("hibernate.connection.url", "jdbc:hsqldb:file:" + dbFile + ";hsqldb.write_delay=false");
         props.put("hibernate.connection.username", "sa");
-        props.put("hibernate.hbm2ddl.auto", "validate");
+        props.put("hibernate.hbm2ddl.auto", "none");
         props.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
         props.put("hibernate.show_sql", "false");
         props.put("hibernate.format_sql", "false");
