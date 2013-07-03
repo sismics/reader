@@ -1,5 +1,6 @@
 package com.sismics.reader.core.dao.jpa;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -200,7 +201,9 @@ public class FeedSubscriptionDao {
             parameterMap.put("feedUrl", criteria.getFeedUrl());
         }
         if (criteria.isUnread()) {
-            criteriaList.add("unreadUserArticleCount > 0");
+            criteriaList.add("(select count(a.ART_ID_C) from T_ARTICLE a" +
+            		" left join T_USER_ARTICLE ua on(ua.USA_IDARTICLE_C = a.ART_ID_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null)" +
+            		" where a.ART_IDFEED_C = f.FED_ID_C and a.ART_DELETEDATE_D is null and ua.USA_READDATE_D is null and ua.USA_ID_C is not null) > 0");
         }
         criteriaList.add("fs.FES_DELETEDATE_D is null");
         
@@ -239,7 +242,7 @@ public class FeedSubscriptionDao {
             Boolean folded = (Boolean) o[i++];
             feedSubscriptionDto.setCategoryFolded(folded != null ? folded : false);
             if (criteria.getUserId() != null) {
-                feedSubscriptionDto.setUnreadUserArticleCount((Integer) o[i++]);
+                feedSubscriptionDto.setUnreadUserArticleCount(((BigInteger) o[i++]).intValue());
             }
             feedSubscriptionDtoList.add(feedSubscriptionDto);
         }

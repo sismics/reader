@@ -104,7 +104,9 @@ public class FeedDao {
             parameterMap.put("feedUrl", criteria.getFeedUrl());
         }
         if (criteria.isWithUserSubscription()) {
-            criteriaList.add("feedSubscriptionCount > 0");
+            criteriaList.add("(select count(fs.FES_ID_C)" +
+            		" from T_FEED_SUBSCRIPTION fs" +
+            		" where fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_DELETEDATE_D is null) > 0");
         }
         criteriaList.add("f.FED_DELETEDATE_D is null");
         

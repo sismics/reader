@@ -26,6 +26,7 @@ import org.hibernate.tool.hbm2ddl.ConnectionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Strings;
 import com.google.common.io.CharStreams;
 import com.sismics.util.ResourceUtil;
 
@@ -88,7 +89,7 @@ public abstract class DbOpenHelper {
                     oldVersion = Integer.parseInt(oldVersionStr);
                 }
             } catch (Exception e) {
-                if (e.getMessage().contains("Table not found")) {
+                if (e.getMessage().contains("object not found")) {
                     log.info("Unable to get database version: Table T_CONFIG not found");
                 } else {
                     log.error("Unable to get database version", e);
@@ -172,6 +173,10 @@ public abstract class DbOpenHelper {
         List<String> lines = CharStreams.readLines(new InputStreamReader(inputScript));
         
         for (String sql : lines) {
+            if (Strings.isNullOrEmpty(sql) || sql.startsWith("--")) {
+                continue;
+            }
+            
             String formatted = formatter.format(sql);
             try {
                 log.debug(formatted);
@@ -186,7 +191,7 @@ public abstract class DbOpenHelper {
                 }
                 exceptions.add(e);
                 if (log.isErrorEnabled()) {
-                    log.error("Error executing SQL statement: {0}", sql);
+                    log.error("Error executing SQL statement: {}", sql);
                     log.error(e.getMessage());
                 }
             }

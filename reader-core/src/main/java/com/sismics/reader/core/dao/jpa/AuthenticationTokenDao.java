@@ -67,9 +67,9 @@ public class AuthenticationTokenDao {
      * @throws Exception
      */
     public void deleteOldSessionToken(String userId) {
-        StringBuilder sb = new StringBuilder("delete from T_AUTHENTICATION_TOKEN at ");
-        sb.append(" where at.AUT_IDUSER_C = :userId and at.AUT_LONGLASTED_B = :longLasted");
-        sb.append(" and at.AUT_LASTCONNECTIONDATE_D < :minDate ");
+        StringBuilder sb = new StringBuilder("delete from T_AUTHENTICATION_TOKEN AS ato ");
+        sb.append(" where ato.AUT_IDUSER_C = :userId and ato.AUT_LONGLASTED_B = :longLasted");
+        sb.append(" and ato.AUT_LASTCONNECTIONDATE_D < :minDate ");
 
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         Query q = em.createNativeQuery(sb.toString());
@@ -86,9 +86,9 @@ public class AuthenticationTokenDao {
      * @throws Exception
      */
     public void updateLastConnectionDate(String id) {
-        StringBuilder sb = new StringBuilder("update T_AUTHENTICATION_TOKEN at ");
-        sb.append(" set at.AUT_LASTCONNECTIONDATE_D = :currentDate ");
-        sb.append(" where at.AUT_ID_C = :id");
+        StringBuilder sb = new StringBuilder("update T_AUTHENTICATION_TOKEN ato ");
+        sb.append(" set ato.AUT_LASTCONNECTIONDATE_D = :currentDate ");
+        sb.append(" where ato.AUT_ID_C = :id");
 
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         Query q = em.createNativeQuery(sb.toString());
