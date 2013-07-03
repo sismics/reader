@@ -1,6 +1,7 @@
 package com.sismics.reader.core.dao.file.json;
 
 import java.io.InputStream;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,6 +11,9 @@ import java.util.Map;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
+import org.codehaus.jackson.node.ObjectNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
@@ -21,6 +25,8 @@ import com.sismics.util.JsonValidationUtil;
  * @author jtremeaux 
  */
 public class StarredReader {
+    private static final Logger log = LoggerFactory.getLogger(StarredReader.class);
+
 
     /**
      * Map of List<Article>, indexed by feed URL. 
@@ -105,16 +111,42 @@ public class StarredReader {
                 }
             }
 
+            String description = null;
+            if (itemNode.has("summary")) {
+                ObjectNode summaryNode = (ObjectNode) itemNode.path("summary");
+                if (summaryNode.has("content")) {
+                    JsonValidationUtil.validateJsonString(summaryNode, "content", true);
+                    description = summaryNode.path("content").getTextValue();
+                }
+            }
+            
+            if (itemNode.has("content")) {
+                ObjectNode contentNode = (ObjectNode) itemNode.path("content");
+                if (contentNode.has("content")) {
+                    JsonValidationUtil.validateJsonString(contentNode, "content", true);
+                    description = contentNode.path("content").getTextValue();
+                }
+            }
+            
+            if (description == null) {
+                if (log.isInfoEnabled()) {
+                    log.info(MessageFormat.format("Content not found for starred article: {0}", title));
+                }
+                continue;
+            }
+
             List<Article> articleList = articleMap.get(feedRssUrl);
             if (articleList == null) {
                 articleList = new ArrayList<Article>();
                 articleMap.put(feedRssUrl, articleList);
             }
             
+            
             Article article = new Article();
             article.setTitle(title);
             article.setPublicationDate(new Date(publicationDate));
             article.setUrl(url);
+            article.setDescription(description);
             articleList.add(article);
         }
     }
