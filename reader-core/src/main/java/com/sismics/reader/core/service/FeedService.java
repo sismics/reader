@@ -112,6 +112,7 @@ public class FeedService extends AbstractScheduledService {
         if (log.isInfoEnabled()) {
             log.info(MessageFormat.format("Synchronizing feed at URL: {0}", url));
         }
+        long startTime = System.currentTimeMillis();
         
         // Parse the feed
         RssReader rssReader = parseFeedOrPage(url, true);
@@ -241,6 +242,10 @@ public class FeedService extends AbstractScheduledService {
             AppContext.getInstance().getAsyncEventBus().post(articleCreatedAsyncEvent);
         }
 
+        long endTime = System.currentTimeMillis();
+        if (log.isInfoEnabled()) {
+            log.info(MessageFormat.format("Synchronization done in {0}ms", endTime - startTime));
+        }
         return feed;
     }
     
