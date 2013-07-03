@@ -200,9 +200,11 @@ public class FeedService extends AbstractScheduledService {
             }
             
             // Update indexed article
-            ArticleUpdatedAsyncEvent articleUpdatedAsyncEvent = new ArticleUpdatedAsyncEvent();
-            articleUpdatedAsyncEvent.setArticleList(articleUpdatedList);
-            AppContext.getInstance().getAsyncEventBus().post(articleUpdatedAsyncEvent);
+            if (!articleUpdatedList.isEmpty()) {
+                ArticleUpdatedAsyncEvent articleUpdatedAsyncEvent = new ArticleUpdatedAsyncEvent();
+                articleUpdatedAsyncEvent.setArticleList(articleUpdatedList);
+                AppContext.getInstance().getAsyncEventBus().post(articleUpdatedAsyncEvent);
+            }
         }
         
         // Create new articles
@@ -232,12 +234,12 @@ public class FeedService extends AbstractScheduledService {
                     userArticleDao.create(userArticle);
                 }
             }
+
+            // Add new articles to the index
+            ArticleCreatedAsyncEvent articleCreatedAsyncEvent = new ArticleCreatedAsyncEvent();
+            articleCreatedAsyncEvent.setArticleList(Lists.newArrayList(articleMap.values()));
+            AppContext.getInstance().getAsyncEventBus().post(articleCreatedAsyncEvent);
         }
-        
-        // Add new articles to the index
-        ArticleCreatedAsyncEvent articleCreatedAsyncEvent = new ArticleCreatedAsyncEvent();
-        articleCreatedAsyncEvent.setArticleList(Lists.newArrayList(articleMap.values()));
-        AppContext.getInstance().getAsyncEventBus().post(articleCreatedAsyncEvent);
 
         return feed;
     }
