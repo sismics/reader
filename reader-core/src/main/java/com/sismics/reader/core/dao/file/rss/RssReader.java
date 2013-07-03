@@ -240,13 +240,16 @@ public class RssReader extends DefaultHandler {
             String enclosureUrl = StringUtils.trim(attributes.getValue("url"));
             if (!StringUtils.isBlank(enclosureUrl)) {
                 article.setEnclosureUrl(enclosureUrl);
-                Integer enclosureLength = null;
-                try {
-                    enclosureLength = Integer.valueOf(attributes.getValue("length"));
-                } catch (Exception e) {
-                    log.error("Error parsing enclosure length", e);
+                String length = attributes.getValue("length");
+                if (!StringUtils.isBlank(length)) {
+                    Integer enclosureLength = null;
+                    try {
+                        enclosureLength = Integer.valueOf(length);
+                    } catch (Exception e) {
+                        // NOP
+                    }
+                    article.setEnclosureLength(enclosureLength);
                 }
-                article.setEnclosureLength(enclosureLength);
                 article.setEnclosureType(StringUtils.trim(attributes.getValue("type")));
             }
         } else if (rss && currentElement == Element.ITEM && "pubDate".equalsIgnoreCase(localName)) {
