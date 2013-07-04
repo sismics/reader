@@ -692,7 +692,7 @@ public class SubscriptionResource extends BaseResource {
             Element subscriptionOutlineElement = opmlDocument.createElement("outline");
             subscriptionOutlineElement.setAttribute("type", "rss");
             subscriptionOutlineElement.setAttribute("title", feedSubscription.getFeedSubscriptionTitle());
-            subscriptionOutlineElement.setAttribute("text", feedSubscription.getCategoryName());
+            subscriptionOutlineElement.setAttribute("text", feedSubscription.getFeedSubscriptionTitle());
             subscriptionOutlineElement.setAttribute("xmlUrl", feedSubscription.getFeedRssUrl());
             subscriptionOutlineElement.setAttribute("htmlUrl", feedSubscription.getFeedUrl());
             categoryOutlineElement.appendChild(subscriptionOutlineElement);

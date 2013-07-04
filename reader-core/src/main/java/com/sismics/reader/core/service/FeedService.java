@@ -84,6 +84,7 @@ public class FeedService extends AbstractScheduledService {
                     for (FeedDto feed : feedList) {
                         try {
                             synchronize(feed.getRssUrl());
+                            TransactionUtil.commit();
                         } catch (Exception e) {
                             log.error(MessageFormat.format("Error synchronizing feed at URL: {0}", feed.getRssUrl()), e);
                         }
