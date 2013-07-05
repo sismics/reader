@@ -98,7 +98,7 @@ public class StarredReader {
             String title = itemNode.path("title").getTextValue();
             
             JsonValidationUtil.validateJsonNumber(itemNode, "published", true);
-            long publicationDate = itemNode.path("published").getLongValue();
+            long publicationDate = itemNode.path("published").getLongValue() * 1000;
 
             JsonValidationUtil.validateJsonArray(itemNode, "alternate", false);
             String url = null;
