@@ -70,7 +70,8 @@ public class ArticleSanitizer {
             "http(s)?://(www.)?youtube.com/embed/.+|" + 
             "http://player.vimeo.com/video/.+|" +
             "http://www.dailymotion.com/embed/.+|" +
-            "http://slashdot.org/.+");
+            "http://slashdot.org/.+|" +
+            "http://www.viddler.com/.+");
 
     private AttributePolicy IMG_SRC_POLICY = new AttributePolicy() {
         @Override
