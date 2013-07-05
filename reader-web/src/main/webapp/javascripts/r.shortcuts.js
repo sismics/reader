@@ -11,9 +11,13 @@ r.shortcuts.init = function() {
     
     var active = false;
     
+    console.log(e.which);
+    
     switch (e.which) {
     case 74: // J key: next article
     case 75: // K key: previous article
+    case 78: // N key : next article
+    case 80: // P key : previous article
       var container = $('#feed-container');
       active = true;
       if (container.is(':visible')) {
@@ -22,7 +26,7 @@ r.shortcuts.init = function() {
         
         // Find the new selected item
         if (selectedItem.length == 1) {
-          if (e.which == 74) {
+          if (e.which == 74 || e.which == 78) {
             newItem = selectedItem.next('.feed-item');
           } else {
             newItem = selectedItem.prev('.feed-item');
