@@ -142,6 +142,6 @@ public class TestArticleSanitizer {
         ArticleSanitizer articleSanitizer = new ArticleSanitizer(feed.getUrl());
         String html = articleSanitizer.sanitize(article.getDescription());
         Assert.assertTrue(html.contains("Higgs data and the cosmic microwave background map from the Planck mission"));
-        Assert.assertFalse(html.contains("iframe"));
+        Assert.assertTrue(html.contains("<iframe src=\"http://slashdot.org/slashdot-it.pl?op&#61;discuss&amp;id&#61;3658423&amp;smallembed&#61;1\" style=\"height: 300px; width: 100%;\">"));
     }
 }

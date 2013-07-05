@@ -63,10 +63,14 @@ public class ArticleSanitizer {
         }
     };
 
-    private static final Pattern VIDEO_PATTERN = Pattern.compile(
+    /**
+     * Allowed iframe src.
+     */
+    private static final Pattern IFRAME_SRC_PATTERN = Pattern.compile(
             "http(s)?://(www.)?youtube.com/embed/.+|" + 
             "http://player.vimeo.com/video/.+|" +
-            "http://www.dailymotion.com/embed/.+");
+            "http://www.dailymotion.com/embed/.+|" +
+            "http://slashdot.org/.+");
 
     private AttributePolicy IMG_SRC_POLICY = new AttributePolicy() {
         @Override
@@ -100,17 +104,34 @@ public class ArticleSanitizer {
         // Allow iframes for embedded videos
         PolicyFactory videoPolicyFactory = new HtmlPolicyBuilder()
                 .allowStandardUrlProtocols()
-                .allowAttributes("src", "height", "width")
+                .allowAttributes("src", "height", "width", "style")
                 .matching(new AttributePolicy() {
-                    
                     @Override
                     public @Nullable
                     String apply(String elementName, String attributeName, String value) {
                         if ("height".equals(attributeName) || "width".equals(attributeName)) {
                             return value;
                         }
-                        if ("src".equals(attributeName) && VIDEO_PATTERN.matcher(value).matches()) {
+                        
+                        if ("src".equals(attributeName) && IFRAME_SRC_PATTERN.matcher(value).matches()) {
                             return value;
+                        }
+                        
+                        // Sanitize CSS
+                        if ("style".equals(attributeName)) {
+                            if (value == null) {
+                                return value;
+                            }
+                            String[] propertyList = value.split(";");
+                            StringBuilder sb = new StringBuilder();
+                            for (String property : propertyList) {
+                                String[] subProperty = property.split(":");
+                                if (subProperty.length != 2 || !subProperty[0].trim().equals("width") && !subProperty[0].trim().equals("height")) {
+                                    continue;
+                                }
+                                sb.append(subProperty[0] + ":" + subProperty[1] + ";");
+                            }
+                            return sb.toString();
                         }
                         return null;
                     }
