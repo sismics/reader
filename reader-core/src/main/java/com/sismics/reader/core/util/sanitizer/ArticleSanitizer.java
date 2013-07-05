@@ -126,7 +126,8 @@ public class ArticleSanitizer {
                 .allowElements("img")
                 .allowAttributes("alt").onElements("img")
                 .allowAttributes("src").matching(IMG_SRC_POLICY).onElements("img")
-                .allowAttributes("border", "height", "width").matching(INTEGER_POLICY).onElements("img")
+                .allowAttributes("border", "height", "width", "hspace", "vspace").matching(INTEGER_POLICY).onElements("img")
+                .allowAttributes("align").onElements("img")
                 .toFactory();
 
         PolicyFactory policy = blocksPolicyFactory

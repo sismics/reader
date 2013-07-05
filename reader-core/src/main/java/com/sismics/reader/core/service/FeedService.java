@@ -176,6 +176,7 @@ public class FeedService extends AbstractScheduledService {
         ArticleDao articleDao = new ArticleDao();
         if (!guidIn.isEmpty()) {
             ArticleCriteria articleCriteria = new ArticleCriteria();
+            articleCriteria.setFeedId(feed.getId());
             articleCriteria.setGuidIn(guidIn);
             List<ArticleDto> currentArticleDtoList = articleDao.findByCriteria(articleCriteria);
             List<Article> articleUpdatedList = new ArrayList<Article>();

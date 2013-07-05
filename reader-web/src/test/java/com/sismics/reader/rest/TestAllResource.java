@@ -188,4 +188,59 @@ public class TestAllResource extends BaseJerseyTest {
         Assert.assertEquals(8, total3);
         Assert.assertEquals("Imprimer son arme sera bientôt possible", articles3.optJSONObject(0).getString("title"));
     }
+    
+    @Test
+    public void testMultipleUsers() throws JSONException {
+        // Create user multiple1
+        clientUtil.createUser("multiple1");
+        String multiple1AuthToken = clientUtil.login("multiple1");
+
+        // Subscribe to korben.info
+        WebResource subscriptionResource = resource().path("/subscription");
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(multiple1AuthToken));
+        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
+        postParams.add("url", "http://localhost:9997/http/feeds/korben.xml");
+        ClientResponse response = subscriptionResource.put(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        JSONObject json = response.getEntity(JSONObject.class);
+        String subscription1Id = json.optString("id");
+        Assert.assertNotNull(subscription1Id);
+        
+        // Check the all resource
+        WebResource allResource = resource().path("/all").queryParam("unread", "true");
+        allResource.addFilter(new CookieAuthenticationFilter(multiple1AuthToken));
+        response = allResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        JSONArray articles = json.optJSONArray("articles");
+        Assert.assertNotNull(articles);
+        Assert.assertEquals(10, articles.length());
+        Assert.assertEquals(10, json.optInt("total"));
+        
+        // Create user multiple2
+        clientUtil.createUser("multiple2");
+        String multiple2AuthToken = clientUtil.login("multiple2");
+
+        // Subscribe to korben.info (alternative URL)
+        subscriptionResource = resource().path("/subscription");
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(multiple2AuthToken));
+        postParams = new MultivaluedMapImpl();
+        postParams.add("url", "http://localhost:9997/http/feeds/korben2.xml");
+        response = subscriptionResource.put(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        subscription1Id = json.optString("id");
+        Assert.assertNotNull(subscription1Id);
+        
+        // Check the all resource
+        allResource = resource().path("/all").queryParam("unread", "true");
+        allResource.addFilter(new CookieAuthenticationFilter(multiple2AuthToken));
+        response = allResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        articles = json.optJSONArray("articles");
+        Assert.assertNotNull(articles);
+        Assert.assertEquals(10, articles.length());
+        Assert.assertEquals(10, json.optInt("total"));
+    }
 }

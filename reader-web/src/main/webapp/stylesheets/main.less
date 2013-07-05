@@ -543,6 +543,16 @@
       .content {
         padding-left: 14px;
         padding-right: 14px;
+        
+        .feed-item-description {
+          &:after {
+				    clear: both;
+				    display: block;
+				    content: " ";
+				    visibility: hidden;
+				    height: 0;
+				  }
+        }
       }
       
       .footer {
