@@ -26,6 +26,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.google.common.collect.ImmutableList;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
+import com.sismics.reader.core.util.StreamUtil;
 import com.sismics.util.DateUtil;
 
 /**
@@ -170,7 +171,7 @@ public class RssReader extends DefaultHandler {
 
         // Pass a character stream to the parser for it to pick-up the correct encoding.
         // See http://stackoverflow.com/questions/3482494/
-        Reader reader = new UnicodeReader(is, "UTF-8");
+        Reader reader = new UnicodeReader(StreamUtil.detectGzip(is), "UTF-8");
         InputSource source = new InputSource(reader);
         
         try {

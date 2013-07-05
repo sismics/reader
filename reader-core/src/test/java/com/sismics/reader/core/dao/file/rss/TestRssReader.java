@@ -17,6 +17,29 @@ import com.sismics.reader.core.model.jpa.Feed;
  */
 public class TestRssReader {
     @Test
+    public void rssReaderGizmodoTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_gizmodo.gzip");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("Gizmodo", feed.getTitle());
+        Assert.assertEquals("http://gizmodo.com", feed.getUrl());
+        Assert.assertEquals("en", feed.getLanguage());
+        Assert.assertEquals("The Gadget Guide", feed.getDescription());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(25, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("IKEA Uses a Staggering One Percent of the World's Wood", article.getTitle());
+        Assert.assertEquals("http://gizmodo.com/ikea-uses-a-staggering-one-percent-of-the-worlds-wood-677540490", article.getUrl());
+        Assert.assertEquals("677540490", article.getGuid());
+        Assert.assertNotNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        Assert.assertTrue(article.getDescription().contains("Plenty of critics would argue that IKEA is unnecessarily"));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
+    
+    @Test
     public void rssReaderApodTest() throws Exception {
         InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_apod.xml");
         RssReader reader = new RssReader();
