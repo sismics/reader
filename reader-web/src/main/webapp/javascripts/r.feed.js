@@ -280,6 +280,8 @@ r.feed.load = function(next) {
       if (!next) {
         // Scrolling to top
         r.feed.scrollTop(0);
+        // Focus article list
+        $('#feed-container').trigger('focus');
       }
       
       r.feed.context.loading = false;
