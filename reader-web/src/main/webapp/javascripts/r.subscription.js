@@ -171,7 +171,7 @@ r.subscription.buildSubscriptionItem = function(subscription) {
   var unread = '<span class="unread-count" ' + (subscription.unread_count == 0 ? 'style="display: none;"' : '') + '>&nbsp;(<span class="count">' + subscription.unread_count + '</span>)</span>';
   
   var title = r.util.escape(subscription.title);
-  return '<li id="subscription-' + subscription.id + '" data-subscription-id="' + subscription.id + '" ' +
+  return '<li id="subscription-' + subscription.id + '" data-subscription-id="' + subscription.id + '" data-subscription-url="' + subscription.url + '" ' +
     'class="subscription' + (r.feed.context.subscriptionId == subscription.id ? ' active' : '') + (subscription.unread_count > 0 ? ' unread' : '') + '">' +
     '<a href="#/feed/subscription/' + subscription.id + '" title="' + title + '"> <img src="' + r.util.url.subscription_favicon.replace('{id}', subscription.id) + '" /> ' +
     '<span class="title">' + title + '</span>' + unread + '</a>' +
@@ -291,6 +291,8 @@ r.subscription.initEditing = function() {
     var content = $('#template .qtip-subscription-edit').clone();
     var titleInput = content.find('.subscription-edit-title-input');
     titleInput.val(parent.find('> a .title').text().trim());
+    console.log(parent);
+    content.find('.subscription-edit-url').html('<strong>URL:</strong> ' + parent.attr('data-subscription-url'));
     
     // Calling API delete
     $('.subscription-edit-delete-button', content).click(function() {

@@ -149,6 +149,7 @@ public class SubscriptionResource extends BaseResource {
             JSONObject subscription = new JSONObject();
             subscription.put("id", feedSubscription.getId());
             subscription.put("title", feedSubscription.getFeedSubscriptionTitle());
+            subscription.put("url", feedSubscription.getFeedRssUrl());
             subscription.put("unread_count", feedSubscription.getUnreadUserArticleCount());
             JsonUtil.append(categoryJson, "subscriptions", subscription);
             

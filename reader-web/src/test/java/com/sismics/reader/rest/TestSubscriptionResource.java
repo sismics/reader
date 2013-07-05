@@ -92,6 +92,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals(1, subscriptions.length());
         JSONObject subscription = subscriptions.getJSONObject(0);
         Assert.assertEquals(10, subscription.getInt("unread_count"));
+        Assert.assertEquals("http://localhost:9997/http/feeds/korben.xml", subscription.getString("url"));
         
         // Check the subscription data
         subscriptionResource = resource().path("/subscription/" + subscription1Id);
