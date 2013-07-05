@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Instant;
@@ -187,8 +188,8 @@ public class FeedService extends AbstractScheduledService {
                 article.setId(currentArticle.getId());
                 article.setFeedId(feed.getId());
                 article.setUrl(newArticle.getUrl());
-                article.setTitle(TextSanitizer.sanitize(newArticle.getTitle()));
-                article.setCreator(newArticle.getCreator());
+                article.setTitle(StringUtils.abbreviate(TextSanitizer.sanitize(newArticle.getTitle()), 4000));
+                article.setCreator(StringUtils.abbreviate(newArticle.getCreator(), 200));
                 article.setDescription(sanitizer.sanitize(newArticle.getDescription()));
                 article.setCommentUrl(newArticle.getCommentUrl());
                 article.setCommentCount(newArticle.getCommentCount());
@@ -222,7 +223,8 @@ public class FeedService extends AbstractScheduledService {
             for (Article article : articleMap.values()) {
                 // Create the new article
                 article.setFeedId(feed.getId());
-                article.setTitle(TextSanitizer.sanitize(article.getTitle()));
+                article.setTitle(StringUtils.abbreviate(TextSanitizer.sanitize(article.getTitle()), 4000));
+                article.setCreator(StringUtils.abbreviate(article.getCreator(), 200));
                 article.setDescription(sanitizer.sanitize(article.getDescription()));
                 if (article.getPublicationDate() == null) {
                     article.setPublicationDate(new Date());
