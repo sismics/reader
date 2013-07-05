@@ -90,3 +90,16 @@ r.util.buildLoader = function() {
 r.util.escape = function(str) {
   return $('<div />').text(str).html();
 };
+
+/**
+ * Redraw an element (WebKit workaround).
+ */
+jQuery.fn.redraw = function() {
+  var _this = this;
+  setTimeout(function() {
+    _this.hide(0, function() {
+      $(this).show();
+    });
+  }, 10);
+  return this;
+};

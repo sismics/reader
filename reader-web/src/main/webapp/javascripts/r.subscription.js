@@ -133,8 +133,10 @@ r.subscription.update = function() {
         });
         html += '&nbsp;</ul>';
         
-        // Updating HTML
-        $('#subscription-list').html(html);
+        // Updating HTML and force redraw
+        $('#subscription-list')
+          .html(html)
+          .redraw();
       } else {
         // Empty placeholder
         var html = '<p>' + $.t('subscription.empty') + '</p>';
