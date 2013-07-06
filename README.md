@@ -14,6 +14,7 @@ Features
 - Supports RSS and Atom standards
 - Organize your feeds into categories and keep track of your favorite articles
 - Supports Web based and mobile user interfaces
+- Keyboard shortcuts
 - RESTful Web API
 - Full text search
 - OPML import / export
