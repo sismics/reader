@@ -11,8 +11,6 @@ r.shortcuts.init = function() {
     
     var active = false;
     
-    console.log(e.which);
-    
     switch (e.which) {
     case 74: // J key: next article
     case 75: // K key: previous article
