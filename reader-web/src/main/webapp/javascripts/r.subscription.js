@@ -291,7 +291,6 @@ r.subscription.initEditing = function() {
     var content = $('#template .qtip-subscription-edit').clone();
     var titleInput = content.find('.subscription-edit-title-input');
     titleInput.val(parent.find('> a .title').text().trim());
-    console.log(parent);
     content.find('.subscription-edit-url').html('<strong>URL:</strong> ' + parent.attr('data-subscription-url'));
     
     // Calling API delete

@@ -162,35 +162,37 @@ r.feed.init = function() {
  * Feed scroll listener.
  */
 r.feed.scroll = function() {
-  var scroll = r.main.mobile ? $(window).scrollTop() : $('#feed-container').scrollTop();
-  var height = r.main.mobile ? $(window).height() / 2 : $('#feed-container').height() / 2;
+  var container = $('#feed-container');
+  var scroll = r.main.mobile ? $(window).scrollTop() : container.scrollTop();
+  var height = r.main.mobile ? $(window).height() / 2 : container.height() / 2;
+  var feedItemList = container.find('.feed-item');
   
   // Selected item
   var selected = null;
   var selectedTopAbs = 0;
-  $('#feed-container .feed-item')
-  .removeClass('selected')
-  .filter(function() {
-    return r.article.top($(this), scroll) < height;
-  })
-  .each(function() {
-    var topAbs = Math.abs($(this).data('top'));
-    if (selected == null || selectedTopAbs > topAbs) {
-      selected = $(this);
-      selectedTopAbs = topAbs;
-    }
-  });
+  feedItemList
+    .removeClass('selected')
+    .filter(function() {
+      return r.article.top($(this), scroll) < height;
+    })
+    .each(function() {
+      var topAbs = Math.abs($(this).data('top'));
+      if (selected == null || selectedTopAbs > topAbs) {
+        selected = $(this);
+        selectedTopAbs = topAbs;
+      }
+    });
   
   if (selected != null) {
     selected.addClass('selected');
     
-    // Don't mark as read folded articles in list mode
-    if (!selected.hasClass('read')
-        && !selected.hasClass('forceunread')
-        && (!selected.parent().hasClass('list') || (selected.parent().hasClass('list') && selected.is('.unfolded')))) {
-      // Auto-mark as read
-      r.article.read(selected, true);
-    }
+    // Mark as read on scroll
+    var itemsToRead = feedItemList.slice(0, selected.index() + 1);
+    if (container.hasClass('list')) itemsToRead = itemsToRead.filter('.unfolded');
+    itemsToRead = itemsToRead.not('.read, .forceunread');
+    itemsToRead.each(function() {
+      r.article.read($(this), true);
+    });
   }
   
   // Paging
