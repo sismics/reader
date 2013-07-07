@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- generator="FeedCreator 1.7.2" -->
+<rdf:RDF
+    xmlns="http://purl.org/rss/1.0/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel rdf:about="http://theoatmeal.com/feed/rss">
+        <title>The Oatmeal - Comics, Quizzes, &amp; Stories</title>
+        <description>The oatmeal tastes better than stale skittles found under the couch cushions</description>
+        <link>http://theoatmeal.com/</link>
+       <dc:date>2013-07-07T09:06:29+01:00</dc:date>
+        <items>
+            <rdf:Seq>
+                <rdf:li rdf:resource="http://theoatmeal.com/comics/wwz"/>
+                <rdf:li rdf:resource="http://theoatmeal.com/blog/arkyd"/>
+                <rdf:li rdf:resource="http://theoatmeal.com/comics/fathers_day"/>
+                <rdf:li rdf:resource="http://theoatmeal.com/blog/million_likes_photos"/>
+                <rdf:li rdf:resource="http://theoatmeal.com/horrible4"/>
+                <rdf:li rdf:resource="http://theoatmeal.com/comics/bacon_flavor"/>
+                <rdf:li rdf:resource="http://theoatmeal.com/comics/womancat"/>
+                <rdf:li rdf:resource="http://theoatmeal.com/comics/manbat"/>
+                <rdf:li rdf:resource="http://theoatmeal.com/blog/bears"/>
+            </rdf:Seq>
+        </items>
+    </channel>
+    <item rdf:about="http://theoatmeal.com/comics/wwz">
+        <dc:format>text/html</dc:format>
+        <dc:date>2013-06-24T17:27:56+01:00</dc:date>
+        <dc:source>http://theoatmeal.com</dc:source>
+        <dc:creator>Matthew Inman</dc:creator>
+        <title>What the World War Z movie has in common with the book</title>
+        <link>http://theoatmeal.com/comics/wwz</link>
+        <description>&lt;a href=&quot;http://theoatmeal.com/comics/wwz&quot;&gt;&lt;img src=&quot;http://s3.amazonaws.com/theoatmeal-img/thumbnails/wwz.png&quot; alt=&quot;What the World War Z movie has in common with the book&quot; class=&quot;border0&quot; /&gt;&lt;/a&gt;&lt;p&gt;What the World War Z movie has in common with the book&lt;/p&gt;&lt;a href=&quot;http://theoatmeal.com/comics/wwz&quot;&gt;View&lt;/a&gt;</description>
+    </item>
+    <item rdf:about="http://theoatmeal.com/blog/arkyd">
+        <dc:format>text/html</dc:format>
+        <dc:date>2013-06-20T00:10:20+01:00</dc:date>
+        <dc:source>http://theoatmeal.com</dc:source>
+        <dc:creator>Matthew Inman</dc:creator>
+        <title>Get your photo in space for 25 bucks</title>
+        <link>http://theoatmeal.com/blog/arkyd</link>
+        <description>&lt;a href=&quot;http://theoatmeal.com/blog/arkyd&quot;&gt;&lt;img src=&quot;http://s3.amazonaws.com/theoatmeal-img/thumbnails/arkyd.png&quot; alt=&quot;Get your photo in space for 25 bucks&quot; class=&quot;border0&quot; /&gt;&lt;/a&gt;&lt;p&gt;ARKYD.&lt;/p&gt;&lt;a href=&quot;http://theoatmeal.com/blog/arkyd&quot;&gt;View&lt;/a&gt;</description>
+    </item>
+    <item rdf:about="http://theoatmeal.com/comics/fathers_day">
+        <dc:format>text/html</dc:format>
+        <dc:date>2013-06-16T21:33:14+01:00</dc:date>
+        <dc:source>http://theoatmeal.com</dc:source>
+        <dc:creator>Matthew Inman</dc:creator>
+        <title>When one has not had a good father, one must create one.</title>
+        <link>http://theoatmeal.com/comics/fathers_day</link>
+        <description>&lt;a href=&quot;http://theoatmeal.com/comics/fathers_day&quot;&gt;&lt;img src=&quot;http://s3.amazonaws.com/theoatmeal-img/thumbnails/fathers_day.png&quot; alt=&quot;When one has not had a good father, one must create one.&quot; class=&quot;border0&quot; /&gt;&lt;/a&gt;&lt;p&gt;Some wisdom from Friedrich Nietzsche.&lt;/p&gt;&lt;a href=&quot;http://theoatmeal.com/comics/fathers_day&quot;&gt;View&lt;/a&gt;</description>
+    </item>
+    <item rdf:about="http://theoatmeal.com/blog/million_likes_photos">
+        <dc:format>text/html</dc:format>
+        <dc:date>2013-06-14T18:59:54+01:00</dc:date>
+        <dc:source>http://theoatmeal.com</dc:source>
+        <dc:creator>Matthew Inman</dc:creator>
+        <title>I illustrated some photos from Facebook</title>
+        <link>http://theoatmeal.com/blog/million_likes_photos</link>
+        <description>&lt;a href=&quot;http://theoatmeal.com/blog/million_likes_photos&quot;&gt;&lt;img src=&quot;http://s3.amazonaws.com/theoatmeal-img/thumbnails/million_likes_photos.png&quot; alt=&quot;I illustrated some photos from Facebook&quot; class=&quot;border0&quot; /&gt;&lt;/a&gt;&lt;p&gt;I took photos that people posted on Facebook and drew them. &lt;/p&gt;&lt;a href=&quot;http://theoatmeal.com/blog/million_likes_photos&quot;&gt;View&lt;/a&gt;</description>
+    </item>
+    <item rdf:about="http://theoatmeal.com/horrible4">
+        <dc:format>text/html</dc:format>
+        <dc:date>2013-06-10T18:00:05+01:00</dc:date>
+        <dc:source>http://theoatmeal.com</dc:source>
+        <dc:creator>Matthew Inman</dc:creator>
+        <title>Horrible Cards 4</title>
+        <link>http://theoatmeal.com/horrible4</link>
+        <description>&lt;a href=&quot;http://theoatmeal.com/horrible4&quot;&gt;&lt;img src=&quot;http://s3.amazonaws.com/theoatmeal-img/thumbnails/horrible4.png&quot; alt=&quot;Horrible Cards 4&quot; class=&quot;border0&quot; /&gt;&lt;/a&gt;&lt;p&gt;I created some new greeting cards.&lt;/p&gt;&lt;a href=&quot;http://theoatmeal.com/horrible4&quot;&gt;View&lt;/a&gt;</description>
+    </item>
+    <item rdf:about="http://theoatmeal.com/comics/bacon_flavor">
+        <dc:format>text/html</dc:format>
+        <dc:date>2013-06-06T19:39:13+01:00</dc:date>
+        <dc:source>http://theoatmeal.com</dc:source>
+        <dc:creator>Matthew Inman</dc:creator>
+        <title>Food for thought</title>
+        <link>http://theoatmeal.com/comics/bacon_flavor</link>
+        <description>&lt;a href=&quot;http://theoatmeal.com/comics/bacon_flavor&quot;&gt;&lt;img src=&quot;http://s3.amazonaws.com/theoatmeal-img/thumbnails/bacon_flavor.png&quot; alt=&quot;Food for thought&quot; class=&quot;border0&quot; /&gt;&lt;/a&gt;&lt;p&gt;A short comic about pigs and bacon. &lt;/p&gt;&lt;a href=&quot;http://theoatmeal.com/comics/bacon_flavor&quot;&gt;View&lt;/a&gt;</description>
+    </item>
+    <item rdf:about="http://theoatmeal.com/comics/womancat">
+        <dc:format>text/html</dc:format>
+        <dc:date>2013-06-03T23:28:00+01:00</dc:date>
+        <dc:source>http://theoatmeal.com</dc:source>
+        <dc:creator>Matthew Inman</dc:creator>
+        <title>Womancat</title>
+        <link>http://theoatmeal.com/comics/womancat</link>
+        <description>&lt;a href=&quot;http://theoatmeal.com/comics/womancat&quot;&gt;&lt;img src=&quot;http://s3.amazonaws.com/theoatmeal-img/thumbnails/womancat.png&quot; alt=&quot;Womancat&quot; class=&quot;border0&quot; /&gt;&lt;/a&gt;&lt;p&gt;Womancat.&lt;/p&gt;&lt;a href=&quot;http://theoatmeal.com/comics/womancat&quot;&gt;View&lt;/a&gt;</description>
+    </item>
+    <item rdf:about="http://theoatmeal.com/comics/manbat">
+        <dc:format>text/html</dc:format>
+        <dc:date>2013-05-28T21:25:00+01:00</dc:date>
+        <dc:source>http://theoatmeal.com</dc:source>
+        <dc:creator>Matthew Inman</dc:creator>
+        <title>Manbat</title>
+        <link>http://theoatmeal.com/comics/manbat</link>
+        <description>&lt;a href=&quot;http://theoatmeal.com/comics/manbat&quot;&gt;&lt;img src=&quot;http://s3.amazonaws.com/theoatmeal-img/thumbnails/manbat.png&quot; alt=&quot;Manbat&quot; class=&quot;border0&quot; /&gt;&lt;/a&gt;&lt;p&gt;Manbat.&lt;/p&gt;&lt;a href=&quot;http://theoatmeal.com/comics/manbat&quot;&gt;View&lt;/a&gt;</description>
+    </item>
+    <item rdf:about="http://theoatmeal.com/blog/bears">
+        <dc:format>text/html</dc:format>
+        <dc:date>2013-05-28T16:50:00+01:00</dc:date>
+        <dc:source>http://theoatmeal.com</dc:source>
+        <dc:creator>Matthew Inman</dc:creator>
+        <title>I got to pet some bears last week</title>
+        <link>http://theoatmeal.com/blog/bears</link>
+        <description>&lt;a href=&quot;http://theoatmeal.com/blog/bears&quot;&gt;&lt;img src=&quot;http://s3.amazonaws.com/theoatmeal-img/thumbnails/bears.png&quot; alt=&quot;I got to pet some bears last week&quot; class=&quot;border0&quot; /&gt;&lt;/a&gt;&lt;p&gt;I got to pet, poke, and prod a couple of sedated black bears last week. &lt;/p&gt;&lt;a href=&quot;http://theoatmeal.com/blog/bears&quot;&gt;View&lt;/a&gt;</description>
+    </item>
+</rdf:RDF>

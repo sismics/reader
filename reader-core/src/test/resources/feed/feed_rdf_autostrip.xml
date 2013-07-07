@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+  xmlns:admin="http://webns.net/mvcb/"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns="http://purl.org/rss/1.0/">
+
+<channel rdf:about="http://autostrip.fr/index.php">
+  <title>autostrip</title>
+  <description><![CDATA[]]></description>
+  <link>http://autostrip.fr/index.php</link>
+  <dc:language>fr</dc:language>
+  <dc:creator></dc:creator>
+  <dc:rights></dc:rights>
+  <dc:date>2013-06-09T00:29:11+02:00</dc:date>
+  <admin:generatorAgent rdf:resource="http://www.dotclear.net/" />
+  
+  <sy:updatePeriod>daily</sy:updatePeriod>
+  <sy:updateFrequency>1</sy:updateFrequency>
+  <sy:updateBase>2013-06-09T00:29:11+02:00</sy:updateBase>
+  
+  <items>
+  <rdf:Seq>
+    <rdf:li rdf:resource="http://autostrip.fr/index.php?2013/06/09/214-bill-le-cocker-coquin" />
+  <rdf:li rdf:resource="http://autostrip.fr/index.php?2013/05/16/213-un-poisson-a-fish" />
+  <rdf:li rdf:resource="http://autostrip.fr/index.php?2013/05/11/212-tous-a-villemomble" />
+  <rdf:li rdf:resource="http://autostrip.fr/index.php?2013/04/20/211-mon-nouvel-album" />
+  <rdf:li rdf:resource="http://autostrip.fr/index.php?2013/03/23/210-vdm" />
+  <rdf:li rdf:resource="http://autostrip.fr/index.php?2013/02/26/209-plein-de-trucs" />
+  <rdf:li rdf:resource="http://autostrip.fr/index.php?2012/12/24/208-happy-hour-de-noel" />
+  <rdf:li rdf:resource="http://autostrip.fr/index.php?2012/12/20/207-la-fin-du-monde-donc" />
+  <rdf:li rdf:resource="http://autostrip.fr/index.php?2012/10/17/206-une-separation" />
+  <rdf:li rdf:resource="http://autostrip.fr/index.php?2012/09/21/205-bien-preparer-son-festiblog" />
+  </rdf:Seq>
+  </items>
+</channel>
+
+<item rdf:about="http://autostrip.fr/index.php?2013/06/09/214-bill-le-cocker-coquin">
+  <title>Bill, le cocker coquin...</title>
+  <link>http://autostrip.fr/index.php?2013/06/09/214-bill-le-cocker-coquin</link>
+  <dc:date>2013-06-09T00:29:11+02:00</dc:date>
+  <dc:language>fr</dc:language>
+  <dc:creator>Tristan</dc:creator>
+  <dc:subject>General</dc:subject>
+  <description>Ahahahahahahahah !!! Voilà. Et sinon, vous l'avez sans doute remarqué, les accents ont disparu du blog... ça craint, c'est nul, le PHP c'est chiant, DotClear me casse les couilles... bref... il y a du changement dans l'air...
+Hey, au fait !!! Je serai à Lyon BD le weekend prochain !!! Viens me...</description>
+  <content:encoded><![CDATA[ <div align="center"><img src="http://autostrip.fr/images/illus038.jpg" alt="" /></div>
+<br/><br/>
+Ahahahahahahahah !!! Voilà. Et sinon, vous l'avez sans doute remarqué, les accents ont disparu du blog... ça craint, c'est nul, le PHP c'est chiant, DotClear me casse les couilles... bref... il y a du changement dans l'air...<br/>
+<strong>Hey, au fait !!! Je serai à <a href="http://www.lyonbd.com/" target="blank">Lyon BD</a> le weekend prochain !!! Viens me voir !!!</strong>
+<br/><br/>
+<i><strong><font size="3">Les commentaires sont malheureusement toujours fermés... RDV sur Facebook.</font></strong></i>
+<br/><br/>
+<img src="http://autostrip.fr/images/picto_fan.jpg" alt="" />&nbsp;&nbsp;Toi aussi tu trouves que Boule est un prénom pourri ? On en parle sur <a href="http://www.facebook.com/autostrip" target="blank">la fan-page du blog</a> !!!]]></content:encoded>
+</item>
+<item rdf:about="http://autostrip.fr/index.php?2013/05/16/213-un-poisson-a-fish">
+  <title>Un poisson, a fish...</title>
+  <link>http://autostrip.fr/index.php?2013/05/16/213-un-poisson-a-fish</link>
+  <dc:date>2013-05-16T16:11:01+02:00</dc:date>
+  <dc:language>fr</dc:language>
+  <dc:creator>Tristan</dc:creator>
+  <dc:subject>General</dc:subject>
+  <description>C'est un peu la fête ? la blague pourrie en ce moment sur ce blog... Hey, n'oubliez pas !!! On se retrouve samedi ? Villemomble !!! Youhou !!!
+
+Les commentaires sont malheureusement toujours fermés... RDV sur Facebook.
+
+  Tu veux m'insulter ? Viens le faire sur la fan-page du blog...</description>
+  <content:encoded><![CDATA[ <div align="center"><img src="http://autostrip.fr/images/illus037.jpg" alt="" /></div>
+<br/><br/>
+C'est un peu la fête ? la blague pourrie en ce moment sur ce blog... Hey, n'oubliez pas !!! On se retrouve samedi ? Villemomble !!! Youhou !!!
+<br/><br/>
+<i><strong><font size="3">Les commentaires sont malheureusement toujours fermés... RDV sur Facebook.</font></strong></i>
+<br/><br/>
+<img src="http://autostrip.fr/images/picto_fan.jpg" alt="" />&nbsp;&nbsp;Tu veux m'insulter ? Viens le faire sur <a href="http://www.facebook.com/autostrip" target="blank">la fan-page du blog</a> !!!]]></content:encoded>
+</item>
+<item rdf:about="http://autostrip.fr/index.php?2013/05/11/212-tous-a-villemomble">
+  <title>Tous à Villemomble...</title>
+  <link>http://autostrip.fr/index.php?2013/05/11/212-tous-a-villemomble</link>
+  <dc:date>2013-05-11T23:56:58+02:00</dc:date>
+  <dc:language>fr</dc:language>
+  <dc:creator>Tristan</dc:creator>
+  <dc:subject>Ev?nement</dc:subject>
+  <description>Hey !!! Ça vous dit une gribouille ? Vous me trouverez ? Villemomble le samedi 18 mai en compagnie Maadiar, Hibi, Wayne, Louna, Manu XYZ, Tim, Marlène, Monsieur To, Saboten, Paka, Eric Salch, Kaouet, Grigou, Moute, Nusse, Turalo, Samaritain, Boutanox, Alienor, Thorn, Thomas Mathieu, Virginie...</description>
+  <content:encoded><![CDATA[ <div align="center"><img src="http://autostrip.fr/images/event_011.jpg" alt="" /></div>
+<br/><br/>
+Hey !!! Ça vous dit une gribouille ? Vous me trouverez ? Villemomble le samedi 18 mai en compagnie Maadiar, Hibi, Wayne, Louna, Manu XYZ, Tim, Marlène, Monsieur To, Saboten, Paka, Eric Salch, Kaouet, Grigou, Moute, Nusse, Turalo, Samaritain, Boutanox, Alienor, Thorn, Thomas Mathieu, Virginie Siveton, Bambiii, 2D, L?na?c, mais surtout Pierrot, Jean-Paul Pognon, Jul et Jibé !!! La grande classe !!! Viendez nombreux !!!
+<br/>
+Et voici un petit dessin... ne cherchez pas la blague, il n'y en a pas, c'est juste un dessin, comme ça...
+<br/><br/>
+<div align="center"><img src="http://autostrip.fr/images/illus036.jpg" alt="" /></div>
+<br/><br/>
+<i><strong><font size="3">Les commentaires sont malheureusement toujours fermés... RDV sur Facebook.</font></strong></i>
+<br/><br/>
+<img src="http://autostrip.fr/images/picto_fan.jpg" alt="" />&nbsp;&nbsp;Alors ? On se voit samedi prochain ? Préviens-moi sur <a href="http://www.facebook.com/autostrip" target="blank">la fan-page du blog</a> !!!]]></content:encoded>
+</item>
+<item rdf:about="http://autostrip.fr/index.php?2013/04/20/211-mon-nouvel-album">
+  <title>Mon nouvel album...</title>
+  <link>http://autostrip.fr/index.php?2013/04/20/211-mon-nouvel-album</link>
+  <dc:date>2013-04-20T10:12:06+02:00</dc:date>
+  <dc:language>fr</dc:language>
+  <dc:creator>Tristan</dc:creator>
+  <dc:subject>General</dc:subject>
+  <description>Pardon... C'est tr?s mauvais, voir honteux... Mais moi ?a me fait rire... !!! Pour ceux qui n'ont pas la r?f?rence, il s'agit d'une parodie de l'album "Nothing but the beat" du tr?s illustre David Guetta. Pour voir l'original, google images est ton ami. A bient?t les gens !!!
+
+Les commentaires...</description>
+  <content:encoded><![CDATA[ <div align="center"><img src="http://autostrip.fr/images/illus035.jpg" alt="" /></div>
+<br/><br/>
+Pardon... C'est tr?s mauvais, voir honteux... Mais moi ?a me fait rire... !!! Pour ceux qui n'ont pas la r?f?rence, il s'agit d'une parodie de l'album "Nothing but the beat" du tr?s illustre David Guetta. Pour voir l'original, google images est ton ami. A bient?t les gens !!!
+<br/><br/>
+<i><strong><font size="3">Les commentaires sont malheureusement toujours ferm?s... RDV sur Facebook.</font></strong></i>
+<br/><br/>
+<img src="http://autostrip.fr/images/picto_fan.jpg" alt="" />&nbsp;&nbsp;Toi aussi tu t'en ferais bien un T-shirt, viens me le dire sur <a href="http://www.facebook.com/autostrip" target="blank">la fan-page du blog</a> !!!]]></content:encoded>
+</item>
+<item rdf:about="http://autostrip.fr/index.php?2013/03/23/210-vdm">
+  <title>VDM...</title>
+  <link>http://autostrip.fr/index.php?2013/03/23/210-vdm</link>
+  <dc:date>2013-03-23T19:32:52+01:00</dc:date>
+  <dc:language>fr</dc:language>
+  <dc:creator>Tristan</dc:creator>
+  <dc:subject>General</dc:subject>
+  <description>L'ambiance est chaude par ici... je crois bien que c'est la premi?re fois qu'il y a du nibard sur le blog !!! J'ai r?alis? cette planche pour Vie de merde et j'en suis super fier parce que j'avais d?j? essay? de bosser avec eux en 2009 et ?a n'avait pas fonctionn?. Je vous engage ? aller y lire...</description>
+  <content:encoded><![CDATA[ <div align="center"><img src="http://autostrip.fr/images/illus034.jpg" alt="" /></div>
+<br/><br/>
+L'ambiance est chaude par ici... je crois bien que c'est la premi?re fois qu'il y a du nibard sur le blog !!! J'ai r?alis? cette planche pour <a href="http://www.viedemerde.fr/" target="blank">Vie de merde</a> et j'en suis super fier parce que j'avais d?j? essay? de bosser avec eux en 2009 et ?a n'avait pas fonctionn?. Je vous engage ? aller y lire <a href="http://www.viedemerde.fr/blog/1547" target="blank">mon interview</a>, j'y raconte plein de choses tr?s int?ressantes (teasing de ouf, t'as vu ?). <br/>A tr?s bient?t !!!
+<br/><br/>
+<i><strong><font size="3">Les commentaires sont malheureusement toujours ferm?s... RDV sur Facebook.</font></strong></i>
+<br/><br/>
+<img src="http://autostrip.fr/images/picto_fan.jpg" alt="" />&nbsp;&nbsp;Sortez couverts sur <a href="http://www.facebook.com/autostrip" target="blank">la fan-page du blog</a> !!!]]></content:encoded>
+</item>
+<item rdf:about="http://autostrip.fr/index.php?2013/02/26/209-plein-de-trucs">
+  <title>Plein de trucs...</title>
+  <link>http://autostrip.fr/index.php?2013/02/26/209-plein-de-trucs</link>
+  <dc:date>2013-02-26T16:56:53+01:00</dc:date>
+  <dc:language>fr</dc:language>
+  <dc:creator>Tristan</dc:creator>
+  <dc:subject>General</dc:subject>
+  <description>Salut les gens !!! J'ai r?alis? la petite illus ci-dessus pour Bonnet de Jour, une petite bo?te qui bosse sur le bien-?tre au travail. N'h?sitez pas ? faire un tour sur son Facebook, il y a plein de trucs marrants ? apprendre. Et je vous pr?sente Chlorofeel, une super app dispo sur la majorit?...</description>
+  <content:encoded><![CDATA[ <div align="center"><img src="http://autostrip.fr/images/illus033.jpg" alt="" /></div>
+<br/><br/>
+Salut les gens !!! J'ai r?alis? la petite illus ci-dessus pour <a href="http://www.bonnetdejour.fr/" target="blank">Bonnet de Jour</a>, une petite bo?te qui bosse sur le bien-?tre au travail. N'h?sitez pas ? faire un tour sur son <a href="http://www.facebook.com/BonnetdeJourInc" target="blank">Facebook</a>, il y a plein de trucs marrants ? apprendre. Et je vous pr?sente <a href="http://www.facebook.com/chlorofeel.good?fref=ts" target="blank">Chlorofeel</a>, une super app dispo sur la majorit? des smartphones et dont j'ai fait tous les dessins !!! Jolie, gratuite, vous devriez d?j? ?tre en train de la charger... Et puisque tout ce que je vous montre aujourd'hui est li? ? mon activit? professionnelle, je vous rappelle que je bosse chez <a href="http://www.i-breed.com" target="blank">I-Breed</a>, qu'on fait du super taf et que notre <a href="http://www.facebook.com/pages/I-breed/180303918656331" target="blank">Facebook</a> d?chire.
+<br/><br/>
+<div align="center"><img src="http://autostrip.fr/images/chlorofeel.jpg" alt="" /></div>
+<br/><br/>
+Chlorofeel est dispo sur <a href="http://www.windowsphone.com/fr-fr/store/app/chlorofeel/3a626c8f-55df-4153-bc9e-727ac8971487" target="blank">Windows Phone</a>, <a href="https://itunes.apple.com/fr/app/id593278157?mt=8&affId=1910055" target="blank">iPhone</a> et <a href="https://play.google.com/store/apps/details?id=com.yooneo.android.chlorofeel&feature=search_result#?t=W251bGwsMSwyLDEsImNvbS55b29uZW8uYW5kcm9pZC5jaGxvcm9mZWVsIl0." target="blank">Android</a> !!! GRA-TOS !!!
+<br/><br/>
+<i><strong>Les commentaires sont toujours ferm?s... RDV sur Facebook.</strong></i>
+<br/><br/>
+<img src="http://autostrip.fr/images/picto_fan.jpg" alt="" />&nbsp;&nbsp;Au milli?me fan, je montre mon cul sur <a href="http://www.facebook.com/autostrip" target="blank">la fan-page du blog</a> !!!]]></content:encoded>
+</item>
+<item rdf:about="http://autostrip.fr/index.php?2012/12/24/208-happy-hour-de-noel">
+  <title>Happy Hour de No?l...</title>
+  <link>http://autostrip.fr/index.php?2012/12/24/208-happy-hour-de-noel</link>
+  <dc:date>2012-12-24T10:59:50+01:00</dc:date>
+  <dc:language>fr</dc:language>
+  <dc:creator>Tristan</dc:creator>
+  <dc:subject>General</dc:subject>
+  <description>Hey, j'ai un super cadeau pour vous... une petite BD r?alis?e en mai dernier pour un ouvrage collectif, Happy Hour... Enjoy, joyeux No?l !!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Vous avez kiff? ? C'est pas tous les jours que je vous ponds des trucs comme ?a... ?a m'avait pris un peu de temps quand...</description>
+  <content:encoded><![CDATA[ <font color="#FF0000">Hey, j'ai un super cadeau pour vous... une petite BD r?alis?e en mai dernier pour un ouvrage collectif, <i>Happy Hour</i>... Enjoy, joyeux No?l !!!</font>
+<br/><br/>
+<div align="center"><img src="http://autostrip.fr/images/hh_page_01.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_02.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_03.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_04.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_05.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_06.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_07_08.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_09.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_10.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_11.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_12.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_13.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_14.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_15.jpg" alt="" /><br/>
+<img src="http://autostrip.fr/images/hh_page_16.jpg" alt="" /></div>
+<br/><br/>
+Vous avez kiff? ? C'est pas tous les jours que je vous ponds des trucs comme ?a... ?a m'avait pris un peu de temps quand m?me. Si l'univers vous a plu, il y a 8 autres r?cits du m?me genre ? d?couvrir sur 3 volumes... je vous en parlais dans <a href="http://autostrip.fr/index.php?2012/06/17/202-viendez-a-lyon">mon billet</a> du 17 juin dernier. Et puisque nous avons finalement tous surv?cu ? la fin du monde, je vous souhaite ? toutes et tous un joyeux No?l !!! A bient?t.
+<br/><br/>
+<i><strong>Les commentaires sont toujours ferm?s... RDV sur Facebook.</strong></i>
+<br/><br/>
+<img src="http://autostrip.fr/images/picto_fan.jpg" alt="" />&nbsp;&nbsp;Ton avis m'int?resse, balance tes commentaires sur <a href="http://www.facebook.com/autostrip" target="blank">la fan-page du blog</a> !!!]]></content:encoded>
+</item>
+<item rdf:about="http://autostrip.fr/index.php?2012/12/20/207-la-fin-du-monde-donc">
+  <title>La fin du monde donc...</title>
+  <link>http://autostrip.fr/index.php?2012/12/20/207-la-fin-du-monde-donc</link>
+  <dc:date>2012-12-20T20:16:22+01:00</dc:date>
+  <dc:language>fr</dc:language>
+  <dc:creator>Tristan</dc:creator>
+  <dc:subject>General</dc:subject>
+  <description>Je vous souhaite ? tous et ? toutes une tr?s joyeuse fin du monde !!! Kiffez bien, quel que soit le truc qui viendra ? bout de l'humanit?. Si c'est comme dans le film, ?a va ?tre un truc de ouf !!!
+
+Ha, j'oubliais... j'ai tr?s officiellement ferm? les commentaires du blog parce que le spam...</description>
+  <content:encoded><![CDATA[ <div align="center"><img src="http://autostrip.fr/images/illus32.jpg" alt="" /></div>
+<br/><br/>
+Je vous souhaite ? tous et ? toutes une tr?s joyeuse fin du monde !!! Kiffez bien, quel que soit le truc qui viendra ? bout de l'humanit?. Si c'est comme dans le film, ?a va ?tre un truc de ouf !!!
+<br/>
+Ha, j'oubliais... j'ai tr?s officiellement ferm? les commentaires du blog parce que le spam devenait ing?rable ici... Mais on peut toujours d?lirer ensemble via la fan-page. Allez commenter l?-bas, je rapatrierai les comm' les plus marrants. A tr?s vite... ou pas.
+<br/><br/>
+<img src="http://autostrip.fr/images/picto_fan.jpg" alt="" />&nbsp;&nbsp;Va laisser ton commentaire sur <a href="http://www.facebook.com/autostrip" target="blank">la fan-page du blog</a> !!!]]></content:encoded>
+</item>
+<item rdf:about="http://autostrip.fr/index.php?2012/10/17/206-une-separation">
+  <title>Une s?paration...</title>
+  <link>http://autostrip.fr/index.php?2012/10/17/206-une-separation</link>
+  <dc:date>2012-10-17T00:25:29+02:00</dc:date>
+  <dc:language>fr</dc:language>
+  <dc:creator>Tristan</dc:creator>
+  <dc:subject>General</dc:subject>
+  <description>Raaahhh !!! Putain de merde !!! C'?tait pas le moment qu'elle me l?che (encore) !!!
+
+  Viens me donner des conseils en m?canique sur la fan-page du blog !!!...</description>
+  <content:encoded><![CDATA[ <div align="center"><img src="http://autostrip.fr/images/illus31.jpg" alt="" /></div>
+<br/><br/>
+Raaahhh !!! Putain de merde !!! C'?tait pas le moment qu'elle me l?che (encore) !!!
+<br/><br/>
+<img src="http://autostrip.fr/images/picto_fan.jpg" alt="" />&nbsp;&nbsp;Viens me donner des conseils en m?canique sur <a href="http://www.facebook.com/autostrip" target="blank">la fan-page du blog</a> !!!]]></content:encoded>
+</item>
+<item rdf:about="http://autostrip.fr/index.php?2012/09/21/205-bien-preparer-son-festiblog">
+  <title>Bien pr?parer son Festiblog...</title>
+  <link>http://autostrip.fr/index.php?2012/09/21/205-bien-preparer-son-festiblog</link>
+  <dc:date>2012-09-21T10:19:32+02:00</dc:date>
+  <dc:language>fr</dc:language>
+  <dc:creator>Tristan</dc:creator>
+  <dc:subject>Ev?nement</dc:subject>
+  <description>Donc... J'esp?re vraiment vous voir autour de moi, histoire qu'on bavarde un peu. Pour passer un bon moment sur les terres du blog BD, je vous conseille de vous munir d'un sac et d'une pochette pour accueillir les dessins que vous glanerez, la plupart des auteurs d?dicacent en effet sur papier...</description>
+  <content:encoded><![CDATA[ <div align="center"><img src="http://autostrip.fr/images/event_010.jpg" alt="" /></div>
+<br/><br/>
+Donc... J'esp?re vraiment vous voir autour de moi, histoire qu'on bavarde un peu. Pour passer un bon moment sur les terres du blog BD, je vous conseille de vous munir d'un sac et d'une pochette pour accueillir les dessins que vous glanerez, la plupart des auteurs d?dicacent en effet sur papier libre. Si vous vous d?tes que faire tout ce chemin juste pour me voir, ?a vaut pas le coup, jetez un ?il sur le <a href="http://www.festival-blogs-bd.com/programme.html" target="blank">programme</a>, il y a plein d'auteurs de ouf le samedi matin... et pour toutes les infos qui concernent le festoche, un petit clic sur la banni?re ci-dessous !!! On se voit la semaine prochaine !!!
+<br/><br/>
+<div style="text-align: center;">
+<a title="Festival des Blogs BD - Festiblog BD" href="http://www.festival-blogs-bd.com">
+<img  alt="Festival des Blogs BD - Festiblog BD" src="http://www.festival-blogs-bd.com/design2009/images/media/banniere-festiblog.gif" height="160" width="160" /></a>
+</div>
+<br/><br/>
+<img src="http://autostrip.fr/images/picto_fan.jpg" alt="" />&nbsp;&nbsp;Et n'oublie pas de m'encourager sur <a href="http://www.facebook.com/autostrip" target="blank">la fan-page du blog</a> !!!]]></content:encoded>
+</item>
+
+</rdf:RDF>
