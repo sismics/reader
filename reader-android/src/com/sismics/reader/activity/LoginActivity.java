@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -41,6 +43,10 @@ public class LoginActivity extends FragmentActivity {
         setContentView(R.layout.login_activity);
         
         AQuery aq = new AQuery(this);
+        aq.id(R.id.loginExplain)
+            .text(Html.fromHtml(getString(R.string.login_explain)))
+            .getTextView()
+            .setMovementMethod(LinkMovementMethod.getInstance());
         
         final EditText txtServer = aq.id(R.id.txtServer).getEditText();
         final EditText txtUsername = aq.id(R.id.txtUsername).getEditText();
