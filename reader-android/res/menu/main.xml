@@ -12,11 +12,11 @@
         android:showAsAction="collapseActionView"
         android:title="@string/logout">
     </item>
-    <item
+    <!-- <item
         android:id="@+id/settings"
         android:showAsAction="collapseActionView"
         android:title="@string/settings">
-    </item>
+    </item> -->
     <item
         android:id="@+id/about"
         android:showAsAction="collapseActionView"

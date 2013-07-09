@@ -3,6 +3,8 @@ package com.sismics.reader;
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
+import org.acra.sender.HttpSender.Method;
+import org.acra.sender.HttpSender.Type;
 import org.json.JSONObject;
 
 import android.app.Application;
@@ -16,7 +18,12 @@ import com.sismics.reader.util.PreferenceUtil;
  * 
  * @author bgamard
  */
-@ReportsCrashes(formKey = "", // TODO Create a new public Drive report
+@ReportsCrashes(formKey = "",
+        httpMethod = Method.PUT,
+        reportType = Type.JSON,
+        formUri = "http://www.sismics.com:5984/acra-reader/_design/acra-storage/_update/report",
+        formUriBasicAuthLogin = "reporter",
+        formUriBasicAuthPassword = "jOS9ezJR",
         mode = ReportingInteractionMode.TOAST,
         forceCloseDialogAfterToast = true,
         resToastText = R.string.crash_toast_text)
