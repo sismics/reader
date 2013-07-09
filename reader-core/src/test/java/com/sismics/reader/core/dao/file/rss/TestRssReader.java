@@ -355,4 +355,88 @@ public class TestRssReader {
         // Assert.assertTrue(article.getDescription().contains("I spend a rather large fraction of my days inside Emacs"));
         Assert.assertNotNull(article.getPublicationDate());
     }
+
+    @Test
+    public void rdfReaderAutostripTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rdf_autostrip.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("autostrip", feed.getTitle());
+        Assert.assertEquals("http://autostrip.fr/index.php", feed.getUrl());
+        Assert.assertEquals("fr", feed.getLanguage());
+        Assert.assertEquals("", feed.getDescription());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(10, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("Bill, le cocker coquin...", article.getTitle());
+        Assert.assertEquals("http://autostrip.fr/index.php?2013/06/09/214-bill-le-cocker-coquin", article.getUrl());
+        Assert.assertEquals("http://autostrip.fr/index.php?2013/06/09/214-bill-le-cocker-coquin", article.getGuid());
+        Assert.assertEquals("Tristan", article.getCreator());
+        Assert.assertTrue(article.getDescription().contains("Ahahahahahahahah"));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
+    
+    @Test
+    public void rdfReaderLxerTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rdf_lxer.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("LXer Linux News", feed.getTitle());
+        Assert.assertEquals("http://lxer.com/", feed.getUrl());
+        Assert.assertEquals("en-us", feed.getLanguage());
+        Assert.assertEquals("Linux and Open Source news headlines", feed.getDescription());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(20, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("GCC vs. LLVM/Clang On The AMD Richland APU", article.getTitle());
+        Assert.assertEquals("http://lxer.com/module/newswire/ext_link.php?rid=187870", article.getUrl());
+        Assert.assertEquals("http://lxer.com/module/newswire/ext_link.php?rid=187870", article.getGuid());
+        Assert.assertEquals("Michael Larabel", article.getCreator());
+        Assert.assertTrue(article.getDescription().contains("Along with benchmarking the AMD A10-6800K"));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
+    
+    @Test
+    public void rdfReaderMeisalamTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rdf_meisalam.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("琥珀色の小箱に恋をして:*:･･:*:･国際結婚生活日記:*:･･:*:･", feed.getTitle());
+        Assert.assertEquals("http://meisalam.blog.fc2.com/", feed.getUrl());
+        Assert.assertEquals("ja", feed.getLanguage());
+        Assert.assertEquals("琥珀色の瞳をした彼に恋をして結婚。日本でポカポカ生息中。異文化交流の新婚生活と彼の観察日記（笑）を気ままに綴ります。", feed.getDescription());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(5, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("外免切替に挑戦！－④最終回", article.getTitle());
+        Assert.assertEquals("http://meisalam.blog.fc2.com/blog-entry-105.html", article.getUrl());
+        Assert.assertEquals("http://meisalam.blog.fc2.com/blog-entry-105.html", article.getGuid());
+        Assert.assertEquals("meisa", article.getCreator());
+        Assert.assertTrue(article.getDescription().contains("そして外免切替実技試験第二回を控えたある日。"));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
+
+    @Test
+    public void rdfReaderOatmealTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rdf_oatmeal.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("The Oatmeal - Comics, Quizzes, & Stories", feed.getTitle());
+        Assert.assertEquals("http://theoatmeal.com/", feed.getUrl());
+        Assert.assertNull(feed.getLanguage());
+        Assert.assertEquals("The oatmeal tastes better than stale skittles found under the couch cushions", feed.getDescription());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(9, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("What the World War Z movie has in common with the book", article.getTitle());
+        Assert.assertEquals("http://theoatmeal.com/comics/wwz", article.getUrl());
+        Assert.assertEquals("http://theoatmeal.com/comics/wwz", article.getGuid());
+        Assert.assertEquals("Matthew Inman", article.getCreator());
+        Assert.assertTrue(article.getDescription().contains("What the World War Z movie has in common with the book"));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
 }

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns="http://purl.org/rss/1.0/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+ xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/"
+ xmlns:admin="http://webns.net/mvcb/"
+ xmlns:syn="http://purl.org/rss/1.0/modules/syndication/"
+>
+
+<channel rdf:about="http://lxer.com/">
+<title>LXer Linux News</title>
+<link>http://lxer.com/</link>
+<description>Linux and Open Source news headlines</description>
+<image rdf:resource="http://lxer.com/images/lxer_small.png" />
+<dc:language>en-us</dc:language>
+<dc:rights>Copyright 2010, LXer - WebMarket  All Rights Reserved.</dc:rights>
+<dc:date>2004-09-15T14:13:08-05:00</dc:date>
+<dc:publisher>LXer</dc:publisher>
+<dc:creator>bob@lxer.com</dc:creator>
+<dc:subject>Information Technology</dc:subject>
+<syn:updatePeriod>hourly</syn:updatePeriod>
+<syn:updateFrequency>1</syn:updateFrequency>
+<syn:updateBase>2004-01-01T00:00:00-05:00</syn:updateBase>
+<items>
+ <rdf:Seq>
+<rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187870" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187873" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187868" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187858" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187867" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187871" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187864" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187866" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187862" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187859" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187857" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187856" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187855" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187853" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187851" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187852" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187841" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187850" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187827" /><rdf:li rdf:resource="http://lxer.com/module/newswire/ext_link.php?rid=187847" />
+ </rdf:Seq>
+</items>
+<textinput rdf:resource="http://lxer.com/module/newswire/search.php" />
+</channel>
+
+
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187870">
+<title>GCC vs. LLVM/Clang On The AMD Richland APU</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187870</link>
+<description>Along with benchmarking the AMD A10-6800K &quot;Richland&quot; APU on Linux and its Radeon HD 8670D graphics, I provided some GCC compiler tuning benchmarks for this AMD APU with Piledriver cores. The latest Linux testing from the A10-6800K is a comparison of GCC 4.8.1 to LLVM/Clang 3.3 on this latest-generation AMD low-power system.</description>
+<dc:creator>Michael Larabel</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-07T07:06:42-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187873">
+<title>Testing Radeon DPM Using Sysfs/Debugfs</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187873</link>
+<description>For those looking to test out the long-awaited Radeon dynamic power management support within the Linux 3.11 kernel, here&apos;s some information on the new debugfs and sysfs interfaces for dealing with this &quot;DPM&quot; feature.  The Radeon updates for the Linux 3.11 kernel are very exciting as the GPU clock speeds and voltages can dynamically adjust based upon load. This leads to power-savings when idling, especially for battery-backed systems, and also to greater performance on newer hardware by being able to up-clock the GPU from its boot speeds.</description>
+<dc:creator>Michael Larabel</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-07T05:12:20-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187868">
+<title>Limit Theory Developer Update on Linux Port</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187868</link>
+<description> Limit Theory is a crowdfunded Space Sim whose universe is based around the concept of procedural content generation: nearly everything in LT, according to the developer words, will be computer generated (quests, solar systems, enemies, nebulas, etc.). </description>
+<dc:creator>Liam Dawe</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-07T03:17:58-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187858">
+<title>DRM/KMS Driver Published For Snapdragon Graphics</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187858</link>
+<description>Rob Clark has expanded his Freedreno efforts from just being a reverse-engineered user-space (Gallium3D) graphics driver for Qualcomm&apos;s Adreno/Snapdragon hardware. Rob has now written his own DRM/KMS kernel driver for dealing with the Snapdragon graphics hardware. </description>
+<dc:creator>Michael Larabel</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-07T01:23:36-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187867">
+<title>Oculus Rift First Impressions and Official Linux Support</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187867</link>
+<description> A couple of days ago, version 0.2.3 of the official SDK for the Oculus Rift was released with Linux support, and I thought now would be a good time to put together a belated unboxing/first impressions video. </description>
+<dc:creator>Cheese</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T23:29:14-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187871">
+<title>Announcing eDeploy: Linux systems provisionning and updating made easy</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187871</link>
+<description>eDeploy is a new generation tool to manage baremetal deployments and upgrades of Linux based systems. Upgrades have been the main focus with the possibility to rollback upgrades if needed. </description>
+<dc:creator>Fred</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T21:34:52-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187864">
+<title>NO, LXDE-QT IS NOT BLOATED</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187864</link>
+<description>After posting a preview screenshot for LXDE-Qt, I got quite a lot of feedback from various sources. Generally the responses from the users are positive, but there are also some people saying that LXDE is no longer lightweight.Please, in the free world we’re all friends and let’s not spread FUDs to hurt each other. I’m not going to respond to groundless accuse or get involved in toolkit wars. Just see the screenshot.</description>
+<dc:creator>PCMan</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T19:40:30-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187866">
+<title>How to change or disable login sound in Linux Mint 15</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187866</link>
+<description>I never liked the login sound of Linux Mint so I disabled it immediately after installing Linux Mint 15. If you want to do the same, here is how:</description>
+<dc:creator></dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T17:46:08-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187862">
+<title>OS4 OpenLinux 13.5 Screenshot Tour</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187862</link>
+<description>With this release we bring lots of enhancements and feature updates to the OS4 OpenLinux operating system. We have made several kernel enhancements that make the default kernel in OS4 OpenLinux that much faster and efficient. Also, many new hardware drivers are included that support more hardware, out of the box. Along with a new logo and an enhanced look and feel from our previous release, we have made OS4 OpenLinux one of the easiest to use operating systems that allow you to complete tasks quickly and efficiently. We have made some new changes in the application line-up.</description>
+<dc:creator></dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T15:51:46-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187859">
+<title>LXLE gets DuckDuckGo, Distrowatch and an update.</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187859</link>
+<description>Late last week Distrowatch decided to create some room for LXLE on their infamous distro discovery site. I was really happy to see an official page for LXLE with an official url. Mid this week DuckDuckGo contacted me after months of review, with news that LXLE would be accepted into the fold of distributions...</description>
+<dc:creator>Ronnie</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T13:57:24-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187857">
+<title>For the First Time, You Can Actually Own the Digital Comics You Buy</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187857</link>
+<description>If you’ve ever bought a digital comic book, your experience probably went something like this: You opened up an app like ComiXology, paid around $1.99 to $3.99 — likely, the same price as a print issue — but never downloaded the file for the comic to your hard drive. That’s because you don’t really own it — you’ve simply licensed the right to look at it in someone else’s library.</description>
+<dc:creator>Laura Hudson</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T12:03:02-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187856">
+<title>Ubuntu Touch no longer launched by Android</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187856</link>
+<description>Pre-release test images of Ubuntu Touch now launch an Ubuntu system directly, with the Android userland environment, used to run Android applications under Ubuntu Touch, running in an LXC Linux container within Ubuntu.</description>
+<dc:creator></dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T10:05:40-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187855">
+<title>Why DRM-free comic books are a big deal, even if you don’t read comics</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187855</link>
+<description>If you&apos;re not familiar with the world of big digital publishing, it works a bit like this: you can generally get digital versions of comics the same day they&apos;re released to brick-and-mortar stores, either through a subscription or a specialized app. Now when I say &quot;get,&quot; I don&apos;t really mean &quot;buy.&quot; Yes, money is leaving your bank account and going into the publisher&apos;s (with maybe a cut going to a middleman like Comixology), but the reality is that you&apos;re just renting the content. You buy a license to view the comic—you don&apos;t actually own it. Want to read it outside of the app you bought it from? Good luck with that.</description>
+<dc:creator>Aurich Lawson </dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T08:11:18-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187853">
+<title>Radeon DRM: Dynamic Power Management Updates</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187853</link>
+<description>The DRM pull request has yet to be submitted for the Linux 3.11 kernel and already there is another revision to the Radeon DRM kernel driver to be submitted. This latest Radeon DRM work provides additional dynamic power management fixes and some new sysfs features...</description>
+<dc:creator>Michael Larabel</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T06:16:56-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187851">
+<title>More AVX2 Crypto Optimizations For Linux 3.11</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187851</link>
+<description>Recent Linux kernel releases have seen a number of crypto performance optimizations for this kernel subsystem by taking advantage of newer CPU instruction set extensions for accelerating various cryptographic workloads. This theme has continued for Linux 3.11.</description>
+<dc:creator>Michael Larabel</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T04:22:34-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187852">
+<title>AMD Radeon HD 8670D: Gallium3D vs. Catalyst</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187852</link>
+<description>This morning there were the RadeonSI Gallium3D vs. AMD Catalyst Linux benchmarks for the high-end Radeon HD 7850/7950 &quot;Southern Islands&quot; graphics cards. While the new Southern Islands GPUs understandingly have a long way to catch up on their new open-source Linux Gallium3D driver compared to Catalyst, how is the AMD Radeon HD 8670D &quot;Richland&quot; APU performance between the open and closed-source drivers? Here are some benchmarks.</description>
+<dc:creator>Michael Larabel</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T02:28:12-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187841">
+<title>PyGObject 3.8.3 Is Now Available for Download</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187841</link>
+<description>The third maintenance release of the stable PyGObject 3.8 library for the GNOME desktop environment was announced earlier today, July 5, fixing various bugs found in the previous release.</description>
+<dc:creator>Marius Nestor</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-06T00:33:50-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187850">
+<title>Korora 19 Screenshot Tour</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187850</link>
+<description>We are pleased to announce that Korora 19 &apos;Bruce&apos; is now available for download, which for the first time ever coincides with the release of Fedora. Features: GNOME 3.8; KDE Plasma Workspaces 4.10; the Anaconda installer has support for many English locales. Of course this release comes with the usual Korora extras out of the box, such as: third party repositories (Chrome, RPMFusion, VirtualBox); full multimedia support including Adobe Flash plugin; Jockey device manager to handle drivers such as ATI and NVIDIA; Firefox as the default web browser (with integration theme for KDE); Firefox extensions enabled (Adblock Plus, DownThemAll, Flashblock, Xclear).</description>
+<dc:creator></dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-05T23:36:39-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187827">
+<title>An Interview and Preview with IndieCity on Linux!</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187827</link>
+<description> Todays GamingOnLinux.com question time is all about IndieCity and their soon to arrive Linux client, this means alongside Steam and Desura we will have another client on Linux. </description>
+<dc:creator>Liam Dawe</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-05T22:39:28-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+<item rdf:about="http://lxer.com/module/newswire/ext_link.php?rid=187847">
+<title>Carla, omnivore audio/MIDI plugins host, released</title>
+<link>http://lxer.com/module/newswire/ext_link.php?rid=187847</link>
+<description> After 2+ years of work Filipe Coelho finally called it a day and released the first stable version of Carla — an audio/MIDI plugins host for Linux and Windows.Carla is omnivore indeed: it loads both LV2, VST, DSSI, and LADSPA plug-ins, and beyond that it supports GIG, SF2, and SFZ samples via FluidSynth and LinuxSampler.</description>
+<dc:creator>Alexandre Prokoudine</dc:creator>
+<dc:subject>linux</dc:subject>
+<dc:date>2013-07-05T21:42:17-00:00</dc:date>
+<slash:section>linux</slash:section>
+<slash:hit_parade>0,0,0,0,0,0,0</slash:hit_parade>
+</item>
+  
+
+<textinput rdf:about="http://lxer.com/module/newswire/search.php">
+<title>Search LXer</title>
+<description>Search LXer newswire</description>
+<name>query</name>
+<link>http://lxer.com/module/newswire/search.php</link>
+</textinput>
+                                                                                                   
+</rdf:RDF>
+

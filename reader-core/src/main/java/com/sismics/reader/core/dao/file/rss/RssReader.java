@@ -54,6 +54,13 @@ public class RssReader extends DefaultHandler {
             DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withOffsetParsed().withLocale(Locale.ENGLISH));
 
     /**
+     * A list of common date formats used in Dublin Core.
+     */
+    private static final List<DateTimeFormatter> DF_DC = ImmutableList.of(
+            DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").withOffsetParsed().withLocale(Locale.ENGLISH),
+            DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withOffsetParsed().withLocale(Locale.ENGLISH));
+
+    /**
      * Contents of the current element.
      */
     private String content;
@@ -68,15 +75,26 @@ public class RssReader extends DefaultHandler {
     
     private String URI_ATOM = "http://www.w3.org/2005/Atom";
     
+    private String URI_RDF = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+    
     private String URI_SLASH = "http://purl.org/rss/1.0/modules/slash/";
     
     private String URI_DC = "http://purl.org/dc/elements/1.1/";
     
     private String URI_CONTENT = "http://purl.org/rss/1.0/modules/content/";
     
+    private enum FeedType {
+        RSS,
+        
+        ATOM,
+        
+        RDF
+    }
+    
     private enum Element {
         UNKNOWN,
         
+        // RSS elements
         RSS,
         
         RSS_CHANNEL,
@@ -105,12 +123,15 @@ public class RssReader extends DefaultHandler {
         
         ITEM_DC_CREATOR,
         
+        ITEM_DC_DATE,
+        
         ITEM_PUB_DATE,
         
         ITEM_CONTENT_ENCODED,
         
         ITEM_ENCLOSURE,
 
+        // ATOM elements
         FEED,
 
         ATOM_TITLE,
@@ -138,15 +159,17 @@ public class RssReader extends DefaultHandler {
         ENTRY_AUTHOR,
         
         AUTHOR_NAME,
+
+        // RDF elements
+        RDF,
+
     }
     
     private Element currentElement;
 
     private Stack<Element> elementStack;
 
-    private boolean rss;
-    
-    private boolean atom;
+    public FeedType feedType;
     
     /**
      * Constructor of RssReader.
@@ -181,7 +204,7 @@ public class RssReader extends DefaultHandler {
             throw new Exception(e);
         }
     
-        if (atom) {
+        if (feedType == FeedType.ATOM) {
             String url = new AtomUrlGuesserStrategy().guess(atomLinkList);
             feed.setUrl(url);
         }
@@ -194,49 +217,78 @@ public class RssReader extends DefaultHandler {
         if ("rss".equalsIgnoreCase(localName)) {
             initFeed();
             pushElement(Element.RSS);
-            rss = true;
+            feedType = FeedType.RSS;
             return;
         } else if ("feed".equalsIgnoreCase(localName)) {
             initFeed();
             pushElement(Element.FEED);
-            atom = true;
+            feedType = FeedType.ATOM;
+            return;
+        } else if ("RDF".equalsIgnoreCase(localName)) {
+            initFeed();
+            pushElement(Element.RDF);
+            feedType = FeedType.RDF;
             return;
         }
         if (feed == null) {
-            throw new SAXException("Root element doesn't designate an RSS/Atom feed, encountered: " + localName);
+            throw new SAXException("Root element doesn't designate an RSS/Atom/RDF feed, encountered: " + localName);
         }
         
-        if (rss && currentElement == Element.RSS && "channel".equalsIgnoreCase(localName)) {
+        if (((feedType == FeedType.RSS && currentElement == Element.RSS) || (feedType == FeedType.RDF && currentElement == Element.RDF)) &&
+                "channel".equalsIgnoreCase(localName)) {
             pushElement(Element.RSS_CHANNEL);
-        } else if (rss && currentElement == Element.RSS_CHANNEL && "title".equalsIgnoreCase(localName)) {
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.RSS_CHANNEL &&
+                "title".equalsIgnoreCase(localName)) {
             pushElement(Element.RSS_TITLE);
-        } else if (rss && currentElement == Element.RSS_CHANNEL && "description".equalsIgnoreCase(localName)) {
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.RSS_CHANNEL
+                && "description".equalsIgnoreCase(localName)) {
             pushElement(Element.RSS_DESCRIPTION);
-        } else if (rss && currentElement == Element.RSS_CHANNEL && "link".equalsIgnoreCase(localName) && !URI_ATOM.equals(uri)) {
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.RSS_CHANNEL
+                && "link".equalsIgnoreCase(localName) && !URI_ATOM.equals(uri)) {
             pushElement(Element.RSS_LINK);
-        } else if (rss && currentElement == Element.RSS_CHANNEL && "language".equals(localName)) {
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.RSS_CHANNEL &&
+                "language".equals(localName)) {
             pushElement(Element.RSS_LANGUAGE);
-        } else if (rss && currentElement == Element.RSS_CHANNEL && "item".equalsIgnoreCase(localName)) {
+        } else if (((feedType == FeedType.RSS && currentElement == Element.RSS_CHANNEL) || (feedType == FeedType.RDF && currentElement == Element.RDF)) &&
+                "item".equalsIgnoreCase(localName)) {
             pushElement(Element.ITEM);
             article = new Article();
             articleList.add(article);
-        } else if (rss && currentElement == Element.ITEM && "title".equalsIgnoreCase(localName)) {
+            
+            if (feedType == FeedType.RDF) {
+                String about = StringUtils.trim(attributes.getValue(URI_RDF, "about"));
+                if (!StringUtils.isBlank(about)) {
+                    article.setGuid(about);
+                }
+            }
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.ITEM &&
+                "title".equalsIgnoreCase(localName)) {
             pushElement(Element.ITEM_TITLE);
-        } else if (rss && currentElement == Element.ITEM && "guid".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.RSS && currentElement == Element.ITEM && "guid".equalsIgnoreCase(localName)) {
             pushElement(Element.ITEM_GUID);
-        } else if (rss && currentElement == Element.ITEM && "link".equalsIgnoreCase(localName) && !URI_ATOM.equals(uri)) {
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.ITEM &&
+                "link".equalsIgnoreCase(localName) && !URI_ATOM.equals(uri)) {
             pushElement(Element.ITEM_LINK);
-        } else if (rss && currentElement == Element.ITEM && "comments".equalsIgnoreCase(localName) && !URI_SLASH.equals(uri)) {
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.ITEM &&
+                "comments".equalsIgnoreCase(localName) && !URI_SLASH.equals(uri)) {
             pushElement(Element.ITEM_COMMENTS);
-        } else if (rss && currentElement == Element.ITEM && "comments".equalsIgnoreCase(localName) && URI_SLASH.equalsIgnoreCase(uri)) {
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.ITEM &&
+                "comments".equalsIgnoreCase(localName) && URI_SLASH.equalsIgnoreCase(uri)) {
             pushElement(Element.ITEM_SLASH_COMMENTS);
-        } else if (rss && currentElement == Element.ITEM && "description".equalsIgnoreCase(localName)) {
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.ITEM &&
+                "description".equalsIgnoreCase(localName)) {
             pushElement(Element.ITEM_DESCRIPTION);
-        } else if (rss && currentElement == Element.ITEM && "creator".equalsIgnoreCase(localName) && URI_DC.equalsIgnoreCase(uri)) {
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.ITEM &&
+                "creator".equalsIgnoreCase(localName) && URI_DC.equalsIgnoreCase(uri)) {
             pushElement(Element.ITEM_DC_CREATOR);
-        } else if (rss && currentElement == Element.ITEM && "encoded".equalsIgnoreCase(localName) && URI_CONTENT.equalsIgnoreCase(uri)) {
+        } else if (feedType == FeedType.RDF && currentElement == Element.ITEM &&
+                "date".equalsIgnoreCase(localName) && URI_DC.equalsIgnoreCase(uri)) {
+            pushElement(Element.ITEM_DC_DATE);
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.ITEM &&
+                "encoded".equalsIgnoreCase(localName) && URI_CONTENT.equalsIgnoreCase(uri)) {
             pushElement(Element.ITEM_CONTENT_ENCODED);
-        } else if (rss && currentElement == Element.ITEM && "enclosure".equalsIgnoreCase(localName)) {
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.ITEM &&
+                "enclosure".equalsIgnoreCase(localName)) {
             pushElement(Element.ITEM_ENCLOSURE);
             String enclosureUrl = StringUtils.trim(attributes.getValue("url"));
             if (!StringUtils.isBlank(enclosureUrl)) {
@@ -253,41 +305,42 @@ public class RssReader extends DefaultHandler {
                 }
                 article.setEnclosureType(StringUtils.trim(attributes.getValue("type")));
             }
-        } else if (rss && currentElement == Element.ITEM && "pubDate".equalsIgnoreCase(localName)) {
+        } else if ((feedType == FeedType.RSS || feedType == FeedType.RDF) && currentElement == Element.ITEM &&
+                "pubDate".equalsIgnoreCase(localName)) {
             pushElement(Element.ITEM_PUB_DATE);
-        } else if (atom && currentElement == Element.FEED && "title".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "title".equalsIgnoreCase(localName)) {
             pushElement(Element.ATOM_TITLE);
-        } else if (atom && currentElement == Element.FEED && "id".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "id".equalsIgnoreCase(localName)) {
             pushElement(Element.ATOM_ID);
-        } else if (atom && currentElement == Element.FEED && "link".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "link".equalsIgnoreCase(localName)) {
             String rel = StringUtils.trim(attributes.getValue("rel"));
             String href = StringUtils.trim(attributes.getValue("href"));
             if (!"self".equals(rel)) {
                 atomLinkList.add(new AtomLink(rel, href));
             }
             pushElement(Element.ATOM_LINK);
-        } else if (atom && currentElement == Element.FEED && "updated".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "updated".equalsIgnoreCase(localName)) {
             pushElement(Element.ATOM_UPDATED);
-        } else if (atom && currentElement == Element.FEED && "entry".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "entry".equalsIgnoreCase(localName)) {
             pushElement(Element.ENTRY);
             article = new Article();
             articleList.add(article);
-        } else if (atom && currentElement == Element.ENTRY && "title".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "title".equalsIgnoreCase(localName)) {
             pushElement(Element.ENTRY_TITLE);
-        } else if (atom && currentElement == Element.ENTRY && "link".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "link".equalsIgnoreCase(localName)) {
             article.setUrl(StringUtils.trim(attributes.getValue("href")));
             pushElement(Element.ENTRY_LINK);
-        } else if (atom && currentElement == Element.ENTRY && "updated".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "updated".equalsIgnoreCase(localName)) {
             pushElement(Element.ENTRY_UPDATED);
-        } else if (atom && currentElement == Element.ENTRY && "id".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "id".equalsIgnoreCase(localName)) {
             pushElement(Element.ENTRY_ID);
-        } else if (atom && currentElement == Element.ENTRY && "summary".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "summary".equalsIgnoreCase(localName)) {
             pushElement(Element.ENTRY_SUMMARY);
-        } else if (atom && currentElement == Element.ENTRY && "content".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "content".equalsIgnoreCase(localName)) {
             pushElement(Element.ENTRY_CONTENT);
-        } else if (atom && currentElement == Element.ENTRY && "author".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "author".equalsIgnoreCase(localName)) {
             pushElement(Element.ENTRY_AUTHOR);
-        } else if (atom && currentElement == Element.ENTRY_AUTHOR && "name".equalsIgnoreCase(localName)) {
+        } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY_AUTHOR && "name".equalsIgnoreCase(localName)) {
             pushElement(Element.AUTHOR_NAME);
         } else {
             pushElement(Element.UNKNOWN);
@@ -330,6 +383,9 @@ public class RssReader extends DefaultHandler {
             }
         } else if ("creator".equalsIgnoreCase(localName) && currentElement == Element.ITEM_DC_CREATOR && URI_DC.equals(uri)) {
             article.setCreator(getContent());
+        } else if ("date".equalsIgnoreCase(localName) && currentElement == Element.ITEM_DC_DATE && URI_DC.equals(uri)) {
+            Date publicationDate = parseDate(DF_DC);
+            article.setPublicationDate(publicationDate);
         } else if ("pubDate".equalsIgnoreCase(localName) && currentElement == Element.ITEM_PUB_DATE) {
             Date publicationDate = parseDate(DF_RSS);
             article.setPublicationDate(publicationDate);
