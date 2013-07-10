@@ -21,7 +21,7 @@ import com.sismics.reader.util.PreferenceUtil;
 @ReportsCrashes(formKey = "",
         httpMethod = Method.PUT,
         reportType = Type.JSON,
-        formUri = "http://www.sismics.com:5984/acra-reader/_design/acra-storage/_update/report",
+        formUri = "http://acralyzer.sismics.com/reader-report",
         formUriBasicAuthLogin = "reporter",
         formUriBasicAuthPassword = "jOS9ezJR",
         mode = ReportingInteractionMode.TOAST,
