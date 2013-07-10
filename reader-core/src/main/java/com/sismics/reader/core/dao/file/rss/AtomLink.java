@@ -13,6 +13,11 @@ public class AtomLink {
     private String rel;
     
     /**
+     * Content-type.
+     */
+    private String type;
+    
+    /**
      * Reference.
      */
     private String href;
@@ -20,11 +25,13 @@ public class AtomLink {
     /**
      * Constructor of RssLink.
      * 
+     * @param type Content type
      * @param rel Relationship type
      * @param href Reference
      */
-    public AtomLink(String rel, String href) {
+    public AtomLink(String rel, String type, String href) {
         this.rel = rel;
+        this.type = type;
         this.href = href;
     }
 
@@ -53,6 +60,24 @@ public class AtomLink {
      */
     public String getHref() {
         return href;
+    }
+
+    /**
+     * Getter of type.
+     *
+     * @return type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Setter of type.
+     *
+     * @param type type
+     */
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**

@@ -111,8 +111,8 @@ public class TestRssReader {
         Assert.assertEquals("http://ploum.net/post/ce-blog-est-payant", article.getUrl());
         Assert.assertEquals("http://ploum.net/?p=3030", article.getGuid());
         Assert.assertEquals("Lionel Dricot", article.getCreator());
-        Assert.assertEquals("http://ploum.net/post/the-disruptive-free-price#comments", article.getCommentUrl());
-        Assert.assertEquals(Integer.valueOf(4), article.getCommentCount());
+        Assert.assertEquals("http://ploum.net/post/ce-blog-est-payant#comments", article.getCommentUrl());
+        Assert.assertEquals(Integer.valueOf(8), article.getCommentCount());
         Assert.assertTrue(article.getDescription().contains("Voilà, ce blog est désormais officiellement un blog payant"));
         Assert.assertNotNull(article.getPublicationDate());
     }
@@ -171,7 +171,7 @@ public class TestRssReader {
         Feed feed = reader.getFeed();
         Assert.assertEquals("xkcd.com", feed.getTitle());
         Assert.assertEquals("http://xkcd.com/", feed.getUrl());
-        Assert.assertNull(feed.getLanguage());
+        Assert.assertEquals("en", feed.getLanguage());
         Assert.assertNull(feed.getDescription());
         List<Article> articleList = reader.getArticleList();
         Assert.assertEquals(4, articleList.size());
@@ -262,6 +262,7 @@ public class TestRssReader {
         Article article = articleList.get(0);
         Assert.assertEquals("くいだおれ", article.getTitle());
         Assert.assertEquals("http://makiko-f.blogspot.com/2013/04/blog-post.html", article.getUrl());
+        Assert.assertEquals("http://www.blogger.com/comment.g?blogID=9184161806327478331&postID=186540250833288646", article.getCommentUrl());
         Assert.assertEquals("tag:blogger.com,1999:blog-9184161806327478331.post-186540250833288646", article.getGuid());
         Assert.assertEquals("Makiko Furuichi", article.getCreator());
         Assert.assertTrue(article.getDescription().contains("甘エビやホタルイカ、もちろん新鮮なお魚を始め"));

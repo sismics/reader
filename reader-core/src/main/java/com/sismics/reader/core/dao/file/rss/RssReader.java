@@ -73,6 +73,8 @@ public class RssReader extends DefaultHandler {
     
     private List<AtomLink> atomLinkList;
     
+    private List<AtomLink> atomArticleLinkList;
+    
     private String URI_XML = "http://www.w3.org/XML/1998/namespace";
     
     private String URI_ATOM = "http://www.w3.org/2005/Atom";
@@ -84,6 +86,8 @@ public class RssReader extends DefaultHandler {
     private String URI_DC = "http://purl.org/dc/elements/1.1/";
     
     private String URI_CONTENT = "http://purl.org/rss/1.0/modules/content/";
+    
+    private String URI_THREAD = "http://purl.org/syndication/thread/1.0";
     
     private enum FeedType {
         RSS,
@@ -322,10 +326,11 @@ public class RssReader extends DefaultHandler {
         } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "id".equalsIgnoreCase(localName)) {
             pushElement(Element.ATOM_ID);
         } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "link".equalsIgnoreCase(localName)) {
-            String rel = StringUtils.trim(attributes.getValue("rel"));
-            String href = StringUtils.trim(attributes.getValue("href"));
+            String rel = StringUtils.trimToNull(attributes.getValue("rel"));
+            String type = StringUtils.trimToNull(attributes.getValue("type"));
+            String href = StringUtils.trimToNull(attributes.getValue("href"));
             if (!"self".equals(rel)) {
-                atomLinkList.add(new AtomLink(rel, href));
+                atomLinkList.add(new AtomLink(rel, type, href));
             }
             pushElement(Element.ATOM_LINK);
         } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "updated".equalsIgnoreCase(localName)) {
@@ -334,10 +339,32 @@ public class RssReader extends DefaultHandler {
             pushElement(Element.ENTRY);
             article = new Article();
             articleList.add(article);
+
+            atomArticleLinkList = new ArrayList<AtomLink>();
+            String base = StringUtils.trimToNull(attributes.getValue(URI_XML, "base"));
+            if (base != null) {
+                atomArticleLinkList.add(new AtomLink(null, null, base));
+            }
         } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "title".equalsIgnoreCase(localName)) {
             pushElement(Element.ENTRY_TITLE);
         } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "link".equalsIgnoreCase(localName)) {
-            article.setUrl(StringUtils.trim(attributes.getValue("href")));
+            String rel = StringUtils.trimToNull(attributes.getValue("rel"));
+            String type = StringUtils.trimToNull(attributes.getValue("type"));
+            String href = StringUtils.trimToNull(attributes.getValue("href"));
+            if (href != null) {
+                atomArticleLinkList.add(new AtomLink(rel, type, href));
+            }
+            String commentCountAsString = StringUtils.trimToNull(attributes.getValue(URI_THREAD, "count"));
+            if (commentCountAsString != null) {
+                try {
+                    article.setCommentCount(Integer.parseInt(commentCountAsString));
+                } catch (Exception e) {
+                    if (log.isWarnEnabled()) {
+                        log.warn("Error parsing comment count: " + commentCountAsString);
+                    }
+                }
+            }
+
             pushElement(Element.ENTRY_LINK);
         } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "updated".equalsIgnoreCase(localName)) {
             pushElement(Element.ENTRY_UPDATED);
@@ -375,16 +402,14 @@ public class RssReader extends DefaultHandler {
         } else if ("comments".equalsIgnoreCase(localName) && currentElement == Element.ITEM_COMMENTS && !URI_SLASH.equals(uri)) {
             article.setCommentUrl(getContent());
         } else if ("comments".equalsIgnoreCase(localName) && currentElement == Element.ITEM_SLASH_COMMENTS && URI_SLASH.equals(uri)) {
-            int commentCount = 0;
             String commentCountAsString = getContent();
             try {
-                commentCount = Integer.parseInt(commentCountAsString);
+                article.setCommentCount(Integer.parseInt(commentCountAsString));
             } catch (NumberFormatException e) {
                 if (log.isWarnEnabled()) {
                     log.warn("Error parsing comment count: " + commentCountAsString);
                 }
             }
-            article.setCommentCount(commentCount);
         } else if ("description".equalsIgnoreCase(localName) && currentElement == Element.ITEM_DESCRIPTION) {
             if (article.getDescription() == null) {
                 // Use encoded:content (full content) if available
@@ -400,6 +425,11 @@ public class RssReader extends DefaultHandler {
             article.setPublicationDate(publicationDate);
         } else if ("encoded".equalsIgnoreCase(localName) && currentElement == Element.ITEM_CONTENT_ENCODED && URI_CONTENT.equals(uri)) {
             article.setDescription(getContent());
+        } else if ("entry".equalsIgnoreCase(localName) && currentElement == Element.ENTRY) {
+            String url = new AtomArticleUrlGuesserStrategy().guess(atomArticleLinkList);
+            article.setUrl(url);
+            String commentUrl = new AtomArticleCommentUrlGuesserStrategy().guess(atomArticleLinkList);
+            article.setCommentUrl(commentUrl);
         } else if ("title".equalsIgnoreCase(localName) && currentElement == Element.ATOM_TITLE) {
             feed.setTitle(getContent());
         } else if ("subtitle".equalsIgnoreCase(localName) && currentElement == Element.ATOM_SUBTITLE) {

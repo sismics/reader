@@ -3,14 +3,14 @@ package com.sismics.reader.core.dao.file.rss;
 import java.util.List;
 
 /**
- * Guess the URL from a set of links.
+ * Guess the article URL from a set of links.
  * 
  * @author jtremeaux
  */
-public class AtomUrlGuesserStrategy {
+public class AtomArticleUrlGuesserStrategy {
 
     /**
-     * Guess the correct site URL from a set of links.
+     * Guess the correct article URL from a set of links.
      * 
      * @param atomLinkList List of links
      * @return Site URL
@@ -20,9 +20,16 @@ public class AtomUrlGuesserStrategy {
             return null;
         }
         
-        // Return alternate links first (e.g. Blogspot)
+        // 1st try: link from the <item> element
         for (AtomLink atomLink : atomLinkList) {
-            if ("alternate".equalsIgnoreCase(atomLink.getRel())) {
+            if (atomLink.getRel() == null && atomLink.getType() == null) {
+                return atomLink.getHref();
+            }
+        }
+        
+        // 2nd try: link from the <alternate> element
+        for (AtomLink atomLink : atomLinkList) {
+            if ("alternate".equals(atomLink.getRel()) && "text/html".equals(atomLink.getType())) {
                 return atomLink.getHref();
             }
         }
