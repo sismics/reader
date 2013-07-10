@@ -65,6 +65,9 @@ r.user.boot = function() {
         
         // Triggering hash change
         $.History.trigger();
+        
+        // Display import data if necessary
+        r.settings.importFeedback(data);
       }
     }
   });
