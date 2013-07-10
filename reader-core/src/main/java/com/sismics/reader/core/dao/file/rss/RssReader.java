@@ -73,6 +73,8 @@ public class RssReader extends DefaultHandler {
     
     private List<AtomLink> atomLinkList;
     
+    private String URI_XML = "http://www.w3.org/XML/1998/namespace";
+    
     private String URI_ATOM = "http://www.w3.org/2005/Atom";
     
     private String URI_RDF = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
@@ -135,6 +137,8 @@ public class RssReader extends DefaultHandler {
         FEED,
 
         ATOM_TITLE,
+
+        ATOM_SUBTITLE,
 
         ATOM_LINK,
 
@@ -223,6 +227,9 @@ public class RssReader extends DefaultHandler {
             initFeed();
             pushElement(Element.FEED);
             feedType = FeedType.ATOM;
+
+            String lang = StringUtils.trimToNull(attributes.getValue(URI_XML, "lang"));
+            feed.setLanguage(lang);
             return;
         } else if ("RDF".equalsIgnoreCase(localName)) {
             initFeed();
@@ -310,6 +317,8 @@ public class RssReader extends DefaultHandler {
             pushElement(Element.ITEM_PUB_DATE);
         } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "title".equalsIgnoreCase(localName)) {
             pushElement(Element.ATOM_TITLE);
+        } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "subtitle".equalsIgnoreCase(localName)) {
+            pushElement(Element.ATOM_SUBTITLE);
         } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "id".equalsIgnoreCase(localName)) {
             pushElement(Element.ATOM_ID);
         } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "link".equalsIgnoreCase(localName)) {
@@ -393,6 +402,8 @@ public class RssReader extends DefaultHandler {
             article.setDescription(getContent());
         } else if ("title".equalsIgnoreCase(localName) && currentElement == Element.ATOM_TITLE) {
             feed.setTitle(getContent());
+        } else if ("subtitle".equalsIgnoreCase(localName) && currentElement == Element.ATOM_SUBTITLE) {
+            feed.setDescription(getContent());
         } else if ("updated".equalsIgnoreCase(localName) && currentElement == Element.ATOM_UPDATED) {
             // TODO updated
         } else if ("title".equalsIgnoreCase(localName) && currentElement == Element.ENTRY_TITLE) {

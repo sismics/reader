@@ -95,6 +95,29 @@ public class TestRssReader {
     }
 
     @Test
+    public void atomReaderPloumTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_atom_ploum.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("ploum.net", feed.getTitle());
+        Assert.assertEquals("http://ploum.net", feed.getUrl());
+        Assert.assertEquals("en-US", feed.getLanguage());
+        Assert.assertEquals("Le blog de Lionel Dricot", feed.getDescription());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(10, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("Ce blog est payant", article.getTitle());
+        Assert.assertEquals("http://ploum.net/post/ce-blog-est-payant", article.getUrl());
+        Assert.assertEquals("http://ploum.net/?p=3030", article.getGuid());
+        Assert.assertEquals("Lionel Dricot", article.getCreator());
+        Assert.assertEquals("http://ploum.net/post/the-disruptive-free-price#comments", article.getCommentUrl());
+        Assert.assertEquals(Integer.valueOf(4), article.getCommentCount());
+        Assert.assertTrue(article.getDescription().contains("Voilà, ce blog est désormais officiellement un blog payant"));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
+
+    @Test
     public void rssReaderRottenTomatoesTest() throws Exception {
         InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_rottentomatoes.xml");
         RssReader reader = new RssReader();
