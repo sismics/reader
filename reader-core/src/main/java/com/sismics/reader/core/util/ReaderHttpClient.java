@@ -30,6 +30,8 @@ public abstract class ReaderHttpClient {
         try {
             URLConnection connection = url.openConnection();
             connection.setRequestProperty("User-Agent", USER_AGENT);
+            connection.setConnectTimeout(20000);
+            connection.setReadTimeout(20000);
             InputStream is = closer.register(connection.getInputStream());
             
             process(is);

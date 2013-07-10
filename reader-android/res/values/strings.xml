@@ -5,6 +5,7 @@
     <string name="application_name">Sismics Reader</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="login_explain"><![CDATA[To start, you must download and install Sismics Reader Server on <a href="http://www.sismics.com/reader">www.sismics.com/reader</a> and enter your server URL below]]></string>
     <string name="server">Server</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -29,7 +30,7 @@
     <string name="article_subscription_author">on %1$s by %2$s</string>
     <string name="crash_toast_text">A crash occurred, a report has been sent to resolve this problem</string>
 
-    <!-- Préférences -->
+    <!-- Preferences -->
     <string name="pref_general_category">General preferences</string>
     <string name="pref_enable_acra">Automatic error reports</string>
     <string name="pref_acra_enabled">Reporting enabled</string>
@@ -41,5 +42,66 @@
     <string name="validate_error_length_max">Too long (max. %d)</string>
     <string name="validate_error_required">Required</string>
     <string name="validate_error_alphanumeric">Only letters and numbers</string>
+    
+    <!-- About -->
+    <string name="about_content">
+      <![CDATA[
+        <div>
+          <h1>About</h1>
+          <p>Reader is an open source, Web-based aggregator of content served by Web Feeds (RSS, Atom).</p>
+
+          <p>
+            ▪ <b>Website:</b> <a href="http://www.sismics.com/reader">www.sismics.com/reader</a><br />
+            ▪ <b>GitHub:</b> <a href="https://github.com/sismics/reader">github.com/sismics/reader</a><br />
+            ▪ <b>Report a bug:</b> <a href="https://github.com/sismics/reader/issues">github.com/sismics/reader/issues</a><br />
+          </p>
+          
+          <h1>Licences</h1>
+          <h2>ACRA</2>
+          <p><a href="http://acra.ch">http://acra.ch</a></p>
+          <p>
+            Copyright 2010 Emmanuel Astier & Kevin Gaudin<br />
+            Licensed under the Apache License, Version 2.0 (the "License");<br />
+            you may not use this file except in compliance with the License.<br />
+            You may obtain a copy of the License at<br />
+            http://www.apache.org/licenses/LICENSE-2.0<br />
+            Unless required by applicable law or agreed to in writing, software<br />
+            distributed under the License is distributed on an "AS IS" BASIS,<br />
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+            See the License for the specific language governing permissions and<br />
+            limitations under the License.
+          </p>
+          
+          <h2>android-async-http</2>
+          <p><a href="http://loopj.com/android-async-http">http://loopj.com/android-async-http</a></p>
+          <p>
+            Copyright 2012 James Smith<br />
+            Licensed under the Apache License, Version 2.0 (the "License");<br />
+            you may not use this file except in compliance with the License.<br />
+            You may obtain a copy of the License at<br />
+            http://www.apache.org/licenses/LICENSE-2.0<br />
+            Unless required by applicable law or agreed to in writing, software<br />
+            distributed under the License is distributed on an "AS IS" BASIS,<br />
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+            See the License for the specific language governing permissions and<br />
+            limitations under the License.
+          </p>
+          
+          <h2>AQuery</2>
+          <p><a href="http://code.google.com/p/android-query">http://code.google.com/p/android-query/</a></p>
+          <p>
+            Licensed under the Apache License, Version 2.0 (the "License");<br />
+            you may not use this file except in compliance with the License.<br />
+            You may obtain a copy of the License at<br />
+            http://www.apache.org/licenses/LICENSE-2.0<br />
+            Unless required by applicable law or agreed to in writing, software<br />
+            distributed under the License is distributed on an "AS IS" BASIS,<br />
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+            See the License for the specific language governing permissions and<br />
+            limitations under the License.
+          </p>
+        </div>
+      ]]>
+    </string>
 
 </resources>

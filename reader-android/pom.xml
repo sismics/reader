@@ -48,7 +48,7 @@
     <dependency>
       <groupId>ch.acra</groupId>
       <artifactId>acra</artifactId>
-      <version>4.3.1</version>
+      <version>4.5.0</version>
     </dependency>
     
   </dependencies>

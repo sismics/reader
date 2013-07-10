@@ -42,7 +42,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(final Bundle args) {
         super.onCreate(args);
-        
+
         // Check if logged in
         if (!ApplicationContext.getInstance().isLoggedIn()) {
             startActivity(new Intent(this, LoginActivity.class));
@@ -119,12 +119,12 @@ public class MainActivity extends FragmentActivity {
             });
             return true;
             
-        case R.id.settings:
+//        case R.id.settings:
 //            startActivity(new Intent(NavigationActivity.this, SettingsActivity.class));
-            return true;
+//            return true;
             
         case R.id.about:
-//            startActivity(new Intent(NavigationActivity.this, AboutActivity.class));
+            startActivity(new Intent(MainActivity.this, AboutActivity.class));
             return true;
             
         case R.id.refresh:

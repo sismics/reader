@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Typeface;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,9 +80,9 @@ public class ArticlesAdapter extends BaseAdapter {
         JSONObject article = getItem(position);
         holder.txtTitle.setText(Html.fromHtml(article.optString("title")));
         if (article.optBoolean("is_read")) {
-            holder.txtTitle.setTypeface(null, Typeface.NORMAL);
+            view.setAlpha(.9f);
         } else {
-            holder.txtTitle.setTypeface(null, Typeface.BOLD);
+            view.setAlpha(1.f);
         }
         JSONObject subscription = article.optJSONObject("subscription");
         Bitmap placeHolder = aq.getCachedImage(R.drawable.ic_launcher);
