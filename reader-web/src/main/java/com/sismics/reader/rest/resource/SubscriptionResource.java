@@ -229,6 +229,7 @@ public class SubscriptionResource extends BaseResource {
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUnread(unread);
         userArticleCriteria.setUserId(principal.getId());
+        userArticleCriteria.setSubscribed(true);
         userArticleCriteria.setVisible(true);
         userArticleCriteria.setFeedId(feedSubscription.getFeedId());
 
@@ -471,6 +472,7 @@ public class SubscriptionResource extends BaseResource {
         // Marks all articles as read in this subscription
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUserId(principal.getId());
+        userArticleCriteria.setSubscribed(true);
         userArticleCriteria.setFeedSubscriptionId(id);
 
         UserArticleDao userArticleDao = new UserArticleDao();
@@ -599,7 +601,7 @@ public class SubscriptionResource extends BaseResource {
             }
             
             // Raise an asynchronous import event
-            if (outlineList != null) {
+            if (outlineList != null || articleMap != null) {
                 SubscriptionImportedEvent event = new SubscriptionImportedEvent();
                 event.setUser(user);
                 event.setOutlineList(outlineList);

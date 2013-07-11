@@ -304,13 +304,13 @@ public class FeedService extends AbstractScheduledService {
     }
     
     protected void logParsingError(String url, Exception e) {
-        if (log.isErrorEnabled()) {
+        if (log.isInfoEnabled()) {
             if (e instanceof UnknownHostException ||
                     e instanceof FileNotFoundException ||
                     e instanceof ConnectException) {
-                log.error(MessageFormat.format("Error parsing HTML page at URL {0} : {1}", url, e.getMessage()));
+                log.info(MessageFormat.format("Error parsing HTML page at URL {0} : {1}", url, e.getMessage()));
             } else {
-                log.error(MessageFormat.format("Error parsing HTML page at URL {0}", url));
+                log.info(MessageFormat.format("Error parsing HTML page at URL {0}", url));
             }
         }
     }
@@ -326,6 +326,7 @@ public class FeedService extends AbstractScheduledService {
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUnread(false);
         userArticleCriteria.setUserId(userId);
+        userArticleCriteria.setSubscribed(true);
         userArticleCriteria.setVisible(false);
         userArticleCriteria.setFeedId(feedSubscription.getFeedId());
 

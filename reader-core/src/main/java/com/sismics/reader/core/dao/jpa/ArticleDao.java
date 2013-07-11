@@ -93,6 +93,10 @@ public class ArticleDao {
             criteriaList.add("a.ART_TITLE_C = :title");
             parameterMap.put("title", criteria.getTitle());
         }
+        if (criteria.getUrl() != null) {
+            criteriaList.add("a.ART_URL_C = :url");
+            parameterMap.put("url", criteria.getUrl());
+        }
         if (criteria.getFeedId() != null) {
             criteriaList.add("a.ART_IDFEED_C = :feedId");
             parameterMap.put("feedId", criteria.getFeedId());

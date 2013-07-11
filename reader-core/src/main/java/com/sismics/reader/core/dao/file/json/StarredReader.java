@@ -75,12 +75,12 @@ public class StarredReader {
                 feedRssUrl = feedRssUrl.substring("feed/".length());
             }
             
-            JsonValidationUtil.validateJsonString(origin, "title", true);
-            String feedTitle = origin.path("title").getTextValue();
-
             JsonValidationUtil.validateJsonString(origin, "htmlUrl", true);
             String feedUrl = origin.path("htmlUrl").getTextValue();
             
+            JsonValidationUtil.validateJsonString(origin, "title", false);
+            String feedTitle = origin.path("title").getTextValue();
+
             Feed feed = feedMap.get(feedRssUrl);
             if (feed == null) {
                 feed = new Feed();
@@ -94,7 +94,7 @@ public class StarredReader {
             JsonValidationUtil.validateJsonString(itemNode, "id", true);
 //            String id = itemNode.path("id").getTextValue();
             
-            JsonValidationUtil.validateJsonString(itemNode, "title", true);
+            JsonValidationUtil.validateJsonString(itemNode, "title", false);
             String title = itemNode.path("title").getTextValue();
             
             JsonValidationUtil.validateJsonNumber(itemNode, "published", true);
@@ -107,7 +107,7 @@ public class StarredReader {
                 
                 for (JsonNode alternateNode : alternate) {
                     JsonValidationUtil.validateJsonString(alternateNode, "href", true);
-                    url = alternate.path("href").getTextValue();
+                    url = alternateNode.path("href").getTextValue();
                 }
             }
 

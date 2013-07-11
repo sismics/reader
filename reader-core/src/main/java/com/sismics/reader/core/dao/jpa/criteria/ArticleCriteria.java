@@ -19,6 +19,11 @@ public class ArticleCriteria {
     private String title;
 
     /**
+     * Article url.
+     */
+    private String url;
+
+    /**
      * Feed ID.
      */
     private String feedId;
@@ -57,6 +62,24 @@ public class ArticleCriteria {
      */
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    /**
+     * Getter of url.
+     *
+     * @return url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Setter of url.
+     *
+     * @param url url
+     */
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**

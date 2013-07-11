@@ -323,7 +323,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         json = response.getEntity(JSONObject.class);
         JSONArray articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
-        Assert.assertEquals(1, articles.length());
-        Assert.assertEquals(1, json.optInt("total"));
+        Assert.assertEquals(3, articles.length());
+        Assert.assertEquals(3, json.optInt("total"));
     }
 }

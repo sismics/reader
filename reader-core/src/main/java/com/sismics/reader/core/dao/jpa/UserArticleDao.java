@@ -235,8 +235,8 @@ public class UserArticleDao {
         }
         if (criteria.getUserId() != null) {
             sb.append(" join T_FEED f on(f.FED_ID_C = a.ART_IDFEED_C and f.FED_DELETEDATE_D is null) ");
-            sb.append(" join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
         }
+        sb.append(" left join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
         
         // Adds search criteria
         List<String> criteriaList = new ArrayList<String>();
@@ -251,6 +251,9 @@ public class UserArticleDao {
         if (criteria.getArticleIdIn() != null) {
             criteriaList.add("a.ART_ID_C IN :articleIdIn");
             parameterMap.put("articleIdIn", criteria.getArticleIdIn());
+        }
+        if (criteria.isSubscribed()) {
+            criteriaList.add("fs.FES_ID_C is not null");
         }
         if (criteria.getCategoryId() != null) {
             criteriaList.add("fs.FES_IDCATEGORY_C = :categoryId");

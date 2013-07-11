@@ -266,7 +266,6 @@ public class SubscriptionImportAsyncListener {
             return;
         }
         
-        FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
         EntityManagerUtil.flush();
         
         // Count the total number of starred articles
@@ -285,16 +284,7 @@ public class SubscriptionImportAsyncListener {
             Feed feed = feedDao.getByRssUrl(rssUrl);
             if (feed == null) {
                 log.error(MessageFormat.format("Feed not found: {0}", rssUrl));
-                continue;
-            }
-            
-            // Check if the user is already subscribed to this feed
-            FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
-            feedSubscriptionCriteria.setUserId(user.getId());
-            feedSubscriptionCriteria.setFeedUrl(rssUrl);
-            List<FeedSubscriptionDto> feedSubscriptionDaoList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
-            if (feedSubscriptionDaoList.size() == 0) {
-                log.error(MessageFormat.format("User not subscribed to feed: {0}", rssUrl));
+                i += articleList.size();
                 continue;
             }
             
@@ -306,14 +296,16 @@ public class SubscriptionImportAsyncListener {
                 Article article = articleList.get(j);
                 // Check if the article already exists
                 String title = article.getTitle();
-                if (StringUtils.isBlank(title)) {
+                String url = article.getUrl();
+                if (StringUtils.isBlank(title) && StringUtils.isBlank(url)) {
                     if (log.isInfoEnabled()) {
-                        log.info(MessageFormat.format("Cannot import starred article with an empty title for feed {0}", rssUrl));
+                        log.info(MessageFormat.format("Cannot import starred article with an empty title and url for feed {0}", rssUrl));
                     }
                     continue;
                 }
                 ArticleCriteria articleCriteria = new ArticleCriteria();
                 articleCriteria.setTitle(title);
+                articleCriteria.setUrl(url);
                 articleCriteria.setFeedId(feed.getId());
                 
                 ArticleDao articleDao = new ArticleDao();

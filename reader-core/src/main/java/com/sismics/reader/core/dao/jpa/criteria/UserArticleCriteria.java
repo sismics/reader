@@ -24,6 +24,11 @@ public class UserArticleCriteria {
     private boolean visible;
     
     /**
+     * Returns the article only if the user is subscribed to the feed.
+     */
+    private boolean subscribed;
+    
+    /**
      * Feed subscription ID.
      */
     private String feedSubscriptionId;
@@ -105,6 +110,24 @@ public class UserArticleCriteria {
      */
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    /**
+     * Getter of subscribed.
+     *
+     * @return subscribed
+     */
+    public boolean isSubscribed() {
+        return subscribed;
+    }
+
+    /**
+     * Setter of subscribed.
+     *
+     * @param subscribed subscribed
+     */
+    public void setSubscribed(boolean subscribed) {
+        this.subscribed = subscribed;
     }
 
     /**

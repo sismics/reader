@@ -27,6 +27,9 @@ public class OpmlFlattener {
     }
 
     private static void flatten(List<Outline> outlineTree, Map<String, List<Outline>> outlineMap, String prefix) {
+        if (outlineTree == null) {
+            return;
+        }
         for (Outline outline : outlineTree) {
             if ("rss".equals(outline.getType())) {
                 List<Outline> outlineList = outlineMap.get(prefix);
