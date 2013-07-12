@@ -252,44 +252,50 @@ public class SubscriptionAdapter extends BaseAdapter {
         // Adding categories and subscriptions
         JSONObject rootCategory = input.optJSONArray("categories").optJSONObject(0);
         JSONArray categories = rootCategory.optJSONArray("categories");
-        for (int i = 0; i < categories.length(); i++) {
-            JSONObject category = categories.optJSONObject(i);
-
-            item = new SubscriptionItem();
-            item.type = CATEGORY_ITEM;
-            item.id = category.optString("id");
-            item.title = category.optString("name");
-            item.url = "/category/" + item.id;
-            item.unreadCount = category.optInt("unread_count");
-            items.add(item);
-            
-            JSONArray subscriptions = category.optJSONArray("subscriptions");
+        if (categories != null) {
+            for (int i = 0; i < categories.length(); i++) {
+                JSONObject category = categories.optJSONObject(i);
+    
+                item = new SubscriptionItem();
+                item.type = CATEGORY_ITEM;
+                item.id = category.optString("id");
+                item.title = category.optString("name");
+                item.url = "/category/" + item.id;
+                item.unreadCount = category.optInt("unread_count");
+                items.add(item);
+                
+                JSONArray subscriptions = category.optJSONArray("subscriptions");
+                if (subscriptions != null) {
+                    for (int j = 0; j < subscriptions.length(); j++) {
+                        JSONObject subscription = subscriptions.optJSONObject(j);
+        
+                        item = new SubscriptionItem();
+                        item.type = SUBSCRIPTION_ITEM;
+                        item.id = subscription.optString("id");
+                        item.title = subscription.optString("title");
+                        item.url = "/subscription/" + item.id;
+                        item.unreadCount = subscription.optInt("unread_count");
+                        items.add(item);
+                    }
+                }
+            }
+        }
+        
+        // Root subscriptions
+        JSONArray subscriptions = rootCategory.optJSONArray("subscriptions");
+        if (subscriptions != null) {
             for (int j = 0; j < subscriptions.length(); j++) {
                 JSONObject subscription = subscriptions.optJSONObject(j);
-
+    
                 item = new SubscriptionItem();
                 item.type = SUBSCRIPTION_ITEM;
                 item.id = subscription.optString("id");
                 item.title = subscription.optString("title");
                 item.url = "/subscription/" + item.id;
                 item.unreadCount = subscription.optInt("unread_count");
+                item.root = true;
                 items.add(item);
             }
-        }
-        
-        // Root subscriptions
-        JSONArray subscriptions = rootCategory.optJSONArray("subscriptions");
-        for (int j = 0; j < subscriptions.length(); j++) {
-            JSONObject subscription = subscriptions.optJSONObject(j);
-
-            item = new SubscriptionItem();
-            item.type = SUBSCRIPTION_ITEM;
-            item.id = subscription.optString("id");
-            item.title = subscription.optString("title");
-            item.url = "/subscription/" + item.id;
-            item.unreadCount = subscription.optInt("unread_count");
-            item.root = true;
-            items.add(item);
         }
     }
 }
