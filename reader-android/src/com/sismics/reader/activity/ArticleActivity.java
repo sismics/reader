@@ -108,6 +108,9 @@ public class ArticleActivity extends FragmentActivity {
         
         // Configuring ViewPagerIndicator
         int position = getIntent().getIntExtra("position", 0);
+        if (position >= sharedAdapterHelper.getArticleItems().size()) {
+            position = 0;
+        }
         UnderlinePageIndicator indicator = (UnderlinePageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(viewPager, position, sharedAdapterHelper.getTotal());
         indicator.setOnPageChangeListener(onPageChangeListener);
