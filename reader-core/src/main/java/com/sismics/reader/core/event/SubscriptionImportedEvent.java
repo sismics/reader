@@ -1,12 +1,8 @@
 package com.sismics.reader.core.event;
 
-import java.util.List;
-import java.util.Map;
+import java.io.File;
 
 import com.google.common.base.Objects;
-import com.sismics.reader.core.dao.file.opml.Outline;
-import com.sismics.reader.core.model.jpa.Article;
-import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.User;
 
 /**
@@ -21,19 +17,9 @@ public class SubscriptionImportedEvent {
     private User user;
     
     /**
-     * OPML outline tree.
+     * Temporary file to import.
      */
-    private List<Outline> outlineList;
-    
-    /**
-     * Map of List<Article>, indexed by feed URL. 
-     */
-    private Map<String, List<Article>> articleMap;
-    
-    /**
-     * List of feeds referenced by starred articles.
-     */
-    private List<Feed> feedList;
+    private File importFile;
     
     /**
      * Getter of user.
@@ -54,63 +40,28 @@ public class SubscriptionImportedEvent {
     }
 
     /**
-     * Getter of outlineList.
+     * Getter of importFile.
      *
-     * @return outlineList
+     * @return importFile
      */
-    public List<Outline> getOutlineList() {
-        return outlineList;
+    public File getImportFile() {
+        return importFile;
     }
 
     /**
-     * Setter of outlineList.
+     * Setter of importFile.
      *
-     * @param outlineList outlineList
+     * @param importFile importFile
      */
-    public void setOutlineList(List<Outline> outlineList) {
-        this.outlineList = outlineList;
+    public void setImportFile(File importFile) {
+        this.importFile = importFile;
     }
 
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
                 .add("user", user)
+                .add("importFile", importFile)
                 .toString();
-    }
-
-    /**
-     * Getter of articleMap.
-     *
-     * @return articleMap
-     */
-    public Map<String, List<Article>> getArticleMap() {
-        return articleMap;
-    }
-
-    /**
-     * Setter of articleMap.
-     *
-     * @param articleMap articleMap
-     */
-    public void setArticleMap(Map<String, List<Article>> articleMap) {
-        this.articleMap = articleMap;
-    }
-
-    /**
-     * Getter of feedList.
-     *
-     * @return feedList
-     */
-    public List<Feed> getFeedList() {
-        return feedList;
-    }
-
-    /**
-     * Setter of feedList.
-     *
-     * @param feedList feedList
-     */
-    public void setFeedList(List<Feed> feedList) {
-        this.feedList = feedList;
     }
 }
