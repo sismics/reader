@@ -2,11 +2,7 @@ package com.sismics.reader.core.dao.file.json;
 
 import java.io.InputStream;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -27,24 +23,7 @@ import com.sismics.util.JsonValidationUtil;
 public class StarredReader {
     private static final Logger log = LoggerFactory.getLogger(StarredReader.class);
 
-
-    /**
-     * Map of List<Article>, indexed by feed URL. 
-     */
-    private Map<String, List<Article>> articleMap;
-    
-    /**
-     * Map of feeds, indexed by feed URL.
-     */
-    private Map<String, Feed> feedMap;
-    
-    /**
-     * Constructor of StarredReader.
-     */
-    public StarredReader() {
-        articleMap = new HashMap<String, List<Article>>();
-        feedMap = new HashMap<String, Feed>();
-    }
+    private StarredArticleImportedListener starredArticleImportedListener;
     
     /**
      * Reads a starred file.
@@ -80,15 +59,6 @@ public class StarredReader {
             
             JsonValidationUtil.validateJsonString(origin, "title", false);
             String feedTitle = origin.path("title").getTextValue();
-
-            Feed feed = feedMap.get(feedRssUrl);
-            if (feed == null) {
-                feed = new Feed();
-                feed.setRssUrl(feedRssUrl);
-                feed.setTitle(feedTitle);
-                feed.setUrl(feedUrl);
-                feedMap.put(feedRssUrl, feed);
-            }
 
             // Extract the article data
             JsonValidationUtil.validateJsonString(itemNode, "id", true);
@@ -135,37 +105,33 @@ public class StarredReader {
                 continue;
             }
 
-            List<Article> articleList = articleMap.get(feedRssUrl);
-            if (articleList == null) {
-                articleList = new ArrayList<Article>();
-                articleMap.put(feedRssUrl, articleList);
+            // Raise a starred article imported event
+            if (starredArticleImportedListener != null) {
+                Feed feed = new Feed();
+                feed.setRssUrl(feedRssUrl);
+                feed.setTitle(feedTitle);
+                feed.setUrl(feedUrl);
+    
+                Article article = new Article();
+                article.setTitle(title);
+                article.setPublicationDate(new Date(publicationDate));
+                article.setUrl(url);
+                article.setDescription(description);
+    
+                StarredArticleImportedEvent event = new StarredArticleImportedEvent();
+                event.setFeed(feed);
+                event.setArticle(article);
+                starredArticleImportedListener.onStarredArticleImported(event);
             }
-            
-            
-            Article article = new Article();
-            article.setTitle(title);
-            article.setPublicationDate(new Date(publicationDate));
-            article.setUrl(url);
-            article.setDescription(description);
-            articleList.add(article);
         }
     }
 
     /**
-     * Getter of articleMap.
+     * Setter of starredArticleListener.
      *
-     * @return articleMap
+     * @param starredArticleListener starredArticleListener
      */
-    public Map<String, List<Article>> getArticleMap() {
-        return articleMap;
-    }
-
-    /**
-     * Returns the list of feeds referenced by starred articles.
-     *
-     * @return List of feeds
-     */
-    public List<Feed> getFeedList() {
-        return new ArrayList<Feed>(feedMap.values());
+    public void setStarredArticleListener(StarredArticleImportedListener starredArticleListener) {
+        this.starredArticleImportedListener = starredArticleListener;
     }
 }

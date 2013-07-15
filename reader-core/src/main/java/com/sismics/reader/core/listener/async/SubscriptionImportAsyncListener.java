@@ -22,6 +22,8 @@ import com.google.common.base.Strings;
 import com.google.common.eventbus.Subscribe;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Closer;
+import com.sismics.reader.core.dao.file.json.StarredArticleImportedEvent;
+import com.sismics.reader.core.dao.file.json.StarredArticleImportedListener;
 import com.sismics.reader.core.dao.file.json.StarredReader;
 import com.sismics.reader.core.dao.file.opml.OpmlFlattener;
 import com.sismics.reader.core.dao.file.opml.OpmlReader;
@@ -92,10 +94,9 @@ public class SubscriptionImportAsyncListener {
      * @param user User
      * @param importFile File to import
      */
-    private void processImportFile(User user, File importFile) {
+    private void processImportFile(final User user, File importFile) {
         List<Outline> outlineList = null;
         Map<String, List<Article>> articleMap = null;
-        List<Feed> feedList = null;
         Closer closer = Closer.create();
         try {
             // Guess the file type
@@ -122,9 +123,26 @@ public class SubscriptionImportAsyncListener {
 
                             // Read the starred file
                             StarredReader starredReader = new StarredReader();
+                            starredReader.setStarredArticleListener(new StarredArticleImportedListener() {
+                                
+                                @Override
+                                public void onStarredArticleImported(StarredArticleImportedEvent event) {
+                                    if (log.isInfoEnabled()) {
+                                        // TODO report progress
+                                        log.info(MessageFormat.format("Importing a starred article for user {0}''s import", user.getId()));
+                                    }
+                                    
+                                    EntityManagerUtil.flush();
+                                    try {
+                                        importFeedFromStarred(user, event.getFeed(), event.getArticle());
+                                    } catch (Exception e) {
+                                        if (log.isErrorEnabled()) {
+                                            log.error(MessageFormat.format("Error importing article {0} from feed {1} for user {2}", event.getArticle(), event.getFeed(), user.getId()), e);
+                                        }
+                                    }
+                                }
+                            });
                             starredReader.read(new FileInputStream(outputFile));
-                            articleMap = starredReader.getArticleMap();
-                            feedList = starredReader.getFeedList();
                         }
                     } finally {
                         if (outputFile != null) {
@@ -152,20 +170,6 @@ public class SubscriptionImportAsyncListener {
                     importOutline(user, outlineList);
                 } catch (Exception e) {
                     log.error("Unknown error during outline import", e);
-                }
-                
-                // Create the feeds referenced from starred articles
-                try {
-                    importFeedFromStarred(user, feedList);
-                } catch (Exception e) {
-                    log.error("Unknown error during feed import for starred data", e);
-                }
-                
-                // Create the user's starred articles
-                try {
-                    importStar(user, articleMap);
-                } catch (Exception e) {
-                    log.error("Unknown error during star import", e);
                 }
             }
         } catch (Exception e) {
@@ -300,145 +304,81 @@ public class SubscriptionImportAsyncListener {
      * If some feed cannot be downloaded, a record is still created from the export data only.
      * 
      * @param user User
-     * @param feedList List of feeds to create
+     * @param feed Feed to import
      */
-    private void importFeedFromStarred(final User user, final List<Feed> feedList) {
-        if (feedList == null) {
-            return;
-        }
-        
-        if (log.isInfoEnabled()) {
-            log.info(MessageFormat.format("Importing {0} feeds for user {1}''s import", feedList.size(), user.getId()));
-        }
-        
-        EntityManagerUtil.flush();
-        int i = 0;
-        for (Feed feed : feedList) {
-            if (log.isInfoEnabled()) {
-                log.info(MessageFormat.format("Importing feed {0}/{1} for starred articles", i + 1, feedList.size()));
-            }
-            String rssUrl = feed.getRssUrl();
-            
-            // Synchronize feed and articles
-            final FeedService feedService = AppContext.getInstance().getFeedService();
+    private void importFeedFromStarred(User user, Feed feed, Article article) {
+        // Synchronize the feed
+        String rssUrl = feed.getRssUrl();
+        FeedDao feedDao = new FeedDao();
+        Feed feedFromDb = feedDao.getByRssUrl(rssUrl.toString());
+        final FeedService feedService = AppContext.getInstance().getFeedService();
+        if (feedFromDb == null) {
             try {
-                feedService.synchronize(rssUrl);
+                feedFromDb = feedService.synchronize(rssUrl);
             } catch (Exception e) {
                 // Add the feed with the data from the export if it is not valid anymore
-                FeedDao feedDao = new FeedDao();
-                Feed feedFromDb = feedDao.getByRssUrl(rssUrl.toString());
-                if (feedFromDb == null) {
-                    Feed newFeed = new Feed();
-                    newFeed.setUrl(feed.getUrl());
-                    newFeed.setRssUrl(rssUrl);
-                    newFeed.setTitle(feed.getTitle());
-                    feedDao.create(newFeed);
-                }
-                
                 if (log.isInfoEnabled()) {
                     log.info(MessageFormat.format("Error importing the feed at URL {0} for user {1}''s stared articles. Maybe it doens't exist anymore?", rssUrl, user.getId()), e);
                 }
-                continue;
+                feedFromDb = new Feed();
+                feedFromDb.setUrl(feed.getUrl());
+                feedFromDb.setRssUrl(rssUrl);
+                feedFromDb.setTitle(feed.getTitle());
+                feedDao.create(feedFromDb);
             }
-            i++;
-        }
-    }
-
-    /**
-     * Create the articles from the starred data.
-     * 
-     * @param user User
-     * @param articleMap Map of articles to create, indexed by RSS URL
-     */
-    private void importStar(final User user, final Map<String, List<Article>> articleMap) {
-        if (articleMap == null) {
-            return;
         }
         
-        EntityManagerUtil.flush();
-        
-        // Count the total number of starred articles
-        long starCount = 0;
-        for (List<Article> articleList : articleMap.values()) {
-            starCount += articleList.size();
+        // Check if the article already exists
+        String title = article.getTitle();
+        String url = article.getUrl();
+        if (StringUtils.isBlank(title) && StringUtils.isBlank(url)) {
+            if (log.isInfoEnabled()) {
+                log.info(MessageFormat.format("Cannot import starred article with an empty title and url for feed {0}", rssUrl));
+            }
         }
-
-        int i = 0;
-        for (Entry<String, List<Article>> entry : articleMap.entrySet()) {
-            String rssUrl = entry.getKey();
-            List<Article> articleList = entry.getValue();
-            
-            // Get the feed
-            FeedDao feedDao = new FeedDao();
-            Feed feed = feedDao.getByRssUrl(rssUrl);
-            if (feed == null) {
-                log.error(MessageFormat.format("Feed not found: {0}", rssUrl));
-                i += articleList.size();
-                continue;
-            }
-            
-            for (int j = 0; j < articleList.size(); j++) {
-                if (log.isInfoEnabled()) {
-                    log.info(MessageFormat.format("Importing starred article {0}/{1}", i + j + 1, starCount));
-                }
-                
-                Article article = articleList.get(j);
-                // Check if the article already exists
-                String title = article.getTitle();
-                String url = article.getUrl();
-                if (StringUtils.isBlank(title) && StringUtils.isBlank(url)) {
-                    if (log.isInfoEnabled()) {
-                        log.info(MessageFormat.format("Cannot import starred article with an empty title and url for feed {0}", rssUrl));
-                    }
-                    continue;
-                }
-                ArticleCriteria articleCriteria = new ArticleCriteria();
-                articleCriteria.setTitle(title);
-                articleCriteria.setUrl(url);
-                articleCriteria.setFeedId(feed.getId());
-                
-                ArticleDao articleDao = new ArticleDao();
-                List<ArticleDto> currentArticleList = articleDao.findByCriteria(articleCriteria);
-                if (!currentArticleList.isEmpty()) {
-                    String articleId = currentArticleList.iterator().next().getId();
-                    article.setId(articleId);
-                } else {
-                    // Create the article if needed
-                    article.setFeedId(feed.getId());
-                    GuidFixer.fixGuid(article);
-                    articleDao.create(article);
-                }
-                
-                // Check if the user is already subscribed to this article
-                UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
-                userArticleCriteria.setUserId(user.getId());
-                userArticleCriteria.setArticleId(article.getId());
-                
-                UserArticleDao userArticleDao = new UserArticleDao();
-                List<UserArticleDto> userArticleList = userArticleDao.findByCriteria(userArticleCriteria);
-                UserArticleDto currentUserArticle = null;
-                if (userArticleList.size() > 0) {
-                    currentUserArticle = userArticleList.iterator().next();
-                }
-                if (currentUserArticle == null || currentUserArticle.getId() == null) {
-                    // Subscribe the user to this article
-                    UserArticle userArticle = new UserArticle();
-                    userArticle.setUserId(user.getId());
-                    userArticle.setArticleId(article.getId());
-                    userArticle.setStarredDate(article.getPublicationDate());
-                    userArticle.setReadDate(article.getPublicationDate());
-                    userArticleDao.create(userArticle);
-                } else if (currentUserArticle.getId() != null && currentUserArticle.getStarTimestamp() == null) {
-                    // Mark the user article as starred
-                    UserArticle userArticle = new UserArticle();
-                    userArticle.setId(currentUserArticle.getId());
-                    userArticle.setStarredDate(article.getPublicationDate());
-                    userArticle.setReadDate(article.getPublicationDate());
-                    userArticleDao.update(userArticle);
-                }
-            }
-            
-            i += articleList.size();
+        ArticleCriteria articleCriteria = new ArticleCriteria();
+        articleCriteria.setTitle(title);
+        articleCriteria.setUrl(url);
+        articleCriteria.setFeedId(feedFromDb.getId());
+        
+        ArticleDao articleDao = new ArticleDao();
+        List<ArticleDto> currentArticleList = articleDao.findByCriteria(articleCriteria);
+        if (!currentArticleList.isEmpty()) {
+            String articleId = currentArticleList.iterator().next().getId();
+            article.setId(articleId);
+        } else {
+            // Create the article if needed
+            article.setFeedId(feedFromDb.getId());
+            GuidFixer.fixGuid(article);
+            articleDao.create(article);
+        }
+        
+        // Check if the user is already subscribed to this article
+        UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
+        userArticleCriteria.setUserId(user.getId());
+        userArticleCriteria.setArticleId(article.getId());
+        
+        UserArticleDao userArticleDao = new UserArticleDao();
+        List<UserArticleDto> userArticleList = userArticleDao.findByCriteria(userArticleCriteria);
+        UserArticleDto currentUserArticle = null;
+        if (userArticleList.size() > 0) {
+            currentUserArticle = userArticleList.iterator().next();
+        }
+        if (currentUserArticle == null || currentUserArticle.getId() == null) {
+            // Subscribe the user to this article
+            UserArticle userArticle = new UserArticle();
+            userArticle.setUserId(user.getId());
+            userArticle.setArticleId(article.getId());
+            userArticle.setStarredDate(article.getPublicationDate());
+            userArticle.setReadDate(article.getPublicationDate());
+            userArticleDao.create(userArticle);
+        } else if (currentUserArticle.getId() != null && currentUserArticle.getStarTimestamp() == null) {
+            // Mark the user article as starred
+            UserArticle userArticle = new UserArticle();
+            userArticle.setId(currentUserArticle.getId());
+            userArticle.setStarredDate(article.getPublicationDate());
+            userArticle.setReadDate(article.getPublicationDate());
+            userArticleDao.update(userArticle);
         }
     }
 }
