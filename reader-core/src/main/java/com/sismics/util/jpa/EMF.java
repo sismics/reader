@@ -47,7 +47,9 @@ public final class EMF {
 
                 @Override
                 public void onUpgrade(int oldVersion, int newVersion) throws Exception {
-                    // TODO Auto-generated method stub
+                    for (int version = oldVersion + 1; version <= newVersion; version++) {
+                        executeAllScript(version);
+                    }
                 }
             };
             openHelper.open();

@@ -234,6 +234,8 @@ public class RssReader extends DefaultHandler {
 
             String lang = StringUtils.trimToNull(attributes.getValue(URI_XML, "lang"));
             feed.setLanguage(lang);
+            String xmlBase = StringUtils.trimToNull(attributes.getValue(URI_XML, "base"));
+            feed.setBaseUri(xmlBase);
             return;
         } else if ("RDF".equalsIgnoreCase(localName)) {
             initFeed();
@@ -341,9 +343,10 @@ public class RssReader extends DefaultHandler {
             articleList.add(article);
 
             atomArticleLinkList = new ArrayList<AtomLink>();
-            String base = StringUtils.trimToNull(attributes.getValue(URI_XML, "base"));
-            if (base != null) {
-                atomArticleLinkList.add(new AtomLink(null, null, base));
+            String xmlBase = StringUtils.trimToNull(attributes.getValue(URI_XML, "base"));
+            if (xmlBase != null) {
+                atomArticleLinkList.add(new AtomLink(null, null, xmlBase));
+                article.setBaseUri(xmlBase);
             }
         } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "title".equalsIgnoreCase(localName)) {
             pushElement(Element.ENTRY_TITLE);
@@ -374,6 +377,11 @@ public class RssReader extends DefaultHandler {
             pushElement(Element.ENTRY_SUMMARY);
         } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "content".equalsIgnoreCase(localName)) {
             pushElement(Element.ENTRY_CONTENT);
+            String xmlBase = StringUtils.trimToNull(attributes.getValue(URI_XML, "base"));
+            if (xmlBase != null) {
+                // Overrides entry's xml:base
+                article.setBaseUri(xmlBase);
+            }
         } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY && "author".equalsIgnoreCase(localName)) {
             pushElement(Element.ENTRY_AUTHOR);
         } else if (feedType == FeedType.ATOM && currentElement == Element.ENTRY_AUTHOR && "name".equalsIgnoreCase(localName)) {

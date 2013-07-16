@@ -14,6 +14,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import org.hibernate.HibernateException;
 import org.hibernate.JDBCException;
@@ -28,6 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Strings;
 import com.google.common.io.CharStreams;
+import com.sismics.reader.core.util.ConfigUtil;
 import com.sismics.util.ResourceUtil;
 
 /**
@@ -106,12 +108,15 @@ public abstract class DbOpenHelper {
                 // Execute creation script
                 log.info("Executing initial schema creation script");
                 onCreate();
-            } else {
-                // Execute update script
-                log.info(MessageFormat.format("Found database version {0}, executing database incremental update scripts", oldVersion));
-                onUpgrade(oldVersion, 42); // TODO complete upgrade scripting
-                log.info("Database upgrade complete");
+                oldVersion = 0;
             }
+            
+            // Execute update script
+            ResourceBundle configBundle = ConfigUtil.getConfigBundle();
+            Integer currentVersion = Integer.parseInt(configBundle.getString("db.version"));
+            log.info(MessageFormat.format("Found database version {0}, new version is {1}, executing database incremental update scripts", oldVersion, currentVersion));
+            onUpgrade(oldVersion, currentVersion);
+            log.info("Database upgrade complete");
         } catch (Exception e) {
             exceptions.add(e);
             log.error("Unable to complete schema update", e);

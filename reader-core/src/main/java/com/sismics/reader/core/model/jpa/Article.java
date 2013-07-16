@@ -38,6 +38,12 @@ public class Article {
     private String url;
 
     /**
+     * Relative URI (Atom).
+     */
+    @Column(name = "ART_BASEURI_C", length = 2000)
+    private String baseUri;
+
+    /**
      * Article GUID.
      */
     @Column(name = "ART_GUID_C", nullable = false, length = 2000)
@@ -162,6 +168,24 @@ public class Article {
      */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    /**
+     * Getter of baseUri.
+     *
+     * @return baseUri
+     */
+    public String getBaseUri() {
+        return baseUri;
+    }
+
+    /**
+     * Setter of baseUri.
+     *
+     * @param baseUri baseUri
+     */
+    public void setBaseUri(String baseUri) {
+        this.baseUri = baseUri;
     }
 
     /**

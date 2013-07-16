@@ -37,6 +37,12 @@ public class Feed {
     private String url;
     
     /**
+     * Relative URI (Atom).
+     */
+    @Column(name = "FED_RSSBASEURI_C", length = 2000)
+    private String baseUri;
+    
+    /**
      * Feed title.
      */
     @Column(name = "FED_TITLE_C", length = 100)
@@ -124,6 +130,24 @@ public class Feed {
      */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    /**
+     * Getter of baseUri.
+     *
+     * @return baseUri
+     */
+    public String getBaseUri() {
+        return baseUri;
+    }
+
+    /**
+     * Setter of baseUri.
+     *
+     * @param baseUri baseUri
+     */
+    public void setBaseUri(String baseUri) {
+        this.baseUri = baseUri;
     }
 
     /**

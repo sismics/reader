@@ -173,7 +173,7 @@ public class FeedService extends AbstractScheduledService {
             guidIn.add(article.getGuid());
         }
         
-        ArticleSanitizer sanitizer = new ArticleSanitizer(feed.getUrl());
+        ArticleSanitizer sanitizer = new ArticleSanitizer();
         ArticleDao articleDao = new ArticleDao();
         if (!guidIn.isEmpty()) {
             ArticleCriteria articleCriteria = new ArticleCriteria();
@@ -190,7 +190,8 @@ public class FeedService extends AbstractScheduledService {
                 article.setUrl(newArticle.getUrl());
                 article.setTitle(StringUtils.abbreviate(TextSanitizer.sanitize(newArticle.getTitle()), 4000));
                 article.setCreator(StringUtils.abbreviate(newArticle.getCreator(), 200));
-                article.setDescription(sanitizer.sanitize(newArticle.getDescription()));
+                String baseUri = getBaseUri(feed, newArticle);
+                article.setDescription(sanitizer.sanitize(baseUri, newArticle.getDescription()));
                 article.setCommentUrl(newArticle.getCommentUrl());
                 article.setCommentCount(newArticle.getCommentCount());
                 article.setEnclosureUrl(newArticle.getEnclosureUrl());
@@ -225,7 +226,8 @@ public class FeedService extends AbstractScheduledService {
                 article.setFeedId(feed.getId());
                 article.setTitle(StringUtils.abbreviate(TextSanitizer.sanitize(article.getTitle()), 4000));
                 article.setCreator(StringUtils.abbreviate(article.getCreator(), 200));
-                article.setDescription(sanitizer.sanitize(article.getDescription()));
+                String baseUri = getBaseUri(feed, article);
+                article.setDescription(sanitizer.sanitize(baseUri, article.getDescription()));
                 if (article.getPublicationDate() == null) {
                     article.setPublicationDate(new Date());
                 }
@@ -253,6 +255,25 @@ public class FeedService extends AbstractScheduledService {
         return feed;
     }
     
+    /**
+     * Get the relative URI for links in an article.
+     * 
+     * @param feed Feed
+     * @param article Article
+     * @return Relative URI
+     */
+    private String getBaseUri(Feed feed, Article article) {
+        if (article.getBaseUri() != null) {
+            // Use xml:base from Atom spec
+            return article.getBaseUri();
+        }
+        if (feed.getBaseUri() != null) {
+            // Use xml:base from Atom spec
+            return feed.getBaseUri();
+        }
+        return feed.getUrl();
+    }
+
     /**
      * Parse a page containing a RSS or Atom feed, or HTML linking to a feed.
      * 

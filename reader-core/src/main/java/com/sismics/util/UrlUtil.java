@@ -35,12 +35,15 @@ public class UrlUtil {
             return url.toString();
         }
         
-        //TODO use the querypart of baseUrl
-        if (!relativeUrl.startsWith("/")) {
+        URL base = new URL(baseUrl);
+        String basePath = base.getPath() != null ? base.getPath() : "";
+        if (!(basePath.endsWith("/") || relativeUrl.startsWith("/"))) {
             relativeUrl = "/" + relativeUrl;
         }
-        URL base = new URL(baseUrl);
-        URL url = new URL(base.getProtocol(), base.getHost(), base.getPort(), relativeUrl);
+        if (basePath.endsWith("/") && relativeUrl.startsWith("/")) {
+            relativeUrl = relativeUrl.substring(1);
+        }
+        URL url = new URL(base.getProtocol(), base.getHost(), base.getPort(), basePath + relativeUrl);
         return url.toString();
     }
 }

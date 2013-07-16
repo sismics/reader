@@ -270,6 +270,28 @@ public class TestRssReader {
     }
     
     @Test
+    public void atomReaderMarijnhaverbekeTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_atom_marijnhaverbeke.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("marijnhaverbeke.nl/blog", feed.getTitle());
+        //Assert.assertEquals("http://marijnhaverbeke.nl/blog/feed.atom", feed.getUrl());
+        Assert.assertNull(feed.getBaseUri());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(26, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("Tern", article.getTitle());
+        Assert.assertEquals("http://marijnhaverbeke.nl/blog/tern.html", article.getUrl());
+        Assert.assertEquals("http://marijnhaverbeke.nl/blog/tern.html", article.getGuid());
+        Assert.assertEquals("http://marijnhaverbeke.nl/blog/", article.getBaseUri());
+        Assert.assertNull(article.getCreator());
+        Assert.assertTrue(article.getDescription().contains("I spend a rather large fraction of my days inside Emacs"));
+        Assert.assertTrue("Feed contains relative links", article.getDescription().contains("\"res/tern_simple_graph.png\""));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
+    
+    @Test
     public void rssReaderPloumTest() throws Exception {
         InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_ploum.xml");
         RssReader reader = new RssReader();
