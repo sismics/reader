@@ -120,11 +120,22 @@ r.about.showUpdate = function(currentVersion, tag, tagDate) {
   var date = moment(tagDate);
   var diff = moment().diff(date);
   
-  if (diff > 3600000 * 24 && currentVersion != tag) {
+  
+  if (diff > 3600000 * 24 && r.about.normalizeTag(currentVersion) < r.about.normalizeTag(tag)) {
     $('#subscriptions .update, #about-version-new')
       .show()
       .html('<a href="http://www.sismics.com/reader/" target="_blank">' + $.t('about.newupdate') + ': ' + tag + '</a>');
   }
+};
+
+/**
+ * Transform a tag in int value.
+ */
+r.about.normalizeTag = function(tag) {
+  var out = parseInt(tag.replace(/\./g, ''));
+  if (out < 10) out *= 100;
+  if (out < 100) out *= 10;
+  return out;
 };
 
 /**
