@@ -54,7 +54,7 @@ public class TestRssReader {
         Article article = articleList.get(0);
         Assert.assertEquals("Saturn Hurricane", article.getTitle());
         Assert.assertEquals("http://antwrp.gsfc.nasa.gov/apod/astropix.html", article.getUrl());
-        Assert.assertEquals("df76e0dea896571b342c3d2d1881c1adc645f37a", article.getGuid());
+        Assert.assertEquals("903a8aa15ad5b186f58e9d3de9e8cd80ab2d8a34", article.getGuid()); // GUID based on URL
         Assert.assertNull(article.getCreator());
         Assert.assertNull(article.getCommentUrl());
         Assert.assertNull(article.getCommentCount());
@@ -328,8 +328,8 @@ public class TestRssReader {
         Assert.assertEquals(100, articleList.size());
         Article article = articleList.get(0);
         Assert.assertEquals("Process real-time big data with Twitter Storm", article.getTitle());
-        Assert.assertEquals("http://www.ibm.com/developerworks/opensource/library/os-twitterstorm/index.html?ca=drs-", article.getUrl());
-        Assert.assertEquals("84fea3ea30ced7029c0ff7f617c0c8be695f5525", article.getGuid());
+        Assert.assertEquals("", article.getUrl());
+        Assert.assertEquals("84fea3ea30ced7029c0ff7f617c0c8be695f5525", article.getGuid()); // GUID based on title/description
         Assert.assertNull(article.getCreator());
         Assert.assertNull(article.getCommentUrl());
         Assert.assertNull(article.getCommentCount());
@@ -351,7 +351,7 @@ public class TestRssReader {
         Article article = articleList.get(0);
         Assert.assertEquals("Collision Course? A Comet Heads for Mars", article.getTitle());
         Assert.assertEquals("http://www.spacedaily.com/reports/Collision_Course_A_Comet_Heads_for_Mars_999.html", article.getUrl());
-        Assert.assertEquals("f8eb7749d7983f850be0ca7a7539a47022ff2b54", article.getGuid());
+        Assert.assertEquals("6ee9faf3505ca964beff280ba87e1be57ea7eee0", article.getGuid()); // GUID based on URL
         Assert.assertNull(article.getCreator());
         Assert.assertNull(article.getCommentUrl());
         Assert.assertNull(article.getCommentCount());

@@ -21,10 +21,14 @@ public class GuidFixer {
     public static void fixGuid(Article article) {
         if (StringUtils.isBlank(article.getGuid())) {
             Hasher hasher = Hashing.sha1().newHasher();
-            if (StringUtils.isNotBlank(article.getTitle())) {
-                hasher.putString(article.getTitle());
-            } else if (StringUtils.isNotBlank(article.getDescription())) {
-                hasher.putString(article.getDescription());
+            if (StringUtils.isNotBlank(article.getUrl())) {
+                hasher.putString(article.getUrl());
+            } else {
+                if (StringUtils.isNotBlank(article.getTitle())) {
+                    hasher.putString(article.getTitle());
+                } else if (StringUtils.isNotBlank(article.getDescription())) {
+                    hasher.putString(article.getDescription());
+                }
             }
             article.setGuid(hasher.hash().toString());
         }
