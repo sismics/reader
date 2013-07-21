@@ -67,6 +67,11 @@ public class ArticleActivity extends FragmentActivity {
         
         readArticleIdList = new ArrayList<String>();
         sharedAdapterHelper = SharedArticlesAdapterHelper.getInstance();
+        if (sharedAdapterHelper.getArticleItems().size() == 0) {
+            finish();
+            return;
+        }
+        
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.article_activity);
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -108,9 +113,6 @@ public class ArticleActivity extends FragmentActivity {
         
         // Configuring ViewPagerIndicator
         int position = getIntent().getIntExtra("position", 0);
-        if (position >= sharedAdapterHelper.getArticleItems().size()) {
-            position = 0;
-        }
         UnderlinePageIndicator indicator = (UnderlinePageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(viewPager, position, sharedAdapterHelper.getTotal());
         indicator.setOnPageChangeListener(onPageChangeListener);

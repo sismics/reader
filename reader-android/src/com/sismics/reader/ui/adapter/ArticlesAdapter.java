@@ -80,7 +80,7 @@ public class ArticlesAdapter extends BaseAdapter {
         JSONObject article = getItem(position);
         holder.txtTitle.setText(Html.fromHtml(article.optString("title")));
         if (article.optBoolean("is_read")) {
-            view.setAlpha(.9f);
+            view.setAlpha(.6f);
         } else {
             view.setAlpha(1.f);
         }
