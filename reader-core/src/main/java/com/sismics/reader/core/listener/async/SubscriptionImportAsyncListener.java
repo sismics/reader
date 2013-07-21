@@ -133,6 +133,7 @@ public class SubscriptionImportAsyncListener {
                                     }
                                     
                                     EntityManagerUtil.flush();
+                                    TransactionUtil.commit();
                                     try {
                                         importFeedFromStarred(user, event.getFeed(), event.getArticle());
                                     } catch (Exception e) {
@@ -241,6 +242,7 @@ public class SubscriptionImportAsyncListener {
             
             // Create the subscriptions
             EntityManagerUtil.flush();
+            TransactionUtil.commit();
             for (int j = 0; j < categoryOutlineList.size(); j++) {
                 if (log.isInfoEnabled()) {
                     log.info(MessageFormat.format("Importing outline {0}/{1}", i + j + 1, feedCount));
@@ -288,6 +290,7 @@ public class SubscriptionImportAsyncListener {
 
                     // Create the initial article subscriptions for this user
                     EntityManagerUtil.flush();
+                    TransactionUtil.commit();
                     feedService.createInitialUserArticle(user.getId(), feedSubscription);
                 } catch (Exception e) {
                     if (log.isErrorEnabled()) {
