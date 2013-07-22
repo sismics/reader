@@ -50,7 +50,7 @@ r.user.boot = function() {
       r.user.initI18n(data.locale);
       
       // Hide loader layer
-      //$('#loader-page').hide();
+      $('#loader-page').hide();
       
       if (data.anonymous) {
         // Current user is anonymous, displaying login
