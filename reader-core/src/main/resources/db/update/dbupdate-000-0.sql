@@ -1,6 +1,5 @@
 create cached table T_ARTICLE ( ART_ID_C varchar(36) not null, ART_IDFEED_C varchar(36) not null, ART_URL_C varchar(2000), ART_GUID_C varchar(2000) not null, ART_TITLE_C varchar(4000), ART_CREATOR_C varchar(200), ART_DESCRIPTION_C LONGVARCHAR, ART_COMMENTURL_C varchar(2000), ART_COMMENTCOUNT_N int, ART_ENCLOSUREURL_C varchar(2000), ART_ENCLOSURELENGTH_N int, ART_ENCLOSURETYPE_C varchar(2000), ART_PUBLICATIONDATE_D datetime not null, ART_CREATEDATE_D datetime not null, ART_DELETEDATE_D datetime, primary key (ART_ID_C) );
 create index IDX_ART_GUID_C on T_ARTICLE ( ART_GUID_C );
-create index IDX_ART_PUBLICATIONDATE_D on T_ARTICLE ( ART_PUBLICATIONDATE_D );
 create memory table T_AUTHENTICATION_TOKEN ( AUT_ID_C varchar(36) not null, AUT_IDUSER_C varchar(36) not null, AUT_LONGLASTED_B bit not null, AUT_CREATIONDATE_D datetime not null, AUT_LASTCONNECTIONDATE_D datetime, primary key (AUT_ID_C) );
 create memory table T_BASE_FUNCTION ( BAF_ID_C varchar(20) not null, primary key (BAF_ID_C) );
 create cached table T_CATEGORY ( CAT_ID_C varchar(36) not null, CAT_IDUSER_C varchar(36) not null, CAT_IDPARENT_C varchar(36), CAT_NAME_C varchar(100), CAT_ORDER_N int not null, CAT_FOLDED_B bit not null, CAT_CREATEDATE_D datetime not null, CAT_DELETEDATE_D datetime, primary key (CAT_ID_C) );
