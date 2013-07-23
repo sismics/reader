@@ -102,12 +102,12 @@ public class FeedSubscriptionDao {
     public void delete(String id) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
-        // Get the category
+        // Get the subscription
         Query q = em.createQuery("select fs from FeedSubscription fs where fs.id = :id and fs.deleteDate is null");
         q.setParameter("id", id);
         FeedSubscription feedSubscriptionFromDb = (FeedSubscription) q.getSingleResult();
 
-        // Delete the category
+        // Delete the subscription
         feedSubscriptionFromDb.setDeleteDate(new Date());
     }
     

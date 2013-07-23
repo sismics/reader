@@ -61,12 +61,12 @@ public class ArticleDao {
     public void delete(String id) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
-        // Get the category
+        // Get the article
         Query q = em.createQuery("select a from Article a where a.id = :id and a.deleteDate is null");
         q.setParameter("id", id);
         Article articleFromDb = (Article) q.getSingleResult();
 
-        // Delete the category
+        // Delete the article
         articleFromDb.setDeleteDate(new Date());
     }
     

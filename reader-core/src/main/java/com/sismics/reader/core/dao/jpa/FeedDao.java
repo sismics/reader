@@ -50,12 +50,12 @@ public class FeedDao {
     public void delete(String id) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
-        // Get the category
+        // Get the feed
         Query q = em.createQuery("select f from Feed f where f.id = :id and f.deleteDate is null");
         q.setParameter("id", id);
         Feed feedFromDb = (Feed) q.getSingleResult();
 
-        // Delete the category
+        // Delete the feed
         feedFromDb.setDeleteDate(new Date());
     }
     

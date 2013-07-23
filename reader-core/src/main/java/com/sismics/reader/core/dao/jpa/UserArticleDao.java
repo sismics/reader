@@ -110,12 +110,12 @@ public class UserArticleDao {
     public void delete(String id) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
-        // Get the category
+        // Get the subscription
         Query q = em.createQuery("select ua from UserArticle ua where ua.id = :id and ua.deleteDate is null");
         q.setParameter("id", id);
         UserArticle userArticleFromDb = (UserArticle) q.getSingleResult();
 
-        // Delete the category
+        // Delete the subscription
         userArticleFromDb.setDeleteDate(new Date());
     }
     
