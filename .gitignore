@@ -1,7 +1,7 @@
-
-/reader-android/.classpath
-/reader-android/.project
-/reader-android/.settings
-/reader-android/bin
-/reader-android/gen
-/reader-android/target
+/*/.classpath
+/*/.project
+/*/.settings
+/*/bin
+/*/gen
+/*/target
+/*/*.iml
