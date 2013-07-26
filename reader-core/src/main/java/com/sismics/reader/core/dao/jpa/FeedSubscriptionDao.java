@@ -70,7 +70,6 @@ public class FeedSubscriptionDao {
      * 
      * @param feedSubscription Subscription to move
      * @param order New display order
-     * @return Updated feedSubscription
      */
     @SuppressWarnings("unchecked")
     public void reorder(FeedSubscription feedSubscription, int order) {
@@ -133,8 +132,7 @@ public class FeedSubscriptionDao {
     /**
      * Returns active subscriptions in a category.
      * 
-     * @param id Subscription ID
-     * @param userId User ID
+     * @param categoryId Category ID
      * @return Feed subscription
      */
     @SuppressWarnings("unchecked")

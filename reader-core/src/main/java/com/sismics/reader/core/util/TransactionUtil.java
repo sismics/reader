@@ -21,9 +21,9 @@ public class TransactionUtil {
     private static final Logger log = LoggerFactory.getLogger(TransactionUtil.class);
 
     /**
-     * Encapsulate a process into a transactionnal context.
+     * Encapsulate a process into a transactional context.
      * 
-     * @param runnable
+     * @param runnable Runnable
      */
     public static void handle(Runnable runnable) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();

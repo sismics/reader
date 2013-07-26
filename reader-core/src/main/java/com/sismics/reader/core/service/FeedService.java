@@ -107,7 +107,6 @@ public class FeedService extends AbstractScheduledService {
      * Synchronize the feed to local database.
      * 
      * @param url RSS url of a feed or page containing a feed to synchronize
-     * @param Feed
      * @throws Exception
      */
     public Feed synchronize(String url) throws Exception {

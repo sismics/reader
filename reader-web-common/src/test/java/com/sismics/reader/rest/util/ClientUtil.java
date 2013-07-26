@@ -23,7 +23,7 @@ public class ClientUtil {
     /**
      * Constructor of ClientUtil.
      * 
-     * @param webResource Resource corresponding to the base URI of REST resources.
+     * @param resource Resource corresponding to the base URI of REST resources.
      */
     public ClientUtil(WebResource resource) {
         this.resource = resource;

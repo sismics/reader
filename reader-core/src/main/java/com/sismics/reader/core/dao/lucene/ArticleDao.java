@@ -88,7 +88,7 @@ public class ArticleDao {
     /**
      * Update index.
      * 
-     * @param article
+     * @param articleList Article list
      */
     public void update(final List<Article> articleList) {
         LuceneUtil.handle(new LuceneRunnable() {
@@ -185,7 +185,7 @@ public class ArticleDao {
     /**
      * Build Lucene document from article.
      * 
-     * @param Article
+     * @param article Article
      * @return Document
      */
     private org.apache.lucene.document.Document getDocumentFromArticle(Article article) {

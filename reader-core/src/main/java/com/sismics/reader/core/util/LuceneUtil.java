@@ -27,8 +27,7 @@ public class LuceneUtil {
     /**
      * Encapsulate a process into a Lucene context.
      * 
-     * @param runnable
-     * @throws IOException 
+     * @param runnable Runnable
      */
     public static void handle(LuceneRunnable runnable) {
         // Standard analyzer
@@ -82,9 +81,9 @@ public class LuceneUtil {
         /**
          * Code to run in a Lucene context.
          * 
-         * @param indexWriter
+         * @param indexWriter Index writer
          * @throws Exception 
          */
-        public abstract void run(IndexWriter indexWriter) throws Exception;
+        abstract void run(IndexWriter indexWriter) throws Exception;
     }
 }

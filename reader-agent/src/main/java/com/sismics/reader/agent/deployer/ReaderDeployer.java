@@ -53,7 +53,7 @@ public class ReaderDeployer implements LifeCycle.Listener {
     /**
      * Constructor of ReaderDeployer.
      * 
-     * @param setting Settings
+     * @param readerAgent Reader agent
      */
     public ReaderDeployer(ReaderAgent readerAgent) {
         this.readerAgent = readerAgent;

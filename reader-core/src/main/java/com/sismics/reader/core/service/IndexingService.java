@@ -103,7 +103,11 @@ public class IndexingService extends AbstractScheduledService {
     /**
      * Search articles.
      * 
-     * @param query Search query
+     * @param userId User ID
+     * @param feedList
+     * @param searchQuery
+     * @param offset Offset
+     * @param limit Limit
      * @return List of articles
      * @throws Exception 
      */

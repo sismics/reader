@@ -21,7 +21,6 @@ public class CategoryDao {
      * 
      * @param category Category
      * @return New ID
-     * @throws Exception
      */
     public String create(Category category) {
         // Create the UUID
@@ -62,7 +61,6 @@ public class CategoryDao {
      * 
      * @param category Category to move
      * @param order New display order
-     * @return Updated category
      */
     @SuppressWarnings("unchecked")
     public void reorder(Category category, int order) {

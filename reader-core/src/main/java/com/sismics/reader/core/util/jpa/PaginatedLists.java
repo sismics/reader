@@ -71,7 +71,6 @@ public class PaginatedLists {
     /**
      * Executes a query and returns the data of the currunt page.
      * 
-     * @param em EntityManager
      * @param paginatedList Paginated list object containing parameters, and into which results are added by side effects
      * @param queryParam Query parameters
      * @return List of results

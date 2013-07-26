@@ -66,7 +66,7 @@ public class AppResource extends BaseResource {
      * @param message Filter on message
      * @param limit Page limit
      * @param offset Page offset
-     * @return
+     * @return Response
      * @throws JSONException
      */
     @GET

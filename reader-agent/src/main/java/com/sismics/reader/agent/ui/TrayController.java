@@ -42,7 +42,7 @@ public class TrayController implements DeploymentStatusListener {
     /**
      * Constructor of TrayController.
      * 
-     * @param readerAgent
+     * @param readerAgent Reader agent
      */
     @SuppressWarnings("serial")
     public TrayController(ReaderAgent readerAgent) {

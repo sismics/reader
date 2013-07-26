@@ -63,7 +63,7 @@ public class ArticleResource extends BaseResource {
     /**
      * Marks multiple articles as read.
      * 
-     * @param id List of article ID
+     * @param idList List of article ID
      * @return Response
      * @throws JSONException
      */

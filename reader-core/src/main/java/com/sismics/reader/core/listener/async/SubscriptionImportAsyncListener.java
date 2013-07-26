@@ -207,7 +207,7 @@ public class SubscriptionImportAsyncListener {
      * 
      * @param user User
      * @param importFile File to import
-     * @parma job Job
+     * @param job Job
      */
     private void processImportFile(final User user, File importFile, final Job job) {
         List<Outline> outlineList = null;
