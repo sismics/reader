@@ -49,6 +49,9 @@ r.user.boot = function() {
       // Load i18n synchronously
       r.user.initI18n(data.locale);
       
+      // Hide loader layer
+      $('#loader-page').hide();
+      
       if (data.anonymous) {
         // Current user is anonymous, displaying login
         $('#login-page').show();
