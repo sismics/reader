@@ -152,6 +152,53 @@
     }
   }
   
+  .jobs {
+    margin: 8px;
+    padding: 4px;
+    
+    > p {
+      margin: 0;
+      margin-bottom: 4px;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #ddd;
+    }
+  
+    .bar {
+      height: 28px;
+    
+      .label {
+        height: 16px;
+        line-height: 16px;
+        margin: 4px 0;
+        width: 30%;
+        font-size: 11px;
+        display: inline-block;
+        vertical-align: top;
+        text-align: right;
+      }
+      
+      .job {
+        vertical-align: top;
+        width: 60%;
+        display: inline-block;
+	      height: 16px;
+	      margin: 4px 0;
+	      border-radius: 2px;
+	      .linear-gradient(top, #f8f8f8, #f1f1f1);
+	      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	      background: #eee;
+	      
+	      .progress {
+	        height: 16px;
+	        border-radius: 2px;
+	        max-width: 100%;
+	        background: @main-color;
+	      }
+	    }
+    }
+  }
+  
   p {
     text-align: center;
     color: #444;
@@ -355,6 +402,11 @@
       }
     }
   }
+}
+
+.qtip-job .qtip-content {
+	text-align: center;
+	font-size: 10px;
 }
 
 // Feed

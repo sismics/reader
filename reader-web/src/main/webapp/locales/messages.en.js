@@ -11,6 +11,12 @@
     "submit": "Login",
     "error": "Bad username or password"
   },
+  "jobs": {
+    "inprogress": "Imports in progress",
+    "feeds": "Feeds:",
+    "starred": "Starred:",
+    "failed": "failed"
+  },
   "defaultpassword": {
     "info": "Reader is not secured. Please log in with username and password \"admin\", then change password immediately.",
     "warning": "You haven't changed your default admin password. Secure your server by changing the default password now.",
