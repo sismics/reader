@@ -1,6 +1,8 @@
 Sismics Reader
 ==============
 
+![](http://www.sismics.com/reader/img/screenshots/big/9-big.png)
+
 What is Reader?
 ---------------
 
