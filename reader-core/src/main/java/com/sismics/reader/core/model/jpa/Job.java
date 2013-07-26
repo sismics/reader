@@ -33,7 +33,7 @@ public class Job {
     /**
      * Job name.
      */
-    @Column(name = "JOB_NAME_C", length = 50)
+    @Column(name = "JOB_NAME_C", length = 50, nullable = false)
     private String name;
     
     /**
@@ -59,6 +59,23 @@ public class Job {
      */
     @Column(name = "JOB_DELETEDATE_D")
     private Date deleteDate;
+    
+    /**
+     * Default constructor.
+     */
+    public Job() {
+    }
+    
+    /**
+     * Job constructor.
+     * 
+     * @param userId User ID
+     * @param name Job name
+     */
+    public Job(String userId, String name) {
+        this.userId = userId;
+        this.name = name;
+    }
     
     /**
      * Getter of id.

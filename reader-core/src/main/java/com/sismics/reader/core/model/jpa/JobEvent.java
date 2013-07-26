@@ -15,7 +15,7 @@ import com.google.common.base.Objects;
  * @author jtremeaux
  */
 @Entity
-@Table(name = "T_JOE_EVENT")
+@Table(name = "T_JOB_EVENT")
 public class JobEvent {
     /**
      * Job event ID.
@@ -28,16 +28,16 @@ public class JobEvent {
      * Job ID.
      */
     @Column(name = "JOE_IDJOB_C", nullable = false, length = 36)
-    private String userId;
+    private String jobId;
     
     /**
-     * Job name.
+     * Job event name.
      */
     @Column(name = "JOE_NAME_C", length = 50)
     private String name;
     
     /**
-     * Job name.
+     * Job event value.
      */
     @Column(name = "JOE_VALUE_C", length = 250)
     private String value;
@@ -53,6 +53,25 @@ public class JobEvent {
      */
     @Column(name = "JOE_DELETEDATE_D")
     private Date deleteDate;
+    
+    /**
+     * Default constructor.
+     */
+    public JobEvent() {
+    }
+    
+    /**
+     * Job event constructor.
+     * 
+     * @param jobId Job ID
+     * @param name Job event name
+     * @param value Job event value
+     */
+    public JobEvent(String jobId, String name, String value) {
+        this.jobId = jobId;
+        this.name = name;
+        this.value = value;
+    }
     
     /**
      * Getter of id.
@@ -73,21 +92,21 @@ public class JobEvent {
     }
 
     /**
-     * Getter of userId.
+     * Getter of jobId.
      *
-     * @return userId
+     * @return jobId
      */
-    public String getUserId() {
-        return userId;
+    public String getJobId() {
+        return jobId;
     }
 
     /**
-     * Setter of userId.
+     * Setter of jobId.
      *
-     * @param userId userId
+     * @param jobId jobId
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setJobId(String jobId) {
+        this.jobId = jobId;
     }
 
     /**

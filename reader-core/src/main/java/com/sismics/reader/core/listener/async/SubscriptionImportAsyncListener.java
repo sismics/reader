@@ -6,10 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
@@ -22,6 +24,7 @@ import com.google.common.base.Strings;
 import com.google.common.eventbus.Subscribe;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Closer;
+import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.dao.file.json.StarredArticleImportedEvent;
 import com.sismics.reader.core.dao.file.json.StarredArticleImportedListener;
 import com.sismics.reader.core.dao.file.json.StarredReader;
@@ -33,6 +36,8 @@ import com.sismics.reader.core.dao.jpa.ArticleDao;
 import com.sismics.reader.core.dao.jpa.CategoryDao;
 import com.sismics.reader.core.dao.jpa.FeedDao;
 import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
+import com.sismics.reader.core.dao.jpa.JobDao;
+import com.sismics.reader.core.dao.jpa.JobEventDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
 import com.sismics.reader.core.dao.jpa.criteria.ArticleCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
@@ -46,6 +51,8 @@ import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Category;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
+import com.sismics.reader.core.model.jpa.Job;
+import com.sismics.reader.core.model.jpa.JobEvent;
 import com.sismics.reader.core.model.jpa.User;
 import com.sismics.reader.core.model.jpa.UserArticle;
 import com.sismics.reader.core.service.FeedService;
@@ -66,6 +73,16 @@ public class SubscriptionImportAsyncListener {
     private static final Logger log = LoggerFactory.getLogger(SubscriptionImportAsyncListener.class);
 
     /**
+     * Starred articles file name (Google Takeout).
+     */
+    private static final String FILE_STARRED_JSON = "starred.json";
+    
+    /**
+     * Subscription file name (Google Takeout).
+     */
+    private static final String FILE_SUBSCRIPTIONS_XML = "subscriptions.xml";
+
+    /**
      * Process the event.
      * 
      * @param subscriptionImportedEvent OPML imported event
@@ -83,20 +100,25 @@ public class SubscriptionImportAsyncListener {
         TransactionUtil.handle(new Runnable() {
             @Override
             public void run() {
-                processImportFile(user, importFile);
+                Job job = createJob(user, importFile);
+                if (job != null) {
+                    processImportFile(user, importFile, job);
+                }
             }
         });
     }
 
     /**
-     * Process the import file.
+     * Read the file to import in a 1st pass to know the number of feeds / starred articles to import
+     * and create a new job.
      * 
      * @param user User
      * @param importFile File to import
+     * @return The new job
      */
-    private void processImportFile(final User user, File importFile) {
-        List<Outline> outlineList = null;
-        Map<String, List<Article>> articleMap = null;
+    private Job createJob(final User user, File importFile) {
+        int outlineCount = 0;
+        final AtomicInteger starredCount = new AtomicInteger();
         Closer closer = Closer.create();
         try {
             // Guess the file type
@@ -109,7 +131,101 @@ public class SubscriptionImportAsyncListener {
                 while (archiveEntry != null) {
                     File outputFile = null;
                     try {
-                        if (archiveEntry.getName().endsWith("subscriptions.xml")) {
+                        if (archiveEntry.getName().endsWith(FILE_SUBSCRIPTIONS_XML)) {
+                            outputFile = File.createTempFile("subscriptions", "xml");
+                            ByteStreams.copy(archiveInputStream, new FileOutputStream(outputFile));
+    
+                            // Read the OPML file
+                            OpmlReader opmlReader = new OpmlReader();
+                            opmlReader.read(new FileInputStream(outputFile));
+                            outlineCount = opmlReader.getOutlineList().size();
+                        } else if (archiveEntry.getName().endsWith(FILE_STARRED_JSON)) {
+                            outputFile = File.createTempFile("starred", "json");
+                            ByteStreams.copy(archiveInputStream, new FileOutputStream(outputFile));
+
+                            // Read the starred file
+                            StarredReader starredReader = new StarredReader();
+                            starredReader.setStarredArticleListener(new StarredArticleImportedListener() {
+                                
+                                @Override
+                                public void onStarredArticleImported(StarredArticleImportedEvent event) {
+                                    starredCount.incrementAndGet();
+                                }
+                            });
+                            starredReader.read(new FileInputStream(outputFile));
+                        }
+                    } finally {
+                        if (outputFile != null) {
+                            try {
+                                outputFile.delete();
+                            } catch (Exception e) {
+                                // NOP
+                            }
+                        }
+                    }
+
+                    archiveEntry = archiveInputStream.getNextEntry();
+                }
+            } else {
+                // Assume the file is an OPML file
+                InputStream is = closer.register(new FileInputStream(importFile));
+                OpmlReader opmlReader = new OpmlReader();
+                opmlReader.read(is);
+                outlineCount = opmlReader.getOutlineList().size();
+            }
+
+            // Create a new job
+            JobDao jobDao = new JobDao();
+
+            Job job = new Job(user.getId(), Constants.JOB_IMPORT);
+            job.setStartDate(new Date());
+            jobDao.create(job);
+            
+            JobEventDao jobEventDao = new JobEventDao();
+
+            JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_FEED_COUNT, String.valueOf(outlineCount));
+            jobEventDao.create(jobEvent);
+            
+            jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_STARRED_ARTICLED_COUNT, String.valueOf(starredCount.get()));
+            jobEventDao.create(jobEvent);
+            
+            return job;
+        } catch (Exception e) {
+            log.error(MessageFormat.format("Error processing import file {0}", importFile), e);
+            return null;
+        } finally {
+            try { 
+                closer.close();
+            } catch (IOException e) {
+                // NOP
+            }
+        }
+    }
+    
+    /**
+     * Process the import file.
+     * 
+     * @param user User
+     * @param importFile File to import
+     * @parma job Job
+     */
+    private void processImportFile(final User user, File importFile, final Job job) {
+        List<Outline> outlineList = null;
+        Map<String, List<Article>> articleMap = null;
+        Closer closer = Closer.create();
+        final JobEventDao jobEventDao = new JobEventDao();
+        try {
+            // Guess the file type
+            String mimeType = MimeTypeUtil.guessMimeType(importFile);
+            if (MimeType.APPLICATION_ZIP.equals(mimeType)) {
+                // Assume the file is a Google Takeout ZIP archive
+                ZipArchiveInputStream archiveInputStream = null;
+                archiveInputStream = closer.register(new ZipArchiveInputStream(new FileInputStream(importFile), Charsets.ISO_8859_1.name()));
+                ArchiveEntry archiveEntry = archiveInputStream.getNextEntry();
+                while (archiveEntry != null) {
+                    File outputFile = null;
+                    try {
+                        if (archiveEntry.getName().endsWith(FILE_SUBSCRIPTIONS_XML)) {
                             outputFile = File.createTempFile("subscriptions", "xml");
                             ByteStreams.copy(archiveInputStream, new FileOutputStream(outputFile));
     
@@ -117,7 +233,7 @@ public class SubscriptionImportAsyncListener {
                             OpmlReader opmlReader = new OpmlReader();
                             opmlReader.read(new FileInputStream(outputFile));
                             outlineList = opmlReader.getOutlineList();
-                        } else if (archiveEntry.getName().endsWith("starred.json")) {
+                        } else if (archiveEntry.getName().endsWith(FILE_STARRED_JSON)) {
                             outputFile = File.createTempFile("starred", "json");
                             ByteStreams.copy(archiveInputStream, new FileOutputStream(outputFile));
 
@@ -128,7 +244,6 @@ public class SubscriptionImportAsyncListener {
                                 @Override
                                 public void onStarredArticleImported(StarredArticleImportedEvent event) {
                                     if (log.isInfoEnabled()) {
-                                        // TODO report progress
                                         log.info(MessageFormat.format("Importing a starred article for user {0}''s import", user.getId()));
                                     }
                                     
@@ -136,10 +251,15 @@ public class SubscriptionImportAsyncListener {
                                     TransactionUtil.commit();
                                     try {
                                         importFeedFromStarred(user, event.getFeed(), event.getArticle());
+
+                                        JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_STARRED_ARTICLE_IMPORT_SUCCESS, event.getArticle().getTitle());
+                                        jobEventDao.create(jobEvent);
                                     } catch (Exception e) {
                                         if (log.isErrorEnabled()) {
                                             log.error(MessageFormat.format("Error importing article {0} from feed {1} for user {2}", event.getArticle(), event.getFeed(), user.getId()), e);
                                         }
+                                        JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_STARRED_ARTICLE_IMPORT_FAILURE, event.getArticle().getTitle());
+                                        jobEventDao.create(jobEvent);
                                     }
                                 }
                             });
@@ -165,10 +285,10 @@ public class SubscriptionImportAsyncListener {
                 outlineList = opmlReader.getOutlineList();
             }
             
-            // Raise an asynchronous import event
+            // Import the feeds
             if (outlineList != null || articleMap != null) {
                 try {
-                    importOutline(user, outlineList);
+                    importOutline(user, outlineList, job);
                 } catch (Exception e) {
                     log.error("Unknown error during outline import", e);
                 }
@@ -192,8 +312,9 @@ public class SubscriptionImportAsyncListener {
      * 
      * @param user User
      * @param outlineList Outlines to import
+     * @param job Job
      */
-    private void importOutline(final User user, final List<Outline> outlineList) {
+    private void importOutline(final User user, final List<Outline> outlineList, final Job job) {
         // Flatten the OPML tree
         Map<String, List<Outline>> outlineMap = OpmlFlattener.flatten(outlineList);
 
@@ -218,7 +339,8 @@ public class SubscriptionImportAsyncListener {
         
         // Create new subscriptions
         int i = 0;
-        FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+        final FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+        final JobEventDao jobEventDao = new JobEventDao();
         for (Entry<String, List<Outline>> entry : outlineMap.entrySet()) {
             String categoryName = entry.getKey();
             List<Outline> categoryOutlineList = entry.getValue();
@@ -261,6 +383,9 @@ public class SubscriptionImportAsyncListener {
                     if (log.isInfoEnabled()) {
                         log.info(MessageFormat.format("User {0} is already subscribed to the feed at URL {1}", user.getId(), feedUrl));
                     }
+                    JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_FEED_IMPORT_SUCCESS, feedSubscriptionList.iterator().next().getFeedSubscriptionTitle());
+                    jobEventDao.create(jobEvent);
+                    
                     continue;
                 }
 
@@ -273,6 +398,8 @@ public class SubscriptionImportAsyncListener {
                     if (log.isErrorEnabled()) {
                         log.error(MessageFormat.format("Error importing the feed at URL {0} for user {1}", feedUrl, user.getId()), e);
                     }
+                    JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_FEED_IMPORT_FAILURE, feedUrl);
+                    jobEventDao.create(jobEvent);
                     continue;
                 }
 
@@ -296,6 +423,8 @@ public class SubscriptionImportAsyncListener {
                     if (log.isErrorEnabled()) {
                         log.error(MessageFormat.format("Error creating the subscription to the feed at URL {0} for user {1}", feedUrl, user.getId()), e);
                     }
+                    JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_FEED_IMPORT_FAILURE, feedUrl);
+                    jobEventDao.create(jobEvent);
                 }
             }
             i += categoryOutlineList.size();

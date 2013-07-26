@@ -27,8 +27,14 @@ import org.codehaus.jettison.json.JSONObject;
 import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.dao.jpa.AuthenticationTokenDao;
 import com.sismics.reader.core.dao.jpa.CategoryDao;
+import com.sismics.reader.core.dao.jpa.JobDao;
+import com.sismics.reader.core.dao.jpa.JobEventDao;
 import com.sismics.reader.core.dao.jpa.RoleBaseFunctionDao;
 import com.sismics.reader.core.dao.jpa.UserDao;
+import com.sismics.reader.core.dao.jpa.criteria.JobCriteria;
+import com.sismics.reader.core.dao.jpa.criteria.JobEventCriteria;
+import com.sismics.reader.core.dao.jpa.dto.JobDto;
+import com.sismics.reader.core.dao.jpa.dto.JobEventDto;
 import com.sismics.reader.core.dao.jpa.dto.UserDto;
 import com.sismics.reader.core.event.PasswordChangedEvent;
 import com.sismics.reader.core.event.UserCreatedEvent;
@@ -532,6 +538,49 @@ public class UserResource extends BaseResource {
             JSONArray baseFunctions = new JSONArray(((UserPrincipal) principal).getBaseFunctionSet());
             response.put("base_functions", baseFunctions);
             response.put("is_default_password", hasBaseFunction(BaseFunction.ADMIN) && Constants.DEFAULT_ADMIN_PASSWORD.equals(user.getPassword()));
+            
+            JobDao jobDao = new JobDao();
+            JobEventDao jobEventDao = new JobEventDao();
+            JobCriteria jobCriteria = new JobCriteria();
+            jobCriteria.setUserId(user.getId());
+            List<JobDto> jobList = jobDao.findByCriteria(jobCriteria);
+            JSONArray jobs = new JSONArray();
+            for (JobDto job : jobList) {
+                JSONObject jobJson = new JSONObject();
+                jobJson.put("name", job.getName());
+                jobJson.put("start_date", job.getStartTimestamp());
+                jobJson.put("end_date", job.getStartTimestamp());
+                
+                JobEventCriteria jobEventCriteria = new JobEventCriteria();
+                jobEventCriteria.setJobId(job.getId());
+                List<JobEventDto> jobEventList = jobEventDao.findByCriteria(jobEventCriteria);
+                int feedSuccess = 0;
+                int feedFailure = 0;
+                int starredSuccess = 0;
+                int starredFailure = 0;
+                for (JobEventDto jobEvent : jobEventList) {
+                    String name = jobEvent.getName();
+                    if (Constants.JOB_EVENT_FEED_COUNT.equals(name)) {
+                        jobJson.put("feed_total", Integer.valueOf(jobEvent.getValue()));
+                    } else if (Constants.JOB_EVENT_STARRED_ARTICLED_COUNT.equals(name)) {
+                        jobJson.put("starred_total", Integer.valueOf(jobEvent.getValue()));
+                    } else if (Constants.JOB_EVENT_FEED_IMPORT_SUCCESS.equals(name)) {
+                        feedSuccess++;
+                    } else if (Constants.JOB_EVENT_FEED_IMPORT_FAILURE.equals(name)) {
+                        feedFailure++;
+                    } else if (Constants.JOB_EVENT_STARRED_ARTICLE_IMPORT_SUCCESS.equals(name)) {
+                        starredSuccess++;
+                    } else if (Constants.JOB_EVENT_STARRED_ARTICLE_IMPORT_FAILURE.equals(name)) {
+                        starredFailure++;
+                    }
+                }
+                jobJson.put("feed_success", Integer.valueOf(feedSuccess));
+                jobJson.put("feed_failure", Integer.valueOf(feedFailure));
+                jobJson.put("starred_success", Integer.valueOf(starredSuccess));
+                jobJson.put("starred_failure", Integer.valueOf(starredFailure));
+                jobs.put(jobJson);
+           }
+            response.put("jobs", jobs);
         }
         
         return Response.ok().entity(response).build();
