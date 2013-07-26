@@ -69,11 +69,80 @@ r.user.boot = function() {
         // Triggering hash change
         $.History.trigger();
         
-        // Display import data if necessary
-        r.settings.importFeedback(data);
+        // Poll jobs if necessary
+        r.user.pollJobs(data);
       }
     }
   });
+};
+
+/**
+ * Poll server to display jobs in progress.
+ * Optional userInfo can be provided to replace the first poll.
+ */
+r.user.pollJobs = function(userInfo) {
+  // Show jobs if necessary and returns true if there is jobs in progress
+  var showJobs = function(userInfo) {
+    var inProgress = $(userInfo.jobs).length > 0;
+    
+    // Display progress bars for each job
+    if (inProgress) {
+      var html = '<p>' + $.t('jobs.inprogress') + '</p>';
+      $(userInfo.jobs).each(function (i, job) {
+        // Feeds progress bar
+        var title = '&lt;b&gt;' + $.t('jobs.feeds') + '&lt;/b&gt; ' + job.feed_success + '/' + job.feed_total + ' (' + job.feed_failure + ' ' + $.t('jobs.failed') + ')';
+        var progress = Math.round(job.feed_success / job.feed_total * 100);
+        html += '<div class="bar"><div class="label">' + $.t('jobs.feeds') + '&nbsp;</div>'
+          + '<div class="job" title="' + title + '" ><div class="progress" style="width: ' + progress + '%;"></div></div></div>';
+        
+        // Starred articles progress bar
+        var title = '&lt;b&gt;' + $.t('jobs.starred') + '&lt;/b&gt; ' + job.starred_success + '/' + job.starred_total + ' (' + job.starred_failure + ' ' + $.t('jobs.failed') + ')';
+        var progress = Math.round(job.starred_success / job.starred_total * 100);
+        html += '<div class="bar"><div class="label">' + $.t('jobs.starred') + '&nbsp;</div>'
+          + '<div class="job" title="' + title + '" ><div class="progress" style="width: ' + progress + '%;"></div></div></div>';
+      });
+      
+      // Replace HTML in DOM, show jobs and configure tips
+      $('#subscriptions .jobs')
+        .html(html)
+        .show()
+        .find('.job')
+        .qtip({
+          content: { attr: 'title' },
+          position: {
+            my: 'top center',
+            at: 'bottom center',
+            effect: false,
+            viewport: $(window),
+            adjust: { method: 'shift' }
+          },
+          style: { classes: 'qtip-light qtip-shadow qtip-job' },
+        });
+    } else {
+      // No job in progress
+      $('#subscriptions .jobs').hide();
+    }
+    
+    return inProgress;
+  };
+  
+  if (userInfo && !showJobs(userInfo)) {
+    return;
+  }
+  
+  // Poll server
+  var intervalId = setInterval(function() {
+    r.util.ajax({
+      url: r.util.url.user_info,
+      type: 'GET',
+      done: function(data) {
+        if (!showJobs(data)) {
+          // Remove polling if there is no more job in progress
+          clearInterval(intervalId);
+        }
+      }
+    });
+  }, 5000);
 };
 
 /**

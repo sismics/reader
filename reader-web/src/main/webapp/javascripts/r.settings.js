@@ -87,18 +87,8 @@ r.settings.init = function() {
       done: function(data) {
         alert($.t('settings.import.success'));
         
-        // Start polling GET /user to obtain feedback on import progression
-        var intervalId = setInterval(function() {
-          r.util.ajax({
-            url: r.util.url.user_info,
-            type: 'GET',
-            done: function(data) {
-              if (!r.settings.importFeedback(data)) {
-                clearInterval(intervalId);
-              }
-            }
-          });
-        }, 5000);
+        // Start feedback on job progression
+        r.user.pollJobs();
       },
       fail: function(data) {
         // Login fail
@@ -417,11 +407,4 @@ r.settings.onTabUsers = function(panel, initialize) {
   
   // Force change trigger to update view
   $('#settings-users-select').trigger('change');
-};
-
-/**
- * Display import feedback if necessary.
- */
-r.settings.importFeedback = function(data) {
-  return false;
 };

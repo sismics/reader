@@ -11,6 +11,12 @@
     "submit": "Connexion",
     "error": "Mauvais nom d'utilisateur ou mot de passe"
   },
+  "jobs": {
+    "inprogress": "Imports en cours",
+    "feeds": "Flux :",
+    "starred": "Favoris :",
+    "failed": "échecs"
+  },
   "defaultpassword": {
     "info": "Reader n'est pas sécurisé. Veuillez vous connecter en utilisant \"admin\" comme nom d'utilisateur et mot de passe, puis changez le mot de passe immédiatement.",
     "warning": "Vous n'avez pas encore changé le mot de passe admin par défaut. Sécurisez votre serveur en changeant le mot de passe maintenant.",
