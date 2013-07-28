@@ -119,8 +119,8 @@ r.feed.init = function() {
   
   // Toolbar action: refresh
   $('#toolbar .refresh-button').click(function() {
-    r.subscription.update();
     r.feed.load(false);
+    r.subscription.update();
   });
   
   // Toolbar action: show all/new articles
@@ -136,8 +136,8 @@ r.feed.init = function() {
       url: r.feed.context.url + '/read',
       type: 'POST',
       always: function() {
-        r.subscription.update();
         r.feed.load(false);
+        r.subscription.update();
       }
     });
   });
