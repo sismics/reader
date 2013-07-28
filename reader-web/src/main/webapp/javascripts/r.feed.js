@@ -7,12 +7,12 @@ r.feed.context = {
   categoryId: null, // Category ID if relevant
   url: null, // API URL
   loading: false, // True if XHR in progress
-  total: 0, // Total number of articles
   limit: function() { // Articles number to fetch each page
     return $('#feed-container').hasClass('list') ? 15 : 10;
   }, 
   lastItem: null, // Last article
-  bumper: null // Bumper
+  bumper: null, // Bumper
+  fullyLoaded: false // True if all articles are loaded
 };
 
 /**
@@ -211,48 +211,53 @@ r.feed.load = function(next) {
     return;
   }
   
-  var articlesLoaded = 0;
-  if (next) {
-    articlesLoaded = $('#feed-container .feed-item').length;
-    if (articlesLoaded >= r.feed.context.total) {
-      // In that case, all articles are loaded
-      return;
-    }
-  }
-  
   if (!next) {
     // Loading animation
     $('#feed-container').html(r.util.buildLoader());
     
     // Updating show all/show new button
     r.feed.context.unread ? $('#toolbar .all-button').html($.t('toolbar.showall')) : $('#toolbar .all-button').html($.t('toolbar.shownew'));
+    
+    // Reset flag telling if all articles are loaded
+    r.feed.context.fullyLoaded = false;
+    r.feed.context.lastItem = null;
   }
   
-  // Calling API
+  // All articles are loaded, stop
+  if (r.feed.context.fullyLoaded) {
+    return;
+  }
+  
+  // Adding bumper
   r.feed.context.loading = true;
   if (r.feed.context.bumper != null) {
     r.feed.context.bumper.find('.loader').show();
   }
   
+  // Building payload
+  data = {
+    unread: r.feed.context.unread,
+    limit: r.feed.context.limit
+  }
+  
+  if (r.feed.context.lastItem) {
+    data.after_article = r.feed.context.lastItem.attr('data-article-id');
+  }
+  
+  // Calling API
   r.util.ajax({
     url: r.feed.context.url,
     type: 'GET',
-    data: {
-      unread: r.feed.context.unread,
-      limit: r.feed.context.limit,
-      offset: next ? articlesLoaded : 0,
-      total: next ? r.feed.context.total : null
-    },
+    data: data,
     done: function(data) {
+      var noArticles = $(data.articles).length == 0;
+      
       // Pre article build
       if (!next) {
         $('#feed-container').html('');
         
-        // Store total number of articles in context
-        r.feed.context.total = data.total;
-        
         // Empty placeholder
-        if (data.total == 0) {
+        if (noArticles) {
           $('#feed-container').append(r.feed.buildEmpty());
         }
         
@@ -261,6 +266,9 @@ r.feed.load = function(next) {
         r.feed.context.bumper = bumper;
         $('#feed-container').append(bumper);
       }
+      
+      // All articles are loaded?
+      r.feed.context.fullyLoaded = noArticles;
       
       // Building articles
       $(data.articles).each(function(i, article) {
@@ -282,6 +290,7 @@ r.feed.load = function(next) {
       if (!next) {
         // Scrolling to top
         r.feed.scrollTop(0);
+        
         // Focus article list and redraw
         $('#feed-container')
           .trigger('focus')

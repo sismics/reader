@@ -91,9 +91,6 @@ public class ArticleActivity extends FragmentActivity {
                 if (!readArticleIdList.contains(articleId) && !article.optBoolean("force_unread")) {
                     readArticleIdList.add(article.optString("id"));
                 }
-                
-                // Update activity title
-                setTitle((position + 1) + "/" + sharedAdapterHelper.getTotal());
             }
             
             @Override
@@ -114,7 +111,7 @@ public class ArticleActivity extends FragmentActivity {
         // Configuring ViewPagerIndicator
         int position = getIntent().getIntExtra("position", 0);
         UnderlinePageIndicator indicator = (UnderlinePageIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(viewPager, position, sharedAdapterHelper.getTotal());
+        indicator.setViewPager(viewPager, position);
         indicator.setOnPageChangeListener(onPageChangeListener);
         
         // Forcing page change listener

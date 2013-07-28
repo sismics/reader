@@ -60,9 +60,9 @@ public class SharedArticlesAdapterHelper {
     private boolean loading;
     
     /**
-     * Total number of articles.
+     * All articles are loaded.
      */
-    private int total;
+    private boolean fullyLoaded;
     
     /**
      * Returns an instance.
@@ -124,7 +124,7 @@ public class SharedArticlesAdapterHelper {
         this.url = url;
         this.unread = unread;
         this.loading = false;
-        this.total = 0;
+        this.fullyLoaded = false;
     }
     
     /**
@@ -134,27 +134,27 @@ public class SharedArticlesAdapterHelper {
     public void load(Context context) {
         final List<JSONObject> items = articleItems;
         
-        if (loading || items.size() >= total && total != 0) {
+        if (loading || fullyLoaded) {
             return;
         }
         
         loading = true;
-        int offset = items.size();
 
         for (ArticlesHelperListener listener : listeners) {
             listener.onStart();
         }
         
-        SubscriptionResource.feed(context, url, unread, 10, offset, offset > 0 ? total : null, new SismicsHttpResponseHandler() {
+        String afterArticleId = null;
+        if (items.size() > 0) {
+            afterArticleId = items.get(items.size() - 1).optString("id");
+        }
+        
+        SubscriptionResource.feed(context, url, unread, 10, afterArticleId, new SismicsHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
                 // If reference has not changed, let's update the shared data
                 if (items != articleItems) {
                     return;
-                }
-                
-                if (total == 0) {
-                    total = json.optInt("total");
                 }
                 
                 JSONArray articles = json.optJSONArray("articles");
@@ -175,6 +175,10 @@ public class SharedArticlesAdapterHelper {
                     items.add(article);
                 }
                 
+                if (articles.length() == 0) {
+                    fullyLoaded = true;
+                }
+                
                 onDataChanged();
             }
             
@@ -187,13 +191,5 @@ public class SharedArticlesAdapterHelper {
                 }
             }
         });
-    }
-    
-    /**
-     * Getter of total.
-     * @return total
-     */
-    public int getTotal() {
-        return total;
     }
 }

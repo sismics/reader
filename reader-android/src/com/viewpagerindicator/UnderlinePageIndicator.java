@@ -53,7 +53,6 @@ public class UnderlinePageIndicator extends View implements PageIndicator {
     private int mScrollState;
     private int mCurrentPage;
     private float mPositionOffset;
-    private Integer total;
 
     private int mTouchSlop;
     private float mLastMotionX = -1;
@@ -163,7 +162,7 @@ public class UnderlinePageIndicator extends View implements PageIndicator {
         if (mViewPager == null) {
             return;
         }
-        final int count = getTotal();
+        final int count = mViewPager.getAdapter().getCount();
         if (count == 0) {
             return;
         }
@@ -186,7 +185,7 @@ public class UnderlinePageIndicator extends View implements PageIndicator {
         if (super.onTouchEvent(ev)) {
             return true;
         }
-        if ((mViewPager == null) || (getTotal() == 0)) {
+        if ((mViewPager == null) || (mViewPager.getAdapter().getCount() == 0)) {
             return false;
         }
 
@@ -221,7 +220,7 @@ public class UnderlinePageIndicator extends View implements PageIndicator {
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
                 if (!mIsDragging) {
-                    final int count = getTotal();
+                    final int count = mViewPager.getAdapter().getCount();
                     final int width = getWidth();
                     final float halfWidth = width / 2f;
                     final float sixthWidth = width / 6f;
@@ -265,13 +264,6 @@ public class UnderlinePageIndicator extends View implements PageIndicator {
         return true;
     }
 
-    private int getTotal() {
-        if (total != null) {
-            return total;
-        }
-        return mViewPager.getAdapter().getCount();
-    }
-
     @Override
     public void setViewPager(ViewPager viewPager) {
         if (mViewPager == viewPager) {
@@ -302,12 +294,6 @@ public class UnderlinePageIndicator extends View implements PageIndicator {
         setCurrentItem(initialPosition);
     }
     
-    public void setViewPager(ViewPager view, int initialPosition, Integer total) {
-        setViewPager(view);
-        setCurrentItem(initialPosition);
-        this.total = total;
-    }
-
     @Override
     public void setCurrentItem(int item) {
         if (mViewPager == null) {
