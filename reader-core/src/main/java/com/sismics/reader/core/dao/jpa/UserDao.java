@@ -1,19 +1,5 @@
 package com.sismics.reader.core.dao.jpa;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-
-import org.mindrot.jbcrypt.BCrypt;
-
 import com.google.common.base.Joiner;
 import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.dao.jpa.dto.UserDto;
@@ -23,6 +9,13 @@ import com.sismics.reader.core.util.jpa.PaginatedLists;
 import com.sismics.reader.core.util.jpa.QueryParam;
 import com.sismics.reader.core.util.jpa.SortCriteria;
 import com.sismics.util.context.ThreadLocalContext;
+import org.mindrot.jbcrypt.BCrypt;
+
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import java.sql.Timestamp;
+import java.util.*;
 
 /**
  * User DAO.
@@ -246,7 +239,7 @@ public class UserDao {
         
         // Perform the search
         QueryParam queryParam = new QueryParam(sb.toString(), parameterMap);
-        List<Object[]> l = PaginatedLists.executePaginatedQuery(paginatedList, queryParam, sortCriteria);
+        List<Object[]> l = PaginatedLists.executePaginatedQuery(paginatedList, queryParam, sortCriteria, true);
         
         // Assemble results
         List<UserDto> userDtoList = new ArrayList<UserDto>();

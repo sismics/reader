@@ -1,8 +1,7 @@
 package com.sismics.reader.core.util.jpa;
 
-import java.util.List;
-
 import javax.persistence.Query;
+import java.util.List;
 
 /**
  * Utilities for paginated lists.
@@ -89,10 +88,13 @@ public class PaginatedLists {
      * 
      * @param paginatedList Paginated list object containing parameters, and into which results are added by side effects
      * @param queryParam Query parameters
+     * @param doCount Count the total number of rows
      * @return List of results
      */
-    public static <E> List<Object[]> executePaginatedQuery(PaginatedList<E> paginatedList, QueryParam queryParam) {
-        executeCountQuery(paginatedList, queryParam);
+    public static <E> List<Object[]> executePaginatedQuery(PaginatedList<E> paginatedList, QueryParam queryParam, boolean doCount) {
+        if (doCount) {
+            executeCountQuery(paginatedList, queryParam);
+        }
         return executeResultQuery(paginatedList, queryParam);
     }
 
@@ -102,17 +104,20 @@ public class PaginatedLists {
      * @param paginatedList Paginated list object containing parameters, and into which results are added by side effects
      * @param queryParam Query parameters
      * @param sortCriteria Sort criteria
+     * @param doCount Count the total number of rows
      * @return List of results
      */
-    public static <E> List<Object[]> executePaginatedQuery(PaginatedList<E> paginatedList, QueryParam queryParam, SortCriteria sortCriteria) {
+    public static <E> List<Object[]> executePaginatedQuery(PaginatedList<E> paginatedList, QueryParam queryParam, SortCriteria sortCriteria, boolean doCount) {
         StringBuilder sb = new StringBuilder(queryParam.getQueryString());
         sb.append(" order by c");
         sb.append(sortCriteria.getColumn());
         sb.append(sortCriteria.isAsc() ? " asc" : " desc");
         
         QueryParam sortedQueryParam = new QueryParam(sb.toString(), queryParam.getParameterMap());
-        
-        executeCountQuery(paginatedList, sortedQueryParam);
+
+        if (doCount) {
+            executeCountQuery(paginatedList, sortedQueryParam);
+        }
         return executeResultQuery(paginatedList, sortedQueryParam);
     }
 }

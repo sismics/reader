@@ -1,25 +1,5 @@
 package com.sismics.reader.rest.resource;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.NoResultException;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-
 import com.sismics.reader.core.dao.jpa.CategoryDao;
 import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
@@ -33,6 +13,17 @@ import com.sismics.reader.rest.assembler.ArticleAssembler;
 import com.sismics.rest.exception.ClientException;
 import com.sismics.rest.exception.ForbiddenClientException;
 import com.sismics.rest.util.ValidationUtil;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import javax.persistence.NoResultException;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Category REST resources.
@@ -88,7 +79,7 @@ public class CategoryResource extends BaseResource {
      * @param id Category ID
      * @param unread Returns only unread articles
      * @param limit Page limit
-     * @param offset Page offset
+     * @param afterArticle Start the list after this article
      * @return Response
      * @throws JSONException
      */
@@ -99,8 +90,7 @@ public class CategoryResource extends BaseResource {
             @PathParam("id") String id,
             @QueryParam("unread") boolean unread,
             @QueryParam("limit") Integer limit,
-            @QueryParam("offset") Integer offset,
-            @QueryParam("total") Integer total) throws JSONException {
+            @QueryParam("after_article") String afterArticle) throws JSONException {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
@@ -115,6 +105,7 @@ public class CategoryResource extends BaseResource {
         }
 
         // Get the articles
+        UserArticleDao userArticleDao = new UserArticleDao();
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
         userArticleCriteria.setUnread(unread);
         userArticleCriteria.setUserId(principal.getId());
@@ -123,16 +114,22 @@ public class CategoryResource extends BaseResource {
         if (category.getParentId() != null) {
             userArticleCriteria.setCategoryId(id);
         }
-
-        UserArticleDao userArticleDao = new UserArticleDao();
-        PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, offset);
-        if(total != null) {
-            userArticleDao.countByCriteria(userArticleCriteria, paginatedList);
-            if (paginatedList.getResultCount() != total) {
-                offset += paginatedList.getResultCount() - total;
-                paginatedList = PaginatedLists.create(limit, offset);
+        if (afterArticle != null) {
+            // Paginate after this user article
+            UserArticleCriteria afterArticleCriteria = new UserArticleCriteria();
+            afterArticleCriteria.setUserArticleId(afterArticle);
+            afterArticleCriteria.setUserId(principal.getId());
+            List<UserArticleDto> userArticleDtoList = userArticleDao.findByCriteria(afterArticleCriteria);
+            if (userArticleDtoList.isEmpty()) {
+                throw new ClientException("ArticleNotFound", MessageFormat.format("Can't find user article {0}", afterArticle));
             }
+            UserArticleDto userArticleDto = userArticleDtoList.iterator().next();
+
+            userArticleCriteria.setArticlePublicationDateMax(new Date(userArticleDto.getArticlePublicationTimestamp()));
+            userArticleCriteria.setArticleIdMax(userArticleDto.getArticleId());
         }
+
+        PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, null);
         userArticleDao.findByCriteria(userArticleCriteria, paginatedList);
         
         // Build the response
@@ -142,7 +139,6 @@ public class CategoryResource extends BaseResource {
         for (UserArticleDto userArticle : paginatedList.getResultList()) {
             articles.add(ArticleAssembler.asJson(userArticle));
         }
-        response.put("total", paginatedList.getResultCount());
         response.put("articles", articles);
 
         return Response.ok().entity(response).build();

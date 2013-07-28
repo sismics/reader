@@ -1,17 +1,5 @@
 package com.sismics.reader.core.dao.jpa;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-
 import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
@@ -21,6 +9,12 @@ import com.sismics.reader.core.util.jpa.PaginatedLists;
 import com.sismics.reader.core.util.jpa.QueryParam;
 import com.sismics.reader.core.util.jpa.QueryUtil;
 import com.sismics.util.context.ThreadLocalContext;
+
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import java.sql.Timestamp;
+import java.util.*;
 
 /**
  * User article DAO.
@@ -153,17 +147,6 @@ public class UserArticleDao {
     }
     
     /**
-     * Count user articles by criteria.
-     * 
-     * @param criteria Search criteria
-     * @param paginatedList Paginated list (populated by side effects)
-     */
-    public void countByCriteria(UserArticleCriteria criteria, PaginatedList<UserArticleDto> paginatedList) {
-        QueryParam queryParam = getQueryParam(criteria);
-        PaginatedLists.executeCountQuery(paginatedList, queryParam);
-    }
-
-    /**
      * Searches user articles by criteria.
      * 
      * @param criteria Search criteria
@@ -171,7 +154,7 @@ public class UserArticleDao {
      */
     public void findByCriteria(UserArticleCriteria criteria, PaginatedList<UserArticleDto> paginatedList) {
         QueryParam queryParam = getQueryParam(criteria);
-        List<Object[]> l = PaginatedLists.executePaginatedQuery(paginatedList, queryParam);
+        List<Object[]> l = PaginatedLists.executePaginatedQuery(paginatedList, queryParam, false);
         List<UserArticleDto> userArticleDtoList = assembleResultList(l);
         paginatedList.setResultList(userArticleDtoList);
     }
@@ -252,6 +235,10 @@ public class UserArticleDao {
             criteriaList.add("a.ART_ID_C IN :articleIdIn");
             parameterMap.put("articleIdIn", criteria.getArticleIdIn());
         }
+        if (criteria.getUserArticleId() != null) {
+            criteriaList.add("ua.USA_ID_C = :userArticleId");
+            parameterMap.put("userArticleId", criteria.getUserArticleId());
+        }
         if (criteria.isSubscribed()) {
             criteriaList.add("fs.FES_ID_C is not null");
         }
@@ -265,6 +252,18 @@ public class UserArticleDao {
         if (criteria.isStarred()) {
             criteriaList.add("ua.USA_STARREDDATE_D is not null");
         }
+        if (criteria.getArticlePublicationDateMax() != null && criteria.getArticleIdMax() != null) {
+            // Start the page after this article
+            criteriaList.add("concat(a.ART_PUBLICATIONDATE_D, a.ART_ID_C) < concat(TIMESTAMP(:articlePublicationDateMax), :articleIdMax)");
+            parameterMap.put("articlePublicationDateMax", criteria.getArticlePublicationDateMax());
+            parameterMap.put("articleIdMax", criteria.getArticleIdMax());
+        }
+        if (criteria.getUserArticleStarredDateMax() != null && criteria.getUserArticleIdMax() != null) {
+            // Start the page this starred article
+            criteriaList.add("concat(ua.USA_STARREDDATE_D, ua.USA_ID_C) < concat(TIMESTAMP(:userArticleStarredDateMax), :userArticleIdMax)");
+            parameterMap.put("userArticleStarredDateMax", criteria.getUserArticleStarredDateMax());
+            parameterMap.put("userArticleIdMax", criteria.getUserArticleIdMax());
+        }
         parameterMap.put("userId", criteria.getUserId());
         criteriaList.add("a.ART_DELETEDATE_D is null");
         
@@ -274,9 +273,9 @@ public class UserArticleDao {
         }
         
         if (criteria.isStarred()) {
-            sb.append(" order by ua.USA_STARREDDATE_D desc");
+            sb.append(" order by ua.USA_STARREDDATE_D desc, ua.USA_ID_C desc");
         } else {
-            sb.append(" order by a.ART_PUBLICATIONDATE_D desc");
+            sb.append(" order by a.ART_PUBLICATIONDATE_D desc, a.ART_ID_C desc");
         }
         
         QueryParam queryParam = new QueryParam(sb.toString(), parameterMap);

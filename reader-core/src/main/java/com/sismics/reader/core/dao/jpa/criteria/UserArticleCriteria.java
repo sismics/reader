@@ -1,5 +1,6 @@
 package com.sismics.reader.core.dao.jpa.criteria;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,7 +58,32 @@ public class UserArticleCriteria {
      * Article ID (inclusive).
      */
     private List<String> articleIdIn;
-    
+
+    /**
+     * User article ID.
+     */
+    private String userArticleId;
+
+    /**
+     * Return only articles before this publication date.
+     */
+    private Date articlePublicationDateMax;
+
+    /**
+     * Return only articles before this starred date.
+     */
+    private Date userArticleStarredDateMax;
+
+    /**
+     * Return only articles before this ID.
+     */
+    private String articleIdMax;
+
+    /**
+     * Return only user articles before this ID.
+     */
+    private String userArticleIdMax;
+
     /**
      * Getter of userId.
      *
@@ -236,5 +262,95 @@ public class UserArticleCriteria {
      */
     public void setArticleIdIn(List<String> articleIdIn) {
         this.articleIdIn = articleIdIn;
+    }
+
+    /**
+     * Getter of userArticleId.
+     *
+     * @return userArticleId
+     */
+    public String getUserArticleId() {
+        return userArticleId;
+    }
+
+    /**
+     * Setter of userArticleId.
+     *
+     * @param userArticleId userArticleId
+     */
+    public void setUserArticleId(String userArticleId) {
+        this.userArticleId = userArticleId;
+    }
+
+    /**
+     * Getter of articlePublicationDateMax.
+     *
+     * @return articlePublicationDateMax
+     */
+    public Date getArticlePublicationDateMax() {
+        return articlePublicationDateMax;
+    }
+
+    /**
+     * Setter of articlePublicationDateMax.
+     *
+     * @param articlePublicationDateMax articlePublicationDateMax
+     */
+    public void setArticlePublicationDateMax(Date articlePublicationDateMax) {
+        this.articlePublicationDateMax = articlePublicationDateMax;
+    }
+
+    /**
+     * Getter of userArticleStarredDateMax.
+     *
+     * @return userArticleStarredDateMax
+     */
+    public Date getUserArticleStarredDateMax() {
+        return userArticleStarredDateMax;
+    }
+
+    /**
+     * Setter of userArticleStarredDateMax.
+     *
+     * @param userArticleStarredDateMax userArticleStarredDateMax
+     */
+    public void setUserArticleStarredDateMax(Date userArticleStarredDateMax) {
+        this.userArticleStarredDateMax = userArticleStarredDateMax;
+    }
+
+    /**
+     * Getter of articleIdMax.
+     *
+     * @return articleIdMax
+     */
+    public String getArticleIdMax() {
+        return articleIdMax;
+    }
+
+    /**
+     * Setter of articleIdMax.
+     *
+     * @param articleIdMax articleIdMax
+     */
+    public void setArticleIdMax(String articleIdMax) {
+        this.articleIdMax = articleIdMax;
+    }
+
+    /**
+     * Getter of userArticleIdMax.
+     *
+     * @return userArticleIdMax
+     */
+    public String getUserArticleIdMax() {
+        return userArticleIdMax;
+    }
+
+    /**
+     * Setter of userArticleIdMax.
+     *
+     * @param userArticleIdMax userArticleIdMax
+     */
+    public void setUserArticleIdMax(String userArticleIdMax) {
+        this.userArticleIdMax = userArticleIdMax;
     }
 }

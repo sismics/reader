@@ -65,8 +65,23 @@ public class TestAllResource extends BaseJerseyTest {
         JSONArray articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(10, articles.length());
-        Integer total = json.optInt("total");
-        Assert.assertTrue(total >= 10);
+        JSONObject article = (JSONObject) articles.get(1);
+        String article1Id = article.getString("id");
+        article = (JSONObject) articles.get(2);
+        String article2Id = article.getString("id");
+
+        // Check pagination
+        categoryResource = resource().path("/category/" + rootCategoryId);
+        categoryResource.addFilter(new CookieAuthenticationFilter(all1AuthToken));
+        MultivaluedMapImpl queryParams = new MultivaluedMapImpl();
+        queryParams.add("after_article", article1Id);
+        response = categoryResource.queryParams(queryParams).get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        articles = json.optJSONArray("articles");
+        Assert.assertNotNull(articles);
+        Assert.assertEquals(8, articles.length());
+        Assert.assertEquals(article2Id, article.getString("id"));
 
         // Check the all resource
         WebResource allResource = resource().path("/all");
@@ -77,7 +92,23 @@ public class TestAllResource extends BaseJerseyTest {
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(10, articles.length());
-        Assert.assertEquals(total.intValue(), json.optInt("total"));
+        article = (JSONObject) articles.get(1);
+        article1Id = article.getString("id");
+        article = (JSONObject) articles.get(2);
+        article2Id = article.getString("id");
+
+        // Check pagination
+        categoryResource = resource().path("/all");
+        categoryResource.addFilter(new CookieAuthenticationFilter(all1AuthToken));
+        queryParams = new MultivaluedMapImpl();
+        queryParams.add("after_article", article1Id);
+        response = categoryResource.queryParams(queryParams).get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        articles = json.optJSONArray("articles");
+        Assert.assertNotNull(articles);
+        Assert.assertEquals(8, articles.length());
+        Assert.assertEquals(article2Id, article.getString("id"));
 
         // Marks all articles as read
         allResource = resource().path("/all/read");
@@ -94,12 +125,11 @@ public class TestAllResource extends BaseJerseyTest {
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(10, articles.length());
-        Assert.assertEquals(total.intValue(), json.optInt("total"));
 
         // Check the all resource for unread articles
         allResource = resource().path("/all");
         allResource.addFilter(new CookieAuthenticationFilter(all1AuthToken));
-        MultivaluedMapImpl queryParams = new MultivaluedMapImpl();
+        queryParams = new MultivaluedMapImpl();
         queryParams.add("unread", true);
         response = allResource.queryParams(queryParams).get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
@@ -107,88 +137,8 @@ public class TestAllResource extends BaseJerseyTest {
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(0, articles.length());
-        Assert.assertEquals(0, json.optInt("total"));
     }
-    
-    @Test
-    public void testPagination() throws JSONException {
-        // Create user page1
-        clientUtil.createUser("page1");
-        String page1AuthToken = clientUtil.login("page1");
 
-        // Subscribe to korben.info
-        WebResource subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(page1AuthToken));
-        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://localhost:9997/http/feeds/korben.xml");
-        ClientResponse response = subscriptionResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
-        String subscription1Id = json.optString("id");
-        Assert.assertNotNull(subscription1Id);
-        
-        // Check the all resource
-        WebResource allResource = resource()
-                .path("/all")
-                .queryParam("unread", "true")
-                .queryParam("limit", "4")
-                .queryParam("offset", "0");
-        allResource.addFilter(new CookieAuthenticationFilter(page1AuthToken));
-        response = allResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
-        JSONArray articles1 = json.optJSONArray("articles");
-        Assert.assertEquals(4, articles1.length());
-        int total1 = json.optInt("total");
-        Assert.assertEquals(10, total1);
-        Assert.assertEquals("RetroN 5 – La console pour les nostalgiques de la cartouche", articles1.optJSONObject(0).getString("title"));
-        
-        // Check the all resource
-        allResource = resource()
-                .path("/all")
-                .queryParam("unread", "true")
-                .queryParam("limit", "4")
-                .queryParam("offset", "4")
-                .queryParam("total", Integer.toString(total1));
-        allResource.addFilter(new CookieAuthenticationFilter(page1AuthToken));
-        response = allResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
-        JSONArray articles2 = json.optJSONArray("articles");
-        Assert.assertEquals(4, articles2.length());
-        int total2 = json.optInt("total");
-        Assert.assertEquals(10, total2);
-        Assert.assertEquals("Imprimer son arme sera bientôt possible", articles2.optJSONObject(0).getString("title"));
-        
-        // Mark 2 articles as read
-        WebResource articleResource = resource().path("/article/read");
-        articleResource.addFilter(new CookieAuthenticationFilter(page1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("id", articles1.optJSONObject(1).getString("id"));
-        postParams.add("id", articles1.optJSONObject(2).getString("id"));
-        response = articleResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
-        Assert.assertEquals("ok", json.getString("status"));
-        
-        // Check the all resource
-        allResource = resource()
-                .path("/all")
-                .queryParam("unread", "true")
-                .queryParam("limit", "4")
-                .queryParam("offset", "4")
-                .queryParam("total", Integer.toString(total1));
-        allResource.addFilter(new CookieAuthenticationFilter(page1AuthToken));
-        response = allResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
-        JSONArray articles3 = json.optJSONArray("articles");
-        Assert.assertEquals(4, articles3.length());
-        int total3 = json.optInt("total");
-        Assert.assertEquals(8, total3);
-        Assert.assertEquals("Imprimer son arme sera bientôt possible", articles3.optJSONObject(0).getString("title"));
-    }
-    
     @Test
     public void testMultipleUsers() throws JSONException {
         // Create user multiple1
@@ -215,8 +165,7 @@ public class TestAllResource extends BaseJerseyTest {
         JSONArray articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(10, articles.length());
-        Assert.assertEquals(10, json.optInt("total"));
-        
+
         // Create user multiple2
         clientUtil.createUser("multiple2");
         String multiple2AuthToken = clientUtil.login("multiple2");
@@ -241,6 +190,5 @@ public class TestAllResource extends BaseJerseyTest {
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(10, articles.length());
-        Assert.assertEquals(10, json.optInt("total"));
     }
 }
