@@ -11,11 +11,13 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     <string name="login_fail_title">Login fail</string>
     <string name="login_fail">Wrong username or password</string>
     <string name="network_error_title">Network error</string>
     <string name="network_error">Network error, please check internet connectivity and server URL</string>
     <string name="refresh">Refresh</string>
+    <string name="all_read">Mark all as read</string>
     <string name="logout">Logout</string>
     <string name="settings">Settings</string>
     <string name="about">About</string>
@@ -29,6 +31,8 @@
     <string name="article_subscription">on %1$s</string>
     <string name="article_subscription_author">on %1$s by %2$s</string>
     <string name="crash_toast_text">A crash occurred, a report has been sent to resolve this problem</string>
+    <string name="all_read_title">Mark all as read</string>
+    <string name="all_read_message">Mark all articles as read?</string>
 
     <!-- Preferences -->
     <string name="pref_general_category">General preferences</string>

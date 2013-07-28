@@ -2,6 +2,8 @@ package com.sismics.reader.activity;
 
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import com.sismics.reader.fragment.ArticlesFragment;
 import com.sismics.reader.model.application.ApplicationContext;
 import com.sismics.reader.resource.SubscriptionResource;
 import com.sismics.reader.resource.UserResource;
+import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
 import com.sismics.reader.ui.adapter.SubscriptionAdapter;
 import com.sismics.reader.ui.adapter.SubscriptionAdapter.SubscriptionItem;
 
@@ -123,6 +126,32 @@ public class MainActivity extends FragmentActivity {
 //            startActivity(new Intent(NavigationActivity.this, SettingsActivity.class));
 //            return true;
             
+        case R.id.all_read:
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.all_read_title)
+            .setMessage(R.string.all_read_message)
+            .setCancelable(true)
+            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    String url = SharedArticlesAdapterHelper.getInstance().getUrl();
+                    SubscriptionResource.read(MainActivity.this, url, new SismicsHttpResponseHandler() {
+                        @Override
+                        public void onFinish() {
+                            refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
+                        }
+                    });
+                }
+            })
+            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.dismiss();
+                }
+            })
+            .create().show();
+            return true;
+        
         case R.id.about:
             startActivity(new Intent(MainActivity.this, AboutActivity.class));
             return true;

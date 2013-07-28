@@ -51,6 +51,18 @@ public class SubscriptionResource extends BaseResource {
     }
     
     /**
+     * Mark all articles as read.
+     * @param context
+     * @param responseHandler
+     */
+    public static void read(Context context, String url, SismicsHttpResponseHandler responseHandler) {
+        init(context);
+        
+        RequestParams params = new RequestParams();
+        client.post(getApiUrl(context) + url + "/read", params, responseHandler);
+    }
+    
+    /**
      * Cancel pending requests.
      * @param context
      */

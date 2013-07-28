@@ -8,6 +8,12 @@
         android:title="@string/refresh">
     </item>
     <item
+        android:id="@+id/all_read"
+        android:icon="@drawable/content_read"
+        android:showAsAction="ifRoom"
+        android:title="@string/all_read">
+    </item>
+    <item
         android:id="@+id/logout"
         android:showAsAction="collapseActionView"
         android:title="@string/logout">

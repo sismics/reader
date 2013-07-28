@@ -128,6 +128,14 @@ public class SharedArticlesAdapterHelper {
     }
     
     /**
+     * Getter of URL.
+     * @return URL
+     */
+    public String getUrl() {
+        return url;
+    }
+    
+    /**
      * Load more articles.
      * @param context
      */
