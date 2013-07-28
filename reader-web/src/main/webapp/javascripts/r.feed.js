@@ -106,11 +106,11 @@ r.feed.init = function() {
     // Focus on articles list
     $('#feed-container').focus();
     
-    // Loading subscriptions tree
-    r.subscription.update();
-    
     // Loading articles
     r.feed.load(false);
+    
+    // Loading subscriptions tree
+    r.subscription.update();
   });
   
   // Smartphone and desktop scroll listener
