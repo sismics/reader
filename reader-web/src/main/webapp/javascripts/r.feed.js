@@ -244,6 +244,11 @@ r.feed.load = function(next) {
     data.after_article = r.feed.context.lastItem.attr('data-article-id');
   }
   
+  // Special case for search (use offset paging)
+  if (next && r.feed.context.url.substring(0, 11) == r.util.url.search.substring(0, 11)) {
+    data.offset = $('#feed-container .feed-item').length;
+  }
+  
   // Calling API
   r.util.ajax({
     url: r.feed.context.url,
