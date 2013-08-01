@@ -12,7 +12,7 @@
     "error": "Mauvais nom d'utilisateur ou mot de passe"
   },
   "jobs": {
-    "inprogress": "Imports en cours",
+    "inprogress": "Import en cours",
     "feeds": "Flux :",
     "starred": "Favoris :",
     "failed": "échecs"

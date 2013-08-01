@@ -90,13 +90,19 @@ r.user.pollJobs = function(userInfo) {
       var html = '<p>' + $.t('jobs.inprogress') + '</p>';
       $(userInfo.jobs).each(function (i, job) {
         // Feeds progress bar
-        var title = '&lt;b&gt;' + $.t('jobs.feeds') + '&lt;/b&gt; ' + job.feed_success + '/' + job.feed_total + ' (' + job.feed_failure + ' ' + $.t('jobs.failed') + ')';
+        var title = '&lt;b&gt;' + $.t('jobs.feeds') + '&lt;/b&gt; ' + (job.feed_success + job.feed_failure) + '/' + job.feed_total;
+        if (job.feed_failure > 0) {
+          title += ' (' + job.feed_failure + ' ' + $.t('jobs.failed') + ')';
+        }
         var progress = Math.round(job.feed_success / job.feed_total * 100);
         html += '<div class="bar"><div class="label">' + $.t('jobs.feeds') + '&nbsp;</div>'
           + '<div class="job" title="' + title + '" ><div class="progress" style="width: ' + progress + '%;"></div></div></div>';
         
         // Starred articles progress bar
-        var title = '&lt;b&gt;' + $.t('jobs.starred') + '&lt;/b&gt; ' + job.starred_success + '/' + job.starred_total + ' (' + job.starred_failure + ' ' + $.t('jobs.failed') + ')';
+        var title = '&lt;b&gt;' + $.t('jobs.starred') + '&lt;/b&gt; ' + (job.starred_success + job.starred_failure) + '/' + job.starred_total;
+        if (job.starred_failure > 0) {
+          title += ' (' + job.starred_failure + ' ' + $.t('jobs.failed') + ')';
+        }
         var progress = Math.round(job.starred_success / job.starred_total * 100);
         html += '<div class="bar"><div class="label">' + $.t('jobs.starred') + '&nbsp;</div>'
           + '<div class="job" title="' + title + '" ><div class="progress" style="width: ' + progress + '%;"></div></div></div>';

@@ -12,7 +12,7 @@
     "error": "Bad username or password"
   },
   "jobs": {
-    "inprogress": "Imports in progress",
+    "inprogress": "Import in progress",
     "feeds": "Feeds:",
     "starred": "Starred:",
     "failed": "failed"
