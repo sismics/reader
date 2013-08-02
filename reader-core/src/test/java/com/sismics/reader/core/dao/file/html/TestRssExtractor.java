@@ -30,7 +30,7 @@ public class TestRssExtractor {
         Assert.assertEquals(3, feedList.size());
         Assert.assertEquals("http://korben.info/feed", feedList.get(0));
         Assert.assertEquals("http://korben.info/feed/atom", feedList.get(1));
-        Assert.assertEquals("http://korben.info/wp-content/plugins/nextgen-gallery/xml/media-rss.php", feedList.get(2));
+        Assert.assertEquals("http://korben.info/wp-content/plugins/nextgen-gallery/products/photocrati_nextgen/modules/ngglegacy/xml/media-rss.php", feedList.get(2));
     }
 
     @Test
