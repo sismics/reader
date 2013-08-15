@@ -1,16 +1,14 @@
 package com.sismics.util;
 
-import java.io.InputStream;
-import java.util.List;
-
-import junit.framework.Assert;
-
-import org.junit.Test;
-
 import com.sismics.reader.core.dao.file.rss.RssReader;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.util.sanitizer.ArticleSanitizer;
+import junit.framework.Assert;
+import org.junit.Test;
+
+import java.io.InputStream;
+import java.util.List;
 
 /**
  * Test of the article sanitizer.
@@ -24,7 +22,7 @@ public class TestArticleSanitizer {
      * @throws Exception
      */
     @Test
-    public void articleSanitizerImageTest() throws Exception {
+    public void articleSanitizerImageAkeweaTest() throws Exception {
         // Load a feed
         InputStream is = getClass().getResourceAsStream("/feed/feed_atom_akewea.xml");
         RssReader reader = new RssReader();
@@ -40,6 +38,29 @@ public class TestArticleSanitizer {
         String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
         Assert.assertTrue(html.contains("\"http://blog.akewea.com/themes/akewea-4/smilies/redface.png\""));
         Assert.assertTrue(html.contains("\"http://blog.akewea.com/themes/akewea-4/smilies/test.png\""));
+    }
+
+    /**
+     * Tests the article sanitizer.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void articleSanitizerImageDilbertTest() throws Exception {
+        // Load a feed
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_dilbert.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("http://dilbert.com/blog", feed.getUrl());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(20, articleList.size());
+        Article article = articleList.get(0);
+
+        // Images: transform relative URLs to absolute
+        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
+        String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
+        Assert.assertTrue(html.contains("\"http://dilbert.com/dyn/tiny/File/photo.JPG\""));
     }
 
     /**
