@@ -1,25 +1,5 @@
 package com.sismics.reader.core.service;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.net.ConnectException;
-import java.net.URL;
-import java.net.UnknownHostException;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.lang.StringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.Days;
-import org.joda.time.Instant;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.AbstractScheduledService;
 import com.sismics.reader.core.dao.file.html.FeedChooserStrategy;
@@ -51,6 +31,22 @@ import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
 import com.sismics.reader.core.util.sanitizer.ArticleSanitizer;
 import com.sismics.reader.core.util.sanitizer.TextSanitizer;
+import com.sismics.util.UrlUtil;
+import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Instant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.net.ConnectException;
+import java.net.URL;
+import java.net.UnknownHostException;
+import java.text.MessageFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Feed service.
@@ -189,7 +185,7 @@ public class FeedService extends AbstractScheduledService {
                 article.setUrl(newArticle.getUrl());
                 article.setTitle(StringUtils.abbreviate(TextSanitizer.sanitize(newArticle.getTitle()), 4000));
                 article.setCreator(StringUtils.abbreviate(newArticle.getCreator(), 200));
-                String baseUri = getBaseUri(feed, newArticle);
+                String baseUri = UrlUtil.getBaseUri(feed, newArticle);
                 article.setDescription(sanitizer.sanitize(baseUri, newArticle.getDescription()));
                 article.setCommentUrl(newArticle.getCommentUrl());
                 article.setCommentCount(newArticle.getCommentCount());
@@ -225,7 +221,7 @@ public class FeedService extends AbstractScheduledService {
                 article.setFeedId(feed.getId());
                 article.setTitle(StringUtils.abbreviate(TextSanitizer.sanitize(article.getTitle()), 4000));
                 article.setCreator(StringUtils.abbreviate(article.getCreator(), 200));
-                String baseUri = getBaseUri(feed, article);
+                String baseUri = UrlUtil.getBaseUri(feed, article);
                 article.setDescription(sanitizer.sanitize(baseUri, article.getDescription()));
                 if (article.getPublicationDate() == null) {
                     article.setPublicationDate(new Date());
@@ -254,25 +250,6 @@ public class FeedService extends AbstractScheduledService {
         return feed;
     }
     
-    /**
-     * Get the relative URI for links in an article.
-     * 
-     * @param feed Feed
-     * @param article Article
-     * @return Relative URI
-     */
-    private String getBaseUri(Feed feed, Article article) {
-        if (article.getBaseUri() != null) {
-            // Use xml:base from Atom spec
-            return article.getBaseUri();
-        }
-        if (feed.getBaseUri() != null) {
-            // Use xml:base from Atom spec
-            return feed.getBaseUri();
-        }
-        return feed.getUrl();
-    }
-
     /**
      * Parse a page containing a RSS or Atom feed, or HTML linking to a feed.
      * 

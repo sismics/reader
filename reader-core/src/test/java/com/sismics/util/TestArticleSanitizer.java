@@ -35,7 +35,8 @@ public class TestArticleSanitizer {
 
         // Images: transform relative URLs to absolute
         ArticleSanitizer articleSanitizer = new ArticleSanitizer();
-        String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
+        String baseUrl = UrlUtil.getBaseUri(feed, article);
+        String html = articleSanitizer.sanitize(baseUrl, article.getDescription());
         Assert.assertTrue(html.contains("\"http://blog.akewea.com/themes/akewea-4/smilies/redface.png\""));
         Assert.assertTrue(html.contains("\"http://blog.akewea.com/themes/akewea-4/smilies/test.png\""));
     }
@@ -59,7 +60,8 @@ public class TestArticleSanitizer {
 
         // Images: transform relative URLs to absolute
         ArticleSanitizer articleSanitizer = new ArticleSanitizer();
-        String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
+        String baseUrl = UrlUtil.getBaseUri(feed, article);
+        String html = articleSanitizer.sanitize(baseUrl, article.getDescription());
         Assert.assertTrue(html.contains("\"http://dilbert.com/dyn/tiny/File/photo.JPG\""));
     }
 
