@@ -53,11 +53,13 @@ public class ArticleSanitizer {
      * Allowed iframe src.
      */
     private static final Pattern IFRAME_SRC_PATTERN = Pattern.compile(
-            "http(s)?://(www.)?youtube.com/embed/.+|" + 
-            "http://player.vimeo.com/video/.+|" +
-            "http://www.dailymotion.com/embed/.+|" +
-            "http://slashdot.org/.+|" +
-            "http://www.viddler.com/.+");
+            "(http:|https:)?//(www.)?youtube.com/embed/.+|" + 
+            "(http:|https:)?//player.vimeo.com/video/.+|" +
+            "(http:|https:)?//www.dailymotion.com/embed/.+|" +
+            "(http:|https:)?//slashdot.org/.+|" +
+            "(http:|https:)?//www.viddler.com/.+|" +
+            "(http:|https:)?//maps.google.com/.+|" +
+            "(http:|https:)?//w.soundcloud.com/.+");
 
     /**
      * Sanitize HTML contents.
@@ -91,7 +93,7 @@ public class ArticleSanitizer {
         
         // Allow iframes for embedded videos
         PolicyFactory videoPolicyFactory = new HtmlPolicyBuilder()
-                .allowStandardUrlProtocols()
+                .allowUrlProtocols("http", "https")
                 .allowAttributes("src", "height", "width", "style")
                 .matching(new AttributePolicy() {
                     @Override
