@@ -11,9 +11,7 @@ import org.apache.lucene.document.Field;
 import org.apache.lucene.document.FieldType;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
-import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.FieldInfo.IndexOptions;
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queries.TermsFilter;
@@ -135,8 +133,7 @@ public class ArticleDao {
         TermsFilter feedsFilter = new TermsFilter(terms);
         
         // Search
-        IndexReader reader = DirectoryReader.open(AppContext.getInstance().getLuceneDirectory());
-        IndexSearcher searcher = new IndexSearcher(reader);
+        IndexSearcher searcher = new IndexSearcher(AppContext.getInstance().getIndexingService().getDirectoryReader());
         TopDocs topDocs = searcher.search(query, feedsFilter, paginatedList.getOffset() + paginatedList.getLimit());
         ScoreDoc[] docs = topDocs.scoreDocs;
         paginatedList.setResultCount(topDocs.totalHits);
