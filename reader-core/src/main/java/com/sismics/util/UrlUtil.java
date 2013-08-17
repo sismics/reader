@@ -1,5 +1,8 @@
 package com.sismics.util;
 
+import com.sismics.reader.core.model.jpa.Article;
+import com.sismics.reader.core.model.jpa.Feed;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -9,6 +12,36 @@ import java.net.URL;
  * @author jtremeaux 
  */
 public class UrlUtil {
+
+    /**
+     * Get the relative URI for links in an article.
+     *
+     * @param feed Feed
+     * @param article Article
+     * @return Relative URI
+     */
+    public static String getBaseUri(Feed feed, Article article) {
+        if (article.getBaseUri() != null) {
+            // Use xml:base from Atom spec
+            return article.getBaseUri();
+        }
+        if (feed.getBaseUri() != null) {
+            // Use xml:base from Atom spec
+            return feed.getBaseUri();
+        }
+
+        // Use the website root URL
+        if (feed.getUrl() != null) {
+            try {
+                URL url = new URL(feed.getUrl());
+                return new URL(url.getProtocol(), url.getHost(), url.getPort(), "").toString();
+            } catch (MalformedURLException e) {
+                return feed.getUrl();
+            }
+        } else {
+            return null;
+        }
+    }
 
     /**
      * Completes and validates relative URLs.
