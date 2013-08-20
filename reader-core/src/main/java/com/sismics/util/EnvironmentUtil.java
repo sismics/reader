@@ -18,9 +18,9 @@ public class EnvironmentUtil {
     private static String READER_HOME = System.getProperty("reader.home");
 
     /**
-     * Web application root.
+     * In a web application context.
      */
-    private static String webappRoot;
+    private static boolean webappContext;
     
     /**
      * Returns true if running under Microsoft Windows.
@@ -55,7 +55,7 @@ public class EnvironmentUtil {
      * @return Unit testing environment
      */
     public static boolean isUnitTest() {
-        return webappRoot == null ||
+        return !webappContext ||
                 TEST_ENV != null && "true".equals(TEST_ENV);
     }
 
@@ -87,20 +87,20 @@ public class EnvironmentUtil {
     }
 
     /**
-     * Getter of webappRoot.
+     * Getter of webappContext.
      *
-     * @return webappRoot
+     * @return webappContext
      */
-    public static String getWebappRoot() {
-        return webappRoot;
+    public static boolean isWebappContext() {
+        return webappContext;
     }
 
     /**
-     * Setter of webappRoot.
+     * Setter of webappContext.
      *
-     * @param webappRoot webappRoot
+     * @param webappContext webappContext
      */
-    public static void setWebappRoot(String webappRoot) {
-        EnvironmentUtil.webappRoot = webappRoot;
+    public static void setWebappContext(boolean webappContext) {
+        EnvironmentUtil.webappContext = webappContext;
     }
 }

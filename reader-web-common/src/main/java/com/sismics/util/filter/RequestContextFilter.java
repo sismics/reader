@@ -1,26 +1,5 @@
 package com.sismics.util.filter;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.MessageFormat;
-import java.util.Locale;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.Level;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.RollingFileAppender;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.util.DirectoryUtil;
@@ -28,6 +7,20 @@ import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.util.EnvironmentUtil;
 import com.sismics.util.context.ThreadLocalContext;
 import com.sismics.util.jpa.EMF;
+import org.apache.log4j.Level;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.RollingFileAppender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.servlet.*;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.text.MessageFormat;
+import java.util.Locale;
 
 /**
  * Filter used to process a couple things in the request context.
@@ -45,11 +38,8 @@ public class RequestContextFilter implements Filter {
         // Force the locale in order to not depend on the execution environment
         Locale.setDefault(new Locale(Constants.DEFAULT_LOCALE_ID));
 
-        // Injects the webapp root
-        String webappRoot = filterConfig.getServletContext().getRealPath("/");
-        EnvironmentUtil.setWebappRoot(webappRoot);
-        
         // Initialize the app directory
+        EnvironmentUtil.setWebappContext(true);
         File baseDataDirectory = null;
         try {
             baseDataDirectory = DirectoryUtil.getBaseDataDirectory();
