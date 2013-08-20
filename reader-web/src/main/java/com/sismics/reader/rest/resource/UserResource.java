@@ -1,36 +1,7 @@
 package com.sismics.reader.rest.resource;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
-import javax.servlet.http.Cookie;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.NewCookie;
-import javax.ws.rs.core.Response;
-
-import org.apache.commons.lang.StringUtils;
-import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-
 import com.sismics.reader.core.constant.Constants;
-import com.sismics.reader.core.dao.jpa.AuthenticationTokenDao;
-import com.sismics.reader.core.dao.jpa.CategoryDao;
-import com.sismics.reader.core.dao.jpa.JobDao;
-import com.sismics.reader.core.dao.jpa.JobEventDao;
-import com.sismics.reader.core.dao.jpa.RoleBaseFunctionDao;
-import com.sismics.reader.core.dao.jpa.UserDao;
+import com.sismics.reader.core.dao.jpa.*;
 import com.sismics.reader.core.dao.jpa.criteria.JobCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.JobEventCriteria;
 import com.sismics.reader.core.dao.jpa.dto.JobDto;
@@ -53,6 +24,20 @@ import com.sismics.rest.util.ValidationUtil;
 import com.sismics.security.UserPrincipal;
 import com.sismics.util.LocaleUtil;
 import com.sismics.util.filter.TokenBasedSecurityFilter;
+import org.apache.commons.lang.StringUtils;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import javax.servlet.http.Cookie;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * User REST resources.
@@ -176,8 +161,8 @@ public class UserResource extends BaseResource {
         // Validate the input data
         password = ValidationUtil.validateLength(password, "password", 8, 50, true);
         email = ValidationUtil.validateLength(email, "email", null, 100, true);
-        localeId = ValidationUtil.validateLocale(localeId, "locale", true);
-        themeId = ValidationUtil.validateTheme(themeId, "theme", true);
+        localeId = com.sismics.reader.rest.util.ValidationUtil.validateLocale(localeId, "locale", true);
+        themeId = com.sismics.reader.rest.util.ValidationUtil.validateTheme(request.getServletContext(), themeId, "theme", true);
         
         // Update the user
         UserDao userDao = new UserDao();
@@ -264,8 +249,8 @@ public class UserResource extends BaseResource {
         // Validate the input data
         password = ValidationUtil.validateLength(password, "password", 8, 50, true);
         email = ValidationUtil.validateLength(email, "email", null, 100, true);
-        localeId = ValidationUtil.validateLocale(localeId, "locale", true);
-        themeId = ValidationUtil.validateTheme(themeId, "theme", true);
+        localeId = com.sismics.reader.rest.util.ValidationUtil.validateLocale(localeId, "locale", true);
+        themeId = com.sismics.reader.rest.util.ValidationUtil.validateTheme(request.getServletContext(), themeId, "theme", true);
         
         // Check if the user exists
         UserDao userDao = new UserDao();

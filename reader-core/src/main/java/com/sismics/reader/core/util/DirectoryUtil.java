@@ -1,10 +1,9 @@
 package com.sismics.reader.core.util;
 
-import java.io.File;
-
+import com.sismics.util.EnvironmentUtil;
 import org.apache.commons.lang.StringUtils;
 
-import com.sismics.util.EnvironmentUtil;
+import java.io.File;
 
 /**
  * Utilities to gain access to the storage directories used by the application.
@@ -80,35 +79,16 @@ public class DirectoryUtil {
     }
 
     /**
-     * Returns the themes directory.
-     * 
-     * @return Theme directory.
-     */
-    public static File getThemeDirectory() {
-        String webappRoot = EnvironmentUtil.getWebappRoot();
-        File themeDir = null;
-        if (webappRoot != null) {
-            themeDir = new File(webappRoot + File.separator + "stylesheets" + File.separator + "theme");
-        } else {
-            themeDir = new File(DirectoryUtil.class.getResource("/stylesheets/theme").getFile());
-        }
-        if (themeDir != null && themeDir.isDirectory()) {
-            return themeDir;
-        }
-        return null;
-    }
-
-    /**
      * Returns a subdirectory of the base data directory
      * 
      * @return Subdirectory
      */
     private static File getDataSubDirectory(String subdirectory) {
         File baseDataDir = getBaseDataDirectory();
-        File faviconDirectory = new File(baseDataDir.getPath() + File.separator + subdirectory);
-        if (!faviconDirectory.isDirectory()) {
-            faviconDirectory.mkdirs();
+        File dataSubDirectory = new File(baseDataDir.getPath() + File.separator + subdirectory);
+        if (!dataSubDirectory.isDirectory()) {
+            dataSubDirectory.mkdirs();
         }
-        return faviconDirectory;
+        return dataSubDirectory;
     }
 }

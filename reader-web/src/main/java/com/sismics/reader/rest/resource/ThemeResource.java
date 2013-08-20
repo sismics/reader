@@ -1,18 +1,17 @@
 package com.sismics.reader.rest.resource;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.sismics.reader.rest.dao.ThemeDao;
+import com.sismics.rest.exception.ServerException;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-
-import com.sismics.reader.core.dao.file.theme.ThemeDao;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Theme REST resources.
@@ -31,7 +30,12 @@ public class ThemeResource extends BaseResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response list() throws JSONException {
         ThemeDao themeDao = new ThemeDao();
-        List<String> themeList = themeDao.findAll();
+        List<String> themeList = null;
+        try {
+            themeList = themeDao.findAll(request.getServletContext());
+        } catch (Exception e) {
+            throw new ServerException("UnknownError", "Error getting theme list", e);
+        }
         JSONObject response = new JSONObject();
         List<JSONObject> items = new ArrayList<JSONObject>();
         for (String theme : themeList) {
