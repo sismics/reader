@@ -7,8 +7,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.lucene.store.Directory;
-
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 import com.sismics.reader.core.constant.ConfigType;
@@ -66,11 +64,6 @@ public class AppContext {
     private IndexingService indexingService;
 
     /**
-     * Lucene directory.
-     */
-    private Directory luceneDirectory;
-    
-    /**
      * Asynchronous executors.
      */
     private List<ExecutorService> asyncExecutorList;
@@ -88,8 +81,6 @@ public class AppContext {
         Config luceneStorageConfig = configDao.getById(ConfigType.LUCENE_DIRECTORY_STORAGE);
         indexingService = new IndexingService(luceneStorageConfig != null ? luceneStorageConfig.getValue() : null);
         indexingService.startAndWait();
-        
-        luceneDirectory = indexingService.getDirectory();
     }
     
     /**
@@ -211,20 +202,11 @@ public class AppContext {
     }
     
     /**
-     * Getter of feedService.
+     * Getter of indexingService.
      *
-     * @return feedService
+     * @return indexingService
      */
     public IndexingService getIndexingService() {
         return indexingService;
-    }
-
-    /**
-     * Getter of- luceneDirectory.
-     *
-     * @return the luceneDirectory
-     */
-    public Directory getLuceneDirectory() {
-        return luceneDirectory;
     }
 }

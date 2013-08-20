@@ -168,6 +168,57 @@ public class TestArticleSanitizer {
         html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
         Assert.assertTrue(html.contains("La RetroN 5 sera équipée d&#39;une sortie HDMI"));
         Assert.assertTrue(html.contains("<iframe src=\"https://www.youtube.com/embed/5OcNy7t17LA?feature&#61;player_embedded\" height=\"360\" width=\"640\">"));
+        
+        // Allow iframes to Youtube without protocol
+        article = articleList.get(15);
+        articleSanitizer = new ArticleSanitizer();
+        html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
+        Assert.assertTrue(html.contains("Si quand vous étiez petit"));
+        Assert.assertTrue(html.contains("<iframe src=\"//www.youtube.com/embed/7vIi0U4rSX4?feature&#61;player_embedded\" height=\"360\" width=\"640\">"));
+    }
+    
+    /**
+     * Tests the article sanitizer.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void articleSanitizerIframeGoogleMapsTest() throws Exception {
+        // Load a feed
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_korben.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        List<Article> articleList = reader.getArticleList();
+
+        // Allow iframes to Google Maps
+        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
+        Article article = articleList.get(15);
+        articleSanitizer = new ArticleSanitizer();
+        String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
+        Assert.assertTrue(html.contains("<iframe src=\"https://maps.google.com/?t&#61;m&amp;layer&#61;c&amp;panoid&#61;JkQZAcDH9c2tky4T8irVUg&amp;cbp&#61;13,219.16,,0,41.84&amp;cbll&#61;35.370043,138.739238&amp;ie&#61;UTF8&amp;source&#61;embed&amp;ll&#61;35.336203,138.739128&amp;spn&#61;0.117631,0.216293&amp;z&#61;12&amp;output&#61;svembed\" height=\"420\" width=\"630\">"));
+    }
+    
+    /**
+     * Tests the article sanitizer.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void articleSanitizerIframeSoundCloudTest() throws Exception {
+        // Load a feed
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_korben.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        List<Article> articleList = reader.getArticleList();
+
+        // Allow iframes to SoundCloud
+        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
+        Article article = articleList.get(15);
+        articleSanitizer = new ArticleSanitizer();
+        String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
+        Assert.assertTrue(html.contains("<iframe height=\"166\" src=\"https://w.soundcloud.com/player/?url&#61;http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F105401675\" width=\"100%\"></iframe>"));
     }
 
     /**
