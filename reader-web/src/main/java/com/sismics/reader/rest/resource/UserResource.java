@@ -22,6 +22,7 @@ import com.sismics.rest.exception.ForbiddenClientException;
 import com.sismics.rest.exception.ServerException;
 import com.sismics.rest.util.ValidationUtil;
 import com.sismics.security.UserPrincipal;
+import com.sismics.util.EnvironmentUtil;
 import com.sismics.util.LocaleUtil;
 import com.sismics.util.filter.TokenBasedSecurityFilter;
 import org.apache.commons.lang.StringUtils;
@@ -162,7 +163,7 @@ public class UserResource extends BaseResource {
         password = ValidationUtil.validateLength(password, "password", 8, 50, true);
         email = ValidationUtil.validateLength(email, "email", null, 100, true);
         localeId = com.sismics.reader.rest.util.ValidationUtil.validateLocale(localeId, "locale", true);
-        themeId = com.sismics.reader.rest.util.ValidationUtil.validateTheme(request.getServletContext(), themeId, "theme", true);
+        themeId = com.sismics.reader.rest.util.ValidationUtil.validateTheme(EnvironmentUtil.isUnitTest() ? null : request.getServletContext(), themeId, "theme", true);
         
         // Update the user
         UserDao userDao = new UserDao();

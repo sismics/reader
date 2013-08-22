@@ -2,6 +2,7 @@ package com.sismics.reader.rest.resource;
 
 import com.sismics.reader.rest.dao.ThemeDao;
 import com.sismics.rest.exception.ServerException;
+import com.sismics.util.EnvironmentUtil;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -32,7 +33,7 @@ public class ThemeResource extends BaseResource {
         ThemeDao themeDao = new ThemeDao();
         List<String> themeList = null;
         try {
-            themeList = themeDao.findAll(request.getServletContext());
+            themeList = themeDao.findAll(EnvironmentUtil.isUnitTest() ? null : request.getServletContext());
         } catch (Exception e) {
             throw new ServerException("UnknownError", "Error getting theme list", e);
         }

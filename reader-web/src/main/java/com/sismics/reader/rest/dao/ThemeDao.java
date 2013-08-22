@@ -13,13 +13,15 @@ import java.util.Set;
  * @author jtremeaux 
  */
 public class ThemeDao {
+    public static final String STYLESHEETS_THEME_DIR = "/stylesheets/theme/";
+
     private final static FilenameFilter CSS_FILTER = new FilenameFilter() {
         @Override
         public boolean accept(File dir, String name) {
             return name.endsWith(".css") || name.endsWith(".less");
         }
     };
-    
+
     /**
      * Return the list of all themes.
      *
@@ -27,11 +29,19 @@ public class ThemeDao {
      * @return List of themes
      */
     public List<String> findAll(ServletContext servletContext) {
-        Set<String> fileList = servletContext.getResourcePaths("/stylesheets/theme/");
+        Set<String> fileList = null;
         List<String> themeList = new ArrayList<String>();
-        for (String file : fileList) {
-            if (CSS_FILTER.accept(null, file)) {
-                themeList.add(new File(file).getName());
+        if (servletContext != null) {
+            fileList = servletContext.getResourcePaths("/stylesheets/theme/");
+            for (String file : fileList) {
+                if (CSS_FILTER.accept(null, file)) {
+                    themeList.add(new File(file).getName());
+                }
+            }
+        } else {
+            File dir = new File(this.getClass().getResource(STYLESHEETS_THEME_DIR).getFile());
+            for (File file : dir.listFiles(CSS_FILTER)) {
+               themeList.add(file.getName());
             }
         }
         return themeList;
