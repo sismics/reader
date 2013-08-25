@@ -533,6 +533,7 @@ public class UserResource extends BaseResource {
             JSONArray jobs = new JSONArray();
             for (JobDto job : jobList) {
                 JSONObject jobJson = new JSONObject();
+                jobJson.put("id", job.getId());
                 jobJson.put("name", job.getName());
                 jobJson.put("start_date", job.getStartTimestamp());
                 jobJson.put("end_date", job.getStartTimestamp());

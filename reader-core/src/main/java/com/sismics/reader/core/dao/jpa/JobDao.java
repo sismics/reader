@@ -1,22 +1,17 @@
 package com.sismics.reader.core.dao.jpa;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.JobCriteria;
 import com.sismics.reader.core.dao.jpa.dto.JobDto;
 import com.sismics.reader.core.model.jpa.Job;
 import com.sismics.util.context.ThreadLocalContext;
+
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import java.sql.Timestamp;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Job DAO.
@@ -41,7 +36,24 @@ public class JobDao {
         
         return job.getId();
     }
-    
+
+    /**
+     * Returns an active job.
+     *
+     * @param id Job ID
+     * @return Job
+     */
+    public Job getActiveJob(String id) {
+        EntityManager em = ThreadLocalContext.get().getEntityManager();
+        Query q = em.createQuery("select j from Job j where j.id = :id and j.deleteDate is null");
+        q.setParameter("id", id);
+        try {
+            return (Job) q.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
     /**
      * Deletes a job.
      * 
