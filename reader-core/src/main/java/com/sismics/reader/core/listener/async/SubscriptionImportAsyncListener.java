@@ -1,24 +1,5 @@
 package com.sismics.reader.core.listener.async;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.MessageFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import org.apache.commons.compress.archivers.ArchiveEntry;
-import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
 import com.google.common.eventbus.Subscribe;
@@ -32,13 +13,7 @@ import com.sismics.reader.core.dao.file.opml.OpmlFlattener;
 import com.sismics.reader.core.dao.file.opml.OpmlReader;
 import com.sismics.reader.core.dao.file.opml.Outline;
 import com.sismics.reader.core.dao.file.rss.GuidFixer;
-import com.sismics.reader.core.dao.jpa.ArticleDao;
-import com.sismics.reader.core.dao.jpa.CategoryDao;
-import com.sismics.reader.core.dao.jpa.FeedDao;
-import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
-import com.sismics.reader.core.dao.jpa.JobDao;
-import com.sismics.reader.core.dao.jpa.JobEventDao;
-import com.sismics.reader.core.dao.jpa.UserArticleDao;
+import com.sismics.reader.core.dao.jpa.*;
 import com.sismics.reader.core.dao.jpa.criteria.ArticleCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
@@ -47,19 +22,26 @@ import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.event.SubscriptionImportedEvent;
 import com.sismics.reader.core.model.context.AppContext;
-import com.sismics.reader.core.model.jpa.Article;
-import com.sismics.reader.core.model.jpa.Category;
-import com.sismics.reader.core.model.jpa.Feed;
-import com.sismics.reader.core.model.jpa.FeedSubscription;
-import com.sismics.reader.core.model.jpa.Job;
-import com.sismics.reader.core.model.jpa.JobEvent;
-import com.sismics.reader.core.model.jpa.User;
-import com.sismics.reader.core.model.jpa.UserArticle;
+import com.sismics.reader.core.model.jpa.*;
 import com.sismics.reader.core.service.FeedService;
 import com.sismics.reader.core.util.EntityManagerUtil;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.util.mime.MimeType;
 import com.sismics.util.mime.MimeTypeUtil;
+import org.apache.commons.compress.archivers.ArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.*;
+import java.text.MessageFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Listener on subscriptions import request.
@@ -117,7 +99,7 @@ public class SubscriptionImportAsyncListener {
      * @return The new job
      */
     private Job createJob(final User user, File importFile) {
-        int outlineCount = 0;
+        long outlineCount = 0;
         final AtomicInteger starredCount = new AtomicInteger();
         Closer closer = Closer.create();
         try {
@@ -138,7 +120,7 @@ public class SubscriptionImportAsyncListener {
                             // Read the OPML file
                             OpmlReader opmlReader = new OpmlReader();
                             opmlReader.read(new FileInputStream(outputFile));
-                            outlineCount = opmlReader.getOutlineList().size();
+                            outlineCount = getFeedCount(opmlReader.getOutlineList());
                         } else if (archiveEntry.getName().endsWith(FILE_STARRED_JSON)) {
                             outputFile = File.createTempFile("starred", "json");
                             ByteStreams.copy(archiveInputStream, new FileOutputStream(outputFile));
@@ -171,7 +153,7 @@ public class SubscriptionImportAsyncListener {
                 InputStream is = closer.register(new FileInputStream(importFile));
                 OpmlReader opmlReader = new OpmlReader();
                 opmlReader.read(is);
-                outlineCount = opmlReader.getOutlineList().size();
+                outlineCount = getFeedCount(opmlReader.getOutlineList());
             }
 
             // Create a new job
@@ -201,7 +183,26 @@ public class SubscriptionImportAsyncListener {
             }
         }
     }
-    
+
+    /**
+     * Get the total number of feeds in a tree of outlines.
+     *
+     * @param outlineList List of outlines
+     * @return Number of feeds
+     */
+    private long getFeedCount(List<Outline> outlineList) {
+        // Flatten the OPML tree
+        Map<String, List<Outline>> outlineMap = OpmlFlattener.flatten(outlineList);
+
+        // Count the total number of feeds
+        long feedCount = 0;
+        for (List<Outline> categoryOutlineList : outlineMap.values()) {
+            feedCount += categoryOutlineList.size();
+        }
+
+        return feedCount;
+    }
+
     /**
      * Process the import file.
      * 
@@ -363,9 +364,9 @@ public class SubscriptionImportAsyncListener {
             }
             
             // Create the subscriptions
-            EntityManagerUtil.flush();
-            TransactionUtil.commit();
             for (int j = 0; j < categoryOutlineList.size(); j++) {
+                EntityManagerUtil.flush();
+                TransactionUtil.commit();
                 if (log.isInfoEnabled()) {
                     log.info(MessageFormat.format("Importing outline {0}/{1}", i + j + 1, feedCount));
                 }
@@ -383,7 +384,7 @@ public class SubscriptionImportAsyncListener {
                     if (log.isInfoEnabled()) {
                         log.info(MessageFormat.format("User {0} is already subscribed to the feed at URL {1}", user.getId(), feedUrl));
                     }
-                    JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_FEED_IMPORT_SUCCESS, feedSubscriptionList.iterator().next().getFeedSubscriptionTitle());
+                    JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_FEED_IMPORT_SUCCESS, feedSubscriptionList.iterator().next().getFeedRssUrl());
                     jobEventDao.create(jobEvent);
                     
                     continue;
@@ -416,9 +417,10 @@ public class SubscriptionImportAsyncListener {
                     feedDisplayOrder++;
 
                     // Create the initial article subscriptions for this user
-                    EntityManagerUtil.flush();
-                    TransactionUtil.commit();
                     feedService.createInitialUserArticle(user.getId(), feedSubscription);
+
+                    JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_FEED_IMPORT_SUCCESS, feedUrl);
+                    jobEventDao.create(jobEvent);
                 } catch (Exception e) {
                     if (log.isErrorEnabled()) {
                         log.error(MessageFormat.format("Error creating the subscription to the feed at URL {0} for user {1}", feedUrl, user.getId()), e);
