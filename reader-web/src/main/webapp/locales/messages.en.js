@@ -13,6 +13,8 @@
   },
   "jobs": {
     "inprogress": "Import in progress",
+    "done": "Import done",
+    "dismiss": "Dismiss",
     "feeds": "Feeds:",
     "starred": "Starred:",
     "failed": "failed"

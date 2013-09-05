@@ -13,6 +13,8 @@
   },
   "jobs": {
     "inprogress": "Import en cours",
+    "done": "Import terminé",
+    "Dismiss": "Fermer",
     "feeds": "Flux :",
     "starred": "Favoris :",
     "failed": "échecs"

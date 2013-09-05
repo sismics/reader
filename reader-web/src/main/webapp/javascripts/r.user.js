@@ -87,14 +87,23 @@ r.user.pollJobs = function(userInfo) {
     
     // Display progress bars for each job
     if (inProgress) {
-      var html = '<p>' + $.t('jobs.inprogress') + '</p>';
+      // Jobs title
+      var done = true;
+      $(userInfo.jobs).each(function (i, job) {
+        if (job.feed_success + job.feed_failure != job.feed_total || job.starred_success + job.starred_failure != job.starred_total) {
+          done = false;
+        }
+      });
+      var html = '<p>' + (done ? $.t('jobs.done') : $.t('jobs.inprogress')) + ' <a href="#" class="dismiss">' + $.t('jobs.dismiss') + '</a></p>';
+      
+      // Jobs details
       $(userInfo.jobs).each(function (i, job) {
         // Feeds progress bar
         var title = '&lt;b&gt;' + $.t('jobs.feeds') + '&lt;/b&gt; ' + (job.feed_success + job.feed_failure) + '/' + job.feed_total;
         if (job.feed_failure > 0) {
           title += ' (' + job.feed_failure + ' ' + $.t('jobs.failed') + ')';
         }
-        var progress = Math.round(job.feed_success / job.feed_total * 100);
+        var progress = Math.round((job.feed_success + job.feed_failure) / job.feed_total * 100);
         html += '<div class="bar"><div class="label">' + $.t('jobs.feeds') + '&nbsp;</div>'
           + '<div class="job" title="' + title + '" ><div class="progress" style="width: ' + progress + '%;"></div></div></div>';
         
@@ -103,7 +112,7 @@ r.user.pollJobs = function(userInfo) {
         if (job.starred_failure > 0) {
           title += ' (' + job.starred_failure + ' ' + $.t('jobs.failed') + ')';
         }
-        var progress = Math.round(job.starred_success / job.starred_total * 100);
+        var progress = Math.round((job.starred_success + job.starred_failure) / job.starred_total * 100);
         html += '<div class="bar"><div class="label">' + $.t('jobs.starred') + '&nbsp;</div>'
           + '<div class="job" title="' + title + '" ><div class="progress" style="width: ' + progress + '%;"></div></div></div>';
       });
@@ -124,6 +133,19 @@ r.user.pollJobs = function(userInfo) {
           },
           style: { classes: 'qtip-light qtip-shadow qtip-job' },
         });
+      
+      // Dismiss jobs
+      $('#subscriptions .jobs .dismiss').click(function() {
+        $(userInfo.jobs).each(function (i, job) {
+          r.util.ajax({
+            url: r.util.url.job_delete.replace('{id}', job.id),
+            type: 'DELETE'
+          });
+        });
+        
+        $('#subscriptions .jobs').hide();
+        return false;
+      });
     } else {
       // No job in progress
       $('#subscriptions .jobs').hide();
