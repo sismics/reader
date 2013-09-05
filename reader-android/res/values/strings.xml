@@ -16,6 +16,8 @@
     <string name="login_fail">Wrong username or password</string>
     <string name="network_error_title">Network error</string>
     <string name="network_error">Network error, please check internet connectivity and server URL</string>
+    <string name="invalid_url_title">Invalid URL</string>
+    <string name="invalid_url">Please check the server URL and try again</string>
     <string name="refresh">Refresh</string>
     <string name="all_read">Mark all as read</string>
     <string name="logout">Logout</string>

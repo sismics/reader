@@ -89,35 +89,40 @@ public class LoginActivity extends FragmentActivity {
                 
                 PreferenceUtil.setServerUrl(LoginActivity.this, txtServer.getText().toString());
                 
-                UserResource.login(getApplicationContext(), txtUsername.getText().toString(), txtPassword.getText().toString(), new SismicsHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(JSONObject json) {
-                        // Empty previous user caches
-                        PreferenceUtil.resetUserCache(getApplicationContext());
-                        
-                        // Getting user info and redirecting to main activity
-                        ApplicationContext.getInstance().fetchUserInfo(LoginActivity.this, new CallbackListener() {
-                            @Override
-                            public void onComplete() {
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        });
-                    }
-                    
-                    @Override
-                    public void onFailure(Throwable t, String response) {
-                        loginForm.setVisibility(View.VISIBLE);
-                        progressBar.setVisibility(View.GONE);
-                        
-                        if (response != null && response.contains("\"ForbiddenError\"")) {
-                            DialogUtil.showOkDialog(LoginActivity.this, R.string.login_fail_title, R.string.login_fail);
-                        } else {
-                            DialogUtil.showOkDialog(LoginActivity.this, R.string.network_error_title, R.string.network_error);
+                try {
+                    UserResource.login(getApplicationContext(), txtUsername.getText().toString(), txtPassword.getText().toString(), new SismicsHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(JSONObject json) {
+                            // Empty previous user caches
+                            PreferenceUtil.resetUserCache(getApplicationContext());
+                            
+                            // Getting user info and redirecting to main activity
+                            ApplicationContext.getInstance().fetchUserInfo(LoginActivity.this, new CallbackListener() {
+                                @Override
+                                public void onComplete() {
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
                         }
-                    }
-                });
+                        
+                        @Override
+                        public void onFailure(Throwable t, String response) {
+                            loginForm.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                            
+                            if (response != null && response.contains("\"ForbiddenError\"")) {
+                                DialogUtil.showOkDialog(LoginActivity.this, R.string.login_fail_title, R.string.login_fail);
+                            } else {
+                                DialogUtil.showOkDialog(LoginActivity.this, R.string.network_error_title, R.string.network_error);
+                            }
+                        }
+                    });
+                } catch (IllegalArgumentException e) {
+                    // Given URL is not valid
+                    DialogUtil.showOkDialog(LoginActivity.this, R.string.invalid_url_title, R.string.invalid_url);
+                }
             }
         });
     }
