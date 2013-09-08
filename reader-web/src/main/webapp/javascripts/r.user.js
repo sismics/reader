@@ -94,7 +94,7 @@ r.user.pollJobs = function(userInfo) {
           done = false;
         }
       });
-      var html = '<p>' + (done ? $.t('jobs.done') : $.t('jobs.inprogress')) + ' <a href="#" class="dismiss">' + $.t('jobs.dismiss') + '</a></p>';
+      var html = '<p>' + (done ? $.t('jobs.done') : $.t('jobs.inprogress')) + (done ? ' <a href="#" class="dismiss">' + $.t('jobs.dismiss') + '</a>' : '') + '</p>';
       
       // Jobs details
       $(userInfo.jobs).each(function (i, job) {
