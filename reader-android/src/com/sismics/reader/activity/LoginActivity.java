@@ -121,6 +121,9 @@ public class LoginActivity extends FragmentActivity {
                     });
                 } catch (IllegalArgumentException e) {
                     // Given URL is not valid
+                    loginForm.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+                    PreferenceUtil.setServerUrl(LoginActivity.this, null);
                     DialogUtil.showOkDialog(LoginActivity.this, R.string.invalid_url_title, R.string.invalid_url);
                 }
             }
