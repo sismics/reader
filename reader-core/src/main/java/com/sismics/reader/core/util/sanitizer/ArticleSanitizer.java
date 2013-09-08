@@ -1,20 +1,14 @@
 package com.sismics.reader.core.util.sanitizer;
 
-import java.net.MalformedURLException;
-import java.text.MessageFormat;
-import java.util.regex.Pattern;
-
-import javax.annotation.Nullable;
-
-import org.owasp.html.AttributePolicy;
-import org.owasp.html.ElementPolicy;
-import org.owasp.html.HtmlPolicyBuilder;
-import org.owasp.html.PolicyFactory;
-import org.owasp.html.Sanitizers;
+import com.sismics.util.UrlUtil;
+import org.owasp.html.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sismics.util.UrlUtil;
+import javax.annotation.Nullable;
+import java.net.MalformedURLException;
+import java.text.MessageFormat;
+import java.util.regex.Pattern;
 
 /**
  * Sanitize the contents of an article: removes iframes, JS etc.
@@ -59,7 +53,8 @@ public class ArticleSanitizer {
             "(http:|https:)?//slashdot.org/.+|" +
             "(http:|https:)?//www.viddler.com/.+|" +
             "(http:|https:)?//maps.google.com/.+|" +
-            "(http:|https:)?//w.soundcloud.com/.+");
+            "(http:|https:)?//w.soundcloud.com/.+|" +
+            "(http:|https:)?//(www.)?whyd.com/.+");
 
     /**
      * Sanitize HTML contents.

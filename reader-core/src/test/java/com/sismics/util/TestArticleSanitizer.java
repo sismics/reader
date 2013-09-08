@@ -244,4 +244,29 @@ public class TestArticleSanitizer {
         Assert.assertTrue(html.contains("Higgs data and the cosmic microwave background map from the Planck mission"));
         Assert.assertTrue(html.contains("<iframe src=\"http://slashdot.org/slashdot-it.pl?op&#61;discuss&amp;id&#61;3658423&amp;smallembed&#61;1\" style=\"height: 300px; width: 100%;\">"));
     }
+
+    /**
+     * Tests the article sanitizer.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void articleSanitizerIframeWhydTest() throws Exception {
+        // Load a feed
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_cultiz.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("http://cultiz.com/blog", feed.getUrl());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(10, articleList.size());
+        Article article = articleList.get(2);
+
+        // Allow unknown iframes
+        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
+        String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
+        Assert.assertTrue(html.contains("Quoi de mieux"));
+        Assert.assertTrue(html.contains("<iframe src=\"https://whyd.com/u/514ad8737e91c862b2ab7ef1/playlist/6?format&#61;embedV2&amp;embedW&#61;480\" height=\"600\" width=\"600\"></iframe>"));
+    }
+
 }
