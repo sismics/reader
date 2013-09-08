@@ -20,7 +20,7 @@ public class UserArticleCriteria {
     private String feedId;
     
     /**
-     * The article is visible to the user (he has an UserArticle).
+     * The article is visible to the user (he has a UserArticle).
      */
     private boolean visible;
     

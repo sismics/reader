@@ -321,10 +321,8 @@ public class FeedService extends AbstractScheduledService {
      */
     public void createInitialUserArticle(String userId, FeedSubscription feedSubscription) {
         UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
-        userArticleCriteria.setUnread(false);
         userArticleCriteria.setUserId(userId);
         userArticleCriteria.setSubscribed(true);
-        userArticleCriteria.setVisible(false);
         userArticleCriteria.setFeedId(feedSubscription.getFeedId());
 
         UserArticleDao userArticleDao = new UserArticleDao();

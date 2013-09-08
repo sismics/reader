@@ -417,6 +417,7 @@ public class SubscriptionImportAsyncListener {
                     feedDisplayOrder++;
 
                     // Create the initial article subscriptions for this user
+                    EntityManagerUtil.flush();
                     feedService.createInitialUserArticle(user.getId(), feedSubscription);
 
                     JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_FEED_IMPORT_SUCCESS, feedUrl);
