@@ -564,7 +564,7 @@
       margin: 12px;
       border: 1px solid #ccc;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-      overflow: auto;
+      overflow: hidden;
       
       &.read {
         border: 1px solid #888;
@@ -630,6 +630,11 @@
         .feed-item-description {
           iframe {
             border: 1px solid #ccc !important;
+          }
+          
+          img, iframe {
+            max-width: 100%;
+            height: auto;
           }
         
           &:after {
