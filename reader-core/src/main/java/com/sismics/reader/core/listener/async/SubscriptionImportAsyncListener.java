@@ -458,7 +458,7 @@ public class SubscriptionImportAsyncListener {
                 feedFromDb = new Feed();
                 feedFromDb.setUrl(feed.getUrl());
                 feedFromDb.setRssUrl(rssUrl);
-                feedFromDb.setTitle(feed.getTitle());
+                feedFromDb.setTitle(StringUtils.abbreviate(feed.getTitle(), 100));
                 feedDao.create(feedFromDb);
             }
         }

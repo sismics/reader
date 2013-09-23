@@ -124,9 +124,9 @@ public class FeedService extends AbstractScheduledService {
             feed = new Feed();
             feed.setUrl(newFeed.getUrl());
             feed.setRssUrl(rssUrl);
-            feed.setTitle(newFeed.getTitle());
-            feed.setLanguage(newFeed.getLanguage());
-            feed.setDescription(newFeed.getDescription());
+            feed.setTitle(StringUtils.abbreviate(newFeed.getTitle(), 100));
+            feed.setLanguage(newFeed.getLanguage() != null && newFeed.getLanguage().length() <= 10 ? newFeed.getLanguage() : null);
+            feed.setDescription(StringUtils.abbreviate(newFeed.getDescription(), 4000));
             feed.setLastFetchDate(new Date());
             feedDao.create(feed);
 
