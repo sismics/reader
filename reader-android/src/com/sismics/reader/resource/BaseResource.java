@@ -41,7 +41,7 @@ public class BaseResource {
     
     static {
         // 20sec default timeout
-        client.setTimeout(20000);
+        client.setTimeout(60000);
         try {
             KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
             trustStore.load(null, null);
