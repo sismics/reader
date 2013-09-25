@@ -14,7 +14,7 @@
   "jobs": {
     "inprogress": "Import in Arbeit",
     "done": "Import erledigt",
-    "dismiss": "Dismiss",
+    "dismiss": "ausblenden",
     "feeds": "Feeds:",
     "starred": "Favoriten:",
     "failed": "fehlerhaft"
@@ -29,14 +29,14 @@
     "unread": "Ungelesen",
     "all": "Alle",
     "starred": "Favoriten",
-    "subscriptions": "Abos",
+    "subscriptions": "Abonnements",
     "empty": "Keine Abonnements",
     "emptyunread": "Keine ungelesenen Abonnements",
     "showall": "Zeige alle",
     "toggleunread": "Wechsel zwischen alle / ungelesenen Abonnements",
     "add": {
-      "button": "Neues Abonnement",
-      "placeholder": "Füge einen Feed oder Website-URL ein",
+      "button": "Neues Abonnement hinzufügen",
+      "placeholder": "Füge eine Feed- oder Webseiten-URL ein",
       "submit": "Hinzufügen"
     },
     "edit": {
@@ -84,8 +84,8 @@
       "edit": {
         "title": "Kontoeinstellungen",
         "username": "Benutzername",
-        "locale": "Locale / Sprache",
-        "theme": "Theme / Aussehen",
+        "locale": "Sprache / Locale",
+        "theme": "Aussehen / Theme",
         "password": "Passwort",
         "passwordconfirm": "Passwort (Bestätigung)",
         "submit": "Speichern",
@@ -156,11 +156,11 @@
   },
   "feed": {
     "nomorearticles": "Keine weiteren Artikel",
-    "nomoreunreadarticles": "Keine weitere ungelesenen Artikel",
+    "nomoreunreadarticles": "Keine weiteren ungelesenen Artikel",
     "subscriptionnomoreunreadarticles": "\"__subscription__\" enthält keine weitere ungelesenen Artikel",
     "noarticle": "Keine Artikel",
     "nonewarticle": "Keine neuen Artikel",
-    "showall": "zeige alle",
+    "showall": "Zeige alle",
     "retry": "Wiederholen"
   },
   "wizard": {
