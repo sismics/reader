@@ -46,6 +46,7 @@ Translations
 - Italian by Marco Narco
 - Japanese
 - Korean
+- German
 
 How to build Reader from the sources
 ------------------------------------
