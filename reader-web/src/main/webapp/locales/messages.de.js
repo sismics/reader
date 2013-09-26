@@ -67,7 +67,7 @@
     "showall": "Zeige alle",
     "shownew": "Zeige die neuesten",
     "allread": "Alle als gelesen markieren",
-    "category": "Kategory",
+    "category": "Kategorie",
     "back": "&larr; zurück",
     "settings": "Einstellungen",
     "about": "Über",
