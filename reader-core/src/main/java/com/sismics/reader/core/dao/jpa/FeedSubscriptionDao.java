@@ -171,9 +171,9 @@ public class FeedSubscriptionDao {
         StringBuilder sb = new StringBuilder("select fs.FES_ID_C, fs.FES_TITLE_C, fs.FES_IDUSER_C, f.FED_ID_C, f.FED_TITLE_C, f.FED_RSSURL_C, f.FED_URL_C, f.FED_DESCRIPTION_C, c.CAT_ID_C, c.CAT_IDPARENT_C, c.CAT_NAME_C, c.CAT_FOLDED_B");
         if (criteria.getUserId() != null) {
             sb.append(", (select count(a.ART_ID_C)");
-            sb.append("     from T_ARTICLE a");
-            sb.append("     left join T_USER_ARTICLE ua on(ua.USA_IDARTICLE_C = a.ART_ID_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null) ");
-            sb.append("     where a.ART_IDFEED_C = f.FED_ID_C and a.ART_DELETEDATE_D is null and ua.USA_READDATE_D is null and ua.USA_ID_C is not null)");
+            sb.append("     from T_USER_ARTICLE ua");
+            sb.append("     join T_ARTICLE a on ua.USA_IDARTICLE_C = a.ART_ID_C ");
+            sb.append("     where a.ART_IDFEED_C = f.FED_ID_C and a.ART_DELETEDATE_D is null and ua.USA_READDATE_D is null and ua.USA_DELETEDATE_D is null and ua.USA_IDUSER_C = :userId)");
             sb.append("  as unreadUserArticleCount");
         }
         sb.append(" from T_FEED_SUBSCRIPTION fs ");
