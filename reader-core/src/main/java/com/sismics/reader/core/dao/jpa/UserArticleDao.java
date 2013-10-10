@@ -208,12 +208,15 @@ public class UserArticleDao {
      */
     private QueryParam getQueryParam(UserArticleCriteria criteria) {
         Map<String, Object> parameterMap = new HashMap<String, Object>();
+        List<String> criteriaList = new ArrayList<String>();
         
         StringBuilder sb = new StringBuilder("select ua.USA_ID_C, ua.USA_READDATE_D, ua.USA_STARREDDATE_D, f.FED_TITLE_C, fs.FES_ID_C, fs.FES_TITLE_C, a.ART_ID_C, a.ART_URL_C, a.ART_GUID_C, a.ART_TITLE_C, a.ART_CREATOR_C, a.ART_DESCRIPTION_C, a.ART_COMMENTURL_C, a.ART_COMMENTCOUNT_N, a.ART_ENCLOSUREURL_C, a.ART_ENCLOSURELENGTH_N, a.ART_ENCLOSURETYPE_C, a.ART_PUBLICATIONDATE_D");
-        sb.append(" from T_ARTICLE a ");
         if (criteria.isVisible()) {
-            sb.append(" join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null) ");
+            sb.append(" from T_USER_ARTICLE ua ");
+            sb.append(" join T_ARTICLE a on(a.ART_ID_C = ua.USA_IDARTICLE_C) ");
+            criteriaList.add("ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null");
         } else {
+            sb.append(" from T_ARTICLE a ");
             sb.append(" left join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null) ");
         }
         if (criteria.getUserId() != null) {
@@ -222,7 +225,6 @@ public class UserArticleDao {
         sb.append(" left join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
         
         // Adds search criteria
-        List<String> criteriaList = new ArrayList<String>();
         if (criteria.getFeedId() != null) {
             criteriaList.add("a.ART_IDFEED_C = :feedId");
             parameterMap.put("feedId", criteria.getFeedId());
