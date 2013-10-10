@@ -212,7 +212,7 @@ public class UserArticleDao {
         
         StringBuilder sb = new StringBuilder("select ua.USA_ID_C, ua.USA_READDATE_D, ua.USA_STARREDDATE_D, f.FED_TITLE_C, fs.FES_ID_C, fs.FES_TITLE_C, a.ART_ID_C, a.ART_URL_C, a.ART_GUID_C, a.ART_TITLE_C, a.ART_CREATOR_C, a.ART_DESCRIPTION_C, a.ART_COMMENTURL_C, a.ART_COMMENTCOUNT_N, a.ART_ENCLOSUREURL_C, a.ART_ENCLOSURELENGTH_N, a.ART_ENCLOSURETYPE_C, a.ART_PUBLICATIONDATE_D");
         if (criteria.isVisible()) {
-            if (criteria.isUnread() && !criteria.isStarred()) {
+            if (criteria.isUnread() || criteria.isStarred()) {
                 sb.append(" from T_USER_ARTICLE ua ");
                 sb.append(" join T_ARTICLE a on(a.ART_ID_C = ua.USA_IDARTICLE_C) ");
             } else {
