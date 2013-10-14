@@ -14,9 +14,6 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
-import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
-import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.service.IndexingService;
@@ -56,23 +53,11 @@ public class SearchResource extends BaseResource {
         
         ValidationUtil.validateRequired(query, "query");
         
-        // Search this user's subscriptions
-        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
-        feedSubscriptionCriteria.setUserId(principal.getId());
-        
-        FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
-        List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
-        
-        List<String> feedList = new ArrayList<String>();
-        for (FeedSubscriptionDto feedSubscriptionDto : feedSubscriptionList) {
-            feedList.add(feedSubscriptionDto.getFeedId());
-        }
-        
         // Search in index
         IndexingService indexingService = AppContext.getInstance().getIndexingService();
         PaginatedList<UserArticleDto> paginatedList = null;
         try {
-            paginatedList = indexingService.searchArticles(principal.getId(), feedList, query, offset, limit);
+            paginatedList = indexingService.searchArticles(principal.getId(), query, offset, limit);
         } catch (Exception e) {
             throw new ServerException("SearchError", "Error searching articles", e);
         }

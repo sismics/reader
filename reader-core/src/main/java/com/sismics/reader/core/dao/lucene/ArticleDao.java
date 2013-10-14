@@ -1,7 +1,6 @@
 package com.sismics.reader.core.dao.lucene;
 
 import java.text.BreakIterator;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -14,7 +13,6 @@ import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.FieldInfo.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.queries.TermsFilter;
 import org.apache.lucene.queryparser.flexible.standard.QueryParserUtil;
 import org.apache.lucene.queryparser.flexible.standard.StandardQueryParser;
 import org.apache.lucene.search.BooleanClause.Occur;
@@ -105,12 +103,11 @@ public class ArticleDao {
      * Search articles.
      * 
      * @param paginatedList
-     * @param feedList
      * @param searchQuery
      * @return List of articles
      * @throws Exception
      */
-    public Map<String, Article> search(PaginatedList<UserArticleDto> paginatedList, List<String> feedList, String searchQuery) throws Exception {
+    public Map<String, Article> search(PaginatedList<UserArticleDto> paginatedList, String searchQuery) throws Exception {
         // Escape query and add quotes so QueryParser generate a PhraseQuery
         searchQuery = "\"" + QueryParserUtil.escape(searchQuery) + "\"";
         
@@ -125,16 +122,9 @@ public class ArticleDao {
         query.add(titleQuery, Occur.SHOULD);
         query.add(descriptionQuery, Occur.SHOULD);
         
-        // Filter on selected feeds
-        List<Term> terms = new ArrayList<Term>();
-        for (String feed : feedList) {
-            terms.add(new Term("feed_id", feed));
-        }
-        TermsFilter feedsFilter = new TermsFilter(terms);
-        
         // Search
         IndexSearcher searcher = new IndexSearcher(AppContext.getInstance().getIndexingService().getDirectoryReader());
-        TopDocs topDocs = searcher.search(query, feedsFilter, paginatedList.getOffset() + paginatedList.getLimit());
+        TopDocs topDocs = searcher.search(query, null, paginatedList.getOffset() + paginatedList.getLimit());
         ScoreDoc[] docs = topDocs.scoreDocs;
         paginatedList.setResultCount(topDocs.totalHits);
         

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -116,23 +115,20 @@ public class IndexingService extends AbstractScheduledService {
      * Search articles.
      * 
      * @param userId User ID
-     * @param feedList
      * @param searchQuery
      * @param offset Offset
      * @param limit Limit
      * @return List of articles
      * @throws Exception 
      */
-    public PaginatedList<UserArticleDto> searchArticles(String userId, List<String> feedList, String searchQuery, Integer offset, Integer limit) throws Exception {
+    public PaginatedList<UserArticleDto> searchArticles(String userId, String searchQuery, Integer offset, Integer limit) throws Exception {
         // Search articles
         ArticleDao articleDao = new ArticleDao();
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, offset);
         Map<String, Article> articleMap = null;
-        if (feedList.size() > 0) {
-            articleMap = articleDao.search(paginatedList, feedList, searchQuery);
-        }
+        articleMap = articleDao.search(paginatedList, searchQuery);
         
-        if (articleMap != null && articleMap.size() > 0) {
+        if (articleMap.size() > 0) {
             // Get linked UserArticle from database
             UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
             userArticleCriteria.setUserId(userId);

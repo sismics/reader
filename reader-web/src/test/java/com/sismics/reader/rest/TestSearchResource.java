@@ -111,5 +111,14 @@ public class TestSearchResource extends BaseJerseyTest {
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
         Assert.assertEquals(0, articles.length());
+        
+        // Search "zelda"
+        searchResource = resource().path("/search/zelda");
+        searchResource.addFilter(new CookieAuthenticationFilter(search3AuthToken));
+        response = searchResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        articles = json.getJSONArray("articles");
+        Assert.assertEquals(1, articles.length());
     }
 }

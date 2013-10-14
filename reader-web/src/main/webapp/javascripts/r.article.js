@@ -168,7 +168,11 @@ r.article.build = function(article, classes) {
     .attr('title', date.format('L LT'));
   
   if (r.feed.context.subscriptionId == null) {
-    item.find('.feed-item-subscription').html('on <a href="#/feed/subscription/' + article.subscription.id + '">' + article.subscription.title + '</a>');
+    if (article.subscription.id) {
+      item.find('.feed-item-subscription').html('on <a href="#/feed/subscription/' + article.subscription.id + '">' + article.subscription.title + '</a>');
+    } else {
+      item.find('.feed-item-subscription').html('on ' + article.subscription.title);
+    }
   } else {
     item.find('.feed-item-subscription').remove();
   }
