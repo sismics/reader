@@ -54,6 +54,7 @@ public class ArticleSanitizer {
             "(http:|https:)?//www.viddler.com/.+|" +
             "(http:|https:)?//maps.google.com/.+|" +
             "(http:|https:)?//w.soundcloud.com/.+|" +
+            "(http:|https:)?//(www.)?bandcamp.com/.+|" +
             "(http:|https:)?//(www.)?whyd.com/.+");
 
     /**
