@@ -48,8 +48,8 @@ public class TestSearchResource extends BaseJerseyTest {
         JSONObject article = articles.getJSONObject(0);
         Assert.assertEquals("Quand <span class=\"highlight\">Zelda</span> prend les armes", article.getString("title"));
         
-        // Search "something"
-        searchResource = resource().path("/search/something");
+        // Search "njloinzejrmklsjd"
+        searchResource = resource().path("/search/njloinzejrmklsjd");
         searchResource.addFilter(new CookieAuthenticationFilter(search1AuthToken));
         response = searchResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
@@ -103,8 +103,8 @@ public class TestSearchResource extends BaseJerseyTest {
         clientUtil.createUser("search3");
         String search3AuthToken = clientUtil.login("search3");
         
-        // Search "something"
-        searchResource = resource().path("/search/something");
+        // Search "njloinzejrmklsjd"
+        searchResource = resource().path("/search/njloinzejrmklsjd");
         searchResource.addFilter(new CookieAuthenticationFilter(search3AuthToken));
         response = searchResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
