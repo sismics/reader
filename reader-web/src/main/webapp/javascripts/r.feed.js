@@ -12,7 +12,8 @@ r.feed.context = {
   }, 
   lastItem: null, // Last article
   bumper: null, // Bumper
-  fullyLoaded: false // True if all articles are loaded
+  fullyLoaded: false, // True if all articles are loaded
+  activeXhr: null // Active XHR retrieving a feed
 };
 
 /**
@@ -206,9 +207,14 @@ r.feed.scroll = function() {
  * Load articles according to the feed context.
  */
 r.feed.load = function(next) {
-  // Stop if already loading articles
   if (r.feed.context.loading) {
-    return;
+    if (next) {
+      // Stop if already loading articles
+      return;
+    } else if (r.feed.activeXhr) {
+      // Cancel ongoing request
+      r.feed.activeXhr.abort();
+    }
   }
   
   if (!next) {
@@ -250,7 +256,7 @@ r.feed.load = function(next) {
   }
   
   // Calling API
-  r.util.ajax({
+  r.feed.activeXhr = r.util.ajax({
     url: r.feed.context.url,
     type: 'GET',
     data: data,
@@ -303,17 +309,22 @@ r.feed.load = function(next) {
       }
       
       r.feed.context.loading = false;
+      r.feed.activeXhr = null;
       r.feed.context.bumper.find('.loader').hide();
       r.feed.context.bumper.find('.retry').hide();
       
       // Trigger paging in the case that all newly added articles are visible
       r.feed.triggerPaging();
     },
-    fail: function() {
+    fail: function(jqXHR, textStatus, errorThrown) {
       r.feed.context.loading = false;
+      r.feed.activeXhr = null;
       $('#feed-container .loader').hide();
-      r.feed.context.bumper.find('.retry').show();
-      $().toastmessage('showErrorToast', $.t('error.feed'));
+      
+      if (textStatus != 'abort') {
+        r.feed.context.bumper.find('.retry').show();
+        $().toastmessage('showErrorToast', $.t('error.feed'));
+      }
     }
   });
 };
