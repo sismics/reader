@@ -231,6 +231,10 @@ public class MainActivity extends FragmentActivity {
         SubscriptionResource.list(this, false, new SismicsHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
+                if (isFinishing()) {
+                    return;
+                }
+                
                 // Update or create adapter
                 SubscriptionAdapter adapter = (SubscriptionAdapter) drawerList.getAdapter();
                 if (adapter == null) {
