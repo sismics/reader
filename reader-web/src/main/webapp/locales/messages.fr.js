@@ -152,7 +152,9 @@
     }
   },
   "article": {
-    "markasunread": "Marquer comme non-lu"
+    "markasunread": "Marquer comme non-lu",
+    "creator": "par __creator__",
+    "subscription": "sur __subscription__"
   },
   "feed": {
     "nomorearticles": "Pas plus d'articles",

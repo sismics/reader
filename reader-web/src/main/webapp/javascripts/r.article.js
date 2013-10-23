@@ -167,18 +167,18 @@ r.article.build = function(article, classes) {
     .html(date.fromNow())
     .attr('title', date.format('L LT'));
   
-  if (r.feed.context.subscriptionId == null) {
+  if (!r.feed.context.subscriptionId) {
     if (article.subscription.id) {
-      item.find('.feed-item-subscription').html('on <a href="#/feed/subscription/' + article.subscription.id + '">' + article.subscription.title + '</a>');
+      item.find('.feed-item-subscription').html($.t('article.subscription', { subscription: '<a href="#/feed/subscription/' + article.subscription.id + '">' + article.subscription.title + '</a>' });
     } else {
-      item.find('.feed-item-subscription').html('on ' + article.subscription.title);
+      item.find('.feed-item-subscription').html($.t('article.subscription', { subscription: article.subscription.title }));
     }
   } else {
     item.find('.feed-item-subscription').remove();
   }
   
   if (article.creator) {
-    item.find('.feed-item-creator').html('by ' + article.creator);
+    item.find('.feed-item-creator').html($.t('article.creator', { creator: article.creator }));
   }
   
   // In list mode, don't fill the description now

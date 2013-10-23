@@ -152,7 +152,9 @@
     }
   },
   "article": {
-    "markasunread": "Mark as unread"
+    "markasunread": "Mark as unread",
+    "creator": "by __creator__",
+    "subscription": "on __subscription__"
   },
   "feed": {
     "nomorearticles": "No more articles",
