@@ -169,7 +169,7 @@ r.article.build = function(article, classes) {
   
   if (!r.feed.context.subscriptionId) {
     if (article.subscription.id) {
-      item.find('.feed-item-subscription').html($.t('article.subscription', { subscription: '<a href="#/feed/subscription/' + article.subscription.id + '">' + article.subscription.title + '</a>' });
+      item.find('.feed-item-subscription').html($.t('article.subscription', { subscription: '<a href="#/feed/subscription/' + article.subscription.id + '">' + article.subscription.title + '</a>' }));
     } else {
       item.find('.feed-item-subscription').html($.t('article.subscription', { subscription: article.subscription.title }));
     }
