@@ -3,6 +3,7 @@ package com.sismics.reader.rest;
 import junit.framework.Assert;
 
 import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 
@@ -44,9 +45,8 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         JSONArray articles = json.getJSONArray("articles");
-        Assert.assertEquals(1, articles.length());
-        JSONObject article = articles.getJSONObject(0);
-        Assert.assertEquals("Quand <span class=\"highlight\">Zelda</span> prend les armes", article.getString("title"));
+        Assert.assertTrue(articles.length() > 0);
+        assertSearchResult(articles, "Quand <span class=\"highlight\">Zelda</span> prend les armes");
         
         // Search "njloinzejrmklsjd"
         searchResource = resource().path("/search/njloinzejrmklsjd");
@@ -64,9 +64,9 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
-        Assert.assertEquals(2, articles.length());
-        Assert.assertEquals("Récupérer les clés <span class=\"highlight\">wifi</span> sur un téléphone Android", articles.getJSONObject(0).getString("title"));
-        Assert.assertEquals("Partagez vos clés <span class=\"highlight\">WiFi</span> avec vos amis", articles.getJSONObject(1).getString("title"));
+        Assert.assertTrue(articles.length() > 0);
+        assertSearchResult(articles, "Récupérer les clés <span class=\"highlight\">wifi</span> sur un téléphone Android");
+        assertSearchResult(articles, "Partagez vos clés <span class=\"highlight\">WiFi</span> avec vos amis");
         
         // Search "google keep"
         searchResource = resource().path("/search/google%20keep");
@@ -119,6 +119,24 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
-        Assert.assertEquals(1, articles.length());
+        Assert.assertTrue(articles.length() > 0);
+    }
+    
+    /**
+     * Assert that an article exists with a specific title in the provided articles set.
+     * 
+     * @param articles Articles from search
+     * @param title Expected title
+     * @throws JSONException
+     */
+    private void assertSearchResult(JSONArray articles, String title) throws JSONException {
+    	for (int i = 0; i < articles.length(); i++) {
+    		JSONObject article = articles.getJSONObject(i);
+    		if (article.getString("title").equals(title)) {
+    			return;
+    		}
+    	}
+    	
+    	Assert.fail();
     }
 }
