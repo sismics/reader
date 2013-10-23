@@ -122,10 +122,11 @@ public class ArticleActivity extends FragmentActivity {
     @Override
     public void finish() {
         Intent data = new Intent();
-        data.putExtra("position", viewPager.getCurrentItem());
+        if (viewPager != null) {
+            data.putExtra("position", viewPager.getCurrentItem());
+            sharedAdapterHelper.removeAdapter(viewPager.getAdapter(), articlesHelperListener);
+        }
         setResult(RESULT_OK, data);
-        
-        sharedAdapterHelper.removeAdapter(viewPager.getAdapter(), articlesHelperListener);
         
         super.finish();
     }

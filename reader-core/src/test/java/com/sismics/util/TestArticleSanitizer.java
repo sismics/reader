@@ -269,4 +269,27 @@ public class TestArticleSanitizer {
         Assert.assertTrue(html.contains("<iframe src=\"https://whyd.com/u/514ad8737e91c862b2ab7ef1/playlist/6?format&#61;embedV2&amp;embedW&#61;480\" height=\"600\" width=\"600\"></iframe>"));
     }
 
+    /**
+     * Tests the article sanitizer.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void articleSanitizerIframeBandcampTest() throws Exception {
+        // Load a feed
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_distractionware.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("http://distractionware.com/blog", feed.getUrl());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(10, articleList.size());
+        Article article = articleList.get(4);
+
+        // Allow unknown iframes
+        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
+        String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
+        Assert.assertTrue(html.contains("Naya’s Quest"));
+        Assert.assertTrue(html.contains("<iframe style=\" width: 350px; height: 659px;\" src=\"http://bandcamp.com/EmbeddedPlayer/album&#61;578259909/size&#61;large/bgcol&#61;ffffff/linkcol&#61;0687f5/transparent&#61;true/\"></iframe>"));
+    }
 }

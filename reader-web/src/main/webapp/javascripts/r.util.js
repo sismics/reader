@@ -72,7 +72,7 @@ r.util.ajax = function(args) {
     }
   }
   
-  $.ajax(args)
+  return $.ajax(args)
     .done(args.done)
     .fail(args.fail)
     .always(args.always);

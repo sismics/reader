@@ -1,0 +1,215 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+  xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+  >
+
+<channel>
+  <title>distractionware</title>
+  <atom:link href="http://distractionware.com/blog/feed/" rel="self" type="application/rss+xml" />
+  <link>http://distractionware.com/blog</link>
+  <description>my development ramblings</description>
+  <lastBuildDate>Wed, 16 Oct 2013 19:42:58 +0000</lastBuildDate>
+  <language>en-US</language>
+  <sy:updatePeriod>hourly</sy:updatePeriod>
+  <sy:updateFrequency>1</sy:updateFrequency>
+  <generator>http://wordpress.org/?v=3.6.1</generator>
+    <item>
+    <title>Crash course</title>
+    <link>http://distractionware.com/blog/2013/10/crash-course/</link>
+    <comments>http://distractionware.com/blog/2013/10/crash-course/#comments</comments>
+    <pubDate>Wed, 16 Oct 2013 19:42:58 +0000</pubDate>
+    <dc:creator>Terry</dc:creator>
+        <category><![CDATA[halting problem]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3434</guid>
+    <description><![CDATA[I made a decision a few days ago that I felt like sharing here &#8211; I&#8217;m not going to enter Halting Problem into the IGF this year. I had a long blog post about why, but I&#8217;m probably better keeping it short &#8211; I just felt like I was having to rush some important decisions [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><center><img src="http://distractionware.com/blog/wp-content/uploads/2013/10/glitch.png" alt="glitch" width="335" height="256" class="alignnone size-full wp-image-3435" /></center><br />I made a decision a few days ago that I felt like sharing here &#8211; I&#8217;m not going to enter Halting Problem into the IGF this year. I had a long blog post about why, but I&#8217;m probably better keeping it short &#8211; I just felt like I was having to rush some important decisions about the game to get it ready to show to people, and I don&#8217;t feel like that&#8217;s something I want to do, not with this game &#8211; I&#8217;ve kinda had that experience before, when I rushed to submit <a href="http://distractionware.com/blog/2011/11/the-four-letter-word-thing/">Four Letter Word</a> to the 2011 IGF, and I ultimately regretted it. I ended up with something I just wanted to tear down and start over with.</p>
+<p>This is a game I&#8217;m hugely excited about, and this is how I want to make it. At a relaxed pace, adding new things when inspiration hits, exploring ideas fully as they come. I think this is healthier, and better for the game overall. Maybe I&#8217;ll enter it next year instead!</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/10/crash-course/feed/</wfw:commentRss>
+    <slash:comments>5</slash:comments>
+    </item>
+    <item>
+    <title>Collapse</title>
+    <link>http://distractionware.com/blog/2013/10/collapse/</link>
+    <comments>http://distractionware.com/blog/2013/10/collapse/#comments</comments>
+    <pubDate>Tue, 08 Oct 2013 00:38:11 +0000</pubDate>
+    <dc:creator>Terry</dc:creator>
+        <category><![CDATA[collapse]]></category>
+    <category><![CDATA[Complete Games]]></category>
+    <category><![CDATA[puzzlescript]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3424</guid>
+    <description><![CDATA[Yay, I took some time out of crunching on Halting Problem to make a little thing. Play it here! [Collapse - Play online (HTML5)] It&#8217;s created using my flatmate&#8217;s awesome new puzzle game engine, PuzzleScript, which is extremely fun to use. You can hack the source for this game here, if you like.]]></description>
+        <content:encoded><![CDATA[<p><img src="http://distractionware.com/blog/wp-content/uploads/2013/10/collapse-640x400.png" alt="collapse" width="640" height="400" class="alignnone size-medium wp-image-3425" /></p>
+<p>Yay, I took some time out of crunching on Halting Problem to make a little thing. Play it here!</p>
+<p><center><big><a href="http://www.puzzlescript.net/play.html?p=6877455">[Collapse - Play online (HTML5)]</a></big></center></p>
+<p>It&#8217;s created using my <a href="http://www.increpare.com/">flatmate&#8217;s</a> awesome new puzzle game engine, <a href="http://www.puzzlescript.net/">PuzzleScript</a>, which is extremely fun to use. You can <a href="http://www.puzzlescript.net/editor.html?hack=6877455">hack the source for this game here</a>, if you like.</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/10/collapse/feed/</wfw:commentRss>
+    <slash:comments>12</slash:comments>
+    </item>
+    <item>
+    <title>Bosca Ceoil for Linux</title>
+    <link>http://distractionware.com/blog/2013/09/bosca-ceoil-for-linux/</link>
+    <comments>http://distractionware.com/blog/2013/09/bosca-ceoil-for-linux/#comments</comments>
+    <pubDate>Sun, 29 Sep 2013 21:42:35 +0000</pubDate>
+    <dc:creator>Terry</dc:creator>
+        <category><![CDATA[bosca ceoil]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3406</guid>
+    <description><![CDATA[Yay! Thanks to awesome github user dlan-fr, Bosca Ceoil is available for Linux! I haven&#8217;t tested this myself (I don&#8217;t have a linux installation at the moment), but it sounds like it should work. He&#8217;s ported it back to AIR 2.6, which was the last version of Adobe AIR supported on Linux. [Download Linux .deb [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><img src="http://distractionware.com/blog/wp-content/uploads/2013/09/LINUX_95_CLEAR-640x480.gif" alt="LINUX_95_CLEAR" width="640" height="480" class="alignnone size-large wp-image-3409" /></p>
+<p>Yay! Thanks to awesome github user <a href="https://github.com/dlan-fr">dlan-fr</a>, Bosca Ceoil is available for Linux!</p>
+<p>I haven&#8217;t tested this myself (I don&#8217;t have a linux installation at the moment), but it sounds like it should work. He&#8217;s ported it back to AIR 2.6, which was the last version of Adobe AIR supported on Linux.</p>
+<p><center><a href="http://distractionware.com/tools/bosca_ceoil_linux_1_1.deb">[Download Linux .deb (v1.1)]</a><br /><a href="http://distractionware.com/tools/bosca_ceoil_linux_1_1.rpm">[Download Linux .rpm (v1.1)]</a><br /><a href="http://distractionware.com/tools/bosca_ceoil_linux_1_1.tar.gz">[Download Linux .tar.gz (v1.1)]</a></center></p>
+<p>Here&#8217;s more info from dlan-fr:</p>
+<blockquote><p>I have tested it on Ubuntu linux and Linux mint, It seem to work properly. (minor some sound delay issue, see below for workaround).</p>
+<p>the source code is available on GitHub, I have made some minor adjustments to the existing source code :</p>
+<p><a href="https://github.com/dlan-fr/boscaceoil">https://github.com/dlan-fr/boscaceoil</a></p>
+<p>Some people could run into a sound delay issue, it seem it&#8217;s a bug in adobe air. Using this launcher script fix it (included in the package) :</p>
+<p><a href="https://github.com/dlan-fr/boscaceoil/blob/master/fix_sound_latency.sh">https://github.com/dlan-fr/boscaceoil/blob/master/fix_sound_latency.sh</a></p>
+<p>For .tar.gz version, to run it :<br />
+[path-to-adobeairsdk]/bin/adl -nodebug [path-to-boscaceoil]/share/META-INF/AIR/application.xml  [path-to-boscaceoil]/share/</p>
+<p>more info for archlinux:</p>
+<p>https://wiki.archlinux.org/index.php/Adobe_AIR</p>
+</blockquote>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/09/bosca-ceoil-for-linux/feed/</wfw:commentRss>
+    <slash:comments>17</slash:comments>
+    </item>
+    <item>
+    <title>Robot Rock #screenshotsaturday</title>
+    <link>http://distractionware.com/blog/2013/09/robot-rock-screenshotsaturday/</link>
+    <comments>http://distractionware.com/blog/2013/09/robot-rock-screenshotsaturday/#comments</comments>
+    <pubDate>Sat, 28 Sep 2013 11:46:09 +0000</pubDate>
+    <dc:creator>Terry</dc:creator>
+        <category><![CDATA[halting problem]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3401</guid>
+    <description><![CDATA[With Naya&#8217;s Quest finished, I&#8217;ve gotten back to work on what&#8217;s kept me busy for most of this year &#8211; Halting Problem. I feel like this game has the potential to be something really special. So, I&#8217;ve decided I wanna give it all my energy, and enter it into this year&#8217;s IGF. The submission deadline [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><img src="http://distractionware.com/blog/wp-content/uploads/2013/09/robots.png" alt="robots" width="640" height="548" class="alignnone size-full wp-image-3402" /></p>
+<p>With Naya&#8217;s Quest finished, I&#8217;ve gotten back to work on what&#8217;s kept me busy for most of this year &#8211; Halting Problem.</p>
+<p>I feel like this game has the potential to be something really special. So, I&#8217;ve decided I wanna give it all my energy, and enter it into this year&#8217;s IGF. <a href="http://www.timeanddate.com/counters/fullscreen.html?mode=a&#038;iso=20131019T235959&#038;year=2013&#038;month=10&#038;day=19&#038;hour=23&#038;min=59&#038;sec=59&#038;p0=224&#038;msg=IGF%20Submission%20Deadline">The submission deadline is just three weeks from now!</a> It&#8217;s not going to be anywhere close to finished by then, but hopefully it&#8217;s just enough time to make something which gets across why I like this idea so much.</p>
+<p>I&#8217;m probably going to hold off saying much more about this until after the deadline. Here goes everything!</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/09/robot-rock-screenshotsaturday/feed/</wfw:commentRss>
+    <slash:comments>8</slash:comments>
+    </item>
+    <item>
+    <title>Naya&#8217;s Quest Soundtrack</title>
+    <link>http://distractionware.com/blog/2013/09/nayas-quest-soundtrack/</link>
+    <comments>http://distractionware.com/blog/2013/09/nayas-quest-soundtrack/#comments</comments>
+    <pubDate>Fri, 20 Sep 2013 08:33:38 +0000</pubDate>
+    <dc:creator>Terry</dc:creator>
+        <category><![CDATA[naya's quest]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3391</guid>
+    <description><![CDATA[Naya&#39;s Quest Soundtrack by Terry Cavanagh I hope you&#8217;re all enjoying Naya&#8217;s Quest! I uploaded the soundtrack to bandcamp last night, and thought I should share it here too. One of the reasons this game took so long is that I&#8217;d decided I wanted to do everything myself &#8211; which included writing a script, and [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><center><iframe style="border: 0; width: 350px; height: 659px;" src="http://bandcamp.com/EmbeddedPlayer/album=578259909/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/" seamless><a href="http://terrycavanagh.bandcamp.com/album/nayas-quest-soundtrack">Naya&#39;s Quest Soundtrack by Terry Cavanagh</a></iframe></center></p>
+<p>I hope you&#8217;re all enjoying Naya&#8217;s Quest! I uploaded the soundtrack to bandcamp last night, and thought I should share it here too.</p>
+<p>One of the reasons this game took so long is that I&#8217;d decided I wanted to do everything myself &#8211; which included writing a script, and composing a soundtrack. They&#8217;re both things I find very difficult, but I think it was pretty important for me to make myself do them anyway. </p>
+<p>In the end, I think that&#8217;s what I&#8217;m most proud of with this game &#8211; that I went outside my creative comfort zones, and that every part of this game is mine, right down to the tool I used to write the soundtrack.</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/09/nayas-quest-soundtrack/feed/</wfw:commentRss>
+    <slash:comments>10</slash:comments>
+    </item>
+    <item>
+    <title>Naya&#8217;s Quest</title>
+    <link>http://distractionware.com/blog/2013/09/nayas-quest/</link>
+    <comments>http://distractionware.com/blog/2013/09/nayas-quest/#comments</comments>
+    <pubDate>Thu, 19 Sep 2013 15:11:15 +0000</pubDate>
+    <dc:creator>Terry</dc:creator>
+        <category><![CDATA[Complete Games]]></category>
+    <category><![CDATA[naya's quest]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3385</guid>
+    <description><![CDATA[[Play here]]]></description>
+        <content:encoded><![CDATA[<p><img src="http://distractionware.com/blog/wp-content/uploads/2013/09/outdoors_red.png" alt="outdoors_red" width="640" height="480" class="alignnone size-full wp-image-3387" /></p>
+<p><center><big><a href="http://terrycavanaghgames.com/nayasquest">[Play here]</a></big></center></p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/09/nayas-quest/feed/</wfw:commentRss>
+    <slash:comments>41</slash:comments>
+    </item>
+    <item>
+    <title>Bosca Ceoil v1.1</title>
+    <link>http://distractionware.com/blog/2013/09/bosca-ceoil-v1-1/</link>
+    <comments>http://distractionware.com/blog/2013/09/bosca-ceoil-v1-1/#comments</comments>
+    <pubDate>Sun, 01 Sep 2013 19:53:44 +0000</pubDate>
+    <dc:creator>Terry</dc:creator>
+        <category><![CDATA[bosca ceoil]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3376</guid>
+    <description><![CDATA[Bosca Ceoil is updated to version 1.1! Download links are in the original blog post. So what&#8217;s new? Lots of stuff! You can zoom the arrangement view with the mouse wheel now! You can have pattern sizes up to 32 notes! It associates with .ceol files, so you can double click on files to load [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><center><img src="http://distractionware.com/blog/wp-content/uploads/2013/09/bcnew.png" alt="bcnew" width="563" height="402" class="alignnone size-full wp-image-3377" /></center></p>
+<p>Bosca Ceoil is updated to version 1.1! <a href="http://distractionware.com/blog/2013/08/bosca-ceoil/"> Download links are in the original blog post.</a></p>
+<p>So what&#8217;s new? Lots of stuff! You can zoom the arrangement view with the mouse wheel now! You can have pattern sizes up to 32 notes! It associates with .ceol files, so you can double click on files to load them! <a href="https://github.com/TerryCavanagh/boscaceoil/blob/master/changelog.txt">The full changelog is here, on github.</a></p>
+<p>This version also adds support for the SiON library&#8217;s global effects, like delay, distortion, loads and loads of stuff. I can&#8217;t seem to figure out how to have more than one of these operational at a time though, so for this build at least, they&#8217;re implemented as a drop down menu. I&#8217;d really like to change that &#8211; if you know your way around the library, consider making a request on github!</p>
+<p>Hope you&#8217;ve been having fun using this. I know I have!</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/09/bosca-ceoil-v1-1/feed/</wfw:commentRss>
+    <slash:comments>10</slash:comments>
+    </item>
+    <item>
+    <title>Spectra</title>
+    <link>http://distractionware.com/blog/2013/09/spectra/</link>
+    <comments>http://distractionware.com/blog/2013/09/spectra/#comments</comments>
+    <pubDate>Sun, 01 Sep 2013 15:01:45 +0000</pubDate>
+    <dc:creator>Terry</dc:creator>
+        <category><![CDATA[super hexagon]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3372</guid>
+    <description><![CDATA[Spectra by chipzel Yo! I thought Super Hexagon fans might like to know that Chipzel has a new album out today, and it&#8217;s amazing. Check it out here!]]></description>
+        <content:encoded><![CDATA[<p><Center><iframe style="border: 0; width: 360px; height: 480px;" src="http://bandcamp.com/EmbeddedPlayer/album=4292475287/size=large/bgcol=ffffff/linkcol=0687f5/notracklist=true/t=1/transparent=true/" seamless><a href="http://chipzelmusic.bandcamp.com/album/spectra">Spectra by chipzel</a></iframe></center></p>
+<p>Yo! I thought Super Hexagon fans might like to know that Chipzel has a new album out today, and it&#8217;s amazing. <a href="http://chipzelmusic.bandcamp.com">Check it out here!</a></p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/09/spectra/feed/</wfw:commentRss>
+    <slash:comments>2</slash:comments>
+    </item>
+    <item>
+    <title>868-HACK</title>
+    <link>http://distractionware.com/blog/2013/08/868-hack/</link>
+    <comments>http://distractionware.com/blog/2013/08/868-hack/#comments</comments>
+    <pubDate>Fri, 30 Aug 2013 13:39:05 +0000</pubDate>
+    <dc:creator>Terry</dc:creator>
+        <category><![CDATA[games I like]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3368</guid>
+    <description><![CDATA[I&#8217;m on Michael Brough&#8217;s testflight, so over the past couple of months I&#8217;ve gotten to play a lot of his amazing new game 868-HACK. It&#8217;s really, really good, just a beautifully designed little thing. It&#8217;s easily the iPad game I&#8217;ve played the most of ever. It&#8217;s an update to his 7DRL 86856527 from earlier this [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><img src="http://distractionware.com/blog/wp-content/uploads/2013/08/xMZ0oM2-640x480.png" alt="xMZ0oM2" width="640" height="480" class="alignnone size-medium wp-image-3369" /></p>
+<p>I&#8217;m on Michael Brough&#8217;s testflight, so over the past couple of months I&#8217;ve gotten to play a lot of his amazing new game <a href="http://mightyvision.blogspot.co.uk/2013/08/868-hack-ios.html">868-HACK</a>. It&#8217;s really, really good, just a beautifully designed little thing. It&#8217;s easily the iPad game I&#8217;ve played the most of ever. It&#8217;s an update to his 7DRL 86856527 from earlier this year, only with, like, months and months of careful tweaking and balancing and attention to detail.</p>
+<p>I don&#8217;t often post other people&#8217;s games on this blog, but I think this one is pretty special. <a href="http://mightyvision.blogspot.co.uk/2013/08/868-hack-ios.html">Go check it out.</a> </p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/08/868-hack/feed/</wfw:commentRss>
+    <slash:comments>3</slash:comments>
+    </item>
+    <item>
+    <title>Bosca Ceoil</title>
+    <link>http://distractionware.com/blog/2013/08/bosca-ceoil/</link>
+    <comments>http://distractionware.com/blog/2013/08/bosca-ceoil/#comments</comments>
+    <pubDate>Fri, 23 Aug 2013 23:39:10 +0000</pubDate>
+    <dc:creator>Terry</dc:creator>
+        <category><![CDATA[bosca ceoil]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3354</guid>
+    <description><![CDATA[I made a thing! It&#8217;s a simple music creation tool, called Bosca Ceoil (pronouced &#8220;bus-ka kyo-al&#8221;, Irish for &#8220;Music Box/Accordion&#8221;). I made this because I find other music programs really confusing and distracting. Too many panels, buttons and knobs! I wanted something really simple, something designed to work the way I tend to create stuff [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><center><img src="http://distractionware.com/blog/wp-content/uploads/2013/08/bc-640x400.png" alt="bc" width="640" height="400" class="alignnone size-medium wp-image-3355" /></center></p>
+<p>I made a thing! It&#8217;s a simple music creation tool, called Bosca Ceoil (pronouced &#8220;bus-ka kyo-al&#8221;, Irish for &#8220;Music Box/Accordion&#8221;).</p>
+<p>I made this because I find other music programs really confusing and distracting. Too many panels, buttons and knobs! I wanted something really simple, something designed to work the way I tend to create stuff &#8211; a process that I suppose I could best describe as: make something super simple, and keep tweaking it until it starts to get good.</p>
+<p>Bosca Ceoil is all about looping, and designed that way at its heart. Songs are built up from lots of tiny 16 note patterns &#8211; the intended workflow is that you loop over these single patterns until you have something you like, then you start making variations. If you approach it this way, you&#8217;ll find it&#8217;s pretty decent at doing that &#8211; but it&#8217;s not very good at other things, like say, long melody lines. It is what it is! I made it for myself, and the way I work, but hopefully some of you out there will find it useful too. It&#8217;s free, and open source under the FreeBSD licence. If anyone wants to port it/fork it, go for it! <a href="https://github.com/TerryCavanagh/boscaceoil/">It&#8217;s on github here.</a></p>
+<p><center><a href="http://distractionware.com/tools/bosca_ceoil_win_1_1.zip">[Download for Windows (v1.1)]</a><br /><a href="http://distractionware.com/tools/bosca_ceoil_osx_1_1.zip">[Download for Mac (v1.1)]</a><br /><a href="http://distractionware.com/blog/2013/09/bosca-ceoil-for-linux/">(for Linux, more info here)</a></center></p>
+<p><center><a href="http://distractionware.com/tools/boscaceoil.air">[Download AIR Installer (v1.1)]</a><br /><small><a href="http://get.adobe.com/air/">[download adobe air]</small></a></center></p>
+<p>It&#8217;s a pretty simple program, and only takes about five minutes to learn how to use. <a href="http://distractionware.com/blog/bosca-ceoil-overview/">Here&#8217;s a tutorial to get you started!</a></p>
+<p>(if Bosca Ceoil is too much of a mouthful, feel free to just call it Bosca)</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/08/bosca-ceoil/feed/</wfw:commentRss>
+    <slash:comments>38</slash:comments>
+    </item>
+  </channel>
+</rss>

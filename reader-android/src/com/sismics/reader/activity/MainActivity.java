@@ -41,6 +41,7 @@ public class MainActivity extends FragmentActivity {
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     private ActionBarDrawerToggle drawerToggle;
+    private boolean destroyed = false;
     
     @Override
     protected void onCreate(final Bundle args) {
@@ -231,6 +232,10 @@ public class MainActivity extends FragmentActivity {
         SubscriptionResource.list(this, false, new SismicsHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
+                if (isActivityDestroyed()) {
+                    return;
+                }
+                
                 // Update or create adapter
                 SubscriptionAdapter adapter = (SubscriptionAdapter) drawerList.getAdapter();
                 if (adapter == null) {
@@ -275,5 +280,19 @@ public class MainActivity extends FragmentActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("drawerItemSelected", drawerList.getCheckedItemPosition());
+    }
+    
+    /**
+     * Return true if the activity has been destroyed (not present until API 17).
+     * @return True if the activity has been destroyed
+     */
+    public boolean isActivityDestroyed() {
+        return destroyed;
+    }
+    
+    @Override
+    protected void onDestroy() {
+        destroyed = true;
+        super.onDestroy();
     }
 }
