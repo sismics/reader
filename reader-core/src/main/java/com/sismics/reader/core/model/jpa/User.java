@@ -83,6 +83,12 @@ public class User {
      */
     @Column(name = "USE_DISPLAYUNREADMOBILE_B", nullable = false)
     private boolean displayUnreadMobile;
+    
+    /**
+     * Show narrow articles on wide screen.
+     */
+    @Column(name = "USE_NARROWARTICLE_B", nullable = false)
+    private boolean narrowArticle;
 
     /**
      * True if the user hasn't dismissed the first connection screen.
@@ -298,6 +304,24 @@ public class User {
      */
     public void setDisplayUnreadMobile(boolean displayUnreadMobile) {
         this.displayUnreadMobile = displayUnreadMobile;
+    }
+    
+    /**
+     * Getter of narrowArticle.
+     *
+     * @return narrowArticle
+     */
+    public boolean isNarrowArticle() {
+        return narrowArticle;
+    }
+
+    /**
+     * Setter of narrowArticle.
+     *
+     * @param narrowArticle narrowArticle
+     */
+    public void setNarrowArticle(boolean narrowArticle) {
+        this.narrowArticle = narrowArticle;
     }
 
     /**

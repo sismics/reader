@@ -153,6 +153,7 @@ public class UserResource extends BaseResource {
         @FormParam("display_title_mobile") Boolean displayTitleMobile,
         @FormParam("display_unread_web") Boolean displayUnreadWeb,
         @FormParam("display_unread_mobile") Boolean displayUnreadMobile,
+        @FormParam("narrow_article") Boolean narrowArticle,
         @FormParam("first_connection") Boolean firstConnection) throws JSONException {
         
         if (!authenticate()) {
@@ -188,6 +189,9 @@ public class UserResource extends BaseResource {
         }
         if (displayUnreadMobile != null) {
             user.setDisplayUnreadMobile(displayUnreadMobile);
+        }
+        if (narrowArticle != null) {
+            user.setNarrowArticle(narrowArticle);
         }
         if (firstConnection != null && hasBaseFunction(BaseFunction.ADMIN)) {
             user.setFirstConnection(firstConnection);
@@ -240,7 +244,8 @@ public class UserResource extends BaseResource {
         @FormParam("display_title_web") Boolean displayTitleWeb,
         @FormParam("display_title_mobile") Boolean displayTitleMobile,
         @FormParam("display_unread_web") Boolean displayUnreadWeb,
-        @FormParam("display_unread_mobile") Boolean displayUnreadMobile) throws JSONException {
+        @FormParam("display_unread_mobile") Boolean displayUnreadMobile,
+        @FormParam("narrow_article") Boolean narrowArticle) throws JSONException {
         
         if (!authenticate()) {
             throw new ForbiddenClientException();
@@ -281,6 +286,9 @@ public class UserResource extends BaseResource {
         }
         if (displayUnreadMobile != null) {
             user.setDisplayUnreadMobile(displayUnreadMobile);
+        }
+        if (narrowArticle != null) {
+            user.setNarrowArticle(narrowArticle);
         }
         
         user = userDao.update(user);
@@ -520,6 +528,7 @@ public class UserResource extends BaseResource {
             response.put("display_title_mobile", user.isDisplayTitleMobile());
             response.put("display_unread_web", user.isDisplayUnreadWeb());
             response.put("display_unread_mobile", user.isDisplayUnreadMobile());
+            response.put("narrow_article", user.isNarrowArticle());
             response.put("first_connection", user.isFirstConnection());
             JSONArray baseFunctions = new JSONArray(((UserPrincipal) principal).getBaseFunctionSet());
             response.put("base_functions", baseFunctions);

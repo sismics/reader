@@ -153,6 +153,7 @@ public class TestUserResource extends BaseJerseyTest {
         Assert.assertTrue(json.getBoolean("display_title_mobile"));
         Assert.assertTrue(json.getBoolean("display_unread_web"));
         Assert.assertTrue(json.getBoolean("display_unread_mobile"));
+        Assert.assertFalse(json.getBoolean("narrow_article"));
         Assert.assertFalse(json.getBoolean("first_connection"));
         Assert.assertFalse(json.getBoolean("is_default_password"));
         
@@ -190,6 +191,7 @@ public class TestUserResource extends BaseJerseyTest {
         postParams.add("display_title_mobile", false);
         postParams.add("display_unread_web", false);
         postParams.add("display_unread_mobile", false);
+        postParams.add("narrow_article", true);
         response = userResource.post(ClientResponse.class, postParams);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
@@ -206,6 +208,7 @@ public class TestUserResource extends BaseJerseyTest {
         Assert.assertFalse(json.getBoolean("display_title_mobile"));
         Assert.assertFalse(json.getBoolean("display_unread_web"));
         Assert.assertFalse(json.getBoolean("display_unread_mobile"));
+        Assert.assertTrue(json.getBoolean("narrow_article"));
         
         // Delete user alice
         userResource = resource().path("/user");
@@ -272,6 +275,7 @@ public class TestUserResource extends BaseJerseyTest {
         postParams.add("display_title_mobile", false);
         postParams.add("display_unread_web", false);
         postParams.add("display_unread_mobile", false);
+        postParams.add("narrow_article", true);
         response = userResource.post(ClientResponse.class, postParams);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);

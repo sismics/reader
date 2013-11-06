@@ -154,6 +154,12 @@ r.feed.init = function() {
     r.user.setDisplayTitle(false);
     r.feed.updateMode(true);
   });
+
+  // Toolbar action: narrow article
+  $('#toolbar .narrow-article').click(function() {
+    r.user.setNarrowArticle(!r.user.isNarrowArticle());
+    r.feed.updateMode(true);
+  });
   
   // Update feed mode
   r.feed.updateMode(false);
@@ -316,7 +322,7 @@ r.feed.load = function(next) {
       // Trigger paging in the case that all newly added articles are visible
       r.feed.triggerPaging();
     },
-    fail: function(jqXHR, textStatus, errorThrown) {
+    fail: function(jqXHR, textStatus) {
       r.feed.context.loading = false;
       r.feed.activeXhr = null;
       $('#feed-container .loader').hide();
@@ -430,14 +436,28 @@ r.feed.scrollTop = function(top, animate) {
 };
 
 /**
- * Update feed mode (list or full) according to user preference.
+ * Update feed mode (list or full, narrow or not) according to user preference.
  */
 r.feed.updateMode = function(reload) {
   var list = r.user.isDisplayTitle();
+  var narrow = r.user.isNarrowArticle();
+  var container = $('#feed-container');
+  var narrowBtn = $('#toolbar .narrow-article');
+
   if (list) {
-    $('#feed-container').addClass('list');
+    container.addClass('list');
   } else {
-    $('#feed-container').removeClass('list');
+    container.removeClass('list');
+  }
+
+  if (narrow) {
+    container.addClass('narrow');
+    narrowBtn.find('img:first').removeClass('hidden');
+    narrowBtn.find('img:last').addClass('hidden');
+  } else {
+    container.removeClass('narrow');
+    narrowBtn.find('img:first').addClass('hidden');
+    narrowBtn.find('img:last').removeClass('hidden');
   }
   
   if (reload) {

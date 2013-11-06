@@ -131,7 +131,7 @@ r.user.pollJobs = function(userInfo) {
             viewport: $(window),
             adjust: { method: 'shift' }
           },
-          style: { classes: 'qtip-light qtip-shadow qtip-job' },
+          style: { classes: 'qtip-light qtip-shadow qtip-job' }
         });
       
       // Dismiss jobs
@@ -293,6 +293,29 @@ r.user.setDisplayTitle = function(title) {
   r.util.ajax({
     url: r.util.url.user_update,
     data: data,
+    type: 'POST'
+  });
+};
+
+/**
+ * Return true if the feed displays narrow articles.
+ */
+r.user.isNarrowArticle = function() {
+  return r.user.userInfo.narrow_article;
+};
+
+/**
+ * Update feed display narrow articles.
+ */
+r.user.setNarrowArticle = function(narrow) {
+  r.user.userInfo.narrow_article = narrow;
+
+  // Calling API
+  r.util.ajax({
+    url: r.util.url.user_update,
+    data: {
+      narrow_article: narrow
+    },
     type: 'POST'
   });
 };
