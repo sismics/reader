@@ -5,5 +5,5 @@
 /*/gen
 /*/target
 /*/*.iml
-/*/.idea
+.idea/
 /reader-web/src/main/webapp/sismicsreader
