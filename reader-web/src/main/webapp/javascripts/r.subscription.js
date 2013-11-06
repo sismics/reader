@@ -3,8 +3,9 @@
  */
 r.subscription.init = function() {
   // Actionbar: displaying subscriptions
-  $('#subscriptions-show-button').click(function() {
-    $('#subscriptions').toggle('fast');
+  $('#subscriptions-show-button, #subscriptions .close-button, #subscriptions-backdrop').click(function() {
+    $('#subscriptions').fadeToggle('fast');
+    $('#subscriptions-backdrop').fadeToggle('fast');
   });
 
   // Button for changing subscription tree unread state

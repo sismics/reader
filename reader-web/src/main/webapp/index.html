@@ -11,7 +11,7 @@
     <link rel="stylesheet/less" href="stylesheets/main.less" type="text/css" />
     <script>
       less = {
-        env: 'production', // or "development"
+        env: 'development', // or "development"
         async: false,       // load imports async
         fileAsync: false,   // load imports async when in a page under a file protocol
         poll: 1000,         // when in watch mode, time in ms between polls
@@ -59,6 +59,8 @@
     
     <!-- Subscriptions -->
     <div id="subscriptions">
+      <div class="button close-button">&#11013;</div>
+
       <div class="input-container">
         <input class="important" id="subscription-add-button" type="button" value="New subscription" data-i18n="[value]subscription.add.button" />
       </div>
@@ -84,6 +86,9 @@
         <!-- Here subscriptions -->
       </div>
     </div>
+
+    <!-- Subscription backdrop -->
+    <div id="subscriptions-backdrop"></div>
     
     <!-- Feed -->
     <div id="feed">
