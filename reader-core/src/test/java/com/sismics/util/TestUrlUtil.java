@@ -1,7 +1,6 @@
 package com.sismics.util;
 
 import junit.framework.Assert;
-
 import org.junit.Test;
 
 /**
@@ -10,6 +9,16 @@ import org.junit.Test;
  * @author jtremeaux
  */
 public class TestUrlUtil {
+
+    @Test
+    public void getBaseUriTest() throws Exception {
+        Assert.assertEquals("http://somehost.com", UrlUtil.getBaseUri("http://somehost.com"));
+        Assert.assertEquals("http://somehost.com", UrlUtil.getBaseUri("http://somehost.com/"));
+        Assert.assertEquals("http://somehost.com", UrlUtil.getBaseUri("http://somehost.com/asset"));
+        Assert.assertEquals("http://somehost.com", UrlUtil.getBaseUri("http://somehost.com/asset/"));
+        Assert.assertEquals("http://somehost.com", UrlUtil.getBaseUri("http://somehost.com/asset/img"));
+        Assert.assertEquals("https://somehost.com", UrlUtil.getBaseUri("https://somehost.com/asset/img"));
+    }
 
     @Test
     public void completeUrlTest() throws Exception {

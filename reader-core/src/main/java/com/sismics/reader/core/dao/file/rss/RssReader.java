@@ -1,17 +1,11 @@
 package com.sismics.reader.core.dao.file.rss;
 
-import java.io.InputStream;
-import java.io.Reader;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Stack;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
+import com.google.common.collect.ImmutableList;
+import com.sismics.reader.core.model.jpa.Article;
+import com.sismics.reader.core.model.jpa.Feed;
+import com.sismics.reader.core.util.StreamUtil;
+import com.sismics.util.DateUtil;
+import com.sismics.util.UrlUtil;
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -23,11 +17,13 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.google.common.collect.ImmutableList;
-import com.sismics.reader.core.model.jpa.Article;
-import com.sismics.reader.core.model.jpa.Feed;
-import com.sismics.reader.core.util.StreamUtil;
-import com.sismics.util.DateUtil;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.InputStream;
+import java.io.Reader;
+import java.net.MalformedURLException;
+import java.text.MessageFormat;
+import java.util.*;
 
 /**
  * RSS / Atom feed parser.
@@ -213,8 +209,20 @@ public class RssReader extends DefaultHandler {
         }
     
         if (feedType == FeedType.ATOM) {
-            String url = new AtomUrlGuesserStrategy().guess(atomLinkList);
-            feed.setUrl(url);
+            AtomUrlGuesserStrategy strategy = new AtomUrlGuesserStrategy();
+            String siteUrl = strategy.guessSiteUrl(atomLinkList);
+            feed.setUrl(siteUrl);
+
+            if (feed.getBaseUri() == null) {
+                String feedBaseUri = strategy.guessFeedUrl(atomLinkList);
+                if (feedBaseUri != null) {
+                    try {
+                        feed.setBaseUri(UrlUtil.getBaseUri(feedBaseUri));
+                    } catch (MalformedURLException e) {
+                        // NOP
+                    }
+                }
+            }
         }
         validateFeed();
         fixGuid();
@@ -331,9 +339,7 @@ public class RssReader extends DefaultHandler {
             String rel = StringUtils.trimToNull(attributes.getValue("rel"));
             String type = StringUtils.trimToNull(attributes.getValue("type"));
             String href = StringUtils.trimToNull(attributes.getValue("href"));
-            if (!"self".equals(rel)) {
-                atomLinkList.add(new AtomLink(rel, type, href));
-            }
+            atomLinkList.add(new AtomLink(rel, type, href));
             pushElement(Element.ATOM_LINK);
         } else if (feedType == FeedType.ATOM && currentElement == Element.FEED && "updated".equalsIgnoreCase(localName)) {
             pushElement(Element.ATOM_UPDATED);

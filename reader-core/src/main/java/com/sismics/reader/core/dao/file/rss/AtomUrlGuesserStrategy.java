@@ -15,7 +15,7 @@ public class AtomUrlGuesserStrategy {
      * @param atomLinkList List of links
      * @return Site URL
      */
-    public String guess(List<AtomLink> atomLinkList) {
+    public String guessSiteUrl(List<AtomLink> atomLinkList) {
         if (atomLinkList == null || atomLinkList.isEmpty()) {
             return null;
         }
@@ -27,7 +27,34 @@ public class AtomUrlGuesserStrategy {
             }
         }
         
-        // Default: return the first link
-        return atomLinkList.get(0).getHref();
+        // Default: return the first valid link
+        for (AtomLink atomLink : atomLinkList) {
+            if (!"self".equals(atomLink.getRel())) {
+                return atomLink.getHref();
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Guess the correct Feed URL from a set of links.
+     *
+     * @param atomLinkList List of links
+     * @return Site URL
+     */
+    public String guessFeedUrl(List<AtomLink> atomLinkList) {
+        if (atomLinkList == null || atomLinkList.isEmpty()) {
+            return null;
+        }
+
+        // Return the self link
+        for (AtomLink atomLink : atomLinkList) {
+            if ("self".equalsIgnoreCase(atomLink.getRel())) {
+                return atomLink.getHref();
+            }
+        }
+
+        return null;
     }
 }

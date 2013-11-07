@@ -199,24 +199,6 @@ public class TestRssReader {
     }
 
     @Test
-    public void atomReaderWhatif2Test() throws Exception {
-        InputStream is = getClass().getResourceAsStream("/feed/feed_atom_whatif2.xml");
-        RssReader reader = new RssReader();
-        reader.readRssFeed(is);
-        Feed feed = reader.getFeed();
-        Assert.assertEquals("What If?", feed.getTitle());
-        Assert.assertNull(feed.getUrl());
-        Assert.assertEquals("http://what-if.xkcd.com/feed.atom", feed.getRssUrl());
-        Assert.assertNull(feed.getLanguage());
-        Assert.assertEquals("Answering your hypothetical questions with physics, every Tuesday.", feed.getDescription());
-        List<Article> articleList = reader.getArticleList();
-        Article article = articleList.get(0);
-        Assert.assertTrue(article.getDescription().contains("The Constant Groundskeeper"));
-        Assert.assertFalse(article.getDescription().contains("src=\"/imgs/a/70/lawn_cougar.png\""));
-        Assert.assertTrue(article.getDescription().contains("src=\"http://what-if.xkcd.com/imgs/a/70/lawn_cougar.png\""));
-    }
-
-    @Test
     public void rssReaderSpaceTest() throws Exception {
         InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_space.xml");
         RssReader reader = new RssReader();
@@ -292,8 +274,7 @@ public class TestRssReader {
         reader.readRssFeed(is);
         Feed feed = reader.getFeed();
         Assert.assertEquals("marijnhaverbeke.nl/blog", feed.getTitle());
-        //Assert.assertEquals("http://marijnhaverbeke.nl/blog/feed.atom", feed.getUrl());
-        Assert.assertNull(feed.getBaseUri());
+        Assert.assertEquals("http://marijnhaverbeke.nl", feed.getBaseUri());
         List<Article> articleList = reader.getArticleList();
         Assert.assertEquals(26, articleList.size());
         Article article = articleList.get(0);

@@ -34,14 +34,26 @@ public class UrlUtil {
         // Use the website root URL
         if (feed.getUrl() != null) {
             try {
-                URL url = new URL(feed.getUrl());
-                return new URL(url.getProtocol(), url.getHost(), url.getPort(), "").toString();
+                return getBaseUri(feed.getUrl());
             } catch (MalformedURLException e) {
-                return feed.getUrl();
+                // NOP
             }
-        } else {
-            return null;
         }
+
+        return null;
+    }
+
+    /**
+     * Try to extract the base URL without the full path.
+     * e.g. http://somehost.com/asset/img/ -> http://somehost.com/
+     *
+     * @param urlString Source URL
+     * @return Extracted URL
+     * @throws MalformedURLException
+     */
+    public static String getBaseUri(String urlString) throws MalformedURLException {
+        URL url = new URL(urlString);
+        return new URL(url.getProtocol(), url.getHost(), url.getPort(), "").toString();
     }
 
     /**

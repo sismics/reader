@@ -308,11 +308,13 @@ public class TestArticleSanitizer {
         Assert.assertEquals("What If?", feed.getTitle());
         List<Article> articleList = reader.getArticleList();
         Assert.assertEquals(5, articleList.size());
-        Article article = articleList.get(4);
 
-        // Allow unknown iframes
+        // Check that absolute URL are constructed from the feed base URL
+        Article article = articleList.get(0);
         ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         String html = articleSanitizer.sanitize(UrlUtil.getBaseUri(feed, article), article.getDescription());
-        Assert.assertTrue(html.contains("If winds reached 500 mph, would it pick up a human?"));
+        Assert.assertTrue(html.contains("The Constant Groundskeeper"));
+        Assert.assertFalse(html.contains("src=\"/imgs/a/70/lawn_cougar.png\""));
+        Assert.assertTrue(html.contains("src=\"http://what-if.xkcd.com/imgs/a/70/lawn_cougar.png\""));
     }
 }
