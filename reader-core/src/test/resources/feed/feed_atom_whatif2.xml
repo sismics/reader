@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title type="text">What If?</title><id>http://what-if.xkcd.com/feed.atom</id><updated>2013-11-06T15:22:25Z</updated><link href="http://what-if.xkcd.com/feed.atom" rel="self"/><author><name>xkcd</name><email>whatif@xkcd.com</email></author><icon>http://what-if.xkcd.com/imgs/favicon.ico</icon><logo>http://what-if.xkcd.com/imgs/favicon.ico</logo><subtitle type="text">Answering your hypothetical questions with physics, every Tuesday.</subtitle><entry><id>http://what-if.xkcd.com/70/</id><title type="text">The Constant Groundskeeper</title><updated>2013-11-05T00:00:00Z</updated><author><name>xkcd</name><email>whatif@xkcd.com</email></author><content type="html">&lt;article class="entry"&gt;
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title type="text">What If?</title>
+    <id>http://what-if.xkcd.com/feed.atom</id>
+    <updated>2013-11-06T15:22:25Z</updated>
+    <link href="http://what-if.xkcd.com/feed.atom" rel="self"/>
+    <author><name>xkcd</name><email>whatif@xkcd.com</email></author>
+    <icon>http://what-if.xkcd.com/imgs/favicon.ico</icon>
+    <logo>http://what-if.xkcd.com/imgs/favicon.ico</logo>
+    <subtitle type="text">Answering your hypothetical questions with physics, every Tuesday.</subtitle>
+
+    <entry>
+        <id>http://what-if.xkcd.com/70/</id>
+        <title type="text">The Constant Groundskeeper</title>
+        <updated>2013-11-05T00:00:00Z</updated>
+        <author><name>xkcd</name><email>whatif@xkcd.com</email></author>
+        <content type="html">&lt;article class="entry"&gt;
   &lt;a href="//what-if.xkcd.com/70/"&gt;&lt;h1&gt;The Constant Groundskeeper&lt;/h1&gt;&lt;/a&gt;
   &lt;p id="question"&gt;How big of a lawn would you have to have so that when you finished mowing you&amp;#39;d need to start over because the grass has grown?&lt;/p&gt;
 &lt;p id="attribute"&gt;Nick Nelson&lt;/p&gt;

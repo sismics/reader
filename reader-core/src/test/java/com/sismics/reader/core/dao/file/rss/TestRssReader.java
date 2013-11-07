@@ -1,14 +1,12 @@
 package com.sismics.reader.core.dao.file.rss;
 
-import java.io.InputStream;
-import java.util.List;
-
-import junit.framework.Assert;
-
-import org.junit.Test;
-
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
+import junit.framework.Assert;
+import org.junit.Test;
+
+import java.io.InputStream;
+import java.util.List;
 
 /**
  * Test of the RSS reader.
@@ -198,6 +196,24 @@ public class TestRssReader {
         Assert.assertNull(feed.getDescription());
         List<Article> articleList = reader.getArticleList();
         Assert.assertEquals(3, articleList.size());
+    }
+
+    @Test
+    public void atomReaderWhatif2Test() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_atom_whatif2.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("What If?", feed.getTitle());
+        Assert.assertNull(feed.getUrl());
+        Assert.assertEquals("http://what-if.xkcd.com/feed.atom", feed.getRssUrl());
+        Assert.assertNull(feed.getLanguage());
+        Assert.assertEquals("Answering your hypothetical questions with physics, every Tuesday.", feed.getDescription());
+        List<Article> articleList = reader.getArticleList();
+        Article article = articleList.get(0);
+        Assert.assertTrue(article.getDescription().contains("The Constant Groundskeeper"));
+        Assert.assertFalse(article.getDescription().contains("src=\"/imgs/a/70/lawn_cougar.png\""));
+        Assert.assertTrue(article.getDescription().contains("src=\"http://what-if.xkcd.com/imgs/a/70/lawn_cougar.png\""));
     }
 
     @Test
