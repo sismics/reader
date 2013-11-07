@@ -604,7 +604,9 @@
       
         .feed-item-star {
           position: absolute;
-          top: 9px;
+          top: 0;
+          left: 3px;
+          padding: 7px;
           
           &+ .feed-item-title {
             margin-left: 28px;
@@ -622,7 +624,7 @@
         
         .feed-item-subscription {
           display: inline-block;
-          margin-top: 8px;
+          margin-top: 12px;
           color: #777;
         }
         
@@ -707,10 +709,10 @@
         width: 24px;
         height: 24px;
         cursor: pointer;
-        background: url('../images/nostar.png');
+        background: url('../images/nostar.png') no-repeat center;
         
         &.starred {
-          background: url('../images/star.png');
+          background: url('../images/star.png') no-repeat center;
         }
       }
     }
