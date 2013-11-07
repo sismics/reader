@@ -94,7 +94,8 @@ r.subscription.init = function() {
     
     // Hide subscriptions on mobile
     if(r.main.mobile) {
-      $('#subscriptions').hide('fast');
+      $('#subscriptions').fadeOut('fast');
+      $('#subscriptions-backdrop').fadeOut('fast');
     }
   });
 };
@@ -406,6 +407,9 @@ r.subscription.initEditing = function() {
   });
 };
 
+/**
+ * Initialize subscription related toolbar actions.
+ */
 r.subscription.initToolbar = function() {
   // Toolbar action: change category
   var content = $('#template .qtip-change-category');
