@@ -183,7 +183,7 @@ public class ArticleDao {
         // Building document
         org.apache.lucene.document.Document document = new org.apache.lucene.document.Document();
         document.add(new StringField("id", article.getId(), Field.Store.YES));
-        document.add(new StringField("feed_id", article.getFeedId(), Field.Store.YES));
+        document.add(new StringField("url", article.getUrl(), Field.Store.YES));
         document.add(new Field("title", article.getTitle(), fieldType));
         document.add(new Field("description", article.getDescription(), fieldType));
         

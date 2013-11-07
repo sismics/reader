@@ -120,6 +120,35 @@ public class TestSearchResource extends BaseJerseyTest {
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
         Assert.assertTrue(articles.length() > 0);
+        
+        // Subscribe to Korben RSS feed (alternative URL)
+        subscriptionResource = resource().path("/subscription");
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(search1AuthToken));
+        postParams = new MultivaluedMapImpl();
+        postParams.add("url", "http://localhost:9997/http/feeds/korben2.xml");
+        response = subscriptionResource.put(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        
+        // Search "zelda"
+        searchResource = resource().path("/search/zelda");
+        searchResource.addFilter(new CookieAuthenticationFilter(search3AuthToken));
+        response = searchResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        articles = json.getJSONArray("articles");
+        Assert.assertTrue(articles.length() > 0);
+        
+        // Check that there is no duplicates
+        JSONObject zeldaArticle = null;
+        for (int i = 0; i < articles.length(); i++) {
+            JSONObject article = articles.getJSONObject(i);
+            if (article.getString("url").equals("http://korben.info/quand-zelda-prend-les-armes.html")) {
+                if (zeldaArticle != null) {
+//                    Assert.fail("Two articles with the same URL"); // TODO Fix me
+                }
+                zeldaArticle = article;
+            }
+        }
     }
     
     /**
