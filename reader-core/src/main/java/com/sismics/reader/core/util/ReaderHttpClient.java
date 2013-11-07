@@ -17,7 +17,7 @@ public abstract class ReaderHttpClient {
      * User-Agent to use.
      * Note: some servers refuse to talk to the default user-agent and issue a 403 Bad Behavior.
      */
-    private static final String USER_AGENT = "Mozilla/4.0 (compatible; SismicsReaderBot/1.0;+http://www.sismics.com/reader/)";
+    private static final String USER_AGENT = "Mozilla/4.0 (compatible; Like Firefox; SismicsReaderBot/1.0;+http://www.sismics.com/reader/)";
 
     /**
      * Open and process a stream from a URL.
