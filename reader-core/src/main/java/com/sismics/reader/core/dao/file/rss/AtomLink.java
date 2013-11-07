@@ -23,7 +23,7 @@ public class AtomLink {
     private String href;
 
     /**
-     * Constructor of RssLink.
+     * Constructor of AtomLink.
      * 
      * @param type Content type
      * @param rel Relationship type

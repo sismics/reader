@@ -292,4 +292,27 @@ public class TestArticleSanitizer {
         Assert.assertTrue(html.contains("Naya’s Quest"));
         Assert.assertTrue(html.contains("<iframe style=\" width: 350px; height: 659px;\" src=\"http://bandcamp.com/EmbeddedPlayer/album&#61;578259909/size&#61;large/bgcol&#61;ffffff/linkcol&#61;0687f5/transparent&#61;true/\"></iframe>"));
     }
+    
+    /**
+     * Tests the article sanitizer related to issue #71.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void articleSanitizer71Test() throws Exception {
+        // Load a feed
+        InputStream is = getClass().getResourceAsStream("/feed/feed_atom_whatif2.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("What If?", feed.getTitle());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(5, articleList.size());
+        Article article = articleList.get(4);
+
+        // Allow unknown iframes
+        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
+        String html = articleSanitizer.sanitize(UrlUtil.getBaseUri(feed, article), article.getDescription());
+        Assert.assertTrue(html.contains("If winds reached 500 mph, would it pick up a human?"));
+    }
 }

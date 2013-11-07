@@ -1,5 +1,6 @@
 package com.sismics.util;
 
+import com.google.common.base.Strings;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
 
@@ -53,7 +54,7 @@ public class UrlUtil {
      */
     public static String completeUrl(String baseUrl, String relativeUrl) throws MalformedURLException {
         // Trim URL
-        baseUrl = baseUrl.trim();
+        baseUrl = Strings.nullToEmpty(baseUrl).trim();
         relativeUrl = relativeUrl.trim();
         
         // If the URL is already absolute, just validate
