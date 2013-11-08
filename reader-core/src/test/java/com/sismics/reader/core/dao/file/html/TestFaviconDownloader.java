@@ -68,14 +68,22 @@ public class TestFaviconDownloader {
         Assert.assertTrue(new File(filename).exists());
     }
     
+    /**
+     * Related to issue #2.
+     * 
+     * @throws Exception
+     */
     @Test
     public void faviconDownloaderDoubleFineTest() throws Exception {
         // Download from page
-//        FaviconDownloader downloader = new FaviconDownloader();
-//        String tempDir = System.getProperty("java.io.tmpdir");
-//        String filename = downloader.downloadFaviconFromPage("http://www.kickstarter.com/projects/66710809/double-fine-adventure/posts.atom", tempDir, "favicon");
-//         TODO Fallback to rssUrl if url in the feed is incorrect
-//        Assert.assertNotNull(filename);
-//        Assert.assertTrue(new File(filename).exists());
+        FaviconDownloader downloader = new FaviconDownloader();
+        String tempDir = System.getProperty("java.io.tmpdir");
+        String filename = downloader.downloadFaviconFromPage("/projects/doublefine/double-fine-adventure/posts", tempDir, "favicon");
+        if (filename == null) {
+            // If nothing is found, try again with the RSS URL
+            filename = downloader.downloadFaviconFromPage("http://www.kickstarter.com/projects/66710809/double-fine-adventure/posts.atom", tempDir, "favicon");
+        }
+        Assert.assertNotNull(filename);
+        Assert.assertTrue(new File(filename).exists());
     }
 }

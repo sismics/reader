@@ -77,7 +77,7 @@ public class FaviconDownloader {
 
         // Attempt to download a valid favicon from guessed URLs 
         final List<String> filenameList = ImmutableList.of(
-                "favicon.png", "favicon.gif", "favicon.ico", "favicon.jpg", "favicon.jpeg", "favicon.bmp");
+                "favicon.png", "favicon.gif", "favicon.ico", "favicon.jpg", "favicon.jpeg");
         Iterator<String> iterator = filenameList.iterator(); 
         while (localFilename == null && iterator.hasNext()) {
             String filename = iterator.next();
