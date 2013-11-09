@@ -28,6 +28,7 @@ r.util.url = {
   starred_star: 'api/starred/{id}',
   article_read: 'api/article/{id}/read',
   article_unread: 'api/article/{id}/unread',
+  articles_read: 'api/article/read',
   search: 'api/search/{query}',
   locale_list: 'api/locale',
   theme_list: 'api/theme',

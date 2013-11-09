@@ -175,9 +175,7 @@ r.feed.init = function() {
 
   // Mark as read on a batch of articles
   r.feed.cache.container.on('click', '.markread', function() {
-    $(this).prevAll('.feed-item:not(.read)').each(function() {
-      r.article.read($(this), true);
-    });
+    r.article.read($(this).prevAll('.feed-item:not(.read)'), true);
   });
   
   // Update feed mode
@@ -326,6 +324,7 @@ r.feed.load = function(next) {
       if (r.main.mobile
           && r.feed.context.unread
           && nbArticles == r.feed.context.limit()) {
+        // Mark previous articles as read button
         r.feed.context.lastItem.after('<div class="markread"><a>' + $.t('feed.markread') + '</a></div>');
       }
 

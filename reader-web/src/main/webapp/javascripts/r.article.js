@@ -3,7 +3,7 @@
  */
 r.article.init = function() {
   // Delegate on mark as unread checkboxes
-  $('#feed-container').on('change', '.feed-item .feed-item-unread input', function() {
+  r.feed.cache.container.on('change', '.feed-item .feed-item-unread input', function() {
     var checked = $(this).is(':checked');
     var item = $(this).closest('.feed-item');
     
@@ -17,7 +17,7 @@ r.article.init = function() {
   });
   
   // Delegate on star buttons
-  $('#feed-container').on('click', '.feed-item .feed-item-star', function(e) {
+  r.feed.cache.container.on('click', '.feed-item .feed-item-star', function(e) {
     var item = $(this).closest('.feed-item');
     var article = item.data('article');
     article.is_starred = !article.is_starred;
@@ -41,7 +41,7 @@ r.article.init = function() {
   });
   
   // Delegate on article collapsed header click
-  $('#feed-container').on('click', '.feed-item .collapsed .container', function() {
+  r.feed.cache.container.on('click', '.feed-item .collapsed .container', function() {
     var item = $(this).closest('.feed-item');
     var container = item.parent();
     
@@ -65,7 +65,7 @@ r.article.init = function() {
   });
   
   // Delegate on article content click
-  $('#feed-container').on('click', '.feed-item .header, .feed-item .content', function() {
+  r.feed.cache.container.on('click', '.feed-item .header, .feed-item .content', function() {
     var item = $(this).closest('.feed-item');
     var container = item.parent();
       
@@ -76,7 +76,7 @@ r.article.init = function() {
   });
   
   // Delegate on link click in content
-  $('#feed-container').on('click', '.feed-item .content a', function() {
+  r.feed.cache.container.on('click', '.feed-item .content a', function() {
     $(this).target = '_blank';
     window.open($(this).prop('href'));
     return false;
@@ -84,42 +84,61 @@ r.article.init = function() {
 };
 
 /**
- * Mark an article as read or unread.
+ * Mark articles as read or unread.
  */
-r.article.read = function(item, read) {
-  var current = item.hasClass('read');
-  
-  // Do nothing if read state has not changed
-  if (current == read) {
+r.article.read = function(items, read) {
+  // Update application counts when an article is read or unread
+  var updateReadState = function(item) {
+    // Update tree unread counts
+    var count = read ? -1 : -2;
+    var article = item.data('article');
+    var subscriptionId = article.subscription.id;
+    var subscription = $('#subscription-list').find('li.subscription[data-subscription-id="' + subscriptionId + '"]');
+    r.subscription.updateUnreadCount(subscription, count); // Update article's subscription
+
+    // Update parent categories (only 1)
+    subscription.parents('li.category').each(function(i, category) {
+      r.subscription.updateUnreadCount($(category), count);
+    });
+
+    // Update main unread item and title
+    count = r.subscription.updateUnreadCount($('#unread-feed-button'), count);
+    r.subscription.updateTitle(count);
+  };
+
+  var articleIdList = [];
+
+  items.each(function() {
+    var item = $(this);
+
+    var current = item.hasClass('read');
+
+    // Do nothing if read state has not changed
+    if (current == read) {
+      return;
+    }
+
+    // Update item state
+    read ? item.addClass('read') : item.removeClass('read');
+
+    articleIdList.push(item.attr('data-article-id'));
+  });
+
+  // Do nothing if no article to mark as read
+  if (articleIdList.length == 0) {
     return;
   }
   
-  // Update item state
-  read ? item.addClass('read') : item.removeClass('read');
-  
-  var articleId = item.attr('data-article-id');
-  
   // Calling API
-  var url = read ? r.util.url.article_read : r.util.url.article_unread;
+  var url = read ? r.util.url.articles_read : r.util.url.article_unread;
   r.util.ajax({
-    url: url.replace('{id}', articleId),
+    url: url.replace('{id}', articleIdList[0]), // Unread is not supported for multiple articles
+    data: { id: articleIdList },
     type: 'POST',
-    done: function(data) {
-      // Update tree unread counts
-      var count = read ? -1 : -2;
-      var article = item.data('article');
-      var subscriptionId = article.subscription.id;
-      var subscription = $('#subscription-list li.subscription[data-subscription-id="' + subscriptionId + '"]');
-      r.subscription.updateUnreadCount(subscription, count); // Update article's subscription
-      
-      // Update parent categories (only 1)
-      subscription.parents('li.category').each(function(i, category) {
-        r.subscription.updateUnreadCount($(category), count);
+    done: function() {
+      items.each(function() {
+        updateReadState($(this));
       });
-      
-      // Update main unread item and title
-      var count = r.subscription.updateUnreadCount($('#unread-feed-button'), count);
-      r.subscription.updateTitle(count);
     }
   });
 };
@@ -128,7 +147,7 @@ r.article.read = function(item, read) {
  * Build an article from server data.
  */
 r.article.build = function(article, classes) {
-  var item = $('#template .feed-item').clone();
+  var item = $('#template').find('.feed-item').clone();
   var date = moment(article.date);
   
   if (!r.user.isDisplayTitle()) {
