@@ -133,6 +133,7 @@ r.article.read = function(items, read) {
   var url = read ? r.util.url.articles_read : r.util.url.article_unread;
   r.util.ajax({
     url: url.replace('{id}', articleIdList[0]), // Unread is not supported for multiple articles
+    traditional: true,
     data: { id: articleIdList },
     type: 'POST',
     done: function() {

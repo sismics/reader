@@ -145,14 +145,7 @@ r.feed.init = function() {
   
   // Toolbar action: mark all as read
   r.feed.cache.toolbar.find('.all-read-button').click(function() {
-    r.util.ajax({
-      url: r.feed.context.url + '/read',
-      type: 'POST',
-      always: function() {
-        r.feed.load(false);
-        r.subscription.update();
-      }
-    });
+    r.feed.markAllRead();
   });
   
   // Toolbar action: list mode
@@ -321,8 +314,7 @@ r.feed.load = function(next) {
       });
       
       // Post article build
-      if (r.main.mobile
-          && r.feed.context.unread
+      if (r.feed.context.unread
           && nbArticles == r.feed.context.limit()) {
         // Mark previous articles as read button
         r.feed.context.lastItem.after('<div class="markread"><a>' + $.t('feed.markread') + '</a></div>');
@@ -395,6 +387,9 @@ r.feed.buildBumper = function(data) {
       html = $.t('feed.nomoreunreadarticles');
     }
     html += '<br /><a href="#" class="showall">' + $.t('feed.showall') + '</a>';
+    if (r.user.isDisplayTitle()) {
+      html += '<br /><a href="#" class="markallread">' + $.t('feed.markallread') + '</a>';
+    }
   }
   
   var bumper = $('<div class="bumper"><img class="loader" src="images/ajax-loader.gif" />' +
@@ -413,6 +408,14 @@ r.feed.buildBumper = function(data) {
     $(this).hide();
     return false;
   });
+
+  // Mark all as read link
+  bumper.find('.markallread').click(function() {
+    r.feed.markAllRead();
+    return false;
+  });
+
+  bumper.css('height', ($(window).height() - 200) + 'px');
   
   return bumper;
 };
@@ -485,4 +488,18 @@ r.feed.updateMode = function(reload) {
     // Reload feed
     r.feed.load(false);
   }
+};
+
+/**
+ * Mark all as read.
+ */
+r.feed.markAllRead = function() {
+  r.util.ajax({
+    url: r.feed.context.url + '/read',
+    type: 'POST',
+    always: function() {
+      r.feed.load(false);
+      r.subscription.update();
+    }
+  });
 };

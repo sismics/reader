@@ -161,6 +161,7 @@
     "nomoreunreadarticles": "No more unread articles",
     "subscriptionnomoreunreadarticles": "\"__subscription__\" contains no more unread articles",
     "markread": "Mark previous articles as read",
+    "markallread": "Mark all as read",
     "noarticle": "No article",
     "nonewarticle": "No new article",
     "showall": "Show all",

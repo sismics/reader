@@ -161,6 +161,7 @@
     "nomoreunreadarticles": "Pas plus d'articles non-lus",
     "subscriptionnomoreunreadarticles": "\"__subscription__\" ne contient pas d'articles non-lus",
     "markread": "Marquer les articles au dessus comme lus",
+    "markallread": "Tout marquer comme lu",
     "noarticle": "Aucun articles",
     "nonewarticle": "Aucun articles non-lus",
     "showall": "Tout afficher",
