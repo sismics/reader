@@ -172,6 +172,13 @@ r.feed.init = function() {
     r.user.setNarrowArticle(!r.user.isNarrowArticle());
     r.feed.updateMode(true);
   });
+
+  // Mark as read on a batch of articles
+  r.feed.cache.container.on('click', '.markread', function() {
+    $(this).prevAll('.feed-item:not(.read)').each(function() {
+      r.article.read($(this), true);
+    });
+  });
   
   // Update feed mode
   r.feed.updateMode(false);
@@ -261,7 +268,7 @@ r.feed.load = function(next) {
   // Building payload
   var data = {
     unread: r.feed.context.unread,
-    limit: r.feed.context.limit
+    limit: r.feed.context.limit()
   };
   
   if (r.feed.context.lastItem) {
@@ -279,14 +286,14 @@ r.feed.load = function(next) {
     type: 'GET',
     data: data,
     done: function(data) {
-      var noArticles = $(data.articles).length == 0;
+      var nbArticles = $(data.articles).length;
       
       // Pre article build
       if (!next) {
         r.feed.cache.container.html('');
         
         // Empty placeholder
-        if (noArticles) {
+        if (nbArticles == 0) {
           r.feed.cache.container.append(r.feed.buildEmpty());
         }
         
@@ -297,7 +304,7 @@ r.feed.load = function(next) {
       }
       
       // All articles are loaded?
-      r.feed.context.fullyLoaded = noArticles;
+      r.feed.context.fullyLoaded = nbArticles == 0;
       
       // Building articles
       $(data.articles).each(function(i, article) {
@@ -310,18 +317,24 @@ r.feed.load = function(next) {
         r.feed.context.bumper.before(item);
         
         // Store last item
-        if(i == $(data.articles).length - 1) {
+        if(i == nbArticles - 1) {
           r.feed.context.lastItem = item;
         }
       });
       
       // Post article build
+      if (r.main.mobile
+          && r.feed.context.unread
+          && nbArticles == r.feed.context.limit()) {
+        r.feed.context.lastItem.after('<div class="markread"><a>' + $.t('feed.markread') + '</a></div>');
+      }
+
       if (!next) {
         // Scrolling to top
         r.feed.scrollTop(0);
         
         // Focus article list and redraw
-        $('#feed-container')
+        r.feed.cache.container
           .trigger('focus')
           .redraw();
       }
