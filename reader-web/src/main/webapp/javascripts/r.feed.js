@@ -8,7 +8,7 @@ r.feed.context = {
   url: null, // API URL
   loading: false, // True if XHR in progress
   limit: function() { // Articles number to fetch each page
-    return $('#feed-container').hasClass('list') ? 15 : 10;
+    return r.feed.cache.container.hasClass('list') ? 15 : 10;
   }, 
   lastItem: null, // Last article
   bumper: null, // Bumper
@@ -17,20 +17,32 @@ r.feed.context = {
 };
 
 /**
+ * jQuery cache.
+ */
+r.feed.cache = {
+  container: null,
+  toolbar: null
+};
+
+/**
  * Reset feed related context.
  */
 r.feed.reset = function() {
   // Hiding articles container
-  $('#feed-container').hide();
+  r.feed.cache.container.hide();
   
   // Resetting highlights
-  $('#subscriptions li.active').removeClass('active');
+  $('#subscriptions').find('li.active').removeClass('active');
 };
 
 /**
  * Initializing feed module.
  */
 r.feed.init = function() {
+  // jQuery cache
+  r.feed.cache.container = $('#feed-container');
+  r.feed.cache.toolbar = $('#toolbar');
+
   // Listening hash changes on #/feed/*
   // /feed/all
   // /feed/unread
@@ -43,10 +55,10 @@ r.feed.init = function() {
     r.main.reset();
     
     // Showing articles container
-    $('#feed-container').show();
+    r.feed.cache.container.show();
     
     // Configuring contextual toolbar
-    $('#toolbar > .feed').removeClass('hidden');
+    r.feed.cache.toolbar.find('> .feed').removeClass('hidden');
     
     // Resetting context
     r.feed.context.subscriptionId = null;
@@ -60,7 +72,7 @@ r.feed.init = function() {
       $('#all-feed-button').addClass('active');
       
       // Specific toolbar actions for all
-      $('#toolbar > .all').removeClass('hidden');
+      r.feed.cache.toolbar.find('> .all').removeClass('hidden');
       
     } else if (target == 'unread') {
       // Configuring context for /all?unread=true
@@ -69,7 +81,7 @@ r.feed.init = function() {
       $('#unread-feed-button').addClass('active');
       
       // Specific toolbar actions for unread
-      $('#toolbar > .unread').removeClass('hidden');
+      r.feed.cache.toolbar.find('> .unread').removeClass('hidden');
       
     } else if (target == 'starred') {
       // Configuring context for /starred
@@ -78,7 +90,7 @@ r.feed.init = function() {
       $('#starred-feed-button').addClass('active');
       
       // Specific toolbar actions for starred
-      $('#toolbar > .starred').removeClass('hidden');
+      r.feed.cache.toolbar.find('> .starred').removeClass('hidden');
       
     } else if (target.substring(0, 13) == 'subscription/') {
       // Configuring context for /subscription/id
@@ -86,7 +98,7 @@ r.feed.init = function() {
       r.feed.context.subscriptionId = target.substring(13);
       
       // Specific toolbar actions for subscriptions
-      $('#toolbar > .subscription').removeClass('hidden');
+      r.feed.cache.toolbar.find('> .subscription').removeClass('hidden');
       
     } else if (target.substring(0, 9) == 'category/') {
       // Configuring context for /category/id
@@ -94,18 +106,18 @@ r.feed.init = function() {
       r.feed.context.categoryId = target.substring(9);
       
       // Specific toolbar actions for categories
-      $('#toolbar > .category').removeClass('hidden');
+      r.feed.cache.toolbar.find('> .category').removeClass('hidden');
     } else if (target.substring(0, 7) == 'search/') {
       // Configuring context for /search/query
       r.feed.context.unread = false;
       r.feed.context.url = r.util.url.search.replace('{query}', target.substring(7));
       
       // Specific toolbar actions for search
-      $('#toolbar > .search').removeClass('hidden');
+      r.feed.cache.toolbar.find('> .search').removeClass('hidden');
     }
     
     // Focus on articles list
-    $('#feed-container').focus();
+    r.feed.cache.container.focus();
     
     // Loading articles
     r.feed.load(false);
@@ -116,23 +128,23 @@ r.feed.init = function() {
   
   // Smartphone and desktop scroll listener
   $(window).scroll(r.feed.scroll);
-  $('#feed-container').scroll(r.feed.scroll);
+  r.feed.cache.container.scroll(r.feed.scroll);
   
   // Toolbar action: refresh
-  $('#toolbar .refresh-button').click(function() {
+  r.feed.cache.toolbar.find('.refresh-button').click(function() {
     r.feed.load(false);
     r.subscription.update();
   });
   
   // Toolbar action: show all/new articles
-  $('#toolbar .all-button').click(function() {
+  r.feed.cache.toolbar.find('.all-button').click(function() {
     r.feed.context.unread = !r.feed.context.unread;
     r.feed.context.unread ? $(this).html($.t('toolbar.showall')) : $(this).html($.t('toolbar.shownew'));
     r.feed.load(false);
   });
   
   // Toolbar action: mark all as read
-  $('#toolbar .all-read-button').click(function() {
+  r.feed.cache.toolbar.find('.all-read-button').click(function() {
     r.util.ajax({
       url: r.feed.context.url + '/read',
       type: 'POST',
@@ -144,19 +156,19 @@ r.feed.init = function() {
   });
   
   // Toolbar action: list mode
-  $('#toolbar .list-button').click(function() {
+  r.feed.cache.toolbar.find('.list-button').click(function() {
     r.user.setDisplayTitle(true);
     r.feed.updateMode(true);
   });
   
   // Toolbar action: full mode
-  $('#toolbar .full-button').click(function() {
+  r.feed.cache.toolbar.find('.full-button').click(function() {
     r.user.setDisplayTitle(false);
     r.feed.updateMode(true);
   });
 
   // Toolbar action: narrow article
-  $('#toolbar .narrow-article').click(function() {
+  r.feed.cache.toolbar.find('.narrow-article').click(function() {
     r.user.setNarrowArticle(!r.user.isNarrowArticle());
     r.feed.updateMode(true);
   });
@@ -169,10 +181,9 @@ r.feed.init = function() {
  * Feed scroll listener.
  */
 r.feed.scroll = function() {
-  var container = $('#feed-container');
-  var scroll = r.main.mobile ? $(window).scrollTop() : container.scrollTop();
-  var height = r.main.mobile ? $(window).height() / 2 : container.height() / 2;
-  var feedItemList = container.find('.feed-item');
+  var scroll = r.main.mobile ? $(window).scrollTop() : r.feed.cache.container.scrollTop();
+  var height = r.main.mobile ? $(window).height() / 2 : r.feed.cache.container.height() / 2;
+  var feedItemList = r.feed.cache.container.find('.feed-item');
   
   // Selected item
   var selected = null;
@@ -195,7 +206,7 @@ r.feed.scroll = function() {
     
     // Mark as read on scroll
     var itemsToRead = feedItemList.slice(0, selected.index() + 1);
-    if (container.hasClass('list')) itemsToRead = itemsToRead.filter('.unfolded');
+    if (r.feed.cache.container.hasClass('list')) itemsToRead = itemsToRead.filter('.unfolded');
     itemsToRead = itemsToRead.not('.read, .forceunread');
     itemsToRead.each(function() {
       r.article.read($(this), true);
@@ -225,10 +236,11 @@ r.feed.load = function(next) {
   
   if (!next) {
     // Loading animation
-    $('#feed-container').html(r.util.buildLoader());
+    r.feed.cache.container.html(r.util.buildLoader());
     
     // Updating show all/show new button
-    r.feed.context.unread ? $('#toolbar .all-button').html($.t('toolbar.showall')) : $('#toolbar .all-button').html($.t('toolbar.shownew'));
+    r.feed.context.unread ?  r.feed.cache.toolbar.find('.all-button').html($.t('toolbar.showall'))
+        : r.feed.cache.toolbar.find('.all-button').html($.t('toolbar.shownew'));
     
     // Reset flag telling if all articles are loaded
     r.feed.context.fullyLoaded = false;
@@ -247,10 +259,10 @@ r.feed.load = function(next) {
   }
   
   // Building payload
-  data = {
+  var data = {
     unread: r.feed.context.unread,
     limit: r.feed.context.limit
-  }
+  };
   
   if (r.feed.context.lastItem) {
     data.after_article = r.feed.context.lastItem.attr('data-article-id');
@@ -258,7 +270,7 @@ r.feed.load = function(next) {
   
   // Special case for search (use offset paging)
   if (next && r.feed.context.url.substring(0, 11) == r.util.url.search.substring(0, 11)) {
-    data.offset = $('#feed-container .feed-item').length;
+    data.offset = r.feed.cache.container.find('.feed-item').length;
   }
   
   // Calling API
@@ -271,17 +283,17 @@ r.feed.load = function(next) {
       
       // Pre article build
       if (!next) {
-        $('#feed-container').html('');
+        r.feed.cache.container.html('');
         
         // Empty placeholder
         if (noArticles) {
-          $('#feed-container').append(r.feed.buildEmpty());
+          r.feed.cache.container.append(r.feed.buildEmpty());
         }
         
         // Adding bumper
         var bumper = r.feed.buildBumper(data);
         r.feed.context.bumper = bumper;
-        $('#feed-container').append(bumper);
+        r.feed.cache.container.append(bumper);
       }
       
       // All articles are loaded?
@@ -325,7 +337,7 @@ r.feed.load = function(next) {
     fail: function(jqXHR, textStatus) {
       r.feed.context.loading = false;
       r.feed.activeXhr = null;
-      $('#feed-container .loader').hide();
+      r.feed.cache.container.find('.loader').hide();
       
       if (textStatus != 'abort') {
         r.feed.context.bumper.find('.retry').show();
@@ -397,15 +409,13 @@ r.feed.buildBumper = function(data) {
  * Optimize articles list by destructing article's DOM outside of the viewport.
  */
 r.feed.optimize = $.debounce(350, function() {
-  // TODO Smarter articles outside window detection to avoid burning CPU
-  
   // It's not necessary to optimize in list mode, the content is not rendered
-  if ($('#feed-container').hasClass('list')) {
+  if (r.feed.cache.container.hasClass('list')) {
     return;
   }
   
   // Delete content from articles largely outside
-  $('#feed-container .feed-item:largelyoutside')
+  r.feed.cache.container.find('.feed-item:largelyoutside')
     .addClass('destroyed')
     .height(function() {
       return $(this).height();
@@ -413,7 +423,7 @@ r.feed.optimize = $.debounce(350, function() {
     .html('');
   
   // Rebuild articles near the viewport
-  $('#feed-container .feed-item.destroyed:not(:largelyoutside)')
+  r.feed.cache.container.find('.feed-item.destroyed:not(:largelyoutside)')
   .removeClass('destroyed')
   .height('auto')
   .replaceWith(function() {
@@ -428,10 +438,10 @@ r.feed.optimize = $.debounce(350, function() {
 r.feed.scrollTop = function(top, animate) {
   if (animate) {
     $('body, html').animate({ scrollTop: top }, 200);
-    $('#feed-container').animate({ scrollTop: top }, 200);
+    r.feed.cache.container.animate({ scrollTop: top }, 200);
   } else {
     $('body, html').scrollTop(top);
-    $('#feed-container').scrollTop(top);
+    r.feed.cache.container.scrollTop(top);
   }
 };
 
@@ -441,21 +451,20 @@ r.feed.scrollTop = function(top, animate) {
 r.feed.updateMode = function(reload) {
   var list = r.user.isDisplayTitle();
   var narrow = r.user.isNarrowArticle();
-  var container = $('#feed-container');
-  var narrowBtn = $('#toolbar .narrow-article');
+  var narrowBtn = r.feed.cache.toolbar.find('.narrow-article');
 
   if (list) {
-    container.addClass('list');
+    r.feed.cache.container.addClass('list');
   } else {
-    container.removeClass('list');
+    r.feed.cache.container.removeClass('list');
   }
 
   if (narrow) {
-    container.addClass('narrow');
+    r.feed.cache.container.addClass('narrow');
     narrowBtn.find('img:first').removeClass('hidden');
     narrowBtn.find('img:last').addClass('hidden');
   } else {
-    container.removeClass('narrow');
+    r.feed.cache.container.removeClass('narrow');
     narrowBtn.find('img:first').addClass('hidden');
     narrowBtn.find('img:last').removeClass('hidden');
   }
