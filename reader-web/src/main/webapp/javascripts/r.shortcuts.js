@@ -25,9 +25,9 @@ r.shortcuts.init = function() {
         // Find the new selected item
         if (selectedItem.length == 1) {
           if (e.which == 74 || e.which == 78) {
-            newItem = selectedItem.next('.feed-item');
+            newItem = selectedItem.nextAll('.feed-item').first();
           } else {
-            newItem = selectedItem.prev('.feed-item');
+            newItem = selectedItem.prevAll('.feed-item').first();
           }
         } else {
           newItem = container.find('.feed-item:first');

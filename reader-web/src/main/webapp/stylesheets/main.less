@@ -429,6 +429,8 @@
     padding: 8px;
     height: 27px;
     
+    
+    
     > .full-button {
       border-left: none;
       border-radius: 0 2px 2px 0;
@@ -441,11 +443,6 @@
 
     > .narrow-article {
       display: none;
-      margin-left: 8px;
-    }
-    
-    > .settings-button {
-      margin-left: 8px;
     }
     
     > .search-input {
@@ -457,6 +454,10 @@
     
     > .back-button {
       display: inline-block;
+    }
+    
+    > .refresh-button, > .all-button, > .all-read-button, > .settings-button, > .narrow-article {
+      margin-left: 8px;
     }
     
     > .full-button, > .list-button, > .settings-button, > .category-button, > .back-button, .narrow-article {
@@ -708,6 +709,21 @@
           vertical-align: middle;
           line-height: 24px;
           height: 24px;
+        }
+
+        .feed-item-share {
+          display: inline-block;
+          vertical-align: middle;
+          line-height: 24px;
+          height: 24px;
+
+          img {
+            opacity: 0.6;
+
+            &:hover {
+              opacity: 1;
+            }
+          }
         }
       }
       

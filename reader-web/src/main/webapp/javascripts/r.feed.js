@@ -203,7 +203,7 @@ r.feed.scroll = function() {
     selected.addClass('selected');
     
     // Mark as read on scroll
-    var itemsToRead = feedItemList.slice(0, selected.index() + 1);
+    var itemsToRead = feedItemList.slice(0, selected.index('.feed-item') + 1);
     if (r.feed.cache.container.hasClass('list')) itemsToRead = itemsToRead.filter('.unfolded');
     itemsToRead = itemsToRead.not('.read, .forceunread');
     itemsToRead.each(function() {
