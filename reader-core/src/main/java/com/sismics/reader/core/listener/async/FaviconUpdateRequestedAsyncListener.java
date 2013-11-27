@@ -43,8 +43,12 @@ public class FaviconUpdateRequestedAsyncListener {
                 String faviconDirectory = DirectoryUtil.getFaviconDirectory().getPath();
                 FaviconDownloader downloader = new FaviconDownloader();
                 
-                // Try with the feed URL
-                String localFilename = downloader.downloadFaviconFromPage(feed.getUrl(), faviconDirectory, feed.getId());
+                String localFilename = null;
+                if (feed.getUrl() != null) {
+                    // Try with the feed URL if available
+                    downloader.downloadFaviconFromPage(feed.getUrl(), faviconDirectory, feed.getId());
+                }
+                
                 if (localFilename == null) {
                     // If nothing is found, try again with the RSS URL
                     downloader.downloadFaviconFromPage(feed.getRssUrl(), faviconDirectory, feed.getId());

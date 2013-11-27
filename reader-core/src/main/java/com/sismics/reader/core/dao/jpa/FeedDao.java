@@ -153,6 +153,7 @@ public class FeedDao {
 
         // Update the feed
         feedFromDb.setUrl(feed.getUrl());
+        feedFromDb.setBaseUri(feed.getBaseUri());
         feedFromDb.setTitle(feed.getTitle());
         feedFromDb.setLanguage(feed.getLanguage());
         feedFromDb.setDescription(feed.getDescription());

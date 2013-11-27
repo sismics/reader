@@ -123,6 +123,7 @@ public class FeedService extends AbstractScheduledService {
         if (feed == null) {
             feed = new Feed();
             feed.setUrl(newFeed.getUrl());
+            feed.setBaseUri(newFeed.getBaseUri());
             feed.setRssUrl(rssUrl);
             feed.setTitle(StringUtils.abbreviate(newFeed.getTitle(), 100));
             feed.setLanguage(newFeed.getLanguage() != null && newFeed.getLanguage().length() <= 10 ? newFeed.getLanguage() : null);
@@ -143,6 +144,7 @@ public class FeedService extends AbstractScheduledService {
 
             // Update metadata
             feed.setUrl(newFeed.getUrl());
+            feed.setBaseUri(newFeed.getBaseUri());
             feed.setTitle(newFeed.getTitle());
             feed.setLanguage(newFeed.getLanguage());
             feed.setDescription(newFeed.getDescription());
