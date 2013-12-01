@@ -249,6 +249,19 @@ r.article.build = function(article, classes) {
     item.find('.feed-item-unread input').attr('checked', 'checked');
   }
   
+  // Sharing links
+  if (article.url) {
+    item.find('.feed-item-share a').each(function(i, link) {
+      var href = $(link).attr('href');
+      href = href
+        .replace('${title}', article.title)
+        .replace('${url}', article.url);
+      $(link).attr('href', href);
+    });
+  } else {
+    item.find('.feed-item-share').remove();
+  }
+  
   return item;
 };
 
