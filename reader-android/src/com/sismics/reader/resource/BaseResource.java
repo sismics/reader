@@ -19,6 +19,7 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 
 import android.content.Context;
 
+import com.androidquery.callback.AbstractAjaxCallback;
 import com.loopj.android.http.AsyncHttpClient;
 import com.sismics.reader.util.PreferenceUtil;
 
@@ -47,7 +48,8 @@ public class BaseResource {
             trustStore.load(null, null);
             MySSLSocketFactory sf = new MySSLSocketFactory(trustStore);
             sf.setHostnameVerifier(MySSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-            client.setSSLSocketFactory(sf);   
+            client.setSSLSocketFactory(sf);
+            AbstractAjaxCallback.setSSF(sf);
         } catch (Exception e) {
             // NOP
         }
