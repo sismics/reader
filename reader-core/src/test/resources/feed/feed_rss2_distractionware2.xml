@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+  xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+  >
+
+<channel>
+  <title>distractionware</title>
+  <atom:link href="http://distractionware.com/blog/feed/" rel="self" type="application/rss+xml" />
+  <link>http://distractionware.com/blog</link>
+  <description>my development ramblings</description>
+  <lastBuildDate>Wed, 04 Dec 2013 00:10:47 +0000</lastBuildDate>
+  <language>en-US</language>
+    <sy:updatePeriod>hourly</sy:updatePeriod>
+    <sy:updateFrequency>1</sy:updateFrequency>
+  <generator>http://wordpress.org/?v=3.7.1</generator>
+  <item>
+    <title>Wanted: Artist, maybe, I dunno, aghh</title>
+    <link>http://distractionware.com/blog/2013/12/wanted-artist-maybe-i-dunno-aghh/</link>
+    <comments>http://distractionware.com/blog/2013/12/wanted-artist-maybe-i-dunno-aghh/#comments</comments>
+    <pubDate>Tue, 03 Dec 2013 23:22:58 +0000</pubDate>
+    <dc:creator><![CDATA[Terry]]></dc:creator>
+        <category><![CDATA[vanda game]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3459</guid>
+    <description><![CDATA[For the last month or so, I&#8217;ve been working on a couple of different small projects. Here&#8217;s another one I started recently! I went to a jam at London&#8217;s V&#038;A museum about a week ago. The theme: make a game inspired by the exhibits. One of my favourite recent games is Dark Souls, and this [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p>For the last month or so, I&#8217;ve been working on a couple of different small projects. Here&#8217;s another one I started recently!</p>
+<p><center><img src="http://distractionware.com/blog/wp-content/uploads/2013/12/vanda-640x400.png" alt="vanda" width="640" height="400" class="alignnone size-medium wp-image-3460" /></center></p>
+<p>I went to a jam at London&#8217;s V&#038;A museum about a week ago. The theme: make a game inspired by the exhibits.</p>
+<p>One of my favourite recent games is Dark Souls, and this seemed like a good opportunity to make a small Dark Souls inspired thing. One of the many things I love about that game is how it tells you about its world &#8211; letting you slowly piece things together for yourself as you discover useful game items containing parts of its history, fragments of stories with crucial details omitted. </p>
+<p>I thought I&#8217;d try making a sort of dungeon crawler that had the same approach to item lore, only, based on real life museum exhibits from the V&#038;A. Items that implied details of history lost in time, mysteries never solved. Pretty straightforward for a two day jam, I figured! Anyway, I got sidetracked and made a cool combat engine thing instead. </p>
+<p>Here&#8217;s a vine!</p>
+<p><center><iframe class="vine-embed" src="https://vine.co/v/hUMBgqHAOdU/embed/simple" width="480" height="480" frameborder="0"></iframe><script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script></center></p>
+<p>I&#8217;ve basically got this really simple Dark Souls meets JRPG meets Street Fighter inspired system going on. It&#8217;s all about blocking at the right time, attacking at the right time, while managing your health, stamina and status effects. Nothing too complex, but it&#8217;s frantic and fun! I ripped the cutscene code out of my Experiment 12 game to make the battle animations, which are just clunky single frames that pan and shake.</p>
+<p>So, here&#8217;s the thing. After the jam, I sat down and had another look at the game, and figured out some kind of bigger plan for what I want to make out of it. I wanna finish this up as a small, <strong>completely non-commercial</strong> thing and I&#8217;m just going to throw up online &#8211; and I&#8217;d like to do it soon, before the end of the year, preferably before Christmas.</p>
+<p>It seems like it&#8217;s going to require a LOT of art assets, though. That one battle in the vine has three idle frames, three attack frames, a blocking frame, and it&#8217;s not even complete at that. <i>And that&#8217;s just one enemy.</i> I&#8217;m planning to have about eight of them! I&#8217;ll probably end up just doing palette swaps, but still.</p>
+<p>So that&#8217;s a lot of work, and it&#8217;s not really work I&#8217;m that into doing &#8211; I&#8217;d much rather spend my time focused on the design, which itself has a bunch of scary time consuming challenges. So, I figured, why not team up with someone who actually enjoys drawing! You know, an artist!</p>
+<p>I&#8217;m usually super reluctant to team up with artists, but I think it makes sense here, and it could be fun &#8211; I kinda love the idea of finding someone who brings something unexpected and cool to this universe.</p>
+<p>So! If this sounds like something you&#8217;d be into and you&#8217;ve got some free time this month, <a href="http://mailhide.recaptcha.net/d?k=016_gjnPbAc2I2h_ZjrrEVbg==&#038;c=l45xWDzBHJuWYkz7TYR_QGyHmH5Rth8QmzU0VzgWzYA=">drop me a mail</a>, and we&#8217;ll talk more about it. (if you&#8217;re based in London, even better!)</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/12/wanted-artist-maybe-i-dunno-aghh/feed/</wfw:commentRss>
+    <slash:comments>1</slash:comments>
+    </item>
+    <item>
+    <title>New City RPG #screenshotsaturday</title>
+    <link>http://distractionware.com/blog/2013/11/new-city-rpg/</link>
+    <comments>http://distractionware.com/blog/2013/11/new-city-rpg/#comments</comments>
+    <pubDate>Sat, 16 Nov 2013 20:08:04 +0000</pubDate>
+    <dc:creator><![CDATA[Terry]]></dc:creator>
+        <category><![CDATA[new city rpg]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3451</guid>
+    <description><![CDATA[Oh look, a new RPG! I wonder how far I&#8217;ll get with this one?]]></description>
+        <content:encoded><![CDATA[<p><center><img src="http://distractionware.com/blog/wp-content/uploads/2013/11/newcity-640x400.png" alt="newcity" width="640" height="400" class="alignnone size-medium wp-image-3452" /></center></p>
+<p>Oh look, a new RPG! I wonder how far I&#8217;ll get with this one?</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/11/new-city-rpg/feed/</wfw:commentRss>
+    <slash:comments>14</slash:comments>
+    </item>
+    <item>
+    <title>Happy Birthday Super Hexagon</title>
+    <link>http://distractionware.com/blog/2013/11/happy-birthday/</link>
+    <comments>http://distractionware.com/blog/2013/11/happy-birthday/#comments</comments>
+    <pubDate>Wed, 13 Nov 2013 23:24:31 +0000</pubDate>
+    <dc:creator><![CDATA[Terry]]></dc:creator>
+        <category><![CDATA[super hexagon]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3444</guid>
+    <description><![CDATA[(Above: my favourite Super Hexagon Let&#8217;s Play!) Hey! It&#8217;s now been a year since Super Hexagon came out on PC and Mac! (the iOS birthday was about two months back, so this is a bit overdue really). One of the main things I aspire to, creatively, is to make things that will matter long after [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><center><iframe width="640" height="360" src="//www.youtube.com/embed/iaeK9ZTh_OY?rel=0" frameborder="0" allowfullscreen></iframe></center></p>
+<p>(Above: my favourite Super Hexagon Let&#8217;s Play!)</p>
+<p>Hey! It&#8217;s now been a year since Super Hexagon came out on PC and Mac! (the iOS birthday was about two months back, so this is a bit overdue really).</p>
+<p>One of the main things I aspire to, creatively, is to make things that will matter long after I&#8217;m gone. That&#8217;s a lot to ask &#8211; I don&#8217;t think I&#8217;ve done that yet, with anything I&#8217;ve made. I don&#8217;t know if I ever will. But I think Super Hexagon might be the closest I&#8217;ve come so far. I&#8217;m very proud of it.</p>
+<p>An opportunity came along this week to put the game on sale in a new online store, and I decided it&#8217;d be a nice pretext to mark the occasion; one year or so since it&#8217;s release. So Happy Birthday! I&#8217;m putting the game on sale everywhere! This weekend only, Super Hexagon is available on <a href="https://www.humblebundle.com/store">PC, Mac, Linux</a>, <a href="https://itunes.apple.com/us/app/super-hexagon/id549027629?ls=1&#038;mt=8">iOS</a>, <a href="https://play.google.com/store/apps/details?id=com.distractionware.superhexagon">Android</a> and <a href="http://appworld.blackberry.com/webstore/content/22507872/">Blackberry</a> for just 99 cents.</p>
+<p>Thanks for all the support, everyone <img src='http://distractionware.com/blog/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/11/happy-birthday/feed/</wfw:commentRss>
+    <slash:comments>9</slash:comments>
+    </item>
+    <item>
+    <title>Crash course</title>
+    <link>http://distractionware.com/blog/2013/10/crash-course/</link>
+    <comments>http://distractionware.com/blog/2013/10/crash-course/#comments</comments>
+    <pubDate>Wed, 16 Oct 2013 19:42:58 +0000</pubDate>
+    <dc:creator><![CDATA[Terry]]></dc:creator>
+        <category><![CDATA[halting problem]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3434</guid>
+    <description><![CDATA[I made a decision a few days ago that I felt like sharing here &#8211; I&#8217;m not going to enter Halting Problem into the IGF this year. I had a long blog post about why, but I&#8217;m probably better keeping it short &#8211; I just felt like I was having to rush some important decisions [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><center><img src="http://distractionware.com/blog/wp-content/uploads/2013/10/glitch.png" alt="glitch" width="335" height="256" class="alignnone size-full wp-image-3435" /></center><br />I made a decision a few days ago that I felt like sharing here &#8211; I&#8217;m not going to enter Halting Problem into the IGF this year. I had a long blog post about why, but I&#8217;m probably better keeping it short &#8211; I just felt like I was having to rush some important decisions about the game to get it ready to show to people, and I don&#8217;t feel like that&#8217;s something I want to do, not with this game &#8211; I&#8217;ve kinda had that experience before, when I rushed to submit <a href="http://distractionware.com/blog/2011/11/the-four-letter-word-thing/">Four Letter Word</a> to the 2011 IGF, and I ultimately regretted it. I ended up with something I just wanted to tear down and start over with.</p>
+<p>This is a game I&#8217;m hugely excited about, and this is how I want to make it. At a relaxed pace, adding new things when inspiration hits, exploring ideas fully as they come. I think this is healthier, and better for the game overall. Maybe I&#8217;ll enter it next year instead!</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/10/crash-course/feed/</wfw:commentRss>
+    <slash:comments>9</slash:comments>
+    </item>
+    <item>
+    <title>Collapse</title>
+    <link>http://distractionware.com/blog/2013/10/collapse/</link>
+    <comments>http://distractionware.com/blog/2013/10/collapse/#comments</comments>
+    <pubDate>Tue, 08 Oct 2013 00:38:11 +0000</pubDate>
+    <dc:creator><![CDATA[Terry]]></dc:creator>
+        <category><![CDATA[collapse]]></category>
+    <category><![CDATA[Complete Games]]></category>
+    <category><![CDATA[puzzlescript]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3424</guid>
+    <description><![CDATA[Yay, I took some time out of crunching on Halting Problem to make a little thing. Play it here! [Collapse - Play online (HTML5)] It&#8217;s created using my flatmate&#8217;s awesome new puzzle game engine, PuzzleScript, which is extremely fun to use. You can hack the source for this game here, if you like.]]></description>
+        <content:encoded><![CDATA[<p><img src="http://distractionware.com/blog/wp-content/uploads/2013/10/collapse-640x400.png" alt="collapse" width="640" height="400" class="alignnone size-medium wp-image-3425" /></p>
+<p>Yay, I took some time out of crunching on Halting Problem to make a little thing. Play it here!</p>
+<p><center><big><a href="http://www.puzzlescript.net/play.html?p=6877455">[Collapse - Play online (HTML5)]</a></big></center></p>
+<p>It&#8217;s created using my <a href="http://www.increpare.com/">flatmate&#8217;s</a> awesome new puzzle game engine, <a href="http://www.puzzlescript.net/">PuzzleScript</a>, which is extremely fun to use. You can <a href="http://www.puzzlescript.net/editor.html?hack=6877455">hack the source for this game here</a>, if you like.</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/10/collapse/feed/</wfw:commentRss>
+    <slash:comments>12</slash:comments>
+    </item>
+    <item>
+    <title>Bosca Ceoil for Linux</title>
+    <link>http://distractionware.com/blog/2013/09/bosca-ceoil-for-linux/</link>
+    <comments>http://distractionware.com/blog/2013/09/bosca-ceoil-for-linux/#comments</comments>
+    <pubDate>Sun, 29 Sep 2013 21:42:35 +0000</pubDate>
+    <dc:creator><![CDATA[Terry]]></dc:creator>
+        <category><![CDATA[bosca ceoil]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3406</guid>
+    <description><![CDATA[Yay! Thanks to awesome github user dlan-fr, Bosca Ceoil is available for Linux! I haven&#8217;t tested this myself (I don&#8217;t have a linux installation at the moment), but it sounds like it should work. He&#8217;s ported it back to AIR 2.6, which was the last version of Adobe AIR supported on Linux. [Download Linux .deb [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><img src="http://distractionware.com/blog/wp-content/uploads/2013/09/LINUX_95_CLEAR-640x480.gif" alt="LINUX_95_CLEAR" width="640" height="480" class="alignnone size-large wp-image-3409" /></p>
+<p>Yay! Thanks to awesome github user <a href="https://github.com/dlan-fr">dlan-fr</a>, Bosca Ceoil is available for Linux!</p>
+<p>I haven&#8217;t tested this myself (I don&#8217;t have a linux installation at the moment), but it sounds like it should work. He&#8217;s ported it back to AIR 2.6, which was the last version of Adobe AIR supported on Linux.</p>
+<p><center><a href="http://distractionware.com/tools/bosca_ceoil_linux_1_1.deb">[Download Linux .deb (v1.1)]</a><br /><a href="http://distractionware.com/tools/bosca_ceoil_linux_1_1.rpm">[Download Linux .rpm (v1.1)]</a><br /><a href="http://distractionware.com/tools/bosca_ceoil_linux_1_1.tar.gz">[Download Linux .tar.gz (v1.1)]</a></center></p>
+<p>Here&#8217;s more info from dlan-fr:</p>
+<blockquote><p>I have tested it on Ubuntu linux and Linux mint, It seem to work properly. (minor some sound delay issue, see below for workaround).</p>
+<p>the source code is available on GitHub, I have made some minor adjustments to the existing source code :</p>
+<p><a href="https://github.com/dlan-fr/boscaceoil">https://github.com/dlan-fr/boscaceoil</a></p>
+<p>Some people could run into a sound delay issue, it seem it&#8217;s a bug in adobe air. Using this launcher script fix it (included in the package) :</p>
+<p><a href="https://github.com/dlan-fr/boscaceoil/blob/master/fix_sound_latency.sh">https://github.com/dlan-fr/boscaceoil/blob/master/fix_sound_latency.sh</a></p>
+<p>For .tar.gz version, to run it :<br />
+[path-to-adobeairsdk]/bin/adl -nodebug [path-to-boscaceoil]/share/META-INF/AIR/application.xml  [path-to-boscaceoil]/share/</p>
+<p>more info for archlinux:</p>
+<p>https://wiki.archlinux.org/index.php/Adobe_AIR</p>
+</blockquote>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/09/bosca-ceoil-for-linux/feed/</wfw:commentRss>
+    <slash:comments>17</slash:comments>
+    </item>
+    <item>
+    <title>Robot Rock #screenshotsaturday</title>
+    <link>http://distractionware.com/blog/2013/09/robot-rock-screenshotsaturday/</link>
+    <comments>http://distractionware.com/blog/2013/09/robot-rock-screenshotsaturday/#comments</comments>
+    <pubDate>Sat, 28 Sep 2013 11:46:09 +0000</pubDate>
+    <dc:creator><![CDATA[Terry]]></dc:creator>
+        <category><![CDATA[halting problem]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3401</guid>
+    <description><![CDATA[With Naya&#8217;s Quest finished, I&#8217;ve gotten back to work on what&#8217;s kept me busy for most of this year &#8211; Halting Problem. I feel like this game has the potential to be something really special. So, I&#8217;ve decided I wanna give it all my energy, and enter it into this year&#8217;s IGF. The submission deadline [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><img src="http://distractionware.com/blog/wp-content/uploads/2013/09/robots.png" alt="robots" width="640" height="548" class="alignnone size-full wp-image-3402" /></p>
+<p>With Naya&#8217;s Quest finished, I&#8217;ve gotten back to work on what&#8217;s kept me busy for most of this year &#8211; Halting Problem.</p>
+<p>I feel like this game has the potential to be something really special. So, I&#8217;ve decided I wanna give it all my energy, and enter it into this year&#8217;s IGF. <a href="http://www.timeanddate.com/counters/fullscreen.html?mode=a&#038;iso=20131019T235959&#038;year=2013&#038;month=10&#038;day=19&#038;hour=23&#038;min=59&#038;sec=59&#038;p0=224&#038;msg=IGF%20Submission%20Deadline">The submission deadline is just three weeks from now!</a> It&#8217;s not going to be anywhere close to finished by then, but hopefully it&#8217;s just enough time to make something which gets across why I like this idea so much.</p>
+<p>I&#8217;m probably going to hold off saying much more about this until after the deadline. Here goes everything!</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/09/robot-rock-screenshotsaturday/feed/</wfw:commentRss>
+    <slash:comments>9</slash:comments>
+    </item>
+    <item>
+    <title>Naya&#8217;s Quest Soundtrack</title>
+    <link>http://distractionware.com/blog/2013/09/nayas-quest-soundtrack/</link>
+    <comments>http://distractionware.com/blog/2013/09/nayas-quest-soundtrack/#comments</comments>
+    <pubDate>Fri, 20 Sep 2013 08:33:38 +0000</pubDate>
+    <dc:creator><![CDATA[Terry]]></dc:creator>
+        <category><![CDATA[naya's quest]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3391</guid>
+    <description><![CDATA[Naya&#39;s Quest Soundtrack by Terry Cavanagh I hope you&#8217;re all enjoying Naya&#8217;s Quest! I uploaded the soundtrack to bandcamp last night, and thought I should share it here too. One of the reasons this game took so long is that I&#8217;d decided I wanted to do everything myself &#8211; which included writing a script, and [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><center><iframe style="border: 0; width: 350px; height: 659px;" src="http://bandcamp.com/EmbeddedPlayer/album=578259909/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/" seamless><a href="http://terrycavanagh.bandcamp.com/album/nayas-quest-soundtrack">Naya&#39;s Quest Soundtrack by Terry Cavanagh</a></iframe></center></p>
+<p>I hope you&#8217;re all enjoying Naya&#8217;s Quest! I uploaded the soundtrack to bandcamp last night, and thought I should share it here too.</p>
+<p>One of the reasons this game took so long is that I&#8217;d decided I wanted to do everything myself &#8211; which included writing a script, and composing a soundtrack. They&#8217;re both things I find very difficult, but I think it was pretty important for me to make myself do them anyway. </p>
+<p>In the end, I think that&#8217;s what I&#8217;m most proud of with this game &#8211; that I went outside my creative comfort zones, and that every part of this game is mine, right down to the tool I used to write the soundtrack.</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/09/nayas-quest-soundtrack/feed/</wfw:commentRss>
+    <slash:comments>11</slash:comments>
+    </item>
+    <item>
+    <title>Naya&#8217;s Quest</title>
+    <link>http://distractionware.com/blog/2013/09/nayas-quest/</link>
+    <comments>http://distractionware.com/blog/2013/09/nayas-quest/#comments</comments>
+    <pubDate>Thu, 19 Sep 2013 15:11:15 +0000</pubDate>
+    <dc:creator><![CDATA[Terry]]></dc:creator>
+        <category><![CDATA[Complete Games]]></category>
+    <category><![CDATA[naya's quest]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3385</guid>
+    <description><![CDATA[[Play here]]]></description>
+        <content:encoded><![CDATA[<p><img src="http://distractionware.com/blog/wp-content/uploads/2013/09/outdoors_red.png" alt="outdoors_red" width="640" height="480" class="alignnone size-full wp-image-3387" /></p>
+<p><center><big><a href="http://terrycavanaghgames.com/nayasquest">[Play here]</a></big></center></p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/09/nayas-quest/feed/</wfw:commentRss>
+    <slash:comments>41</slash:comments>
+    </item>
+    <item>
+    <title>Bosca Ceoil v1.1</title>
+    <link>http://distractionware.com/blog/2013/09/bosca-ceoil-v1-1/</link>
+    <comments>http://distractionware.com/blog/2013/09/bosca-ceoil-v1-1/#comments</comments>
+    <pubDate>Sun, 01 Sep 2013 19:53:44 +0000</pubDate>
+    <dc:creator><![CDATA[Terry]]></dc:creator>
+        <category><![CDATA[bosca ceoil]]></category>
+
+    <guid isPermaLink="false">http://distractionware.com/blog/?p=3376</guid>
+    <description><![CDATA[Bosca Ceoil is updated to version 1.1! Download links are in the original blog post. So what&#8217;s new? Lots of stuff! You can zoom the arrangement view with the mouse wheel now! You can have pattern sizes up to 32 notes! It associates with .ceol files, so you can double click on files to load [&#8230;]]]></description>
+        <content:encoded><![CDATA[<p><center><img src="http://distractionware.com/blog/wp-content/uploads/2013/09/bcnew.png" alt="bcnew" width="563" height="402" class="alignnone size-full wp-image-3377" /></center></p>
+<p>Bosca Ceoil is updated to version 1.1! <a href="http://distractionware.com/blog/2013/08/bosca-ceoil/"> Download links are in the original blog post.</a></p>
+<p>So what&#8217;s new? Lots of stuff! You can zoom the arrangement view with the mouse wheel now! You can have pattern sizes up to 32 notes! It associates with .ceol files, so you can double click on files to load them! <a href="https://github.com/TerryCavanagh/boscaceoil/blob/master/changelog.txt">The full changelog is here, on github.</a></p>
+<p>This version also adds support for the SiON library&#8217;s global effects, like delay, distortion, loads and loads of stuff. I can&#8217;t seem to figure out how to have more than one of these operational at a time though, so for this build at least, they&#8217;re implemented as a drop down menu. I&#8217;d really like to change that &#8211; if you know your way around the library, consider making a request on github!</p>
+<p>Hope you&#8217;ve been having fun using this. I know I have!</p>
+]]></content:encoded>
+      <wfw:commentRss>http://distractionware.com/blog/2013/09/bosca-ceoil-v1-1/feed/</wfw:commentRss>
+    <slash:comments>10</slash:comments>
+    </item>
+  </channel>
+</rss>

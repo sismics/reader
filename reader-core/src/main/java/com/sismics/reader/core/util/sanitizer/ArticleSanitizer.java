@@ -50,9 +50,10 @@ public class ArticleSanitizer {
             "(http:|https:)?//(www.)?youtube.com/embed/.+|" + 
             "(http:|https:)?//player.vimeo.com/video/.+|" +
             "(http:|https:)?//www.dailymotion.com/embed/.+|" +
-            "(http:|https:)?//slashdot.org/.+|" +
+            "http://slashdot.org/.+|" + // Slashdot doesn't support https
             "(http:|https:)?//www.viddler.com/.+|" +
             "(http:|https:)?//maps.google.com/.+|" +
+            "(http:|https:)?//vine.co/v/.+|" +
             "(http:|https:)?//w.soundcloud.com/.+|" +
             "(http:|https:)?//(www.)?bandcamp.com/.+|" +
             "(http:|https:)?//(www.)?whyd.com/.+");

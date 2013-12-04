@@ -294,6 +294,30 @@ public class TestArticleSanitizer {
     }
     
     /**
+     * Tests the article sanitizer.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void articleSanitizerIframeVineTest() throws Exception {
+        // Load a feed
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_distractionware2.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("http://distractionware.com/blog", feed.getUrl());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(10, articleList.size());
+        Article article = articleList.get(0);
+
+        // Allow unknown iframes
+        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
+        String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
+        Assert.assertTrue(html.contains("Dark Souls"));
+        Assert.assertTrue(html.contains("<iframe src=\"https://vine.co/v/hUMBgqHAOdU/embed/simple\" width=\"480\" height=\"480\"></iframe>"));
+    }
+    
+    /**
      * Tests the article sanitizer related to issue #71.
      *
      * @throws Exception
