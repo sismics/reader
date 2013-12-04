@@ -50,7 +50,7 @@ public class ArticleSanitizer {
             "(http:|https:)?//(www.)?youtube.com/embed/.+|" + 
             "(http:|https:)?//player.vimeo.com/video/.+|" +
             "(http:|https:)?//www.dailymotion.com/embed/.+|" +
-            "http://slashdot.org/.+|" + // Slashdot doesn't support https
+            "http://slashdot.org/.+|" + // Slashdot doesn't support https but redirect 301 to http
             "(http:|https:)?//www.viddler.com/.+|" +
             "(http:|https:)?//maps.google.com/.+|" +
             "(http:|https:)?//vine.co/v/.+|" +
@@ -101,6 +101,10 @@ public class ArticleSanitizer {
                         }
                         
                         if ("src".equals(attributeName) && IFRAME_SRC_PATTERN.matcher(value).matches()) {
+                            // Deleting the protocol part
+                            if (value.startsWith("https:")) value = value.substring(6);
+                            else if (value.startsWith("http:")) value = value.substring(5);
+                            
                             return value;
                         }
                         

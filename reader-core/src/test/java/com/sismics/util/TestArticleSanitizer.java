@@ -112,7 +112,7 @@ public class TestArticleSanitizer {
         ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
         Assert.assertTrue(html.contains("Déjà nominé dans la"));
-        Assert.assertTrue(html.contains("<iframe src=\"http://player.vimeo.com/video/63898090?title&#61;0&amp;byline&#61;0&amp;portrait&#61;0&amp;color&#61;ffffff\" width=\"640\" height=\"360\">"));
+        Assert.assertTrue(html.contains("<iframe src=\"//player.vimeo.com/video/63898090?title&#61;0&amp;byline&#61;0&amp;portrait&#61;0&amp;color&#61;ffffff\" width=\"640\" height=\"360\">"));
     }
 
     /**
@@ -136,7 +136,7 @@ public class TestArticleSanitizer {
         ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
         Assert.assertTrue(html.contains("On ne va pas faire les étonnés, hein"));
-        Assert.assertTrue(html.contains("<iframe src=\"http://www.dailymotion.com/embed/video/xy9zdc\" height=\"360\" width=\"640\">"));
+        Assert.assertTrue(html.contains("<iframe src=\"//www.dailymotion.com/embed/video/xy9zdc\" height=\"360\" width=\"640\">"));
     }
 
     /**
@@ -160,14 +160,14 @@ public class TestArticleSanitizer {
         ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
         Assert.assertTrue(html.contains("Y&#39;a pas que XBMC dans la vie"));
-        Assert.assertTrue(html.contains("<iframe src=\"http://www.youtube.com/embed/n2d4c8JIT0E?feature&#61;player_embedded\" height=\"360\" width=\"640\">"));
+        Assert.assertTrue(html.contains("<iframe src=\"//www.youtube.com/embed/n2d4c8JIT0E?feature&#61;player_embedded\" height=\"360\" width=\"640\">"));
         
         // Allow iframes to Youtube HTTPS
         article = articleList.get(0);
         articleSanitizer = new ArticleSanitizer();
         html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
         Assert.assertTrue(html.contains("La RetroN 5 sera équipée d&#39;une sortie HDMI"));
-        Assert.assertTrue(html.contains("<iframe src=\"https://www.youtube.com/embed/5OcNy7t17LA?feature&#61;player_embedded\" height=\"360\" width=\"640\">"));
+        Assert.assertTrue(html.contains("<iframe src=\"//www.youtube.com/embed/5OcNy7t17LA?feature&#61;player_embedded\" height=\"360\" width=\"640\">"));
         
         // Allow iframes to Youtube without protocol
         article = articleList.get(15);
@@ -196,7 +196,7 @@ public class TestArticleSanitizer {
         Article article = articleList.get(15);
         articleSanitizer = new ArticleSanitizer();
         String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
-        Assert.assertTrue(html.contains("<iframe src=\"https://maps.google.com/?t&#61;m&amp;layer&#61;c&amp;panoid&#61;JkQZAcDH9c2tky4T8irVUg&amp;cbp&#61;13,219.16,,0,41.84&amp;cbll&#61;35.370043,138.739238&amp;ie&#61;UTF8&amp;source&#61;embed&amp;ll&#61;35.336203,138.739128&amp;spn&#61;0.117631,0.216293&amp;z&#61;12&amp;output&#61;svembed\" height=\"420\" width=\"630\">"));
+        Assert.assertTrue(html.contains("<iframe src=\"//maps.google.com/?t&#61;m&amp;layer&#61;c&amp;panoid&#61;JkQZAcDH9c2tky4T8irVUg&amp;cbp&#61;13,219.16,,0,41.84&amp;cbll&#61;35.370043,138.739238&amp;ie&#61;UTF8&amp;source&#61;embed&amp;ll&#61;35.336203,138.739128&amp;spn&#61;0.117631,0.216293&amp;z&#61;12&amp;output&#61;svembed\" height=\"420\" width=\"630\">"));
     }
     
     /**
@@ -218,7 +218,7 @@ public class TestArticleSanitizer {
         Article article = articleList.get(15);
         articleSanitizer = new ArticleSanitizer();
         String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
-        Assert.assertTrue(html.contains("<iframe height=\"166\" src=\"https://w.soundcloud.com/player/?url&#61;http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F105401675\" width=\"100%\"></iframe>"));
+        Assert.assertTrue(html.contains("<iframe height=\"166\" src=\"//w.soundcloud.com/player/?url&#61;http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F105401675\" width=\"100%\"></iframe>"));
     }
 
     /**
@@ -242,7 +242,7 @@ public class TestArticleSanitizer {
         ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
         Assert.assertTrue(html.contains("Higgs data and the cosmic microwave background map from the Planck mission"));
-        Assert.assertTrue(html.contains("<iframe src=\"http://slashdot.org/slashdot-it.pl?op&#61;discuss&amp;id&#61;3658423&amp;smallembed&#61;1\" style=\"height: 300px; width: 100%;\">"));
+        Assert.assertTrue(html.contains("<iframe src=\"//slashdot.org/slashdot-it.pl?op&#61;discuss&amp;id&#61;3658423&amp;smallembed&#61;1\" style=\"height: 300px; width: 100%;\">"));
     }
 
     /**
@@ -266,7 +266,7 @@ public class TestArticleSanitizer {
         ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
         Assert.assertTrue(html.contains("Quoi de mieux"));
-        Assert.assertTrue(html.contains("<iframe src=\"https://whyd.com/u/514ad8737e91c862b2ab7ef1/playlist/6?format&#61;embedV2&amp;embedW&#61;480\" height=\"600\" width=\"600\"></iframe>"));
+        Assert.assertTrue(html.contains("<iframe src=\"//whyd.com/u/514ad8737e91c862b2ab7ef1/playlist/6?format&#61;embedV2&amp;embedW&#61;480\" height=\"600\" width=\"600\"></iframe>"));
     }
 
     /**
@@ -290,7 +290,7 @@ public class TestArticleSanitizer {
         ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
         Assert.assertTrue(html.contains("Naya’s Quest"));
-        Assert.assertTrue(html.contains("<iframe style=\" width: 350px; height: 659px;\" src=\"http://bandcamp.com/EmbeddedPlayer/album&#61;578259909/size&#61;large/bgcol&#61;ffffff/linkcol&#61;0687f5/transparent&#61;true/\"></iframe>"));
+        Assert.assertTrue(html.contains("<iframe style=\" width: 350px; height: 659px;\" src=\"//bandcamp.com/EmbeddedPlayer/album&#61;578259909/size&#61;large/bgcol&#61;ffffff/linkcol&#61;0687f5/transparent&#61;true/\"></iframe>"));
     }
     
     /**
@@ -314,7 +314,7 @@ public class TestArticleSanitizer {
         ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
         Assert.assertTrue(html.contains("Dark Souls"));
-        Assert.assertTrue(html.contains("<iframe src=\"https://vine.co/v/hUMBgqHAOdU/embed/simple\" width=\"480\" height=\"480\"></iframe>"));
+        Assert.assertTrue(html.contains("<iframe src=\"//vine.co/v/hUMBgqHAOdU/embed/simple\" width=\"480\" height=\"480\"></iframe>"));
     }
     
     /**
