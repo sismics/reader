@@ -83,3 +83,12 @@ From the `reader-web` directory:
     mvn -Pprod -DskipTests clean install
 
 You will get your deployable WAR in the `target` directory.
+
+#### Build the Android app
+
+There is some prerequisites here : <https://code.google.com/p/maven-android-plugin/wiki/GettingStarted>.
+
+Then, from the `reader-android` directory:
+
+    mvn -N -Pinit validate
+    mvn clean install
