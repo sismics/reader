@@ -105,7 +105,7 @@
   </build>
   
   <profiles>
-    <!-- Lancer une premiere fois "mvn -N -Pinit validate" pour installer les bibliothèques -->
+    <!-- Launch first "mvn -N -Pinit validate" to install the libraries -->
     <profile>
       <id>init</id>
 
