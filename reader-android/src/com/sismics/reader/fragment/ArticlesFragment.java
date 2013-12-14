@@ -72,7 +72,10 @@ public class ArticlesFragment extends NavigationFragment {
      * @param url
      */
     private void initFragment(final String url, final boolean unread, Bundle savedInstanceState) {
-        aq.id(R.id.articleList).getListView().setEmptyView(aq.id(R.id.progressBar).getView());
+        aq.id(R.id.articleList)
+            .getListView()
+            .setEmptyView(aq.id(R.id.progressBar).getView());
+        aq.id(R.id.loadingText).text(R.string.loading_articles);
         
         if (savedInstanceState == null) {
             SharedArticlesAdapterHelper.getInstance().restart(url, unread);

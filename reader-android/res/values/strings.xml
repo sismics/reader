@@ -35,6 +35,10 @@
     <string name="crash_toast_text">A crash occurred, a report has been sent to resolve this problem</string>
     <string name="all_read_title">Mark all as read</string>
     <string name="all_read_message">Mark all articles as read?</string>
+    <string name="share">Share</string>
+    <string name="no_articles">No articles</string>
+    <string name="loading_subscriptions">Loading subscriptions&#8230;</string>
+    <string name="loading_articles">Loading articles&#8230;</string>
 
     <!-- Preferences -->
     <string name="pref_general_category">General preferences</string>

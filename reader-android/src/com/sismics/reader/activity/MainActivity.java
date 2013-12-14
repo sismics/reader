@@ -23,6 +23,7 @@ import android.widget.ListView;
 
 import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.R;
+import com.sismics.reader.fragment.ArticlesDefaultFragment;
 import com.sismics.reader.fragment.ArticlesFragment;
 import com.sismics.reader.model.application.ApplicationContext;
 import com.sismics.reader.resource.SubscriptionResource;
@@ -38,6 +39,7 @@ import com.sismics.reader.ui.adapter.SubscriptionAdapter.SubscriptionItem;
  */
 public class MainActivity extends FragmentActivity {
     
+    private static final String ARTICLES_FRAGMENT_TAG = "articlesFragment";
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     private ActionBarDrawerToggle drawerToggle;
@@ -101,14 +103,6 @@ public class MainActivity extends FragmentActivity {
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content view
-//        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-//        menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.logout:
@@ -122,10 +116,6 @@ public class MainActivity extends FragmentActivity {
                 }
             });
             return true;
-            
-//        case R.id.settings:
-//            startActivity(new Intent(NavigationActivity.this, SettingsActivity.class));
-//            return true;
             
         case R.id.all_read:
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -200,7 +190,7 @@ public class MainActivity extends FragmentActivity {
 
         // Update the main content by replacing fragment if it has different arguments from the previous one
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment oldFragment = fragmentManager.findFragmentByTag("articlesFragment");
+        Fragment oldFragment = fragmentManager.findFragmentByTag(ARTICLES_FRAGMENT_TAG);
         
         boolean replace = true;
         if (oldFragment != null && !refresh) {
@@ -214,7 +204,7 @@ public class MainActivity extends FragmentActivity {
         }
         
         if (replace) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "articlesFragment").commitAllowingStateLoss();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, ARTICLES_FRAGMENT_TAG).commitAllowingStateLoss();
         }
 
         // Update selected item and title, then close the drawer
@@ -228,6 +218,12 @@ public class MainActivity extends FragmentActivity {
      * @param refresh True to force articles refresh
      */
     private void refreshSubscriptions(final int position, final boolean refresh) {
+        // Show a default fragment while the subscriptions are loading
+        getSupportFragmentManager()
+            .beginTransaction()
+            .replace(R.id.content_frame, new ArticlesDefaultFragment(), ARTICLES_FRAGMENT_TAG)
+            .commitAllowingStateLoss();
+        
         // Load subscriptions from server
         SubscriptionResource.list(this, false, new SismicsHttpResponseHandler() {
             @Override

@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import com.sismics.android.Log;
@@ -45,6 +46,11 @@ public class ArticleActivity extends FragmentActivity {
      * Shared articles adapter helper.
      */
     private SharedArticlesAdapterHelper sharedAdapterHelper;
+    
+    /**
+     * Share action provider.
+     */
+    private ShareActionProvider shareActionProvider;
     
     /**
      * Articles loading listener.
@@ -91,6 +97,9 @@ public class ArticleActivity extends FragmentActivity {
                 if (!readArticleIdList.contains(articleId) && !article.optBoolean("force_unread")) {
                     readArticleIdList.add(article.optString("id"));
                 }
+                
+                // Update the share action provider
+                updateShareActionIntent();
             }
             
             @Override
@@ -135,7 +144,30 @@ public class ArticleActivity extends FragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.article_activity, menu);
+        
+        // Fetch and store ShareActionProvider to feed later
+        MenuItem item = menu.findItem(R.id.share);
+        shareActionProvider = (ShareActionProvider) item.getActionProvider();
+        updateShareActionIntent();
+        
         return super.onCreateOptionsMenu(menu);
+    }
+    
+    /**
+     * Update the sharing intent on the share action provider.
+     */
+    private void updateShareActionIntent() {
+        if (shareActionProvider != null) {
+            final JSONObject article = sharedAdapterHelper.getArticleItems().get(viewPager.getCurrentItem());
+            
+            // Building the intent
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SEND);
+            intent.putExtra(Intent.EXTRA_SUBJECT, article.optString("title"));
+            intent.putExtra(Intent.EXTRA_TEXT, article.optString("url"));
+            intent.setType("text/plain");
+            shareActionProvider.setShareIntent(intent);
+        }
     }
     
     @Override
