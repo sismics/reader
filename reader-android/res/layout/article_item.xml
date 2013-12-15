@@ -12,6 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="6dip"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/favicon"
         android:src="@drawable/ic_launcher" />
 
     <TextView
@@ -25,7 +26,6 @@
         android:fontFamily="sans-serif-light"
         android:lines="1"
         android:maxLines="1"
-        android:text="Gravity Suddenly Switched Off"
         android:textSize="14sp" />
 
     <TextView
@@ -39,7 +39,6 @@
         android:fontFamily="sans-serif-light"
         android:lines="2"
         android:maxLines="2"
-        android:text="Lorem ipsum dolor sit amen lorem ipsum dolor sit amen lorem ipsum dolor sit amen lorem ipsum dolor sit amen lorem ipsum dolor sit amen lorem ipsum dolor sit amen lorem ipsum dolor sit amen"
         android:textSize="12sp" />
 
 </RelativeLayout>

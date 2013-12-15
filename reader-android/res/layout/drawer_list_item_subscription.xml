@@ -9,6 +9,7 @@
         android:id="@+id/imgFavicon"
         android:layout_width="18dip"
         android:layout_height="18dip"
+        android:contentDescription="@string/favicon"
         android:layout_marginLeft="32dp" />
 
     <TextView
@@ -22,7 +23,6 @@
         android:lines="1"
         android:maxLines="1"
         android:paddingLeft="16dp"
-        android:text="Space.com Space.com Space.com Space.com Space.com"
         android:textColor="#fff"
         android:textSize="14sp" />
 
@@ -35,7 +35,6 @@
         android:gravity="center_vertical"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:text="87"
         android:textColor="#aaa"
         android:textSize="14sp"
         android:textStyle="bold" />

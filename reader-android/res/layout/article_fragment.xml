@@ -17,7 +17,6 @@
             android:clickable="true"
             android:fontFamily="sans-serif-light"
             android:padding="8dp"
-            android:text="Gravity Suddenly Switched Off"
             android:textColor="#fff"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -32,16 +31,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:fontFamily="sans-serif-light"
-                android:text="on Slashdot by samzenpus" />
+                android:fontFamily="sans-serif-light" />
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:fontFamily="sans-serif-light"
-                android:text="6 minutes ago" />
+                android:fontFamily="sans-serif-light" />
         </RelativeLayout>
 
         <WebView

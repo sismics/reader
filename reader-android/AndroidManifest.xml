@@ -44,7 +44,7 @@
         <activity
             android:name=".activity.AboutActivity"
             android:label="@string/about"
-            android:logo="@drawable/action_about" >
+            android:logo="@drawable/ic_action_about" >
         </activity>
     </application>
 

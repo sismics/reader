@@ -21,7 +21,6 @@
     <string name="refresh">Refresh</string>
     <string name="all_read">Mark all as read</string>
     <string name="logout">Logout</string>
-    <string name="settings">Settings</string>
     <string name="about">About</string>
     <string name="mark_as_unread">Mark as unread</string>
     <string name="marked_as_unread">Marked as unread</string>
@@ -30,6 +29,8 @@
     <string name="all">All</string>
     <string name="starred">Starred</string>
     <string name="subscriptions">Subscriptions</string>
+    <string name="category">Category</string>
+    <string name="favicon">Favicon</string>
     <string name="article_subscription">on %1$s</string>
     <string name="article_subscription_author">on %1$s by %2$s</string>
     <string name="crash_toast_text">A crash occurred, a report has been sent to resolve this problem</string>
