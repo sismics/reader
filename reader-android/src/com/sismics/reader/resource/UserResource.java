@@ -1,10 +1,7 @@
 package com.sismics.reader.resource;
 
-import java.util.Locale;
-
 import android.content.Context;
 
-import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.sismics.android.SismicsHttpResponseHandler;
 
@@ -14,18 +11,6 @@ import com.sismics.android.SismicsHttpResponseHandler;
  * @author bgamard
  */
 public class UserResource extends BaseResource {
-
-    /**
-     * Resource initialization.
-     * @param context
-     */
-    private static void init(Context context) {
-        PersistentCookieStore cookieStore = new PersistentCookieStore(context);
-        client.setCookieStore(cookieStore);
-        
-        Locale locale = Locale.getDefault();
-        client.addHeader("Accept-Language", locale.getLanguage() + "_" + locale.getCountry());
-    }
 
     /**
      * POST /user/login.

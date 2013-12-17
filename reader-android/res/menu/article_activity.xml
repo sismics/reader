@@ -4,12 +4,18 @@
     <item
         android:id="@+id/share"
         android:actionProviderClass="android.widget.ShareActionProvider"
-        android:showAsAction="ifRoom"
-        android:title="@string/share" />
+        android:showAsAction="always"
+        android:title="@string/share"/>
+    <item
+        android:id="@+id/favorite"
+        android:icon="@drawable/ic_action_not_important"
+        android:showAsAction="always"
+        android:title="@string/favorite">
+    </item>
     <item
         android:id="@+id/unread"
         android:icon="@drawable/content_unread"
-        android:showAsAction="ifRoom"
+        android:showAsAction="always"
         android:title="@string/mark_as_unread">
     </item>
 

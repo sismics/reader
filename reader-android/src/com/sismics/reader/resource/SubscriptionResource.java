@@ -2,7 +2,6 @@ package com.sismics.reader.resource;
 
 import android.content.Context;
 
-import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.sismics.android.SismicsHttpResponseHandler;
 
@@ -12,15 +11,6 @@ import com.sismics.android.SismicsHttpResponseHandler;
  * @author bgamard
  */
 public class SubscriptionResource extends BaseResource {
-
-    /**
-     * Resource initialization.
-     * @param context
-     */
-    private static void init(Context context) {
-        PersistentCookieStore cookieStore = new PersistentCookieStore(context);
-        client.setCookieStore(cookieStore);
-    }
 
     /**
      * GET /subscription.

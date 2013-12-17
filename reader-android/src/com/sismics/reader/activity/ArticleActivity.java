@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
@@ -22,6 +25,7 @@ import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.R;
 import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.ArticleResource;
+import com.sismics.reader.resource.StarredResource;
 import com.sismics.reader.ui.adapter.ArticlesPagerAdapter;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
 import com.viewpagerindicator.UnderlinePageIndicator;
@@ -51,6 +55,11 @@ public class ArticleActivity extends FragmentActivity {
      * Share action provider.
      */
     private ShareActionProvider shareActionProvider;
+    
+    /**
+     * Favorite menu item.
+     */
+    private MenuItem favoriteMenuItem;
     
     /**
      * Articles loading listener.
@@ -98,8 +107,8 @@ public class ArticleActivity extends FragmentActivity {
                     readArticleIdList.add(article.optString("id"));
                 }
                 
-                // Update the share action provider
-                updateShareActionIntent();
+                // Update the action bar
+                updateActionBar();
             }
             
             @Override
@@ -148,19 +157,22 @@ public class ArticleActivity extends FragmentActivity {
         // Fetch and store ShareActionProvider to feed later
         MenuItem item = menu.findItem(R.id.share);
         shareActionProvider = (ShareActionProvider) item.getActionProvider();
-        updateShareActionIntent();
         
+        // Store favorite button to change his icon
+        favoriteMenuItem = menu.findItem(R.id.favorite);
+        
+        updateActionBar();
         return super.onCreateOptionsMenu(menu);
     }
     
     /**
-     * Update the sharing intent on the share action provider.
+     * Update the action bar with current article context.
      */
-    private void updateShareActionIntent() {
+    private void updateActionBar() {
+        final JSONObject article = sharedAdapterHelper.getArticleItems().get(viewPager.getCurrentItem());
+        
+        // Update the share action provider with a new intent
         if (shareActionProvider != null) {
-            final JSONObject article = sharedAdapterHelper.getArticleItems().get(viewPager.getCurrentItem());
-            
-            // Building the intent
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_SEND);
             intent.putExtra(Intent.EXTRA_SUBJECT, article.optString("title"));
@@ -168,14 +180,25 @@ public class ArticleActivity extends FragmentActivity {
             intent.setType("text/plain");
             shareActionProvider.setShareIntent(intent);
         }
+        
+        // Update the favorite button
+        if (favoriteMenuItem != null) {
+            boolean isStarred = article.optBoolean("is_starred");
+            favoriteMenuItem.setIcon(isStarred ? R.drawable.ic_action_important : R.drawable.ic_action_not_important);
+        }
     }
     
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        final JSONObject article = sharedAdapterHelper.getArticleItems().get(viewPager.getCurrentItem());
+        final String articleId = article.optString("id");
+        
+        // Button as progress bar during network work
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View progressView = inflater.inflate(R.layout.actionbar_indeterminate_progress, null);
+        
         switch (item.getItemId()) {
         case R.id.unread:
-            final JSONObject article = sharedAdapterHelper.getArticleItems().get(viewPager.getCurrentItem());
-            
             // Flagging article as unread
             try {
                 article.put("force_unread", true);
@@ -184,8 +207,9 @@ public class ArticleActivity extends FragmentActivity {
             }
             
             // Removing from mark as read list
-            String articleId = article.optString("id");
             readArticleIdList.remove(articleId);
+            
+            item.setActionView(progressView);
             
             // Marking article as unread
             ArticleResource.unread(ArticleActivity.this, articleId, new SismicsHttpResponseHandler() {
@@ -197,6 +221,35 @@ public class ArticleActivity extends FragmentActivity {
                     } catch (JSONException e) {
                         Log.e("ArticleActivity", "Error changing read state", e);
                     }
+                }
+                
+                @Override
+                public void onFinish() {
+                    item.setActionView(null);
+                }
+            });
+            return true;
+            
+        case R.id.favorite:
+            item.setActionView(progressView);
+            
+            final boolean isStarred = article.optBoolean("is_starred");
+            
+            // Star or unstar the article
+            StarredResource.star(ArticleActivity.this, articleId, !isStarred, new SismicsHttpResponseHandler() {
+                public void onSuccess(JSONObject json) {
+                    try {
+                        article.put("is_starred", !isStarred);
+                        updateActionBar();
+                        sharedAdapterHelper.onDataChanged();
+                    } catch (JSONException e) {
+                        Log.e("ArticleActivity", "Error starring/unstarring article", e);
+                    }
+                }
+                
+                @Override
+                public void onFinish() {
+                    item.setActionView(null);
                 }
             });
             return true;

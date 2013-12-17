@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Locale;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -18,9 +19,12 @@ import javax.net.ssl.X509TrustManager;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 
 import android.content.Context;
+import android.os.Build;
 
 import com.androidquery.callback.AbstractAjaxCallback;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.PersistentCookieStore;
+import com.sismics.reader.util.ApplicationUtil;
 import com.sismics.reader.util.PreferenceUtil;
 
 /**
@@ -33,7 +37,12 @@ public class BaseResource {
     /**
      * User-Agent to use.
      */
-    protected static String USER_AGENT = null;
+    private static String USER_AGENT = null;
+    
+    /**
+     * Accept-Language header.
+     */
+    private static String ACCEPT_LANGUAGE = null; 
     
     /**
      * HTTP client.
@@ -52,6 +61,26 @@ public class BaseResource {
             AbstractAjaxCallback.setSSF(sf);
         } catch (Exception e) {
             // NOP
+        }
+    }
+    
+    /**
+     * Resource initialization.
+     * @param context
+     */
+    protected static void init(Context context) {
+        PersistentCookieStore cookieStore = new PersistentCookieStore(context);
+        client.setCookieStore(cookieStore);
+        
+        if (USER_AGENT == null) {
+            USER_AGENT = "Sismics Reader Android " + ApplicationUtil.getVersionName(context) + "/Android " + Build.VERSION.RELEASE + "/" + Build.MODEL;
+            client.setUserAgent(USER_AGENT);
+        }
+        
+        if (ACCEPT_LANGUAGE == null) {
+            Locale locale = Locale.getDefault();
+            ACCEPT_LANGUAGE = locale.getLanguage() + "_" + locale.getCountry();
+            client.addHeader("Accept-Language", ACCEPT_LANGUAGE);
         }
     }
     

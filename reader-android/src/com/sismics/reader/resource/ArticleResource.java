@@ -3,12 +3,9 @@ package com.sismics.reader.resource;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.os.Build;
 
-import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.sismics.android.SismicsHttpResponseHandler;
-import com.sismics.reader.util.ApplicationUtil;
 
 /**
  * Access to /article API.
@@ -16,20 +13,6 @@ import com.sismics.reader.util.ApplicationUtil;
  * @author bgamard
  */
 public class ArticleResource extends BaseResource {
-
-    /**
-     * Resource initialization.
-     * @param context
-     */
-    private static void init(Context context) {
-        PersistentCookieStore cookieStore = new PersistentCookieStore(context);
-        client.setCookieStore(cookieStore);
-        
-        if (USER_AGENT == null) {
-            USER_AGENT = "Sismics Reader Android " + ApplicationUtil.getVersionName(context) + "/Android " + Build.VERSION.RELEASE + "/" + Build.MODEL;
-            client.setUserAgent(USER_AGENT);
-        }
-    }
 
     /**
      * POST /article/id/read.
