@@ -4,7 +4,7 @@
   <jar>reader-agent.jar</jar>
   <outfile>${project.build.directory}/reader-agent.exe</outfile>
   <errTitle>Reader</errTitle>
-  <cmdLine>-Xmx512M -XX:MaxPermSize=128M</cmdLine>
+  <cmdLine></cmdLine>
   <chdir>.</chdir>
   <priority>normal</priority>
   <downloadUrl>http://www.java.com/download/</downloadUrl>
@@ -22,7 +22,8 @@
     <minVersion>1.6.0</minVersion>
     <maxVersion></maxVersion>
     <jdkPreference>preferJre</jdkPreference>
-    <maxHeapSize>16</maxHeapSize>
+    <maxHeapSize>512</maxHeapSize>
+    <opt>-XX:MaxPermSize=128M</opt>
   </jre>
   <messages>
     <startupErr>Startup error</startupErr>
