@@ -486,6 +486,8 @@ public class SubscriptionImportAsyncListener {
             article.setFeedId(feedFromDb.getId());
             GuidFixer.fixGuid(article);
             articleDao.create(article);
+            
+            // TODO Raise a ArticleCreatedAsyncEvent
         }
         
         // Check if the user is already subscribed to this article

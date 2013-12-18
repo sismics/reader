@@ -4,7 +4,7 @@
   <jar>reader-agent.jar</jar>
   <outfile>${project.build.directory}/reader-agent-elevated.exe</outfile>
   <errTitle>Reader</errTitle>
-  <cmdLine>-elevated -Xmx150M -XX:MaxPermSize=128M</cmdLine>
+  <cmdLine>-elevated -Xmx512M -XX:MaxPermSize=128M</cmdLine>
   <chdir>.</chdir>
   <priority>normal</priority>
   <downloadUrl>http://www.java.com/download/</downloadUrl>
