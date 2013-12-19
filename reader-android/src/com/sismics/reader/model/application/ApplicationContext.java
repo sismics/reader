@@ -66,7 +66,7 @@ public class ApplicationContext {
      */
     public void setUserInfo(Context context, JSONObject json) {
         this.userInfo = json;
-        PreferenceUtil.setCachedUserInfoJson(context, json);
+        PreferenceUtil.setCachedJson(context, PreferenceUtil.PREF_CACHED_USER_INFO_JSON, json);
     }
     
     /**

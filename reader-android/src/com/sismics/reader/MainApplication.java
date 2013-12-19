@@ -33,15 +33,9 @@ public class MainApplication extends Application {
         ACRA.init(this);
         
         // Fetching /user/info from cache
-        String jsonStr = PreferenceUtil.getStringPreference(getApplicationContext(), PreferenceUtil.PREF_CACHED_USER_INFO_JSON);
-        try {
-            JSONObject json = new JSONObject(jsonStr);
-            ApplicationContext.getInstance().setUserInfo(getApplicationContext(), json);
-        } catch (Exception e) {
-            // Should not happen
-            PreferenceUtil.setCachedUserInfoJson(getApplicationContext(), null);
-        }
-        
+        JSONObject json = PreferenceUtil.getCachedJson(getApplicationContext(), PreferenceUtil.PREF_CACHED_USER_INFO_JSON);
+        ApplicationContext.getInstance().setUserInfo(getApplicationContext(), json);
+
         super.onCreate();
     }
     

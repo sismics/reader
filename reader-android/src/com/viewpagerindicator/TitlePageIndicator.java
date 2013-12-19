@@ -541,6 +541,9 @@ public class TitlePageIndicator extends View implements PageIndicator {
                 canvas.drawPath(mPath, mPaintFooterIndicator);
                 mPaintFooterIndicator.setAlpha(0xFF);
                 break;
+                
+            case None:
+                break;
         }
     }
 

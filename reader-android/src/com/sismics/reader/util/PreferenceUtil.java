@@ -24,6 +24,11 @@ public class PreferenceUtil {
     public static final String PREF_CACHED_USER_INFO_JSON = "pref_cachedUserInfoJson";
     
     /**
+     * Cache of /subscription.
+     */
+    public static final String PREF_CACHED_SUBSCRIPTION_JSON = "pref_cachedSubscriptionJson";
+    
+    /**
      * Server URL.
      */
     public static final String PREF_SERVER_URL = "pref_ServerUrl";
@@ -72,12 +77,30 @@ public class PreferenceUtil {
     }
     
     /**
-     * Update cache of /user/info.
+     * Update JSON cache.
      * @param context
+     * @param key
+     * @param json
      */
-    public static void setCachedUserInfoJson(Context context, JSONObject json) {
+    public static void setCachedJson(Context context, String key, JSONObject json) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        sharedPreferences.edit().putString(PREF_CACHED_USER_INFO_JSON, json != null ? json.toString() : null).commit();
+        sharedPreferences.edit().putString(key, json != null ? json.toString() : null).commit();
+    }
+    
+    /**
+     * Returns a JSON cache.
+     * @param context
+     * @param key
+     * @return
+     */
+    public static JSONObject getCachedJson(Context context, String key) {
+        try {
+            return new JSONObject(getStringPreference(context, key));
+        } catch (Exception e) {
+            // The cache is not parsable, clean this up
+            setCachedJson(context, key, null);
+            return null;
+        }
     }
     
     /**

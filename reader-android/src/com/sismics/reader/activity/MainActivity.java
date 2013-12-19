@@ -31,6 +31,7 @@ import com.sismics.reader.resource.UserResource;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
 import com.sismics.reader.ui.adapter.SubscriptionAdapter;
 import com.sismics.reader.ui.adapter.SubscriptionAdapter.SubscriptionItem;
+import com.sismics.reader.util.PreferenceUtil;
 
 /**
  * Main activity.
@@ -67,7 +68,6 @@ public class MainActivity extends FragmentActivity {
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         
         // Load subscriptions and select unread item
-        // TODO Display cached subscriptions before loading fresh data from server
         if (args == null) {
             refreshSubscriptions(1, false);
         } else {
@@ -78,7 +78,7 @@ public class MainActivity extends FragmentActivity {
         drawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItem(position, false);
+                selectItem(position, false, true);
             }
         });
         
@@ -169,8 +169,9 @@ public class MainActivity extends FragmentActivity {
      * Select an item from the subscription list.
      * @param position Position to select
      * @param refresh True to force articles refresh
+     * @param closeDrawer If true, close the drawer
      */
-    private void selectItem(int position, boolean refresh) {
+    private void selectItem(int position, boolean refresh, boolean closeDrawer) {
         // Create a new fragment with articles context
         SubscriptionAdapter adapter = (SubscriptionAdapter) drawerList.getAdapter();
         if (adapter == null) {
@@ -207,9 +208,13 @@ public class MainActivity extends FragmentActivity {
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, ARTICLES_FRAGMENT_TAG).commitAllowingStateLoss();
         }
 
-        // Update selected item and title, then close the drawer
+        // Update selected item and title
         drawerList.setItemChecked(position, true);
-        drawerLayout.closeDrawer(findViewById(R.id.left_drawer));
+        
+        // Close the drawer if asked
+        if (closeDrawer) {
+            drawerLayout.closeDrawer(findViewById(R.id.left_drawer));
+        }
     }
 
     /**
@@ -218,16 +223,13 @@ public class MainActivity extends FragmentActivity {
      * @param refresh True to force articles refresh
      */
     private void refreshSubscriptions(final int position, final boolean refresh) {
-        // Show a default fragment while the subscriptions are loading
-        getSupportFragmentManager()
-            .beginTransaction()
-            .replace(R.id.content_frame, new ArticlesDefaultFragment(), ARTICLES_FRAGMENT_TAG)
-            .commitAllowingStateLoss();
-        
-        // Load subscriptions from server
-        SubscriptionResource.list(this, false, new SismicsHttpResponseHandler() {
+        // Callback when JSON data from subscriptions needs to be displayed
+        SismicsHttpResponseHandler callback = new SismicsHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
+                // Cache the JSON
+                PreferenceUtil.setCachedJson(getApplicationContext(), PreferenceUtil.PREF_CACHED_SUBSCRIPTION_JSON, json);
+                
                 if (isActivityDestroyed()) {
                     return;
                 }
@@ -244,14 +246,31 @@ public class MainActivity extends FragmentActivity {
                 
                 if (position != -1) {
                     int pos = position;
-                    // Check if item exists and is selectable
+                    // Check if the item exists and is selectable
                     if (!adapter.isEnabled(pos)) {
                         pos = 1;
                     }
-                    selectItem(pos, refresh);
+                    selectItem(pos, refresh, false);
                 }
             }
-        });
+        };
+        
+        if (refresh) {
+            // Show a default fragment while the subscriptions are loading
+            getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content_frame, new ArticlesDefaultFragment(), "articlesDefaultFragment")
+                .commitAllowingStateLoss();
+        } else {
+            // Show the cache first
+            JSONObject cache = PreferenceUtil.getCachedJson(getApplicationContext(), PreferenceUtil.PREF_CACHED_SUBSCRIPTION_JSON);
+            if (cache != null) {
+                callback.onSuccess(cache);
+            }
+        }
+            
+        // Load subscriptions from server
+        SubscriptionResource.list(this, false, callback);
     }
     
     /**
