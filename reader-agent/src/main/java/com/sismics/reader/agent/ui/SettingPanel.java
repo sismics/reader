@@ -39,7 +39,7 @@ public class SettingPanel extends JPanel {
 
     private JFormattedTextField portTextField;
     
-    private JComboBox contextPathComboBox;
+    private JComboBox<String> contextPathComboBox;
     
     private JCheckBox autoStartCheckBox;
     
@@ -96,7 +96,7 @@ public class SettingPanel extends JPanel {
     private void initComponent() {
         portTextField = new JFormattedTextField(INTEGER_FORMAT);
         
-        contextPathComboBox = new JComboBox();
+        contextPathComboBox = new JComboBox<String>();
         contextPathComboBox.setEditable(true);
         contextPathComboBox.addItem("/");
         contextPathComboBox.addItem("/reader");
