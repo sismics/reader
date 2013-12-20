@@ -45,32 +45,32 @@ public class RssReader extends DefaultHandler {
      */
     private static final DateTimeFormatter DF_RSS = new DateTimeFormatterBuilder()
             .append(null, new DateTimeParser[] {
-                    DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss Z").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
-                    DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss zzz").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
-                    DateTimeFormat.forPattern("EEE,  d MMM yyyy HH:mm:ss zzz").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
-                    DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss Z").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
-                    DateTimeFormat.forPattern("yyyy-mm-dd HH:mm:ss").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
-                    DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
-                    DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss zzz").withOffsetParsed().withLocale(Locale.ENGLISH).getParser()
-                }).toFormatter();
+                    DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss Z").getParser(),
+                    DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss zzz").getParser(),
+                    DateTimeFormat.forPattern("EEE,  d MMM yyyy HH:mm:ss zzz").getParser(),
+                    DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss Z").getParser(),
+                    DateTimeFormat.forPattern("yyyy-mm-dd HH:mm:ss").getParser(),
+                    DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss").getParser(),
+                    DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss zzz").getParser()
+                }).toFormatter().withOffsetParsed().withLocale(Locale.ENGLISH);
     
     /**
      * A list of common date formats used in Atom feeds.
      */
     private static final DateTimeFormatter DF_ATOM = new DateTimeFormatterBuilder()
             .append(null, new DateTimeParser[] {
-                    DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
-                    DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withOffsetParsed().withLocale(Locale.ENGLISH).getParser()
-                }).toFormatter();
+                    DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").getParser(),
+                    DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").getParser()
+                }).toFormatter().withOffsetParsed().withLocale(Locale.ENGLISH);
 
     /**
      * A list of common date formats used in Dublin Core.
      */
     private static final DateTimeFormatter DF_DC = new DateTimeFormatterBuilder()
             .append(null, new DateTimeParser[] {
-                    DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
-                    DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withOffsetParsed().withLocale(Locale.ENGLISH).getParser()
-                }).toFormatter();
+                    DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").getParser(),
+                    DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").getParser()
+                }).toFormatter().withOffsetParsed().withLocale(Locale.ENGLISH);
 
     /**
      * Contents of the current element.
