@@ -214,7 +214,7 @@ public class RssReader extends DefaultHandler {
 
         // Pass a character stream to the parser for it to pick-up the correct encoding.
         // See http://stackoverflow.com/questions/3482494/
-        Reader reader = new UnicodeReader(StreamUtil.detectGzip(is), "UTF-8");
+        Reader reader = new XmlReader(StreamUtil.detectGzip(is), "UTF-8");
         InputSource source = new InputSource(reader);
         
         try {
@@ -593,7 +593,7 @@ public class RssReader extends DefaultHandler {
     
     @Override
     public void fatalError(SAXParseException e) throws SAXException {
-        log.error("Fatal SAX parse error encountered, trying to resume parsing...", e);
+        log.warn("Fatal SAX parse error encountered, trying to resume parsing...", e);
     }
     
     /**

@@ -246,6 +246,31 @@ public class TestRssReader {
         Assert.assertTrue(article.getDescription().contains("ESA's first iBook"));
         Assert.assertNotNull(article.getPublicationDate());
     }
+    
+    /**
+     * This feed if encoded if ISO-8859-1.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void rssReaderLemessagerTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_lemessager.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("Genevois : Le Messager", feed.getTitle());
+        Assert.assertEquals("http://www.lemessager.fr", feed.getUrl());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(10, articleList.size());
+        Article article = articleList.get(2);
+        Assert.assertEquals("L´Annemassienne Dana brille à la Nouvelle Star", article.getTitle());
+        Assert.assertEquals("http://www.lemessager.fr/Actualite/Genevois/2013/12/18/article_l_annemassienne_dana_brille_a_la_nouvell.shtml", article.getUrl());
+        Assert.assertEquals("gps://story/1790664", article.getGuid());
+        Assert.assertNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        Assert.assertNotNull(article.getPublicationDate());
+    }
 
     @Test
     public void atomReaderMakikoTest() throws Exception {
@@ -438,7 +463,7 @@ public class TestRssReader {
         List<Article> articleList = reader.getArticleList();
         Assert.assertEquals(20, articleList.size());
         Article article = articleList.get(0);
-        Assert.assertEquals("strip : R�tro gamines 2", article.getTitle());
+        Assert.assertEquals("strip : Rétro gamines 2", article.getTitle());
         Assert.assertEquals("http://www.maliki.com/strip.php?strip=342", article.getUrl());
         Assert.assertEquals("70cf99d7c7347ec08b6cec6cd795b572a63481f2", article.getGuid());
         Assert.assertNull(article.getCreator());
