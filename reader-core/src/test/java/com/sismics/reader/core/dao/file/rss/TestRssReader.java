@@ -398,6 +398,73 @@ public class TestRssReader {
         // Assert.assertTrue(article.getDescription().contains("I spend a rather large fraction of my days inside Emacs"));
         Assert.assertNotNull(article.getPublicationDate());
     }
+    
+    /**
+     * Related to issue #84.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void rssReaderSlackwareTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_slackware.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("Alien's Slackware packages", feed.getTitle());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(17, articleList.size());
+        Article article = articleList.get(7);
+        Assert.assertEquals("Mon,  9 Dec 2013 18:51:52 GMT", article.getTitle());
+        Assert.assertEquals("http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt", article.getUrl());
+        Assert.assertEquals("20131209195152", article.getGuid());
+        Assert.assertNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        Assert.assertNotNull(article.getPublicationDate());
+    }
+    
+    /**
+     * Related to issue #84.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void rssReaderMalikiTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_maliki.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("Le webcomic", feed.getTitle());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(20, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("strip : R�tro gamines 2", article.getTitle());
+        Assert.assertEquals("http://www.maliki.com/strip.php?strip=342", article.getUrl());
+        Assert.assertEquals("70cf99d7c7347ec08b6cec6cd795b572a63481f2", article.getGuid());
+        Assert.assertNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        Assert.assertNotNull(article.getPublicationDate());
+    }
+    
+    @Test
+    public void rssReaderNovaTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_nova.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("NOVA | PBS", feed.getTitle());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(35, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("Killer Typhoon", article.getTitle());
+        Assert.assertEquals("/wgbh/nova/earth/killer-typhoon.html", article.getUrl());
+        Assert.assertEquals("/wgbh/nova/earth/killer-typhoon.html", article.getGuid());
+        Assert.assertNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        Assert.assertNotNull(article.getPublicationDate());
+    }
 
     @Test
     public void rdfReaderAutostripTest() throws Exception {

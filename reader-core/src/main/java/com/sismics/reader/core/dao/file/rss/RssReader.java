@@ -1,14 +1,23 @@
 package com.sismics.reader.core.dao.file.rss;
 
-import com.google.common.collect.ImmutableList;
-import com.sismics.reader.core.model.jpa.Article;
-import com.sismics.reader.core.model.jpa.Feed;
-import com.sismics.reader.core.util.StreamUtil;
-import com.sismics.util.DateUtil;
-import com.sismics.util.UrlUtil;
+import java.io.InputStream;
+import java.io.Reader;
+import java.net.MalformedURLException;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Stack;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
+import org.joda.time.format.DateTimeParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
@@ -17,13 +26,11 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import java.io.InputStream;
-import java.io.Reader;
-import java.net.MalformedURLException;
-import java.text.MessageFormat;
-import java.util.*;
+import com.sismics.reader.core.model.jpa.Article;
+import com.sismics.reader.core.model.jpa.Feed;
+import com.sismics.reader.core.util.StreamUtil;
+import com.sismics.util.DateUtil;
+import com.sismics.util.UrlUtil;
 
 /**
  * RSS / Atom feed parser.
@@ -36,25 +43,34 @@ public class RssReader extends DefaultHandler {
     /**
      * A list of common date formats used in RSS feeds.
      */
-    private static final List<DateTimeFormatter> DF_RSS = ImmutableList.of(
-            DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss Z").withOffsetParsed().withLocale(Locale.ENGLISH),
-            DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss zzz").withOffsetParsed().withLocale(Locale.ENGLISH),
-            DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss Z").withOffsetParsed().withLocale(Locale.ENGLISH),
-            DateTimeFormat.forPattern("yyyy-mm-dd HH:mm:ss").withOffsetParsed().withLocale(Locale.ENGLISH));
+    private static final DateTimeFormatter DF_RSS = new DateTimeFormatterBuilder()
+            .append(null, new DateTimeParser[] {
+                    DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss Z").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
+                    DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss zzz").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
+                    DateTimeFormat.forPattern("EEE,  d MMM yyyy HH:mm:ss zzz").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
+                    DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss Z").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
+                    DateTimeFormat.forPattern("yyyy-mm-dd HH:mm:ss").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
+                    DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
+                    DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss zzz").withOffsetParsed().withLocale(Locale.ENGLISH).getParser()
+                }).toFormatter();
     
     /**
      * A list of common date formats used in Atom feeds.
      */
-    private static final List<DateTimeFormatter> DF_ATOM = ImmutableList.of(
-            DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").withOffsetParsed().withLocale(Locale.ENGLISH),
-            DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withOffsetParsed().withLocale(Locale.ENGLISH));
+    private static final DateTimeFormatter DF_ATOM = new DateTimeFormatterBuilder()
+            .append(null, new DateTimeParser[] {
+                    DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
+                    DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withOffsetParsed().withLocale(Locale.ENGLISH).getParser()
+                }).toFormatter();
 
     /**
      * A list of common date formats used in Dublin Core.
      */
-    private static final List<DateTimeFormatter> DF_DC = ImmutableList.of(
-            DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").withOffsetParsed().withLocale(Locale.ENGLISH),
-            DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withOffsetParsed().withLocale(Locale.ENGLISH));
+    private static final DateTimeFormatter DF_DC = new DateTimeFormatterBuilder()
+            .append(null, new DateTimeParser[] {
+                    DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").withOffsetParsed().withLocale(Locale.ENGLISH).getParser(),
+                    DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withOffsetParsed().withLocale(Locale.ENGLISH).getParser()
+                }).toFormatter();
 
     /**
      * Contents of the current element.
@@ -485,29 +501,25 @@ public class RssReader extends DefaultHandler {
      * @param dateTimeFormatterList List of DateTimeFormatter
      * @return Date or null is the date is unparsable
      */
-    private Date parseDate(List<DateTimeFormatter> dateTimeFormatterList) {
+    private Date parseDate(DateTimeFormatter df) {
         String dateAsString = getContent();
         if (StringUtils.isBlank(dateAsString)) {
             return null;
         }
         Date publicationDate = null;
-        for (DateTimeFormatter df : dateTimeFormatterList) {
+        try {
+            publicationDate = df.parseDateTime(dateAsString).toDate();
+            return publicationDate;
+        } catch (IllegalArgumentException e) {
+            // NOP
+        }
+        String dateWithOffset = DateUtil.guessTimezoneOffset(dateAsString);
+        if (!dateWithOffset.equals(dateAsString)) {
             try {
-                publicationDate = df.parseDateTime(dateAsString).toDate();
+                publicationDate = df.parseDateTime(dateWithOffset).toDate();
                 return publicationDate;
             } catch (IllegalArgumentException e) {
                 // NOP
-            }
-        }
-        String dateWithOffset= DateUtil.guessTimezoneOffset(dateAsString);
-        if (!dateWithOffset.equals(dateAsString)) {
-            for (DateTimeFormatter df : dateTimeFormatterList) {
-                try {
-                    publicationDate = df.parseDateTime(dateWithOffset).toDate();
-                    return publicationDate;
-                } catch (IllegalArgumentException e) {
-                    // NOP
-                }
             }
         }
         

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<rss version="2.0">
+   <channel>
+      <title>Alien's Slackware packages</title>
+      <link>http://www.slackware.com/~alien/</link>
+      <image>
+        <title>Alien's Slackware packages</title>
+        <url>http://www.slackware.com/~alien/graphics/blueorb.png</url>
+        <link>http://www.slackware.com/~alien/</link>
+      </image>
+      <description>Eric Hameleers (alien's) Slackware package repository. The package directories include the SlackBuild script and sources.</description>
+      <language>en-us</language>
+      <id xmlns="http://www.w3.org/2005/Atom">urn:uuid:a953352c-8f1b-11dc-9dcc-006094b9dda7</id>
+      <pubDate>Thu, 19 Dec 2013 10:46:28 GMT</pubDate>
+      <lastBuildDate>Thu, 19 Dec 2013 10:48:18 GMT</lastBuildDate>
+      <generator>gen_repos_files.sh v 1.88</generator>
+      <item>
+         <title>Thu, 19 Dec 2013 10:46:28 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Thu, 19 Dec 2013 10:46:28 GMT</pubDate>
+         <guid isPermaLink="false">20131219114628</guid>
+         <description>
+           <![CDATA[<pre>
+libreoffice: updated to 4.1.4 (compiled on Slackware 14.0, works fine on
+  14.1 and -current).  These packages will not work on Slackware 13.37;
+  use my libreoffice-3.6.7 instead.
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Mon, 16 Dec 2013 00:11:55 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Mon, 16 Dec 2013 00:11:55 GMT</pubDate>
+         <guid isPermaLink="false">20131216011155</guid>
+         <description>
+           <![CDATA[<pre>
+pipelight: updated to 0.2.3 (depends on OpenAL, cabextract, wine-pipelight)
+wine-pipelight: updated to 1.7.8 (depends on OpenAL and on slackware64,
+  you need full multilib including OpenAL-compat32)
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Sat, 14 Dec 2013 12:04:19 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Sat, 14 Dec 2013 12:04:19 GMT</pubDate>
+         <guid isPermaLink="false">20131214130419</guid>
+         <description>
+           <![CDATA[<pre>
+vlc: recompiled (Slackware 14.1).  I fixed the RTMP playbak which apparently
+  had been broken a long time. Also I repaired the accidentally introduced
+  regression that vlc would no longer play videos if libvdpau was not
+  installed.
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Fri, 13 Dec 2013 11:17:17 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Fri, 13 Dec 2013 11:17:17 GMT</pubDate>
+         <guid isPermaLink="false">20131213121717</guid>
+         <description>
+           <![CDATA[<pre>
+calibre: updated to 1.15.0. Calibre's feature set has been extended with an
+  integrated ebook editor, supported formats are EPUB and AZW3.
+  For the (unchanged) dependency list, see the 'Fri Aug 23 14:53:15 UTC 2013'
+  entry in the ChangeLog.txt.
+vlc: I re-uploaded the '1alien' builds of vlc-2.1.2 for people who do not have
+  libvdpau installed. Accidentally I introduced an external dependency on
+  libvdpau when I added VDPAU support. I will try to get this fixed in the
+  next package release, there should be zero external dependencies.
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Thu, 12 Dec 2013 09:24:48 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Thu, 12 Dec 2013 09:24:48 GMT</pubDate>
+         <guid isPermaLink="false">20131212102448</guid>
+         <description>
+           <![CDATA[<pre>
+libva: updated to 1.2.1
+libva-vdpau-driver: updated to 0.7.4.  This package was renamed from
+  'vdpau-video' when the VA-API libraries got new maintainers.
+  You need this to use GPU-assisted video hardware decoding in a VA-API
+  enabled application and using Nvidia's binary drivers
+  (depends on the libvdpau and libva packages).
+libva-intel-driver: added v1.2.1. This is the VA-API backend for Intel G45
+  chipsets and Intel HD Graphics for Intel Core CPU's. Depends on libva.
+libvdpau: updated to 0.7.
+vlc: rebuilt the 2.1.2 packages.
+  Enabled the VDPAU driver which solves jerky playback and crashes on machines
+  with a binary Nvidia driver when GPU-assisted hardware decoding is enabled.
+  You need to have libvdpau installed to use this feature.
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Tue, 10 Dec 2013 21:07:30 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Tue, 10 Dec 2013 21:07:30 GMT</pubDate>
+         <guid isPermaLink="false">20131210220730</guid>
+         <description>
+           <![CDATA[<pre>
+flashplayer-plugin: updated to 11.2.202.332.
+  Verify that you are running the latest version on:
+  http://www.adobe.com/software/flash/about/
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Tue, 10 Dec 2013 18:08:08 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Tue, 10 Dec 2013 18:08:08 GMT</pubDate>
+         <guid isPermaLink="false">20131210190808</guid>
+         <description>
+           <![CDATA[<pre>
+vlc: updated to 2.1.2.
+  Enabled the 10-bit decoder in x624 (aka 'Hi10P' for Anime fans).
+  Updates to the internal libraries for bluray, dvdnav, dvdread, ffmpeg,
+  fribidi, live555, opus, speex, and x264,
+  Usual caveat: versions that can not only DEcode but also ENcode mp3 and aac
+  audio, and can play encrypted DVD's without the need for a separate
+  libdvdcss package, can be found in my alternative repository where I keep
+  the packages containing code that might violate stupid US software patents:
+  http://taper.alienbase.nl/mirrors/people/alien/restricted_slackbuilds/vlc/
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Mon,  9 Dec 2013 18:51:52 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Mon,  9 Dec 2013 18:51:52 GMT</pubDate>
+         <guid isPermaLink="false">20131209195152</guid>
+         <description>
+           <![CDATA[<pre>
+mirall: updated to 1.4.2 - desktop syncing client for ownCloud (depends on
+  ocsync).
+  Be sure to check http://owncloud.org/ this wednesday, when the awesome
+  release 6 is unveiled. It includes 'ownCloud Documents', collaborative
+  editing of rich-text documents.
+ocsync: updated to v0.90.4 - owncloud bidirectional sync library (depends on
+  iniparser).
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Sun,  8 Dec 2013 13:00:16 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Sun,  8 Dec 2013 13:00:16 GMT</pubDate>
+         <guid isPermaLink="false">20131208140016</guid>
+         <description>
+           <![CDATA[<pre>
+tigervnc: updated to 1.3.0.
+  It seems that with this version, and a series of patches, the new vncviewer
+  with the FLTK based graphical interface has finally become equivalent
+  in functionality compared to the old 1.1.0 version.
+  If you just want to *run* my package, no other dependencies are needed; it
+  has the libjpeg-turbo and fltk code statically compiled-in.
+  In order to build this from source, you need to have a Java JDK installed or
+  else the Java viewer will not be compiled.
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Fri,  6 Dec 2013 16:27:43 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Fri,  6 Dec 2013 16:27:43 GMT</pubDate>
+         <guid isPermaLink="false">20131206172743</guid>
+         <description>
+           <![CDATA[<pre>
+chromium: updated to 31.0.1650.63
+chromium-pdf-plugin: updated to 31.0.1650.63
+chromium-pepperflash-plugin: updated to 11.9.900.170
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Fri,  6 Dec 2013 08:35:04 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Fri,  6 Dec 2013 08:35:04 GMT</pubDate>
+         <guid isPermaLink="false">20131206093504</guid>
+         <description>
+           <![CDATA[<pre>
+calibre: updated to 1.14.0.
+  For the (unchanged) dependency list, see the 'Fri Aug 23 14:53:15 UTC 2013'
+  entry in the ChangeLog.txt.
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Sat, 30 Nov 2013 19:08:09 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Sat, 30 Nov 2013 19:08:09 GMT</pubDate>
+         <guid isPermaLink="false">20131130200809</guid>
+         <description>
+           <![CDATA[<pre>
+recordmydesktop:  applied a patch to the 0.3.8.1 which fixes the 'Advanced'
+  button which was broken if you did not have JackD installed.
+steamclient: updated to 1.0.0.45.
+  Same conditions/requirements as mentioned in my 'Sun Feb 24 21:24:50 UTC 2013'
+  ChangeLog.txt entry still apply.
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Fri, 29 Nov 2013 09:32:01 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Fri, 29 Nov 2013 09:32:01 GMT</pubDate>
+         <guid isPermaLink="false">20131129103201</guid>
+         <description>
+           <![CDATA[<pre>
+calibre: updated to 1.13.0.
+  For the (unchanged) dependency list, see the 'Fri Aug 23 14:53:15 UTC 2013'
+  entry in the ChangeLog.txt.
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Tue, 26 Nov 2013 09:21:36 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Tue, 26 Nov 2013 09:21:36 GMT</pubDate>
+         <guid isPermaLink="false">20131126102136</guid>
+         <description>
+           <![CDATA[<pre>
+qbittorrent: updated to 3.1.3 (depends on libtorrent-rasterbar)
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Sun, 24 Nov 2013 15:18:59 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Sun, 24 Nov 2013 15:18:59 GMT</pubDate>
+         <guid isPermaLink="false">20131124161859</guid>
+         <description>
+           <![CDATA[<pre>
+chromium: I have added my Google API keys in the file 'chromium_apikeys'.
+  This means you can rebuild the package yourself and get a fully functional
+  Chromium browser. Note that you are explicitly _not_ allowed to re-distribute
+  the file 'chromium_apikeys' containing my keys when you build a modified
+  version of the package!
+chromium-pdf-plugin: added version 31.0.1650.57. This is the PDF viewer for
+  Chromium and Chrome based browsers, extracted from the official Chrome RPM.
+  The version should match that of your Chromium package.
+  By installing it, you agree to the license as included in the doc directory.
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Fri, 22 Nov 2013 14:31:53 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Fri, 22 Nov 2013 14:31:53 GMT</pubDate>
+         <guid isPermaLink="false">20131122153153</guid>
+         <description>
+           <![CDATA[<pre>
+chromium: added version 31.0.1650.57. Chromium is the open source variant of
+  Google's Chrome browser.  Chrome and Chromium are based on the same code
+  and releases are always parallel.
+  My package contains the Native Client component which allows you to run
+  applications in the browser at near-native speeds.
+chromium-pepperflash-plugin: added version 11.9.900.152. This is a Flash plugin
+  for the Chromium browser, extracted from the official Chrome RPM.
+  This package needs my chromium package (install chromium first because the
+  chromium file /etc/default/chromium must exist when you install the plugin!)
+  By installing it, you agree to the license as included in the doc directory.
+  Check http://www.adobe.com/software/flash/about/ afterwards.
+           </pre>]]>
+         </description>
+      </item>
+      <item>
+         <title>Fri, 22 Nov 2013 11:46:14 GMT</title>
+         <link>http://www.slackware.com/~alien/slackbuilds/ChangeLog.txt</link>
+         <pubDate>Fri, 22 Nov 2013 11:46:14 GMT</pubDate>
+         <guid isPermaLink="false">20131122124614</guid>
+         <description>
+           <![CDATA[<pre>
+calibre: updated to 1.12.0.
+  For the (unchanged) dependency list, see the 'Fri Aug 23 14:53:15 UTC 2013'
+  entry in the ChangeLog.txt.
+           </pre>]]>
+         </description>
+      </item>
+   </channel>
+</rss>

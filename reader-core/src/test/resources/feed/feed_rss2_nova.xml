@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+   <rss version="2.0">
+   <channel>
+ 	  <title>NOVA | PBS</title>
+		<link>http://www.pbs.org/nova/</link>
+		<description>NOVA turns its lens on the timeliest developments and most intriguing personalities in science and technology in a new magazine series, NOVA scienceNOW, and we want to hear what you think about it.</description>
+		<copyright>Copyright 2013 NOVA/WGBH Educational Foundation</copyright>
+		<language>en-us</language>
+		<docs>http://blogs.law.harvard.edu/tech/rss</docs>
+		<managingEditor>nova@wgbh.org</managingEditor>
+		<webMaster>nova_tech@wgbh.org</webMaster>
+		<pubDate>Thu, 12 Dec 2013 09:00:00 EST</pubDate>
+		<lastBuildDate>Thu, 12 Dec 2013 09:00:00 EST</lastBuildDate>
+
+		<image>
+			<url>http://www.pbs.org/wgbh/nova/images04/logo-nova-rss.gif</url>
+			<title>NOVA</title>
+			<link>http://www.pbs.org/wgbh/nova/rss/</link>
+		</image>
+
+		<item>
+			<title>Killer Typhoon</title>
+			<link>/wgbh/nova/earth/killer-typhoon.html</link>
+			<description>What made Haiyan so destructive, and how can we prepare for the next monster storm?</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>19 Dec 2013 9:00:00 EST</pubDate>
+			<category>Video</category>
+			<guid isPermaLink="true">/wgbh/nova/earth/killer-typhoon.html</guid>
+		</item>
+
+		<item>
+			<title>Roman Catacomb Mystery</title>
+			<link>/wgbh/nova/ancient/roman-catacomb-mystery.html</link>
+			<description>Who or what killed hundreds of people hidden in a burial chamber nearly 2,000 years ago?</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>19 Dec 2013 9:00:00 EST</pubDate>
+			<category>Video</category>
+			<guid isPermaLink="true">/wgbh/nova/ancient/roman-catacomb-mystery.html</guid>
+		</item>
+
+		<item>
+			<title>Alien Planets Revealed</title>
+			<link>/wgbh/nova/space/alien-planets-revealed.html</link>
+			<description>Are we alone—and if not, what might the inhabitants of far-flung worlds look like?</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>12 Dec 2013 9:00:00 EST</pubDate>
+			<category>Video</category>
+			<guid isPermaLink="true">/wgbh/nova/space/alien-planets-revealed.html</guid>
+		</item>
+
+		<item>
+			<title>Dutch Windmills</title>
+			<link>/wgbh/nova/tech/dutch-windmills.html</link>
+			<description>Explore an 18th century windmill with a modern day Dutch miller.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>12 Dec 2013 9:00:00 EST</pubDate>
+			<category>02:05 Video</category>
+			<guid isPermaLink="true">/wgbh/nova/tech/dutch-windmills.html</guid>
+		</item>
+
+		<item>
+			<title>Ghosts of Murdered Kings</title>
+			<link>/wgbh/nova/ancient/ghosts-murdered-kings.html</link>
+			<description>Bronze age bog bodies reveal the strange beliefs of the long-vanished peoples of Europe.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>12 Dec 2013 9:00:00 EST</pubDate>
+			<category>Video</category>
+			<guid isPermaLink="true">/wgbh/nova/ancient/ghosts-murdered-kings.html</guid>
+		</item>
+
+		<item>
+			<title>Zeppelin Terror Attack</title>
+			<link>/wgbh/nova/military/zeppelin-terror-attack.html</link>
+			<description>Discover how the first civilian bombing unfolded as Germany’s Zeppelins rained fiery terror on London in World War I.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>12 Dec 2013 9:00:00 EST</pubDate>
+			<category>Video</category>
+			<guid isPermaLink="true">/wgbh/nova/military/zeppelin-terror-attack.html</guid>
+		</item>
+
+		<item>
+			<title>Judo with Nature</title>
+			<link>/wgbh/nova/tech/judo-nature.html</link>
+			<description>Planting trees in front of dikes is one way to keep large waves from flooding the shore.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>5 Dec 2013 9:00:00 EST</pubDate>
+			<category>02:18 Video</category>
+			<guid isPermaLink="true">/wgbh/nova/tech/judo-nature.html</guid>
+		</item>
+
+		<item>
+			<title>Repairing the Beach After Sandy</title>
+			<link>/wgbh/nova/earth/beach-nourishment.html</link>
+			<description>To rebuild the coastline, engineers are pumping sand onto New York's Coney Island beach.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>28 Nov 2013 9:00:00 EST</pubDate>
+			<category>02:55 Video</category>
+			<guid isPermaLink="true">/wgbh/nova/earth/beach-nourishment.html</guid>
+		</item>
+
+		<item>
+			<title>Great Cathedral Mystery</title>
+			<link>/wgbh/nova/ancient/great-cathedral-mystery.html</link>
+			<description>Master craftsmen explore how Florence’s monumental dome was built nearly 600 years ago.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>27 Nov 2013 9:00:00 EST</pubDate>
+			<category>Video</category>
+			<guid isPermaLink="true">/wgbh/nova/ancient/great-cathedral-mystery.html</guid>
+		</item>
+
+		<item>
+			<title>Reimagining New York</title>
+			<link>/wgbh/nova/earth/reimagining-nyc.html</link>
+			<description>A risk management expert says that we must look to New York's future to prevent flooding.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>21 Nov 2013 9:00:00 EST</pubDate>
+			<category>04:35 Video</category>
+			<guid isPermaLink="true">/wgbh/nova/earth/reimagining-nyc.html</guid>
+		</item>
+
+		<item>
+			<title>The Shot That Missed</title>
+			<link>/wgbh/nova/tech/shot-missed.html</link>
+			<description>What happened to the mysterious &quot;first bullet&quot; from JFK's assassination?</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>14 Nov 2013 9:00:00 EST</pubDate>
+			<category>03:00 Video</category>
+			<guid isPermaLink="true">/wgbh/nova/tech/shot-missed.html</guid>
+		</item>
+
+		<item>
+			<title>Cryonics</title>
+			<link>/wgbh/nova/tech/cryonics.html</link>
+			<description>A company called Alcor freezes dead people, hoping to restore them to health one day.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>7 Nov 2013 9:00:00 EST</pubDate>
+			<category>04:00 Video</category>
+			<guid isPermaLink="true">/wgbh/nova/tech/cryonics.html</guid>
+		</item>
+
+		<item>
+			<title>Super Fast Cameras</title>
+			<link>/wgbh/nova/tech/super-fast-cameras.html</link>
+			<description>A new high speed camera can capture light in motion and see around corners.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>7 Nov 2013 9:00:00 EST</pubDate>
+			<category>05:11 Video</category>
+			<guid isPermaLink="true">/wgbh/nova/tech/super-fast-cameras.html</guid>
+		</item>
+
+		<item>
+			<title>Cyber War Games</title>
+			<link>/wgbh/nova/tech/cyber-war-games.html</link>
+			<description>A project called DETER allows researchers to practice fighting cyber crimes.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>31 Oct 2013 9:00:00 EST</pubDate>
+			<category>03:50 Video</category>
+			<guid isPermaLink="true">/wgbh/nova/tech/cyber-war-games.html</guid>
+		</item>
+
+		<item>
+			<title>The Hummingbird Drone</title>
+			<link>/wgbh/nova/tech/hummingbird-drone.html</link>
+			<description>A new drone doesn't fly like an airplane or helicopter—it flaps its wings like a bird.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>31 Oct 2013 9:00:00 EST</pubDate>
+			<category>03:36 Video</category>
+			<guid isPermaLink="true">/wgbh/nova/tech/hummingbird-drone.html</guid>
+		</item>
+
+		<item>
+			<title>Natural Flood Protection</title>
+			<link>/wgbh/nova/tech/nat-flood-protection.html</link>
+			<description>Could shellfish beds protect New York from flooding?</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>31 Oct 2013 9:00:00 EST</pubDate>
+			<category>01:52 Video</category>
+			<guid isPermaLink="true">/wgbh/nova/tech/nat-flood-protection.html</guid>
+		</item>
+
+		<item>
+			<title>Making More Stuff Quiz</title>
+			<link>/wgbh/nova/tech/making-stuff-quiz/</link>
+			<description>Could robots do search and rescue? Can we grow batteries? Take the quiz and find out.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>24 Oct 2013 9:00:00 EST</pubDate>
+			<category>Multimedia</category>
+			<guid isPermaLink="true">/wgbh/nova/tech/making-stuff-quiz/</guid>
+		</item>
+
+		<item>
+			<title>Cockroach Cyborgs</title>
+			<link>/wgbh/nova/tech/cockroach-cyborgs.html</link>
+			<description>Scientists are turning cockroaches into robots—and you can, too.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>17 Oct 2013 9:00:00 EST</pubDate>
+			<category>02:26 Video</category>
+			<guid isPermaLink="true">/wgbh/nova/tech/cockroach-cyborgs.html</guid>
+		</item>
+
+		<item>
+			<title>Asteroid: Doomsday or Payday?</title>
+			<link>http://www.pbs.org/wgbh/nova/earth/asteroid-doomsday.html</link>
+			<description>Will future asteroids trigger massive extinctions—or be mined for precious minerals?</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 17 Oct 2013 9:00:00 EST</pubDate>
+			<category>Video</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/earth/asteroid-doomsday.html</guid>
+		</item>
+
+		<item>
+			<title>At the Edge of Space</title>
+			<link>http://www.pbs.org/wgbh/nova/earth/edge-of-space.html</link>
+			<description>Can scientists unravel the mysterious phenomena that lurk between Earth and space?</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 17 Oct 2013 9:00:00 EST</pubDate>
+			<category>Video</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/earth/edge-of-space.html</guid>
+		</item>		
+
+		<item>
+			<title>Mushroom Material</title>
+			<link>http://www.pbs.org/wgbh/nova/tech/mushroom-material.html</link>
+			<description>Move over peanuts, there's a new packaging material in town—and it's made of mushrooms.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 17 Oct 2013 9:00:00 EST</pubDate>
+			<category>Video 03:45</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/mushroom-material.html</guid>
+		</item>		
+
+		<item>
+			<title>Floating Buildings</title>
+			<link>http://www.pbs.org/wgbh/nova/tech/floating-buildings.html</link>
+			<description>Engineers in the Netherlands propose building homes that float on water.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 10 Oct 2013 9:00:00 EST</pubDate>
+			<category>Video 01:37</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/floating-buildings.html</guid>
+		</item>		
+		<item>
+			<title>Carnivorous Plants, Killer Ants</title>
+			<link>http://www.pbs.org/wgbh/nova/nature/plants-killer-ants.html</link>
+			<description>Ant eats plant's parasites. Plant eats ant's poop. It's the circle of life.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 3 Oct 2013 9:00:00 EST</pubDate>
+			<category>Video 03:03</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/nature/plants-killer-ants.html</guid>
+		</item>		
+		<item>
+			<title>RoboBees to the Rescue</title>
+			<link>http://www.pbs.org/wgbh/nova/tech/robobees-rescue.html</link>
+			<description>As colony collapse disorder decimates beehives, scientists are developing mini drones, called RoboBees, to help pollinate our crops.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 3 Oct 2013 9:00:00 EST</pubDate>
+			<category>Video 02:24</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/robobees-rescue.html</guid>
+		</item>
+
+		<item>
+			<title>Making Stuff: Faster</title>
+			<link>http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/making-stuff-faster.html</link>
+			<description>Host David Pogue tries to find out if there are physical limits to how fast we can go.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 19 Sep 2013 9:00:00 EST</pubDate>
+			<category>Video 00:30</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/making-stuff-faster.html</guid>
+		</item>
+
+		<item>
+			<title>Making Stuff: Wilder</title>
+			<link>http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/making-stuff-wilder.html</link>
+			<description>Host David Pogue travels the globe to explore new technologies inspired by nature.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 19 Sep 2013 9:00:00 EST</pubDate>
+			<category>Video 00:30</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/making-stuff-wilder.html</guid>
+		</item>
+
+		<item>
+			<title>Making Stuff: Colder</title>
+			<link>http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/making-stuff-colder.html</link>
+			<description>Host David Pogue asks if cold holds the key to technology that can improve our lives.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 19 Sep 2013 9:00:00 EST</pubDate>
+			<category>Video</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/making-stuff-colder.html</guid>
+		</item>
+
+		<item>
+			<title>Making Stuff: Safer</title>
+			<link>http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/making-stuff-safer.html</link>
+			<description>Host David Pogue examines groundbreaking research that aims to keep us out of harm’s way.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 19 Sep 2013 9:00:00 EST</pubDate>
+			<category>Video</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/making-stuff-safer.html</guid>
+		</item>
+
+		<item>
+			<title>Ground Zero Supertower</title>
+			<link>http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/ground-supertower.html</link>
+			<description>Engineers race to complete 1 World Trade Center as they grapple with the final challenges.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Wed, 11 Sep 2013 9:00:00 EST</pubDate>
+			<category>Video 52:52</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/ground-supertower.html</guid>
+		</item>
+
+		<item>
+			<title>Get Involved: Making Stuff</title>
+			<link>http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/making-stuff-outreach.html</link>
+			<description>Discover a range of opportunities for exploring how scientific discovery and engineering lead to innovation.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 05 Sep 2013 9:00:00 EST</pubDate>
+			<!-- <enclosure url="http://www.pbs.org/wgbh/nova/assets/img/thumbnails/making-stuff-outreach-ic.jpg" length="70184" type="image/jpeg" /> -->
+			<category>Text</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/making-stuff-outreach.html</guid>
+		</item>
+
+		<item>
+			<title>16th Century Nose Jobs</title>
+			<link>http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/ancient/16-century-nose-jobs.html</link>
+			<description>Thinking about getting a nose job? Thank goodness it's not the 16th century.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 05 Sep 2013 9:00:00 EST</pubDate>
+			<!-- <enclosure url="http://www.pbs.org/wgbh/nova/assets/img/thumbnails/16-century-nose-jobs-ic.jpg" length="70184" type="image/jpeg" /> -->
+			<category>Video (2:19)</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/ancient/16-century-nose-jobs.html</guid>
+		</item>
+
+		<item>
+			<title>Ground Zero Supertower</title>
+			<link>http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/ground-supertower.html</link>
+			<description>Engineers race to complete 1 World Trade Center as they grapple with the final challenges.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 29 Aug 2013 17:00:00 EST</pubDate>
+			<!-- <enclosure url="http://www.pbs.org/wgbh/nova/assets/img/thumbnails/ground-supertower-ic.jpg" length="70184" type="image/jpeg" /> -->
+			<category>Video</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/ground-supertower.html</guid>
+		</item>
+
+		<item>
+			<title>Megastorm Aftermath</title>
+			<link>http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/earth/megastorm-aftermath.html</link>
+			<description>How can cities prepare for rising seas and raging storms?</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 15 Aug 2013 17:00:00 EST</pubDate>
+			<!-- <enclosure url="http://www.pbs.org/wgbh/nova/assets/img/thumbnails/megastorm-aftermath-ic.jpg" length="70184" type="image/jpeg" /> -->
+			<category></category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/earth/megastorm-aftermath.html</guid>
+		</item>
+
+		<item>
+			<title>Making More Stuff</title>
+			<link>http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/making-more-stuff.html</link>
+			<description>Host David Pogue hits the road to explore the frontiers of invention and innovation.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 25 Jul 2013 17:00:00 EST</pubDate>
+			<!-- <enclosure url="http://www.pbs.org/wgbh/nova/assets/img/thumbnails/making-more-stuff-ic.jpg" length="70184" type="image/jpeg" /> -->
+			<category>1:12 Video</category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/wgbh/nova/tech/making-more-stuff.html</guid>
+		</item>
+		
+		<item>
+			<title>ScienceCafes.org</title>
+			<link>http://sciencecafes.org/</link>
+			<description>Find out about Science Cafés. Their casual, open format readily engages the public in conversations about science.</description>
+			<author>NOVA &lt;nova@wgbh.org&gt;</author>
+			<pubDate>Thu, 18 Jul 2013 17:00:00 EST</pubDate>
+			<!-- <enclosure url="http://www.pbs.org/wgbh/nova/assets/img/thumbnails/science-cafes-ic.jpg" length="93796" type="image/jpeg" /> -->
+			<category></category>
+			<guid isPermaLink="true">http://www.pbs.org/wgbh/nova/rss/redir/http://sciencecafes.org/</guid>
+		</item>
+
+	</channel>
+</rss>
