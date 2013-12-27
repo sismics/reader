@@ -43,7 +43,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:ems="10"
-                    android:inputType="textNoSuggestions" >
+                    android:inputType="textNoSuggestions"
+                    android:hint="@string/server_url_hint">
                 </EditText>
             </LinearLayout>
 

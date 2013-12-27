@@ -1,0 +1,33 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.1"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 19
+    }
+
+    signingConfigs {
+        release {
+            storeFile file(System.getenv("READER_STORE_PATH"))
+            storePassword System.getenv("READER_STORE_PASS")
+            keyAlias System.getenv("READER_STORE_ALIAS")
+            keyPassword System.getenv("READER_STORE_KEYPASS")
+        }
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+    compile 'ch.acra:acra:4.5.0'
+    compile 'com.android.support:support-v4:19.0.0'
+}

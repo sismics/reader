@@ -6,6 +6,7 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="login_explain"><![CDATA[To start, you must download and install Sismics Reader Server on <a href="http://www.sismics.com/reader">www.sismics.com/reader</a> and enter your server URL below]]></string>
+    <string name="server_url_hint">reader.sismics.com</string>
     <string name="server">Server</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
