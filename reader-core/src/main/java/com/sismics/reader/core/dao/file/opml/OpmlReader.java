@@ -99,12 +99,16 @@ public class OpmlReader extends DefaultHandler {
             Outline outline = new Outline();
             outline.setText(StringUtils.trim(attributes.getValue("text")));
             outline.setTitle(StringUtils.trim(attributes.getValue("title")));
-            String type = StringUtils.trim(attributes.getValue("type"));
-            outline.setType(type);
             outline.setXmlUrl(StringUtils.trim(attributes.getValue("xmlUrl")));
             outline.setHtmlUrl(StringUtils.trim(attributes.getValue("htmlUrl")));
             
-            if (StringUtils.isBlank(type) || "rss".equals(attributes.getValue("type"))) {
+            String type = StringUtils.trim(attributes.getValue("type"));
+            if ("folder".equals(type)) {
+                type = null; // Some OPML exporter put "folder" instead of an empty type attribute
+            }
+            outline.setType(type);
+            
+            if (StringUtils.isBlank(type) || "rss".equals(type)) {
                 currentOutline.getOutlineList().add(outline);
                 currentOutline = outline;
                 outlineStack.push(currentOutline);

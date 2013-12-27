@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<opml version="1.0">
+   <head>
+     <title>Liferea Feed List Export</title>
+   </head>
+   <body>
+     <outline title="MyFeeds" text="MyFeeds" description="MyFeeds"
+type="folder">
+       <outline title="Web Design Ledger" text="Web Design Ledger"
+description="Web Design Ledger" type="rss"
+xmlUrl="http://feeds.feedburner.com/WebDesignLedger"
+htmlUrl="http://webdesignledger.com"/>
+       <outline title="OSDir.com" text="OSDir.com"
+description="OSDir.com" type="rss" xmlUrl="http://osdir.com/rss.php"
+htmlUrl="http://osdir.com/"/>
+       <outline title="Gizmag: ecoGizmo" text="Gizmag: ecoGizmo"
+description="Gizmag: ecoGizmo" type="rss"
+xmlUrl="http://feeds.feedburner.com/GizmagEcogizmo"
+htmlUrl="http://www.gizmag.com/environment/"/>
+       <outline title="Gizmag: Personal Computing" text="Gizmag:
+Personal Computing" description="Gizmag: Personal Computing" type="rss"
+xmlUrl="http://feeds.feedburner.com/GizmagPersonalComputing"
+htmlUrl="http://www.gizmag.com/computers/"/>
+       <outline title="OSAlt" text="OSAlt" description="OSAlt"
+type="rss" xmlUrl="http://feeds.feedburner.com/OpenSourceAlternative"
+htmlUrl="http://www.osalt.com/"/>
+       <outline title="HacknMod.com - You name it. We hack it."
+text="HacknMod.com - You name it. We hack it." description="HacknMod.com
+- You name it. We hack it." type="rss"
+xmlUrl="http://feeds.feedburner.com/hacknmod/qjUG"
+htmlUrl="http://hacknmod.com"/>
+     </outline>
+   </body>
+</opml>

@@ -38,7 +38,7 @@ public class OpmlFlattener {
                     outlineMap.put(prefix, outlineList);
                 }
                 outlineList.add(outline);
-            } else if (outline.getType() == null) {
+            } else if (StringUtils.isBlank(outline.getType())) {
                 flatten(outline.getOutlineList(), outlineMap, getPrefix(outline, prefix));
             }
         }
