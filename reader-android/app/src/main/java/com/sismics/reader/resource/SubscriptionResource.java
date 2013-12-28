@@ -13,8 +13,22 @@ import com.sismics.android.SismicsHttpResponseHandler;
 public class SubscriptionResource extends BaseResource {
 
     /**
+     * PUT /subscription.
+     * @param context
+     * @param responseHandler
+     */
+    public static void add(Context context, String url, SismicsHttpResponseHandler responseHandler) {
+        init(context);
+
+        RequestParams params = new RequestParams();
+        params.put("url", url);
+        client.put(getApiUrl(context) + "/subscription", params, responseHandler);
+    }
+
+    /**
      * GET /subscription.
      * @param context
+     * @param unread
      * @param responseHandler
      */
     public static void list(Context context, boolean unread, SismicsHttpResponseHandler responseHandler) {
@@ -28,6 +42,10 @@ public class SubscriptionResource extends BaseResource {
     /**
      * GET articles feed.
      * @param context
+     * @param url
+     * @param unread
+     * @param limit
+     * @param afterArticleId
      * @param responseHandler
      */
     public static void feed(Context context, String url, boolean unread, int limit, String afterArticleId, SismicsHttpResponseHandler responseHandler) {
@@ -43,6 +61,7 @@ public class SubscriptionResource extends BaseResource {
     /**
      * Mark all articles as read.
      * @param context
+     * @param url
      * @param responseHandler
      */
     public static void read(Context context, String url, SismicsHttpResponseHandler responseHandler) {

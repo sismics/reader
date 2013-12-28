@@ -23,6 +23,7 @@ import android.widget.ListView;
 
 import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.R;
+import com.sismics.reader.fragment.AddSubscriptionDialogFragment;
 import com.sismics.reader.fragment.ArticlesDefaultFragment;
 import com.sismics.reader.fragment.ArticlesFragment;
 import com.sismics.reader.model.application.ApplicationContext;
@@ -105,63 +106,79 @@ public class MainActivity extends FragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.logout:
-            UserResource.logout(getApplicationContext(), new SismicsHttpResponseHandler() {
-                @Override
-                public void onFinish() {
-                    // Force logout in all cases, so the user is not stuck in case of network error
-                    ApplicationContext.getInstance().setUserInfo(getApplicationContext(), null);
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
-                }
-            });
-            return true;
-            
-        case R.id.all_read:
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.all_read_title)
-            .setMessage(R.string.all_read_message)
-            .setCancelable(true)
-            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    String url = SharedArticlesAdapterHelper.getInstance().getUrl();
-                    SubscriptionResource.read(MainActivity.this, url, new SismicsHttpResponseHandler() {
-                        @Override
-                        public void onFinish() {
-                            refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
-                        }
-                    });
-                }
-            })
-            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.dismiss();
-                }
-            })
-            .create().show();
-            return true;
-        
-        case R.id.about:
-            startActivity(new Intent(MainActivity.this, AboutActivity.class));
-            return true;
-            
-        case R.id.refresh:
-            // Refresh subscriptions and articles
-            refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
-            return true;
-            
-        case android.R.id.home:
-            // The action bar home/up action should open or close the drawer.
-            // ActionBarDrawerToggle will take care of this.
-            if (drawerToggle.onOptionsItemSelected(item)) {
+            case R.id.logout:
+                UserResource.logout(getApplicationContext(), new SismicsHttpResponseHandler() {
+                    @Override
+                    public void onFinish() {
+                        // Force logout in all cases, so the user is not stuck in case of network error
+                        ApplicationContext.getInstance().setUserInfo(getApplicationContext(), null);
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                });
                 return true;
-            }
-            return true;
             
-        default:
-            return super.onOptionsItemSelected(item);
+            case R.id.all_read:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.all_read_title)
+                .setMessage(R.string.all_read_message)
+                .setCancelable(true)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        String url = SharedArticlesAdapterHelper.getInstance().getUrl();
+                        SubscriptionResource.read(MainActivity.this, url, new SismicsHttpResponseHandler() {
+                            @Override
+                            public void onFinish() {
+                                refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
+                return true;
+
+            case R.id.add_subscription:
+                // Create the dialog fragment
+                AddSubscriptionDialogFragment addSubscriptionDialogFragment = new AddSubscriptionDialogFragment();
+
+                // Refresh the subscriptions when a new one is added
+                addSubscriptionDialogFragment.setAddSubscriptionDialogListener(new AddSubscriptionDialogFragment.AddSubscriptionDialogListener() {
+                    @Override
+                    public void onSubscriptionAdded(JSONObject json) {
+                        refreshSubscriptions(1, true);
+                    }
+                });
+
+                // Show the dialog
+                addSubscriptionDialogFragment.show(getSupportFragmentManager(), "AddSubscriptionDialogFragment");
+                return true;
+
+            case R.id.about:
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                return true;
+            
+            case R.id.refresh:
+                // Refresh subscriptions and articles
+                refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
+                return true;
+            
+            case android.R.id.home:
+                // The action bar home/up action should open or close the drawer.
+                // ActionBarDrawerToggle will take care of this.
+                if (drawerToggle.onOptionsItemSelected(item)) {
+                    return true;
+                }
+                return true;
+            
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

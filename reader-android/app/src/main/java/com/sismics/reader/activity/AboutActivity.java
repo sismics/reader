@@ -29,7 +29,7 @@ public class AboutActivity extends FragmentActivity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         
-        aq.id(R.id.txt_about)
+        aq.id(R.id.txtAbout)
             .text(Html.fromHtml(getString(R.string.about_content)))
             .getTextView()
             .setMovementMethod(LinkMovementMethod.getInstance());

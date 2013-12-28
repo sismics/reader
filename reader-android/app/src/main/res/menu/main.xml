@@ -14,15 +14,16 @@
         android:title="@string/all_read">
     </item>
     <item
+        android:id="@+id/add_subscription"
+        android:icon="@drawable/ic_action_new"
+        android:showAsAction="ifRoom"
+        android:title="@string/add_subscription">
+    </item>
+    <item
         android:id="@+id/logout"
         android:showAsAction="collapseActionView"
         android:title="@string/logout">
     </item>
-    <!-- <item
-        android:id="@+id/settings"
-        android:showAsAction="collapseActionView"
-        android:title="@string/settings">
-    </item> -->
     <item
         android:id="@+id/about"
         android:showAsAction="collapseActionView"

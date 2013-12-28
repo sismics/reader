@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 /**
- * Surcharge de JsonHttpResponseHandler pour intégrer les logs.
+ * Override of JsonHttpResponseHandler to add logs.
  * 
  * @author bgamard
  */
@@ -24,7 +24,7 @@ public class SismicsHttpResponseHandler extends JsonHttpResponseHandler {
                     onFailure(e, (JSONArray) jsonResponse);
                 }
                 
-                // Quoi qu'il arrive on appelle ce callback
+                // Whatever the response is, we call this
                 onFailure(e, responseBody);
             } else {
                 onFailure(e, "");

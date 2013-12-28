@@ -42,6 +42,11 @@
     <string name="no_articles">No articles</string>
     <string name="loading_subscriptions">Loading subscriptions&#8230;</string>
     <string name="loading_articles">Loading articles&#8230;</string>
+    <string name="add_subscription">Add subscription</string>
+    <string name="add_subscription_hint">Paste a feed or website URL</string>
+    <string name="add_subscription_error">Error adding this subscription</string>
+    <string name="add_subscription_success">Subscription successfully added</string>
+    <string name="add">Add</string>
 
     <!-- Preferences -->
     <string name="pref_general_category">General preferences</string>
