@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <item
         android:id="@+id/share"
         android:actionProviderClass="android.widget.ShareActionProvider"
         android:showAsAction="always"
-        android:title="@string/share"/>
+        android:title="@string/share"
+        tools:ignore="AlwaysShowAction">
+    </item>
     <item
         android:id="@+id/favorite"
         android:icon="@drawable/ic_action_not_important"
         android:showAsAction="always"
-        android:title="@string/favorite">
+        android:title="@string/favorite"
+        tools:ignore="AlwaysShowAction">
     </item>
     <item
         android:id="@+id/unread"
         android:icon="@drawable/content_unread"
         android:showAsAction="always"
-        android:title="@string/mark_as_unread">
+        android:title="@string/mark_as_unread"
+        tools:ignore="AlwaysShowAction">
     </item>
 
 </menu>
