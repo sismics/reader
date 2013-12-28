@@ -86,9 +86,13 @@ You will get your deployable WAR in the `target` directory.
 
 #### Build the Android app
 
-There is some prerequisites here : <https://code.google.com/p/maven-android-plugin/wiki/GettingStarted>.
+Prerequisites :
+  - Gradle
+  - Android SDK
+  - Environment variables pointing to the keystore (see `build.gradle`)
 
 Then, from the `reader-android` directory:
 
-    mvn -N -Pinit validate
-    mvn clean install
+    gradlew build
+    
+The generated APK will be in `app/build/apk/app-release.apk`
