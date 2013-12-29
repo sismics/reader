@@ -15,17 +15,17 @@ public class DialogUtil {
 
     /**
      * Create a dialog with an OK button.
-     * @param context
-     * @param title
-     * @param message
-     * @return
+     *
+     * @param activity Context activity
+     * @param title Dialog title
+     * @param message Dialog message
      */
-    public static void showOkDialog(Activity context, int title, int message) {
-        if (context == null || context.isFinishing()) {
+    public static void showOkDialog(Activity activity, int title, int message) {
+        if (activity == null || activity.isFinishing()) {
             return;
         }
         
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         
         builder.setTitle(title)
         .setMessage(message)

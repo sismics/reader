@@ -30,4 +30,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
     compile 'ch.acra:acra:4.5.0'
     compile 'com.android.support:support-v4:19.0.0'
+    compile 'com.viewpagerindicator:library:2.4.1@aar'
 }

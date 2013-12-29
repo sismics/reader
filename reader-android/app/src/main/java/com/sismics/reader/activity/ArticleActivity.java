@@ -1,10 +1,5 @@
 package com.sismics.reader.activity;
 
-import java.util.ArrayList;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +24,11 @@ import com.sismics.reader.resource.StarredResource;
 import com.sismics.reader.ui.adapter.ArticlesPagerAdapter;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
 import com.viewpagerindicator.UnderlinePageIndicator;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Activity displaying articles.
