@@ -6,11 +6,11 @@ import android.net.NetworkInfo;
 
 import com.google.android.apps.dashclock.api.DashClockExtension;
 import com.google.android.apps.dashclock.api.ExtensionData;
-import com.sismics.android.SismicsHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.reader.R;
-import com.sismics.reader.activity.MainActivity;
 import com.sismics.reader.resource.SubscriptionResource;
 
+import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -42,7 +42,7 @@ public class ReaderExtension extends DashClockExtension {
         // Check if a connection is available
         if (networkInfo.isConnected()) {
             // Fetch the number of unread articles
-            SubscriptionResource.list(this, true, new SismicsHttpResponseHandler() {
+            SubscriptionResource.list(this, true, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(JSONObject json) {
                     int unread = json.optInt("unread_count");
@@ -115,7 +115,7 @@ public class ReaderExtension extends DashClockExtension {
                 }
 
                 @Override
-                public void onFailure(Throwable throwable, String reponse) {
+                public void onFailure(final int statusCode, final Header[] headers, final byte[] responseBytes, final Throwable throwable) {
                     // Network error, retry as soon as possible
                     setUpdateWhenScreenOn(true);
                 }

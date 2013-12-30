@@ -1,11 +1,11 @@
 package com.sismics.reader.resource;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.sismics.android.SismicsHttpResponseHandler;
+
+import java.util.ArrayList;
 
 /**
  * Access to /article API.
@@ -20,7 +20,7 @@ public class ArticleResource extends BaseResource {
      * @param id
      * @param responseHandler
      */
-    public static void read(Context context, String id, SismicsHttpResponseHandler responseHandler) {
+    public static void read(Context context, String id, JsonHttpResponseHandler responseHandler) {
         init(context);
         
         RequestParams params = new RequestParams();
@@ -30,10 +30,10 @@ public class ArticleResource extends BaseResource {
     /**
      * POST /article/read.
      * @param context
-     * @param id
+     * @param idList
      * @param responseHandler
      */
-    public static void readMultiple(Context context, ArrayList<String> idList, SismicsHttpResponseHandler responseHandler) {
+    public static void readMultiple(Context context, ArrayList<String> idList, JsonHttpResponseHandler responseHandler) {
         init(context);
         
         RequestParams params = new RequestParams();
@@ -47,7 +47,7 @@ public class ArticleResource extends BaseResource {
      * @param id
      * @param responseHandler
      */
-    public static void unread(Context context, String id, SismicsHttpResponseHandler responseHandler) {
+    public static void unread(Context context, String id, JsonHttpResponseHandler responseHandler) {
         init(context);
         
         RequestParams params = new RequestParams();

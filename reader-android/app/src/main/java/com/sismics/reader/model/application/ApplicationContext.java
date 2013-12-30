@@ -1,14 +1,14 @@
 package com.sismics.reader.model.application;
 
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.Context;
 
-import com.sismics.android.SismicsHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.reader.listener.CallbackListener;
 import com.sismics.reader.resource.UserResource;
 import com.sismics.reader.util.PreferenceUtil;
+
+import org.json.JSONObject;
 
 /**
  * Global context of the application.
@@ -62,7 +62,7 @@ public class ApplicationContext {
 
     /**
      * Setter of userInfo
-     * @param userInfo
+     * @param json
      */
     public void setUserInfo(Context context, JSONObject json) {
         this.userInfo = json;
@@ -75,7 +75,7 @@ public class ApplicationContext {
      * @param callbackListener
      */
     public void fetchUserInfo(final Activity activity, final CallbackListener callbackListener) {
-        UserResource.info(activity.getApplicationContext(), new SismicsHttpResponseHandler() {
+        UserResource.info(activity.getApplicationContext(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(final JSONObject json) {
                 // Save data in application context

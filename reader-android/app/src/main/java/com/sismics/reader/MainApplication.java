@@ -31,7 +31,7 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         ACRA.init(this);
-        
+
         // Fetching /user/info from cache
         JSONObject json = PreferenceUtil.getCachedJson(getApplicationContext(), PreferenceUtil.PREF_CACHED_USER_INFO_JSON);
         ApplicationContext.getInstance().setUserInfo(getApplicationContext(), json);

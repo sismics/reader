@@ -2,8 +2,8 @@ package com.sismics.reader.resource;
 
 import android.content.Context;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.sismics.android.SismicsHttpResponseHandler;
 
 /**
  * Access to /subscription API.
@@ -17,7 +17,7 @@ public class SubscriptionResource extends BaseResource {
      * @param context
      * @param responseHandler
      */
-    public static void add(Context context, String url, SismicsHttpResponseHandler responseHandler) {
+    public static void add(Context context, String url, JsonHttpResponseHandler responseHandler) {
         init(context);
 
         RequestParams params = new RequestParams();
@@ -31,7 +31,7 @@ public class SubscriptionResource extends BaseResource {
      * @param unread
      * @param responseHandler
      */
-    public static void list(Context context, boolean unread, SismicsHttpResponseHandler responseHandler) {
+    public static void list(Context context, boolean unread, JsonHttpResponseHandler responseHandler) {
         init(context);
         
         RequestParams params = new RequestParams();
@@ -48,7 +48,7 @@ public class SubscriptionResource extends BaseResource {
      * @param afterArticleId
      * @param responseHandler
      */
-    public static void feed(Context context, String url, boolean unread, int limit, String afterArticleId, SismicsHttpResponseHandler responseHandler) {
+    public static void feed(Context context, String url, boolean unread, int limit, String afterArticleId, JsonHttpResponseHandler responseHandler) {
         init(context);
         
         RequestParams params = new RequestParams();
@@ -64,7 +64,7 @@ public class SubscriptionResource extends BaseResource {
      * @param url
      * @param responseHandler
      */
-    public static void read(Context context, String url, SismicsHttpResponseHandler responseHandler) {
+    public static void read(Context context, String url, JsonHttpResponseHandler responseHandler) {
         init(context);
         
         RequestParams params = new RequestParams();

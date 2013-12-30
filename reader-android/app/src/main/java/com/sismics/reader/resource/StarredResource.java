@@ -2,7 +2,7 @@ package com.sismics.reader.resource;
 
 import android.content.Context;
 
-import com.sismics.android.SismicsHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 /**
  * Access to /starred API.
@@ -18,7 +18,7 @@ public class StarredResource extends BaseResource {
      * @param star
      * @param responseHandler
      */
-    public static void star(Context context, String id, boolean star, SismicsHttpResponseHandler responseHandler) {
+    public static void star(Context context, String id, boolean star, JsonHttpResponseHandler responseHandler) {
         init(context);
         
         if (star) {

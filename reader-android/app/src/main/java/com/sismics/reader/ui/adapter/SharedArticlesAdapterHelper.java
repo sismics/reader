@@ -1,22 +1,22 @@
 package com.sismics.reader.ui.adapter;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import android.content.Context;
+import android.support.v4.view.PagerAdapter;
+import android.widget.BaseAdapter;
+
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.sismics.android.Log;
+import com.sismics.reader.listener.ArticlesHelperListener;
+import com.sismics.reader.resource.SubscriptionResource;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-import android.support.v4.view.PagerAdapter;
-import android.widget.BaseAdapter;
-
-import com.sismics.android.Log;
-import com.sismics.android.SismicsHttpResponseHandler;
-import com.sismics.reader.listener.ArticlesHelperListener;
-import com.sismics.reader.resource.SubscriptionResource;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Static helper to use the same articles between multiples adapters.
@@ -157,7 +157,7 @@ public class SharedArticlesAdapterHelper {
             afterArticleId = items.get(items.size() - 1).optString("id");
         }
         
-        SubscriptionResource.feed(context, url, unread, 10, afterArticleId, new SismicsHttpResponseHandler() {
+        SubscriptionResource.feed(context, url, unread, 10, afterArticleId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
                 // If reference has not changed, let's update the shared data

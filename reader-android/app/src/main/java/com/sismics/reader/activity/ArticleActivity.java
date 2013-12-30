@@ -15,8 +15,8 @@ import android.view.Window;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.android.Log;
-import com.sismics.android.SismicsHttpResponseHandler;
 import com.sismics.reader.R;
 import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.ArticleResource;
@@ -212,7 +212,7 @@ public class ArticleActivity extends FragmentActivity {
             item.setActionView(progressView);
             
             // Marking article as unread
-            ArticleResource.unread(ArticleActivity.this, articleId, new SismicsHttpResponseHandler() {
+            ArticleResource.unread(ArticleActivity.this, articleId, new JsonHttpResponseHandler() {
                 public void onSuccess(JSONObject json) {
                     try {
                         article.put("is_read", false);
@@ -236,7 +236,7 @@ public class ArticleActivity extends FragmentActivity {
             final boolean isStarred = article.optBoolean("is_starred");
             
             // Star or unstar the article
-            StarredResource.star(ArticleActivity.this, articleId, !isStarred, new SismicsHttpResponseHandler() {
+            StarredResource.star(ArticleActivity.this, articleId, !isStarred, new JsonHttpResponseHandler() {
                 public void onSuccess(JSONObject json) {
                     try {
                         article.put("is_starred", !isStarred);
@@ -266,7 +266,7 @@ public class ArticleActivity extends FragmentActivity {
     @Override
     protected void onPause() {
         if (readArticleIdList != null && !readArticleIdList.isEmpty()) {
-            ArticleResource.readMultiple(ArticleActivity.this, readArticleIdList, new SismicsHttpResponseHandler() {
+            ArticleResource.readMultiple(ArticleActivity.this, readArticleIdList, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(JSONObject json) {
                     // Mark articles as read on local data

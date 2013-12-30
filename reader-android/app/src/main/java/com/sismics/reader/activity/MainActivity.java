@@ -1,7 +1,5 @@
 package com.sismics.reader.activity;
 
-import org.json.JSONObject;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,7 +19,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.sismics.android.SismicsHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.reader.R;
 import com.sismics.reader.fragment.AddSubscriptionDialogFragment;
 import com.sismics.reader.fragment.ArticlesDefaultFragment;
@@ -33,6 +31,8 @@ import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
 import com.sismics.reader.ui.adapter.SubscriptionAdapter;
 import com.sismics.reader.ui.adapter.SubscriptionAdapter.SubscriptionItem;
 import com.sismics.reader.util.PreferenceUtil;
+
+import org.json.JSONObject;
 
 /**
  * Main activity.
@@ -107,7 +107,7 @@ public class MainActivity extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                UserResource.logout(getApplicationContext(), new SismicsHttpResponseHandler() {
+                UserResource.logout(getApplicationContext(), new JsonHttpResponseHandler() {
                     @Override
                     public void onFinish() {
                         // Force logout in all cases, so the user is not stuck in case of network error
@@ -127,7 +127,7 @@ public class MainActivity extends FragmentActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         String url = SharedArticlesAdapterHelper.getInstance().getUrl();
-                        SubscriptionResource.read(MainActivity.this, url, new SismicsHttpResponseHandler() {
+                        SubscriptionResource.read(MainActivity.this, url, new JsonHttpResponseHandler() {
                             @Override
                             public void onFinish() {
                                 refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
@@ -241,7 +241,7 @@ public class MainActivity extends FragmentActivity {
      */
     private void refreshSubscriptions(final int position, final boolean refresh) {
         // Callback when JSON data from subscriptions needs to be displayed
-        SismicsHttpResponseHandler callback = new SismicsHttpResponseHandler() {
+        JsonHttpResponseHandler callback = new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
                 // Cache the JSON

@@ -1,7 +1,5 @@
 package com.sismics.reader.activity;
 
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.androidquery.AQuery;
-import com.sismics.android.SismicsHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.android.util.DialogUtil;
 import com.sismics.reader.R;
 import com.sismics.reader.listener.CallbackListener;
@@ -23,6 +21,9 @@ import com.sismics.reader.resource.UserResource;
 import com.sismics.reader.ui.form.Validator;
 import com.sismics.reader.ui.form.validator.Required;
 import com.sismics.reader.util.PreferenceUtil;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
 
 /**
  * Login activity.
@@ -90,7 +91,7 @@ public class LoginActivity extends FragmentActivity {
                 PreferenceUtil.setServerUrl(LoginActivity.this, txtServer.getText().toString());
                 
                 try {
-                    UserResource.login(getApplicationContext(), txtUsername.getText().toString(), txtPassword.getText().toString(), new SismicsHttpResponseHandler() {
+                    UserResource.login(getApplicationContext(), txtUsername.getText().toString(), txtPassword.getText().toString(), new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(JSONObject json) {
                             // Empty previous user caches
@@ -108,11 +109,11 @@ public class LoginActivity extends FragmentActivity {
                         }
                         
                         @Override
-                        public void onFailure(Throwable t, String response) {
+                        public void onFailure(final int statusCode, final Header[] headers, final byte[] responseBytes, final Throwable throwable) {
                             loginForm.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.GONE);
-                            
-                            if (response != null && response.contains("\"ForbiddenError\"")) {
+
+                            if (responseBytes != null && new String(responseBytes).contains("\"ForbiddenError\"")) {
                                 DialogUtil.showOkDialog(LoginActivity.this, R.string.login_fail_title, R.string.login_fail);
                             } else {
                                 DialogUtil.showOkDialog(LoginActivity.this, R.string.network_error_title, R.string.network_error);
@@ -150,7 +151,7 @@ public class LoginActivity extends FragmentActivity {
             finish();
         } else {
             // Trying to get user data
-            UserResource.info(getApplicationContext(), new SismicsHttpResponseHandler() {
+            UserResource.info(getApplicationContext(), new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(final JSONObject json) {
                     if (json.optBoolean("anonymous", true)) {
@@ -168,7 +169,7 @@ public class LoginActivity extends FragmentActivity {
                 }
                 
                 @Override
-                public void onFailure(Throwable t, String response) {
+                public void onFailure(final int statusCode, final Header[] headers, final byte[] responseBytes, final Throwable throwable) {
                     DialogUtil.showOkDialog(LoginActivity.this, R.string.network_error_title, R.string.network_error);
                     loginForm.setVisibility(View.VISIBLE);
                 }

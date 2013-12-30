@@ -2,8 +2,8 @@ package com.sismics.reader.resource;
 
 import android.content.Context;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.sismics.android.SismicsHttpResponseHandler;
 
 /**
  * Access to /user API.
@@ -19,7 +19,7 @@ public class UserResource extends BaseResource {
      * @param password
      * @param responseHandler
      */
-    public static void login(Context context, String username, String password, SismicsHttpResponseHandler responseHandler) {
+    public static void login(Context context, String username, String password, JsonHttpResponseHandler responseHandler) {
         init(context);
         
         RequestParams params = new RequestParams();
@@ -34,7 +34,7 @@ public class UserResource extends BaseResource {
      * @param context
      * @param responseHandler
      */
-    public static void info(Context context, SismicsHttpResponseHandler responseHandler) {
+    public static void info(Context context, JsonHttpResponseHandler responseHandler) {
         init(context);
         
         RequestParams params = new RequestParams();
@@ -46,7 +46,7 @@ public class UserResource extends BaseResource {
      * @param context
      * @param responseHandler
      */
-    public static void logout(Context context, SismicsHttpResponseHandler responseHandler) {
+    public static void logout(Context context, JsonHttpResponseHandler responseHandler) {
         init(context);
         
         RequestParams params = new RequestParams();

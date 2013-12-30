@@ -11,10 +11,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.sismics.android.SismicsHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.reader.R;
 import com.sismics.reader.resource.SubscriptionResource;
 
+import org.apache.http.Header;
 import org.json.JSONObject;
 
 /**
@@ -88,7 +89,7 @@ public class AddSubscriptionDialogFragment extends DialogFragment {
                 // Add the subscription
                 txtAddSubscription.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
-                SubscriptionResource.add(getActivity(), url, new SismicsHttpResponseHandler() {
+                SubscriptionResource.add(getActivity(), url, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(JSONObject json) {
                         if (addSubscriptionDialogListener != null) {
@@ -104,7 +105,7 @@ public class AddSubscriptionDialogFragment extends DialogFragment {
                     }
 
                     @Override
-                    public void onFailure(Throwable e, String response) {
+                    public void onFailure(final int statusCode, final Header[] headers, final byte[] responseBytes, final Throwable throwable) {
                         // Feedback that the subscription was not added
                         txtAddSubscription.setError(getText(R.string.add_subscription_error));
                     }
