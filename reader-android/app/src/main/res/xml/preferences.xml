@@ -3,7 +3,36 @@
 
     <PreferenceCategory
         android:key="pref_general_category"
-        android:title="@string/pref_general_category" >
+        android:title="@string/pref_general_category">
+
+        <CheckBoxPreference
+            android:key="pref_subscriptionsUnread"
+            android:title="@string/pref_subscriptions_unread"
+            android:summaryOn="@string/pref_subscriptions_unread_enabled"
+            android:summaryOff="@string/pref_subscriptions_unread_disabled"
+            android:defaultValue="false"/>
+
+        <ListPreference
+            android:key="pref_articlesFetched"
+            android:title="@string/pref_articles_fetched"
+            android:dialogTitle="@string/pref_articles_fetched"
+            android:entries="@array/articlesFetched"
+            android:entryValues="@array/articlesFetched"
+            android:defaultValue="10"/>
+
+        <ListPreference
+            android:key="pref_defaultSubscription"
+            android:title="@string/pref_default_subscription"
+            android:dialogTitle="@string/pref_default_subscription"
+            android:entries="@array/defaultSubscriptions"
+            android:entryValues="@array/defaultSubscriptionsValues"
+            android:defaultValue="1"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_reporting_category"
+        android:title="@string/pref_reporting_category">
 
         <CheckBoxPreference
             android:key="acra.enable"

@@ -42,6 +42,12 @@
             android:logo="@drawable/ic_launcher" >
         </activity>
         <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/settings"
+            android:theme="@android:style/Theme.Holo"
+            android:logo="@drawable/ic_action_settings_dark" >
+        </activity>
+        <activity
             android:name=".activity.AboutActivity"
             android:label="@string/about"
             android:logo="@drawable/ic_action_about" >

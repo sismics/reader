@@ -18,7 +18,7 @@
     </item>
     <item
         android:id="@+id/unread"
-        android:icon="@drawable/content_unread"
+        android:icon="@drawable/ic_action_unread"
         android:showAsAction="always"
         android:title="@string/mark_as_unread"
         tools:ignore="AlwaysShowAction">

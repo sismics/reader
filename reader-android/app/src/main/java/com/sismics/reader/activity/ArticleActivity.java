@@ -28,7 +28,8 @@ import com.viewpagerindicator.UnderlinePageIndicator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Activity displaying articles.
@@ -44,7 +45,7 @@ public class ArticleActivity extends FragmentActivity {
     /**
      * Articles to mark as read later.
      */
-    private ArrayList<String> readArticleIdList;
+    private Set<String> readArticleIdSet;
     
     /**
      * Shared articles adapter helper.
@@ -80,7 +81,7 @@ public class ArticleActivity extends FragmentActivity {
     protected void onCreate(Bundle args) {
         super.onCreate(args);
         
-        readArticleIdList = new ArrayList<String>();
+        readArticleIdSet = new HashSet<String>();
         sharedAdapterHelper = SharedArticlesAdapterHelper.getInstance();
         if (sharedAdapterHelper.getArticleItems().size() == 0) {
             finish();
@@ -103,8 +104,8 @@ public class ArticleActivity extends FragmentActivity {
                 // Store article id to mark as read later
                 final JSONObject article = sharedAdapterHelper.getArticleItems().get(position);
                 String articleId = article.optString("id");
-                if (!readArticleIdList.contains(articleId) && !article.optBoolean("force_unread")) {
-                    readArticleIdList.add(article.optString("id"));
+                if (!readArticleIdSet.contains(articleId) && !article.optBoolean("force_unread")) {
+                    readArticleIdSet.add(article.optString("id"));
                 }
                 
                 // Update the action bar
@@ -207,7 +208,7 @@ public class ArticleActivity extends FragmentActivity {
             }
             
             // Removing from mark as read list
-            readArticleIdList.remove(articleId);
+            readArticleIdSet.remove(articleId);
             
             item.setActionView(progressView);
             
@@ -265,14 +266,14 @@ public class ArticleActivity extends FragmentActivity {
     
     @Override
     protected void onPause() {
-        if (readArticleIdList != null && !readArticleIdList.isEmpty()) {
-            ArticleResource.readMultiple(ArticleActivity.this, readArticleIdList, new JsonHttpResponseHandler() {
+        if (readArticleIdSet != null && !readArticleIdSet.isEmpty()) {
+            ArticleResource.readMultiple(ArticleActivity.this, readArticleIdSet, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(JSONObject json) {
                     // Mark articles as read on local data
                     for (JSONObject article : sharedAdapterHelper.getArticleItems()) {
                         String articleId = article.optString("id");
-                        if (readArticleIdList.contains(articleId)) {
+                        if (readArticleIdSet.contains(articleId)) {
                             try {
                                 article.put("is_read", true);
                             } catch (JSONException e) {

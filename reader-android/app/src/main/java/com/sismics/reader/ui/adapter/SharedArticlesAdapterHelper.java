@@ -8,6 +8,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.android.Log;
 import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.SubscriptionResource;
+import com.sismics.reader.util.PreferenceUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,7 +67,7 @@ public class SharedArticlesAdapterHelper {
     
     /**
      * Returns an instance.
-     * @return
+     * @return Adapter helper instance
      */
     public static SharedArticlesAdapterHelper getInstance() {
         if (instance == null) {
@@ -77,7 +78,7 @@ public class SharedArticlesAdapterHelper {
     
     /**
      * Getter of articleItems.
-     * @return
+     * @return articleItems
      */
     public List<JSONObject> getArticleItems() {
         return articleItems;
@@ -85,7 +86,8 @@ public class SharedArticlesAdapterHelper {
     
     /**
      * Add adapter.
-     * @param adapter
+     * @param adapter Adapter to add
+     * @param listener Listener to add
      */
     public void addAdapter(Object adapter, ArticlesHelperListener listener) {
         adapters.add(adapter);
@@ -94,7 +96,8 @@ public class SharedArticlesAdapterHelper {
     
     /**
      * Remove adapter.
-     * @param adapter
+     * @param adapter Adapter to remove
+     * @param listener Listener to remove
      */
     public void removeAdapter(Object adapter, ArticlesHelperListener listener) {
         adapters.remove(adapter);
@@ -137,7 +140,7 @@ public class SharedArticlesAdapterHelper {
     
     /**
      * Load more articles.
-     * @param context
+     * @param context Context
      */
     public void load(Context context) {
         final List<JSONObject> items = articleItems;
@@ -156,8 +159,12 @@ public class SharedArticlesAdapterHelper {
         if (items.size() > 0) {
             afterArticleId = items.get(items.size() - 1).optString("id");
         }
-        
-        SubscriptionResource.feed(context, url, unread, 10, afterArticleId, new JsonHttpResponseHandler() {
+
+        // Number of articles to fetch
+        int articlesFetchedPref = PreferenceUtil.getIntegerPreference(context, PreferenceUtil.PREF_ARTICLES_FETCHED, 10);
+
+        // Load data from server
+        SubscriptionResource.feed(context, url, unread, articlesFetchedPref, afterArticleId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
                 // If reference has not changed, let's update the shared data
@@ -172,7 +179,7 @@ public class SharedArticlesAdapterHelper {
                     // Precompute some data
                     try {
                         String description = article.optString("description");
-                        String cleanedDescription = description.replaceAll("\\<.*?>", "").trim();
+                        String cleanedDescription = description.replaceAll("<.*?>", "").trim();
                         int length = cleanedDescription.length();
                         String summary = cleanedDescription.substring(0, length < 300 ? length : 300);
                         article.put("summary", summary);

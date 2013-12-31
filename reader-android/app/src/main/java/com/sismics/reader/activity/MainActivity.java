@@ -46,6 +46,7 @@ public class MainActivity extends FragmentActivity {
     private ListView drawerList;
     private ActionBarDrawerToggle drawerToggle;
     private boolean destroyed = false;
+    private int defaultSubscription;
     
     @Override
     protected void onCreate(final Bundle args) {
@@ -57,7 +58,11 @@ public class MainActivity extends FragmentActivity {
             finish();
             return;
         }
-        
+
+        // Find the default subscription
+        defaultSubscription = PreferenceUtil.getIntegerPreference(this, PreferenceUtil.PREF_DEFAULT_SUBSCRIPTION, 1);
+
+        // Setup the activity
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.main_activity);
 
@@ -70,9 +75,9 @@ public class MainActivity extends FragmentActivity {
         
         // Load subscriptions and select unread item
         if (args == null) {
-            refreshSubscriptions(1, false);
+            refreshSubscriptions(defaultSubscription, false);
         } else {
-            refreshSubscriptions(args.getInt("drawerItemSelected", 1), false);
+            refreshSubscriptions(args.getInt("drawerItemSelected", defaultSubscription), false);
         }
 
         // Drawer item click listener
@@ -152,7 +157,7 @@ public class MainActivity extends FragmentActivity {
                 addSubscriptionDialogFragment.setAddSubscriptionDialogListener(new AddSubscriptionDialogFragment.AddSubscriptionDialogListener() {
                     @Override
                     public void onSubscriptionAdded(JSONObject json) {
-                        refreshSubscriptions(1, true);
+                        refreshSubscriptions(defaultSubscription, true);
                     }
                 });
 
@@ -160,10 +165,14 @@ public class MainActivity extends FragmentActivity {
                 addSubscriptionDialogFragment.show(getSupportFragmentManager(), "AddSubscriptionDialogFragment");
                 return true;
 
+            case R.id.settings:
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                return true;
+
             case R.id.about:
                 startActivity(new Intent(MainActivity.this, AboutActivity.class));
                 return true;
-            
+
             case R.id.refresh:
                 // Refresh subscriptions and articles
                 refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
@@ -265,7 +274,7 @@ public class MainActivity extends FragmentActivity {
                     int pos = position;
                     // Check if the item exists and is selectable
                     if (!adapter.isEnabled(pos)) {
-                        pos = 1;
+                        pos = defaultSubscription;
                     }
                     selectItem(pos, refresh, false);
                 }
@@ -287,7 +296,8 @@ public class MainActivity extends FragmentActivity {
         }
             
         // Load subscriptions from server
-        SubscriptionResource.list(this, false, callback);
+        boolean subscriptionUnreadPref = PreferenceUtil.getBooleanPreference(this, PreferenceUtil.PREF_SUBSCRIPTION_UNREAD, false);
+        SubscriptionResource.list(this, subscriptionUnreadPref, callback);
     }
     
     /**

@@ -62,8 +62,8 @@ public class SubscriptionAdapter extends BaseAdapter {
     
     /**
      * Constructor.
-     * @param context
-     * @param input
+     * @param context Context
+     * @param input Subscriptions data from server
      */
     public SubscriptionAdapter(Context context, JSONObject input) {
         this.context = context;
@@ -106,7 +106,13 @@ public class SubscriptionAdapter extends BaseAdapter {
                         .cookie("auth_token", authToken))
                     .margin(item.root ? 16 : 32, 0, 0, 0);
             } else {
-                aq.id(R.id.imgFavicon).image(0);
+                if (item.url.equals("/all")) {
+                    aq.id(R.id.imgFavicon).image(item.unread ? R.drawable.drawer_list_item_unread : R.drawable.drawer_list_item_read);
+                } else if (item.url.equals("/starred")) {
+                    aq.id(R.id.imgFavicon).image(R.drawable.drawer_list_item_important);
+                } else {
+                    aq.id(R.id.imgFavicon).image(0);
+                }
             }
             break;
         case CATEGORY_ITEM:
@@ -156,10 +162,7 @@ public class SubscriptionAdapter extends BaseAdapter {
     @Override
     public boolean isEnabled(int position) {
         SubscriptionItem item = getItem(position);
-        if (item == null) {
-            return false;
-        }
-        return item.type == SUBSCRIPTION_ITEM || item.type == CATEGORY_ITEM;
+        return item != null && (item.type == SUBSCRIPTION_ITEM || item.type == CATEGORY_ITEM);
     }
     
     /**
@@ -192,22 +195,6 @@ public class SubscriptionAdapter extends BaseAdapter {
         public boolean isUnread() {
             return unread;
         }
-
-        /**
-         * Getter de type.
-         * @return type
-         */
-        public int getType() {
-            return type;
-        }
-
-        /**
-         * Setter de type.
-         * @param type type
-         */
-        public void setType(int type) {
-            this.type = type;
-        }
     }
 
     /**
@@ -215,7 +202,7 @@ public class SubscriptionAdapter extends BaseAdapter {
      */
     public void setItems(JSONObject input) {
         items = new ArrayList<SubscriptionItem>();
-        SubscriptionItem item = null;
+        SubscriptionItem item;
         
         // Adding fixed items
         item = new SubscriptionItem();

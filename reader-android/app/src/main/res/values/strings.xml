@@ -22,6 +22,7 @@
     <string name="refresh">Refresh</string>
     <string name="all_read">Mark all as read</string>
     <string name="logout">Logout</string>
+    <string name="settings">Settings</string>
     <string name="about">About</string>
     <string name="mark_as_unread">Mark as unread</string>
     <string name="marked_as_unread">Marked as unread</string>
@@ -52,10 +53,16 @@
 
 
     <!-- Preferences -->
-    <string name="pref_general_category">General preferences</string>
+    <string name="pref_general_category">General settings</string>
+    <string name="pref_reporting_category">Error reporting</string>
     <string name="pref_enable_acra">Automatic error reports</string>
     <string name="pref_acra_enabled">Reporting enabled</string>
     <string name="pref_acra_disabled">Reporting disabled</string>
+    <string name="pref_subscriptions_unread">Display only unread subscriptions</string>
+    <string name="pref_subscriptions_unread_enabled">Only unread subscriptions displayed</string>
+    <string name="pref_subscriptions_unread_disabled">All subscriptions displayed</string>
+    <string name="pref_articles_fetched">Number of articles per page</string>
+    <string name="pref_default_subscription">Startup category to display</string>
     
     <!-- Validation -->
     <string name="validate_error_email">Invalid email</string>
@@ -78,48 +85,39 @@
           </p>
           
           <h1>Licences</h1>
-          <h2>ACRA</2>
+          <h2>ViewPagerIndicator</h2>
+          <p><a href="http://viewpagerindicator.com/">http://viewpagerindicator.com/</a></p>
+          <p>
+            Copyright 2010 2012 Jake Wharton<br />
+            Licensed under the Apache License, Version 2.0.
+          </p>
+
+          <h2>ACRA</h2>
           <p><a href="http://acra.ch">http://acra.ch</a></p>
           <p>
             Copyright 2010 Emmanuel Astier & Kevin Gaudin<br />
-            Licensed under the Apache License, Version 2.0 (the "License");<br />
-            you may not use this file except in compliance with the License.<br />
-            You may obtain a copy of the License at<br />
-            http://www.apache.org/licenses/LICENSE-2.0<br />
-            Unless required by applicable law or agreed to in writing, software<br />
-            distributed under the License is distributed on an "AS IS" BASIS,<br />
-            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
-            See the License for the specific language governing permissions and<br />
-            limitations under the License.
+            Licensed under the Apache License, Version 2.0.
+          </p>
+
+          <h2>Android Support v4</h2>
+          <p><a href="http://developer.android.com/tools/support-library/index.html">http://developer.android.com/tools/support-library/index.html</a></p>
+          <p>
+            Copyright (c) 2005-2008, The Android Open Source Project<br />
+            Licensed under the Apache License, Version 2.0.
           </p>
           
-          <h2>android-async-http</2>
+          <h2>android-async-http</h2>
           <p><a href="http://loopj.com/android-async-http">http://loopj.com/android-async-http</a></p>
           <p>
             Copyright 2012 James Smith<br />
-            Licensed under the Apache License, Version 2.0 (the "License");<br />
-            you may not use this file except in compliance with the License.<br />
-            You may obtain a copy of the License at<br />
-            http://www.apache.org/licenses/LICENSE-2.0<br />
-            Unless required by applicable law or agreed to in writing, software<br />
-            distributed under the License is distributed on an "AS IS" BASIS,<br />
-            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
-            See the License for the specific language governing permissions and<br />
-            limitations under the License.
+            Licensed under the Apache License, Version 2.0.
           </p>
           
-          <h2>AQuery</2>
+          <h2>AQuery</h2>
           <p><a href="http://code.google.com/p/android-query">http://code.google.com/p/android-query/</a></p>
           <p>
-            Licensed under the Apache License, Version 2.0 (the "License");<br />
-            you may not use this file except in compliance with the License.<br />
-            You may obtain a copy of the License at<br />
-            http://www.apache.org/licenses/LICENSE-2.0<br />
-            Unless required by applicable law or agreed to in writing, software<br />
-            distributed under the License is distributed on an "AS IS" BASIS,<br />
-            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
-            See the License for the specific language governing permissions and<br />
-            limitations under the License.
+            Copyright 2012 Peter Liu<br />
+            Licensed under the Apache License, Version 2.0.
           </p>
         </div>
       ]]>

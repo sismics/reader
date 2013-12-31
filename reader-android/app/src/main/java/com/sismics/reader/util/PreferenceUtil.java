@@ -18,37 +18,30 @@ import com.loopj.android.http.PersistentCookieStore;
  * @author bgamard
  */
 public class PreferenceUtil {
-    /**
-     * Cache of /user/info.
-     */
+
     public static final String PREF_CACHED_USER_INFO_JSON = "pref_cachedUserInfoJson";
-    
-    /**
-     * Cache of /subscription.
-     */
     public static final String PREF_CACHED_SUBSCRIPTION_JSON = "pref_cachedSubscriptionJson";
-    
-    /**
-     * Server URL.
-     */
     public static final String PREF_SERVER_URL = "pref_ServerUrl";
+    public static final String PREF_SUBSCRIPTION_UNREAD = "pref_subscriptionsUnread";
+    public static final String PREF_ARTICLES_FETCHED = "pref_articlesFetched";
+    public static final String PREF_DEFAULT_SUBSCRIPTION = "pref_defaultSubscription";
     
     /**
      * Returns a preference of boolean type.
-     * @param context
-     * @param key
-     * @return
+     * @param context Context
+     * @param key Shared preference key
+     * @return Shared preference value
      */
-    public static boolean getBooleanPreference(Context context, String key) {
+    public static boolean getBooleanPreference(Context context, String key, boolean defaultValue) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getBoolean(key, true);
+        return sharedPreferences.getBoolean(key, defaultValue);
     }
     
     /**
      * Returns a preference of string type.
-     * @param context
-     * @param key
-     * @return
+     * @param context Context
+     * @param key Shared preference key
+     * @return Shared preference value
      */
     public static String getStringPreference(Context context, String key) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -57,30 +50,30 @@ public class PreferenceUtil {
     
     /**
      * Returns a preference of integer type.
-     * @param context
-     * @param key
-     * @return
+     * @param context Context
+     * @param key Shared preference key
+     * @return Shared preference value
      */
-    public static int getIntegerPreference(Context context, String key) {
+    public static int getIntegerPreference(Context context, String key, int defaultValue) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         try {
             String pref = sharedPreferences.getString(key, "");
             try {
                 return Integer.parseInt(pref);
             } catch (NumberFormatException e) {
-                return 0;
+                return defaultValue;
             }
         } catch (ClassCastException e) {
-            return sharedPreferences.getInt(key, 0);
+            return sharedPreferences.getInt(key, defaultValue);
         }
         
     }
     
     /**
      * Update JSON cache.
-     * @param context
-     * @param key
-     * @param json
+     * @param context Context
+     * @param key Shared preference key
+     * @param json JSON data
      */
     public static void setCachedJson(Context context, String key, JSONObject json) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -89,9 +82,9 @@ public class PreferenceUtil {
     
     /**
      * Returns a JSON cache.
-     * @param context
-     * @param key
-     * @return
+     * @param context Context
+     * @param key Shared preference key
+     * @return JSON data
      */
     public static JSONObject getCachedJson(Context context, String key) {
         try {
@@ -105,7 +98,7 @@ public class PreferenceUtil {
     
     /**
      * Update server URL.
-     * @param context
+     * @param context Context
      */
     public static void setServerUrl(Context context, String serverUrl) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -114,7 +107,7 @@ public class PreferenceUtil {
     
     /**
      * Empty user caches.
-     * @param context
+     * @param context Context
      */
     public static void resetUserCache(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -141,8 +134,8 @@ public class PreferenceUtil {
 
     /**
      * Returns cleaned server URL.
-     * @param context
-     * @return
+     * @param context Context
+     * @return Server URL
      */
     public static String getServerUrl(Context context) {
         String serverUrl = getStringPreference(context, PREF_SERVER_URL);

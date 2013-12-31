@@ -6,10 +6,10 @@
         android:icon="@drawable/navigation_refresh"
         android:showAsAction="ifRoom"
         android:title="@string/refresh">
-    </item>
+    </item>z
     <item
         android:id="@+id/all_read"
-        android:icon="@drawable/content_read"
+        android:icon="@drawable/ic_action_read"
         android:showAsAction="ifRoom"
         android:title="@string/all_read">
     </item>
@@ -23,6 +23,11 @@
         android:id="@+id/logout"
         android:showAsAction="collapseActionView"
         android:title="@string/logout">
+    </item>
+    <item
+        android:id="@+id/settings"
+        android:showAsAction="collapseActionView"
+        android:title="@string/settings">
     </item>
     <item
         android:id="@+id/about"

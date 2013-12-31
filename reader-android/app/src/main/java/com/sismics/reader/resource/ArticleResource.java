@@ -6,6 +6,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Access to /article API.
@@ -33,7 +34,7 @@ public class ArticleResource extends BaseResource {
      * @param idList
      * @param responseHandler
      */
-    public static void readMultiple(Context context, ArrayList<String> idList, JsonHttpResponseHandler responseHandler) {
+    public static void readMultiple(Context context, Set<String> idList, JsonHttpResponseHandler responseHandler) {
         init(context);
         
         RequestParams params = new RequestParams();
