@@ -44,6 +44,7 @@ public class MainActivity extends FragmentActivity {
     private static final String ARTICLES_FRAGMENT_TAG = "articlesFragment";
     private DrawerLayout drawerLayout;
     private ListView drawerList;
+    private View drawer;
     private ActionBarDrawerToggle drawerToggle;
     private boolean destroyed = false;
     private int defaultSubscription;
@@ -68,11 +69,9 @@ public class MainActivity extends FragmentActivity {
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.drawer_list);
+        drawer = findViewById(R.id.left_drawer);
         drawerList.setEmptyView(findViewById(R.id.progressBarDrawer));
 
-        // Set a custom shadow that overlays the main content when the drawer opens
-        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        
         // Load subscriptions and select unread item
         if (args == null) {
             refreshSubscriptions(defaultSubscription, false);
@@ -87,18 +86,34 @@ public class MainActivity extends FragmentActivity {
                 selectItem(position, false, true);
             }
         });
-        
-        // Enable ActionBar app icon to behave as action to toggle nav drawer
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
 
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the sliding drawer and the action bar app icon
-        drawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                drawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
-        drawerLayout.setDrawerListener(drawerToggle);
+        if (drawerLayout != null) {
+            // Set a custom shadow that overlays the main content when the drawer opens
+            drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+
+            // Enable ActionBar app icon to behave as action to toggle nav drawer
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+            getActionBar().setHomeButtonEnabled(true);
+
+            // ActionBarDrawerToggle ties together the the proper interactions
+            // between the sliding drawer and the action bar app icon
+            drawerToggle = new ActionBarDrawerToggle(
+                    this,                  /* host Activity */
+                    drawerLayout,         /* DrawerLayout object */
+                    R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
+
+                @Override
+                public void onDrawerOpened(View drawerView) {
+                    invalidateOptionsMenu();
+                }
+
+                @Override
+                public void onDrawerClosed(View drawerView) {
+                    invalidateOptionsMenu();
+                }
+            };
+            drawerLayout.setDrawerListener(drawerToggle);
+        }
     }
 
     @Override
@@ -106,6 +121,17 @@ public class MainActivity extends FragmentActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (drawerLayout != null) {
+            // If the nav drawer is open, hide action items related to the content view
+            boolean drawerOpen = drawerLayout.isDrawerOpen(drawer);
+            menu.findItem(R.id.refresh).setVisible(!drawerOpen);
+            menu.findItem(R.id.all_read).setVisible(!drawerOpen);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -181,7 +207,7 @@ public class MainActivity extends FragmentActivity {
             case android.R.id.home:
                 // The action bar home/up action should open or close the drawer.
                 // ActionBarDrawerToggle will take care of this.
-                if (drawerToggle.onOptionsItemSelected(item)) {
+                if (drawerToggle != null && drawerToggle.onOptionsItemSelected(item)) {
                     return true;
                 }
                 return true;
@@ -238,8 +264,8 @@ public class MainActivity extends FragmentActivity {
         drawerList.setItemChecked(position, true);
         
         // Close the drawer if asked
-        if (closeDrawer) {
-            drawerLayout.closeDrawer(findViewById(R.id.left_drawer));
+        if (closeDrawer && drawerLayout != null) {
+            drawerLayout.closeDrawer(drawer);
         }
     }
 
@@ -307,15 +333,19 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        drawerToggle.syncState();
+        if (drawerToggle != null) {
+            // Sync the toggle state after onRestoreInstanceState has occurred.
+            drawerToggle.syncState();
+        }
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggle
-        drawerToggle.onConfigurationChanged(newConfig);
+        if (drawerToggle != null) {
+            // Pass any configuration change to the drawer toggle
+            drawerToggle.onConfigurationChanged(newConfig);
+        }
     }
     
     @Override

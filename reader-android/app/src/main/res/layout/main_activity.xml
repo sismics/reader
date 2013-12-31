@@ -13,7 +13,7 @@
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
     <!--
          android:layout_gravity="start" tells DrawerLayout to treat
@@ -29,7 +29,7 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#eeeeee"
+        android:background="@drawable/list_background_holo"
         android:gravity="center"
         android:orientation="vertical" >
 

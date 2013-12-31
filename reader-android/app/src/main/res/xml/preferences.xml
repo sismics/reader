@@ -6,6 +6,13 @@
         android:title="@string/pref_general_category">
 
         <CheckBoxPreference
+            android:key="pref_narrowArticles"
+            android:title="@string/pref_narrow_articles"
+            android:summaryOn="@string/pref_narrow_articles_enabled"
+            android:summaryOff="@string/pref_narrow_articles_disabled"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
             android:key="pref_subscriptionsUnread"
             android:title="@string/pref_subscriptions_unread"
             android:summaryOn="@string/pref_subscriptions_unread_enabled"

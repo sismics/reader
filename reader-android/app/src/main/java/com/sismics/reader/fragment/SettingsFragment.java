@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
@@ -24,6 +25,13 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
+        // This preference is only for tablet users
+        PreferenceCategory category = (PreferenceCategory) findPreference("pref_general_category");
+        if (!getResources().getBoolean(R.bool.narrow_articles_enabled)) {
+            category.removePreference(findPreference("pref_narrowArticles"));
+        }
+
+        // Initialize summaries
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_ARTICLES_FETCHED);
         onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_DEFAULT_SUBSCRIPTION);

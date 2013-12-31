@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/activatedBackgroundIndicator"
+    android:background="@drawable/list_item_activated_background"
     android:gravity="center"
     android:orientation="horizontal" >
 
@@ -15,7 +15,7 @@
     <TextView
         android:id="@+id/content"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_weight="1"
         android:ellipsize="end"
         android:fontFamily="sans-serif-light"
@@ -29,12 +29,12 @@
     <TextView
         android:id="@+id/unreadCount"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_weight="0"
         android:fontFamily="sans-serif"
         android:gravity="center_vertical"
         android:paddingLeft="8dp"
-        android:paddingRight="8dp"
+        android:paddingRight="@dimen/drawer_list_item_right_margin"
         android:textColor="@drawable/drawer_list_item_text_color"
         android:textSize="14sp"
         android:textStyle="bold" />

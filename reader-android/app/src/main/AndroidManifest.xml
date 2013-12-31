@@ -44,7 +44,6 @@
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/settings"
-            android:theme="@android:style/Theme.Holo"
             android:logo="@drawable/ic_action_settings_dark" >
         </activity>
         <activity

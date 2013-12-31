@@ -24,8 +24,7 @@ public class ArticlesPagerAdapter extends FragmentPagerAdapter {
     
     /**
      * Constructor.
-     * @param FragmentManager
-     * @param ArticlesAdapter to wrap
+     * @param fm FragmentManager
      */
     public ArticlesPagerAdapter(FragmentManager fm) {
         super(fm);

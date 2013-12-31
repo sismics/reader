@@ -21,7 +21,7 @@
     <string name="invalid_url">Please check the server URL and try again</string>
     <string name="refresh">Refresh</string>
     <string name="all_read">Mark all as read</string>
-    <string name="logout">Logout</string>
+    <string name="logout">Sign Out</string>
     <string name="settings">Settings</string>
     <string name="about">About</string>
     <string name="mark_as_unread">Mark as unread</string>
@@ -63,6 +63,9 @@
     <string name="pref_subscriptions_unread_disabled">All subscriptions displayed</string>
     <string name="pref_articles_fetched">Number of articles per page</string>
     <string name="pref_default_subscription">Startup category to display</string>
+    <string name="pref_narrow_articles">Display articles in narrow mode</string>
+    <string name="pref_narrow_articles_enabled">Narrow mode enabled</string>
+    <string name="pref_narrow_articles_disabled">Narrow mode disabled</string>
     
     <!-- Validation -->
     <string name="validate_error_email">Invalid email</string>

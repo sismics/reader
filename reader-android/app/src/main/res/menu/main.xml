@@ -20,11 +20,6 @@
         android:title="@string/add_subscription">
     </item>
     <item
-        android:id="@+id/logout"
-        android:showAsAction="collapseActionView"
-        android:title="@string/logout">
-    </item>
-    <item
         android:id="@+id/settings"
         android:showAsAction="collapseActionView"
         android:title="@string/settings">
@@ -33,6 +28,11 @@
         android:id="@+id/about"
         android:showAsAction="collapseActionView"
         android:title="@string/about">
+    </item>
+    <item
+        android:id="@+id/logout"
+        android:showAsAction="collapseActionView"
+        android:title="@string/logout">
     </item>
 
 </menu>

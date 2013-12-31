@@ -21,8 +21,10 @@ import com.sismics.reader.R;
 import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.ArticleResource;
 import com.sismics.reader.resource.StarredResource;
+import com.sismics.reader.ui.ZoomOutPageTransformer;
 import com.sismics.reader.ui.adapter.ArticlesPagerAdapter;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
+import com.sismics.reader.util.PreferenceUtil;
 import com.viewpagerindicator.UnderlinePageIndicator;
 
 import org.json.JSONException;
@@ -126,6 +128,15 @@ public class ArticleActivity extends FragmentActivity {
         final ArticlesPagerAdapter adapter = new ArticlesPagerAdapter(getSupportFragmentManager());
         sharedAdapterHelper.addAdapter(adapter, articlesHelperListener);
         viewPager.setAdapter(adapter);
+
+        // Special tablet mode where previous and next article are visible
+        if (PreferenceUtil.getBooleanPreference(this, PreferenceUtil.PREF_NARROW_ARTICLES, true)
+                && getResources().getBoolean(R.bool.narrow_articles_enabled)) {
+            viewPager.getLayoutParams().width = (int) (600 * getResources().getDisplayMetrics().density);
+            viewPager.setOffscreenPageLimit(2);
+            viewPager.setClipChildren(false);
+            viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+        }
         
         // Configuring ViewPagerIndicator
         int position = getIntent().getIntExtra("position", 0);

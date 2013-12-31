@@ -25,6 +25,7 @@ public class PreferenceUtil {
     public static final String PREF_SUBSCRIPTION_UNREAD = "pref_subscriptionsUnread";
     public static final String PREF_ARTICLES_FETCHED = "pref_articlesFetched";
     public static final String PREF_DEFAULT_SUBSCRIPTION = "pref_defaultSubscription";
+    public static final String PREF_NARROW_ARTICLES = "pref_narrowArticles";
     
     /**
      * Returns a preference of boolean type.

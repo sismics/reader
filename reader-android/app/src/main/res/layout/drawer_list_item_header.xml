@@ -3,7 +3,8 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:paddingTop="12dp"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/list_item_activated_background">
 
     <TextView
         android:id="@+id/content"
