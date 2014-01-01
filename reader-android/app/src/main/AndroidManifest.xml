@@ -44,7 +44,7 @@
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/settings"
-            android:logo="@drawable/ic_action_settings_dark" >
+            android:logo="@drawable/ic_action_settings" >
         </activity>
         <activity
             android:name=".activity.AboutActivity"

@@ -16,4 +16,9 @@ public interface ArticlesHelperListener {
      * End loading new articles.
      */
     public void onEnd();
+
+    /**
+     * Error occurred while loading the articles.
+     */
+    public void onError();
 }

@@ -6,7 +6,7 @@
         android:icon="@drawable/navigation_refresh"
         android:showAsAction="ifRoom"
         android:title="@string/refresh">
-    </item>z
+    </item>
     <item
         android:id="@+id/all_read"
         android:icon="@drawable/ic_action_read"

@@ -237,6 +237,8 @@ public class MainActivity extends FragmentActivity {
         
         Fragment fragment = new ArticlesFragment();
         Bundle args = new Bundle();
+        args.putString("id", item.getId());
+        args.putString("title", item.getTitle());
         args.putString("url", item.getUrl());
         args.putBoolean("unread", item.isUnread());
         fragment.setArguments(args);

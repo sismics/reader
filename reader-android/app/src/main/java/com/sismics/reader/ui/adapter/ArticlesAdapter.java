@@ -48,8 +48,7 @@ public class ArticlesAdapter extends BaseAdapter {
     
     /**
      * Constructeur.
-     * @param context
-     * @param items
+     * @param activity Context activity
      */
     public ArticlesAdapter(Activity activity) {
         this.activity = activity;
@@ -60,7 +59,7 @@ public class ArticlesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        ViewHolder holder = null;
+        ViewHolder holder;
         
         if (view == null) {
             LayoutInflater vi = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

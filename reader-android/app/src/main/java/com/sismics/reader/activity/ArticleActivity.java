@@ -2,6 +2,8 @@ package com.sismics.reader.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -12,15 +14,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
+import com.androidquery.AQuery;
+import com.androidquery.callback.AjaxCallback;
+import com.androidquery.callback.AjaxStatus;
+import com.androidquery.callback.BitmapAjaxCallback;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.android.Log;
 import com.sismics.reader.R;
 import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.ArticleResource;
 import com.sismics.reader.resource.StarredResource;
+import com.sismics.reader.ui.CardTransformer;
 import com.sismics.reader.ui.ZoomOutPageTransformer;
 import com.sismics.reader.ui.adapter.ArticlesPagerAdapter;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
@@ -39,6 +47,11 @@ import java.util.Set;
  * @author bgamard
  */
 public class ArticleActivity extends FragmentActivity {
+    /**
+     * AQuery.
+     */
+    private AQuery aq;
+
     /**
      * Articles ViewPager.
      */
@@ -77,10 +90,14 @@ public class ArticleActivity extends FragmentActivity {
         public void onEnd() {
             setProgressBarIndeterminateVisibility(false);
         }
+
+        @Override
+        public void onError() {}
     };
     
     @Override
     protected void onCreate(Bundle args) {
+        aq = new AQuery(this);
         super.onCreate(args);
         
         readArticleIdSet = new HashSet<String>();
@@ -89,7 +106,8 @@ public class ArticleActivity extends FragmentActivity {
             finish();
             return;
         }
-        
+
+        // Configure the activity
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.article_activity);
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -122,8 +140,23 @@ public class ArticleActivity extends FragmentActivity {
             public void onPageScrollStateChanged(int state) {
             }
         };
-        
-        // Configuring ViewPager
+
+        // Load the favicon if we are on a subscription only list
+        String subscriptionId = getIntent().getStringExtra("id");
+        if (subscriptionId != null) {
+            String faviconUrl = PreferenceUtil.getServerUrl(this) + "/api/subscription/" + subscriptionId + "/favicon";
+            aq.ajax(faviconUrl, Bitmap.class, 7 * 24 * 3600000, new AjaxCallback<Bitmap>() {
+                @Override
+                public void callback(String url, Bitmap bitmap, AjaxStatus status) {
+                    getActionBar().setLogo(new BitmapDrawable(getResources(), bitmap));
+                }
+            }.cookie("auth_token", PreferenceUtil.getAuthToken(this)));
+        }
+
+        // Setting the title
+        setTitle(getIntent().getStringExtra("title"));
+
+        // Configure the ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         final ArticlesPagerAdapter adapter = new ArticlesPagerAdapter(getSupportFragmentManager());
         sharedAdapterHelper.addAdapter(adapter, articlesHelperListener);
@@ -136,9 +169,11 @@ public class ArticleActivity extends FragmentActivity {
             viewPager.setOffscreenPageLimit(2);
             viewPager.setClipChildren(false);
             viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+        } else {
+            viewPager.setPageTransformer(true, new CardTransformer(.7f));
         }
         
-        // Configuring ViewPagerIndicator
+        // Configure the ViewPagerIndicator
         int position = getIntent().getIntExtra("position", 0);
         UnderlinePageIndicator indicator = (UnderlinePageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(viewPager, position);

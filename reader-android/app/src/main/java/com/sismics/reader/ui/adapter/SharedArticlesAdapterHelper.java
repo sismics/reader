@@ -10,6 +10,7 @@ import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.SubscriptionResource;
 import com.sismics.reader.util.PreferenceUtil;
 
+import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -167,11 +168,18 @@ public class SharedArticlesAdapterHelper {
         SubscriptionResource.feed(context, url, unread, articlesFetchedPref, afterArticleId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
+                // Tell the listeners we have finished
+                loading = false;
+                for (ArticlesHelperListener listener : listeners) {
+                    listener.onEnd();
+                }
+
                 // If reference has not changed, let's update the shared data
                 if (items != articleItems) {
                     return;
                 }
-                
+
+                // Add new articles to the common articles list
                 JSONArray articles = json.optJSONArray("articles");
                 for (int i = 0; i < articles.length(); i++) {
                     JSONObject article = articles.optJSONObject(i);
@@ -189,19 +197,21 @@ public class SharedArticlesAdapterHelper {
                     
                     items.add(article);
                 }
-                
+
+                // If there is no articles here, there won't be more
                 if (articles.length() == 0) {
                     fullyLoaded = true;
                 }
                 
                 onDataChanged();
             }
-            
+
             @Override
-            public void onFinish() {
+            public void onFailure(final int statusCode, final Header[] headers, final byte[] responseBytes, final Throwable throwable) {
+                // Tell the listeners something bad happened
                 loading = false;
-                
                 for (ArticlesHelperListener listener : listeners) {
+                    listener.onError();
                     listener.onEnd();
                 }
             }

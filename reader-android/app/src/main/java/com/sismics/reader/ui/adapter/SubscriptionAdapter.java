@@ -179,7 +179,23 @@ public class SubscriptionAdapter extends BaseAdapter {
         private int unreadCount;
         private boolean unread = false;
         private boolean root = false;
-        
+
+        /**
+         * Getter of id.
+         * @return id
+         */
+        public String getId() {
+            return id;
+        }
+
+        /**
+         * Getter of title.
+         * @return title
+         */
+        public String getTitle() {
+            return title;
+        }
+
         /**
          * Getter of url.
          * @return url

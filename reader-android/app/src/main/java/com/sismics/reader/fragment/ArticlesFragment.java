@@ -48,6 +48,9 @@ public class ArticlesFragment extends NavigationFragment {
             aq.id(R.id.articleList).getListView().setEmptyView(aq.id(R.id.emptyList).getView());
             aq.id(R.id.progressBar).gone();
         }
+
+        @Override
+        public void onError() {}
     };
     
     @Override
@@ -57,10 +60,12 @@ public class ArticlesFragment extends NavigationFragment {
         
         Bundle args = getArguments();
         if (args != null) {
+            String title = args.getString("title");
+            String id = args.getString("id");
             String url = args.getString("url");
             boolean unread = args.getBoolean("unread");
             if (url != null) {
-                initFragment(url, unread, savedInstanceState);
+                initFragment(title, id, url, unread, savedInstanceState);
             }
         }
         
@@ -69,24 +74,32 @@ public class ArticlesFragment extends NavigationFragment {
 
     /**
      * Load articles.
-     * @param url
+     * @param title Title
+     * @param subscriptionId Subscription ID
+     * @param url URL
+     * @param unread Unread state
+     * @param savedInstanceState Saved bundle
      */
-    private void initFragment(final String url, final boolean unread, Bundle savedInstanceState) {
+    private void initFragment(final String title, final String subscriptionId, final String url, final boolean unread, Bundle savedInstanceState) {
+        // Initializing empty view
         aq.id(R.id.articleList)
             .getListView()
             .setEmptyView(aq.id(R.id.progressBar).getView());
         aq.id(R.id.loadingText).text(R.string.loading_articles);
-        
+
+        // Load articles or not? It depends if we are restoring the parent activity
         if (savedInstanceState == null) {
             SharedArticlesAdapterHelper.getInstance().restart(url, unread);
             SharedArticlesAdapterHelper.getInstance().load(getActivity());
         } else {
             articlesHelperListener.onEnd();
         }
-        
+
+        // Start listening to articles loading states
         final ArticlesAdapter adapter = new ArticlesAdapter(getActivity());
         SharedArticlesAdapterHelper.getInstance().addAdapter(adapter, articlesHelperListener);
-        
+
+        // Configure the articles list to listen for scrolls (infinite loading) and clicks
         aq.id(R.id.articleList)
             .adapter(adapter)
             .scrolled(new OnScrollListener() {
@@ -105,6 +118,8 @@ public class ArticlesFragment extends NavigationFragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(getActivity(), ArticleActivity.class);
+                    intent.putExtra("id", subscriptionId);
+                    intent.putExtra("title", title);
                     intent.putExtra("position", position);
                     startActivityForResult(intent, Constants.REQUEST_CODE_ARTICLES);
                 }
@@ -114,6 +129,7 @@ public class ArticlesFragment extends NavigationFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.REQUEST_CODE_ARTICLES && resultCode == Activity.RESULT_OK) {
+            // We are coming back from the articles pager, scroll to the last viewed
             ListView articleList = aq.id(R.id.articleList).getListView();
             articleList.smoothScrollToPosition(data.getIntExtra("position", 0));
             ((ArticlesAdapter)articleList.getAdapter()).notifyDataSetChanged();
@@ -122,6 +138,7 @@ public class ArticlesFragment extends NavigationFragment {
     
     @Override
     public void onDestroyView() {
+        // Don't forget to stop listening to articles loading state to avoid crash and memory leaks
         Adapter adapter = aq.id(R.id.articleList).getListView().getAdapter();
         SharedArticlesAdapterHelper.getInstance().removeAdapter(adapter, articlesHelperListener);
         super.onDestroyView();

@@ -11,8 +11,7 @@ import com.sismics.reader.R;
 
 /**
  * About activity.
- * TODO To transform in help activity, showing version number and license
- * 
+ *
  * @author bgamard
  */
 public class AboutActivity extends FragmentActivity {
