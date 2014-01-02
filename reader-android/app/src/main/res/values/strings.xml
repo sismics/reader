@@ -34,8 +34,6 @@
     <string name="subscriptions">Subscriptions</string>
     <string name="category">Category</string>
     <string name="favicon">Favicon</string>
-    <string name="article_subscription">on %1$s</string>
-    <string name="article_subscription_author">on %1$s by %2$s</string>
     <string name="crash_toast_text">A crash occurred, a report has been sent to resolve this problem</string>
     <string name="all_read_title">Mark all as read</string>
     <string name="all_read_message">Mark all articles as read?</string>
@@ -52,7 +50,8 @@
     <string name="add">Add</string>
     <string name="extension_description">Displays the number of unread articles</string>
     <string name="extension_expanded_title">%1$d unread articles</string>
-
+    <string name="enclosure">Enclosure</string>
+    <string name="touch_close">Touch to close</string>
 
     <!-- Preferences -->
     <string name="pref_general_category">General settings</string>

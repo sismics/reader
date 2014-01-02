@@ -2,8 +2,6 @@ package com.sismics.reader.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -17,9 +15,6 @@ import android.view.Window;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
-import com.androidquery.AQuery;
-import com.androidquery.callback.AjaxCallback;
-import com.androidquery.callback.AjaxStatus;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.android.Log;
 import com.sismics.reader.R;
@@ -96,7 +91,6 @@ public class ArticleActivity extends FragmentActivity {
     
     @Override
     protected void onCreate(Bundle args) {
-        AQuery aq = new AQuery(this);
         super.onCreate(args);
         
         readArticleIdSet = new HashSet<String>();
@@ -139,18 +133,6 @@ public class ArticleActivity extends FragmentActivity {
             @Override
             public void onPageScrollStateChanged(int state) {}
         };
-
-        // Load the favicon if we are on a subscription only list
-        String subscriptionId = getIntent().getStringExtra("id");
-        if (subscriptionId != null) {
-            String faviconUrl = PreferenceUtil.getServerUrl(this) + "/api/subscription/" + subscriptionId + "/favicon";
-            aq.ajax(faviconUrl, Bitmap.class, 7 * 24 * 3600000, new AjaxCallback<Bitmap>() {
-                @Override
-                public void callback(String url, Bitmap bitmap, AjaxStatus status) {
-                    getActionBar().setLogo(new BitmapDrawable(getResources(), bitmap));
-                }
-            }.cookie("auth_token", PreferenceUtil.getAuthToken(this)));
-        }
 
         // Setting the title
         setTitle(getIntent().getStringExtra("title"));

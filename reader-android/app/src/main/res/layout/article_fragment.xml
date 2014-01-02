@@ -1,55 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sismics.reader.ui.widget.ArticleScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="Overdraw"
-    android:id="@+id/scrollView"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff">
 
-    <LinearLayout
-        android:paddingTop="?android:attr/actionBarSize"
+    <com.sismics.reader.ui.widget.ArticleScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:descendantFocusability="blocksDescendants"
-        android:orientation="vertical" >
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/title"
+        <LinearLayout
+            android:paddingTop="?android:attr/actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/article_title_background"
-            android:clickable="true"
-            android:fontFamily="sans-serif-light"
-            android:padding="8dp"
-            android:textColor="#fff"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp" >
+            <RelativeLayout
+                android:id="@+id/enclosure"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="160dp">
+
+                <ProgressBar
+                    android:indeterminate="false"
+                    style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/progressEnclosure"
+                    android:layout_margin="16dp"
+                    android:layout_centerInParent="true"/>
+
+                <ImageView
+                    android:id="@+id/imgEnclosure"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/enclosure"/>
+
+            </RelativeLayout>
 
             <TextView
-                android:id="@+id/author"
-                android:layout_width="wrap_content"
+                android:id="@+id/title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:fontFamily="sans-serif-light" />
+                android:clickable="true"
+                android:fontFamily="sans-serif-light"
+                android:background="@drawable/article_title_background"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="#333333"
+                android:textSize="20sp"/>
 
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:fontFamily="sans-serif-light" />
-        </RelativeLayout>
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp">
 
-        <WebView
-            android:id="@+id/articleWebView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/imgFavicon"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_launcher"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/favicon"/>
 
-</com.sismics.reader.ui.widget.ArticleScrollView>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="#4c4c4c"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:textColor="#acacac"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <WebView
+                android:id="@+id/articleWebView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </com.sismics.reader.ui.widget.ArticleScrollView>
+
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:contentDescription="@string/touch_close"/>
+
+</FrameLayout>
