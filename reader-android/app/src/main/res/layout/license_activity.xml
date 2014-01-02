@@ -11,7 +11,7 @@
         android:padding="20dip" >
 
         <TextView
-            android:id="@+id/txtAbout"
+            android:id="@+id/txtLicenses"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

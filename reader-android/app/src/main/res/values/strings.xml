@@ -23,7 +23,7 @@
     <string name="all_read">Mark all as read</string>
     <string name="logout">Sign Out</string>
     <string name="settings">Settings</string>
-    <string name="about">About</string>
+    <string name="licenses">Open Source Licenses</string>
     <string name="mark_as_unread">Mark as unread</string>
     <string name="marked_as_unread">Marked as unread</string>
     <string name="favorite">Favorite</string>
@@ -52,10 +52,13 @@
     <string name="extension_expanded_title">%1$d unread articles</string>
     <string name="enclosure">Enclosure</string>
     <string name="touch_close">Touch to close</string>
+    <string name="version">Version</string>
+    <string name="build">Build</string>
 
     <!-- Preferences -->
     <string name="pref_general_category">General settings</string>
     <string name="pref_reporting_category">Error reporting</string>
+    <string name="pref_about_category">About</string>
     <string name="pref_enable_acra">Automatic error reports</string>
     <string name="pref_acra_enabled">Reporting enabled</string>
     <string name="pref_acra_disabled">Reporting disabled</string>
@@ -68,6 +71,11 @@
     <string name="pref_narrow_articles_enabled">Narrow mode enabled</string>
     <string name="pref_narrow_articles_disabled">Narrow mode disabled</string>
     <string name="pref_font_size">Articles font size</string>
+    <string name="pref_license_title">Open Source Licenses</string>
+    <string name="pref_license_summary">Legal information about licenses</string>
+    <string name="pref_website">Website</string>
+    <string name="pref_github">GitHub</string>
+    <string name="pref_issue">Report a bug</string>
     
     <!-- Validation -->
     <string name="validate_error_email">Invalid email</string>
@@ -76,20 +84,10 @@
     <string name="validate_error_required">Required</string>
     <string name="validate_error_alphanumeric">Only letters and numbers</string>
     
-    <!-- About -->
-    <string name="about_content">
+    <!-- Open source licenses content -->
+    <string name="licenses_content">
       <![CDATA[
         <div>
-          <h1>About</h1>
-          <p>Reader is an open source, Web-based aggregator of content served by Web Feeds (RSS, Atom).</p>
-
-          <p>
-            ▪ <b>Website:</b> <a href="http://www.sismics.com/reader">www.sismics.com/reader</a><br />
-            ▪ <b>GitHub:</b> <a href="https://github.com/sismics/reader">github.com/sismics/reader</a><br />
-            ▪ <b>Report a bug:</b> <a href="https://github.com/sismics/reader/issues">github.com/sismics/reader/issues</a><br />
-          </p>
-          
-          <h1>Licences</h1>
           <h2>ViewPagerIndicator</h2>
           <p><a href="http://viewpagerindicator.com/">http://viewpagerindicator.com/</a></p>
           <p>

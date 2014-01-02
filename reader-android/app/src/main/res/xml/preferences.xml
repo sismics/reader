@@ -5,6 +5,14 @@
         android:key="pref_general_category"
         android:title="@string/pref_general_category">
 
+        <ListPreference
+            android:key="pref_fontSize"
+            android:title="@string/pref_font_size"
+            android:dialogTitle="@string/pref_font_size"
+            android:entries="@array/fontSize"
+            android:entryValues="@array/fontSizeValues"
+            android:defaultValue="12"/>
+
         <CheckBoxPreference
             android:key="pref_narrowArticles"
             android:title="@string/pref_narrow_articles"
@@ -20,14 +28,6 @@
             android:defaultValue="false"/>
 
         <ListPreference
-            android:key="pref_articlesFetched"
-            android:title="@string/pref_articles_fetched"
-            android:dialogTitle="@string/pref_articles_fetched"
-            android:entries="@array/articlesFetched"
-            android:entryValues="@array/articlesFetched"
-            android:defaultValue="10"/>
-
-        <ListPreference
             android:key="pref_defaultSubscription"
             android:title="@string/pref_default_subscription"
             android:dialogTitle="@string/pref_default_subscription"
@@ -36,12 +36,12 @@
             android:defaultValue="1"/>
 
         <ListPreference
-            android:key="pref_fontSize"
-            android:title="@string/pref_font_size"
-            android:dialogTitle="@string/pref_font_size"
-            android:entries="@array/fontSize"
-            android:entryValues="@array/fontSizeValues"
-            android:defaultValue="12"/>
+            android:key="pref_articlesFetched"
+            android:title="@string/pref_articles_fetched"
+            android:dialogTitle="@string/pref_articles_fetched"
+            android:entries="@array/articlesFetched"
+            android:entryValues="@array/articlesFetched"
+            android:defaultValue="10"/>
 
     </PreferenceCategory>
 
@@ -56,6 +56,50 @@
             android:summaryOff="@string/pref_acra_disabled"
             android:defaultValue="true"/>
         
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_about_category"
+        android:title="@string/pref_about_category">
+
+        <Preference
+            android:key="pref_website"
+            android:title="@string/pref_website"
+            android:summary="www.sismics.com/reader">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://www.sismics.com/reader"/>
+        </Preference>
+
+        <Preference
+            android:key="pref_github"
+            android:title="@string/pref_github"
+            android:summary="github.com/sismics/reader">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/sismics/reader"/>
+        </Preference>
+
+        <Preference
+            android:key="pref_issue"
+            android:title="@string/pref_issue"
+            android:summary="github.com/sismics/reader/issues">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/sismics/reader/issues"/>
+        </Preference>
+
+        <Preference
+            android:key="pref_license"
+            android:title="@string/pref_license_title"
+            android:summary="@string/pref_license_summary">
+            <intent android:action="com.sismics.reader.LICENSES"/>
+        </Preference>
+
+        <Preference
+            android:key="pref_version"
+            android:title="@string/application_name"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

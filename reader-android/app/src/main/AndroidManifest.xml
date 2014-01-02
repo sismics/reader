@@ -47,9 +47,13 @@
             android:logo="@drawable/ic_action_settings">
         </activity>
         <activity
-            android:name=".activity.AboutActivity"
-            android:label="@string/about"
+            android:name=".activity.LicenseActivity"
+            android:label="@string/licenses"
             android:logo="@drawable/ic_action_about">
+            <intent-filter>
+                <action android:name="com.sismics.reader.LICENSES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <service android:name=".extension.ReaderExtension"
             android:icon="@drawable/ic_dashclock"

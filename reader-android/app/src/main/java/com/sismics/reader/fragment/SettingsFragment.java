@@ -9,6 +9,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
 import com.sismics.reader.R;
+import com.sismics.reader.util.ApplicationUtil;
 import com.sismics.reader.util.PreferenceUtil;
 
 /**
@@ -36,6 +37,11 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_ARTICLES_FETCHED);
         onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_DEFAULT_SUBSCRIPTION);
         onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_FONT_SIZE);
+
+        // Initialize static text preferences
+        Preference versionPref = findPreference("pref_version");
+        versionPref.setSummary(getString(R.string.version) + " " + ApplicationUtil.getVersionName(getActivity())
+                + " | " + getString(R.string.build) + " " + ApplicationUtil.getVersionCode(getActivity()));
     }
 
     @Override

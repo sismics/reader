@@ -10,11 +10,11 @@ import com.androidquery.AQuery;
 import com.sismics.reader.R;
 
 /**
- * About activity.
+ * Open source licenses activity.
  *
  * @author bgamard
  */
-public class AboutActivity extends FragmentActivity {
+public class LicenseActivity extends FragmentActivity {
 
     /**
      * AQuery.
@@ -25,12 +25,12 @@ public class AboutActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.about_activity);
+        setContentView(R.layout.license_activity);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         
-        aq.id(R.id.txtAbout)
-            .text(Html.fromHtml(getString(R.string.about_content)))
+        aq.id(R.id.txtLicenses)
+            .text(Html.fromHtml(getString(R.string.licenses_content)))
             .getTextView()
             .setMovementMethod(LinkMovementMethod.getInstance());
     }

@@ -198,10 +198,6 @@ public class MainActivity extends FragmentActivity {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 return true;
 
-            case R.id.about:
-                startActivity(new Intent(MainActivity.this, AboutActivity.class));
-                return true;
-
             case R.id.refresh:
                 // Refresh subscriptions and articles
                 refreshSubscriptions(drawerList.getCheckedItemPosition(), true);

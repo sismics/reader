@@ -25,11 +25,6 @@
         android:title="@string/settings">
     </item>
     <item
-        android:id="@+id/about"
-        android:showAsAction="collapseActionView"
-        android:title="@string/about">
-    </item>
-    <item
         android:id="@+id/logout"
         android:showAsAction="collapseActionView"
         android:title="@string/logout">
