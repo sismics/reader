@@ -67,6 +67,7 @@
     <string name="pref_narrow_articles">Display articles in narrow mode</string>
     <string name="pref_narrow_articles_enabled">Narrow mode enabled</string>
     <string name="pref_narrow_articles_disabled">Narrow mode disabled</string>
+    <string name="pref_font_size">Articles font size</string>
     
     <!-- Validation -->
     <string name="validate_error_email">Invalid email</string>

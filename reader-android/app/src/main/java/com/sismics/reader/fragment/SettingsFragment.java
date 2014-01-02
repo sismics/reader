@@ -35,6 +35,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_ARTICLES_FETCHED);
         onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_DEFAULT_SUBSCRIPTION);
+        onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_FONT_SIZE);
     }
 
     @Override

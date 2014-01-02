@@ -35,6 +35,14 @@
             android:entryValues="@array/defaultSubscriptionsValues"
             android:defaultValue="1"/>
 
+        <ListPreference
+            android:key="pref_fontSize"
+            android:title="@string/pref_font_size"
+            android:dialogTitle="@string/pref_font_size"
+            android:entries="@array/fontSize"
+            android:entryValues="@array/fontSizeValues"
+            android:defaultValue="12"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory

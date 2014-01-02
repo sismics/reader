@@ -36,7 +36,6 @@ public class MainApplication extends Application {
         JSONObject json = PreferenceUtil.getCachedJson(getApplicationContext(), PreferenceUtil.PREF_CACHED_USER_INFO_JSON);
         ApplicationContext.getInstance().setUserInfo(getApplicationContext(), json);
 
-        // TODO Preference for text size
         // TODO Add a navigation drawer to the articles activity to show all articles
         // TODO Remove about activity, put content in preference, with version number, links and license
         // TODO Cards for articles list on tablet

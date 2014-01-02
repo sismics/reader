@@ -103,7 +103,10 @@ public class ArticleFragment extends Fragment {
             if (jsonStr != null) {
                 try {
                     final JSONObject json = new JSONObject(jsonStr);
-                    
+
+                    // Article font size from preference
+                    String fontSize = PreferenceUtil.getStringPreference(getActivity(), PreferenceUtil.PREF_FONT_SIZE);
+
                     // HTML modification to fit the article content in the screen width
                     String html = json.optString("description");
                     try {
@@ -115,6 +118,10 @@ public class ArticleFragment extends Fragment {
                         		"<style>" +
                         		"img, iframe { max-width: 100%; height: auto; } " +
                         		"pre { max-width: 100%; overflow: hidden; } " +
+                                "body {\n" +
+                                "  color: #191919;\n" +
+                                "  font-size: " + fontSize + "pt; \n" +
+                                "  font-family: \"Roboto-Light\", Roboto, sans-serif; } " +
                         		"</style>" +
                         		"</head>" +
                         		"<body>" +
