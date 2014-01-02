@@ -11,14 +11,19 @@ public interface ArticlesHelperListener {
      * Start loading articles.
      */
     public void onStart();
-    
+
     /**
-     * End loading new articles.
+     * Articles successfully loaded.
      */
-    public void onEnd();
+    public void onSuccess();
 
     /**
      * Error occurred while loading the articles.
      */
     public void onError();
+
+    /**
+     * End loading new articles.
+     */
+    public void onEnd();
 }

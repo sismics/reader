@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sismics.reader.ui.ArticleScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="Overdraw"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff">
 
     <LinearLayout
+        android:paddingTop="?android:attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:descendantFocusability="blocksDescendants"
@@ -50,4 +52,4 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-</ScrollView>
+</com.sismics.reader.ui.ArticleScrollView>

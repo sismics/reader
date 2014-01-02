@@ -37,10 +37,9 @@ public class MainApplication extends Application {
         ApplicationContext.getInstance().setUserInfo(getApplicationContext(), json);
 
         // TODO Redesign article fragment layout (cf. Google Newstands)
-        // TODO Hide action bar on articles activity when scrolling down (cf. Google Newsstands)
         // TODO Preference for text size
         // TODO Remove about activity, put content in preference, with version number, links and license
-        // TODO Cards for articles list?
+        // TODO Cards for articles list on tablet
 
         super.onCreate();
     }

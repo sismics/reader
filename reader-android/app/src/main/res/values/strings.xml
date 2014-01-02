@@ -41,6 +41,8 @@
     <string name="all_read_message">Mark all articles as read?</string>
     <string name="share">Share</string>
     <string name="no_articles">No articles</string>
+    <string name="error_loading_articles">Error loading articles</string>
+    <string name="error_loading_subscriptions">Error loading subscriptions</string>
     <string name="loading_subscriptions">Loading subscriptions&#8230;</string>
     <string name="loading_articles">Loading articles&#8230;</string>
     <string name="add_subscription">Add subscription</string>

@@ -29,4 +29,13 @@ public class ArticlesDefaultFragment extends NavigationFragment {
         
         return view;
     }
+
+    /**
+     * Listen to subscription loading error.
+     */
+    public void onSubscriptionError() {
+        aq.id(R.id.emptyList).text(R.string.error_loading_subscriptions);
+        aq.id(R.id.articleList).getListView().setEmptyView(aq.id(R.id.emptyList).getView());
+        aq.id(R.id.progressBar).gone();
+    }
 }

@@ -171,6 +171,7 @@ public class SharedArticlesAdapterHelper {
                 // Tell the listeners we have finished
                 loading = false;
                 for (ArticlesHelperListener listener : listeners) {
+                    listener.onSuccess();
                     listener.onEnd();
                 }
 

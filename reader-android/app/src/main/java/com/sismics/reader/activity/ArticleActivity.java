@@ -85,14 +85,19 @@ public class ArticleActivity extends FragmentActivity {
         public void onStart() {
             setProgressBarIndeterminateVisibility(true);
         }
-        
+
+        @Override
+        public void onSuccess() {}
+
+        @Override
+        public void onError() {
+            Toast.makeText(ArticleActivity.this, R.string.error_loading_articles, Toast.LENGTH_LONG).show();
+        }
+
         @Override
         public void onEnd() {
             setProgressBarIndeterminateVisibility(false);
         }
-
-        @Override
-        public void onError() {}
     };
     
     @Override
@@ -109,9 +114,11 @@ public class ArticleActivity extends FragmentActivity {
 
         // Configure the activity
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.article_activity);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
+
         
         // Building page change listener
         OnPageChangeListener onPageChangeListener = new OnPageChangeListener() {
@@ -133,12 +140,10 @@ public class ArticleActivity extends FragmentActivity {
             }
             
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
             
             @Override
-            public void onPageScrollStateChanged(int state) {
-            }
+            public void onPageScrollStateChanged(int state) {}
         };
 
         // Load the favicon if we are on a subscription only list
@@ -233,6 +238,9 @@ public class ArticleActivity extends FragmentActivity {
             boolean isStarred = article.optBoolean("is_starred");
             favoriteMenuItem.setIcon(isStarred ? R.drawable.ic_action_important : R.drawable.ic_action_not_important);
         }
+
+        // Show the possibly hidden action bar
+        getActionBar().show();
     }
     
     @Override

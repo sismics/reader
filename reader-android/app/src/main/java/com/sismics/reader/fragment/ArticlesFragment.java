@@ -41,16 +41,23 @@ public class ArticlesFragment extends NavigationFragment {
         public void onStart() {
             getActivity().setProgressBarIndeterminateVisibility(true);
         }
-        
+
+        @Override
+        public void onSuccess() {
+            aq.id(R.id.emptyList).text(R.string.no_articles);;
+        }
+
+        @Override
+        public void onError() {
+            aq.id(R.id.emptyList).text(R.string.error_loading_articles);
+        }
+
         @Override
         public void onEnd() {
             getActivity().setProgressBarIndeterminateVisibility(false);
             aq.id(R.id.articleList).getListView().setEmptyView(aq.id(R.id.emptyList).getView());
             aq.id(R.id.progressBar).gone();
         }
-
-        @Override
-        public void onError() {}
     };
     
     @Override
@@ -92,6 +99,7 @@ public class ArticlesFragment extends NavigationFragment {
             SharedArticlesAdapterHelper.getInstance().restart(url, unread);
             SharedArticlesAdapterHelper.getInstance().load(getActivity());
         } else {
+            articlesHelperListener.onSuccess();
             articlesHelperListener.onEnd();
         }
 

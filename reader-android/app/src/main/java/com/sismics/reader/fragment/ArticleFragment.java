@@ -1,12 +1,6 @@
 package com.sismics.reader.fragment;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Date;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +17,14 @@ import android.webkit.WebView;
 
 import com.androidquery.AQuery;
 import com.sismics.reader.R;
+import com.sismics.reader.ui.ArticleScrollView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Date;
 
 /**
  * Fragment displaying an article.
@@ -29,11 +32,6 @@ import com.sismics.reader.R;
  * @author bgamard
  */
 public class ArticleFragment extends Fragment {
-    
-    /**
-     * AQuery.
-     */
-    private AQuery aq;
     
     /**
      * Create a new instance of ArticleFragment.
@@ -52,8 +50,35 @@ public class ArticleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.article_fragment, container, false);
-        aq = new AQuery(view);
-        
+        AQuery aq = new AQuery(view);
+
+        // Get action bar height
+        TypedValue tv = new TypedValue();
+        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true);
+        final int actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+
+        // Show/hide action bar to get an immersive mode
+        ArticleScrollView articleScrollView = (ArticleScrollView) aq.id(R.id.scrollView).getView();
+        articleScrollView.setOnScrollChangedListener(new ArticleScrollView.OnScrollChangedListener() {
+            @Override
+            public int getDeadHeight() {
+                return actionBarHeight;
+            }
+
+            @Override
+            public void onScrollDown() {
+                ActionBar actionBar = getActivity().getActionBar();
+                actionBar.hide();
+            }
+
+            @Override
+            public void onScrollUp() {
+                ActionBar actionBar = getActivity().getActionBar();
+                actionBar.show();
+            }
+        });
+
+        // Configure WebView
         WebView webView = aq.id(R.id.articleWebView).getWebView();
         webView.getSettings().setUseWideViewPort(true);
         

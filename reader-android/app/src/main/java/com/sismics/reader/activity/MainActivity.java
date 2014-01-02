@@ -32,6 +32,7 @@ import com.sismics.reader.ui.adapter.SubscriptionAdapter;
 import com.sismics.reader.ui.adapter.SubscriptionAdapter.SubscriptionItem;
 import com.sismics.reader.util.PreferenceUtil;
 
+import org.apache.http.Header;
 import org.json.JSONObject;
 
 /**
@@ -67,6 +68,7 @@ public class MainActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.main_activity);
 
+        // Cache view references
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.drawer_list);
         drawer = findViewById(R.id.left_drawer);
@@ -306,6 +308,12 @@ public class MainActivity extends FragmentActivity {
                     }
                     selectItem(pos, refresh, false);
                 }
+            }
+
+            @Override
+            public void onFailure(final int statusCode, final Header[] headers, final byte[] responseBytes, final Throwable throwable) {
+                ArticlesDefaultFragment articlesDefaultFragment =  (ArticlesDefaultFragment) getSupportFragmentManager().findFragmentByTag("articlesDefaultFragment");
+                articlesDefaultFragment.onSubscriptionError();
             }
         };
         
