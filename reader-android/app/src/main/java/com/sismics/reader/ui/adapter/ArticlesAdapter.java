@@ -27,11 +27,6 @@ import com.sismics.reader.util.PreferenceUtil;
  */
 public class ArticlesAdapter extends BaseAdapter {
     /**
-     * Articles from server.
-     */
-    private List<JSONObject> items;
-    
-    /**
      * Context.
      */
     private Activity activity;
@@ -53,7 +48,6 @@ public class ArticlesAdapter extends BaseAdapter {
     public ArticlesAdapter(Activity activity) {
         this.activity = activity;
         this.aq = new AQuery(activity);
-        this.items = SharedArticlesAdapterHelper.getInstance().getArticleItems();
         this.authToken = PreferenceUtil.getAuthToken(activity);
     }
 
@@ -104,12 +98,12 @@ public class ArticlesAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return items.size();
+        return SharedArticlesAdapterHelper.getInstance().getArticleItems().size();
     }
 
     @Override
     public JSONObject getItem(int position) {
-        return items.get(position);
+        return SharedArticlesAdapterHelper.getInstance().getArticleItems().get(position);
     }
 
     @Override

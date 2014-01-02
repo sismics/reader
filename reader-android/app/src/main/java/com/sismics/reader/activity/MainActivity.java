@@ -29,7 +29,7 @@ import com.sismics.reader.resource.SubscriptionResource;
 import com.sismics.reader.resource.UserResource;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
 import com.sismics.reader.ui.adapter.SubscriptionAdapter;
-import com.sismics.reader.ui.adapter.SubscriptionAdapter.SubscriptionItem;
+import com.sismics.reader.ui.adapter.SubscriptionItem;
 import com.sismics.reader.util.PreferenceUtil;
 
 import org.apache.http.Header;
@@ -43,6 +43,7 @@ import org.json.JSONObject;
 public class MainActivity extends FragmentActivity {
     
     private static final String ARTICLES_FRAGMENT_TAG = "articlesFragment";
+    private static final String ARTICLES_DEFAULT_FRAGMENT_TAG = "articlesDefaultFragment";
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     private View drawer;
@@ -239,7 +240,10 @@ public class MainActivity extends FragmentActivity {
         
         Fragment fragment = new ArticlesFragment();
         Bundle args = new Bundle();
-        args.putString("id", item.getId());
+        if (item.getType() == SubscriptionItem.SUBSCRIPTION_ITEM) {
+            // ID is only given for subscription, to show the favicon
+            args.putString("id", item.getId());
+        }
         args.putString("title", item.getTitle());
         args.putString("url", item.getUrl());
         args.putBoolean("unread", item.isUnread());
@@ -312,7 +316,7 @@ public class MainActivity extends FragmentActivity {
 
             @Override
             public void onFailure(final int statusCode, final Header[] headers, final byte[] responseBytes, final Throwable throwable) {
-                ArticlesDefaultFragment articlesDefaultFragment =  (ArticlesDefaultFragment) getSupportFragmentManager().findFragmentByTag("articlesDefaultFragment");
+                ArticlesDefaultFragment articlesDefaultFragment =  (ArticlesDefaultFragment) getSupportFragmentManager().findFragmentByTag(ARTICLES_DEFAULT_FRAGMENT_TAG);
                 articlesDefaultFragment.onSubscriptionError();
             }
         };
@@ -321,7 +325,7 @@ public class MainActivity extends FragmentActivity {
             // Show a default fragment while the subscriptions are loading
             getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.content_frame, new ArticlesDefaultFragment(), "articlesDefaultFragment")
+                .replace(R.id.content_frame, new ArticlesDefaultFragment(), ARTICLES_DEFAULT_FRAGMENT_TAG)
                 .commitAllowingStateLoss();
         } else {
             // Show the cache first
@@ -333,6 +337,7 @@ public class MainActivity extends FragmentActivity {
             
         // Load subscriptions from server
         boolean subscriptionUnreadPref = PreferenceUtil.getBooleanPreference(this, PreferenceUtil.PREF_SUBSCRIPTION_UNREAD, false);
+        SubscriptionResource.cancel(this);
         SubscriptionResource.list(this, subscriptionUnreadPref, callback);
     }
     

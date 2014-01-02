@@ -1,14 +1,14 @@
 package com.sismics.reader.ui.adapter;
 
-import java.util.List;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.sismics.reader.fragment.ArticleFragment;
 
 import org.json.JSONObject;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-
-import com.sismics.reader.fragment.ArticleFragment;
+import java.util.List;
 
 
 /**
@@ -16,29 +16,30 @@ import com.sismics.reader.fragment.ArticleFragment;
  * 
  * @author bgamard
  */
-public class ArticlesPagerAdapter extends FragmentPagerAdapter {
-    /**
-     * Articles from server.
-     */
-    private List<JSONObject> items;
-    
+public class ArticlesPagerAdapter extends FragmentStatePagerAdapter {
     /**
      * Constructor.
      * @param fm FragmentManager
      */
     public ArticlesPagerAdapter(FragmentManager fm) {
         super(fm);
-        this.items = SharedArticlesAdapterHelper.getInstance().getArticleItems();
     }
 
     @Override
     public Fragment getItem(int position) {
-        JSONObject article = items.get(position);
+        JSONObject article = SharedArticlesAdapterHelper.getInstance().getArticleItems().get(position);
         return ArticleFragment.newInstance(article);
     }
 
     @Override
     public int getCount() {
-        return items.size();
+        return SharedArticlesAdapterHelper.getInstance().getArticleItems().size();
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_UNCHANGED;
+        // Do not return POSITION_NONE all the time or the whole fragment will be invalidated
+        // return POSITION_NONE;
     }
 }

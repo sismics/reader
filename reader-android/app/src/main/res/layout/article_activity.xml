@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.sismics.reader.ui.PagerContainer
+    <com.sismics.reader.ui.viewpager.PagerContainer
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -16,7 +16,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_height="match_parent" />
 
-    </com.sismics.reader.ui.PagerContainer>
+    </com.sismics.reader.ui.viewpager.PagerContainer>
 
     <com.viewpagerindicator.UnderlinePageIndicator
         android:id="@+id/indicator"

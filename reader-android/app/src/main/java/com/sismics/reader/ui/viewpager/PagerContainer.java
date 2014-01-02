@@ -1,4 +1,4 @@
-package com.sismics.reader.ui;
+package com.sismics.reader.ui.viewpager;
 
 /**
  * Container for ViewPager to display more than one page.

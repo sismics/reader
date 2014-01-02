@@ -17,7 +17,7 @@ import android.webkit.WebView;
 
 import com.androidquery.AQuery;
 import com.sismics.reader.R;
-import com.sismics.reader.ui.ArticleScrollView;
+import com.sismics.reader.ui.widget.ArticleScrollView;
 
 import org.json.JSONException;
 import org.json.JSONObject;

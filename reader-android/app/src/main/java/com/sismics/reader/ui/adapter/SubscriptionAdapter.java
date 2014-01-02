@@ -36,21 +36,6 @@ public class SubscriptionAdapter extends BaseAdapter {
     private Context context;
     
     /**
-     * Header item type.
-     */
-    private static final int HEADER_ITEM = 0;
-    
-    /**
-     * Category item type.
-     */
-    private static final int CATEGORY_ITEM = 1;
-    
-    /**
-     * Subscription item type.
-     */
-    private static final int SUBSCRIPTION_ITEM = 2;
-    
-    /**
      * Auth token used to download favicons.
      */
     private String authToken;
@@ -81,8 +66,8 @@ public class SubscriptionAdapter extends BaseAdapter {
         if (view == null) {
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             int layout = R.layout.drawer_list_item_header;
-            if (item.type == SUBSCRIPTION_ITEM) layout = R.layout.drawer_list_item_subscription;
-            if (item.type == CATEGORY_ITEM) layout = R.layout.drawer_list_item_category;
+            if (item.getType() == SubscriptionItem.SUBSCRIPTION_ITEM) layout = R.layout.drawer_list_item_subscription;
+            if (item.getType() == SubscriptionItem.CATEGORY_ITEM) layout = R.layout.drawer_list_item_category;
             view = vi.inflate(layout, null);
         }
         
@@ -90,12 +75,12 @@ public class SubscriptionAdapter extends BaseAdapter {
         aq.recycle(view);
         
         // Type specific layout data
-        switch (item.type) {
-        case HEADER_ITEM:
+        switch (item.getType()) {
+        case SubscriptionItem.HEADER_ITEM:
             break;
-        case SUBSCRIPTION_ITEM:
-            if (item.id != null) {
-                String faviconUrl = PreferenceUtil.getServerUrl(context) + "/api/subscription/" + item.id + "/favicon";
+        case SubscriptionItem.SUBSCRIPTION_ITEM:
+            if (item.getId() != null) {
+                String faviconUrl = PreferenceUtil.getServerUrl(context) + "/api/subscription/" + item.getId() + "/favicon";
                 Bitmap placeHolder = aq.getCachedImage(R.drawable.ic_launcher);
                 aq.id(R.id.imgFavicon)
                     .image(new BitmapAjaxCallback()
@@ -104,27 +89,27 @@ public class SubscriptionAdapter extends BaseAdapter {
                         .preset(placeHolder)
                         .animation(AQuery.FADE_IN_NETWORK)
                         .cookie("auth_token", authToken))
-                    .margin(item.root ? 16 : 32, 0, 0, 0);
+                    .margin(item.isRoot() ? 16 : 32, 0, 0, 0);
             } else {
-                if (item.url.equals("/all")) {
-                    aq.id(R.id.imgFavicon).image(item.unread ? R.drawable.drawer_list_item_unread : R.drawable.drawer_list_item_read);
-                } else if (item.url.equals("/starred")) {
+                if (item.getUrl().equals("/all")) {
+                    aq.id(R.id.imgFavicon).image(item.isUnread() ? R.drawable.drawer_list_item_unread : R.drawable.drawer_list_item_read);
+                } else if (item.getUrl().equals("/starred")) {
                     aq.id(R.id.imgFavicon).image(R.drawable.drawer_list_item_important);
                 } else {
                     aq.id(R.id.imgFavicon).image(0);
                 }
             }
             break;
-        case CATEGORY_ITEM:
+        case SubscriptionItem.CATEGORY_ITEM:
             break;
         }
         
         // Common layout data
-        aq.id(R.id.content).text(item.title);
-        if (item.unreadCount == 0) {
+        aq.id(R.id.content).text(item.getTitle());
+        if (item.getUnreadCount() == 0) {
             aq.id(R.id.unreadCount).gone();
         } else {
-            aq.id(R.id.unreadCount).visible().text("" + item.unreadCount);
+            aq.id(R.id.unreadCount).visible().text("" + item.getUnreadCount());
         }
         
         return view;
@@ -137,7 +122,7 @@ public class SubscriptionAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        return getItem(position).type;
+        return getItem(position).getType();
     }
     
     @Override
@@ -162,55 +147,9 @@ public class SubscriptionAdapter extends BaseAdapter {
     @Override
     public boolean isEnabled(int position) {
         SubscriptionItem item = getItem(position);
-        return item != null && (item.type == SUBSCRIPTION_ITEM || item.type == CATEGORY_ITEM);
-    }
-    
-    /**
-     * Item in subscription list.
-     * 
-     * @author bgamard
-     */
-    public class SubscriptionItem {
-        
-        private int type;
-        private String id;
-        private String title;
-        private String url;
-        private int unreadCount;
-        private boolean unread = false;
-        private boolean root = false;
-
-        /**
-         * Getter of id.
-         * @return id
-         */
-        public String getId() {
-            return id;
-        }
-
-        /**
-         * Getter of title.
-         * @return title
-         */
-        public String getTitle() {
-            return title;
-        }
-
-        /**
-         * Getter of url.
-         * @return url
-         */
-        public String getUrl() {
-            return url;
-        }
-        
-        /**
-         * Getter of unread.
-         * @return unread
-         */
-        public boolean isUnread() {
-            return unread;
-        }
+        return item != null
+                && (item.getType() == SubscriptionItem.SUBSCRIPTION_ITEM
+                || item.getType() == SubscriptionItem.CATEGORY_ITEM);
     }
 
     /**
@@ -222,34 +161,34 @@ public class SubscriptionAdapter extends BaseAdapter {
         
         // Adding fixed items
         item = new SubscriptionItem();
-        item.type = HEADER_ITEM;
-        item.title = context.getString(R.string.latest);
+        item.setType(SubscriptionItem.HEADER_ITEM);
+        item.setTitle(context.getString(R.string.latest));
         items.add(item);
         
         item = new SubscriptionItem();
-        item.type = SUBSCRIPTION_ITEM;
-        item.title = context.getString(R.string.unread);
-        item.url = "/all";
-        item.unread = true;
-        item.unreadCount = input.optInt("unread_count");
+        item.setType(SubscriptionItem.SUBSCRIPTION_ITEM);
+        item.setTitle(context.getString(R.string.unread));
+        item.setUrl("/all");
+        item.setUnread(true);
+        item.setUnreadCount(input.optInt("unread_count"));
         items.add(item);
         
         item = new SubscriptionItem();
-        item.type = SUBSCRIPTION_ITEM;
-        item.title = context.getString(R.string.all);
-        item.url = "/all";
-        item.unread = false;
+        item.setType(SubscriptionItem.SUBSCRIPTION_ITEM);
+        item.setTitle(context.getString(R.string.all));
+        item.setUrl("/all");
+        item.setUnread(false);
         items.add(item);
         
         item = new SubscriptionItem();
-        item.type = SUBSCRIPTION_ITEM;
-        item.title = context.getString(R.string.starred);
-        item.url = "/starred";
+        item.setType(SubscriptionItem.SUBSCRIPTION_ITEM);
+        item.setTitle(context.getString(R.string.starred));
+        item.setUrl("/starred");
         items.add(item);
         
         item = new SubscriptionItem();
-        item.type = HEADER_ITEM;
-        item.title = context.getString(R.string.subscriptions);
+        item.setType(SubscriptionItem.HEADER_ITEM);
+        item.setTitle(context.getString(R.string.subscriptions));
         items.add(item);
         
         // Adding categories and subscriptions
@@ -260,11 +199,11 @@ public class SubscriptionAdapter extends BaseAdapter {
                 JSONObject category = categories.optJSONObject(i);
     
                 item = new SubscriptionItem();
-                item.type = CATEGORY_ITEM;
-                item.id = category.optString("id");
-                item.title = category.optString("name");
-                item.url = "/category/" + item.id;
-                item.unreadCount = category.optInt("unread_count");
+                item.setType(SubscriptionItem.CATEGORY_ITEM);
+                item.setId(category.optString("id"));
+                item.setTitle(category.optString("name"));
+                item.setUrl("/category/" + item.getId());
+                item.setUnreadCount(category.optInt("unread_count"));
                 items.add(item);
                 
                 JSONArray subscriptions = category.optJSONArray("subscriptions");
@@ -273,11 +212,11 @@ public class SubscriptionAdapter extends BaseAdapter {
                         JSONObject subscription = subscriptions.optJSONObject(j);
         
                         item = new SubscriptionItem();
-                        item.type = SUBSCRIPTION_ITEM;
-                        item.id = subscription.optString("id");
-                        item.title = subscription.optString("title");
-                        item.url = "/subscription/" + item.id;
-                        item.unreadCount = subscription.optInt("unread_count");
+                        item.setType(SubscriptionItem.SUBSCRIPTION_ITEM);
+                        item.setId(subscription.optString("id"));
+                        item.setTitle(subscription.optString("title"));
+                        item.setUrl("/subscription/" + item.getId());
+                        item.setUnreadCount(subscription.optInt("unread_count"));
                         items.add(item);
                     }
                 }
@@ -291,12 +230,12 @@ public class SubscriptionAdapter extends BaseAdapter {
                 JSONObject subscription = subscriptions.optJSONObject(j);
     
                 item = new SubscriptionItem();
-                item.type = SUBSCRIPTION_ITEM;
-                item.id = subscription.optString("id");
-                item.title = subscription.optString("title");
-                item.url = "/subscription/" + item.id;
-                item.unreadCount = subscription.optInt("unread_count");
-                item.root = true;
+                item.setType(SubscriptionItem.SUBSCRIPTION_ITEM);
+                item.setId(subscription.optString("id"));
+                item.setTitle(subscription.optString("title"));
+                item.setUrl("/subscription/" + item.getId());
+                item.setUnreadCount(subscription.optInt("unread_count"));
+                item.setRoot(true);
                 items.add(item);
             }
         }

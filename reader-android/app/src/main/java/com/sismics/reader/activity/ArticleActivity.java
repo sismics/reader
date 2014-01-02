@@ -14,24 +14,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
-import com.androidquery.callback.BitmapAjaxCallback;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.android.Log;
 import com.sismics.reader.R;
 import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.ArticleResource;
 import com.sismics.reader.resource.StarredResource;
-import com.sismics.reader.ui.CardTransformer;
-import com.sismics.reader.ui.ZoomOutPageTransformer;
 import com.sismics.reader.ui.adapter.ArticlesPagerAdapter;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
+import com.sismics.reader.ui.viewpager.CardTransformer;
+import com.sismics.reader.ui.viewpager.ZoomOutPageTransformer;
 import com.sismics.reader.util.PreferenceUtil;
 import com.viewpagerindicator.UnderlinePageIndicator;
 
@@ -47,10 +45,6 @@ import java.util.Set;
  * @author bgamard
  */
 public class ArticleActivity extends FragmentActivity {
-    /**
-     * AQuery.
-     */
-    private AQuery aq;
 
     /**
      * Articles ViewPager.
@@ -102,7 +96,7 @@ public class ArticleActivity extends FragmentActivity {
     
     @Override
     protected void onCreate(Bundle args) {
-        aq = new AQuery(this);
+        AQuery aq = new AQuery(this);
         super.onCreate(args);
         
         readArticleIdSet = new HashSet<String>();
@@ -242,7 +236,7 @@ public class ArticleActivity extends FragmentActivity {
         // Show the possibly hidden action bar
         getActionBar().show();
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final JSONObject article = sharedAdapterHelper.getArticleItems().get(viewPager.getCurrentItem());
@@ -253,68 +247,80 @@ public class ArticleActivity extends FragmentActivity {
         View progressView = inflater.inflate(R.layout.actionbar_indeterminate_progress, null);
         
         switch (item.getItemId()) {
-        case R.id.unread:
-            // Flagging article as unread
-            try {
-                article.put("force_unread", true);
-            } catch (JSONException e) {
-                Log.e("ArticleActivity", "Error forcing article at unread state", e);
-            }
-            
-            // Removing from mark as read list
-            readArticleIdSet.remove(articleId);
-            
-            item.setActionView(progressView);
-            
-            // Marking article as unread
-            ArticleResource.unread(ArticleActivity.this, articleId, new JsonHttpResponseHandler() {
-                public void onSuccess(JSONObject json) {
-                    try {
-                        article.put("is_read", false);
-                        sharedAdapterHelper.onDataChanged();
-                        Toast.makeText(ArticleActivity.this, R.string.marked_as_unread, Toast.LENGTH_LONG).show();
-                    } catch (JSONException e) {
-                        Log.e("ArticleActivity", "Error changing read state", e);
+            case R.id.unread:
+                // Flagging article as unread
+                try {
+                    article.put("force_unread", true);
+                } catch (JSONException e) {
+                    Log.e("ArticleActivity", "Error forcing article at unread state", e);
+                }
+
+                // Removing from mark as read list
+                readArticleIdSet.remove(articleId);
+
+                item.setActionView(progressView);
+
+                // Marking article as unread
+                ArticleResource.unread(ArticleActivity.this, articleId, new JsonHttpResponseHandler() {
+                    public void onSuccess(JSONObject json) {
+                        try {
+                            article.put("is_read", false);
+                            sharedAdapterHelper.onDataChanged();
+                            Toast.makeText(ArticleActivity.this, R.string.marked_as_unread, Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            Log.e("ArticleActivity", "Error changing read state", e);
+                        }
                     }
-                }
-                
-                @Override
-                public void onFinish() {
-                    item.setActionView(null);
-                }
-            });
-            return true;
-            
-        case R.id.favorite:
-            item.setActionView(progressView);
-            
-            final boolean isStarred = article.optBoolean("is_starred");
-            
-            // Star or unstar the article
-            StarredResource.star(ArticleActivity.this, articleId, !isStarred, new JsonHttpResponseHandler() {
-                public void onSuccess(JSONObject json) {
-                    try {
-                        article.put("is_starred", !isStarred);
-                        updateActionBar();
-                        sharedAdapterHelper.onDataChanged();
-                    } catch (JSONException e) {
-                        Log.e("ArticleActivity", "Error starring/unstarring article", e);
+
+                    @Override
+                    public void onFinish() {
+                        item.setActionView(null);
                     }
-                }
-                
-                @Override
-                public void onFinish() {
-                    item.setActionView(null);
-                }
-            });
-            return true;
+                });
+                return true;
             
-        case android.R.id.home:
-            finish();
-            return true;
-            
-        default:
-            return super.onOptionsItemSelected(item);
+            case R.id.favorite:
+                item.setActionView(progressView);
+
+                final boolean isStarred = article.optBoolean("is_starred");
+
+                // Star or unstar the article
+                StarredResource.star(ArticleActivity.this, articleId, !isStarred, new JsonHttpResponseHandler() {
+                    public void onSuccess(JSONObject json) {
+                        try {
+                            article.put("is_starred", !isStarred);
+                            updateActionBar();
+                            sharedAdapterHelper.onDataChanged();
+                        } catch (JSONException e) {
+                            Log.e("ArticleActivity", "Error starring/unstarring article", e);
+                        }
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        item.setActionView(null);
+                    }
+                });
+                return true;
+
+            case R.id.refresh:
+                // This button is desactivated for the moment, problems to solve before:
+                // - Mark as read the articles, this can be done at the same time
+                // - Properly invalidate fragments in ArticlesPagerAdapter.getItemPosition
+                String url = getIntent().getStringExtra("url");
+                boolean unread = getIntent().getBooleanExtra("unread", true);
+                if (url != null) {
+                    SharedArticlesAdapterHelper.getInstance().restart(url, unread);
+                    SharedArticlesAdapterHelper.getInstance().load(this);
+                }
+                return true;
+
+            case android.R.id.home:
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
     

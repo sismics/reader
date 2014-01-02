@@ -79,6 +79,7 @@ public class SharedArticlesAdapterHelper {
     
     /**
      * Getter of articleItems.
+     * Never copy this list or be out of sync.
      * @return articleItems
      */
     public List<JSONObject> getArticleItems() {
@@ -123,12 +124,14 @@ public class SharedArticlesAdapterHelper {
      * Restart shared data on a new context.
      */
     public void restart(String url, boolean unread) {
-        adapters.clear();
         articleItems = new ArrayList<JSONObject>();
         this.url = url;
         this.unread = unread;
         this.loading = false;
         this.fullyLoaded = false;
+
+        // The data has been changed, there is no more articles
+        onDataChanged();
     }
     
     /**

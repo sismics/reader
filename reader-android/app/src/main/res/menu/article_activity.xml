@@ -23,5 +23,13 @@
         android:title="@string/mark_as_unread"
         tools:ignore="AlwaysShowAction">
     </item>
+    <item
+        android:visible="false"
+        android:id="@+id/refresh"
+        android:icon="@drawable/navigation_refresh"
+        android:showAsAction="always"
+        android:title="@string/refresh"
+        tools:ignore="AlwaysShowAction">
+    </item>
 
 </menu>

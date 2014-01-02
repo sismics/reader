@@ -1,4 +1,4 @@
-package com.sismics.reader.ui;
+package com.sismics.reader.ui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -60,9 +60,9 @@ public class SubscriptionResource extends BaseResource {
     
     /**
      * Mark all articles as read.
-     * @param context
-     * @param url
-     * @param responseHandler
+     * @param context Context
+     * @param url URL
+     * @param responseHandler Callback
      */
     public static void read(Context context, String url, JsonHttpResponseHandler responseHandler) {
         init(context);
@@ -73,7 +73,7 @@ public class SubscriptionResource extends BaseResource {
     
     /**
      * Cancel pending requests.
-     * @param context
+     * @param context Context
      */
     public static void cancel(Context context) {
         client.cancelRequests(context, true);

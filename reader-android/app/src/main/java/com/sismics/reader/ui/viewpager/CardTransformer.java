@@ -1,4 +1,4 @@
-package com.sismics.reader.ui;
+package com.sismics.reader.ui.viewpager;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;

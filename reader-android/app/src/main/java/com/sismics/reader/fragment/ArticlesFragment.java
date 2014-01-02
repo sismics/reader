@@ -129,6 +129,8 @@ public class ArticlesFragment extends NavigationFragment {
                     intent.putExtra("id", subscriptionId);
                     intent.putExtra("title", title);
                     intent.putExtra("position", position);
+                    intent.putExtra("url", url);
+                    intent.putExtra("unread", unread);
                     startActivityForResult(intent, Constants.REQUEST_CODE_ARTICLES);
                 }
             });
