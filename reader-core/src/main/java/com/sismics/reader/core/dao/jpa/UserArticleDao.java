@@ -69,21 +69,21 @@ public class UserArticleDao {
     public void markAsRead(UserArticleCriteria criteria) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
-        StringBuilder sb = new StringBuilder("update T_USER_ARTICLE ua set ua.USA_READDATE_D = :readDate where ua.USA_IDARTICLE_C in (");
-        sb.append("  select a.ART_ID_C ");
-        sb.append("  from T_ARTICLE a ");
+        StringBuilder sb = new StringBuilder("update T_USER_ARTICLE ua set ua.USA_READDATE_D = :readDate where ua.USA_ID_C in (");
+        sb.append("  select ua2.USA_ID_C from T_USER_ARTICLE ua2 ");
+        sb.append("  join T_ARTICLE a on a.ART_ID_C = ua2.USA_IDARTICLE_C ");
         if (criteria.getFeedSubscriptionId() != null || criteria.getCategoryId() != null) {
             sb.append("  join T_FEED f on (f.FED_ID_C = a.ART_IDFEED_C and f.FED_DELETEDATE_D is null)");
             sb.append("  join T_FEED_SUBSCRIPTION fs on (fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_DELETEDATE_D is null) ");
         }
-        sb.append("  where a.ART_ID_C = ua.USA_IDARTICLE_C and a.ART_DELETEDATE_D is null ");
+        sb.append("  where a.ART_ID_C = ua2.USA_IDARTICLE_C and a.ART_DELETEDATE_D is null ");
         if (criteria.getFeedSubscriptionId() != null) {
             sb.append("    and fs.FES_ID_C = :feedSubscriptionId ");
         }
         if (criteria.getCategoryId() != null) {
             sb.append("    and fs.FES_IDCATEGORY_C = :categoryId ");
         }
-        sb.append(") and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null and ua.USA_READDATE_D is null");
+        sb.append(" and ua2.USA_IDUSER_C = :userId and ua2.USA_DELETEDATE_D is null and ua2.USA_READDATE_D is null) ");
         Query q = em.createNativeQuery(sb.toString());
         if (criteria.getFeedSubscriptionId() != null) {
             q.setParameter("feedSubscriptionId", criteria.getFeedSubscriptionId());

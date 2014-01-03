@@ -53,6 +53,7 @@ public class MainActivity extends FragmentActivity {
     private ListView drawerList;
     private View drawer;
     private ActionBarDrawerToggle drawerToggle;
+    private MenuItem searchItem;
     private boolean destroyed = false;
     private int defaultSubscription;
     
@@ -133,25 +134,9 @@ public class MainActivity extends FragmentActivity {
 
         // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
-        // Collapse the SearchView after submitting the query
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                if (searchItem != null) {
-                    searchItem.collapseActionView();
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -422,6 +407,11 @@ public class MainActivity extends FragmentActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             // Perform a search query
             String query = intent.getStringExtra(SearchManager.QUERY);
+
+            // Collapse the SearchView
+            if (searchItem != null) {
+                searchItem.collapseActionView();
+            }
 
             // Save the query
             SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, RecentSuggestionsProvider.AUTHORITY, RecentSuggestionsProvider.MODE);

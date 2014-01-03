@@ -35,6 +35,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_DEFAULT_SUBSCRIPTION);
         onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_FONT_SIZE);
 
+        // Handle clearing the recent search history
         Preference clearHistoryPref = findPreference("pref_clearHistory");
         clearHistoryPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
