@@ -355,10 +355,6 @@ public class MainActivity extends FragmentActivity {
         SubscriptionResource.list(this, subscriptionUnreadPref, callback);
     }
     
-    /**
-     * When using the ActionBarDrawerToggle, you must call it during
-     * onPostCreate() and onConfigurationChanged()...
-     */
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);

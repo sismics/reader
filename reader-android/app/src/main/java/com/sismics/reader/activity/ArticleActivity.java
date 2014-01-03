@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,7 +48,9 @@ public class ArticleActivity extends FragmentActivity {
 
     // UI cache
     private ViewPager viewPager;
+    private DrawerLayout drawerLayout;
     private ListView drawerList;
+    private View drawer;
     private MenuItem favoriteMenuItem;
     private ShareActionProvider shareActionProvider;
     
@@ -118,11 +122,9 @@ public class ArticleActivity extends FragmentActivity {
                 }
 
                 // Scroll the ListView
-                if (drawerList != null) {
-                    drawerList.setItemChecked(position, true);
-                    drawerList.smoothScrollToPositionFromTop(position, 100);
-                    drawerList.invalidate();
-                }
+                drawerList.setItemChecked(position, true);
+                drawerList.smoothScrollToPositionFromTop(position, 100);
+                drawerList.invalidate();
 
                 // Update the action bar
                 updateActionBar();
@@ -130,9 +132,7 @@ public class ArticleActivity extends FragmentActivity {
             
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (drawerList != null) {
-                    drawerList.invalidate();
-                }
+                drawerList.invalidate();
             }
             
             @Override
@@ -159,31 +159,62 @@ public class ArticleActivity extends FragmentActivity {
 
         // Configure the ListView
         drawerList = (ListView) findViewById(R.id.drawer_list);
-        if (drawerList != null) {
-            final ArticlesAdapter listAdapter = new ArticlesAdapter(this);
-            sharedAdapterHelper.addAdapter(listAdapter, null);
+        ArticlesAdapter listAdapter = new ArticlesAdapter(this);
+        sharedAdapterHelper.addAdapter(listAdapter, null);
 
-            // Infinite scrolling
-            AQuery aq = new AQuery(this);
-            aq.id(R.id.drawer_list)
-                .adapter(listAdapter)
-                .scrolled(new AbsListView.OnScrollListener() {
-                    @Override
-                    public void onScrollStateChanged(AbsListView view, int scrollState) {}
-
-                    @Override
-                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                        if (firstVisibleItem + visibleItemCount >= totalItemCount - 2) {
-                            SharedArticlesAdapterHelper.getInstance().load(ArticleActivity.this);
-                        }
-                    }
-                });
-
-            // List item handling
-            drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // Infinite scrolling
+        AQuery aq = new AQuery(this);
+        aq.id(R.id.drawer_list)
+            .adapter(listAdapter)
+            .scrolled(new AbsListView.OnScrollListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    viewPager.setCurrentItem(position);
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
+                }
+
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                    if (firstVisibleItem + visibleItemCount >= totalItemCount - 2) {
+                        SharedArticlesAdapterHelper.getInstance().load(ArticleActivity.this);
+                    }
+                }
+            });
+
+        // List item handling
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                viewPager.setCurrentItem(position);
+                // Close the drawer if asked
+                if (drawerLayout != null) {
+                    drawerLayout.closeDrawer(drawer);
+                }
+            }
+        });
+
+        // Configure the drawer
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.left_drawer);
+
+        if (drawerLayout != null) {
+            // Set a custom shadow that overlays the main content when the drawer opens
+            drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+
+            drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+                @Override
+                public void onDrawerSlide(View view, float v) {}
+
+                @Override
+                public void onDrawerStateChanged(int i) {}
+
+                @Override
+                public void onDrawerOpened(View view) {
+                    invalidateOptionsMenu();
+                    getActionBar().show();
+                }
+
+                @Override
+                public void onDrawerClosed(View view) {
+                    invalidateOptionsMenu();
                 }
             });
         }
@@ -206,6 +237,18 @@ public class ArticleActivity extends FragmentActivity {
         setResult(RESULT_OK, data);
         
         super.finish();
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (drawerLayout != null) {
+            // If the nav drawer is open, hide action items related to the content view
+            boolean drawerOpen = drawerLayout.isDrawerOpen(drawer);
+            menu.findItem(R.id.share).setVisible(!drawerOpen);
+            menu.findItem(R.id.favorite).setVisible(!drawerOpen);
+            menu.findItem(R.id.unread).setVisible(!drawerOpen);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
     
     @Override
