@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
@@ -7,8 +8,8 @@
 
     <LinearLayout
         android:id="@+id/left_drawer"
-        android:layout_weight="0.3"
         android:layout_width="0dp"
+        android:layout_weight="0.3"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@drawable/list_background_holo"
@@ -22,6 +23,7 @@
             android:choiceMode="singleChoice"
             android:divider="@android:color/transparent"
             android:verticalScrollbarPosition="left"
+            android:layout_marginTop="?android:attr/actionBarSize"
             android:dividerHeight="0dp" />
 
         <ProgressBar
@@ -32,11 +34,22 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/content_frame"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="0.7"
-        android:layout_width="0dip"
-        android:background="#fff"
-        android:layout_height="match_parent" />
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.viewpagerindicator.UnderlinePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="4dp" />
+
+    </LinearLayout>
 
 </LinearLayout>

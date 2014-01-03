@@ -12,20 +12,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
+import com.androidquery.AQuery;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.android.Log;
 import com.sismics.reader.R;
 import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.ArticleResource;
 import com.sismics.reader.resource.StarredResource;
+import com.sismics.reader.ui.adapter.ArticlesAdapter;
 import com.sismics.reader.ui.adapter.ArticlesPagerAdapter;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
 import com.sismics.reader.ui.viewpager.CardTransformer;
-import com.sismics.reader.ui.viewpager.ZoomOutPageTransformer;
-import com.sismics.reader.util.PreferenceUtil;
 import com.viewpagerindicator.UnderlinePageIndicator;
 
 import org.json.JSONException;
@@ -41,10 +44,11 @@ import java.util.Set;
  */
 public class ArticleActivity extends FragmentActivity {
 
-    /**
-     * Articles ViewPager.
-     */
+    // UI cache
     private ViewPager viewPager;
+    private ListView drawerList;
+    private MenuItem favoriteMenuItem;
+    private ShareActionProvider shareActionProvider;
     
     /**
      * Articles to mark as read later.
@@ -55,16 +59,6 @@ public class ArticleActivity extends FragmentActivity {
      * Shared articles adapter helper.
      */
     private SharedArticlesAdapterHelper sharedAdapterHelper;
-    
-    /**
-     * Share action provider.
-     */
-    private ShareActionProvider shareActionProvider;
-    
-    /**
-     * Favorite menu item.
-     */
-    private MenuItem favoriteMenuItem;
     
     /**
      * Articles loading listener.
@@ -122,13 +116,24 @@ public class ArticleActivity extends FragmentActivity {
                 if (!readArticleIdSet.contains(articleId) && !article.optBoolean("force_unread")) {
                     readArticleIdSet.add(article.optString("id"));
                 }
-                
+
+                // Scroll the ListView
+                if (drawerList != null) {
+                    drawerList.setItemChecked(position, true);
+                    drawerList.smoothScrollToPositionFromTop(position, 100);
+                    drawerList.invalidate();
+                }
+
                 // Update the action bar
                 updateActionBar();
             }
             
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (drawerList != null) {
+                    drawerList.invalidate();
+                }
+            }
             
             @Override
             public void onPageScrollStateChanged(int state) {}
@@ -143,23 +148,46 @@ public class ArticleActivity extends FragmentActivity {
         sharedAdapterHelper.addAdapter(adapter, articlesHelperListener);
         viewPager.setAdapter(adapter);
 
-        // Special tablet mode where previous and next article are visible
-        if (PreferenceUtil.getBooleanPreference(this, PreferenceUtil.PREF_NARROW_ARTICLES, true)
-                && getResources().getBoolean(R.bool.narrow_articles_enabled)) {
-            viewPager.getLayoutParams().width = (int) (600 * getResources().getDisplayMetrics().density);
-            viewPager.setOffscreenPageLimit(2);
-            viewPager.setClipChildren(false);
-            viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
-        } else {
-            viewPager.setPageTransformer(true, new CardTransformer(.7f));
-        }
-        
+        // Pretty animation between pages
+        viewPager.setPageTransformer(true, new CardTransformer(.7f));
+
         // Configure the ViewPagerIndicator
         int position = getIntent().getIntExtra("position", 0);
         UnderlinePageIndicator indicator = (UnderlinePageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(viewPager, position);
         indicator.setOnPageChangeListener(onPageChangeListener);
-        
+
+        // Configure the ListView
+        drawerList = (ListView) findViewById(R.id.drawer_list);
+        if (drawerList != null) {
+            final ArticlesAdapter listAdapter = new ArticlesAdapter(this);
+            sharedAdapterHelper.addAdapter(listAdapter, null);
+
+            // Infinite scrolling
+            AQuery aq = new AQuery(this);
+            aq.id(R.id.drawer_list)
+                .adapter(listAdapter)
+                .scrolled(new AbsListView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(AbsListView view, int scrollState) {}
+
+                    @Override
+                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                        if (firstVisibleItem + visibleItemCount >= totalItemCount - 2) {
+                            SharedArticlesAdapterHelper.getInstance().load(ArticleActivity.this);
+                        }
+                    }
+                });
+
+            // List item handling
+            drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    viewPager.setCurrentItem(position);
+                }
+            });
+        }
+
         // Forcing page change listener
         viewPager.setCurrentItem(position);
         onPageChangeListener.onPageSelected(position);
@@ -171,6 +199,9 @@ public class ArticleActivity extends FragmentActivity {
         if (viewPager != null) {
             data.putExtra("position", viewPager.getCurrentItem());
             sharedAdapterHelper.removeAdapter(viewPager.getAdapter(), articlesHelperListener);
+        }
+        if (drawerList != null) {
+            sharedAdapterHelper.removeAdapter(drawerList.getAdapter(), null);
         }
         setResult(RESULT_OK, data);
         

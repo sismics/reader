@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="drawer_list_item_right_margin">8dp</dimen>
-    <bool name="narrow_articles_enabled">false</bool>
 </resources>

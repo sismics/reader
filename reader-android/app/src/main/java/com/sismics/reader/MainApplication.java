@@ -25,7 +25,7 @@ import com.sismics.reader.util.PreferenceUtil;
         formUriBasicAuthLogin = "reporter",
         formUriBasicAuthPassword = "jOS9ezJR",
         mode = ReportingInteractionMode.TOAST,
-        forceCloseDialogAfterToast = false,
+        forceCloseDialogAfterToast = true,
         resToastText = R.string.crash_toast_text)
 public class MainApplication extends Application {
     @Override

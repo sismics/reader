@@ -112,8 +112,7 @@ public class ArticlesFragment extends NavigationFragment {
             .adapter(adapter)
             .scrolled(new OnScrollListener() {
                 @Override
-                public void onScrollStateChanged(AbsListView view, int scrollState) {
-                }
+                public void onScrollStateChanged(AbsListView view, int scrollState) {}
                 
                 @Override
                 public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
@@ -141,7 +140,7 @@ public class ArticlesFragment extends NavigationFragment {
         if (requestCode == Constants.REQUEST_CODE_ARTICLES && resultCode == Activity.RESULT_OK) {
             // We are coming back from the articles pager, scroll to the last viewed
             ListView articleList = aq.id(R.id.articleList).getListView();
-            articleList.smoothScrollToPosition(data.getIntExtra("position", 0));
+            articleList.setSelection(data.getIntExtra("position", 0));
             ((ArticlesAdapter)articleList.getAdapter()).notifyDataSetChanged();
         }
     }

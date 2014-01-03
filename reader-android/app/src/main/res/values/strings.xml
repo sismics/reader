@@ -67,9 +67,6 @@
     <string name="pref_subscriptions_unread_disabled">All subscriptions displayed</string>
     <string name="pref_articles_fetched">Number of articles per page</string>
     <string name="pref_default_subscription">Startup category to display</string>
-    <string name="pref_narrow_articles">Display articles in narrow mode</string>
-    <string name="pref_narrow_articles_enabled">Narrow mode enabled</string>
-    <string name="pref_narrow_articles_disabled">Narrow mode disabled</string>
     <string name="pref_font_size">Articles font size</string>
     <string name="pref_license_title">Open Source Licenses</string>
     <string name="pref_license_summary">Legal information about licenses</string>

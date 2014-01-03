@@ -92,8 +92,12 @@ public class SharedArticlesAdapterHelper {
      * @param listener Listener to add
      */
     public void addAdapter(Object adapter, ArticlesHelperListener listener) {
-        adapters.add(adapter);
-        listeners.add(listener);
+        if (adapter != null) {
+            adapters.add(adapter);
+        }
+        if (listener != null) {
+            listeners.add(listener);
+        }
     }
     
     /**
@@ -102,8 +106,12 @@ public class SharedArticlesAdapterHelper {
      * @param listener Listener to remove
      */
     public void removeAdapter(Object adapter, ArticlesHelperListener listener) {
-        adapters.remove(adapter);
-        listeners.remove(listener);
+        if (adapter != null) {
+            adapters.remove(adapter);
+        }
+        if (listener != null) {
+            listeners.remove(listener);
+        }
     }
     
     /**
