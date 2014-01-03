@@ -28,7 +28,6 @@
         android:lines="1"
         android:maxLines="1"
         android:gravity="center_vertical|left"
-        android:text="SpaceX says the first foot on Mars is in 2018"
         android:textSize="14sp" />
 
     <TextView
@@ -41,7 +40,6 @@
         android:layout_marginTop="6dp"
         android:ellipsize="end"
         android:fontFamily="sans-serif-light"
-        android:text="Lorem ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen ipsum dolor sit amen"
         android:lines="3"
         android:maxLines="3"
         android:textSize="12sp" />

@@ -117,7 +117,6 @@ public class LoginActivity extends FragmentActivity {
                                 DialogUtil.showOkDialog(LoginActivity.this, R.string.login_fail_title, R.string.login_fail);
                             } else {
                                 DialogUtil.showOkDialog(LoginActivity.this, R.string.network_error_title, R.string.network_error);
-                                // TODO Show a diagnostic test
                             }
                         }
                     });

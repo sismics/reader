@@ -36,8 +36,10 @@ public class MainApplication extends Application {
         JSONObject json = PreferenceUtil.getCachedJson(getApplicationContext(), PreferenceUtil.PREF_CACHED_USER_INFO_JSON);
         ApplicationContext.getInstance().setUserInfo(getApplicationContext(), json);
 
-        // TODO Add a navigation drawer to the articles activity to show all articles
-        // TODO Cards for articles list on tablet
+        // TODO Searching.
+        // TODO Adding categories
+        // TODO Changing the category of a subscription
+        // TODO Reordering categories/subscriptions
 
         super.onCreate();
     }
