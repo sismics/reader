@@ -201,7 +201,7 @@ public class SharedArticlesAdapterHelper {
                         String description = article.optString("description");
                         String cleanedDescription = description.replaceAll("<.*?>", "").trim();
                         int length = cleanedDescription.length();
-                        String summary = cleanedDescription.substring(0, length < 300 ? length : 300);
+                        String summary = cleanedDescription.substring(0, length < 500 ? length : 500);
                         article.put("summary", summary);
                     } catch (JSONException e) {
                         Log.e("ArticlesAdapter", "Cannot precompute article", e);
