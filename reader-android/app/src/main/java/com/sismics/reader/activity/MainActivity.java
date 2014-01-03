@@ -1,10 +1,13 @@
 package com.sismics.reader.activity;
 
 import android.app.AlertDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -18,6 +21,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.reader.R;
@@ -25,6 +29,7 @@ import com.sismics.reader.fragment.AddSubscriptionDialogFragment;
 import com.sismics.reader.fragment.ArticlesDefaultFragment;
 import com.sismics.reader.fragment.ArticlesFragment;
 import com.sismics.reader.model.application.ApplicationContext;
+import com.sismics.reader.provider.RecentSuggestionsProvider;
 import com.sismics.reader.resource.SubscriptionResource;
 import com.sismics.reader.resource.UserResource;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
@@ -117,12 +122,37 @@ public class MainActivity extends FragmentActivity {
             };
             drawerLayout.setDrawerListener(drawerToggle);
         }
+
+        handleIntent(getIntent());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
+
+        // Get the SearchView and set the searchable configuration
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        // Collapse the SearchView after submitting the query
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (searchItem != null) {
+                    searchItem.collapseActionView();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -266,6 +296,7 @@ public class MainActivity extends FragmentActivity {
 
         // Update selected item and title
         drawerList.setItemChecked(position, true);
+        setTitle(item.getTitle());
         
         // Close the drawer if asked
         if (closeDrawer && drawerLayout != null) {
@@ -300,14 +331,12 @@ public class MainActivity extends FragmentActivity {
                     adapter.notifyDataSetChanged();
                 }
                 
-                if (position != -1) {
-                    int pos = position;
-                    // Check if the item exists and is selectable
-                    if (!adapter.isEnabled(pos)) {
-                        pos = defaultSubscription;
-                    }
-                    selectItem(pos, refresh, false);
+                // Check if the item exists and is selectable
+                int pos = position;
+                if (!adapter.isEnabled(pos)) {
+                    pos = defaultSubscription;
                 }
+                selectItem(pos, refresh, false);
             }
 
             @Override
@@ -377,5 +406,42 @@ public class MainActivity extends FragmentActivity {
     protected void onDestroy() {
         destroyed = true;
         super.onDestroy();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent(intent);
+    }
+
+    /**
+     * Handle the incoming intent.
+     * @param intent
+     */
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            // Perform a search query
+            String query = intent.getStringExtra(SearchManager.QUERY);
+
+            // Save the query
+            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, RecentSuggestionsProvider.AUTHORITY, RecentSuggestionsProvider.MODE);
+            suggestions.saveRecentQuery(query, null);
+
+            // Prepare the fragment
+            Fragment fragment = new ArticlesFragment();
+            Bundle args = new Bundle();
+            args.putString("title", query);
+            args.putString("url", "/search/" + query);
+            args.putBoolean("unread", false);
+            fragment.setArguments(args);
+
+            // Update the main content by replacing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, ARTICLES_FRAGMENT_TAG).commitAllowingStateLoss();
+
+            // Update selected item and title
+            drawerList.setItemChecked(drawerList.getCheckedItemPosition(), false);
+            setTitle(query);
+        }
     }
 }

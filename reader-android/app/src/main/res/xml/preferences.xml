@@ -36,6 +36,12 @@
             android:entryValues="@array/articlesFetched"
             android:defaultValue="10"/>
 
+        <Preference
+            android:key="pref_clearHistory"
+            android:title="@string/pref_clear_history_title"
+            android:summary="@string/pref_clear_history_summary">
+        </Preference>
+
     </PreferenceCategory>
 
     <PreferenceCategory

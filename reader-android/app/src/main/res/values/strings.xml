@@ -54,6 +54,8 @@
     <string name="touch_close">Touch to close</string>
     <string name="version">Version</string>
     <string name="build">Build</string>
+    <string name="search_hint">Search articles</string>
+    <string name="action_search">Search</string>
 
     <!-- Preferences -->
     <string name="pref_general_category">General settings</string>
@@ -68,11 +70,14 @@
     <string name="pref_articles_fetched">Number of articles per page</string>
     <string name="pref_default_subscription">Startup category to display</string>
     <string name="pref_font_size">Articles font size</string>
-    <string name="pref_license_title">Open Source Licenses</string>
+    <string name="pref_license_title">Open source licenses</string>
     <string name="pref_license_summary">Legal information about licenses</string>
     <string name="pref_website">Website</string>
     <string name="pref_github">GitHub</string>
     <string name="pref_issue">Report a bug</string>
+    <string name="pref_clear_history_title">Clear search history</string>
+    <string name="pref_clear_history_summary">Wipe the recent search suggestions</string>
+    <string name="pref_clear_history_success">Search history cleared</string>
     
     <!-- Validation -->
     <string name="validate_error_email">Invalid email</string>

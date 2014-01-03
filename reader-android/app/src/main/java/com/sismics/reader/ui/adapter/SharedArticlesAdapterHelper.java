@@ -176,7 +176,8 @@ public class SharedArticlesAdapterHelper {
         int articlesFetchedPref = PreferenceUtil.getIntegerPreference(context, PreferenceUtil.PREF_ARTICLES_FETCHED, 10);
 
         // Load data from server
-        SubscriptionResource.feed(context, url, unread, articlesFetchedPref, afterArticleId, new JsonHttpResponseHandler() {
+        SubscriptionResource.feed(context, url, unread, url.startsWith("/search/") ? items.size() : -1,
+                articlesFetchedPref, afterArticleId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
                 // Tell the listeners we have finished

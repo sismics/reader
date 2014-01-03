@@ -14,8 +14,9 @@ public class SubscriptionResource extends BaseResource {
 
     /**
      * PUT /subscription.
-     * @param context
-     * @param responseHandler
+     * @param context Context
+     * @param url URL to add
+     * @param responseHandler Callback
      */
     public static void add(Context context, String url, JsonHttpResponseHandler responseHandler) {
         init(context);
@@ -27,9 +28,9 @@ public class SubscriptionResource extends BaseResource {
 
     /**
      * GET /subscription.
-     * @param context
-     * @param unread
-     * @param responseHandler
+     * @param context Context
+     * @param unread True if we want only subscriptions with unread articles
+     * @param responseHandler Callback
      */
     public static void list(Context context, boolean unread, JsonHttpResponseHandler responseHandler) {
         init(context);
@@ -41,18 +42,22 @@ public class SubscriptionResource extends BaseResource {
     
     /**
      * GET articles feed.
-     * @param context
-     * @param url
-     * @param unread
-     * @param limit
-     * @param afterArticleId
-     * @param responseHandler
+     * @param context Context
+     * @param url URL of the API
+     * @param unread True if we only want unread articles
+     * @param offset Used only for searching
+     * @param limit Number of articles to fetch
+     * @param afterArticleId ID of the last article currently fetched
+     * @param responseHandler Callback
      */
-    public static void feed(Context context, String url, boolean unread, int limit, String afterArticleId, JsonHttpResponseHandler responseHandler) {
+    public static void feed(Context context, String url, boolean unread, int offset, int limit, String afterArticleId, JsonHttpResponseHandler responseHandler) {
         init(context);
         
         RequestParams params = new RequestParams();
         params.put("unread", Boolean.toString(unread));
+        if (offset != -1) {
+            params.put("offset", Integer.toString(offset));
+        }
         params.put("limit", Integer.toString(limit));
         params.put("after_article", afterArticleId);
         client.get(getApiUrl(context) + url, params, responseHandler);

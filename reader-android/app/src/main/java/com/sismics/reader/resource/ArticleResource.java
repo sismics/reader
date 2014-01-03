@@ -17,9 +17,9 @@ public class ArticleResource extends BaseResource {
 
     /**
      * POST /article/id/read.
-     * @param context
-     * @param id
-     * @param responseHandler
+     * @param context Context
+     * @param id ID of the article to mark as read
+     * @param responseHandler Callback
      */
     public static void read(Context context, String id, JsonHttpResponseHandler responseHandler) {
         init(context);
@@ -30,9 +30,9 @@ public class ArticleResource extends BaseResource {
     
     /**
      * POST /article/read.
-     * @param context
-     * @param idList
-     * @param responseHandler
+     * @param context Context
+     * @param idList IDs of the articles to mark as read
+     * @param responseHandler Callback
      */
     public static void readMultiple(Context context, Set<String> idList, JsonHttpResponseHandler responseHandler) {
         init(context);
@@ -44,9 +44,9 @@ public class ArticleResource extends BaseResource {
     
     /**
      * POST /article/id/unread.
-     * @param context
-     * @param id
-     * @param responseHandler
+     * @param context Context
+     * @param id ID of the article to mark as unread
+     * @param responseHandler Callback
      */
     public static void unread(Context context, String id, JsonHttpResponseHandler responseHandler) {
         init(context);

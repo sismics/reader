@@ -34,7 +34,12 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/application_name"
-            android:logo="@drawable/ic_launcher">
+            android:logo="@drawable/ic_launcher"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable" />
         </activity>
         <activity
             android:name=".activity.ArticleActivity"
@@ -66,6 +71,7 @@
             <meta-data android:name="worldReadable" android:value="true" />
             <meta-data android:name="description" android:value="@string/extension_description" />
         </service>
+        <provider android:name=".provider.RecentSuggestionsProvider" android:authorities="com.sismics.reader.provider.RecentSuggestionsProvider" />
     </application>
 
 </manifest>

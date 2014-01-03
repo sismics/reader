@@ -7,8 +7,11 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.provider.SearchRecentSuggestions;
+import android.widget.Toast;
 
 import com.sismics.reader.R;
+import com.sismics.reader.provider.RecentSuggestionsProvider;
 import com.sismics.reader.util.ApplicationUtil;
 import com.sismics.reader.util.PreferenceUtil;
 
@@ -31,6 +34,18 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_ARTICLES_FETCHED);
         onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_DEFAULT_SUBSCRIPTION);
         onSharedPreferenceChanged(sharedPreferences, PreferenceUtil.PREF_FONT_SIZE);
+
+        Preference clearHistoryPref = findPreference("pref_clearHistory");
+        clearHistoryPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity(),
+                        RecentSuggestionsProvider.AUTHORITY, RecentSuggestionsProvider.MODE);
+                suggestions.clearHistory();
+                Toast.makeText(getActivity(), R.string.pref_clear_history_success, Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
 
         // Initialize static text preferences
         Preference versionPref = findPreference("pref_version");

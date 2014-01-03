@@ -13,10 +13,10 @@ public class StarredResource extends BaseResource {
 
     /**
      * PUT/DELETE /starred/id.
-     * @param context
-     * @param id
-     * @param star
-     * @param responseHandler
+     * @param context Context
+     * @param id Article to star/unstar
+     * @param star Star if true
+     * @param responseHandler Callback
      */
     public static void star(Context context, String id, boolean star, JsonHttpResponseHandler responseHandler) {
         init(context);

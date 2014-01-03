@@ -13,6 +13,11 @@
         android:showAsAction="ifRoom"
         android:title="@string/all_read">
     </item>
+    <item android:id="@+id/action_search"
+        android:title="@string/action_search"
+        android:icon="@drawable/ic_action_search"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:actionViewClass="android.widget.SearchView" />
     <item
         android:id="@+id/add_subscription"
         android:icon="@drawable/ic_action_new"

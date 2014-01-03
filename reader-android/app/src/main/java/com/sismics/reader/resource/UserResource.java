@@ -14,10 +14,10 @@ public class UserResource extends BaseResource {
 
     /**
      * POST /user/login.
-     * @param context
-     * @param username
-     * @param password
-     * @param responseHandler
+     * @param context Context
+     * @param username Username
+     * @param password Password
+     * @param responseHandler Callback
      */
     public static void login(Context context, String username, String password, JsonHttpResponseHandler responseHandler) {
         init(context);
@@ -31,8 +31,8 @@ public class UserResource extends BaseResource {
 
     /**
      * GET /user.
-     * @param context
-     * @param responseHandler
+     * @param context Context
+     * @param responseHandler Callback
      */
     public static void info(Context context, JsonHttpResponseHandler responseHandler) {
         init(context);
@@ -43,8 +43,8 @@ public class UserResource extends BaseResource {
     
     /**
      * POST /user/logout.
-     * @param context
-     * @param responseHandler
+     * @param context Context
+     * @param responseHandler Callback
      */
     public static void logout(Context context, JsonHttpResponseHandler responseHandler) {
         init(context);

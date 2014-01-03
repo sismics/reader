@@ -1,8 +1,18 @@
 package com.sismics.reader.resource;
 
+import android.content.Context;
+import android.os.Build;
+
+import com.androidquery.callback.AbstractAjaxCallback;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.PersistentCookieStore;
+import com.sismics.reader.util.ApplicationUtil;
+import com.sismics.reader.util.PreferenceUtil;
+
+import org.apache.http.conn.ssl.SSLSocketFactory;
+
 import java.io.IOException;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -15,17 +25,6 @@ import java.util.Locale;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-
-import org.apache.http.conn.ssl.SSLSocketFactory;
-
-import android.content.Context;
-import android.os.Build;
-
-import com.androidquery.callback.AbstractAjaxCallback;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.PersistentCookieStore;
-import com.sismics.reader.util.ApplicationUtil;
-import com.sismics.reader.util.PreferenceUtil;
 
 /**
  * Base class for API access.
@@ -66,7 +65,7 @@ public class BaseResource {
     
     /**
      * Resource initialization.
-     * @param context
+     * @param context Context
      */
     protected static void init(Context context) {
         PersistentCookieStore cookieStore = new PersistentCookieStore(context);
@@ -111,7 +110,7 @@ public class BaseResource {
         }
 
         @Override
-        public Socket createSocket(Socket socket, String host, int port, boolean autoClose) throws IOException, UnknownHostException {
+        public Socket createSocket(Socket socket, String host, int port, boolean autoClose) throws IOException {
             return sslContext.getSocketFactory().createSocket(socket, host, port, autoClose);
         }
 
@@ -123,8 +122,8 @@ public class BaseResource {
     
     /**
      * Returns cleaned API URL.
-     * @param context
-     * @return
+     * @param context Context
+     * @return Cleaned API URL
      */
     protected static String getApiUrl(Context context) {
         String serverUrl = PreferenceUtil.getServerUrl(context);
