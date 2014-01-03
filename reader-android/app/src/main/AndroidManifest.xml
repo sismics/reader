@@ -71,7 +71,9 @@
             <meta-data android:name="worldReadable" android:value="true" />
             <meta-data android:name="description" android:value="@string/extension_description" />
         </service>
-        <provider android:name=".provider.RecentSuggestionsProvider" android:authorities="com.sismics.reader.provider.RecentSuggestionsProvider" />
+        <provider android:name=".provider.RecentSuggestionsProvider"
+            android:exported="false"
+            android:authorities="com.sismics.reader.provider.RecentSuggestionsProvider" />
     </application>
 
 </manifest>

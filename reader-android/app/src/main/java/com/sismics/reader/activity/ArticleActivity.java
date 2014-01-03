@@ -340,24 +340,21 @@ public class ArticleActivity extends FragmentActivity {
     @Override
     protected void onPause() {
         if (readArticleIdSet != null && !readArticleIdSet.isEmpty()) {
-            ArticleResource.readMultiple(ArticleActivity.this, readArticleIdSet, new JsonHttpResponseHandler() {
-                @Override
-                public void onSuccess(JSONObject json) {
-                    // Mark articles as read on local data
-                    for (JSONObject article : sharedAdapterHelper.getArticleItems()) {
-                        String articleId = article.optString("id");
-                        if (readArticleIdSet.contains(articleId)) {
-                            try {
-                                article.put("is_read", true);
-                            } catch (JSONException e) {
-                                Log.e("ArticleActivity", "Error changing read state", e);
-                            }
-                        }
+            // Mark articles as read on local data
+            for (JSONObject article : sharedAdapterHelper.getArticleItems()) {
+                String articleId = article.optString("id");
+                if (readArticleIdSet.contains(articleId)) {
+                    try {
+                        article.put("is_read", true);
+                    } catch (JSONException e) {
+                        Log.e("ArticleActivity", "Error changing read state", e);
                     }
-                    
-                    sharedAdapterHelper.onDataChanged();
                 }
-            });
+            }
+            sharedAdapterHelper.onDataChanged();
+
+            // Update the server
+            ArticleResource.readMultiple(ArticleActivity.this, readArticleIdSet, new JsonHttpResponseHandler());
         }
         super.onPause();
     }

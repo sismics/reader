@@ -175,11 +175,15 @@ public class MainActivity extends FragmentActivity {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        setProgressBarIndeterminateVisibility(true);
                         String url = SharedArticlesAdapterHelper.getInstance().getUrl();
                         SubscriptionResource.read(MainActivity.this, url, new JsonHttpResponseHandler() {
                             @Override
                             public void onFinish() {
-                                refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
+                                if (!isActivityDestroyed()) {
+                                    setProgressBarIndeterminateVisibility(false);
+                                    refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
+                                }
                             }
                         });
                     }
@@ -401,9 +405,12 @@ public class MainActivity extends FragmentActivity {
 
     /**
      * Handle the incoming intent.
-     * @param intent
+     * @param intent Intent
      */
     private void handleIntent(Intent intent) {
+        // Intent is consumed
+        setIntent(null);
+
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             // Perform a search query
             String query = intent.getStringExtra(SearchManager.QUERY);

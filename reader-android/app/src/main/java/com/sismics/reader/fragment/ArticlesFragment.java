@@ -44,7 +44,7 @@ public class ArticlesFragment extends NavigationFragment {
 
         @Override
         public void onSuccess() {
-            aq.id(R.id.emptyList).text(R.string.no_articles);;
+            aq.id(R.id.emptyList).text(R.string.no_articles);
         }
 
         @Override
