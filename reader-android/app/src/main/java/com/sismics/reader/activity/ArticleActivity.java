@@ -30,7 +30,6 @@ import com.sismics.reader.resource.StarredResource;
 import com.sismics.reader.ui.adapter.ArticlesAdapter;
 import com.sismics.reader.ui.adapter.ArticlesPagerAdapter;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
-import com.sismics.reader.ui.viewpager.CardTransformer;
 import com.viewpagerindicator.UnderlinePageIndicator;
 
 import org.json.JSONException;
@@ -122,18 +121,22 @@ public class ArticleActivity extends FragmentActivity {
                 }
 
                 // Scroll the ListView
-                drawerList.setItemChecked(position, true);
-                drawerList.smoothScrollToPositionFromTop(position, 100);
-                drawerList.invalidate();
+                if (drawerLayout == null) {
+                    if (drawerList.getCheckedItemCount() == 0) {
+                        // Don't be smooth when the activity has just opened
+                        drawerList.setSelectionFromTop(position, 100);
+                    } else {
+                        drawerList.smoothScrollToPositionFromTop(position, 100);
+                    }
+                    drawerList.setItemChecked(position, true);
+                }
 
                 // Update the action bar
                 updateActionBar();
             }
             
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                drawerList.invalidate();
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
             
             @Override
             public void onPageScrollStateChanged(int state) {}
@@ -155,8 +158,12 @@ public class ArticleActivity extends FragmentActivity {
         // Configure the ViewPagerIndicator
         int position = getIntent().getIntExtra("position", 0);
         UnderlinePageIndicator indicator = (UnderlinePageIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(viewPager, position);
-        indicator.setOnPageChangeListener(onPageChangeListener);
+        if (indicator != null) {
+            indicator.setViewPager(viewPager, position);
+            indicator.setOnPageChangeListener(onPageChangeListener);
+        } else {
+            viewPager.setOnPageChangeListener(onPageChangeListener);
+        }
 
         // Configure the ListView
         drawerList = (ListView) findViewById(R.id.drawer_list);
@@ -211,6 +218,13 @@ public class ArticleActivity extends FragmentActivity {
                 public void onDrawerOpened(View view) {
                     invalidateOptionsMenu();
                     getActionBar().show();
+
+                    // Sync the ListView with the ViewPager
+                    int position = viewPager.getCurrentItem();
+                    drawerList.setItemChecked(position, true);
+                    if (position <= drawerList.getFirstVisiblePosition() || position >= drawerList.getLastVisiblePosition()) {
+                        drawerList.setSelectionFromTop(position, 100);
+                    }
                 }
 
                 @Override

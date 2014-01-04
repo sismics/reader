@@ -35,22 +35,10 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <LinearLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.7"
-        android:orientation="vertical">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <com.viewpagerindicator.UnderlinePageIndicator
-            android:id="@+id/indicator"
-            android:layout_width="match_parent"
-            android:layout_height="4dp" />
-
-    </LinearLayout>
+        android:layout_weight="0.7"/>
 
 </LinearLayout>

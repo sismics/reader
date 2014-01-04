@@ -117,6 +117,7 @@ public class ArticleFragment extends Fragment {
                         		"<meta name=\"viewport\" content=\"initial-scale=1, minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no\" />" +
                         		"<style>" +
                         		"img, iframe { max-width: 100%; height: auto; } " +
+                                "iframe { display: none; } " +
                         		"pre { max-width: 100%; overflow: hidden; } " +
                                 "body {\n" +
                                 "  color: #191919;\n" +

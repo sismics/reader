@@ -140,8 +140,7 @@ public class ArticlesFragment extends NavigationFragment {
         if (requestCode == Constants.REQUEST_CODE_ARTICLES && resultCode == Activity.RESULT_OK) {
             // We are coming back from the articles pager, scroll to the last viewed
             ListView articleList = aq.id(R.id.articleList).getListView();
-            articleList.setSelection(data.getIntExtra("position", 0));
-            ((ArticlesAdapter)articleList.getAdapter()).notifyDataSetChanged();
+            articleList.setSelectionFromTop(data.getIntExtra("position", 0), 100);
         }
     }
     
