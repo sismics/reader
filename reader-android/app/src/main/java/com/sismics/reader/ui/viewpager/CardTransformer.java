@@ -19,6 +19,14 @@ public class CardTransformer implements ViewPager.PageTransformer {
 
     @Override
     public void transformPage(View page, float position) {
+        if (position >= 1){
+            final int w = page.getWidth();
+
+            page.setAlpha(0);
+            page.setScaleX(0);
+            page.setScaleY(0);
+            page.setTranslationX(w);
+        }
 
         if (position >= 0) {
             final int w = page.getWidth();

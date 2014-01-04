@@ -1,8 +1,23 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.7.+'
+    }
+}
+
 apply plugin: 'android'
+
+repositories {
+    maven { url "http://dl.bintray.com/populov/maven" }
+    mavenCentral()
+    flatDir { dirs 'libs' }
+}
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.1"
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 14
@@ -31,6 +46,7 @@ dependencies {
     compile 'ch.acra:acra:4.5.0'
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.viewpagerindicator:library:2.4.1@aar'
+    // compile 'com.mobeta.android.dslv:drag-sort-listview:0.6.1-SNAPSHOT-AAR@aar'
     compile 'com.google.android.apps.dashclock:dashclock-api:+'
     compile 'com.loopj.android:android-async-http:1.4.4'
 }

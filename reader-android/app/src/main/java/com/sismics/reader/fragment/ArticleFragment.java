@@ -96,7 +96,7 @@ public class ArticleFragment extends Fragment {
         // Configure WebView
         WebView webView = aq.id(R.id.articleWebView).getWebView();
         webView.getSettings().setUseWideViewPort(true);
-        
+
         Bundle args = getArguments();
         if (args != null) {
             String jsonStr = args.getString("json");

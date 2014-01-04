@@ -149,7 +149,8 @@ public class ArticleActivity extends FragmentActivity {
         viewPager.setAdapter(adapter);
 
         // Pretty animation between pages
-        viewPager.setPageTransformer(true, new CardTransformer(.7f));
+        // Issue #89 : This animation blocks the vertical scrolling on API16 (at least)
+        //viewPager.setPageTransformer(true, new CardTransformer(.7f));
 
         // Configure the ViewPagerIndicator
         int position = getIntent().getIntExtra("position", 0);

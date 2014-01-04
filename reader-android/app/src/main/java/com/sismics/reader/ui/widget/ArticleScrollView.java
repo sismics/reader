@@ -28,7 +28,9 @@ public class ArticleScrollView extends ScrollView {
     }
 
     @Override
-    public void onScrollChanged(int w, int h, int ow, int oh) {
+    protected void onScrollChanged(int w, int h, int ow, int oh) {
+        super.onScrollChanged(w, h, ow, oh);
+
         if (onScrollChangedListener != null) {
             if (oh < h) {
                 down += h - oh;
