@@ -40,6 +40,8 @@ public class MainApplication extends Application {
         // TODO Renaming subscriptions
         // TODO Adding categories
         // TODO Reordering/renaming/removing categories
+        // TODO Open the drawer when the ViewPager is at the end and all articles are loaded
+        // TODO Sync the drawer's ListView when the user starts draging the drawer (not at the end)
         // TODO Admin interface if the user is admin
 
         super.onCreate();

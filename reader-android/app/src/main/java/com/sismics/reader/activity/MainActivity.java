@@ -25,6 +25,7 @@ import android.widget.SearchView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.reader.R;
+import com.sismics.reader.constant.Constants;
 import com.sismics.reader.fragment.AddSubscriptionDialogFragment;
 import com.sismics.reader.fragment.ArticlesDefaultFragment;
 import com.sismics.reader.fragment.ArticlesFragment;
@@ -214,7 +215,7 @@ public class MainActivity extends FragmentActivity {
                 return true;
 
             case R.id.manage_categories:
-                startActivity(new Intent(MainActivity.this, CategoriesActivity.class));
+                startActivityForResult(new Intent(MainActivity.this, CategoriesActivity.class), Constants.REQUEST_CODE_MANAGE_CATEGORIES);
                 return true;
 
             case R.id.settings:
@@ -439,6 +440,15 @@ public class MainActivity extends FragmentActivity {
             // Update selected item and title
             drawerList.setItemChecked(drawerList.getCheckedItemPosition(), false);
             setTitle(query);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.REQUEST_CODE_MANAGE_CATEGORIES && resultCode == RESULT_OK) {
+            // If we have successfully modified the categories, refresh everything
+            refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
         }
     }
 }

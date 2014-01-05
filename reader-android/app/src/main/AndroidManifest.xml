@@ -54,6 +54,7 @@
         <activity
             android:name=".activity.CategoriesActivity"
             android:label="@string/manage_categories"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:logo="@drawable/ic_action_sort_by_size">
         </activity>
         <activity

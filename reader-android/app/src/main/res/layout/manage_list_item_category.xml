@@ -1,30 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
-    android:gravity="left|center_vertical">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/handle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_drag"
-        android:contentDescription="@string/touch_reorder" />
+        android:contentDescription="@string/touch_reorder"
+        android:paddingRight="8dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"/>
 
     <ImageView
+        android:id="@+id/collection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_action_collection"
         android:contentDescription="@string/favicon"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"/>
+        android:layout_marginRight="6dp"
+        android:layout_toRightOf="@id/handle"
+        android:layout_centerVertical="true"/>
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:layout_toRightOf="@id/collection"
+        android:layout_toLeftOf="@+id/overflow"
+        android:layout_centerVertical="true"
         android:gravity="left|center_vertical"
-        android:fontFamily="sans-serif-light" />
+        android:fontFamily="sans-serif-light"
+        android:lines="1"
+        android:ellipsize="end"/>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/overflow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="6dp"
+        android:src="@drawable/overflow_menu"
+        android:contentDescription="@string/more_options"/>
+
+</RelativeLayout>

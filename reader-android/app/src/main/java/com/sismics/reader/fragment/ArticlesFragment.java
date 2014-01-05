@@ -137,6 +137,7 @@ public class ArticlesFragment extends NavigationFragment {
     
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constants.REQUEST_CODE_ARTICLES && resultCode == Activity.RESULT_OK) {
             // We are coming back from the articles pager, scroll to the last viewed
             ListView articleList = aq.id(R.id.articleList).getListView();

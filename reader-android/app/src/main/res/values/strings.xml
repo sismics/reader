@@ -41,6 +41,7 @@
     <string name="no_articles">No articles</string>
     <string name="error_loading_articles">Error loading articles</string>
     <string name="error_loading_subscriptions">Error loading subscriptions</string>
+    <string name="error_loading_categories">Error loading categories</string>
     <string name="loading_subscriptions">Loading subscriptions&#8230;</string>
     <string name="loading_articles">Loading articles&#8230;</string>
     <string name="add_subscription">Add subscription</string>
@@ -60,6 +61,18 @@
     <string name="touch_reorder">Touch to reorder</string>
     <string name="manage_categories_explain">Drag categories to reorder them. Don\'t forget to save your modifications.</string>
     <string name="save">Save</string>
+    <string name="more_options">More options</string>
+    <string name="rename">Rename</string>
+    <string name="delete">Delete</string>
+    <string name="category_delete_title">Delete category</string>
+    <string name="category_delete_message">Do you really want to delete this category?</string>
+    <string name="finish_save_title">Pending changes</string>
+    <string name="finish_save_message">You have unsaved changes. Save them now?</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="save_now">Save Now</string>
+    <string name="manage_categories_save_error">Network error while saving pending changes</string>
+    <string name="manage_categories_save_success">Changes saved</string>
+    <string name="manage_categories_saving">%1$d changes to save&#8230;</string>
 
     <!-- Preferences -->
     <string name="pref_general_category">General settings</string>
