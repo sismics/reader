@@ -56,6 +56,10 @@
     <string name="build">Build</string>
     <string name="search_hint">Search articles</string>
     <string name="action_search">Search</string>
+    <string name="manage_categories">Manage categories</string>
+    <string name="touch_reorder">Touch to reorder</string>
+    <string name="manage_categories_explain">Drag categories to reorder them. Don\'t forget to save your modifications.</string>
+    <string name="save">Save</string>
 
     <!-- Preferences -->
     <string name="pref_general_category">General settings</string>

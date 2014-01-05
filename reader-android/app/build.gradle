@@ -46,7 +46,7 @@ dependencies {
     compile 'ch.acra:acra:4.5.0'
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.viewpagerindicator:library:2.4.1@aar'
-    // compile 'com.mobeta.android.dslv:drag-sort-listview:0.6.1-SNAPSHOT-AAR@aar'
+    compile 'com.mobeta.android.dslv:drag-sort-listview:0.6.1-SNAPSHOT-AAR@aar'
     compile 'com.google.android.apps.dashclock:dashclock-api:+'
     compile 'com.loopj.android:android-async-http:1.4.4'
 }

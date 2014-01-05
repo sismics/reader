@@ -25,6 +25,12 @@
         android:title="@string/add_subscription">
     </item>
     <item
+        android:id="@+id/manage_categories"
+        android:icon="@drawable/ic_action_sort_by_size"
+        android:showAsAction="collapseActionView"
+        android:title="@string/manage_categories">
+    </item>
+    <item
         android:id="@+id/settings"
         android:showAsAction="collapseActionView"
         android:title="@string/settings">

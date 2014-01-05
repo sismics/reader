@@ -36,9 +36,11 @@ public class MainApplication extends Application {
         JSONObject json = PreferenceUtil.getCachedJson(getApplicationContext(), PreferenceUtil.PREF_CACHED_USER_INFO_JSON);
         ApplicationContext.getInstance().setUserInfo(getApplicationContext(), json);
 
-        // TODO Adding categories
         // TODO Changing the category of a subscription
-        // TODO Reordering categories/subscriptions
+        // TODO Renaming subscriptions
+        // TODO Adding categories
+        // TODO Reordering/renaming/removing categories
+        // TODO Admin interface if the user is admin
 
         super.onCreate();
     }

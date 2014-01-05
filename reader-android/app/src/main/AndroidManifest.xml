@@ -52,6 +52,11 @@
             android:logo="@drawable/ic_action_settings">
         </activity>
         <activity
+            android:name=".activity.CategoriesActivity"
+            android:label="@string/manage_categories"
+            android:logo="@drawable/ic_action_sort_by_size">
+        </activity>
+        <activity
             android:name=".activity.LicenseActivity"
             android:label="@string/licenses"
             android:logo="@drawable/ic_action_about">

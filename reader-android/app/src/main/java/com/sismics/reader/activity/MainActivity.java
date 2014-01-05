@@ -213,6 +213,10 @@ public class MainActivity extends FragmentActivity {
                 addSubscriptionDialogFragment.show(getSupportFragmentManager(), "AddSubscriptionDialogFragment");
                 return true;
 
+            case R.id.manage_categories:
+                startActivity(new Intent(MainActivity.this, CategoriesActivity.class));
+                return true;
+
             case R.id.settings:
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 return true;
