@@ -8,15 +8,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 
 import com.androidquery.AQuery;
 import com.sismics.reader.R;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.UUID;
 
 /**
  * Adapter for categories list.
@@ -85,6 +86,22 @@ public class CategoryAdapter extends BaseAdapter {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.rename:
+                                Category category = getItem(position);
+                                if (category == null) {
+                                    return true;
+                                }
+                                final EditText input = new EditText(context);
+                                input.setText(category.getName());
+                                new AlertDialog.Builder(context)
+                                        .setTitle(R.string.rename_category)
+                                        .setView(input)
+                                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int whichButton) {
+                                                rename(position, input.getText().toString());
+                                            }
+                                        }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {}
+                                }).show();
                                 return true;
 
                             case R.id.delete:
@@ -102,7 +119,7 @@ public class CategoryAdapter extends BaseAdapter {
             }
         });
 
-        aq.id(R.id.title).text(item.getTitle());
+        aq.id(R.id.title).text(item.getName());
         
         return view;
     }
@@ -142,7 +159,7 @@ public class CategoryAdapter extends BaseAdapter {
         }
         Category category = items.remove(from);
         items.add(to, category);
-        State state = new State(category.getId(), State.Type.MOVE, to);
+        State state = new State(category.getId(), category.getName(), State.Type.MOVE, to);
         states.add(state);
         notifyDataSetChanged();
     }
@@ -163,7 +180,7 @@ public class CategoryAdapter extends BaseAdapter {
                             return;
                         }
                         items.remove(position);
-                        State state = new State(category.getId(), State.Type.DELETE, position);
+                        State state = new State(category.getId(), category.getName(), State.Type.DELETE, position);
                         states.add(state);
                         notifyDataSetChanged();
                     }
@@ -175,6 +192,36 @@ public class CategoryAdapter extends BaseAdapter {
                     }
                 })
                 .show();
+    }
+
+    /**
+     * Add an item.
+     * @param name Category name
+     */
+    public void add(String name) {
+        Category category = new Category();
+        category.setId(UUID.randomUUID().toString());
+        category.setName(name);
+        items.add(category);
+        State state = new State(category.getId(), name, State.Type.ADD, items.size() - 1);
+        states.add(state);
+        notifyDataSetChanged();
+    }
+
+    /**
+     * Rename an item.
+     * @param position Item position
+     * @param name Category name
+     */
+    public void rename(int position, String name) {
+        Category category = getItem(position);
+        if (category == null) {
+            return;
+        }
+        category.setName(name);
+        State state = new State(category.getId(), name, State.Type.RENAME, position);
+        states.add(state);
+        notifyDataSetChanged();
     }
 
     /**
@@ -193,12 +240,25 @@ public class CategoryAdapter extends BaseAdapter {
     }
 
     /**
+     * Update a category ID in remaining states.
+     * @param oldId Old ID
+     * @param newId New ID
+     */
+    public void updateCategoryId(String oldId, String newId) {
+        for (State state : states) {
+            if (state.getId().equals(oldId)) {
+                state.setId(newId);
+            }
+        }
+    }
+
+    /**
      * A category.
      */
     public static class Category {
 
         private String id;
-        private String title;
+        private String name;
 
         public String getId() {
             return id;
@@ -208,12 +268,12 @@ public class CategoryAdapter extends BaseAdapter {
             this.id = id;
         }
 
-        public String getTitle() {
-            return title;
+        public String getName() {
+            return name;
         }
 
-        public void setTitle(String title) {
-            this.title = title;
+        public void setName(String name) {
+            this.name = name;
         }
     }
 
@@ -223,21 +283,31 @@ public class CategoryAdapter extends BaseAdapter {
     public static class State {
 
         public static enum Type {
-            DELETE, MOVE
+            DELETE, MOVE, RENAME, ADD
         }
 
         private String id;
+        private String name;
         private Type type;
         private int position;
 
-        public State(String id, Type type, int position) {
+        public State(String id, String name, Type type, int position) {
             this.id = id;
+            this.name = name;
             this.type = type;
             this.position = position;
         }
 
         public String getId() {
             return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
         }
 
         public Type getType() {

@@ -6,4 +6,10 @@
         android:showAsAction="ifRoom"
         android:title="@string/save">
     </item>
+    <item
+        android:id="@+id/add_category"
+        android:icon="@drawable/ic_action_collection_new"
+        android:showAsAction="ifRoom"
+        android:title="@string/add_category">
+    </item>
 </menu>

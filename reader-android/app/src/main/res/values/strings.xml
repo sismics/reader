@@ -63,6 +63,7 @@
     <string name="save">Save</string>
     <string name="more_options">More options</string>
     <string name="rename">Rename</string>
+    <string name="rename_category">Rename category</string>
     <string name="delete">Delete</string>
     <string name="category_delete_title">Delete category</string>
     <string name="category_delete_message">Do you really want to delete this category?</string>
@@ -73,6 +74,8 @@
     <string name="manage_categories_save_error">Network error while saving pending changes</string>
     <string name="manage_categories_save_success">Changes saved</string>
     <string name="manage_categories_saving">%1$d changes to save&#8230;</string>
+    <string name="add_category">Add a category</string>
+    <string name="category_name">Category name</string>
 
     <!-- Preferences -->
     <string name="pref_general_category">General settings</string>
