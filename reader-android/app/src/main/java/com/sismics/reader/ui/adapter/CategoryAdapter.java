@@ -90,8 +90,12 @@ public class CategoryAdapter extends BaseAdapter {
                                 if (category == null) {
                                     return true;
                                 }
+                                // Make a focused EditText
                                 final EditText input = new EditText(context);
                                 input.setText(category.getName());
+                                input.setSelectAllOnFocus(true);
+
+                                // Build the dialog
                                 new AlertDialog.Builder(context)
                                         .setTitle(R.string.rename_category)
                                         .setView(input)
