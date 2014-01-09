@@ -40,7 +40,7 @@ public class ReaderExtension extends DashClockExtension {
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         // Check if a connection is available
-        if (networkInfo.isConnected()) {
+        if (networkInfo != null && networkInfo.isConnected()) {
             // Fetch the number of unread articles
             SubscriptionResource.list(this, true, new JsonHttpResponseHandler() {
                 @Override
