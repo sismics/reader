@@ -157,7 +157,7 @@ public class SharedArticlesAdapterHelper {
     public void load(Context context) {
         final List<JSONObject> items = articleItems;
         
-        if (loading || fullyLoaded) {
+        if (loading || fullyLoaded || url == null) {
             return;
         }
         
