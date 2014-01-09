@@ -336,7 +336,9 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onFailure(final int statusCode, final Header[] headers, final byte[] responseBytes, final Throwable throwable) {
                 ArticlesDefaultFragment articlesDefaultFragment =  (ArticlesDefaultFragment) getSupportFragmentManager().findFragmentByTag(ARTICLES_DEFAULT_FRAGMENT_TAG);
-                articlesDefaultFragment.onSubscriptionError();
+                if (articlesDefaultFragment != null) {
+                    articlesDefaultFragment.onSubscriptionError();
+                }
             }
         };
         
