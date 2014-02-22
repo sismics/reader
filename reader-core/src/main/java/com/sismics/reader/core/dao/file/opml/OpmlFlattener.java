@@ -31,15 +31,17 @@ public class OpmlFlattener {
             return;
         }
         for (Outline outline : outlineTree) {
-            if ("rss".equals(outline.getType())) {
+            if (StringUtils.isBlank(outline.getXmlUrl())) {
+                // It's a category
+                flatten(outline.getOutlineList(), outlineMap, getPrefix(outline, prefix));
+            } else {
+                // It's a feed
                 List<Outline> outlineList = outlineMap.get(prefix);
                 if (outlineList == null) {
                     outlineList = new ArrayList<Outline>();
                     outlineMap.put(prefix, outlineList);
                 }
                 outlineList.add(outline);
-            } else if (StringUtils.isBlank(outline.getType())) {
-                flatten(outline.getOutlineList(), outlineMap, getPrefix(outline, prefix));
             }
         }
     }

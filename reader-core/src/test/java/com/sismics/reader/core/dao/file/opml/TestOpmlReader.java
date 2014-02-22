@@ -74,7 +74,7 @@ public class TestOpmlReader {
             List<Outline> rootOutlineList = opmlReader.getOutlineList();
             Assert.assertEquals(1, rootOutlineList.size());
             Outline category = rootOutlineList.get(0);
-            Assert.assertEquals(null, category.getType());
+            Assert.assertEquals("folder", category.getType());
             Assert.assertEquals("MyFeeds", category.getTitle());
             Assert.assertEquals("MyFeeds", category.getText());
             Assert.assertEquals(6, category.getOutlineList().size());
@@ -90,6 +90,51 @@ public class TestOpmlReader {
             Assert.assertEquals(1, outlineMap.size());
             List<Outline> rootList = outlineMap.get("MyFeeds");
             Assert.assertEquals(6, rootList.size());
+        } finally {
+            closer.close();
+        }
+    }
+    
+    /**
+     * Related to #95.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void ttrssOpmlReaderTest() throws Exception {
+        Closer closer = Closer.create();
+        InputStream is = null;
+        try {
+            is = closer.register(getClass().getResourceAsStream("/opml/ttrss_subscriptions.xml"));
+            OpmlReader opmlReader = new OpmlReader();
+            opmlReader.read(is);
+            List<Outline> rootOutlineList = opmlReader.getOutlineList();
+            Assert.assertEquals(8, rootOutlineList.size());
+            Outline category = rootOutlineList.get(0);
+            Assert.assertEquals(null, category.getType());
+            Assert.assertEquals(null, category.getTitle());
+            Assert.assertEquals("test", category.getText());
+            Assert.assertEquals(1, category.getOutlineList().size());
+            Outline outline = category.getOutlineList().get(0);
+            Assert.assertEquals(null, outline.getType());
+            Assert.assertEquals(null, outline.getTitle());
+            Assert.assertEquals("Fefes Blog", outline.getText());
+            Assert.assertEquals("http://blog.fefe.de/rss.xml?html", outline.getXmlUrl());
+            Assert.assertEquals("http://blog.fefe.de/", outline.getHtmlUrl());
+            Assert.assertEquals(0, outline.getOutlineList().size());
+            outline = rootOutlineList.get(1);
+            Assert.assertEquals(null, outline.getType());
+            Assert.assertEquals(null, outline.getTitle());
+            Assert.assertEquals("Boing Boing", outline.getText());
+            Assert.assertEquals(0, outline.getOutlineList().size());
+            
+            
+            Map<String, List<Outline>> outlineMap = OpmlFlattener.flatten(rootOutlineList);
+            Assert.assertEquals(2, outlineMap.size());
+            List<Outline> rootList = outlineMap.get("test");
+            Assert.assertEquals(1, rootList.size());
+            rootList = outlineMap.get(null);
+            Assert.assertEquals(7, rootList.size());
         } finally {
             closer.close();
         }
