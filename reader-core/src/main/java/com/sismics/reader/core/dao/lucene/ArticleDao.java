@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.FieldType;
+import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.FieldInfo.IndexOptions;
@@ -20,6 +21,9 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.Sort;
+import org.apache.lucene.search.SortField;
+import org.apache.lucene.search.SortField.Type;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.postingshighlight.Passage;
 import org.apache.lucene.search.postingshighlight.PassageFormatter;
@@ -124,7 +128,8 @@ public class ArticleDao {
         
         // Search
         IndexSearcher searcher = new IndexSearcher(AppContext.getInstance().getIndexingService().getDirectoryReader());
-        TopDocs topDocs = searcher.search(query, null, paginatedList.getOffset() + paginatedList.getLimit());
+        Sort sort = new Sort(new SortField("date", Type.LONG, true));
+        TopDocs topDocs = searcher.search(query, null, paginatedList.getOffset() + paginatedList.getLimit(), sort);
         ScoreDoc[] docs = topDocs.scoreDocs;
         paginatedList.setResultCount(topDocs.totalHits);
         
@@ -184,6 +189,7 @@ public class ArticleDao {
         org.apache.lucene.document.Document document = new org.apache.lucene.document.Document();
         document.add(new StringField("id", article.getId(), Field.Store.YES));
         document.add(new StringField("url", article.getUrl(), Field.Store.YES));
+        document.add(new LongField("date", article.getCreateDate().getTime(), Field.Store.YES));
         document.add(new Field("title", article.getTitle(), fieldType));
         document.add(new Field("description", article.getDescription(), fieldType));
         
