@@ -9,7 +9,7 @@ r.theme.init = function() {
  * Update current theme.
  */
 r.theme.update = function(theme) {
-  // Remove previous custom theme
+  /*// Remove previous custom theme
   less.sheets = $.grep(less.sheets, function(sheet) {
     return !$(sheet).hasClass('custom');
   });
@@ -21,5 +21,5 @@ r.theme.update = function(theme) {
     less.sheets.push($('<link class="custom" rel="stylesheet/less" href="stylesheets/theme/' + theme + '" type="text/css" />')[0]);
   }
   
-  less.refresh();
+  less.refresh();*/
 };

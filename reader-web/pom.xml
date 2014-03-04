@@ -285,85 +285,30 @@
         </resources>
         
         <plugins>
-        
-          <!-- Minify -->
-          <plugin>
-            <groupId>com.samaxes.maven</groupId>
-            <artifactId>minify-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>reader-minify</id>
-                <phase>process-resources</phase>
-                <configuration>
-                  <jsSourceDir>javascripts</jsSourceDir>
-                  <jsTargetDir>javascripts</jsTargetDir>
-                  <jsSourceFiles>
-                    <jsSourceFile>jquery.less.js</jsSourceFile>
-                    <jsSourceFile>jquery.ui.js</jsSourceFile>
-                    <jsSourceFile>jquery.visible.js</jsSourceFile>
-                    <jsSourceFile>jquery.cookie.js</jsSourceFile>
-                    <jsSourceFile>jquery.history.js</jsSourceFile>
-                    <jsSourceFile>jquery.moment.js</jsSourceFile>
-                    <jsSourceFile>jquery.cookie.js</jsSourceFile>
-                    <jsSourceFile>jquery.qtip.js</jsSourceFile>
-                    <jsSourceFile>jquery.toastmessage.js</jsSourceFile>
-                    <jsSourceFile>jquery.json.js</jsSourceFile>
-                    <jsSourceFile>jquery.throttle.js</jsSourceFile>
-                    <jsSourceFile>jquery.i18next.js</jsSourceFile>
-                    <jsSourceFile>jquery.visible.js</jsSourceFile>
-                    <jsSourceFile>jquery.validate.js</jsSourceFile>
-                    <jsSourceFile>jquery.numeral.js</jsSourceFile>
-                    <jsSourceFile>r.main.js</jsSourceFile>
-                    <jsSourceFile>r.user.js</jsSourceFile>
-                    <jsSourceFile>r.subscription.js</jsSourceFile>
-                    <jsSourceFile>r.article.js</jsSourceFile>
-                    <jsSourceFile>r.category.js</jsSourceFile>
-                    <jsSourceFile>r.feed.js</jsSourceFile>
-                    <jsSourceFile>r.search.js</jsSourceFile>
-                    <jsSourceFile>r.settings.js</jsSourceFile>
-                    <jsSourceFile>r.about.js</jsSourceFile>
-                    <jsSourceFile>r.wizard.js</jsSourceFile>
-                    <jsSourceFile>r.theme.js</jsSourceFile>
-                    <jsSourceFile>r.util.js</jsSourceFile>
-                    <jsSourceFile>r.shortcuts.js</jsSourceFile>
-                  </jsSourceFiles>
-                  <jsFinalFile>reader.js</jsFinalFile>
-                </configuration>
-                <goals>
-                  <goal>minify</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
           
-          <!-- Ant task to modify the JS/CSS imports -->
+          <!-- Launch NPM & Grunt -->
           <plugin>
             <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.7</version>
             <executions>
               <execution>
-                <id>default-antrun</id>
-                <phase>process-resources</phase>
+                <phase>generate-sources</phase>
                 <configuration>
-                  <target>
-                    
-                    <property name="webapp.dir" location="${basedir}/src/main/webapp" />
-                    <property name="war.dir" location="${project.build.directory}/${project.artifactId}-${project.version}" />
-                    
-                    <!-- Copy HTML files -->
-                    <copy todir="${war.dir}">
-                      <fileset dir="${webapp.dir}" includes="*.html" />
-                    </copy>
-                    
-                    <!-- Use minified imports -->
-                    <replaceregexp match="&lt;!-- MINIFIED (.*) --&gt;" replace="\1" flags="g">
-                      <fileset dir="${war.dir}" includes="*.html" />
-                    </replaceregexp>
-                    
-                    <!-- Delete unminified imports -->
-                    <replaceregexp match="&lt;!-- BEGIN NON MINIFIED --&gt;(.*?)&lt;!-- END NON MINIFIED --&gt;" replace="" flags="gs">
-                      <fileset dir="${war.dir}" includes="*.html" />
-                    </replaceregexp>
-                    
+                  <target name="building">
+                    <!-- npm install -->
+                    <exec executable="cmd" dir="${project.basedir}/src/main/webapp" osfamily="windows" failonerror="true">
+                      <arg line="/c npm install" />
+                    </exec>
+                    <exec executable="npm" dir="${project.basedir}/src/main/webapp" osfamily="unix" failonerror="true">
+                      <arg line="install" />
+                    </exec>
+                    <!-- grunt -->
+                    <exec executable="cmd" dir="${project.basedir}/src/main/webapp" osfamily="windows">
+                      <arg line="/c grunt --apiurl=api" />
+                    </exec>
+                    <exec executable="grunt" dir="${project.basedir}/src/main/webapp" osfamily="unix">
+                      <arg line="--apiurl=api" />
+                    </exec>
                   </target>
                 </configuration>
                 <goals>
@@ -373,44 +318,12 @@
             </executions>
           </plugin>
           
-          <!-- Generation of the war -->
+          <!-- WAR generation -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-war-plugin</artifactId>
             <configuration>
-              <warSourceExcludes>
-                **/javascripts/jquery.less.js,
-                **/javascripts/jquery.ui.js,
-                **/javascripts/jquery.cookie.js,
-                **/javascripts/jquery.visible.js,
-                **/javascripts/jquery.history.js,
-                **/javascripts/jquery.moment.js,
-                **/javascripts/jquery.cookie.js,
-                **/javascripts/jquery.qtip.js,
-                **/javascripts/jquery.toastmessage.js,
-                **/javascripts/jquery.json.js,
-                **/javascripts/jquery.throttle.js,
-                **/javascripts/jquery.i18next.js,
-                **/javascripts/jquery.visible.js,
-                **/javascripts/jquery.validate.js,
-                **/javascripts/jquery.numeral.js,
-                **/javascripts/r.main.js,
-                **/javascripts/r.user.js,
-                **/javascripts/r.subscription.js,
-                **/javascripts/r.article.js,
-                **/javascripts/r.category.js,
-                **/javascripts/r.feed.js,
-                **/javascripts/r.search.js,
-                **/javascripts/r.settings.js,
-                **/javascripts/r.about.js,
-                **/javascripts/r.wizard.js,
-                **/javascripts/r.theme.js,
-                **/javascripts/r.util.js,
-                **/javascripts/r.shortcuts.js,
-                test/**,
-                sismicsreader/**,
-                *.html
-              </warSourceExcludes>
+              <warSourceDirectory>${basedir}/src/main/webapp/dist</warSourceDirectory>
               <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
             </configuration>
           </plugin>

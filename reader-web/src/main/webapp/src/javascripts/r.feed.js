@@ -94,7 +94,7 @@ r.feed.init = function() {
       
     } else if (target.substring(0, 13) == 'subscription/') {
       // Configuring context for /subscription/id
-      r.feed.context.url = 'api/' + target;
+      r.feed.context.url = '../api/' + target;
       r.feed.context.subscriptionId = target.substring(13);
       
       // Specific toolbar actions for subscriptions
@@ -102,7 +102,7 @@ r.feed.init = function() {
       
     } else if (target.substring(0, 9) == 'category/') {
       // Configuring context for /category/id
-      r.feed.context.url = 'api/' + target;
+      r.feed.context.url = '../api/' + target;
       r.feed.context.categoryId = target.substring(9);
       
       // Specific toolbar actions for categories
