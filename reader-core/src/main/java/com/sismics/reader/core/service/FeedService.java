@@ -236,6 +236,9 @@ public class FeedService extends AbstractScheduledService {
                     userArticle.setArticleId(article.getId());
                     userArticle.setUserId(feedSubscription.getUserId());
                     userArticleDao.create(userArticle);
+
+                    feedSubscription.setUnreadUserArticleCount(feedSubscription.getUnreadUserArticleCount() + 1);
+                    feedSubscriptionDao.updateUnreadCount(feedSubscription.getId(), feedSubscription.getUnreadUserArticleCount());
                 }
             }
 
@@ -328,7 +331,7 @@ public class FeedService extends AbstractScheduledService {
         userArticleCriteria.setFeedId(feedSubscription.getFeedId());
 
         UserArticleDao userArticleDao = new UserArticleDao();
-        PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(); //TODO we could fetch as much articles as in the feed, not 10
+        PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(); //TODO we could fetch as many articles as in the feed, not 10
         userArticleDao.findByCriteria(userArticleCriteria, paginatedList);
         for (UserArticleDto userArticleDto : paginatedList.getResultList()) {
             if (userArticleDto.getId() == null) {
@@ -336,7 +339,11 @@ public class FeedService extends AbstractScheduledService {
                 userArticle.setArticleId(userArticleDto.getArticleId());
                 userArticle.setUserId(userId);
                 userArticleDao.create(userArticle);
+                feedSubscription.setUnreadCount(feedSubscription.getUnreadCount() + 1);
             }
         }
+
+        FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+        feedSubscriptionDao.updateUnreadCount(feedSubscription.getId(), feedSubscription.getUnreadCount());
     }
 }

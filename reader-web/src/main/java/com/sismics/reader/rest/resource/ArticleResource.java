@@ -1,24 +1,24 @@
 package com.sismics.reader.rest.resource;
 
-import java.text.MessageFormat;
-import java.util.Date;
-import java.util.List;
-
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-
+import com.sismics.reader.core.dao.jpa.ArticleDao;
+import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
+import com.sismics.reader.core.dao.jpa.criteria.ArticleCriteria;
+import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
+import com.sismics.reader.core.dao.jpa.dto.ArticleDto;
+import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.model.jpa.UserArticle;
 import com.sismics.rest.exception.ClientException;
 import com.sismics.rest.exception.ForbiddenClientException;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.text.MessageFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Article REST resources.
@@ -53,6 +53,17 @@ public class ArticleResource extends BaseResource {
         // Update the article
         userArticle.setReadDate(new Date());
         userArticleDao.update(userArticle);
+
+        // Update the subscriptions
+        ArticleDto article = new ArticleDao().findFirstByCriteria(
+                new ArticleCriteria().setId(userArticle.getArticleId()));
+
+        FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+        for (FeedSubscriptionDto feedSubscription : feedSubscriptionDao.findByCriteria(new FeedSubscriptionCriteria()
+                .setFeedId(article.getFeedId())
+                .setUserId(principal.getId()))) {
+            feedSubscriptionDao.updateUnreadCount(feedSubscription.getId(), feedSubscription.getUnreadUserArticleCount() - 1);
+        }
         
         // Always return ok
         JSONObject response = new JSONObject();
@@ -87,6 +98,17 @@ public class ArticleResource extends BaseResource {
             // Update the article
             userArticle.setReadDate(new Date());
             userArticleDao.update(userArticle);
+
+            // Update the subscriptions
+            ArticleDto article = new ArticleDao().findFirstByCriteria(
+                    new ArticleCriteria().setId(userArticle.getArticleId()));
+
+            FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+            for (FeedSubscriptionDto feedSubscription : feedSubscriptionDao.findByCriteria(new FeedSubscriptionCriteria()
+                    .setFeedId(article.getFeedId())
+                    .setUserId(principal.getId()))) {
+                feedSubscriptionDao.updateUnreadCount(feedSubscription.getId(), feedSubscription.getUnreadUserArticleCount() - 1);
+            }
         }
         
         // Always return ok
@@ -121,7 +143,17 @@ public class ArticleResource extends BaseResource {
         // Update the article
         userArticle.setReadDate(null);
         userArticleDao.update(userArticle);
-        
+
+        // Update the subscriptions
+        ArticleDto article = new ArticleDao().findFirstByCriteria(
+                new ArticleCriteria().setId(userArticle.getArticleId()));
+
+        FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+        for (FeedSubscriptionDto feedSubscription : feedSubscriptionDao.findByCriteria(new FeedSubscriptionCriteria()
+                .setFeedId(article.getFeedId())
+                .setUserId(principal.getId()))) {
+            feedSubscriptionDao.updateUnreadCount(feedSubscription.getId(), feedSubscription.getUnreadUserArticleCount() + 1);
+        }
         // Always return ok
         JSONObject response = new JSONObject();
         response.put("status", "ok");

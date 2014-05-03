@@ -303,6 +303,7 @@ public class SubscriptionResource extends BaseResource {
         feedSubscription.setFeedId(feed.getId());
         feedSubscription.setCategoryId(category.getId());
         feedSubscription.setOrder(displayOrder);
+        feedSubscription.setUnreadCount(0);
         feedSubscription.setTitle(title);
         String feedSubscriptionId = feedSubscriptionDao.create(feedSubscription);
         
@@ -446,13 +447,13 @@ public class SubscriptionResource extends BaseResource {
         }
         
         // Marks all articles as read in this subscription
-        UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
-        userArticleCriteria.setUserId(principal.getId());
-        userArticleCriteria.setSubscribed(true);
-        userArticleCriteria.setFeedSubscriptionId(id);
-
         UserArticleDao userArticleDao = new UserArticleDao();
-        userArticleDao.markAsRead(userArticleCriteria);
+        userArticleDao.markAsRead(new UserArticleCriteria()
+                .setUserId(principal.getId())
+                .setSubscribed(true)
+                .setFeedSubscriptionId(id));
+
+        feedSubscriptionDao.updateUnreadCount(feedSubscription.getId(), 0);
 
         // Always return ok
         JSONObject response = new JSONObject();

@@ -22,6 +22,11 @@ public class FeedSubscriptionCriteria {
     private String feedId;
     
     /**
+     * Category ID.
+     */
+    private String categoryId;
+    
+    /**
      * Feed URL.
      */
     private String feedUrl;
@@ -85,6 +90,25 @@ public class FeedSubscriptionCriteria {
      */
     public FeedSubscriptionCriteria setFeedId(String feedId) {
         this.feedId = feedId;
+        return this;
+    }
+
+    /**
+     * Getter of categoryId.
+     *
+     * @return categoryId
+     */
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    /**
+     * Setter of categoryId.
+     *
+     * @param categoryId categoryId
+     */
+    public FeedSubscriptionCriteria setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
         return this;
     }
 

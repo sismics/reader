@@ -1,13 +1,12 @@
 package com.sismics.reader.core.model.jpa;
 
-import java.util.Date;
+import com.google.common.base.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.google.common.base.Objects;
+import java.util.Date;
 
 /**
  * Subscription from a user to a feed.
@@ -53,6 +52,12 @@ public class FeedSubscription {
      */
     @Column(name = "FES_ORDER_N", nullable = false)
     private Integer order;
+
+    /**
+     * Number of unread articles in this subscription..
+     */
+    @Column(name = "FES_UNREADCOUNT_N", nullable = false)
+    private Integer unreadCount;
 
     /**
      * Creation date.
@@ -172,6 +177,24 @@ public class FeedSubscription {
      */
     public void setOrder(Integer order) {
         this.order = order;
+    }
+
+    /**
+     * Getter of unreadCount.
+     *
+     * @return unreadCount
+     */
+    public Integer getUnreadCount() {
+        return unreadCount;
+    }
+
+    /**
+     * Setter of unreadCount.
+     *
+     * @param unreadCount unreadCount
+     */
+    public void setUnreadCount(Integer unreadCount) {
+        this.unreadCount = unreadCount;
     }
 
     /**

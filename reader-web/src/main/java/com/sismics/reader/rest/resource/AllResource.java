@@ -1,7 +1,10 @@
 package com.sismics.reader.rest.resource;
 
+import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
+import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
+import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
@@ -97,13 +100,17 @@ public class AllResource extends BaseResource {
         }
         
         // Marks all articles of this user as read
-        UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
-        userArticleCriteria.setUserId(principal.getId());
-        userArticleCriteria.setSubscribed(true);
-
         UserArticleDao userArticleDao = new UserArticleDao();
-        userArticleDao.markAsRead(userArticleCriteria);
-        
+        userArticleDao.markAsRead(new UserArticleCriteria()
+                .setUserId(principal.getId())
+                .setSubscribed(true));
+
+        FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+        for (FeedSubscriptionDto feedSubscrition : feedSubscriptionDao.findByCriteria(new FeedSubscriptionCriteria()
+                .setUserId(principal.getId()))) {
+            feedSubscriptionDao.updateUnreadCount(feedSubscrition.getId(), 0);
+        }
+
         // Always return ok
         JSONObject response = new JSONObject();
         response.put("status", "ok");

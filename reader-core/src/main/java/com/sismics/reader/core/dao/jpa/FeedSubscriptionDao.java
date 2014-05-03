@@ -1,23 +1,16 @@
 package com.sismics.reader.core.dao.jpa;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-
 import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
 import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
 import com.sismics.util.context.ThreadLocalContext;
+
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Feed subscription DAO.
@@ -61,10 +54,24 @@ public class FeedSubscriptionDao {
         feedSubscriptionFromDb.setTitle(feedSubscription.getTitle());
         feedSubscriptionFromDb.setCategoryId(feedSubscription.getCategoryId());
         feedSubscriptionFromDb.setOrder(feedSubscription.getOrder());
-        
+
         return feedSubscription;
     }
-    
+
+    /**
+     * Update the number of unread articles in a user subscription
+     *
+     * @param id User subscription ID
+     * @param unreadCount Number of unread articles
+     */
+    public void updateUnreadCount(String id, Integer unreadCount) {
+        EntityManager em = ThreadLocalContext.get().getEntityManager();
+        Query q = em.createNativeQuery("update T_FEED_SUBSCRIPTION set FES_UNREADCOUNT_N = :unreadCount where FES_ID_C = :id");
+        q.setParameter("id", id);
+        q.setParameter("unreadCount", unreadCount);
+        q.executeUpdate();
+    }
+
     /**
      * Moves the subscription to the specified display order, and reorders adjacent subscription.
      * 
@@ -168,14 +175,7 @@ public class FeedSubscriptionDao {
     public List<FeedSubscriptionDto> findByCriteria(FeedSubscriptionCriteria criteria) {
         Map<String, Object> parameterMap = new HashMap<String, Object>();
         
-        StringBuilder sb = new StringBuilder("select fs.FES_ID_C, fs.FES_TITLE_C, fs.FES_IDUSER_C, f.FED_ID_C, f.FED_TITLE_C, f.FED_RSSURL_C, f.FED_URL_C, f.FED_DESCRIPTION_C, c.CAT_ID_C, c.CAT_IDPARENT_C, c.CAT_NAME_C, c.CAT_FOLDED_B");
-        if (criteria.getUserId() != null) {
-            sb.append(", (select count(a.ART_ID_C)");
-            sb.append("     from T_USER_ARTICLE ua");
-            sb.append("     join T_ARTICLE a on ua.USA_IDARTICLE_C = a.ART_ID_C ");
-            sb.append("     where a.ART_IDFEED_C = f.FED_ID_C and a.ART_DELETEDATE_D is null and ua.USA_READDATE_D is null and ua.USA_DELETEDATE_D is null and ua.USA_IDUSER_C = :userId)");
-            sb.append("  as unreadUserArticleCount");
-        }
+        StringBuilder sb = new StringBuilder("select fs.FES_ID_C, fs.FES_TITLE_C, fs.FES_UNREADCOUNT_N, fs.FES_IDUSER_C, f.FED_ID_C, f.FED_TITLE_C, f.FED_RSSURL_C, f.FED_URL_C, f.FED_DESCRIPTION_C, c.CAT_ID_C, c.CAT_IDPARENT_C, c.CAT_NAME_C, c.CAT_FOLDED_B");
         sb.append(" from T_FEED_SUBSCRIPTION fs ");
         sb.append(" join T_FEED f on(f.FED_ID_C = fs.FES_IDFEED_C and f.FED_DELETEDATE_D is null) ");
         sb.append(" join T_CATEGORY c on(c.CAT_ID_C = fs.FES_IDCATEGORY_C and c.CAT_DELETEDATE_D is null) ");
@@ -193,6 +193,10 @@ public class FeedSubscriptionDao {
         if (criteria.getFeedId() != null) {
             criteriaList.add("fs.FES_IDFEED_C = :feedId");
             parameterMap.put("feedId", criteria.getFeedId());
+        }
+        if (criteria.getCategoryId() != null) {
+            criteriaList.add("fs.FES_IDCATEGORY_C = :categoryId");
+            parameterMap.put("categoryId", criteria.getCategoryId());
         }
         if (criteria.getFeedUrl() != null) {
             criteriaList.add("f.FED_RSSURL_C = :feedUrl");
@@ -227,6 +231,7 @@ public class FeedSubscriptionDao {
             FeedSubscriptionDto feedSubscriptionDto = new FeedSubscriptionDto();
             feedSubscriptionDto.setId((String) o[i++]);
             String feedSubscriptionTitle = (String) o[i++];
+            feedSubscriptionDto.setUnreadUserArticleCount((Integer) o[i++]);
             feedSubscriptionDto.setUserId((String) o[i++]);
             feedSubscriptionDto.setFeedId((String) o[i++]);
             String feedTitle = (String) o[i++];
@@ -239,9 +244,6 @@ public class FeedSubscriptionDao {
             feedSubscriptionDto.setCategoryName((String) o[i++]);
             Boolean folded = (Boolean) o[i++];
             feedSubscriptionDto.setCategoryFolded(folded != null ? folded : false);
-            if (criteria.getUserId() != null) {
-                feedSubscriptionDto.setUnreadUserArticleCount(((BigInteger) o[i++]).intValue());
-            }
             feedSubscriptionDtoList.add(feedSubscriptionDto);
         }
         return feedSubscriptionDtoList;

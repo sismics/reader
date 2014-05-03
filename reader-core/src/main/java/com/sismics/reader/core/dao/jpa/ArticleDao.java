@@ -1,21 +1,15 @@
 package com.sismics.reader.core.dao.jpa;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.ArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.ArticleDto;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.util.context.ThreadLocalContext;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Article DAO.
@@ -69,7 +63,21 @@ public class ArticleDao {
         // Delete the article
         articleFromDb.setDeleteDate(new Date());
     }
-    
+
+    /**
+     * Searches articles by criteria, and returns the first occurence.
+     *
+     * @param criteria Search criteria
+     * @return Article
+     */
+    public ArticleDto findFirstByCriteria(ArticleCriteria criteria) {
+        List<ArticleDto> articleList = findByCriteria(criteria);
+        if (!articleList.isEmpty()) {
+            return articleList.iterator().next();
+        }
+        return null;
+    }
+
     /**
      * Searches articles by criteria.
      * 
@@ -85,6 +93,10 @@ public class ArticleDao {
         
         // Adds search criteria
         List<String> criteriaList = new ArrayList<String>();
+        if (criteria.getId() != null) {
+            criteriaList.add("a.ART_ID_C = :id");
+            parameterMap.put("id", criteria.getId());
+        }
         if (criteria.getGuidIn() != null) {
             criteriaList.add("a.ART_GUID_C in :guidIn");
             parameterMap.put("guidIn", criteria.getGuidIn());

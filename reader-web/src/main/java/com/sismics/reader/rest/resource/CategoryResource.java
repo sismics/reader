@@ -3,7 +3,9 @@ package com.sismics.reader.rest.resource;
 import com.sismics.reader.core.dao.jpa.CategoryDao;
 import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
+import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
+import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.model.jpa.Category;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
@@ -242,21 +244,26 @@ public class CategoryResource extends BaseResource {
         }
         
         // Get the category
-        CategoryDao categoryDao = new CategoryDao();
+        Category category = null;
         try {
-            categoryDao.getCategory(id, principal.getId());
+            category = new CategoryDao().getCategory(id, principal.getId());
         } catch (NoResultException e) {
             throw new ClientException("CategoryNotFound", MessageFormat.format("Category not found: {0}", id));
         }
 
         // Marks all articles as read in this category
-        UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
-        userArticleCriteria.setUserId(principal.getId());
-        userArticleCriteria.setSubscribed(true);
-        userArticleCriteria.setCategoryId(id);
-
         UserArticleDao userArticleDao = new UserArticleDao();
-        userArticleDao.markAsRead(userArticleCriteria);
+        userArticleDao.markAsRead(new UserArticleCriteria()
+                .setUserId(principal.getId())
+                .setSubscribed(true)
+                .setCategoryId(id));
+
+        FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+        for (FeedSubscriptionDto feedSubscrition : feedSubscriptionDao.findByCriteria(new FeedSubscriptionCriteria()
+                .setCategoryId(category.getId())
+                .setUserId(principal.getId()))) {
+            feedSubscriptionDao.updateUnreadCount(feedSubscrition.getId(), 0);
+        }
         
         // Always return ok
         JSONObject response = new JSONObject();

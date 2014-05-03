@@ -411,6 +411,7 @@ public class SubscriptionImportAsyncListener {
                     feedSubscription.setFeedId(feed.getId());
                     feedSubscription.setCategoryId(category.getId());
                     feedSubscription.setOrder(feedDisplayOrder);
+                    feedSubscription.setUnreadCount(0);
                     feedSubscription.setTitle(feedTitle);
                     feedSubscriptionDao.create(feedSubscription);
                     
