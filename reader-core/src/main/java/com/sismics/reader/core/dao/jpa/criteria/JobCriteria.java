@@ -25,7 +25,8 @@ public class JobCriteria {
      *
      * @param userId userId
      */
-    public void setUserId(String userId) {
+    public JobCriteria setUserId(String userId) {
         this.userId = userId;
+        return this;
     }
 }

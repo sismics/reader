@@ -98,8 +98,9 @@ public class UserArticleCriteria {
      *
      * @param userId userId
      */
-    public void setUserId(String userId) {
+    public UserArticleCriteria setUserId(String userId) {
         this.userId = userId;
+        return this;
     }
 
     /**
@@ -116,8 +117,9 @@ public class UserArticleCriteria {
      *
      * @param feedId feedId
      */
-    public void setFeedId(String feedId) {
+    public UserArticleCriteria setFeedId(String feedId) {
         this.feedId = feedId;
+        return this;
     }
 
     /**
@@ -134,8 +136,9 @@ public class UserArticleCriteria {
      *
      * @param visible visible
      */
-    public void setVisible(boolean visible) {
+    public UserArticleCriteria setVisible(boolean visible) {
         this.visible = visible;
+        return this;
     }
 
     /**
@@ -152,8 +155,9 @@ public class UserArticleCriteria {
      *
      * @param subscribed subscribed
      */
-    public void setSubscribed(boolean subscribed) {
+    public UserArticleCriteria setSubscribed(boolean subscribed) {
         this.subscribed = subscribed;
+        return this;
     }
 
     /**
@@ -170,8 +174,9 @@ public class UserArticleCriteria {
      *
      * @param feedSubscriptionId feedSubscriptionId
      */
-    public void setFeedSubscriptionId(String feedSubscriptionId) {
+    public UserArticleCriteria setFeedSubscriptionId(String feedSubscriptionId) {
         this.feedSubscriptionId = feedSubscriptionId;
+        return this;
     }
 
     /**
@@ -188,8 +193,9 @@ public class UserArticleCriteria {
      *
      * @param unread unread
      */
-    public void setUnread(boolean unread) {
+    public UserArticleCriteria setUnread(boolean unread) {
         this.unread = unread;
+        return this;
     }
 
     /**
@@ -206,8 +212,9 @@ public class UserArticleCriteria {
      *
      * @param categoryId categoryId
      */
-    public void setCategoryId(String categoryId) {
+    public UserArticleCriteria setCategoryId(String categoryId) {
         this.categoryId = categoryId;
+        return this;
     }
 
     /**
@@ -224,8 +231,9 @@ public class UserArticleCriteria {
      *
      * @param starred starred
      */
-    public void setStarred(boolean starred) {
+    public UserArticleCriteria setStarred(boolean starred) {
         this.starred = starred;
+        return this;
     }
 
     /**
@@ -242,8 +250,9 @@ public class UserArticleCriteria {
      *
      * @param articleId articleId
      */
-    public void setArticleId(String articleId) {
+    public UserArticleCriteria setArticleId(String articleId) {
         this.articleId = articleId;
+        return this;
     }
 
     /**
@@ -260,8 +269,9 @@ public class UserArticleCriteria {
      *
      * @param articleIdIn articleIdIn
      */
-    public void setArticleIdIn(List<String> articleIdIn) {
+    public UserArticleCriteria setArticleIdIn(List<String> articleIdIn) {
         this.articleIdIn = articleIdIn;
+        return this;
     }
 
     /**
@@ -278,8 +288,9 @@ public class UserArticleCriteria {
      *
      * @param userArticleId userArticleId
      */
-    public void setUserArticleId(String userArticleId) {
+    public UserArticleCriteria setUserArticleId(String userArticleId) {
         this.userArticleId = userArticleId;
+        return this;
     }
 
     /**
@@ -296,8 +307,9 @@ public class UserArticleCriteria {
      *
      * @param articlePublicationDateMax articlePublicationDateMax
      */
-    public void setArticlePublicationDateMax(Date articlePublicationDateMax) {
+    public UserArticleCriteria setArticlePublicationDateMax(Date articlePublicationDateMax) {
         this.articlePublicationDateMax = articlePublicationDateMax;
+        return this;
     }
 
     /**
@@ -314,8 +326,9 @@ public class UserArticleCriteria {
      *
      * @param userArticleStarredDateMax userArticleStarredDateMax
      */
-    public void setUserArticleStarredDateMax(Date userArticleStarredDateMax) {
+    public UserArticleCriteria setUserArticleStarredDateMax(Date userArticleStarredDateMax) {
         this.userArticleStarredDateMax = userArticleStarredDateMax;
+        return this;
     }
 
     /**
@@ -332,8 +345,9 @@ public class UserArticleCriteria {
      *
      * @param articleIdMax articleIdMax
      */
-    public void setArticleIdMax(String articleIdMax) {
+    public UserArticleCriteria setArticleIdMax(String articleIdMax) {
         this.articleIdMax = articleIdMax;
+        return this;
     }
 
     /**
@@ -350,7 +364,8 @@ public class UserArticleCriteria {
      *
      * @param userArticleIdMax userArticleIdMax
      */
-    public void setUserArticleIdMax(String userArticleIdMax) {
+    public UserArticleCriteria setUserArticleIdMax(String userArticleIdMax) {
         this.userArticleIdMax = userArticleIdMax;
+        return this;
     }
 }

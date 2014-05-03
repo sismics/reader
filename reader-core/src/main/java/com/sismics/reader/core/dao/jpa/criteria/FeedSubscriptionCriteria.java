@@ -45,8 +45,9 @@ public class FeedSubscriptionCriteria {
      *
      * @param id id
      */
-    public void setId(String id) {
+    public FeedSubscriptionCriteria setId(String id) {
         this.id = id;
+        return this;
     }
 
     /**
@@ -63,8 +64,9 @@ public class FeedSubscriptionCriteria {
      *
      * @param userId userId
      */
-    public void setUserId(String userId) {
+    public FeedSubscriptionCriteria setUserId(String userId) {
         this.userId = userId;
+        return this;
     }
 
     /**
@@ -81,8 +83,9 @@ public class FeedSubscriptionCriteria {
      *
      * @param feedId feedId
      */
-    public void setFeedId(String feedId) {
+    public FeedSubscriptionCriteria setFeedId(String feedId) {
         this.feedId = feedId;
+        return this;
     }
 
     /**
@@ -99,8 +102,9 @@ public class FeedSubscriptionCriteria {
      *
      * @param feedUrl feedUrl
      */
-    public void setFeedUrl(String feedUrl) {
+    public FeedSubscriptionCriteria setFeedUrl(String feedUrl) {
         this.feedUrl = feedUrl;
+        return this;
     }
 
     /**
@@ -117,7 +121,8 @@ public class FeedSubscriptionCriteria {
      *
      * @param unread unread
      */
-    public void setUnread(boolean unread) {
+    public FeedSubscriptionCriteria setUnread(boolean unread) {
         this.unread = unread;
+        return this;
     }
 }

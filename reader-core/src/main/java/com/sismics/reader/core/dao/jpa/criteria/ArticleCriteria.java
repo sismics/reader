@@ -9,6 +9,11 @@ import java.util.List;
  */
 public class ArticleCriteria {
     /**
+     * Article ID.
+     */
+    private String id;
+    
+    /**
      * Article GUID list (inclusive).
      */
     private List<String> guidIn;
@@ -27,7 +32,26 @@ public class ArticleCriteria {
      * Feed ID.
      */
     private String feedId;
-    
+
+    /**
+     * Getter of id.
+     *
+     * @return id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Setter of id.
+     *
+     * @param id id
+     */
+    public ArticleCriteria setId(String id) {
+        this.id = id;
+        return this;
+    }
+
     /**
      * Getter of guidIn.
      *
@@ -42,8 +66,9 @@ public class ArticleCriteria {
      *
      * @param guidIn guidIn
      */
-    public void setGuidIn(List<String> guidIn) {
+    public ArticleCriteria setGuidIn(List<String> guidIn) {
         this.guidIn = guidIn;
+        return this;
     }
 
     /**
@@ -60,8 +85,9 @@ public class ArticleCriteria {
      *
      * @param title title
      */
-    public void setTitle(String title) {
+    public ArticleCriteria setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     /**
@@ -78,8 +104,9 @@ public class ArticleCriteria {
      *
      * @param url url
      */
-    public void setUrl(String url) {
+    public ArticleCriteria setUrl(String url) {
         this.url = url;
+        return this;
     }
 
     /**
@@ -96,7 +123,8 @@ public class ArticleCriteria {
      *
      * @param feedId feedId
      */
-    public void setFeedId(String feedId) {
+    public ArticleCriteria setFeedId(String feedId) {
         this.feedId = feedId;
+        return this;
     }
 }

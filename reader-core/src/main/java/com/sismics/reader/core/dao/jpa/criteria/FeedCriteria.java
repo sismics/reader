@@ -30,8 +30,9 @@ public class FeedCriteria {
      *
      * @param feedUrl feedUrl
      */
-    public void setFeedUrl(String feedUrl) {
+    public FeedCriteria setFeedUrl(String feedUrl) {
         this.feedUrl = feedUrl;
+        return this;
     }
 
     /**
@@ -48,8 +49,9 @@ public class FeedCriteria {
      *
      * @param withUserSubscription withUserSubscription
      */
-    public void setWithUserSubscription(boolean withUserSubscription) {
+    public FeedCriteria setWithUserSubscription(boolean withUserSubscription) {
         this.withUserSubscription = withUserSubscription;
+        return this;
     }
 
 }
