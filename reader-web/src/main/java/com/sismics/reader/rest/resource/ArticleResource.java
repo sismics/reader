@@ -50,19 +50,21 @@ public class ArticleResource extends BaseResource {
             throw new ClientException("ArticleNotFound", MessageFormat.format("Article not found: {0}", id));
         }
         
-        // Update the article
-        userArticle.setReadDate(new Date());
-        userArticleDao.update(userArticle);
-
-        // Update the subscriptions
-        ArticleDto article = new ArticleDao().findFirstByCriteria(
-                new ArticleCriteria().setId(userArticle.getArticleId()));
-
-        FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
-        for (FeedSubscriptionDto feedSubscription : feedSubscriptionDao.findByCriteria(new FeedSubscriptionCriteria()
-                .setFeedId(article.getFeedId())
-                .setUserId(principal.getId()))) {
-            feedSubscriptionDao.updateUnreadCount(feedSubscription.getId(), feedSubscription.getUnreadUserArticleCount() - 1);
+        if (userArticle.getReadDate() == null) {
+            // Update the article
+            userArticle.setReadDate(new Date());
+            userArticleDao.update(userArticle);
+    
+            // Update the subscriptions
+            ArticleDto article = new ArticleDao().findFirstByCriteria(
+                    new ArticleCriteria().setId(userArticle.getArticleId()));
+    
+            FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+            for (FeedSubscriptionDto feedSubscription : feedSubscriptionDao.findByCriteria(new FeedSubscriptionCriteria()
+                    .setFeedId(article.getFeedId())
+                    .setUserId(principal.getId()))) {
+                feedSubscriptionDao.updateUnreadCount(feedSubscription.getId(), feedSubscription.getUnreadUserArticleCount() - 1);
+            }
         }
         
         // Always return ok
@@ -95,19 +97,21 @@ public class ArticleResource extends BaseResource {
                 throw new ClientException("ArticleNotFound", MessageFormat.format("Article not found: {0}", id));
             }
             
-            // Update the article
-            userArticle.setReadDate(new Date());
-            userArticleDao.update(userArticle);
-
-            // Update the subscriptions
-            ArticleDto article = new ArticleDao().findFirstByCriteria(
-                    new ArticleCriteria().setId(userArticle.getArticleId()));
-
-            FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
-            for (FeedSubscriptionDto feedSubscription : feedSubscriptionDao.findByCriteria(new FeedSubscriptionCriteria()
-                    .setFeedId(article.getFeedId())
-                    .setUserId(principal.getId()))) {
-                feedSubscriptionDao.updateUnreadCount(feedSubscription.getId(), feedSubscription.getUnreadUserArticleCount() - 1);
+            if (userArticle.getReadDate() == null) {
+                // Update the article
+                userArticle.setReadDate(new Date());
+                userArticleDao.update(userArticle);
+    
+                // Update the subscriptions
+                ArticleDto article = new ArticleDao().findFirstByCriteria(
+                        new ArticleCriteria().setId(userArticle.getArticleId()));
+    
+                FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+                for (FeedSubscriptionDto feedSubscription : feedSubscriptionDao.findByCriteria(new FeedSubscriptionCriteria()
+                        .setFeedId(article.getFeedId())
+                        .setUserId(principal.getId()))) {
+                    feedSubscriptionDao.updateUnreadCount(feedSubscription.getId(), feedSubscription.getUnreadUserArticleCount() - 1);
+                }
             }
         }
         
@@ -140,20 +144,23 @@ public class ArticleResource extends BaseResource {
             throw new ClientException("ArticleNotFound", MessageFormat.format("Article not found: {0}", id));
         }
         
-        // Update the article
-        userArticle.setReadDate(null);
-        userArticleDao.update(userArticle);
-
-        // Update the subscriptions
-        ArticleDto article = new ArticleDao().findFirstByCriteria(
-                new ArticleCriteria().setId(userArticle.getArticleId()));
-
-        FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
-        for (FeedSubscriptionDto feedSubscription : feedSubscriptionDao.findByCriteria(new FeedSubscriptionCriteria()
-                .setFeedId(article.getFeedId())
-                .setUserId(principal.getId()))) {
-            feedSubscriptionDao.updateUnreadCount(feedSubscription.getId(), feedSubscription.getUnreadUserArticleCount() + 1);
+        if (userArticle.getReadDate() != null) {
+            // Update the article
+            userArticle.setReadDate(null);
+            userArticleDao.update(userArticle);
+    
+            // Update the subscriptions
+            ArticleDto article = new ArticleDao().findFirstByCriteria(
+                    new ArticleCriteria().setId(userArticle.getArticleId()));
+    
+            FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+            for (FeedSubscriptionDto feedSubscription : feedSubscriptionDao.findByCriteria(new FeedSubscriptionCriteria()
+                    .setFeedId(article.getFeedId())
+                    .setUserId(principal.getId()))) {
+                feedSubscriptionDao.updateUnreadCount(feedSubscription.getId(), feedSubscription.getUnreadUserArticleCount() + 1);
+            }
         }
+        
         // Always return ok
         JSONObject response = new JSONObject();
         response.put("status", "ok");

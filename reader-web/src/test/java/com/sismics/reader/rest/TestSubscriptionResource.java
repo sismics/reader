@@ -160,6 +160,15 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         Assert.assertEquals("ok", json.getString("status"));
+        
+        // Marks an article as read (2nd time)
+        articleResource = resource().path("/article/" + article0Id + "/read");
+        articleResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
+        postParams = new MultivaluedMapImpl();
+        response = articleResource.post(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ok", json.getString("status"));
 
         // Check the subscription data
         subscriptionResource = resource().path("/subscription/" + subscription1Id);
@@ -194,6 +203,15 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals(9, json.optInt("unread_count"));
 
         // Marks an article as unread
+        articleResource = resource().path("/article/" + article0Id + "/unread");
+        articleResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
+        postParams = new MultivaluedMapImpl();
+        response = articleResource.post(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ok", json.getString("status"));
+        
+        // Marks an article as unread (2nd time)
         articleResource = resource().path("/article/" + article0Id + "/unread");
         articleResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
         postParams = new MultivaluedMapImpl();
