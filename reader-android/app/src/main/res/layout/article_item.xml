@@ -23,11 +23,21 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="6dip"
         android:layout_toRightOf="@+id/imgFavicon"
+        android:layout_toLeftOf="@+id/imgStarred"
         android:ellipsize="end"
         android:fontFamily="sans-serif-light"
         android:lines="1"
         android:maxLines="1"
         android:textSize="14sp" />
+
+    <ImageView
+        android:contentDescription="@string/starred"
+        android:id="@id/imgStarred"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_action_not_important"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
 
     <TextView
         android:id="@+id/txtSummary"

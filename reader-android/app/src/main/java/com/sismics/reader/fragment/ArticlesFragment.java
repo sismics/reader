@@ -3,7 +3,12 @@ package com.sismics.reader.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -14,12 +19,24 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.androidquery.AQuery;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.sismics.android.Log;
 import com.sismics.reader.R;
 import com.sismics.reader.activity.ArticleActivity;
 import com.sismics.reader.constant.Constants;
 import com.sismics.reader.listener.ArticlesHelperListener;
+import com.sismics.reader.resource.ArticleResource;
+import com.sismics.reader.resource.StarredResource;
 import com.sismics.reader.ui.adapter.ArticlesAdapter;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Articles list fragment.
@@ -108,7 +125,7 @@ public class ArticlesFragment extends NavigationFragment {
         SharedArticlesAdapterHelper.getInstance().addAdapter(adapter, articlesHelperListener);
 
         // Configure the articles list to listen for scrolls (infinite loading) and clicks
-        aq.id(R.id.articleList)
+        final ListView articleList = aq.id(R.id.articleList)
             .adapter(adapter)
             .scrolled(new OnScrollListener() {
                 @Override
@@ -132,7 +149,85 @@ public class ArticlesFragment extends NavigationFragment {
                     intent.putExtra("unread", unread);
                     startActivityForResult(intent, Constants.REQUEST_CODE_ARTICLES);
                 }
-            });
+            }).getListView();
+
+        // Batch contextual actions
+        articleList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        articleList.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+            @Override
+            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+                mode.setTitle(getString(R.string.selected_items, articleList.getCheckedItemCount()));
+            }
+
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                MenuInflater inflater = mode.getMenuInflater();
+                inflater.inflate(R.menu.context_articles, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                final Set<String> articleIdList = new HashSet<String>();
+                final List<JSONObject> articleJsonList = new ArrayList<JSONObject>();
+                SparseBooleanArray booleanArray = articleList.getCheckedItemPositions();
+                for (int i = 0; i < booleanArray.size(); i++) {
+                    if (!booleanArray.valueAt(i)) {
+                        continue;
+                    }
+                    JSONObject article = adapter.getItem(booleanArray.keyAt(i));
+                    articleIdList.add(article.optString("id"));
+                    articleJsonList.add(article);
+                }
+
+                switch (item.getItemId()) {
+                    case R.id.favorite:
+                        ArticleResource.unreadMultiple(getActivity(), articleIdList, new JsonHttpResponseHandler() {
+                            public void onSuccess(JSONObject json) {
+                                try {
+                                    for (JSONObject article : articleJsonList) {
+                                        article.put("is_read", false);
+                                    }
+                                    SharedArticlesAdapterHelper.getInstance().onDataChanged();
+                                } catch (JSONException e) {
+                                    Log.e("ArticlesFragment", "Error unreading articles", e);
+                                }
+                            }
+                        });
+                        break;
+                    case R.id.unread:
+                        StarredResource.starMultiple(getActivity(), articleIdList, new JsonHttpResponseHandler() {
+                            public void onSuccess(JSONObject json) {
+                                try {
+                                    for (JSONObject article : articleJsonList) {
+                                        article.put("is_starred", true);
+                                    }
+                                    SharedArticlesAdapterHelper.getInstance().onDataChanged();
+                                } catch (JSONException e) {
+                                    Log.e("ArticlesFragment", "Error starring articles", e);
+                                }
+                            }
+                        });
+                        break;
+                    default:
+                        return false;
+                }
+
+                articleList.clearChoices();
+                mode.finish();
+                return true;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+
+            }
+        });
     }
     
     @Override

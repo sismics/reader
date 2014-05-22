@@ -1,5 +1,25 @@
 package com.sismics.reader.rest.resource;
 
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
@@ -9,16 +29,6 @@ import com.sismics.reader.core.util.jpa.PaginatedLists;
 import com.sismics.reader.rest.assembler.ArticleAssembler;
 import com.sismics.rest.exception.ClientException;
 import com.sismics.rest.exception.ForbiddenClientException;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Starred articles REST resources.
@@ -145,6 +155,76 @@ public class StarredResource extends BaseResource {
         // Update the article
         userArticle.setStarredDate(null);
         userArticleDao.update(userArticle);
+        
+        // Always return ok
+        JSONObject response = new JSONObject();
+        response.put("status", "ok");
+        return Response.ok().entity(response).build();
+    }
+    
+    /**
+     * Marks multiple articles as starred.
+     * 
+     * @param idList List of article ID
+     * @return Response
+     * @throws JSONException
+     */
+    @POST
+    @Path("star")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response starMultiple(
+            @FormParam("id") List<String> idList) throws JSONException {
+        if (!authenticate()) {
+            throw new ForbiddenClientException();
+        }
+        
+        for (String id : idList) {
+            // Get the article
+            UserArticleDao userArticleDao = new UserArticleDao();
+            UserArticle userArticle = userArticleDao.getUserArticle(id, principal.getId());
+            if (userArticle == null) {
+                throw new ClientException("ArticleNotFound", MessageFormat.format("Article not found: {0}", id));
+            }
+            
+            // Update the article
+            userArticle.setStarredDate(new Date());
+            userArticleDao.update(userArticle);
+        }
+        
+        // Always return ok
+        JSONObject response = new JSONObject();
+        response.put("status", "ok");
+        return Response.ok().entity(response).build();
+    }
+    
+    /**
+     * Marks multiple articles as unstarred.
+     * 
+     * @param idList List of article ID
+     * @return Response
+     * @throws JSONException
+     */
+    @POST
+    @Path("unstar")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response unstarMultiple(
+            @FormParam("id") List<String> idList) throws JSONException {
+        if (!authenticate()) {
+            throw new ForbiddenClientException();
+        }
+        
+        for (String id : idList) {
+            // Get the article
+            UserArticleDao userArticleDao = new UserArticleDao();
+            UserArticle userArticle = userArticleDao.getUserArticle(id, principal.getId());
+            if (userArticle == null) {
+                throw new ClientException("ArticleNotFound", MessageFormat.format("Article not found: {0}", id));
+            }
+            
+            // Update the article
+            userArticle.setStarredDate(null);
+            userArticleDao.update(userArticle);
+        }
         
         // Always return ok
         JSONObject response = new JSONObject();

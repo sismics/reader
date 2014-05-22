@@ -41,7 +41,21 @@ public class ArticleResource extends BaseResource {
         params.put("id", idList);
         client.post(getApiUrl(context) + "/article/read", params, responseHandler);
     }
-    
+
+    /**
+     * POST /article/unread.
+     * @param context Context
+     * @param idList IDs of the articles to mark as unread
+     * @param responseHandler Callback
+     */
+    public static void unreadMultiple(Context context, Set<String> idList, JsonHttpResponseHandler responseHandler) {
+        init(context);
+
+        RequestParams params = new RequestParams();
+        params.put("id", idList);
+        client.post(getApiUrl(context) + "/article/unread", params, responseHandler);
+    }
+
     /**
      * POST /article/id/unread.
      * @param context Context

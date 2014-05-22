@@ -63,6 +63,7 @@ public class ArticlesAdapter extends BaseAdapter {
             holder.txtTitle = aq.id(R.id.txtTitle).getTextView();
             holder.txtSummary = aq.id(R.id.txtSummary).getTextView();
             holder.imgFavicon = aq.id(R.id.imgFavicon).getImageView();
+            holder.imgStarred = aq.id(R.id.imgStarred).getImageView();
             view.setTag(holder);
         } else {
             aq.recycle(view);
@@ -92,7 +93,9 @@ public class ArticlesAdapter extends BaseAdapter {
         }
         String summary = "<b>" + subscription.optString("title") + "</b> &mdash; " + article.optString("summary");
         holder.txtSummary.setText(Html.fromHtml(summary));
-        
+        holder.imgStarred.setImageResource(article.optBoolean("is_starred") ?
+                R.drawable.ic_action_important : R.drawable.ic_action_not_important);
+
         return view;
     }
 
@@ -120,5 +123,6 @@ public class ArticlesAdapter extends BaseAdapter {
         TextView txtTitle;
         TextView txtSummary;
         ImageView imgFavicon;
+        ImageView imgStarred;
     }
 }

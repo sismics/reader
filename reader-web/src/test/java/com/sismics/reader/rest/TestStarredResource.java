@@ -78,14 +78,14 @@ public class TestStarredResource extends BaseJerseyTest {
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(2, articles.length());
-        article0 = articles.getJSONObject(0);
-        article0Id = article0.getString("id");
+        JSONObject articleAfter = articles.getJSONObject(0);
+        String articleAfterId = articleAfter.getString("id");
 
         // Check pagination
         starredResource = resource().path("/starred");
         starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
         MultivaluedMapImpl queryParams = new MultivaluedMapImpl();
-        queryParams.add("after_article", article0Id);
+        queryParams.add("after_article", articleAfterId);
         response = starredResource.queryParams(queryParams).get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
@@ -109,5 +109,45 @@ public class TestStarredResource extends BaseJerseyTest {
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(1, articles.length());
+        
+        // Delete multiple starred articles
+        starredResource = resource().path("/starred/unstar");
+        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
+        postParams = new MultivaluedMapImpl();
+        postParams.add("id", article0Id);
+        postParams.add("id", article1Id);
+        response = starredResource.post(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        
+        // Check the starred resource
+        starredResource = resource().path("/starred");
+        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
+        response = starredResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        articles = json.optJSONArray("articles");
+        Assert.assertNotNull(articles);
+        Assert.assertEquals(0, articles.length());
+        
+        // Create multiple starred articles
+        starredResource = resource().path("/starred/star");
+        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
+        postParams = new MultivaluedMapImpl();
+        postParams.add("id", article0Id);
+        postParams.add("id", article1Id);
+        response = starredResource.post(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        
+        // Check the starred resource
+        starredResource = resource().path("/starred");
+        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
+        response = starredResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        articles = json.optJSONArray("articles");
+        Assert.assertNotNull(articles);
+        Assert.assertEquals(2, articles.length());
     }
 }

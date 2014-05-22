@@ -3,6 +3,9 @@ package com.sismics.reader.resource;
 import android.content.Context;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import java.util.Set;
 
 /**
  * Access to /starred API.
@@ -26,5 +29,19 @@ public class StarredResource extends BaseResource {
         } else {
             client.delete(getApiUrl(context) + "/starred/" + id, responseHandler);
         }
+    }
+
+    /**
+     * POST /starred/star.
+     * @param context Context
+     * @param idList IDs of the articles to mark as unread
+     * @param responseHandler Callback
+     */
+    public static void starMultiple(Context context, Set<String> idList, JsonHttpResponseHandler responseHandler) {
+        init(context);
+
+        RequestParams params = new RequestParams();
+        params.put("id", idList);
+        client.post(getApiUrl(context) + "/starred/star", params, responseHandler);
     }
 }

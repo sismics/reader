@@ -76,6 +76,7 @@
     <string name="manage_categories_saving">%1$d changes to save&#8230;</string>
     <string name="add_category">Add a category</string>
     <string name="category_name">Category name</string>
+    <string name="selected_items">%1$d selected articles</string>
 
     <!-- Preferences -->
     <string name="pref_general_category">General settings</string>
