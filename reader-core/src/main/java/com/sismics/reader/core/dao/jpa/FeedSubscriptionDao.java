@@ -179,7 +179,7 @@ public class FeedSubscriptionDao {
         sb.append(" from T_FEED_SUBSCRIPTION fs ");
         sb.append(" join T_FEED f on(f.FED_ID_C = fs.FES_IDFEED_C and f.FED_DELETEDATE_D is null) ");
         sb.append(" join T_CATEGORY c on(c.CAT_ID_C = fs.FES_IDCATEGORY_C and c.CAT_DELETEDATE_D is null) ");
-        
+
         // Adds search criteria
         List<String> criteriaList = new ArrayList<String>();
         if (criteria.getId() != null) {
@@ -203,9 +203,7 @@ public class FeedSubscriptionDao {
             parameterMap.put("feedUrl", criteria.getFeedUrl());
         }
         if (criteria.isUnread()) {
-            criteriaList.add("(select count(a.ART_ID_C) from T_ARTICLE a" +
-            		" left join T_USER_ARTICLE ua on(ua.USA_IDARTICLE_C = a.ART_ID_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null)" +
-            		" where a.ART_IDFEED_C = f.FED_ID_C and a.ART_DELETEDATE_D is null and ua.USA_READDATE_D is null and ua.USA_ID_C is not null) > 0");
+            criteriaList.add("fs.FES_UNREADCOUNT_N > 0");
         }
         criteriaList.add("fs.FES_DELETEDATE_D is null");
         
