@@ -30,6 +30,15 @@
         android:gravity="center_vertical|left"
         android:textSize="14sp" />
 
+    <ImageView
+        android:contentDescription="@string/starred"
+        android:id="@id/imgStarred"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_action_not_important"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+
     <TextView
         android:id="@+id/txtSummary"
         android:layout_width="wrap_content"
