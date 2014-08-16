@@ -81,7 +81,7 @@ public class TestFaviconDownloader {
         String filename = downloader.downloadFaviconFromPage("/projects/doublefine/double-fine-adventure/posts", tempDir, "favicon");
         if (filename == null) {
             // If nothing is found, try again with the RSS URL
-            filename = downloader.downloadFaviconFromPage("http://www.kickstarter.com/projects/66710809/double-fine-adventure/posts.atom", tempDir, "favicon");
+            filename = downloader.downloadFaviconFromPage("https://www.kickstarter.com/projects/66710809/double-fine-adventure/posts.atom", tempDir, "favicon");
         }
         Assert.assertNotNull(filename);
         Assert.assertTrue(new File(filename).exists());
