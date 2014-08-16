@@ -182,6 +182,7 @@ public class FeedService extends AbstractScheduledService {
                 Article newArticle = articleMap.remove(currentArticle.getGuid());
                 
                 Article article = new Article();
+                article.setPublicationDate(currentArticle.getPublicationDate());
                 article.setId(currentArticle.getId());
                 article.setFeedId(feed.getId());
                 article.setUrl(newArticle.getUrl());

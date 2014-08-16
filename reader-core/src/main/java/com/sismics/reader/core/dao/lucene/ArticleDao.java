@@ -189,7 +189,7 @@ public class ArticleDao {
         org.apache.lucene.document.Document document = new org.apache.lucene.document.Document();
         document.add(new StringField("id", article.getId(), Field.Store.YES));
         document.add(new StringField("url", article.getUrl(), Field.Store.YES));
-        document.add(new LongField("date", article.getCreateDate().getTime(), Field.Store.YES));
+        document.add(new LongField("date", article.getPublicationDate().getTime(), Field.Store.YES));
         document.add(new Field("title", article.getTitle(), fieldType));
         document.add(new Field("description", article.getDescription(), fieldType));
         
