@@ -14,22 +14,9 @@ import java.util.Set;
  * @author bgamard
  */
 public class ArticleResource extends BaseResource {
-
-    /**
-     * POST /article/id/read.
-     * @param context Context
-     * @param id ID of the article to mark as read
-     * @param responseHandler Callback
-     */
-    public static void read(Context context, String id, JsonHttpResponseHandler responseHandler) {
-        init(context);
-        
-        RequestParams params = new RequestParams();
-        client.post(getApiUrl(context) + "/article/" + id + "/read", params, responseHandler);
-    }
-    
     /**
      * POST /article/read.
+     *
      * @param context Context
      * @param idList IDs of the articles to mark as read
      * @param responseHandler Callback
@@ -44,6 +31,7 @@ public class ArticleResource extends BaseResource {
 
     /**
      * POST /article/unread.
+     *
      * @param context Context
      * @param idList IDs of the articles to mark as unread
      * @param responseHandler Callback
@@ -58,6 +46,7 @@ public class ArticleResource extends BaseResource {
 
     /**
      * POST /article/id/unread.
+     *
      * @param context Context
      * @param id ID of the article to mark as unread
      * @param responseHandler Callback

@@ -172,9 +172,9 @@ public class ArticlesFragment extends NavigationFragment {
             }
 
             @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                final Set<String> articleIdList = new HashSet<String>();
-                final List<JSONObject> articleJsonList = new ArrayList<JSONObject>();
+            public boolean onActionItemClicked(ActionMode mode, final MenuItem item) {
+                final Set<String> articleIdList = new HashSet<>();
+                final List<JSONObject> articleJsonList = new ArrayList<>();
                 SparseBooleanArray booleanArray = articleList.getCheckedItemPositions();
                 for (int i = 0; i < booleanArray.size(); i++) {
                     if (!booleanArray.valueAt(i)) {
@@ -186,33 +186,48 @@ public class ArticlesFragment extends NavigationFragment {
                 }
 
                 switch (item.getItemId()) {
-                    case R.id.favorite:
-                        ArticleResource.unreadMultiple(getActivity(), articleIdList, new JsonHttpResponseHandler() {
+                    case R.id.star:
+                    case R.id.unstar:
+                        JsonHttpResponseHandler callback = new JsonHttpResponseHandler() {
                             public void onSuccess(JSONObject json) {
                                 try {
                                     for (JSONObject article : articleJsonList) {
-                                        article.put("is_read", false);
-                                    }
-                                    SharedArticlesAdapterHelper.getInstance().onDataChanged();
-                                } catch (JSONException e) {
-                                    Log.e("ArticlesFragment", "Error unreading articles", e);
-                                }
-                            }
-                        });
-                        break;
-                    case R.id.unread:
-                        StarredResource.starMultiple(getActivity(), articleIdList, new JsonHttpResponseHandler() {
-                            public void onSuccess(JSONObject json) {
-                                try {
-                                    for (JSONObject article : articleJsonList) {
-                                        article.put("is_starred", true);
+                                        article.put("is_starred", item.getItemId() == R.id.star);
                                     }
                                     SharedArticlesAdapterHelper.getInstance().onDataChanged();
                                 } catch (JSONException e) {
                                     Log.e("ArticlesFragment", "Error starring articles", e);
                                 }
                             }
-                        });
+                        };
+
+                        if (item.getItemId() == R.id.star) {
+                            StarredResource.starMultiple(getActivity(), articleIdList, callback);
+                        } else {
+                            StarredResource.unstarMultiple(getActivity(), articleIdList, callback);
+                        }
+                        break;
+
+                    case R.id.read:
+                    case R.id.unread:
+                        callback = new JsonHttpResponseHandler() {
+                            public void onSuccess(JSONObject json) {
+                                try {
+                                    for (JSONObject article : articleJsonList) {
+                                        article.put("is_read", item.getItemId() == R.id.read);
+                                    }
+                                    SharedArticlesAdapterHelper.getInstance().onDataChanged();
+                                } catch (JSONException e) {
+                                    Log.e("ArticlesFragment", "Error unreading articles", e);
+                                }
+                            }
+                        };
+
+                        if (item.getItemId() == R.id.read) {
+                            ArticleResource.readMultiple(getActivity(), articleIdList, callback);
+                        } else {
+                            ArticleResource.unreadMultiple(getActivity(), articleIdList, callback);
+                        }
                         break;
                     default:
                         return false;

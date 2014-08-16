@@ -16,6 +16,7 @@ public class StarredResource extends BaseResource {
 
     /**
      * PUT/DELETE /starred/id.
+     *
      * @param context Context
      * @param id Article to star/unstar
      * @param star Star if true
@@ -33,6 +34,7 @@ public class StarredResource extends BaseResource {
 
     /**
      * POST /starred/star.
+     *
      * @param context Context
      * @param idList IDs of the articles to mark as unread
      * @param responseHandler Callback
@@ -43,5 +45,20 @@ public class StarredResource extends BaseResource {
         RequestParams params = new RequestParams();
         params.put("id", idList);
         client.post(getApiUrl(context) + "/starred/star", params, responseHandler);
+    }
+
+    /**
+     * POST /starred/unstar.
+     *
+     * @param context Context
+     * @param idList IDs of the articles to mark as unread
+     * @param responseHandler Callback
+     */
+    public static void unstarMultiple(Context context, Set<String> idList, JsonHttpResponseHandler responseHandler) {
+        init(context);
+
+        RequestParams params = new RequestParams();
+        params.put("id", idList);
+        client.post(getApiUrl(context) + "/starred/unstar", params, responseHandler);
     }
 }

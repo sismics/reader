@@ -24,9 +24,11 @@
     <string name="logout">Sign Out</string>
     <string name="settings">Settings</string>
     <string name="licenses">Open Source Licenses</string>
+    <string name="mark_as_read">Mark as read</string>
     <string name="mark_as_unread">Mark as unread</string>
     <string name="marked_as_unread">Marked as unread</string>
-    <string name="favorite">Favorite</string>
+    <string name="star">Star</string>
+    <string name="unstar">Unstar</string>
     <string name="latest">Latest</string>
     <string name="unread">Unread</string>
     <string name="all">All</string>
@@ -76,7 +78,7 @@
     <string name="manage_categories_saving">%1$d changes to save&#8230;</string>
     <string name="add_category">Add a category</string>
     <string name="category_name">Category name</string>
-    <string name="selected_items">%1$d selected articles</string>
+    <string name="selected_items">%1$d selected</string>
 
     <!-- Preferences -->
     <string name="pref_general_category">General settings</string>

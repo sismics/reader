@@ -50,7 +50,7 @@ public class ArticleActivity extends FragmentActivity {
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     private View drawer;
-    private MenuItem favoriteMenuItem;
+    private MenuItem starMenuItem;
     private ShareActionProvider shareActionProvider;
     
     /**
@@ -90,7 +90,7 @@ public class ArticleActivity extends FragmentActivity {
     protected void onCreate(Bundle args) {
         super.onCreate(args);
         
-        readArticleIdSet = new HashSet<String>();
+        readArticleIdSet = new HashSet<>();
         sharedAdapterHelper = SharedArticlesAdapterHelper.getInstance();
         if (sharedAdapterHelper.getArticleItems().size() == 0) {
             finish();
@@ -260,7 +260,7 @@ public class ArticleActivity extends FragmentActivity {
             // If the nav drawer is open, hide action items related to the content view
             boolean drawerOpen = drawerLayout.isDrawerOpen(drawer);
             menu.findItem(R.id.share).setVisible(!drawerOpen);
-            menu.findItem(R.id.favorite).setVisible(!drawerOpen);
+            menu.findItem(R.id.star).setVisible(!drawerOpen);
             menu.findItem(R.id.unread).setVisible(!drawerOpen);
         }
         return super.onPrepareOptionsMenu(menu);
@@ -276,7 +276,7 @@ public class ArticleActivity extends FragmentActivity {
         shareActionProvider = (ShareActionProvider) item.getActionProvider();
         
         // Store favorite button to change his icon
-        favoriteMenuItem = menu.findItem(R.id.favorite);
+        starMenuItem = menu.findItem(R.id.star);
         
         updateActionBar();
         return super.onCreateOptionsMenu(menu);
@@ -299,9 +299,9 @@ public class ArticleActivity extends FragmentActivity {
         }
         
         // Update the favorite button
-        if (favoriteMenuItem != null) {
+        if (starMenuItem != null) {
             boolean isStarred = article.optBoolean("is_starred");
-            favoriteMenuItem.setIcon(isStarred ? R.drawable.ic_action_important : R.drawable.ic_action_not_important);
+            starMenuItem.setIcon(isStarred ? R.drawable.ic_action_important : R.drawable.ic_action_not_important);
         }
 
         // Show the possibly hidden action bar
@@ -350,7 +350,7 @@ public class ArticleActivity extends FragmentActivity {
                 });
                 return true;
             
-            case R.id.favorite:
+            case R.id.star:
                 item.setActionView(progressView);
 
                 final boolean isStarred = article.optBoolean("is_starred");
