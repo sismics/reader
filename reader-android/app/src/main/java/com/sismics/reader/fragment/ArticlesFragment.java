@@ -61,7 +61,15 @@ public class ArticlesFragment extends NavigationFragment {
 
         @Override
         public void onSuccess() {
-            aq.id(R.id.emptyList).text(R.string.no_articles);
+            Bundle args = getArguments();
+            int str = R.string.no_articles;
+            if (args != null) {
+                boolean unread = args.getBoolean("unread");
+                if (unread) {
+                    str = R.string.no_unread_articles;
+                }
+            }
+            aq.id(R.id.emptyList).text(str);
         }
 
         @Override
