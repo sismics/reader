@@ -370,7 +370,7 @@ r.feed.buildEmpty = function() {
   if (r.feed.context.unread) {
     message = $.t('feed.nonewarticle');
   }
-  return $('<div class="empty">' + message + '</div>');
+  return $('<div class="empty">' + message + '<br /><img src="images/rssman.png" /></div>');
 };
 
 /**

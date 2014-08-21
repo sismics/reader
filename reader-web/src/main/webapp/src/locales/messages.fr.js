@@ -163,7 +163,7 @@
     "markread": "Marquer les articles au dessus comme lus",
     "markallread": "Tout marquer comme lu",
     "noarticle": "Aucun articles",
-    "nonewarticle": "Aucun articles non-lus",
+    "nonewarticle": "Tout lu !",
     "showall": "Tout afficher",
     "retry": "Réessayer"
   },

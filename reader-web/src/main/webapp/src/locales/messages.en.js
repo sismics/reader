@@ -163,7 +163,7 @@
     "markread": "Mark previous articles as read",
     "markallread": "Mark all as read",
     "noarticle": "No article",
-    "nonewarticle": "No new article",
+    "nonewarticle": "All read!",
     "showall": "Show all",
     "retry": "Retry"
   },

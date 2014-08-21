@@ -150,7 +150,7 @@
     "nomorearticles": "これ以上記事はありません",
     "nomoreunreadarticles": "これ以上未読記事はありません",
     "noarticle": "記事はありません",
-    "nonewarticle": "未読記事はありません",
+    "nonewarticle": "全て既読！",
     "showall": "全てを表示",
     "retry": "再試行"
   },
