@@ -11,6 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Adapter;
@@ -89,7 +91,17 @@ public class ArticlesFragment extends NavigationFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.articles_fragment, container, false);
         aq = new AQuery(view);
-        
+
+        // RSSMan animation
+        aq.id(R.id.emptyList).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.rssman);
+                view.startAnimation(anim);
+            }
+        });
+
+        // Init fragment
         Bundle args = getArguments();
         if (args != null) {
             String title = args.getString("title");
@@ -106,6 +118,7 @@ public class ArticlesFragment extends NavigationFragment {
 
     /**
      * Load articles.
+     *
      * @param title Title
      * @param subscriptionId Subscription ID
      * @param url URL
