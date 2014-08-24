@@ -6,7 +6,7 @@
     <translate
         android:interpolator="@android:anim/decelerate_interpolator"
         android:fromYDelta="0"
-        android:toYDelta="-10"
+        android:toYDelta="-20"
         android:duration="100"
         android:fillAfter="true"
         android:startOffset="0" />
@@ -14,7 +14,7 @@
     <translate
         android:interpolator="@android:anim/accelerate_interpolator"
         android:fromYDelta="0"
-        android:toYDelta="10"
+        android:toYDelta="20"
         android:duration="100"
         android:fillAfter="true"
         android:startOffset="100" />
@@ -22,7 +22,7 @@
     <translate
         android:interpolator="@android:anim/decelerate_interpolator"
         android:fromYDelta="0"
-        android:toYDelta="-10"
+        android:toYDelta="-20"
         android:duration="100"
         android:fillAfter="true"
         android:startOffset="200" />
@@ -30,7 +30,7 @@
     <translate
         android:interpolator="@android:anim/accelerate_interpolator"
         android:fromYDelta="0"
-        android:toYDelta="10"
+        android:toYDelta="20"
         android:duration="100"
         android:fillAfter="true"
         android:startOffset="300" />

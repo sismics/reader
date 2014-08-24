@@ -109,6 +109,7 @@ public class ArticleActivity extends FragmentActivity {
         OnPageChangeListener onPageChangeListener = new OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
+                // We reached the latest page, load more articles if needed
                 if (position + 1 >= sharedAdapterHelper.getArticleItems().size()) {
                     sharedAdapterHelper.load(ArticleActivity.this);
                 }
@@ -134,12 +135,34 @@ public class ArticleActivity extends FragmentActivity {
                 // Update the action bar
                 updateActionBar();
             }
+
+            float countPositionOffset = 0;
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (!sharedAdapterHelper.isFullyLoaded()) {
+                    return;
+                }
+
+                // If all articles are loaded and the user try to swipe right, open the drawer
+                if (positionOffset == 0) {
+                    countPositionOffset++;
+                } else {
+                    countPositionOffset = 0;
+                }
+
+                if (countPositionOffset == 5) {
+                    if (drawerLayout != null) {
+                        drawerLayout.openDrawer(drawer);
+                        onArticlesDrawerOpened();
+                    }
+                }
+            }
             
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
-            
-            @Override
-            public void onPageScrollStateChanged(int state) {}
+            public void onPageScrollStateChanged(int state) {
+                Log.e("DEBUG", "state=1");
+            }
         };
 
         // Setting the title
@@ -153,7 +176,7 @@ public class ArticleActivity extends FragmentActivity {
 
         // Pretty animation between pages
         // Issue #89 : This animation blocks the vertical scrolling on API16 (at least)
-        //viewPager.setPageTransformer(true, new CardTransformer(.7f));
+        // viewPager.setPageTransformer(true, new CardTransformer(.7f));
 
         // Configure the ViewPagerIndicator
         int position = getIntent().getIntExtra("position", 0);
@@ -212,20 +235,14 @@ public class ArticleActivity extends FragmentActivity {
                 public void onDrawerSlide(View view, float v) {}
 
                 @Override
-                public void onDrawerStateChanged(int i) {}
-
-                @Override
-                public void onDrawerOpened(View view) {
-                    invalidateOptionsMenu();
-                    getActionBar().show();
-
-                    // Sync the ListView with the ViewPager
-                    int position = viewPager.getCurrentItem();
-                    drawerList.setItemChecked(position, true);
-                    if (position <= drawerList.getFirstVisiblePosition() || position >= drawerList.getLastVisiblePosition()) {
-                        drawerList.setSelectionFromTop(position, 100);
+                public void onDrawerStateChanged(int state) {
+                    if (state == DrawerLayout.STATE_DRAGGING) {
+                        onArticlesDrawerOpened();
                     }
                 }
+
+                @Override
+                public void onDrawerOpened(View view) {}
 
                 @Override
                 public void onDrawerClosed(View view) {
@@ -237,6 +254,21 @@ public class ArticleActivity extends FragmentActivity {
         // Forcing page change listener
         viewPager.setCurrentItem(position);
         onPageChangeListener.onPageSelected(position);
+    }
+
+    /**
+     * Called when the drawer is just opened.
+     */
+    private void onArticlesDrawerOpened() {
+        invalidateOptionsMenu();
+        getActionBar().show();
+
+        // Sync the ListView with the ViewPager
+        int position = viewPager.getCurrentItem();
+        drawerList.setItemChecked(position, true);
+        if (position <= drawerList.getFirstVisiblePosition() || position >= drawerList.getLastVisiblePosition()) {
+            drawerList.setSelectionFromTop(position, 100);
+        }
     }
     
     @Override

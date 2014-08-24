@@ -132,7 +132,7 @@ public class SharedArticlesAdapterHelper {
      * Restart shared data on a new context.
      */
     public void restart(String url, boolean unread) {
-        articleItems = new ArrayList<JSONObject>();
+        articleItems = new ArrayList<>();
         this.url = url;
         this.unread = unread;
         this.loading = false;
@@ -229,5 +229,14 @@ public class SharedArticlesAdapterHelper {
                 }
             }
         });
+    }
+
+    /**
+     * Returns true if all articles are loaded.
+     *
+     * @return True if all articles are loaded
+     */
+    public boolean isFullyLoaded() {
+        return fullyLoaded;
     }
 }
