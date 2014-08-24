@@ -39,7 +39,6 @@ public class MainApplication extends Application {
         // TODO Changing the category of a subscription
         // TODO Renaming subscriptions
         // TODO Deleting subscriptions
-        // TODO Cancel articles loading if a new categorie is clicked
         // TODO Admin interface if the user is admin
 
         super.onCreate();

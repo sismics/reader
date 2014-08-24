@@ -5,6 +5,7 @@ import android.support.v4.view.PagerAdapter;
 import android.widget.BaseAdapter;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestHandle;
 import com.sismics.android.Log;
 import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.SubscriptionResource;
@@ -30,21 +31,26 @@ public class SharedArticlesAdapterHelper {
      * Current instance.
      */
     private static SharedArticlesAdapterHelper instance;
+
+    /**
+     * Feed loading request handle.
+     */
+    private RequestHandle feedRequestHandle;
     
     /**
      * Shared data.
      */
-    private List<JSONObject> articleItems = new ArrayList<JSONObject>();
+    private List<JSONObject> articleItems = new ArrayList<>();
     
     /**
      * Adapters sharing the same data.
      */
-    private Set<Object> adapters = new HashSet<Object>();
+    private Set<Object> adapters = new HashSet<>();
     
     /**
      * Listeners on articles loading.
      */
-    private Set<ArticlesHelperListener> listeners = new HashSet<ArticlesHelperListener>();
+    private Set<ArticlesHelperListener> listeners = new HashSet<>();
     
     /**
      * API URL.
@@ -138,6 +144,11 @@ public class SharedArticlesAdapterHelper {
         this.loading = false;
         this.fullyLoaded = false;
 
+        if (feedRequestHandle != null && !feedRequestHandle.isCancelled() && !feedRequestHandle.isFinished()) {
+            // Cancel the previous request if it's not yet finished
+            feedRequestHandle.cancel(true);
+        }
+
         // The data has been changed, there is no more articles
         onDataChanged();
     }
@@ -176,7 +187,7 @@ public class SharedArticlesAdapterHelper {
         int articlesFetchedPref = PreferenceUtil.getIntegerPreference(context, PreferenceUtil.PREF_ARTICLES_FETCHED, 10);
 
         // Load data from server
-        SubscriptionResource.feed(context, url, unread, url.startsWith("/search/") ? items.size() : -1,
+        feedRequestHandle = SubscriptionResource.feed(context, url, unread, url.startsWith("/search/") ? items.size() : -1,
                 articlesFetchedPref, afterArticleId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject json) {
