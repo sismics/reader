@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="60dip"
     android:background="@drawable/list_item_activated_background"
-    android:padding="6dip" >
+    android:padding="16dip" >
 
     <ImageView
         android:id="@+id/imgFavicon"
@@ -11,7 +11,6 @@
         android:layout_height="18dip"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="6dip"
         android:scaleType="centerCrop"
         android:contentDescription="@string/favicon"
         android:src="@drawable/ic_launcher" />
@@ -19,16 +18,17 @@
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="match_parent"
-        android:layout_height="18dip"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="6dip"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_toRightOf="@+id/imgFavicon"
         android:layout_toLeftOf="@+id/imgStarred"
         android:ellipsize="end"
         android:fontFamily="sans-serif-light"
         android:lines="1"
         android:maxLines="1"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <ImageView
         android:contentDescription="@string/starred"
@@ -45,11 +45,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/txtTitle"
-        android:layout_marginLeft="6dip"
+        android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:fontFamily="sans-serif-light"
         android:lines="2"
         android:maxLines="2"
+        android:textColor="#666"
         android:textSize="12sp" />
 
 </RelativeLayout>

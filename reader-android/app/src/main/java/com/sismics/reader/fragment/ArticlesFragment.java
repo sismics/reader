@@ -86,11 +86,16 @@ public class ArticlesFragment extends NavigationFragment {
         @Override
         public void onEnd() {
             ListView articleList = aq.id(R.id.articleList).getListView();
+            View emptyView = aq.id(R.id.emptyList).getView();
+
             if (!listViewAnimated) {
-                articleList.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
+                Animation animation = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
+                articleList.startAnimation(animation);
+                emptyView.startAnimation(animation);
                 listViewAnimated = true;
             }
-            articleList.setEmptyView(aq.id(R.id.emptyList).getView());
+
+            articleList.setEmptyView(emptyView);
             aq.id(R.id.progressBar).gone();
         }
     };
