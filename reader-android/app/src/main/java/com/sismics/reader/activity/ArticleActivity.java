@@ -160,9 +160,7 @@ public class ArticleActivity extends FragmentActivity {
             }
             
             @Override
-            public void onPageScrollStateChanged(int state) {
-                Log.e("DEBUG", "state=1");
-            }
+            public void onPageScrollStateChanged(int state) {}
         };
 
         // Setting the title
