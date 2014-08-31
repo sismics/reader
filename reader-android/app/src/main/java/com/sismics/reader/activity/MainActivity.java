@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,6 +30,7 @@ import com.sismics.reader.constant.Constants;
 import com.sismics.reader.fragment.AddSubscriptionDialogFragment;
 import com.sismics.reader.fragment.ArticlesDefaultFragment;
 import com.sismics.reader.fragment.ArticlesFragment;
+import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.model.application.ApplicationContext;
 import com.sismics.reader.provider.RecentSuggestionsProvider;
 import com.sismics.reader.resource.SubscriptionResource;
@@ -53,10 +55,32 @@ public class MainActivity extends FragmentActivity {
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     private View drawer;
+    private SwipeRefreshLayout swipeLayout;
     private ActionBarDrawerToggle drawerToggle;
     private MenuItem searchItem;
     private boolean destroyed = false;
     private int defaultSubscription;
+
+    /**
+     * Articles loading listener.
+     */
+    private ArticlesHelperListener articlesHelperListener = new ArticlesHelperListener() {
+        @Override
+        public void onStart() {
+            swipeLayout.setRefreshing(true);
+        }
+
+        @Override
+        public void onSuccess() {}
+
+        @Override
+        public void onError() {}
+
+        @Override
+        public void onEnd() {
+            swipeLayout.setRefreshing(false);
+        }
+    };
     
     @Override
     protected void onCreate(final Bundle args) {
@@ -73,10 +97,10 @@ public class MainActivity extends FragmentActivity {
         defaultSubscription = PreferenceUtil.getIntegerPreference(this, PreferenceUtil.PREF_DEFAULT_SUBSCRIPTION, 1);
 
         // Setup the activity
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.main_activity);
 
         // Cache view references
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.drawer_list);
         drawer = findViewById(R.id.left_drawer);
@@ -125,6 +149,16 @@ public class MainActivity extends FragmentActivity {
             drawerLayout.setDrawerListener(drawerToggle);
         }
 
+        // Swipe refresh layout
+        SharedArticlesAdapterHelper.getInstance().addAdapter(null, articlesHelperListener);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
+            }
+        });
+        swipeLayout.setColorSchemeResources(R.color.main_color, R.color.secondary_color, R.color.main_color2, R.color.secondary_color2);
+
         handleIntent(getIntent());
     }
 
@@ -147,7 +181,6 @@ public class MainActivity extends FragmentActivity {
         if (drawerLayout != null) {
             // If the nav drawer is open, hide action items related to the content view
             boolean drawerOpen = drawerLayout.isDrawerOpen(drawer);
-            menu.findItem(R.id.refresh).setVisible(!drawerOpen);
             menu.findItem(R.id.all_read).setVisible(!drawerOpen);
         }
         return super.onPrepareOptionsMenu(menu);
@@ -218,15 +251,15 @@ public class MainActivity extends FragmentActivity {
                 startActivityForResult(new Intent(MainActivity.this, CategoriesActivity.class), Constants.REQUEST_CODE_MANAGE_CATEGORIES);
                 return true;
 
+            case R.id.refresh:
+                swipeLayout.setRefreshing(true);
+                refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
+                return true;
+
             case R.id.settings:
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 return true;
 
-            case R.id.refresh:
-                // Refresh subscriptions and articles
-                refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
-                return true;
-            
             case android.R.id.home:
                 // The action bar home/up action should open or close the drawer.
                 // ActionBarDrawerToggle will take care of this.
@@ -335,6 +368,7 @@ public class MainActivity extends FragmentActivity {
 
             @Override
             public void onFailure(final int statusCode, final Header[] headers, final byte[] responseBytes, final Throwable throwable) {
+                swipeLayout.setRefreshing(false);
                 ArticlesDefaultFragment articlesDefaultFragment =  (ArticlesDefaultFragment) getSupportFragmentManager().findFragmentByTag(ARTICLES_DEFAULT_FRAGMENT_TAG);
                 if (articlesDefaultFragment != null) {
                     articlesDefaultFragment.onSubscriptionError();
@@ -396,6 +430,7 @@ public class MainActivity extends FragmentActivity {
     
     @Override
     protected void onDestroy() {
+        SharedArticlesAdapterHelper.getInstance().removeAdapter(null, articlesHelperListener);
         destroyed = true;
         super.onDestroy();
     }

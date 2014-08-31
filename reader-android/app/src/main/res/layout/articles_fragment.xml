@@ -20,6 +20,7 @@
         android:text="@string/no_articles"
         android:fontFamily="sans-serif-light"
         android:textSize="22sp"
+        android:textColor="#888"
         android:gravity="center"
         android:visibility="gone" />
 
@@ -34,11 +35,8 @@
         <TextView
             android:id="@+id/loadingText"
             android:fontFamily="sans-serif-light"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
+            android:textSize="18sp"
+            android:textColor="#888"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

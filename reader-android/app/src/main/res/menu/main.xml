@@ -2,12 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/refresh"
-        android:icon="@drawable/navigation_refresh"
-        android:showAsAction="ifRoom"
-        android:title="@string/refresh">
-    </item>
-    <item
         android:id="@+id/all_read"
         android:icon="@drawable/ic_action_read"
         android:showAsAction="ifRoom"
@@ -18,6 +12,12 @@
         android:icon="@drawable/ic_action_search"
         android:showAsAction="ifRoom|collapseActionView"
         android:actionViewClass="android.widget.SearchView" />
+    <item
+        android:id="@+id/refresh"
+        android:icon="@drawable/navigation_refresh"
+        android:showAsAction="collapseActionView"
+        android:title="@string/refresh">
+    </item>
     <item
         android:id="@+id/add_subscription"
         android:icon="@drawable/ic_action_new"

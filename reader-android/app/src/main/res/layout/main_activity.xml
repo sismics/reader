@@ -6,10 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/content_frame"
+    <com.sismics.reader.ui.widget.ArticlesSwipeRefreshLayout
+        android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.sismics.reader.ui.widget.ArticlesSwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/left_drawer"

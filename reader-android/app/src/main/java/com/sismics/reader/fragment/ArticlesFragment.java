@@ -57,9 +57,7 @@ public class ArticlesFragment extends NavigationFragment {
      */
     private ArticlesHelperListener articlesHelperListener = new ArticlesHelperListener() {
         @Override
-        public void onStart() {
-            getActivity().setProgressBarIndeterminateVisibility(true);
-        }
+        public void onStart() {}
 
         @Override
         public void onSuccess() {
@@ -81,7 +79,6 @@ public class ArticlesFragment extends NavigationFragment {
 
         @Override
         public void onEnd() {
-            getActivity().setProgressBarIndeterminateVisibility(false);
             aq.id(R.id.articleList).getListView().setEmptyView(aq.id(R.id.emptyList).getView());
             aq.id(R.id.progressBar).gone();
         }
