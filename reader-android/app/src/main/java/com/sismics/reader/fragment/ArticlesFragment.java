@@ -77,9 +77,19 @@ public class ArticlesFragment extends NavigationFragment {
             aq.id(R.id.emptyList).text(R.string.error_loading_articles);
         }
 
+        /**
+         * Animate the ListView only once per instance.
+         */
+        private boolean listViewAnimated = false;
+
         @Override
         public void onEnd() {
-            aq.id(R.id.articleList).getListView().setEmptyView(aq.id(R.id.emptyList).getView());
+            ListView articleList = aq.id(R.id.articleList).getListView();
+            if (!listViewAnimated) {
+                articleList.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
+                listViewAnimated = true;
+            }
+            articleList.setEmptyView(aq.id(R.id.emptyList).getView());
             aq.id(R.id.progressBar).gone();
         }
     };

@@ -318,7 +318,9 @@ public class MainActivity extends FragmentActivity {
         }
         
         if (replace) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, ARTICLES_FRAGMENT_TAG).commitAllowingStateLoss();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment, ARTICLES_FRAGMENT_TAG)
+                    .commitAllowingStateLoss();
         }
 
         // Update selected item and title
