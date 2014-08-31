@@ -12,6 +12,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -319,6 +320,7 @@ public class MainActivity extends FragmentActivity {
         
         if (replace) {
             fragmentManager.beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .replace(R.id.content_frame, fragment, ARTICLES_FRAGMENT_TAG)
                     .commitAllowingStateLoss();
         }
@@ -382,6 +384,7 @@ public class MainActivity extends FragmentActivity {
             // Show a default fragment while the subscriptions are loading
             getSupportFragmentManager()
                 .beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(R.id.content_frame, new ArticlesDefaultFragment(), ARTICLES_DEFAULT_FRAGMENT_TAG)
                 .commitAllowingStateLoss();
         } else {
@@ -474,7 +477,10 @@ public class MainActivity extends FragmentActivity {
 
             // Update the main content by replacing fragment
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, ARTICLES_FRAGMENT_TAG).commitAllowingStateLoss();
+            fragmentManager.beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .replace(R.id.content_frame, fragment, ARTICLES_FRAGMENT_TAG)
+                    .commitAllowingStateLoss();
 
             // Update selected item and title
             drawerList.setItemChecked(drawerList.getCheckedItemPosition(), false);
