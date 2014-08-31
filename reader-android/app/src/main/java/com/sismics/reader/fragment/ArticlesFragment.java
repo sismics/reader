@@ -19,6 +19,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -103,7 +104,22 @@ public class ArticlesFragment extends NavigationFragment {
         aq.id(R.id.emptyList).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final TextView textView = (TextView) view;
                 Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.rssman);
+                anim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.character_happy);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.character);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {}
+                });
                 view.startAnimation(anim);
             }
         });
