@@ -25,6 +25,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.reader.R;
 import com.sismics.reader.constant.Constants;
@@ -159,6 +162,36 @@ public class MainActivity extends FragmentActivity {
             }
         });
         swipeLayout.setColorSchemeResources(R.color.main_color, R.color.secondary_color, R.color.main_color2, R.color.secondary_color2);
+
+        // Showcase view (shown only once)
+        new ShowcaseView.Builder(this)
+                .setTarget(new ViewTarget(R.id.content_frame, this))
+                .setStyle(R.style.CustomShowcaseTheme)
+                .singleShot(42)
+                .setContentTitle(R.string.showcase_swipe_title)
+                .setContentText(R.string.showcase_swipe_text)
+                .setOnClickListener(new View.OnClickListener() {
+                    boolean shown = false;
+
+                    @Override
+                    public void onClick(View view) {
+                        ShowcaseView showcaseView = (ShowcaseView) view.getParent();
+
+                        // Hide the showcase when all is shown
+                        if (shown) {
+                            showcaseView.hide();
+                            return;
+                        }
+
+                        // Second showcase view
+                        showcaseView.setShowcase(new ActionViewTarget(MainActivity.this, ActionViewTarget.Type.HOME), true);
+                        showcaseView.setContentTitle(getString(R.string.showcase_drawer_title));
+                        showcaseView.setContentText(getString(R.string.showcase_drawer_text));
+                        showcaseView.setButtonText(getString(R.string.close));
+                        shown = true;
+                    }
+                })
+                .build();
 
         handleIntent(getIntent());
     }

@@ -80,6 +80,8 @@
     <string name="add_category">Add a category</string>
     <string name="category_name">Category name</string>
     <string name="selected_items">%1$d selected</string>
+    <string name="next">Next</string>
+    <string name="close">Close</string>
 
     <!-- Preferences -->
     <string name="pref_general_category">General settings</string>
@@ -151,5 +153,9 @@
         </div>
       ]]>
     </string>
+    <string name="showcase_swipe_title">Refresh articles</string>
+    <string name="showcase_swipe_text">Swipe down the list to refresh articles</string>
+    <string name="showcase_drawer_title">Subscriptions</string>
+    <string name="showcase_drawer_text">Touch here to open your subscriptions</string>
 
 </resources>

@@ -39,7 +39,7 @@ import java.util.Date;
 
 /**
  * Fragment displaying an article.
- * 
+ *
  * @author bgamard
  */
 public class ArticleFragment extends Fragment {
@@ -61,7 +61,7 @@ public class ArticleFragment extends Fragment {
 
         return f;
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.article_fragment, container, false);
@@ -111,39 +111,44 @@ public class ArticleFragment extends Fragment {
                     String html = json.optString("description");
                     try {
                         html = "<!DOCTYPE html>" +
-                        		"<html>" +
-                        		"<head>" +
-                        		"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />" +
-                        		"<meta name=\"viewport\" content=\"initial-scale=1, minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no\" />" +
-                        		"<style>" +
-                        		"img, iframe { max-width: 100%; height: auto; } " +
+                                "<html>" +
+                                "<head>" +
+                                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />" +
+                                "<meta name=\"viewport\" content=\"initial-scale=1, minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no\" />" +
+                                "<style>" +
+                                "img, iframe { max-width: 100%; height: auto; display: block; margin: 8px; } " +
                                 "iframe { display: none; } " +
-                        		"pre { max-width: 100%; overflow: hidden; } " +
-                                "body {\n" +
-                                "  color: #191919;\n" +
-                                "  font-size: " + fontSize + "pt; \n" +
-                                "  font-family: \"Roboto-Light\", Roboto, sans-serif; } " +
-                        		"</style>" +
-                        		"</head>" +
-                        		"<body>" +
-                        		URLEncoder.encode(html, "UTF-8").replaceAll("\\+", "%20") +
-                        		"</body>" +
-                        		"</html>";
+                                "pre { max-width: 100%; overflow: hidden; } " +
+                                "a {" +
+                                "  text-decoration: none;" +
+                                "  color: #0099cc;" +
+                                "} " +
+                                "body {" +
+                                "  color: #191919;" +
+                                "  font-size: " + fontSize + "pt;" +
+                                "  font-family: 'sans-serif-light', 'sans-serif';" +
+                                "  line-height: 150%; } " +
+                                "</style>" +
+                                "</head>" +
+                                "<body>" +
+                                URLEncoder.encode(html, "UTF-8").replaceAll("\\+", "%20") +
+                                "</body>" +
+                                "</html>";
                     } catch (UnsupportedEncodingException e) {
                         Log.e("ArticleFragment", "Error modifying article HTML", e);
                     }
                     webView.loadData(html, "text/html; charset=UTF-8", null);
-                    
+
                     // Title
                     aq.id(R.id.title)
-                        .text(Html.fromHtml(json.optString("title")))
-                        .clicked(new OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(json.optString("url")));
-                                startActivity(intent);
-                            }
-                        });
+                            .text(Html.fromHtml(json.optString("title")))
+                            .clicked(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(json.optString("url")));
+                                    startActivity(intent);
+                                }
+                            });
 
                     // Subscription
                     JSONObject subscription = json.optJSONObject("subscription");

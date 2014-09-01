@@ -56,4 +56,5 @@ dependencies {
     compile 'com.mobeta.android.dslv:drag-sort-listview:0.6.1-SNAPSHOT-AAR@aar'
     compile 'com.google.android.apps.dashclock:dashclock-api:2.0.0'
     compile 'com.loopj.android:android-async-http:1.4.4'
+    compile 'com.github.amlcurran.showcaseview:library:5.0.0'
 }

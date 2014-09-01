@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ThemeMain"
+        parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionOverflowButtonStyle">@android:style/Widget.Holo.ActionButton.Overflow</item>
+        <item name="android:actionBarStyle">@style/ThemeMainActionBar</item>
+    </style>
+
+    <style name="ThemeMainActionBar"
+        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/actionbar_background</item>
+    </style>
+
+    <style name="ThemeArticle"
+        parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/ThemeArticleActionBar</item>
+    </style>
+
+    <style name="ThemeArticleActionBar"
+        parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@drawable/actionbar_background_transparent</item>
+    </style>
+</resources>

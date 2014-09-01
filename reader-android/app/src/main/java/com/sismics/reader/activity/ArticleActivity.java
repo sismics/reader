@@ -404,18 +404,6 @@ public class ArticleActivity extends FragmentActivity {
                 });
                 return true;
 
-            case R.id.refresh:
-                // This button is desactivated for the moment, problems to solve before:
-                // - Mark as read the articles, this can be done at the same time
-                // - Properly invalidate fragments in ArticlesPagerAdapter.getItemPosition
-                String url = getIntent().getStringExtra("url");
-                boolean unread = getIntent().getBooleanExtra("unread", true);
-                if (url != null) {
-                    SharedArticlesAdapterHelper.getInstance().restart(url, unread);
-                    SharedArticlesAdapterHelper.getInstance().load(this);
-                }
-                return true;
-
             case android.R.id.home:
                 finish();
                 return true;

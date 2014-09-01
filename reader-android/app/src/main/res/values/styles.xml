@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<resources>
+
+    <style name="CompatDarkActionBarTheme" parent="android:Theme.Holo.Light" />
+
+    <style name="CustomShowcaseTheme" parent="ShowcaseView.Light">
+        <item name="sv_titleTextAppearance">@style/CustomShowcaseTitle</item>
+        <item name="sv_backgroundColor">#b9ffffff</item>
+        <item name="sv_buttonText">@string/next</item>
+    </style>
+
+    <style name="CustomShowcaseTitle" parent="TextAppearance.ShowcaseView.Title">
+        <item name="android:textColor">#0099cc</item>
+    </style>
+
+</resources>
