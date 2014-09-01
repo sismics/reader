@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -485,6 +484,7 @@ public class MainActivity extends FragmentActivity {
      */
     private void handleIntent(Intent intent) {
         // Intent is consumed
+        // TODO Refreshing the search results returns to the default state
         setIntent(null);
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
