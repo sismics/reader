@@ -227,6 +227,7 @@ public class ArticleActivity extends FragmentActivity {
         if (drawerLayout != null) {
             // Set a custom shadow that overlays the main content when the drawer opens
             drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+            drawerLayout.setScrimColor(getResources().getColor(R.color.drawer_shadow));
 
             drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
                 @Override

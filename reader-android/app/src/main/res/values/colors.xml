@@ -4,4 +4,5 @@
     <color name="secondary_color">#0099cc</color>
     <color name="main_color2">#aa66cc</color>
     <color name="secondary_color2">#9933cc</color>
+    <color name="drawer_shadow">#50ffffff</color>
 </resources>

@@ -32,11 +32,18 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/content_frame"
+    <com.sismics.reader.ui.widget.ArticlesSwipeRefreshLayout
+        android:id="@+id/swipe_layout"
         android:layout_weight="0.7"
         android:layout_width="0dip"
-        android:background="#fff"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"/>
+
+    </com.sismics.reader.ui.widget.ArticlesSwipeRefreshLayout>
 
 </LinearLayout>

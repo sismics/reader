@@ -6,6 +6,11 @@
         <item name="android:actionBarStyle">@style/ThemeMainActionBar</item>
     </style>
 
+    <style name="ThemeMainCab"
+        parent="ThemeMain">
+        <item name="android:actionOverflowButtonStyle">@android:style/Widget.Holo.Light.ActionButton.Overflow</item>
+    </style>
+
     <style name="ThemeMainActionBar"
         parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@drawable/actionbar_background</item>

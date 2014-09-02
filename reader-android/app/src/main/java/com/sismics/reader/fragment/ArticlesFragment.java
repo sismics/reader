@@ -217,7 +217,8 @@ public class ArticlesFragment extends NavigationFragment {
 
             @Override
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                return false;
+                getActivity().setTheme(R.style.ThemeMainCab);
+                return true;
             }
 
             @Override
@@ -289,7 +290,7 @@ public class ArticlesFragment extends NavigationFragment {
 
             @Override
             public void onDestroyActionMode(ActionMode mode) {
-
+                getActivity().setTheme(R.style.ThemeMain);
             }
         });
     }

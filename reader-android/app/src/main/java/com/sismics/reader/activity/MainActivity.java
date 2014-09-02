@@ -28,6 +28,7 @@ import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.sismics.bluractionbar.BlurActionBarDrawerToggle;
 import com.sismics.reader.R;
 import com.sismics.reader.constant.Constants;
 import com.sismics.reader.fragment.AddSubscriptionDialogFragment;
@@ -127,6 +128,7 @@ public class MainActivity extends FragmentActivity {
         if (drawerLayout != null) {
             // Set a custom shadow that overlays the main content when the drawer opens
             drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+            drawerLayout.setScrimColor(getResources().getColor(R.color.drawer_shadow));
 
             // Enable ActionBar app icon to behave as action to toggle nav drawer
             getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -134,18 +136,21 @@ public class MainActivity extends FragmentActivity {
 
             // ActionBarDrawerToggle ties together the the proper interactions
             // between the sliding drawer and the action bar app icon
-            drawerToggle = new ActionBarDrawerToggle(
+            drawerToggle = new BlurActionBarDrawerToggle(
                     this,                  /* host Activity */
                     drawerLayout,         /* DrawerLayout object */
-                    R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
+                    R.drawable.ic_drawer_inverse, R.string.drawer_open, R.string.drawer_close,
+                    findViewById(R.id.blurlayout), 5) {
 
                 @Override
                 public void onDrawerOpened(View drawerView) {
+                    super.onDrawerOpened(drawerView);
                     invalidateOptionsMenu();
                 }
 
                 @Override
                 public void onDrawerClosed(View drawerView) {
+                    super.onDrawerClosed(drawerView);
                     invalidateOptionsMenu();
                 }
             };
