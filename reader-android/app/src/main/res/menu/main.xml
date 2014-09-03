@@ -7,17 +7,6 @@
         android:showAsAction="ifRoom"
         android:title="@string/all_read">
     </item>
-    <item android:id="@+id/action_search"
-        android:title="@string/action_search"
-        android:icon="@drawable/ic_action_search_inverse"
-        android:showAsAction="ifRoom|collapseActionView"
-        android:actionViewClass="android.widget.SearchView" />
-    <item
-        android:id="@+id/refresh"
-        android:icon="@drawable/ic_action_refresh_inverse"
-        android:showAsAction="collapseActionView"
-        android:title="@string/refresh">
-    </item>
     <item
         android:id="@+id/add_subscription"
         android:icon="@drawable/ic_action_new_inverse"
@@ -25,8 +14,16 @@
         android:title="@string/add_subscription">
     </item>
     <item
+        android:id="@+id/refresh"
+        android:showAsAction="collapseActionView"
+        android:title="@string/refresh">
+    </item>
+    <item android:id="@+id/action_search"
+        android:title="@string/action_search"
+        android:showAsAction="collapseActionView"
+        android:actionViewClass="android.widget.SearchView" />
+    <item
         android:id="@+id/manage_categories"
-        android:icon="@drawable/ic_action_sort_by_size_inverse"
         android:showAsAction="collapseActionView"
         android:title="@string/manage_categories">
     </item>

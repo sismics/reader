@@ -13,7 +13,6 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:paddingTop="?android:attr/actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:descendantFocusability="blocksDescendants"
@@ -42,6 +41,12 @@
                     android:contentDescription="@string/enclosure"/>
 
             </RelativeLayout>
+
+            <View
+                android:id="@+id/padder"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/title"

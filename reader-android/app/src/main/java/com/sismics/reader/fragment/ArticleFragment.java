@@ -185,6 +185,8 @@ public class ArticleFragment extends Fragment {
                                         }
                                     });
                         }
+                    } else {
+                        aq.id(R.id.padder).visible();
                     }
                 } catch (JSONException e) {
                     Log.e("ArticleFragment", "Unable to parse JSON", e);

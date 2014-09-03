@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <searchable xmlns:android="http://schemas.android.com/apk/res/android"
     android:label="@string/application_name"
-    android:hint="@string/search_hint"
+    android:hint="@string/action_search"
     android:searchSuggestAuthority="com.sismics.reader.provider.RecentSuggestionsProvider"
     android:searchSuggestSelection=" ?">
 </searchable>

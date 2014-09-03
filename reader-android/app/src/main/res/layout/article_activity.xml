@@ -28,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:layout_marginTop="?android:attr/actionBarSize"
         android:background="@drawable/list_background_holo"
         android:gravity="center"
         android:orientation="vertical">
@@ -38,7 +39,6 @@
             android:layout_height="match_parent"
             android:choiceMode="singleChoice"
             android:divider="@android:color/transparent"
-            android:layout_marginTop="?android:attr/actionBarSize"
             android:dividerHeight="0dp" />
 
     </LinearLayout>

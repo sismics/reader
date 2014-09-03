@@ -332,7 +332,7 @@ public class ArticleActivity extends FragmentActivity {
         // Update the favorite button
         if (starMenuItem != null) {
             boolean isStarred = article.optBoolean("is_starred");
-            starMenuItem.setIcon(isStarred ? R.drawable.ic_action_important : R.drawable.ic_action_not_important);
+            starMenuItem.setIcon(isStarred ? R.drawable.ic_action_important_inverse : R.drawable.ic_action_not_important_inverse);
         }
 
         // Show the possibly hidden action bar

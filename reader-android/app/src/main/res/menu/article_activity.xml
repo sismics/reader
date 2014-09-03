@@ -11,14 +11,14 @@
     </item>
     <item
         android:id="@+id/star"
-        android:icon="@drawable/ic_action_not_important"
+        android:icon="@drawable/ic_action_not_important_inverse"
         android:showAsAction="always"
         android:title="@string/star"
         tools:ignore="AlwaysShowAction">
     </item>
     <item
         android:id="@+id/unread"
-        android:icon="@drawable/ic_action_unread"
+        android:icon="@drawable/ic_action_unread_inverse"
         android:showAsAction="always"
         android:title="@string/mark_as_unread"
         tools:ignore="AlwaysShowAction">

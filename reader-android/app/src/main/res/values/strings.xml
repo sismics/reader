@@ -58,8 +58,7 @@
     <string name="touch_close">Touch to close</string>
     <string name="version">Version</string>
     <string name="build">Build</string>
-    <string name="search_hint">Search articles</string>
-    <string name="action_search">Search</string>
+    <string name="action_search">Search articles</string>
     <string name="manage_categories">Manage categories</string>
     <string name="touch_reorder">Touch to reorder</string>
     <string name="manage_categories_explain">Drag categories to reorder them. Don\'t forget to save your modifications.</string>
