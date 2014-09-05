@@ -5,11 +5,13 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -26,7 +28,9 @@ import android.widget.ImageView;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.BitmapAjaxCallback;
+import com.sismics.android.SystemBarTintManager;
 import com.sismics.reader.R;
+import com.sismics.reader.activity.ArticleActivity;
 import com.sismics.reader.ui.widget.ArticleScrollView;
 import com.sismics.reader.util.PreferenceUtil;
 
@@ -47,6 +51,11 @@ public class ArticleFragment extends Fragment {
     // Properties for the zoom in animation of enclosures
     private Animator currentAnimator;
     private int shortAnimationDuration;
+
+    /**
+     * True if the article has enclosure.
+     */
+    boolean hasEnclosure;
 
     /**
      * Create a new instance of ArticleFragment.
@@ -74,6 +83,8 @@ public class ArticleFragment extends Fragment {
 
         // Show/hide action bar to get an immersive mode
         ArticleScrollView articleScrollView = (ArticleScrollView) aq.id(R.id.scrollView).getView();
+        final ActionBar actionBar = getActivity().getActionBar();
+        final ArticleActivity articleActivity = (ArticleActivity) getActivity();
         articleScrollView.setOnScrollChangedListener(new ArticleScrollView.OnScrollChangedListener() {
             @Override
             public int getDeadHeight() {
@@ -82,14 +93,14 @@ public class ArticleFragment extends Fragment {
 
             @Override
             public void onScrollDown() {
-                ActionBar actionBar = getActivity().getActionBar();
                 actionBar.hide();
+                articleActivity.hideSystemUi();
             }
 
             @Override
             public void onScrollUp() {
-                ActionBar actionBar = getActivity().getActionBar();
                 actionBar.show();
+                articleActivity.showSystemUi();
             }
         });
 
@@ -169,6 +180,7 @@ public class ArticleFragment extends Fragment {
 
                     // Enclosure
                     JSONObject enclosure = json.optJSONObject("enclosure");
+                    hasEnclosure = enclosure != null;
                     if (enclosure != null) {
                         String type = enclosure.optString("type");
                         String url = enclosure.optString("url");
@@ -185,8 +197,6 @@ public class ArticleFragment extends Fragment {
                                         }
                                     });
                         }
-                    } else {
-                        aq.id(R.id.padder).visible();
                     }
                 } catch (JSONException e) {
                     Log.e("ArticleFragment", "Unable to parse JSON", e);
@@ -197,7 +207,27 @@ public class ArticleFragment extends Fragment {
         // Retrieve and cache the system's default "short" animation time.
         shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
+        // Set padding according to content and visible area
+        setInsets(getActivity(), articleScrollView, actionBarHeight);
+
         return view;
+    }
+
+    /**
+     * Set padding on a view based on viewable area.
+     *
+     * @param context Context
+     * @param view View
+     * @param actionBarHeight ActionBar height
+     */
+    private void setInsets(Activity context, View view, int actionBarHeight) {
+        if (Build.VERSION.SDK_INT < 19) {
+            view.setPadding(0, hasEnclosure ? 0 : actionBarHeight, 0, 0);
+            return;
+        }
+        SystemBarTintManager tintManager = new SystemBarTintManager(context);
+        SystemBarTintManager.SystemBarConfig config = tintManager.getConfig();
+        view.setPadding(0, config.getPixelInsetTop(!hasEnclosure), config.getPixelInsetRight(), config.getPixelInsetBottom());
     }
 
     /**

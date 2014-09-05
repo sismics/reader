@@ -4,13 +4,13 @@
     tools:ignore="Overdraw"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff">
+    android:layout_height="match_parent">
 
     <com.sismics.reader.ui.widget.ArticleScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,12 +41,6 @@
                     android:contentDescription="@string/enclosure"/>
 
             </RelativeLayout>
-
-            <View
-                android:id="@+id/padder"
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/title"

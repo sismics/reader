@@ -41,6 +41,10 @@ public class MainApplication extends Application {
         // TODO Deleting subscriptions
         // TODO Admin interface if the user is admin
 
+        // TODO Articles drawer: select article on opening
+        // TODO Articles drawer: on opening, top margin should use screen size (25% from top)
+        // TODO Articles drawer: top margin not great
+
         super.onCreate();
     }
     
