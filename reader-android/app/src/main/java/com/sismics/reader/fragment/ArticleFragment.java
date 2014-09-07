@@ -28,7 +28,7 @@ import android.widget.ImageView;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.BitmapAjaxCallback;
-import com.sismics.android.SystemBarTintManager;
+import com.sismics.systembartint.SystemBarTintManager;
 import com.sismics.reader.R;
 import com.sismics.reader.activity.ArticleActivity;
 import com.sismics.reader.ui.widget.ArticleScrollView;

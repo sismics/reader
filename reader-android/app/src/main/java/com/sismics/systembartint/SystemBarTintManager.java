@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sismics.android;
+package com.sismics.systembartint;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

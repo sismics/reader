@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
-    android:background="#fff"
+    android:background="#eee"
     android:orientation="horizontal">
 
     <LinearLayout

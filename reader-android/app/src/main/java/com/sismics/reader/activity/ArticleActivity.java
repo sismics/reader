@@ -26,7 +26,7 @@ import android.widget.Toast;
 import com.androidquery.AQuery;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.android.Log;
-import com.sismics.android.SystemBarTintManager;
+import com.sismics.systembartint.SystemBarTintManager;
 import com.sismics.reader.R;
 import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.ArticleResource;
@@ -55,7 +55,7 @@ public class ArticleActivity extends FragmentActivity {
     private ListView drawerList;
     private View drawer;
     private MenuItem starMenuItem;
-    private ShareActionProvider shareActionProvider;
+    private Intent shareIntent;
 
     /**
      * Use low profile mode in immersion mode.
@@ -300,10 +300,6 @@ public class ArticleActivity extends FragmentActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.article_activity, menu);
         
-        // Fetch and store ShareActionProvider to feed later
-        MenuItem item = menu.findItem(R.id.share);
-        shareActionProvider = (ShareActionProvider) item.getActionProvider();
-        
         // Store favorite button to change his icon
         starMenuItem = menu.findItem(R.id.star);
         
@@ -317,16 +313,13 @@ public class ArticleActivity extends FragmentActivity {
     private void updateActionBar() {
         final JSONObject article = sharedAdapterHelper.getArticleItems().get(viewPager.getCurrentItem());
         
-        // Update the share action provider with a new intent
-        if (shareActionProvider != null) {
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_SEND);
-            intent.putExtra(Intent.EXTRA_SUBJECT, article.optString("title"));
-            intent.putExtra(Intent.EXTRA_TEXT, article.optString("url"));
-            intent.setType("text/plain");
-            shareActionProvider.setShareIntent(intent);
-        }
-        
+        // Update the share intent
+        shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, article.optString("title"));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, article.optString("url"));
+        shareIntent.setType("text/plain");
+
         // Update the favorite button
         if (starMenuItem != null) {
             boolean isStarred = article.optBoolean("is_starred");
@@ -402,6 +395,12 @@ public class ArticleActivity extends FragmentActivity {
                         item.setActionView(null);
                     }
                 });
+                return true;
+
+            case R.id.share:
+                if (shareIntent != null) {
+                    startActivity(Intent.createChooser(shareIntent, getText(R.string.share_to)));
+                }
                 return true;
 
             case android.R.id.home:

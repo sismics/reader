@@ -40,6 +40,7 @@
     <string name="all_read_title">Mark all as read</string>
     <string name="all_read_message">Mark all articles as read?</string>
     <string name="share">Share</string>
+    <string name="share_to">Share article to&#8230;</string>
     <string name="no_articles">No articles</string>
     <string name="no_unread_articles">All read!</string>
     <string name="error_loading_articles">Error loading articles</string>
@@ -147,6 +148,41 @@
           <p><a href="http://code.google.com/p/android-query">http://code.google.com/p/android-query/</a></p>
           <p>
             Copyright 2012 Peter Liu<br />
+            Licensed under the Apache License, Version 2.0.
+          </p>
+
+          <h2>Blur ActionBarDrawerToggle</h2>
+          <p><a href="https://github.com/charbgr/BlurNavigationDrawer">https://github.com/charbgr/BlurNavigationDrawer</a></p>
+          <p>
+            Copyright 2014 Charalampakis Basilis<br />
+            Licensed under the Apache License, Version 2.0.
+          </p>
+
+          <h2>ParallaxScroll</h2>
+          <p><a href="https://github.com/nirhart/ParallaxScroll">https://github.com/nirhart/ParallaxScroll</a></p>
+          <p>
+            Copyright 2014 Nir Hartmann<br />
+            Licensed under the MIT License.
+          </p>
+
+          <h2>ShowcaseView</h2>
+          <p><a href="https://github.com/amlcurran/Showcaseview">https://github.com/amlcurran/Showcaseview</a></p>
+          <p>
+            Copyright 2012 Alex Curran<br />
+            Licensed under the Apache License, Version 2.0.
+          </p>
+
+          <h2>drag-sort-listview</h2>
+          <p><a href="https://github.com/bauerca/drag-sort-listview">https://github.com/bauerca/drag-sort-listview</a></p>
+          <p>
+            Copyright 2012 Carl Bauer<br />
+            Licensed under the Apache License, Version 2.0.
+          </p>
+
+          <h2>SystemBarTint</h2>
+          <p><a href="https://github.com/jgilfelt/SystemBarTint">https://github.com/jgilfelt/SystemBarTint</a></p>
+          <p>
+            Copyright 2013 readyState Software Limited<br />
             Licensed under the Apache License, Version 2.0.
           </p>
         </div>

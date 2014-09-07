@@ -4,12 +4,14 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ScrollView;
 
+import com.sismics.parallaxscroll.ParallaxScrollView;
+
 /**
  * ScrollView used to view an article.
  *
  * @author bgamard.
  */
-public class ArticleScrollView extends ScrollView {
+public class ArticleScrollView extends ParallaxScrollView {
 
     private OnScrollChangedListener onScrollChangedListener;
     private int down = 0;
