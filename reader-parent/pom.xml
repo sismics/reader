@@ -51,7 +51,7 @@
     <org.apache.maven.plugins.maven-dependency-plugin.version>2.7</org.apache.maven.plugins.maven-dependency-plugin.version>
     <org.apache.maven.plugins.maven-eclipse-plugin.version>2.8</org.apache.maven.plugins.maven-eclipse-plugin.version>
     <org.apache.maven.plugins.maven-jar-plugin.version>2.4</org.apache.maven.plugins.maven-jar-plugin.version>
-    <org.apache.maven.plugins.maven-release-plugin.version>2.4.1</org.apache.maven.plugins.maven-release-plugin.version>
+    <org.apache.maven.plugins.maven-release-plugin.version>2.5.1</org.apache.maven.plugins.maven-release-plugin.version>
     <org.apache.maven.plugins.maven-resources-plugin.version>2.6</org.apache.maven.plugins.maven-resources-plugin.version>
     <org.apache.maven.plugins.maven-war-plugin.version>2.2</org.apache.maven.plugins.maven-war-plugin.version>
     <org.codehaus.cargo.cargo-maven2-plugin.version>1.2.0</org.codehaus.cargo.cargo-maven2-plugin.version>
