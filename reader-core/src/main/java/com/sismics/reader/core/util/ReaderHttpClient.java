@@ -2,8 +2,8 @@ package com.sismics.reader.core.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 
 import com.google.common.io.Closer;
 
@@ -28,12 +28,20 @@ public abstract class ReaderHttpClient {
     public void open(URL url) throws Exception {
         Closer closer = Closer.create();
         try {
-            URLConnection connection = url.openConnection();
-            connection.setRequestProperty("User-Agent", USER_AGENT);
-            connection.setConnectTimeout(20000);
-            connection.setReadTimeout(20000);
-            InputStream is = closer.register(connection.getInputStream());
+            HttpURLConnection connection = buildHttpConnection(url);
             
+            // Handle 3xx redirections
+            int status = connection.getResponseCode();
+            if (status == HttpURLConnection.HTTP_MOVED_TEMP
+                || status == HttpURLConnection.HTTP_MOVED_PERM
+                    || status == HttpURLConnection.HTTP_SEE_OTHER) {
+                String newUrl = connection.getHeaderField("Location");
+                if (newUrl != null) {
+                    connection = buildHttpConnection(new URL(newUrl));
+                }
+            }
+            
+            InputStream is = closer.register(connection.getInputStream());
             process(is);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -44,6 +52,21 @@ public abstract class ReaderHttpClient {
                 // NOP
             }
         }
+    }
+    
+    /**
+     * Build a connection to an URL.
+     * 
+     * @param url URL
+     * @return Connection
+     * @throws IOException
+     */
+    private HttpURLConnection buildHttpConnection(URL url) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestProperty("User-Agent", USER_AGENT);
+        connection.setConnectTimeout(20000);
+        connection.setReadTimeout(20000);
+        return connection;
     }
     
     public abstract void process(InputStream is) throws Exception;

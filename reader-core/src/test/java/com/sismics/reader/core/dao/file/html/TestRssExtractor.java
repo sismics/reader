@@ -63,6 +63,22 @@ public class TestRssExtractor {
     }
 
     @Test
+    public void rssExtractPloumTest() throws Exception {
+        final RssExtractor extractor = new RssExtractor("http://www.ploum.net");
+        new ReaderHttpClient() {
+            
+            @Override
+            public void process(InputStream is) throws Exception {
+                extractor.readPage(is);
+            }
+        }.open(new URL("http://www.ploum.net"));
+        List<String> feedList = extractor.getFeedList();
+        Assert.assertEquals(2, feedList.size());
+        Assert.assertEquals("https://ploum.net/feed/", feedList.get(0));
+        Assert.assertEquals("https://ploum.net/comments/feed/", feedList.get(1));
+    }
+    
+    @Test
     public void rssExtractMakiko() throws Exception {
         InputStream is = getClass().getResourceAsStream("/page/makiko-f.blogspot.fr.html");
         final RssExtractor extractor = new RssExtractor("http://makiko-f.blogspot.fr/");
