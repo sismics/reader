@@ -341,4 +341,23 @@ public class TestArticleSanitizer {
         Assert.assertFalse(html.contains("src=\"/imgs/a/70/lawn_cougar.png\""));
         Assert.assertTrue(html.contains("src=\"http://what-if.xkcd.com/imgs/a/70/lawn_cougar.png\""));
     }
+    
+    /**
+     * Tests various iframes sanitizing related to issue #99.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void articleSanitizer99Test() throws Exception {
+        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
+        String html = articleSanitizer.sanitize("http://localhost/", "<iframe src=\"http://www.deezer.com/plugins/player?autoplay=false&playlist=true\" width=\"480\" height=\"480\"></iframe>"
+                + "<iframe src=\"//giphy.com/embed/9hDNJVBbDyZGw\" width=\"480\" height=\"480\"></iframe>"
+                + "<iframe src=\"//www.slideshare.net/slideshow/embed_code/37454624\" width=\"480\" height=\"480\"></iframe>"
+                + "<iframe src=\"//hitbox.tv/#!/embed/CymaticBruce\" width=\"480\" height=\"480\"></iframe>");
+        System.out.println(html);
+        Assert.assertTrue(html.contains("<iframe src=\"//www.deezer.com/plugins/player?autoplay&#61;false&amp;playlist&#61;true\" width=\"480\" height=\"480\"></iframe>"));
+        Assert.assertTrue(html.contains("<iframe src=\"//giphy.com/embed/9hDNJVBbDyZGw\" width=\"480\" height=\"480\"></iframe>"));
+        Assert.assertTrue(html.contains("<iframe src=\"//www.slideshare.net/slideshow/embed_code/37454624\" width=\"480\" height=\"480\"></iframe>"));
+        Assert.assertTrue(html.contains("<iframe src=\"//hitbox.tv/#!/embed/CymaticBruce\" width=\"480\" height=\"480\"></iframe>"));
+    }
 }

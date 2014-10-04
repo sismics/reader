@@ -60,6 +60,10 @@ public class ArticleSanitizer {
             "(http:|https:)?//w.soundcloud.com/.+|" +
             "(http:|https:)?//(www.)?bandcamp.com/.+|" +
             "(http:|https:)?//player.qobuz.com/.+|" +
+            "(http:|https:)?//www.deezer.com/plugins/player\\?.+|" +
+            "(http:|https:)?//giphy.com/embed/.+|" +
+            "(http:|https:)?//www.slideshare.net/slideshow/embed_code/.+|" +
+            "(http:|https:)?//hitbox.tv/#!/embed/.+|" +
             "(http:|https:)?//(www.)?whyd.com/.+");
 
     /**
