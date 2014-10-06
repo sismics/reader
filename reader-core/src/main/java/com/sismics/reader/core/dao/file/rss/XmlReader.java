@@ -24,6 +24,8 @@ import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.common.io.ByteStreams;
+
 /**
  * Text reader, which uses a BOM (Byte Order Mark) to identify the encoding to
  * be used. This also has the side effect of removing the BOM from the input
@@ -36,7 +38,11 @@ public class XmlReader extends Reader {
 
     private final InputStreamReader internalInputStreamReader;
 
-    private static final int HEADER_SIZE = 48;
+    /**
+     * Bytes to read from the beginning of the XML.
+     * We need to read the full XML head tag (to get the encoding).
+     */
+    private static final int HEADER_SIZE = 128;
 
     /**
      * @param in Input stream
@@ -50,8 +56,9 @@ public class XmlReader extends Reader {
         byte header[] = new byte[HEADER_SIZE];
         int n, unread;
 
+        
         PushbackInputStream pushbackStream = new PushbackInputStream(in, HEADER_SIZE);
-        n = pushbackStream.read(header, 0, header.length);
+        n = ByteStreams.read(in, header, 0, header.length);
 
         if ((header[0] == (byte) 0xEF) && (header[1] == (byte) 0xBB) && (header[2] == (byte) 0xBF)) {
             encoding = "UTF-8";

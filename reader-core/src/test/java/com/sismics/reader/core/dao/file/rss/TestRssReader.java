@@ -1,12 +1,14 @@
 package com.sismics.reader.core.dao.file.rss;
 
-import com.sismics.reader.core.model.jpa.Article;
-import com.sismics.reader.core.model.jpa.Feed;
-import junit.framework.Assert;
-import org.junit.Test;
-
 import java.io.InputStream;
 import java.util.List;
+
+import junit.framework.Assert;
+
+import org.junit.Test;
+
+import com.sismics.reader.core.model.jpa.Article;
+import com.sismics.reader.core.model.jpa.Feed;
 
 /**
  * Test of the RSS reader.
@@ -572,6 +574,27 @@ public class TestRssReader {
         Assert.assertEquals("http://theoatmeal.com/comics/wwz", article.getGuid());
         Assert.assertEquals("Matthew Inman", article.getCreator());
         Assert.assertTrue(article.getDescription().contains("What the World War Z movie has in common with the book"));
+        Assert.assertNotNull(article.getPublicationDate());
+    }
+    
+    @Test
+    public void rssReaderIboxTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_ibox.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("Topsport.bg - Испания", feed.getTitle());
+        Assert.assertEquals("http://topsport.ibox.bg/section/id_20", feed.getUrl());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(20, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("Роналдо не спира да бележи, Реал набира скорост", article.getTitle());
+        Assert.assertEquals("http://topsport.ibox.bg/news/id_636352968", article.getUrl());
+        Assert.assertEquals("636352968", article.getGuid());
+        Assert.assertNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        Assert.assertEquals("Португалецът с хеттрик", article.getDescription());
         Assert.assertNotNull(article.getPublicationDate());
     }
 }
