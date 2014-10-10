@@ -26,6 +26,14 @@ module.exports = function(grunt) {
       dist: {
         src: ['src/stylesheets/main.less'],
         dest: 'dist/less.css'
+      },
+      theme_default: {
+        src: ['src/stylesheets/theme/default.less'],
+        dest: 'dist/stylesheets/theme/default.css'
+      },
+      theme_highcontrast: {
+        src: ['src/stylesheets/theme/highcontrast.less'],
+        dest: 'dist/stylesheets/theme/highcontrast.css'
       }
     },
     cssmin: {
@@ -92,6 +100,6 @@ module.exports = function(grunt) {
 
   // Default tasks.
   grunt.registerTask('default', ['clean', 'concat:js', 'less', 'concat:css', 'cssmin',
-    'uglify', 'copy', 'remove', 'cleanempty', 'htmlrefs', 'replace']);
+    'uglify', 'copy:dist', 'remove', 'cleanempty', 'htmlrefs', 'replace']);
 
 };

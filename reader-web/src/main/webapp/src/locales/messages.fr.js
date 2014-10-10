@@ -187,10 +187,10 @@
   },
   "theme": {
     "default": {
-      "less": "Défaut"
+      "name": "Défaut"
     },
     "highcontrast": {
-      "less": "Contraste élevé"
+      "name": "Contraste élevé"
     }
   }
 }

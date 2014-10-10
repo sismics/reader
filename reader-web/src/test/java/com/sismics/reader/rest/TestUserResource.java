@@ -185,7 +185,7 @@ public class TestUserResource extends BaseJerseyTest {
         userResource.addFilter(new CookieAuthenticationFilter(aliceAuthToken));
         postParams = new MultivaluedMapImpl();
         postParams.add("email", " alice2@reader.com ");
-        postParams.add("theme", " highcontrast.less ");
+        postParams.add("theme", " highcontrast ");
         postParams.add("locale", " en ");
         postParams.add("display_title_web", true);
         postParams.add("display_title_mobile", false);
@@ -203,7 +203,7 @@ public class TestUserResource extends BaseJerseyTest {
         response = userResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
-        Assert.assertEquals("highcontrast.less", json.getString("theme"));
+        Assert.assertEquals("highcontrast", json.getString("theme"));
         Assert.assertTrue(json.getBoolean("display_title_web"));
         Assert.assertFalse(json.getBoolean("display_title_mobile"));
         Assert.assertFalse(json.getBoolean("display_unread_web"));
@@ -269,7 +269,7 @@ public class TestUserResource extends BaseJerseyTest {
         userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
         postParams = new MultivaluedMapImpl();
         postParams.add("email", " alice2@reader.com ");
-        postParams.add("theme", " highcontrast.less");
+        postParams.add("theme", " highcontrast");
         postParams.add("locale", " en ");
         postParams.add("display_title_web", true);
         postParams.add("display_title_mobile", false);

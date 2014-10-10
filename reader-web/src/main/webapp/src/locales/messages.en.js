@@ -187,10 +187,10 @@
   },
   "theme": {
     "default": {
-      "less": "Default"
+      "name": "Default"
     },
     "highcontrast": {
-      "less": "High contrast"
+      "name": "High contrast"
     }
   },
   "locale": {

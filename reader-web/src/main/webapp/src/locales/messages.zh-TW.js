@@ -173,10 +173,10 @@
   },
   "theme": {
     "default": {
-      "less": "原始"
+      "name": "原始"
     },
     "highcontrast": {
-      "less": "高對比"
+      "name": "高對比"
     }
   }
 }

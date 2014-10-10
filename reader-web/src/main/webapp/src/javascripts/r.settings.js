@@ -183,7 +183,7 @@ r.settings.onTabAccount = function(panel, initialize) {
       done: function(data) {
         var html = '';
         $(data.themes).each(function(i, theme) {
-          html += '<option value="' + theme.id + '"' + (userTheme == theme.id ? ' selected' : '') + '>' +  $.t('theme.' + theme.id) + '</option>';
+          html += '<option value="' + theme.id + '"' + (userTheme == theme.id ? ' selected' : '') + '>' +  $.t('theme.' + theme.id + '.name') + '</option>';
         });
         form.find('.edit-theme-input').html(html);
       }

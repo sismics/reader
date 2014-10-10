@@ -173,10 +173,10 @@
   },
   "theme": {
     "default": {
-      "less": "Standard"
+      "name": "Standard"
     },
     "highcontrast": {
-      "less": "Høj kontrast"
+      "name": "Høj kontrast"
     }
   },
   "locale": {

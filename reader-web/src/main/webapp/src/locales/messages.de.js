@@ -183,10 +183,10 @@
   },
   "theme": {
     "default": {
-      "less": "Standard"
+      "name": "Standard"
     },
     "highcontrast": {
-      "less": "Hoher Kontrast (high contrast)"
+      "name": "Hoher Kontrast (high contrast)"
     }
   },
   "locale": {
