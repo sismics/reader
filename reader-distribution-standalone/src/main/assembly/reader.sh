@@ -15,6 +15,16 @@ READER_HOME=/var/reader
 READER_MAX_MEMORY=150
 READER_PIDFILE=
 
+# SSL configuration here
+# Set READER_SECURE to true to activate SSL
+READER_SECURE=false
+# Your keystore path
+READER_KEYSTORE_PATH=
+# The keystore password
+READER_KEYSTORE_PASSWORD=
+# The keymanager password
+READER_KEYMANAGER_PASSWORD=
+
 quiet=0
 
 usage() {
@@ -96,6 +106,10 @@ ${JAVA} -Xmx${READER_MAX_MEMORY}m \
   -Dreader.home=${READER_HOME} \
   -Dreader.host=${READER_HOST} \
   -Dreader.port=${READER_PORT} \
+  -Dreader.secure=${READER_SECURE} \
+  -Dreader.keystore_path=${READER_KEYSTORE_PATH} \
+  -Dreader.keystore_password=${READER_KEYSTORE_PASSWORD} \
+  -Dreader.keymanager_password=${READER_KEYMANAGER_PASSWORD} \
   -Dreader.contextPath=${READER_CONTEXT_PATH} \
   -Djava.awt.headless=true \
   -jar reader-standalone.jar > ${LOG} 2>&1 &

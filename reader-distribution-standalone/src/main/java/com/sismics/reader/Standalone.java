@@ -2,8 +2,11 @@ package com.sismics.reader;
 
 import java.text.MessageFormat;
 
+import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
+import org.eclipse.jetty.server.ssl.SslSocketConnector;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 /**
@@ -31,7 +34,17 @@ public class Standalone {
     public static void main(String[] args) throws Exception {
         Server server = new Server();
         
-        SelectChannelConnector connector = new SelectChannelConnector();
+        // Is SSL activated
+        String secure = System.getProperty("reader.secure");
+        
+        Connector connector = new SelectChannelConnector();
+        if (Boolean.valueOf(secure)) {
+            SslContextFactory sslContextFactory = new SslContextFactory();
+            sslContextFactory.setKeyStorePath(System.getProperty("reader.keystore_path"));
+            sslContextFactory.setKeyStorePassword(System.getProperty("reader.keystore_password"));
+            sslContextFactory.setKeyManagerPassword(System.getProperty("reader.keymanager_password"));
+            connector = new SslSocketConnector(sslContextFactory);
+        }
         
         // Set host
         String host = System.getProperty("reader.host");

@@ -28,4 +28,16 @@ rem set READER_CONTEXT_PATH=/
 rem The memory limit (max Java heap size) in megabytes.
 set READER_MAX_MEMORY=150
 
-java -Xmx%READER_MAX_MEMORY%m  -Dreader.home=%READER_HOME% -Dreader.host=%READER_HOST% -Dreader.port=%READER_PORT% -Dreader.contextPath=%READER_CONTEXT_PATH% -jar reader-standalone.jar
+rem Set to true to activate SSL
+set READER_SECURE=false
+
+rem The keystore path
+set READER_KEYSTORE_PATH=
+
+rem The keystore password
+set READER_KEYSTORE_PASSWORD=
+
+rem The key manager password
+set READER_KEYMANAGER_PASSWORD=
+
+java -Xmx%READER_MAX_MEMORY%m  -Dreader.home=%READER_HOME% -Dreader.host=%READER_HOST% -Dreader.port=%READER_PORT% -Dreader.secure=%READER_SECURE% -Dreader.keystore_path=%READER_KEYSTORE_PATH% -Dreader.keystore_password=%READER_KEYSTORE_PASSWORD% -Dreader.keymanager_password=%READER_KEYMANAGER_PASSWORD% -Dreader.contextPath=%READER_CONTEXT_PATH% -jar reader-standalone.jar
