@@ -44,6 +44,11 @@ public class Setting {
     public static final boolean DEFAULT_AUTO_START = true;
     
     /**
+     * Default secure.
+     */
+    public static final boolean DEFAULT_SECURE = false;
+    
+    /**
      * Host name.
      */
     private String host;
@@ -69,6 +74,26 @@ public class Setting {
     private boolean autoStart;
     
     /**
+     * SSL on.
+     */
+    private boolean secure;
+    
+    /**
+     * KeyStore path.
+     */
+    private String keyStorePath;
+    
+    /**
+     * KeyStore password.
+     */
+    private String keyStorePassword;
+    
+    /**
+     * KeyManager password.
+     */
+    private String keyManagerPassword;
+    
+    /**
      * Constructor of Setting.
      */
     public Setting() {
@@ -76,6 +101,10 @@ public class Setting {
         port = DEFAULT_PORT;
         contextPath = DEFAULT_CONTEXT_PATH;
         autoStart = DEFAULT_AUTO_START;
+        secure = DEFAULT_SECURE;
+        keyStorePath = "";
+        keyStorePassword = "";
+        keyManagerPassword = "";
         
         if (EnvironmentUtil.isWindows()) {
             readerHome = EnvironmentUtil.getWindowsAppData() + "\\Sismics\\Reader";
@@ -102,6 +131,10 @@ public class Setting {
                 port = Integer.valueOf(properties.getProperty("reader.port", String.valueOf(DEFAULT_PORT)));
                 contextPath = properties.getProperty("reader.context_path", DEFAULT_CONTEXT_PATH);
                 autoStart = Boolean.valueOf(properties.getProperty("reader.auto_start", String.valueOf(DEFAULT_AUTO_START)));
+                secure = Boolean.valueOf(properties.getProperty("reader.secure", String.valueOf(DEFAULT_SECURE)));
+                keyStorePath = properties.getProperty("reader.keystore_path", "");
+                keyStorePassword = properties.getProperty("reader.keystore_password", "");
+                keyManagerPassword = properties.getProperty("reader.keymanager_password", "");
             }
         } catch (Exception e) {
             e.printStackTrace(System.err);
@@ -127,6 +160,10 @@ public class Setting {
             properties.setProperty("reader.port", String.valueOf(port));
             properties.setProperty("reader.context_path", contextPath);
             properties.setProperty("reader.auto_start", String.valueOf(autoStart));
+            properties.setProperty("reader.secure", String.valueOf(secure));
+            properties.setProperty("reader.keystore_path", keyStorePath);
+            properties.setProperty("reader.keystore_password", keyStorePassword);
+            properties.setProperty("reader.keymanager_password", keyManagerPassword);
             
             File file = new File(READER_AGENT_PROPERTIES_FILE);
             OutputStream os = closer.register(new FileOutputStream(file));
@@ -232,5 +269,77 @@ public class Setting {
      */
     public void setAutoStart(boolean autoStart) {
         this.autoStart = autoStart;
+    }
+
+    /**
+     * Getter de secure.
+     *
+     * @return the secure
+     */
+    public boolean isSecure() {
+        return secure;
+    }
+
+    /**
+     * Setter de secure.
+     *
+     * @param secure secure
+     */
+    public void setSecure(boolean secure) {
+        this.secure = secure;
+    }
+
+    /**
+     * Getter of keyStorePath.
+     *
+     * @return the keyStorePath
+     */
+    public String getKeyStorePath() {
+        return keyStorePath;
+    }
+
+    /**
+     * Setter of keyStorePath.
+     *
+     * @param keyStorePath keyStorePath
+     */
+    public void setKeyStorePath(String keyStorePath) {
+        this.keyStorePath = keyStorePath;
+    }
+
+    /**
+     * Getter of keyStorePassword.
+     *
+     * @return the keyStorePassword
+     */
+    public String getKeyStorePassword() {
+        return keyStorePassword;
+    }
+
+    /**
+     * Setter of keyStorePassword.
+     *
+     * @param keyStorePassword keyStorePassword
+     */
+    public void setKeyStorePassword(String keyStorePassword) {
+        this.keyStorePassword = keyStorePassword;
+    }
+
+    /**
+     * Getter of keyManagerPassword.
+     *
+     * @return the keyManagerPassword
+     */
+    public String getKeyManagerPassword() {
+        return keyManagerPassword;
+    }
+
+    /**
+     * Setter of keyManagerPassword.
+     *
+     * @param keyManagerPassword keyManagerPassword
+     */
+    public void setKeyManagerPassword(String keyManagerPassword) {
+        this.keyManagerPassword = keyManagerPassword;
     }
 }

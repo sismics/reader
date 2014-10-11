@@ -5,7 +5,9 @@ import java.util.Date;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
+import org.eclipse.jetty.server.ssl.SslSocketConnector;
 import org.eclipse.jetty.util.component.LifeCycle;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import com.sismics.reader.agent.ReaderAgent;
@@ -71,10 +73,21 @@ public class ReaderDeployer implements LifeCycle.Listener {
             lifeCycleStarting(null);
 
             server = new Server();
-            SelectChannelConnector connector = new SelectChannelConnector();
-            connector.setHost(setting.getHost());
-            connector.setPort(setting.getPort());
-            server.addConnector(connector);
+            if (setting.isSecure()) {
+                SslContextFactory sslContextFactory = new SslContextFactory();
+                sslContextFactory.setKeyStorePath(setting.getKeyStorePath());
+                sslContextFactory.setKeyStorePassword(setting.getKeyStorePassword());
+                sslContextFactory.setKeyManagerPassword(setting.getKeyManagerPassword());
+                SslSocketConnector connector = new SslSocketConnector(sslContextFactory);
+                connector.setHost(setting.getHost());
+                connector.setPort(setting.getPort());
+                server.addConnector(connector);
+            } else {
+                SelectChannelConnector connector = new SelectChannelConnector();
+                connector.setHost(setting.getHost());
+                connector.setPort(setting.getPort());
+                server.addConnector(connector);
+            }
 
             WebAppContext webapp = new WebAppContext();
             webapp.setContextPath(setting.getContextPath());
@@ -146,7 +159,7 @@ public class ReaderDeployer implements LifeCycle.Listener {
      */
     public String getUrl() {
         final Setting setting = readerAgent.getSetting();
-        StringBuilder sb = new StringBuilder("http://");
+        StringBuilder sb = new StringBuilder(setting.isSecure() ? "https://" : "http://");
         sb.append(Setting.DEFAULT_HOST.equals(setting.getHost()) ? "localhost" : setting.getHost());
         if (setting.getPort() != 80) {
             sb.append(":");

@@ -3,6 +3,7 @@ package com.sismics.reader.agent.ui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.Format;
@@ -14,7 +15,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
+import com.google.common.base.Strings;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.factories.ButtonBarFactory;
@@ -43,6 +47,14 @@ public class SettingPanel extends JPanel {
     
     private JCheckBox autoStartCheckBox;
     
+    private JCheckBox secureCheckBox;
+    
+    private JFormattedTextField keyStorePathTextField;
+    
+    private JFormattedTextField keyStorePasswordTextField;
+    
+    private JFormattedTextField keyManagerPasswordTextField;
+    
     private JButton defaultButton;
     
     private JButton saveButton;
@@ -70,6 +82,10 @@ public class SettingPanel extends JPanel {
         portTextField.setValue(setting.getPort());
         contextPathComboBox.setSelectedItem(setting.getContextPath());
         autoStartCheckBox.setSelected(setting.isAutoStart());
+        secureCheckBox.setSelected(setting.isSecure());
+        keyStorePathTextField.setValue(setting.getKeyStorePath());
+        keyStorePasswordTextField.setValue(setting.getKeyStorePassword());
+        keyManagerPasswordTextField.setValue(setting.getKeyManagerPassword());
     }
 
     /**
@@ -82,6 +98,10 @@ public class SettingPanel extends JPanel {
         setting.setPort(getPort());
         setting.setContextPath(getContextPath());
         setting.setAutoStart(autoStartCheckBox.isSelected());
+        setting.setSecure(secureCheckBox.isSelected());
+        setting.setKeyStorePath(getKeyStorePath());
+        setting.setKeyStorePassword(getKeyStorePassword());
+        setting.setKeyManagerPassword(getKeyManagerPassword());
         setting.save();
 
         JOptionPane.showMessageDialog(this,
@@ -112,6 +132,24 @@ public class SettingPanel extends JPanel {
         });
         
         autoStartCheckBox = new JCheckBox();
+        
+        keyStorePathTextField = new JFormattedTextField();
+        
+        keyStorePasswordTextField = new JFormattedTextField();
+        
+        keyManagerPasswordTextField = new JFormattedTextField();
+        
+        secureCheckBox = new JCheckBox();
+        secureCheckBox.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                boolean secure = secureCheckBox.isSelected();
+                keyStorePathTextField.setEnabled(secure);
+                keyStorePasswordTextField.setEnabled(secure);
+                keyManagerPasswordTextField.setEnabled(secure);
+            }
+        });
+        
 
         saveButton = new JButton(MessageUtil.getMessage("agent.setting.save"));
         saveButton.addActionListener(new ActionListener() {
@@ -133,6 +171,10 @@ public class SettingPanel extends JPanel {
         builder.append(MessageUtil.getMessage("agent.setting.port"), portTextField);
         builder.append(MessageUtil.getMessage("agent.setting.context_path"), contextPathComboBox);
         builder.append(MessageUtil.getMessage("agent.setting.auto_start"), autoStartCheckBox);
+        builder.append(MessageUtil.getMessage("agent.setting.secure"), secureCheckBox);
+        builder.append(MessageUtil.getMessage("agent.setting.keystore_path"), keyStorePathTextField);
+        builder.append(MessageUtil.getMessage("agent.setting.keystore_password"), keyStorePasswordTextField);
+        builder.append(MessageUtil.getMessage("agent.setting.keymanager_password"), keyManagerPasswordTextField);
 
         setBorder(Borders.DIALOG_BORDER);
 
@@ -172,5 +214,47 @@ public class SettingPanel extends JPanel {
             throw new Exception(MessageUtil.getMessage("agent.setting.save.error.port"), e);
         }
         return port;
+    }
+    
+    /**
+     * Validate and get the keystore path.
+     * 
+     * @return Keystore path
+     * @throws Exception
+     */
+    private String getKeyStorePath() throws Exception {
+        String path = (String) keyStorePathTextField.getValue();
+        if (!new File(path).exists()) {
+            throw new Exception(MessageUtil.getMessage("agent.setting.save.error.keystore_path"));
+        }
+        return path;
+    }
+    
+    /**
+     * Validate and get the keystore password.
+     * 
+     * @return Keystore password
+     * @throws Exception
+     */
+    private String getKeyStorePassword() throws Exception {
+        String password = (String) keyStorePasswordTextField.getValue();
+        if (Strings.isNullOrEmpty(password) && secureCheckBox.isSelected()) {
+            throw new Exception(MessageUtil.getMessage("agent.setting.save.error.keystore_password"));
+        }
+        return password;
+    }
+    
+    /**
+     * Validate and get the keymanager password.
+     * 
+     * @return Key manager password
+     * @throws Exception
+     */
+    private String getKeyManagerPassword() throws Exception {
+        String password = (String) keyManagerPasswordTextField.getValue();
+        if (Strings.isNullOrEmpty(password) && secureCheckBox.isSelected()) {
+            throw new Exception(MessageUtil.getMessage("agent.setting.save.error.keymanager_password"));
+        }
+        return password;
     }
 }
