@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="ThemeLight" parent="@android:style/Theme.Holo.Light">
+    </style>
+
     <style name="ThemeMain"
         parent="@android:style/Theme.Holo.Light">
         <item name="android:actionOverflowButtonStyle">@android:style/Widget.Holo.ActionButton.Overflow</item>
