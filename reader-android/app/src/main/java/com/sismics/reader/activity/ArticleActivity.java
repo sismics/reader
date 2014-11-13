@@ -1,9 +1,7 @@
 package com.sismics.reader.activity;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
@@ -16,17 +14,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.android.Log;
-import com.sismics.systembartint.SystemBarTintManager;
 import com.sismics.reader.R;
 import com.sismics.reader.listener.ArticlesHelperListener;
 import com.sismics.reader.resource.ArticleResource;
@@ -34,7 +29,6 @@ import com.sismics.reader.resource.StarredResource;
 import com.sismics.reader.ui.adapter.ArticlesAdapter;
 import com.sismics.reader.ui.adapter.ArticlesPagerAdapter;
 import com.sismics.reader.ui.adapter.SharedArticlesAdapterHelper;
-import com.viewpagerindicator.UnderlinePageIndicator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,11 +50,6 @@ public class ArticleActivity extends FragmentActivity {
     private View drawer;
     private MenuItem starMenuItem;
     private Intent shareIntent;
-
-    /**
-     * Use low profile mode in immersion mode.
-     */
-    boolean lowProfile;
 
     /**
      * Articles to mark as read later.
@@ -108,14 +97,9 @@ public class ArticleActivity extends FragmentActivity {
 
         // Configure the activity
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.article_activity);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-        if (Build.VERSION.SDK_INT >= 19) {
-            lowProfile = !new SystemBarTintManager(this).getConfig().isNavigationAtBottom();
-        }
-        showSystemUi();
 
         // Building page change listener
         OnPageChangeListener onPageChangeListener = new OnPageChangeListener() {
@@ -183,20 +167,7 @@ public class ArticleActivity extends FragmentActivity {
         final ArticlesPagerAdapter adapter = new ArticlesPagerAdapter(getSupportFragmentManager());
         sharedAdapterHelper.addAdapter(adapter, articlesHelperListener);
         viewPager.setAdapter(adapter);
-
-        // Pretty animation between pages
-        // Issue #89 : This animation blocks the vertical scrolling on API16 (at least)
-        // viewPager.setPageTransformer(true, new CardTransformer(.7f));
-
-        // Configure the ViewPagerIndicator
-        int position = getIntent().getIntExtra("position", 0);
-        UnderlinePageIndicator indicator = (UnderlinePageIndicator) findViewById(R.id.indicator);
-        if (indicator != null) {
-            indicator.setViewPager(viewPager, position);
-            indicator.setOnPageChangeListener(onPageChangeListener);
-        } else {
-            viewPager.setOnPageChangeListener(onPageChangeListener);
-        }
+        viewPager.setOnPageChangeListener(onPageChangeListener);
 
         // Configure the ListView
         drawerList = (ListView) findViewById(R.id.drawer_list);
@@ -261,6 +232,7 @@ public class ArticleActivity extends FragmentActivity {
         }
 
         // Forcing page change listener
+        int position = getIntent().getIntExtra("position", 0);
         viewPager.setCurrentItem(position);
         onPageChangeListener.onPageSelected(position);
     }
@@ -328,7 +300,6 @@ public class ArticleActivity extends FragmentActivity {
 
         // Show the possibly hidden action bar and system UI
         getActionBar().show();
-        showSystemUi();
     }
 
     @Override
@@ -432,36 +403,5 @@ public class ArticleActivity extends FragmentActivity {
             ArticleResource.readMultiple(ArticleActivity.this, readArticleIdSet, new JsonHttpResponseHandler());
         }
         super.onPause();
-    }
-
-    /**
-     * Hide the system UI on API >= 19 (immersive mode).
-     */
-    @TargetApi(19)
-    public void hideSystemUi() {
-        if (Build.VERSION.SDK_INT >= 19) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | (lowProfile ? View.SYSTEM_UI_FLAG_LOW_PROFILE : View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE);
-        }
-    }
-
-    /**
-     * Show the system UI on API >= 19 (immersive mode).
-     */
-    @TargetApi(19)
-    public void showSystemUi() {
-        if (Build.VERSION.SDK_INT >= 19) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
     }
 }

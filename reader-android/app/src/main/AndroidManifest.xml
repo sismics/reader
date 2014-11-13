@@ -12,12 +12,11 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/application_name"
-        android:theme="@style/ThemeLight">
+        android:theme="@style/ThemeMain">
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/application_name"
-            android:logo="@drawable/ic_launcher"
-            android:theme="@style/ThemeMain">
+            android:logo="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.sismics.reader.OPEN" />
@@ -29,7 +28,6 @@
             android:name=".activity.MainActivity"
             android:label="@string/application_name"
             android:logo="@drawable/ic_launcher"
-            android:theme="@style/ThemeMain"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -39,7 +37,6 @@
         <activity
             android:name=".activity.ArticleActivity"
             android:label=""
-            android:theme="@style/ThemeArticle"
             android:logo="@android:color/transparent">
         </activity>
         <activity

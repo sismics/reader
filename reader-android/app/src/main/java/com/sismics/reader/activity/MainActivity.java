@@ -28,7 +28,6 @@ import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.sismics.bluractionbar.BlurActionBarDrawerToggle;
 import com.sismics.reader.R;
 import com.sismics.reader.constant.Constants;
 import com.sismics.reader.fragment.AddSubscriptionDialogFragment;
@@ -136,11 +135,8 @@ public class MainActivity extends FragmentActivity {
 
             // ActionBarDrawerToggle ties together the the proper interactions
             // between the sliding drawer and the action bar app icon
-            drawerToggle = new BlurActionBarDrawerToggle(
-                    this,                  /* host Activity */
-                    drawerLayout,         /* DrawerLayout object */
-                    R.drawable.ic_drawer_inverse, R.string.drawer_open, R.string.drawer_close,
-                    findViewById(R.id.blurlayout), 5) {
+            drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
+                    R.drawable.ic_drawer_inverse, R.string.drawer_open, R.string.drawer_close) {
 
                 @Override
                 public void onDrawerOpened(View drawerView) {

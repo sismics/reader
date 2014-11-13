@@ -6,6 +6,7 @@
         <item name="android:colorAccent">#1d93bf</item>
     </style>
 
-    <style name="ThemeLight" parent="@style/ThemeMain">
+    <style name="ThemeMainCab"
+        parent="ThemeMain">
     </style>
 </resources>

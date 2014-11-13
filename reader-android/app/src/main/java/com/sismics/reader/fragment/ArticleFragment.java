@@ -4,20 +4,16 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,10 +24,7 @@ import android.widget.ImageView;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.BitmapAjaxCallback;
-import com.sismics.systembartint.SystemBarTintManager;
 import com.sismics.reader.R;
-import com.sismics.reader.activity.ArticleActivity;
-import com.sismics.reader.ui.widget.ArticleScrollView;
 import com.sismics.reader.util.PreferenceUtil;
 
 import org.json.JSONException;
@@ -75,34 +68,6 @@ public class ArticleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.article_fragment, container, false);
         final AQuery aq = new AQuery(view);
-
-        // Get action bar height
-        TypedValue tv = new TypedValue();
-        getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true);
-        final int actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-
-        // Show/hide action bar to get an immersive mode
-        ArticleScrollView articleScrollView = (ArticleScrollView) aq.id(R.id.scrollView).getView();
-        final ActionBar actionBar = getActivity().getActionBar();
-        final ArticleActivity articleActivity = (ArticleActivity) getActivity();
-        articleScrollView.setOnScrollChangedListener(new ArticleScrollView.OnScrollChangedListener() {
-            @Override
-            public int getDeadHeight() {
-                return actionBarHeight;
-            }
-
-            @Override
-            public void onScrollDown() {
-                actionBar.hide();
-                articleActivity.hideSystemUi();
-            }
-
-            @Override
-            public void onScrollUp() {
-                actionBar.show();
-                articleActivity.showSystemUi();
-            }
-        });
 
         // Configure WebView
         WebView webView = aq.id(R.id.articleWebView).getWebView();
@@ -207,27 +172,7 @@ public class ArticleFragment extends Fragment {
         // Retrieve and cache the system's default "short" animation time.
         shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-        // Set padding according to content and visible area
-        setInsets(getActivity(), articleScrollView, actionBarHeight);
-
         return view;
-    }
-
-    /**
-     * Set padding on a view based on viewable area.
-     *
-     * @param context Context
-     * @param view View
-     * @param actionBarHeight ActionBar height
-     */
-    private void setInsets(Activity context, View view, int actionBarHeight) {
-        if (Build.VERSION.SDK_INT < 19) {
-            view.setPadding(0, hasEnclosure ? 0 : actionBarHeight, 0, 0);
-            return;
-        }
-        SystemBarTintManager tintManager = new SystemBarTintManager(context);
-        SystemBarTintManager.SystemBarConfig config = tintManager.getConfig();
-        view.setPadding(0, config.getPixelInsetTop(!hasEnclosure), config.getPixelInsetRight(), config.getPixelInsetBottom());
     }
 
     /**
