@@ -3,11 +3,10 @@ package com.sismics.reader.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,7 +40,7 @@ import java.util.Set;
  * 
  * @author bgamard
  */
-public class ArticleActivity extends FragmentActivity {
+public class ArticleActivity extends ActionBarActivity {
 
     // UI cache
     private ViewPager viewPager;
@@ -67,7 +66,7 @@ public class ArticleActivity extends FragmentActivity {
     private ArticlesHelperListener articlesHelperListener = new ArticlesHelperListener() {
         @Override
         public void onStart() {
-            setProgressBarIndeterminateVisibility(true);
+            setSupportProgressBarIndeterminateVisibility(true);
         }
 
         @Override
@@ -80,7 +79,7 @@ public class ArticleActivity extends FragmentActivity {
 
         @Override
         public void onEnd() {
-            setProgressBarIndeterminateVisibility(false);
+            setSupportProgressBarIndeterminateVisibility(false);
         }
     };
     
@@ -96,10 +95,10 @@ public class ArticleActivity extends FragmentActivity {
         }
 
         // Configure the activity
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.article_activity);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         // Building page change listener
         OnPageChangeListener onPageChangeListener = new OnPageChangeListener() {
@@ -208,10 +207,6 @@ public class ArticleActivity extends FragmentActivity {
         drawer = findViewById(R.id.left_drawer);
 
         if (drawerLayout != null) {
-            // Set a custom shadow that overlays the main content when the drawer opens
-            drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-            drawerLayout.setScrimColor(getResources().getColor(R.color.drawer_shadow));
-
             drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
                 @Override
                 public void onDrawerSlide(View view, float v) {}
@@ -242,7 +237,7 @@ public class ArticleActivity extends FragmentActivity {
      */
     private void onArticlesDrawerOpened() {
         invalidateOptionsMenu();
-        getActionBar().show();
+        getSupportActionBar().show();
 
         // Sync the ListView with the ViewPager
         int position = viewPager.getCurrentItem();
@@ -299,7 +294,7 @@ public class ArticleActivity extends FragmentActivity {
         }
 
         // Show the possibly hidden action bar and system UI
-        getActionBar().show();
+        getSupportActionBar().show();
     }
 
     @Override

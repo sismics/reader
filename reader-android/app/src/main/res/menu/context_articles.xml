@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/read"
         android:icon="@drawable/ic_action_read"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/mark_as_read">
     </item>
     <item
         android:id="@+id/unread"
         android:icon="@drawable/ic_action_unread"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/mark_as_unread">
     </item>
     <item
         android:id="@+id/star"
         android:icon="@drawable/ic_action_important"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/star">
     </item>
     <item
         android:id="@+id/unstar"
         android:icon="@drawable/ic_action_not_important"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/unstar">
     </item>
 

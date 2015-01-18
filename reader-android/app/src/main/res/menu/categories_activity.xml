@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/accept"
         android:icon="@drawable/ic_action_accept"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/save">
     </item>
     <item
         android:id="@+id/add_category"
         android:icon="@drawable/ic_action_collection_new"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/add_category">
     </item>
 </menu>

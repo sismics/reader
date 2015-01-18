@@ -1,7 +1,7 @@
 package com.sismics.reader.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 import com.sismics.reader.fragment.SettingsFragment;
@@ -11,14 +11,14 @@ import com.sismics.reader.fragment.SettingsFragment;
  *
  * @author bgamard.
  */
-public class SettingsActivity extends FragmentActivity {
+public class SettingsActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         // Display the fragment as the main content.
         getFragmentManager().beginTransaction()

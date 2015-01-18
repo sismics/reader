@@ -32,7 +32,8 @@
         android:layout_gravity="start"
         android:background="@drawable/list_background_holo"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:elevation="5dp">
 
         <ListView
             android:id="@+id/drawer_list"

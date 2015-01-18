@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/all_read"
         android:icon="@drawable/ic_action_read_inverse"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/all_read">
     </item>
     <item
         android:id="@+id/add_subscription"
         android:icon="@drawable/ic_action_new_inverse"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/add_subscription">
     </item>
     <item
         android:id="@+id/refresh"
-        android:showAsAction="collapseActionView"
+        app:showAsAction="collapseActionView"
         android:title="@string/refresh">
     </item>
     <item android:id="@+id/action_search"
         android:title="@string/action_search"
-        android:showAsAction="collapseActionView"
-        android:actionViewClass="android.widget.SearchView" />
+        app:showAsAction="collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
     <item
         android:id="@+id/manage_categories"
-        android:showAsAction="collapseActionView"
+        app:showAsAction="collapseActionView"
         android:title="@string/manage_categories">
     </item>
     <item
         android:id="@+id/settings"
-        android:showAsAction="collapseActionView"
+        app:showAsAction="collapseActionView"
         android:title="@string/settings">
     </item>
     <item
         android:id="@+id/logout"
-        android:showAsAction="collapseActionView"
+        app:showAsAction="collapseActionView"
         android:title="@string/logout">
     </item>
 

@@ -244,9 +244,6 @@ public class ArticleFragment extends Fragment {
         thumbView.setAlpha(0f);
         expandedImageView.setVisibility(View.VISIBLE);
 
-        // Hide the action bar
-        getActivity().getActionBar().hide();
-
         // Set the pivot point for SCALE_X and SCALE_Y transformations
         // to the top-left corner of the zoomed-in view (the default
         // is the center of the view).
@@ -312,7 +309,6 @@ public class ArticleFragment extends Fragment {
                     public void onAnimationEnd(Animator animation) {
                         thumbView.setAlpha(1f);
                         expandedImageView.setVisibility(View.GONE);
-                        getActivity().getActionBar().show();
                         currentAnimator = null;
                     }
 

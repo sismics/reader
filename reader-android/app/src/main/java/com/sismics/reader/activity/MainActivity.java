@@ -8,25 +8,21 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SearchView;
 
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
-import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sismics.reader.R;
 import com.sismics.reader.constant.Constants;
@@ -51,7 +47,7 @@ import org.json.JSONObject;
  * 
  * @author bgamard
  */
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity {
     
     private static final String ARTICLES_FRAGMENT_TAG = "articlesFragment";
     private static final String ARTICLES_DEFAULT_FRAGMENT_TAG = "articlesDefaultFragment";
@@ -125,18 +121,14 @@ public class MainActivity extends FragmentActivity {
         });
 
         if (drawerLayout != null) {
-            // Set a custom shadow that overlays the main content when the drawer opens
-            drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-            drawerLayout.setScrimColor(getResources().getColor(R.color.drawer_shadow));
-
             // Enable ActionBar app icon to behave as action to toggle nav drawer
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-            getActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
 
             // ActionBarDrawerToggle ties together the the proper interactions
             // between the sliding drawer and the action bar app icon
             drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
-                    R.drawable.ic_drawer_inverse, R.string.drawer_open, R.string.drawer_close) {
+                    R.string.drawer_open, R.string.drawer_close) {
 
                 @Override
                 public void onDrawerOpened(View drawerView) {
@@ -162,36 +154,6 @@ public class MainActivity extends FragmentActivity {
             }
         });
         swipeLayout.setColorSchemeResources(R.color.main_color, R.color.secondary_color, R.color.main_color2, R.color.secondary_color2);
-
-        // Showcase view (shown only once)
-        new ShowcaseView.Builder(this)
-                .setTarget(new ViewTarget(R.id.content_frame, this))
-                .setStyle(R.style.CustomShowcaseTheme)
-                .singleShot(42)
-                .setContentTitle(R.string.showcase_swipe_title)
-                .setContentText(R.string.showcase_swipe_text)
-                .setOnClickListener(new View.OnClickListener() {
-                    boolean shown = false;
-
-                    @Override
-                    public void onClick(View view) {
-                        ShowcaseView showcaseView = (ShowcaseView) view.getParent();
-
-                        // Hide the showcase when all is shown
-                        if (shown) {
-                            showcaseView.hide();
-                            return;
-                        }
-
-                        // Second showcase view
-                        showcaseView.setShowcase(new ActionViewTarget(MainActivity.this, ActionViewTarget.Type.HOME), true);
-                        showcaseView.setContentTitle(getString(R.string.showcase_drawer_title));
-                        showcaseView.setContentText(getString(R.string.showcase_drawer_text));
-                        showcaseView.setButtonText(getString(R.string.close));
-                        shown = true;
-                    }
-                })
-                .build();
 
         handleIntent(getIntent());
     }
@@ -243,13 +205,13 @@ public class MainActivity extends FragmentActivity {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        setProgressBarIndeterminateVisibility(true);
+                        setSupportProgressBarIndeterminateVisibility(true);
                         String url = SharedArticlesAdapterHelper.getInstance().getUrl();
                         SubscriptionResource.read(MainActivity.this, url, new JsonHttpResponseHandler() {
                             @Override
                             public void onFinish() {
                                 if (!isActivityDestroyed()) {
-                                    setProgressBarIndeterminateVisibility(false);
+                                    setSupportProgressBarIndeterminateVisibility(false);
                                     refreshSubscriptions(drawerList.getCheckedItemPosition(), true);
                                 }
                             }

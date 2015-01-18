@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,7 +31,7 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @author bgamard
  */
-public class CategoriesActivity extends FragmentActivity {
+public class CategoriesActivity extends ActionBarActivity {
 
     CategoryAdapter categoryAdapter;
 
@@ -41,8 +41,8 @@ public class CategoriesActivity extends FragmentActivity {
 
         // Activity setup
         setContentView(R.layout.categories_activity);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         // Loading categories from server
         CategoryResource.list(this, new JsonHttpResponseHandler() {
@@ -51,7 +51,7 @@ public class CategoriesActivity extends FragmentActivity {
                 // Extracting categories
                 JSONObject rootCategory = json.optJSONArray("categories").optJSONObject(0);
                 JSONArray categories = rootCategory.optJSONArray("categories");
-                List<CategoryAdapter.Category> items = new ArrayList<CategoryAdapter.Category>();
+                List<CategoryAdapter.Category> items = new ArrayList<>();
                 if (categories != null) {
                     for (int i = 0; i < categories.length(); i++) {
                         JSONObject category = categories.optJSONObject(i);
@@ -129,7 +129,7 @@ public class CategoriesActivity extends FragmentActivity {
             });
 
             // Consume each state and apply them
-            final AtomicReference<Runnable> atomicRunnable = new AtomicReference<Runnable>();
+            final AtomicReference<Runnable> atomicRunnable = new AtomicReference<>();
             atomicRunnable.set(new Runnable() {
                 @Override
                 public void run() {
