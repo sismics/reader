@@ -143,7 +143,7 @@
     }
   },
   "article": {
-    "markasunread": "标记为已读"
+    "markasunread": "标记为未读"
   },
   "feed": {
     "nomorearticles": "没有更多条目",
