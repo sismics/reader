@@ -201,7 +201,7 @@
       </activation>
       <properties>
         <nsis.home>/usr/bin</nsis.home>
-        <launch4j.home>/opt/launch4j</launch4j.home>
+        <launch4j.home>${env.LAUNCH4J_HOME}</launch4j.home>
       </properties>
     </profile>
   </profiles>
