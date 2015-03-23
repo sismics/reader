@@ -200,7 +200,7 @@
         </os>
       </activation>
       <properties>
-        <nsis.home>/usr/bin</nsis.home>
+        <nsis.home>${env.MAKENSIS_HOME}</nsis.home>
         <launch4j.home>${env.LAUNCH4J_HOME}</launch4j.home>
       </properties>
     </profile>
