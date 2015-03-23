@@ -27,9 +27,12 @@ public class TestRssExtractor {
             }
         }.open(new URL("http://korben.info"));
         List<String> feedList = extractor.getFeedList();
-        Assert.assertEquals(2, feedList.size());
+        System.out.println(feedList);
+        Assert.assertEquals(4, feedList.size());
         Assert.assertEquals("http://korben.info/feed", feedList.get(0));
         Assert.assertEquals("http://korben.info/feed/atom", feedList.get(1));
+        Assert.assertEquals("http://korben.info/feed", feedList.get(2));
+        Assert.assertEquals("http://korben.info/comments/feed", feedList.get(3));
     }
 
     @Test
