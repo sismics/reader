@@ -4,25 +4,25 @@
 
     <item
         android:id="@+id/read"
-        android:icon="@drawable/ic_action_read"
+        android:icon="@drawable/ic_action_read_inverse"
         app:showAsAction="ifRoom"
         android:title="@string/mark_as_read">
     </item>
     <item
         android:id="@+id/unread"
-        android:icon="@drawable/ic_action_unread"
+        android:icon="@drawable/ic_action_unread_inverse"
         app:showAsAction="ifRoom"
         android:title="@string/mark_as_unread">
     </item>
     <item
         android:id="@+id/star"
-        android:icon="@drawable/ic_action_important"
+        android:icon="@drawable/ic_action_important_inverse"
         app:showAsAction="ifRoom"
         android:title="@string/star">
     </item>
     <item
         android:id="@+id/unstar"
-        android:icon="@drawable/ic_action_not_important"
+        android:icon="@drawable/ic_action_not_important_inverse"
         app:showAsAction="ifRoom"
         android:title="@string/unstar">
     </item>

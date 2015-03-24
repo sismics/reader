@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.1'
+        classpath 'com.android.tools.build:gradle:1.1.0'
     }
 }
 
@@ -16,9 +16,6 @@ repositories {
 }
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion '21.1.2'
-
     signingConfigs {
         release {
             storeFile file(System.getenv("READER_STORE_PATH"))
@@ -28,9 +25,12 @@ android {
         }
     }
 
+    compileSdkVersion 22
+    buildToolsVersion '22.0.1'
+
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 21
+        targetSdkVersion 22
         versionCode 11
         versionName "1.5.1"
     }
@@ -50,7 +50,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
     compile 'ch.acra:acra:4.5.0'
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.mobeta.android.dslv:drag-sort-listview:0.6.1-SNAPSHOT-AAR@aar'
     compile 'com.google.android.apps.dashclock:dashclock-api:2.0.0'
     compile 'com.loopj.android:android-async-http:1.4.4'
