@@ -1,0 +1,52 @@
+
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>QC RSS</title>
+        <link>http://www.questionablecontent.net</link>
+        <description>The Official QC RSS Feed</description>
+        <generator>Feeder 2.5.9(1914); Mac OS X Version 10.10.2 (Build 14C1514) http://reinventedsoftware.com/feeder/</generator>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <language>en</language>
+        <pubDate>Mon, 06 Apr 2015 22:30:34 -0400</pubDate>
+        <lastBuildDate>Mon, 06 Apr 2015 22:30:34 -0400</lastBuildDate>
+        <atom:link href="http://www.questionablecontent.net/QCRSS.xml" rel="self" type="application/rss+xml"/>
+        
+        <item>
+            <title>-1 Shirt</title>
+            <link>http://questionablecontent.net/view.php?comic=2732</link>
+            <description><![CDATA[<p><!-- Beginning of Project Wonderful ad code: -->
+<br />
+<!-- Ad box ID: 39770 -->
+<br />
+<map name="admap39770" id="admap39770"><area href="http://www.projectwonderful.com/out_nojs.php?r=0&c=0&id=39770&type=5" shape="rect" coords="0,0,728,90" title="" alt="" target="_blank" /></map>
+<br />
+<table cellpadding="0" border="0" cellspacing="0" width="728" bgcolor="#ffffff"><tr><td><img src="http://www.projectwonderful.com/nojs.php?id=39770&type=5" width="728" height="90" usemap="#admap39770" border="0" alt="" /></td></tr><tr><td bgcolor="#ffffff" colspan="1"><center><a style="font-size:10px;color:#0000ff;text-decoration:none;line-height:1.2;font-weight:bold;font-family:Tahoma, verdana,arial,helvetica,sans-serif;text-transform: none;letter-spacing:normal;text-shadow:none;white-space:normal;word-spacing:normal;" href="http://www.projectwonderful.com/advertisehere.php?id=39770&type=5" target="_blank">Ads by Project Wonderful!  Your ad could be here, right now.</a></center></td></tr><tr><td colspan="1" valign="top" width="728" bgcolor="#000000" style="height:3px;font-size:1px;padding:0px;max-height:3px;"></td></tr></table>
+<br />
+<img src="http://www.questionablecontent.net/comics/2732.png"></p>
+
+<p>RIP shirt</p>
+
+<p><a href="http://www.patreon.com/jephjacques">One weird tip about my Patreon, discovered by a mom!</a></p>]]></description>
+            <pubDate>Mon, 23 Jun 2014 21:32:09 -0400</pubDate>
+            <guid isPermaLink="false">ad528a3695c1f2816fa3ca916ce2f1739733d7ab</guid>
+        </item>
+        <item>
+            <title>Metal Gear Emily</title>
+            <link>http://questionablecontent.net/view.php?comic=2731</link>
+            <description><![CDATA[<p><!-- Beginning of Project Wonderful ad code: -->
+<br />
+<!-- Ad box ID: 39770 -->
+<br />
+<map name="admap39770" id="admap39770"><area href="http://www.projectwonderful.com/out_nojs.php?r=0&c=0&id=39770&type=5" shape="rect" coords="0,0,728,90" title="" alt="" target="_blank" /></map>
+<br />
+<table cellpadding="0" border="0" cellspacing="0" width="728" bgcolor="#ffffff"><tr><td><img src="http://www.projectwonderful.com/nojs.php?id=39770&type=5" width="728" height="90" usemap="#admap39770" border="0" alt="" /></td></tr><tr><td bgcolor="#ffffff" colspan="1"><center><a style="font-size:10px;color:#0000ff;text-decoration:none;line-height:1.2;font-weight:bold;font-family:Tahoma, verdana,arial,helvetica,sans-serif;text-transform: none;letter-spacing:normal;text-shadow:none;white-space:normal;word-spacing:normal;" href="http://www.projectwonderful.com/advertisehere.php?id=39770&type=5" target="_blank">Ads by Project Wonderful!  Your ad could be here, right now.</a></center></td></tr><tr><td colspan="1" valign="top" width="728" bgcolor="#000000" style="height:3px;font-size:1px;padding:0px;max-height:3px;"></td></tr></table>
+<br />
+<img src="http://www.questionablecontent.net/comics/2731.png"></p>
+
+<p>Emily why</p>]]></description>
+            <pubDate>Sun, 22 Jun 2014 21:35:55 -0400</pubDate>
+            <guid isPermaLink="false">GUID2</guid>
+        </item>
+    </channel>
+</rss>

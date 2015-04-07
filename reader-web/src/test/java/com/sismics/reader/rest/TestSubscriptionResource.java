@@ -362,4 +362,40 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertNotNull(articles);
         Assert.assertEquals(3, articles.length());
     }
+    
+    /**
+     * Test related to issue #110.
+     * See https://github.com/sismics/reader/issues/110.
+     * 
+     * @throws JSONException
+     */
+    @Test
+    public void testIssue110() throws JSONException {
+        // Create user subscription1
+        clientUtil.createUser("test_issue_110");
+        String authToken = clientUtil.login("test_issue_110");
+
+        // Import a Takeout file
+        WebResource trackResource = resource().path("/subscription/import");
+        trackResource.addFilter(new CookieAuthenticationFilter(authToken));
+        FormDataMultiPart form = new FormDataMultiPart();
+        InputStream track = this.getClass().getResourceAsStream("/import/issue_110@gmail.com-takeout.zip");
+        FormDataBodyPart fdp = new FormDataBodyPart("file",
+                new BufferedInputStream(track),
+                MediaType.APPLICATION_OCTET_STREAM_TYPE);
+        form.bodyPart(fdp);
+        ClientResponse response = trackResource.type(MediaType.MULTIPART_FORM_DATA).put(ClientResponse.class, form);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        
+        // Subscribe to questionablecontent.net
+        WebResource subscriptionResource = resource().path("/subscription");
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
+        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
+        postParams.add("url", "http://localhost:9997/http/feeds/qc.xml");
+        response = subscriptionResource.put(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        JSONObject json = response.getEntity(JSONObject.class);
+        String subscription1Id = json.getString("id");
+        Assert.assertNotNull(subscription1Id);
+    }
 }
