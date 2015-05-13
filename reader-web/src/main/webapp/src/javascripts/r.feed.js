@@ -370,7 +370,13 @@ r.feed.buildEmpty = function() {
   if (r.feed.context.unread) {
     message = $.t('feed.nonewarticle');
   }
-  return $('<div class="empty">' + message + '<br /><img src="images/rssman.png" /></div>');
+  var empty = $('<div class="empty">' + message + '<br /><img src="images/rssman.png" /></div>');
+  $(empty).click(function() {
+    $(this).addClass('bounce').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+      $(this).removeClass('bounce');
+    })
+  });
+  return empty;
 };
 
 /**

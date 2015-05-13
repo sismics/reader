@@ -135,3 +135,51 @@ a:hover, a:active {
   color: @main-color-active;
   text-decoration: none;
 }
+
+// Double bounce animation
+@keyframes bounce {
+  25% {
+    transform: translate3d(0, -10px, 0);
+  }
+
+  50% {
+    transform: translate3d(0, 0, 0);
+  }
+  
+  75% {
+    transform: translate3d(0, -10px, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@-webkit-keyframes bounce {
+  25% {
+    -webkit-transform: translate3d(0, -10px, 0);
+  }
+
+  50% {
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+  
+  75% {
+    -webkit-transform: translate3d(0, -10px, 0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+}
+
+.bounce {
+  animation-name: bounce;
+  transform-origin: center bottom;
+  animation-duration: 0.45s;
+  animation-fill-mode: both;
+  -webkit-animation-name: bounce;
+  -webkit-transform-origin: center bottom;
+  -webkit-animation-duration: 0.45s;
+  -webkit-animation-fill-mode: both;
+}
