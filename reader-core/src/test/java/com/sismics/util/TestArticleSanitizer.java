@@ -353,11 +353,15 @@ public class TestArticleSanitizer {
         String html = articleSanitizer.sanitize("http://localhost/", "<iframe src=\"http://www.deezer.com/plugins/player?autoplay=false&playlist=true\" width=\"480\" height=\"480\"></iframe>"
                 + "<iframe src=\"//giphy.com/embed/9hDNJVBbDyZGw\" width=\"480\" height=\"480\"></iframe>"
                 + "<iframe src=\"//www.slideshare.net/slideshow/embed_code/37454624\" width=\"480\" height=\"480\"></iframe>"
-                + "<iframe src=\"//hitbox.tv/#!/embed/CymaticBruce\" width=\"480\" height=\"480\"></iframe>");
+                + "<iframe src=\"//hitbox.tv/#!/embed/CymaticBruce\" width=\"480\" height=\"480\"></iframe>"
+                + "<iframe src=\"//embed.spotify.com/?uri=spotify:album:3NNSJt3gWSmPmnjCwZyLA5\" width=\"480\" height=\"480\"></iframe>"
+                + "<iframe src=\"//www.kickstarter.com/projects/223628811/the-airboard-sketch-internet-of-things-fast/widget/video.html\" width=\"480\" height=\"480\"></iframe>");
         System.out.println(html);
         Assert.assertTrue(html.contains("<iframe src=\"//www.deezer.com/plugins/player?autoplay&#61;false&amp;playlist&#61;true\" width=\"480\" height=\"480\"></iframe>"));
         Assert.assertTrue(html.contains("<iframe src=\"//giphy.com/embed/9hDNJVBbDyZGw\" width=\"480\" height=\"480\"></iframe>"));
         Assert.assertTrue(html.contains("<iframe src=\"//www.slideshare.net/slideshow/embed_code/37454624\" width=\"480\" height=\"480\"></iframe>"));
         Assert.assertTrue(html.contains("<iframe src=\"//hitbox.tv/#!/embed/CymaticBruce\" width=\"480\" height=\"480\"></iframe>"));
+        Assert.assertTrue(html.contains("<iframe src=\"//embed.spotify.com/?uri&#61;spotify:album:3NNSJt3gWSmPmnjCwZyLA5\" width=\"480\" height=\"480\"></iframe>"));
+        Assert.assertTrue(html.contains("<iframe src=\"//www.kickstarter.com/projects/223628811/the-airboard-sketch-internet-of-things-fast/widget/video.html\" width=\"480\" height=\"480\"></iframe>"));
     }
 }

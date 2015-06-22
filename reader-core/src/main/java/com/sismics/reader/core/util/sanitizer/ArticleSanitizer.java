@@ -64,7 +64,9 @@ public class ArticleSanitizer {
             "(http:|https:)?//giphy.com/embed/.+|" +
             "(http:|https:)?//www.slideshare.net/slideshow/embed_code/.+|" +
             "(http:|https:)?//hitbox.tv/#!/embed/.+|" +
-            "(http:|https:)?//(www.)?whyd.com/.+");
+            "(http:|https:)?//(www.)?whyd.com/.+|" +
+            "(http:|https:)?//embed.spotify.com/.+|" +
+            "(http:|https:)?//www.kickstarter.com/.+");
 
     /**
      * Sanitize HTML contents.
