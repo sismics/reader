@@ -597,4 +597,21 @@ public class TestRssReader {
         Assert.assertEquals("Португалецът с хеттрик", article.getDescription());
         Assert.assertNotNull(article.getPublicationDate());
     }
+    
+    @Test
+    public void rssReaderBysmeTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_bysme.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("by.S", feed.getTitle());
+        Assert.assertEquals("http://by-s.me", feed.getUrl());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(30, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("キスの相性が悪いと別れる確率7割！？SEXの相性より大切な”キスの科学”", article.getTitle());
+        Assert.assertEquals("http://by-s.me/article/161508051440523422", article.getUrl());
+        Assert.assertEquals("http://by-s.me/article/161508051440523422", article.getGuid());
+        Assert.assertNotNull(article.getPublicationDate());
+    }
 }

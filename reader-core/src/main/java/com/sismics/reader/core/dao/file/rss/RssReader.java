@@ -51,7 +51,8 @@ public class RssReader extends DefaultHandler {
                     DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss Z").getParser(),
                     DateTimeFormat.forPattern("yyyy-mm-dd HH:mm:ss").getParser(),
                     DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss").getParser(),
-                    DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss zzz").getParser()
+                    DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss zzz").getParser(),
+                    DateTimeFormat.forPattern("EEE MMM dd yyyy HH:mm:ss 'GMT'Z Z").getParser()
                 }).toFormatter().withOffsetParsed().withLocale(Locale.ENGLISH);
     
     /**
