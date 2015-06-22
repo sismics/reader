@@ -45,6 +45,7 @@ public class RssReader extends DefaultHandler {
      */
     private static final DateTimeFormatter DF_RSS = new DateTimeFormatterBuilder()
             .append(null, new DateTimeParser[] {
+                    DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm zzz").getParser(),
                     DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss Z").getParser(),
                     DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss zzz").getParser(),
                     DateTimeFormat.forPattern("EEE,  d MMM yyyy HH:mm:ss zzz").getParser(),

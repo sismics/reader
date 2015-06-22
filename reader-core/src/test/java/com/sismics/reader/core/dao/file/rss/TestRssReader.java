@@ -614,4 +614,25 @@ public class TestRssReader {
         Assert.assertEquals("http://by-s.me/article/161508051440523422", article.getGuid());
         Assert.assertNotNull(article.getPublicationDate());
     }
+    
+    @Test
+    public void rssReaderNasaTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_rss2_nasa.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("NASA Breaking News", feed.getTitle());
+        Assert.assertEquals("http://www.nasa.gov/", feed.getUrl());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(10, articleList.size());
+        Article article = articleList.get(0);
+        Assert.assertEquals("NASA Signs Agreement with Space Florida to Operate Historic Landing Facility", article.getTitle());
+        Assert.assertEquals("http://www.nasa.gov/press-release/nasa-signs-agreement-with-space-florida-to-operate-historic-landing-facility-0", article.getUrl());
+        Assert.assertEquals("http://www.nasa.gov/press-release/nasa-signs-agreement-with-space-florida-to-operate-historic-landing-facility-0", article.getGuid());
+        Assert.assertNull(article.getCreator());
+        Assert.assertNull(article.getCommentUrl());
+        Assert.assertNull(article.getCommentCount());
+        Assert.assertEquals("A new agreement marks another step in the transformation of NASA’s Kennedy Space Center in Florida to a multi-user spaceport. NASA’s historic Shuttle Landing Facility, the site of one of the longest runways in the world, has a new operator.", article.getDescription());
+        Assert.assertNotNull(article.getPublicationDate());
+    }
 }

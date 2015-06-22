@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?> <rss version="2.0" xml:base="http://www.nasa.gov/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:media="http://search.yahoo.com/mrss/"> <channel> <title>NASA Breaking News</title>
+ <description>A RSS news feed containing the latest NASA news articles and press releases.</description>
+ <link>http://www.nasa.gov/</link>
+ <atom:link rel="self" href="http://www.nasa.gov/rss/dyn/breaking_news.rss" />
+ <language>en-us</language>
+ <managingEditor>jim.wilson@nasa.gov</managingEditor>
+ <webMaster>brian.dunbar@nasa.gov</webMaster>
+ <docs>http://blogs.harvard.edu/tech/rss</docs>
+ <item> <title>NASA Signs Agreement with Space Florida to Operate Historic Landing Facility</title>
+ <link>http://www.nasa.gov/press-release/nasa-signs-agreement-with-space-florida-to-operate-historic-landing-facility-0</link>
+ <description>A new agreement marks another step in the transformation of NASA’s Kennedy Space Center in Florida to a multi-user spaceport. NASA’s historic Shuttle Landing Facility, the site of one of the longest runways in the world, has a new operator.</description>
+ <enclosure url="http://www.nasa.gov/sites/default/files/styles/1x1_cardfeed/public/thumbnails/image/15-135b.jpg?itok=5y3TPEYf" length="932918" type="image/jpeg" />
+ <guid isPermaLink="false">http://www.nasa.gov/press-release/nasa-signs-agreement-with-space-florida-to-operate-historic-landing-facility-0</guid>
+ <pubDate>Mon, 22 Jun 2015 15:25 EDT</pubDate>
+ <source url="http://www.nasa.gov/rss/dyn/breaking_news.rss">NASA Breaking News</source>
+</item>
+ <item> <title>Media Invited to Tour Journey to Mars Exhibits with Senior NASA Leaders</title>
+ <link>http://www.nasa.gov/press-release/media-invited-to-tour-journey-to-mars-exhibits-with-senior-nasa-leaders</link>
+ <description>Senior NASA officials will help showcase the agency’s work on the Journey to Mars during a Mars Day on the Hill event Thursday, June 25, in the Rayburn House Office Building Foyer in Washington.</description>
+ <enclosure url="http://www.nasa.gov/sites/default/files/styles/1x1_cardfeed/public/thumbnails/image/15-133_0.jpg?itok=DCYbYlZ2" length="194734" type="image/jpeg" />
+ <guid isPermaLink="false">http://www.nasa.gov/press-release/media-invited-to-tour-journey-to-mars-exhibits-with-senior-nasa-leaders</guid>
+ <pubDate>Mon, 22 Jun 2015 11:41 EDT</pubDate>
+ <source url="http://www.nasa.gov/rss/dyn/breaking_news.rss">NASA Breaking News</source>
+</item>
+ <item> <title>NASA Selects Six Wild Ideas in Aviation for Further Study</title>
+ <link>http://www.nasa.gov/press-release/nasa-selects-six-wild-ideas-in-aviation-for-further-study</link>
+ <description>NASA has selected six proposals to study transformative ideas that might expand what&#039;s possible in aviation, shifting the boundary between fantastic and futuristic.</description>
+ <enclosure url="http://www.nasa.gov/sites/default/files/styles/1x1_cardfeed/public/thumbnails/image/15-132.jpg?itok=FlosPxx4" length="758002" type="image/jpeg" />
+ <guid isPermaLink="false">http://www.nasa.gov/press-release/nasa-selects-six-wild-ideas-in-aviation-for-further-study</guid>
+ <pubDate>Mon, 22 Jun 2015 11:18 EDT</pubDate>
+ <source url="http://www.nasa.gov/rss/dyn/breaking_news.rss">NASA Breaking News</source>
+</item>
+ <item> <title>NASA TV Coverage Set for Seventh SpaceX Resupply Mission to Space Station</title>
+ <link>http://www.nasa.gov/press-release/nasa-tv-coverage-set-for-seventh-spacex-resupply-mission-to-space-station</link>
+ <description>NASA commercial partner SpaceX currently is targeting Sunday, June 28, for the launch of its seventh cargo delivery to the International Space Station under the agency’s Commercial Resupply Services contract. NASA Television coverage of the launch begins at 9 a.m. EDT.</description>
+ <enclosure url="http://www.nasa.gov/sites/default/files/styles/1x1_cardfeed/public/thumbnails/image/m15-078.jpg?itok=xl_jULv_" length="3347150" type="image/jpeg" />
+ <guid isPermaLink="false">http://www.nasa.gov/press-release/nasa-tv-coverage-set-for-seventh-spacex-resupply-mission-to-space-station</guid>
+ <pubDate>Fri, 19 Jun 2015 15:37 EDT</pubDate>
+ <source url="http://www.nasa.gov/rss/dyn/breaking_news.rss">NASA Breaking News</source>
+</item>
+ <item> <title>Veteran NASA Spacecraft Nears 60,000th Lap Around Mars, No Pit Stops</title>
+ <link>http://www.nasa.gov/press-release/veteran-nasa-spacecraft-nears-60000th-lap-around-mars-no-pit-stops</link>
+ <description>NASA&#039;s Mars Odyssey spacecraft will reach a major milestone June 23, when it completes its 60,000th orbit since arriving at the Red Planet in 2001.</description>
+ <enclosure url="http://www.nasa.gov/sites/default/files/styles/1x1_cardfeed/public/thumbnails/image/15-134c.jpg?itok=W0ypSG7u" length="303815" type="image/jpeg" />
+ <guid isPermaLink="false">http://www.nasa.gov/press-release/veteran-nasa-spacecraft-nears-60000th-lap-around-mars-no-pit-stops</guid>
+ <pubDate>Fri, 19 Jun 2015 14:33 EDT</pubDate>
+ <source url="http://www.nasa.gov/rss/dyn/breaking_news.rss">NASA Breaking News</source>
+</item>
+ <item> <title>University Students Win NASA/NIA Space Engineering Design Contest</title>
+ <link>http://www.nasa.gov/press-release/university-students-win-nasania-space-engineering-design-contest</link>
+ <description>Future astronauts may someday explore Mars using winning concepts from NASA’s 2015 Revolutionary Aerospace Systems Concepts Academic Linkage (RASC-AL) Competition.</description>
+ <enclosure url="http://www.nasa.gov/sites/default/files/styles/1x1_cardfeed/public/thumbnails/image/15-133.jpg?itok=lUfNIFmW" length="194734" type="image/jpeg" />
+ <guid isPermaLink="false">http://www.nasa.gov/press-release/university-students-win-nasania-space-engineering-design-contest</guid>
+ <pubDate>Thu, 18 Jun 2015 17:23 EDT</pubDate>
+ <source url="http://www.nasa.gov/rss/dyn/breaking_news.rss">NASA Breaking News</source>
+</item>
+ <item> <title>NASA Hosts Rocket Week at Wallops Flight Facility</title>
+ <link>http://www.nasa.gov/press-release/nasa-hosts-rocket-week-at-wallops-flight-facility-0</link>
+ <description>Students and educators from across the country will have the chance to be rocket scientists during Rocket Week, June 20-26 at NASA’s Wallops Flight Facility in Virginia.</description>
+ <enclosure url="http://www.nasa.gov/sites/default/files/styles/1x1_cardfeed/public/thumbnails/image/15-131.jpg?itok=myGPHHFU" length="368202" type="image/jpeg" />
+ <guid isPermaLink="false">http://www.nasa.gov/press-release/nasa-hosts-rocket-week-at-wallops-flight-facility-0</guid>
+ <pubDate>Thu, 18 Jun 2015 12:54 EDT</pubDate>
+ <source url="http://www.nasa.gov/rss/dyn/breaking_news.rss">NASA Breaking News</source>
+</item>
+ <item> <title>All Systems Go for NASA&#039;s Mission to Jupiter Moon Europa</title>
+ <link>http://www.nasa.gov/press-release/all-systems-go-for-nasas-mission-to-jupiter-moon-europa</link>
+ <description>Beyond Earth, Jupiter’s moon Europa is considered one of the most promising places in the solar system to search for signs of present-day life, and a new NASA mission to explore this potential is moving forward from concept review to development.</description>
+ <enclosure url="http://www.nasa.gov/sites/default/files/styles/1x1_cardfeed/public/thumbnails/image/15-130.jpg?itok=gcaYzq5E" length="657865" type="image/jpeg" />
+ <guid isPermaLink="false">http://www.nasa.gov/press-release/all-systems-go-for-nasas-mission-to-jupiter-moon-europa</guid>
+ <pubDate>Wed, 17 Jun 2015 15:13 EDT</pubDate>
+ <source url="http://www.nasa.gov/rss/dyn/breaking_news.rss">NASA Breaking News</source>
+</item>
+ <item> <title>NASA Astronauts Headline Public Events in Washington, Virginia, Maryland, Online</title>
+ <link>http://www.nasa.gov/press-release/nasa-astronauts-headline-public-events-in-washington-virginia-maryland-online</link>
+ <description>NASA astronauts Reid Wiseman and Barry “Butch” Wilmore will be making several stops in the Washington area June 22-26 to share with many audiences their experiences aboard the International Space Station (ISS).</description>
+ <enclosure url="http://www.nasa.gov/sites/default/files/styles/1x1_cardfeed/public/thumbnails/image/m15-090.jpg?itok=KaPkXBro" length="186523" type="image/jpeg" />
+ <guid isPermaLink="false">http://www.nasa.gov/press-release/nasa-astronauts-headline-public-events-in-washington-virginia-maryland-online</guid>
+ <pubDate>Wed, 17 Jun 2015 14:53 EDT</pubDate>
+ <source url="http://www.nasa.gov/rss/dyn/breaking_news.rss">NASA Breaking News</source>
+</item>
+ <item> <title>International Spacecraft Carrying NASA’s Aquarius Instrument Ends Operations</title>
+ <link>http://www.nasa.gov/press-release/international-spacecraft-carrying-nasa-s-aquarius-instrument-ends-operations</link>
+ <description>An international Earth-observing mission launched in 2011 to study the salinity of the ocean surface ended June 8 when an essential part of the power and attitude control system for the SAC-D spacecraft, which carries NASA&#039;s Aquarius instrument, stopped operating. The Aquarius instrument successfully achieved its science objectives and completed it</description>
+ <enclosure url="http://www.nasa.gov/sites/default/files/styles/1x1_cardfeed/public/thumbnails/image/15-126b.jpg?itok=qE6IrQQ7" length="1998131" type="image/jpeg" />
+ <guid isPermaLink="false">http://www.nasa.gov/press-release/international-spacecraft-carrying-nasa-s-aquarius-instrument-ends-operations</guid>
+ <pubDate>Wed, 17 Jun 2015 14:00 EDT</pubDate>
+ <source url="http://www.nasa.gov/rss/dyn/breaking_news.rss">NASA Breaking News</source>
+</item>
+</channel>
+</rss>
