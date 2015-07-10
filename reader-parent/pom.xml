@@ -61,6 +61,7 @@
     <org.mortbay.jetty.jetty-maven-plugin.version>8.1.2.v20120308</org.mortbay.jetty.jetty-maven-plugin.version>
     <org.vafer.jdeb.version>1.0.1</org.vafer.jdeb.version>
     <com.samaxes.maven.minify-maven-plugin.version>1.7</com.samaxes.maven.minify-maven-plugin.version>
+    <org.apache.maven.plugins.maven-surefire-plugin.version>2.18.1</org.apache.maven.plugins.maven-surefire-plugin.version>
   </properties> 
   
   <scm>
@@ -157,6 +158,12 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>osxappbundle-maven-plugin</artifactId>
         <version>${org.codehaus.mojo.osxappbundle-maven-plugin.version}</version>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${org.apache.maven.plugins.maven-surefire-plugin.version}</version>
       </plugin>
     </plugins>
   </build>

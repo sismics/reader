@@ -92,7 +92,7 @@ public class TestAppResource extends BaseJerseyTest {
         Assert.assertTrue(logs.length() == 10);
         Long date1 = logs.optJSONObject(0).optLong("date");
         Long date2 = logs.optJSONObject(9).optLong("date");
-        Assert.assertTrue(date1 > date2);
+        Assert.assertTrue(date1 >= date2);
         
         // Check the logs (page 2)
         appResource = resource()
@@ -108,6 +108,6 @@ public class TestAppResource extends BaseJerseyTest {
         Assert.assertTrue(logs.length() == 10);
         Long date3 = logs.optJSONObject(0).optLong("date");
         Long date4 = logs.optJSONObject(9).optLong("date");
-        Assert.assertTrue(date3 > date4);
+        Assert.assertTrue(date3 >= date4);
     }
 }
