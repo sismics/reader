@@ -463,6 +463,12 @@
       
       <dependency>
         <groupId>org.apache.lucene</groupId>
+        <artifactId>lucene-grouping</artifactId>
+        <version>${org.apache.lucene.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.apache.lucene</groupId>
         <artifactId>lucene-analyzers-common</artifactId>
         <version>${org.apache.lucene.version}</version>
       </dependency>

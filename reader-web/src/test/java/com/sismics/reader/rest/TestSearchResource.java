@@ -45,8 +45,8 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         JSONArray articles = json.getJSONArray("articles");
-        Assert.assertTrue(articles.length() > 0);
-        assertSearchResult(articles, "Quand <span class=\"highlight\">Zelda</span> prend les armes");
+        Assert.assertEquals(1, articles.length());
+        assertSearchResult(articles, "Quand <span class=\"highlight\">Zelda</span> prend les armes", 0);
         
         // Search "njloinzejrmklsjd"
         searchResource = resource().path("/search/njloinzejrmklsjd");
@@ -64,9 +64,9 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
-        Assert.assertTrue(articles.length() > 0);
-        assertSearchResult(articles, "Récupérer les clés <span class=\"highlight\">wifi</span> sur un téléphone Android");
-        assertSearchResult(articles, "Partagez vos clés <span class=\"highlight\">WiFi</span> avec vos amis");
+        Assert.assertEquals(2, articles.length());
+        assertSearchResult(articles, "Récupérer les clés <span class=\"highlight\">wifi</span> sur un téléphone Android", 0);
+        assertSearchResult(articles, "Partagez vos clés <span class=\"highlight\">WiFi</span> avec vos amis", 1);
         
         // Search "google keep"
         searchResource = resource().path("/search/google%20keep");
@@ -75,7 +75,10 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
-        Assert.assertTrue(articles.length() > 0);
+        Assert.assertEquals(3, articles.length());
+        assertSearchResult(articles, "Ask Slashdot: Measuring (and Constraining) Mobile Data Use?", 0);
+        assertSearchResult(articles, "<span class=\"highlight\">Google</span> <span class=\"highlight\">Keep</span>…eut pas vraiment en faire plus (pour le moment)", 1);
+        assertSearchResult(articles, "Quand Zelda prend les armes", 2);
         
         // Create user search2
         clientUtil.createUser("search2");
@@ -97,7 +100,7 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
-        Assert.assertTrue(articles.length() > 0);
+        Assert.assertEquals(3, articles.length());
         
         // Create user search3
         clientUtil.createUser("search3");
@@ -119,7 +122,8 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
-        Assert.assertTrue(articles.length() > 0);
+        Assert.assertEquals(1, articles.length());
+        assertSearchResult(articles, "Quand <span class=\"highlight\">Zelda</span> prend les armes", 0);
         
         // Subscribe to Korben RSS feed (alternative URL)
         subscriptionResource = resource().path("/subscription");
@@ -136,19 +140,8 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
-        Assert.assertTrue(articles.length() > 0);
-        
-        // Check that there is no duplicates
-        JSONObject zeldaArticle = null;
-        for (int i = 0; i < articles.length(); i++) {
-            JSONObject article = articles.getJSONObject(i);
-            if (article.getString("url").equals("http://korben.info/quand-zelda-prend-les-armes.html")) {
-                if (zeldaArticle != null) {
-//                    Assert.fail("Two articles with the same URL"); // TODO Fix me
-                }
-                zeldaArticle = article;
-            }
-        }
+        Assert.assertEquals(1, articles.length());
+        assertSearchResult(articles, "Quand <span class=\"highlight\">Zelda</span> prend les armes", 0);
     }
     
     /**
@@ -156,16 +149,14 @@ public class TestSearchResource extends BaseJerseyTest {
      * 
      * @param articles Articles from search
      * @param title Expected title
+     * @param index Index
      * @throws JSONException
      */
-    private void assertSearchResult(JSONArray articles, String title) throws JSONException {
-    	for (int i = 0; i < articles.length(); i++) {
-    		JSONObject article = articles.getJSONObject(i);
-    		if (article.getString("title").equals(title)) {
-    			return;
-    		}
-    	}
-    	
+    private void assertSearchResult(JSONArray articles, String title, int index) throws JSONException {
+		JSONObject article = articles.getJSONObject(index);
+		if (article.getString("title").equals(title)) {
+			return;
+		}
     	Assert.fail();
     }
 }

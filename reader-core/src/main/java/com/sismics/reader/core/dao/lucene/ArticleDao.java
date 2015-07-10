@@ -25,10 +25,14 @@ import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
 import org.apache.lucene.search.SortField.Type;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.grouping.GroupDocs;
+import org.apache.lucene.search.grouping.GroupingSearch;
+import org.apache.lucene.search.grouping.TopGroups;
 import org.apache.lucene.search.postingshighlight.Passage;
 import org.apache.lucene.search.postingshighlight.PassageFormatter;
 import org.apache.lucene.search.postingshighlight.PassageScorer;
 import org.apache.lucene.search.postingshighlight.PostingsHighlighter;
+import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.Version;
 
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
@@ -126,12 +130,24 @@ public class ArticleDao {
         query.add(titleQuery, Occur.SHOULD);
         query.add(descriptionQuery, Occur.SHOULD);
         
-        // Search
+        // Grouping
+        GroupingSearch groupingSearch = new GroupingSearch("url");
+        groupingSearch.setGroupSort(new Sort(new SortField("date", Type.LONG, true)));
+        groupingSearch.setFillSortFields(true);
+        groupingSearch.setCachingInMB(20, true);
+        groupingSearch.setAllGroups(true);
+        
+        // Searching
         IndexSearcher searcher = new IndexSearcher(AppContext.getInstance().getIndexingService().getDirectoryReader());
-        Sort sort = new Sort(new SortField("date", Type.LONG, true));
-        TopDocs topDocs = searcher.search(query, null, paginatedList.getOffset() + paginatedList.getLimit(), sort);
-        ScoreDoc[] docs = topDocs.scoreDocs;
-        paginatedList.setResultCount(topDocs.totalHits);
+        TopGroups<BytesRef> topGroups = groupingSearch.search(searcher, query, paginatedList.getOffset(), paginatedList.getLimit());
+        int total = topGroups.totalGroupCount == null ? 0 : topGroups.totalGroupCount;
+        paginatedList.setResultCount(total);
+        ScoreDoc[] scoreDocs = new ScoreDoc[topGroups.groups.length];
+        int j = 0;
+        for (GroupDocs<BytesRef> groupDocs : topGroups.groups) {
+            scoreDocs[j++] = groupDocs.scoreDocs[0];
+        }
+        TopDocs topDocs = new TopDocs(total, scoreDocs, 0);
         
         // Highlighting
         PostingsHighlighter highlighter = new PostingsHighlighter(1000000, BreakIterator.getSentenceInstance(Locale.ROOT), new PassageScorer(), new PassageFormatter() {
@@ -160,8 +176,8 @@ public class ArticleDao {
         
         // Extract article ids
         Map<String, Article> articleList = new HashMap<String, Article>();
-        for (int i = paginatedList.getOffset(); i < docs.length; i++) {
-            String id = searcher.doc(docs[i].doc).get("id");
+        for (int i = 0; i < scoreDocs.length; i++) {
+            String id = searcher.doc(scoreDocs[i].doc).get("id");
             String title = highlights.get("title")[i];
             String description = highlights.get("description")[i];
             Article article = new Article();
