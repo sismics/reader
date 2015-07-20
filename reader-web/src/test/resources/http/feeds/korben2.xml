@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
-	xmlns:content="http://purl.org/rss/1.0/modules/content/"
-	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
-	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns:atom="http://www.w3.org/2005/Atom"
-	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
-	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
-	>
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+  xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+  >
 
 <channel>
-	<title>Korben</title>
-	<atom:link href="http://korben.info/feed" rel="self" type="application/rss+xml" />
-	<link>http://korben.info</link>
-	<description>Upgrade your mind</description>
-	<lastBuildDate>Sun, 24 Mar 2013 07:03:43 +0000</lastBuildDate>
-	<language>fr-FR</language>
-	<sy:updatePeriod>hourly</sy:updatePeriod>
-	<sy:updateFrequency>1</sy:updateFrequency>
-	<generator>http://wordpress.org/?v=3.5.1</generator>
-<atom:link rel="hub" href="http://pubsubhubbub.appspot.com"/><atom:link rel="hub" href="http://superfeedr.com/hubbub"/>		<item>
-		<title>RetroN 5 &#8211; La console pour les nostalgiques de la cartouche</title>
-		<link>http://korben.info/retron-5.html</link>
-		<comments>http://korben.info/retron-5.html#comments</comments>
-		<pubDate>Sun, 24 Mar 2013 07:03:43 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Hardware]]></category>
-		<category><![CDATA[Jeux vidéos]]></category>
+  <title>Korben</title>
+  <atom:link href="http://korben.info/feed" rel="self" type="application/rss+xml" />
+  <link>http://korben.info</link>
+  <description>Upgrade your mind</description>
+  <lastBuildDate>Sun, 24 Mar 2013 07:03:43 +0000</lastBuildDate>
+  <language>fr-FR</language>
+  <sy:updatePeriod>hourly</sy:updatePeriod>
+  <sy:updateFrequency>1</sy:updateFrequency>
+  <generator>http://wordpress.org/?v=3.5.1</generator>
+<atom:link rel="hub" href="http://pubsubhubbub.appspot.com"/><atom:link rel="hub" href="http://superfeedr.com/hubbub"/>   <item>
+    <title>RetroN 5 &#8211; La console pour les nostalgiques de la cartouche</title>
+    <link>http://korben.info/retron-5.html</link>
+    <comments>http://korben.info/retron-5.html#comments</comments>
+    <pubDate>Sun, 24 Mar 2013 07:03:43 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Hardware]]></category>
+    <category><![CDATA[Jeux vidéos]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38958</guid>
-		<description><![CDATA[La RetroN 5 est une console conçue par la société Hyperkin, qui va vous permettre enfin de retrouver vos anciens jeux vidéos. Attention, je ne parle pas d'une nième console sur laquelle il faut coller des Roms, mais plutôt d'une console capable d'accepter les cartouches originales de votre : NES SNES Genesis Famicon et Game [...]]]></description>
-				<content:encoded><![CDATA[<p>La <strong>RetroN 5</strong> est une console conçue par la société Hyperkin, qui va vous permettre enfin de retrouver vos anciens jeux vidéos. Attention, je ne parle pas d'une nième console sur laquelle il faut coller des Roms, mais plutôt d'une console capable d'accepter les cartouches originales de votre :
+    <guid isPermaLink="false">http://korben.info/?p=38958</guid>
+    <description><![CDATA[La RetroN 5 est une console conçue par la société Hyperkin, qui va vous permettre enfin de retrouver vos anciens jeux vidéos. Attention, je ne parle pas d'une nième console sur laquelle il faut coller des Roms, mais plutôt d'une console capable d'accepter les cartouches originales de votre : NES SNES Genesis Famicon et Game [...]]]></description>
+        <content:encoded><![CDATA[<p>La <strong>RetroN 5</strong> est une console conçue par la société Hyperkin, qui va vous permettre enfin de retrouver vos anciens jeux vidéos. Attention, je ne parle pas d'une nième console sur laquelle il faut coller des Roms, mais plutôt d'une console capable d'accepter les cartouches originales de votre :
 <ul>
 <li>NES</li>
 <li>SNES</li>
@@ -44,22 +44,22 @@
 <p>Sinon, vous pouvez aussi investir dans un Raspberry Pi et vous lancer dans la réalisation d'une borne d'arcade, c'est encore mieux ^^</p>
 <p><a href="http://www.theverge.com/2013/3/23/4140592/hyperkin-retron-5-gaming-console-can-play-almost-any-cartridge">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/retron-5.html/feed</wfw:commentRss>
-		<slash:comments>4</slash:comments>
+      <wfw:commentRss>http://korben.info/retron-5.html/feed</wfw:commentRss>
+    <slash:comments>4</slash:comments>
 <enclosure url="http://media.eurekalert.org/multimedia_prod/pub/media/54033.flv" length="7172109" type="video/x-flv" />
-		</item>
-		<item>
-		<title>Récupérer les clés wifi sur un téléphone Android</title>
-		<link>http://korben.info/recuperer-les-cles-wifi-sur-un-telephone-android.html</link>
-		<comments>http://korben.info/recuperer-les-cles-wifi-sur-un-telephone-android.html#comments</comments>
-		<pubDate>Fri, 22 Mar 2013 12:30:07 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Android]]></category>
-		<category><![CDATA[Sécurité]]></category>
+    </item>
+    <item>
+    <title>Récupérer les clés searchtermwifi sur un téléphone Android</title>
+    <link>http://korben.info/recuperer-les-cles-wifi-sur-un-telephone-android.html</link>
+    <comments>http://korben.info/recuperer-les-cles-wifi-sur-un-telephone-android.html#comments</comments>
+    <pubDate>Fri, 22 Mar 2013 12:30:07 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Android]]></category>
+    <category><![CDATA[Sécurité]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38952</guid>
-		<description><![CDATA[Si vous souhaitez récupérer un mot de passe de réseau WiFi sur votre téléphone Android, bonne nouvelle, vous allez pouvoir le faire puisqu'elles sont stockées en clair. Évidemment, il vous faudra un téléphone rooter, mais ensuite, avec un petit explorateur de fichier comme celui-ci (activez le mode root dans ses options), vous allez pouvoir vous [...]]]></description>
-				<content:encoded><![CDATA[<p>Si vous souhaitez récupérer un mot de passe de réseau WiFi sur votre téléphone Android, bonne nouvelle, vous allez pouvoir le faire puisqu'elles sont stockées en clair.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38952</guid>
+    <description><![CDATA[Si vous souhaitez récupérer un mot de passe de réseau WiFi sur votre téléphone Android, bonne nouvelle, vous allez pouvoir le faire puisqu'elles sont stockées en clair. Évidemment, il vous faudra un téléphone rooter, mais ensuite, avec un petit explorateur de fichier comme celui-ci (activez le mode root dans ses options), vous allez pouvoir vous [...]]]></description>
+        <content:encoded><![CDATA[<p>Si vous souhaitez récupérer un mot de passe de réseau WiFi sur votre téléphone Android, bonne nouvelle, vous allez pouvoir le faire puisqu'elles sont stockées en clair.</p>
 <p>Évidemment, il vous faudra un téléphone rooter, mais ensuite, avec un petit explorateur de fichier <a href="https://play.google.com/store/apps/details?id=com.rhmsoft.fm">comme celui-ci</a> (activez le mode root dans ses options), vous allez pouvoir vous rendre dans le dossier :</p>
 <blockquote><p>/data/misc/wifi</p></blockquote>
 <p>et ouvrir avec un éditeur de texte (qui dispose lui aussi du droit root), le fichier <strong>wpa_supplicant.conf</strong> qui comme vous pouvez le voir contient la liste des réseaux WiFi enregistrés dans votre mobile et tous leurs mots de passe en clair.</p>
@@ -67,21 +67,21 @@
 <p>Je me demande d'ailleurs pourquoi une application comme <a href="http://korben.info/instabridge.html">Instabridge</a> ne propose pas directement à ses utilisateurs rootés d'aller récupérer ces mots de passe directement. Surement par "politesse".</p>
 <p><a href="http://www.howtogeek.com/140320/how-to-view-that-forgotten-wireless-password-on-your-android-device/">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/recuperer-les-cles-wifi-sur-un-telephone-android.html/feed</wfw:commentRss>
-		<slash:comments>18</slash:comments>
-		</item>
-		<item>
-		<title>La vidéo verbalisation &#8211; Le premier pas vers un Etat policier ?</title>
-		<link>http://korben.info/video-verbalisation.html</link>
-		<comments>http://korben.info/video-verbalisation.html#comments</comments>
-		<pubDate>Fri, 22 Mar 2013 09:30:42 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Sécurité]]></category>
-		<category><![CDATA[Société]]></category>
+      <wfw:commentRss>http://korben.info/recuperer-les-cles-wifi-sur-un-telephone-android.html/feed</wfw:commentRss>
+    <slash:comments>18</slash:comments>
+    </item>
+    <item>
+    <title>La vidéo verbalisation &#8211; Le premier pas vers un Etat policier ?</title>
+    <link>http://korben.info/video-verbalisation.html</link>
+    <comments>http://korben.info/video-verbalisation.html#comments</comments>
+    <pubDate>Fri, 22 Mar 2013 09:30:42 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Sécurité]]></category>
+    <category><![CDATA[Société]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38947</guid>
-		<description><![CDATA[Hier, j'ai vu un petit reportage sur un nouveau procédé de verbalisation dont les maires sont de plus en plus friands : La vidéo-verbalisation. Je ne sais pas si vous vous souvenez, mais il y a quelque temps, la France est devenue un vaste champ de caméras de surveillances qui étaient destinées (on nous les [...]]]></description>
-				<content:encoded><![CDATA[<p>Hier, j'ai vu un petit reportage sur un nouveau procédé de verbalisation dont les maires sont de plus en plus friands : La <strong>vidéo-verbalisation.</strong></p>
+    <guid isPermaLink="false">http://korben.info/?p=38947</guid>
+    <description><![CDATA[Hier, j'ai vu un petit reportage sur un nouveau procédé de verbalisation dont les maires sont de plus en plus friands : La vidéo-verbalisation. Je ne sais pas si vous vous souvenez, mais il y a quelque temps, la France est devenue un vaste champ de caméras de surveillances qui étaient destinées (on nous les [...]]]></description>
+        <content:encoded><![CDATA[<p>Hier, j'ai vu un petit reportage sur un nouveau procédé de verbalisation dont les maires sont de plus en plus friands : La <strong>vidéo-verbalisation.</strong></p>
 <p>Je ne sais pas si vous vous souvenez, mais il y a quelque temps, la France est devenue un vaste champ de <strong>caméras de surveillances</strong> qui étaient destinées (on nous les a vendus comme ça) à dissuader les criminels et surtout à retrouver ces derniers lorsqu'un crime ou un délit était commis... Bien qu'on ne sache pas finalement si ces caméras ont un réel impact sur la criminalité.</p>
 <p>Mais les Maires d'Aix-en- Provence, Marseille, Nice, Chartres, Saint-Mandé, d'Asnières-sur-Seine, de Puteaux et bientôt de Paris ont décidé d'aller encore plus loin et d'utiliser ces mêmes caméras de manière active. Maintenant, ils collent des policiers derrière chaque caméra et ces derniers sont chargés de mettre des amendes aux automobilistes qui ne respectent pas les stops ou les feux rouges, les limitations de vitesse, les distances de sécurité, ou encore les voies de bus, le stationnement gênant ou qui ne payent pas leur péage.</p>
 <p>Un esprit un peu simpliste pourrait se dire : "<em>Oh, c'est bien comme ça, ça dissuadera les méchants automobilistes de faire n'importe quoi</em>".</p>
@@ -99,20 +99,20 @@
 <p>À regarder aussi (<a href="http://reflets.info/verbalisation-par-videosurveillance-enfin-une-bonne-nouvelle/">et à lire</a>)</p>
 <p style="text-align: center;"><iframe src="http://player.vimeo.com/video/52218364" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/video-verbalisation.html/feed</wfw:commentRss>
-		<slash:comments>57</slash:comments>
-		</item>
-		<item>
-		<title>Le gel qui stoppe net les hémorragies</title>
-		<link>http://korben.info/le-gel-qui-stoppe-net-les-hemorragies.html</link>
-		<comments>http://korben.info/le-gel-qui-stoppe-net-les-hemorragies.html#comments</comments>
-		<pubDate>Fri, 22 Mar 2013 08:30:54 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Science]]></category>
+      <wfw:commentRss>http://korben.info/video-verbalisation.html/feed</wfw:commentRss>
+    <slash:comments>57</slash:comments>
+    </item>
+    <item>
+    <title>Le gel qui stoppe net les hémorragies</title>
+    <link>http://korben.info/le-gel-qui-stoppe-net-les-hemorragies.html</link>
+    <comments>http://korben.info/le-gel-qui-stoppe-net-les-hemorragies.html#comments</comments>
+    <pubDate>Fri, 22 Mar 2013 08:30:54 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Science]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38944</guid>
-		<description><![CDATA[Même si mercredi, c'était la "Meatout Day" (la journée sans viande), et bien, je suis un ouf et je poste cette vidéo où on voit un gros bout de barbaque sanguinolent.... Mais attention, ici pas question de le manger. Il s'agit plutôt d'une démonstration d'un gel de haute technologie baptisé Veti-Gel qui une fois appliquée [...]]]></description>
-				<content:encoded><![CDATA[<p>Même si mercredi, c'était la "Meatout Day" (la journée sans viande), et bien, je suis un ouf et je poste cette vidéo où on voit un gros bout de barbaque sanguinolent.... Mais attention, ici pas question de le manger. Il s'agit plutôt d'une démonstration d'un gel de haute technologie baptisé Veti-Gel qui une fois appliquée sur une plaie permet de stopper immédiatement un saignement.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38944</guid>
+    <description><![CDATA[Même si mercredi, c'était la "Meatout Day" (la journée sans viande), et bien, je suis un ouf et je poste cette vidéo où on voit un gros bout de barbaque sanguinolent.... Mais attention, ici pas question de le manger. Il s'agit plutôt d'une démonstration d'un gel de haute technologie baptisé Veti-Gel qui une fois appliquée [...]]]></description>
+        <content:encoded><![CDATA[<p>Même si mercredi, c'était la "Meatout Day" (la journée sans viande), et bien, je suis un ouf et je poste cette vidéo où on voit un gros bout de barbaque sanguinolent.... Mais attention, ici pas question de le manger. Il s'agit plutôt d'une démonstration d'un gel de haute technologie baptisé Veti-Gel qui une fois appliquée sur une plaie permet de stopper immédiatement un saignement.</p>
 <p>Le résultat est immédiat et très impressionnant. Le Veti-Gel a été mis au point par un étudiant de l'Université de New York, Joe Landolina. Son gel agit comme un adhésif sur les tissus organiques pour contenir la pression et une fois en contact avec le sang, cela active l'action de la fibrine, une protéine nécessaire à la coagulation. Enfin, les plaquettes se joignent à la fête pour finir le travail.</p>
 <p>Le Veti-gel est tellement bien supporté par le corps humain qu'il est même possible d'ajouter dans sa composition d'autre chose comme des médicaments.</p>
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/Cif-o4V-2wA?feature=player_embedded" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
@@ -120,20 +120,20 @@
 <p>Bon, après cette charmante vidéo, je vous laisse, c'est l'heure du petit déj.</p>
 <p><a href="http://gizmodo.com/5991637/holy-wow-this-incredible-gel-stops-bleeding-instantly">Source</a> et <a href="http://www.humansinvent.com/#!/11409/the-gel-that-stops-bleeding-instantly/">source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/le-gel-qui-stoppe-net-les-hemorragies.html/feed</wfw:commentRss>
-		<slash:comments>19</slash:comments>
-		</item>
-		<item>
-		<title>Imprimer son arme sera bientôt possible</title>
-		<link>http://korben.info/imprimer-son-arme-sera-bientot-possible.html</link>
-		<comments>http://korben.info/imprimer-son-arme-sera-bientot-possible.html#comments</comments>
-		<pubDate>Thu, 21 Mar 2013 16:30:04 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[DIY]]></category>
+      <wfw:commentRss>http://korben.info/le-gel-qui-stoppe-net-les-hemorragies.html/feed</wfw:commentRss>
+    <slash:comments>19</slash:comments>
+    </item>
+    <item>
+    <title>Imprimer son arme sera bientôt possible</title>
+    <link>http://korben.info/imprimer-son-arme-sera-bientot-possible.html</link>
+    <comments>http://korben.info/imprimer-son-arme-sera-bientot-possible.html#comments</comments>
+    <pubDate>Thu, 21 Mar 2013 16:30:04 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[DIY]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38935</guid>
-		<description><![CDATA[Un des premiers problèmes qui risque de se poser avec les imprimantes 3D (à par les problématiques de "contrefaçon"), ce sera probablement l'arrivée des armes imprimables. Le site Motherboard vient de mettre en ligne une bande-annonce pour son documentaire sur Cody R. Wilson qui est l’initiateur d'un wiki dédié aux armes imprimables. L'idée est de [...]]]></description>
-				<content:encoded><![CDATA[<p>Un des premiers problèmes qui risque de se poser avec les imprimantes 3D (à par les problématiques de "contrefaçon"), ce sera probablement l'arrivée des <strong>armes imprimables</strong>.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38935</guid>
+    <description><![CDATA[Un des premiers problèmes qui risque de se poser avec les imprimantes 3D (à par les problématiques de "contrefaçon"), ce sera probablement l'arrivée des armes imprimables. Le site Motherboard vient de mettre en ligne une bande-annonce pour son documentaire sur Cody R. Wilson qui est l’initiateur d'un wiki dédié aux armes imprimables. L'idée est de [...]]]></description>
+        <content:encoded><![CDATA[<p>Un des premiers problèmes qui risque de se poser avec les imprimantes 3D (à par les problématiques de "contrefaçon"), ce sera probablement l'arrivée des <strong>armes imprimables</strong>.</p>
 <p>Le site <a href="http://motherboard.vice.com/read/trailer-click-print-gun">Motherboard</a> vient de mettre en ligne une bande-annonce pour son documentaire sur <a href="http://defensedistributed.com/">Cody R. Wilson</a> qui est l’initiateur d'un wiki dédié aux armes imprimables. L'idée est de permettre à chacun, grâce à une imprimante 3D, d'avoir son gun.</p>
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/nkXG1nsh-FA?feature=player_embedded" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
 <p>Le hic, c'est que dans de nombreux pays, la possession d'une arme est réglementée. Là, avec un peu de matos informatique et quelques plans 3D téléchargeables librement sur le net, n'importe qui pourra fabriquer à l'abri des regards, sa propre arme.</p>
@@ -143,20 +143,20 @@
 <p>Bienvenu dans le futur !</p>
 <p><a href="http://gizmodo.com/5991601/the-terrifying-future-is-3d-printed-weapons">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/imprimer-son-arme-sera-bientot-possible.html/feed</wfw:commentRss>
-		<slash:comments>37</slash:comments>
-		</item>
-		<item>
-		<title>Extensions Firefox : Quelles sont celles qui consomment le plus de mémoire ?</title>
-		<link>http://korben.info/memoire-extension-firefox.html</link>
-		<comments>http://korben.info/memoire-extension-firefox.html#comments</comments>
-		<pubDate>Thu, 21 Mar 2013 14:30:41 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Navigateur]]></category>
+      <wfw:commentRss>http://korben.info/imprimer-son-arme-sera-bientot-possible.html/feed</wfw:commentRss>
+    <slash:comments>37</slash:comments>
+    </item>
+    <item>
+    <title>Extensions Firefox : Quelles sont celles qui consomment le plus de mémoire ?</title>
+    <link>http://korben.info/memoire-extension-firefox.html</link>
+    <comments>http://korben.info/memoire-extension-firefox.html#comments</comments>
+    <pubDate>Thu, 21 Mar 2013 14:30:41 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Navigateur]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38926</guid>
-		<description><![CDATA[Si comme moi, vous utilisez Firefox, z'avez du remarquer que parfois, ça bouffe pas mal de mémoire. Bon, Firefox en lui-même n'est pas 100% innocent, mais il y a aussi et surtout les extensions que vous avez installées sur votre navigateur qui peuvent bouffer une part non négligeable de mémoire. Mais comment savoir quels sont [...]]]></description>
-				<content:encoded><![CDATA[<p>Si comme moi, vous utilisez Firefox, z'avez du remarquer que parfois, ça bouffe pas mal de mémoire. Bon, Firefox en lui-même n'est pas 100% innocent, mais il y a aussi et surtout les extensions que vous avez installées sur votre navigateur qui peuvent bouffer une part non négligeable de mémoire.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38926</guid>
+    <description><![CDATA[Si comme moi, vous utilisez Firefox, z'avez du remarquer que parfois, ça bouffe pas mal de mémoire. Bon, Firefox en lui-même n'est pas 100% innocent, mais il y a aussi et surtout les extensions que vous avez installées sur votre navigateur qui peuvent bouffer une part non négligeable de mémoire. Mais comment savoir quels sont [...]]]></description>
+        <content:encoded><![CDATA[<p>Si comme moi, vous utilisez Firefox, z'avez du remarquer que parfois, ça bouffe pas mal de mémoire. Bon, Firefox en lui-même n'est pas 100% innocent, mais il y a aussi et surtout les extensions que vous avez installées sur votre navigateur qui peuvent bouffer une part non négligeable de mémoire.</p>
 <p>Mais comment savoir quels sont les mauvais élèves ?</p>
 <p>Et bien c'est simple. Il suffit d'installer <a href="https://addons.mozilla.org/en-US/firefox/addon/about-addons-memory/">cet addon</a> puis de taper dans la barre d'adresse :</p>
 <blockquote>
@@ -167,58 +167,58 @@
 <p>À vous alors de faire le ménage parmi les extensions bouffeuses de mémoire.</p>
 <p><a href="http://maketecheasier.com/check-firefox-addons-memory-consumption/2013/03/20">Source</a> et <a href="http://wallbase.cc/wallpaper/44285">photo</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/memoire-extension-firefox.html/feed</wfw:commentRss>
-		<slash:comments>14</slash:comments>
-		</item>
-		<item>
-		<title>BeetleCraft roller coaster</title>
-		<link>http://korben.info/beetlecraft-roller-coaster.html</link>
-		<comments>http://korben.info/beetlecraft-roller-coaster.html#comments</comments>
-		<pubDate>Thu, 21 Mar 2013 12:30:06 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Jeux vidéos]]></category>
-		<category><![CDATA[Vidéo]]></category>
+      <wfw:commentRss>http://korben.info/memoire-extension-firefox.html/feed</wfw:commentRss>
+    <slash:comments>14</slash:comments>
+    </item>
+    <item>
+    <title>BeetleCraft roller coaster</title>
+    <link>http://korben.info/beetlecraft-roller-coaster.html</link>
+    <comments>http://korben.info/beetlecraft-roller-coaster.html#comments</comments>
+    <pubDate>Thu, 21 Mar 2013 12:30:06 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Jeux vidéos]]></category>
+    <category><![CDATA[Vidéo]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38918</guid>
-		<description><![CDATA[Les créateurs du roller coaster Minecraft Malice ont passé 2 mois sur leur Xbox pour pondre ce nouveau roller coaster inspiré du film BeetleJuice sorti en 1988 au cinéma. Le boulot est immense et les effets visuels sont impressionnants ! Sans en douter, du boulot d'artiste Minecraftien de haut vol ! Source]]></description>
-				<content:encoded><![CDATA[<p>Les créateurs du roller coaster Minecraft <a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=i7YrO6Fc82M">Malice</a> ont passé 2 mois sur leur Xbox pour pondre ce nouveau roller coaster inspiré du film <strong>BeetleJuice</strong> sorti en 1988 au cinéma.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38918</guid>
+    <description><![CDATA[Les créateurs du roller coaster Minecraft Malice ont passé 2 mois sur leur Xbox pour pondre ce nouveau roller coaster inspiré du film BeetleJuice sorti en 1988 au cinéma. Le boulot est immense et les effets visuels sont impressionnants ! Sans en douter, du boulot d'artiste Minecraftien de haut vol ! Source]]></description>
+        <content:encoded><![CDATA[<p>Les créateurs du roller coaster Minecraft <a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=i7YrO6Fc82M">Malice</a> ont passé 2 mois sur leur Xbox pour pondre ce nouveau roller coaster inspiré du film <strong>BeetleJuice</strong> sorti en 1988 au cinéma.</p>
 <p>Le boulot est immense et les effets visuels sont impressionnants ! Sans en douter, du boulot d'artiste Minecraftien de haut vol !</p>
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/afcudstM9zA" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
 <p><a href="http://sebsauvage.net">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/beetlecraft-roller-coaster.html/feed</wfw:commentRss>
-		<slash:comments>6</slash:comments>
-		</item>
-		<item>
-		<title>Déverrouiller l&#8217;iPhone &#8211; La faille à peine corrigée, une autre méthode voit le jour</title>
-		<link>http://korben.info/deverrouiller-liphone-la-faille-a-peine-corrigee-une-autre-methode-voit-le-jour.html</link>
-		<comments>http://korben.info/deverrouiller-liphone-la-faille-a-peine-corrigee-une-autre-methode-voit-le-jour.html#comments</comments>
-		<pubDate>Thu, 21 Mar 2013 11:07:34 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[iOS]]></category>
+      <wfw:commentRss>http://korben.info/beetlecraft-roller-coaster.html/feed</wfw:commentRss>
+    <slash:comments>6</slash:comments>
+    </item>
+    <item>
+    <title>Déverrouiller l&#8217;iPhone &#8211; La faille à peine corrigée, une autre méthode voit le jour</title>
+    <link>http://korben.info/deverrouiller-liphone-la-faille-a-peine-corrigee-une-autre-methode-voit-le-jour.html</link>
+    <comments>http://korben.info/deverrouiller-liphone-la-faille-a-peine-corrigee-une-autre-methode-voit-le-jour.html#comments</comments>
+    <pubDate>Thu, 21 Mar 2013 11:07:34 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[iOS]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38938</guid>
-		<description><![CDATA[Cette faille à peine corrigée par Apple, en voici une autre qui ressemble fortement à la première à la différence près qu'elle utilise le contrôle vocal. Malin ;-) Pour se protéger, il suffit de désactiver la composition vocale dans les options. Source]]></description>
-				<content:encoded><![CDATA[<p>Cette <a href="http://korben.info/comment-deverouiller-un-iphone-sans-connaitre-le-code.html">faille</a> à peine <a href="http://www.nbcnews.com/technology/gadgetbox/update-your-iphone-now-fix-passcode-vulnerability-1C8932493">corrigée par Apple</a>, en voici une autre qui ressemble fortement à la première à la différence près qu'elle utilise le contrôle vocal.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38938</guid>
+    <description><![CDATA[Cette faille à peine corrigée par Apple, en voici une autre qui ressemble fortement à la première à la différence près qu'elle utilise le contrôle vocal. Malin ;-) Pour se protéger, il suffit de désactiver la composition vocale dans les options. Source]]></description>
+        <content:encoded><![CDATA[<p>Cette <a href="http://korben.info/comment-deverouiller-un-iphone-sans-connaitre-le-code.html">faille</a> à peine <a href="http://www.nbcnews.com/technology/gadgetbox/update-your-iphone-now-fix-passcode-vulnerability-1C8932493">corrigée par Apple</a>, en voici une autre qui ressemble fortement à la première à la différence près qu'elle utilise le contrôle vocal.</p>
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/QCGJTuTZf8M" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
 <p>Malin ;-)</p>
 <p>Pour se protéger, il suffit de désactiver la composition vocale dans les options.</p>
 <p><a href="http://www.theregister.co.uk/2013/03/21/another_magic_iphone_unlock_spell/">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/deverrouiller-liphone-la-faille-a-peine-corrigee-une-autre-methode-voit-le-jour.html/feed</wfw:commentRss>
-		<slash:comments>8</slash:comments>
-		</item>
-		<item>
-		<title>Google Keep&#8230;eut pas vraiment en faire plus (pour le moment)</title>
-		<link>http://korben.info/google-keep-eut-pas-vraiment-en-faire-plus-pour-le-moment.html</link>
-		<comments>http://korben.info/google-keep-eut-pas-vraiment-en-faire-plus-pour-le-moment.html#comments</comments>
-		<pubDate>Thu, 21 Mar 2013 10:32:53 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[service web]]></category>
+      <wfw:commentRss>http://korben.info/deverrouiller-liphone-la-faille-a-peine-corrigee-une-autre-methode-voit-le-jour.html/feed</wfw:commentRss>
+    <slash:comments>8</slash:comments>
+    </item>
+    <item>
+    <title>searchtermGoogle searchtermKeep&#8230;eut pas vraiment en faire plus (pour le moment)</title>
+    <link>http://korben.info/google-keep-eut-pas-vraiment-en-faire-plus-pour-le-moment.html</link>
+    <comments>http://korben.info/google-keep-eut-pas-vraiment-en-faire-plus-pour-le-moment.html#comments</comments>
+    <pubDate>Thu, 21 Mar 2013 10:32:53 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[service web]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38930</guid>
-		<description><![CDATA[Google a sorti hier son outil de prise de note et de todo et WAHOU c'est une révolution. ... Non, je déconne. M'enfin si vous voulez jouer avec c'est par ici. C'est très basique (les hipsters disent "minimaliste")... Par exemple, on ne peut même pas partager une note avec des amis. Une application Android est [...]]]></description>
-				<content:encoded><![CDATA[<p>Google a sorti hier son outil de prise de note et de todo et WAHOU c'est une révolution.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38930</guid>
+    <description><![CDATA[Google a sorti hier son outil de prise de note et de todo et WAHOU c'est une révolution. ... Non, je déconne. M'enfin si vous voulez jouer avec c'est par ici. C'est très basique (les hipsters disent "minimaliste")... Par exemple, on ne peut même pas partager une note avec des amis. Une application Android est [...]]]></description>
+        <content:encoded><![CDATA[<p>Google a sorti hier son outil de prise de note et de todo et WAHOU c'est une révolution.</p>
 <p>...</p>
 <p style="text-align: center;"><a href="http://korben.info/wp-content/uploads/2013/03/keep.jpg"><img class="aligncenter size-full wp-image-38931" alt="keep Google Keep...eut pas vraiment en faire plus (pour le moment)" src="http://korben.info/wp-content/uploads/2013/03/keep.jpg" width="650" height="380" title="Google Keep...eut pas vraiment en faire plus (pour le moment)" /></a></p>
 <p>Non, je déconne.</p>
@@ -226,42 +226,42 @@
 <p>Une application Android est <a href="https://play.google.com/store/apps/details?id=com.google.android.keep">aussi disponible</a>.</p>
 <p>À voir ce qu'ils y mettront par la suite, mais je doute que Evernote et ce genre de service soient distancés...pour le moment.</p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/google-keep-eut-pas-vraiment-en-faire-plus-pour-le-moment.html/feed</wfw:commentRss>
-		<slash:comments>36</slash:comments>
-		</item>
-		<item>
-		<title>Quand Zelda prend les armes</title>
-		<link>http://korben.info/quand-zelda-prend-les-armes.html</link>
-		<comments>http://korben.info/quand-zelda-prend-les-armes.html#comments</comments>
-		<pubDate>Thu, 21 Mar 2013 09:43:17 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Culture Internet]]></category>
-		<category><![CDATA[DIY]]></category>
-		<category><![CDATA[Jeux vidéos]]></category>
-		<category><![CDATA[Société]]></category>
+      <wfw:commentRss>http://korben.info/google-keep-eut-pas-vraiment-en-faire-plus-pour-le-moment.html/feed</wfw:commentRss>
+    <slash:comments>36</slash:comments>
+    </item>
+    <item>
+    <title>Quand searchtermZelda prend les armes</title>
+    <link>http://korben.info/quand-zelda-prend-les-armes.html</link>
+    <comments>http://korben.info/quand-zelda-prend-les-armes.html#comments</comments>
+    <pubDate>Thu, 21 Mar 2013 09:43:17 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Culture Internet]]></category>
+    <category><![CDATA[DIY]]></category>
+    <category><![CDATA[Jeux vidéos]]></category>
+    <category><![CDATA[Société]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38921</guid>
-		<description><![CDATA[Après avoir vu l'histoire de ce papa qui a modifié Donkey Kong pour faire plaisir à sa fille, Kenna W. a décidé de modifier elle aussi un jeu et pas n'importe lequel puisqu'il s'agit de Zelda sorti en 1986 sur NES. Résultat, ce n'est plus Zelda qui se fait kidnapper, mais Link et c'est la [...]]]></description>
-				<content:encoded><![CDATA[<p>Après avoir vu l'histoire de ce papa qui a modifié <a href="http://korben.info/donkey-kong-sans-la-moustache.html" target="_blank">Donkey Kong</a> pour faire plaisir à sa fille, <a href="http://kennastuff.blogspot.jp/2013/03/zelda-starring-zelda-story.html" target="_blank">Kenna W.</a> a décidé de modifier elle aussi un jeu et pas n'importe lequel puisqu'il s'agit de Zelda sorti en 1986 sur NES. Résultat, ce n'est plus Zelda qui se fait kidnapper, mais Link et c'est la princesse qui part à sa rescousse.</p>
-<p>Je me demande d'ailleurs pourquoi Nintendo n'a Google jamais permis qu'on Keep puisse choisir l'une ou l'un pour aller sauver l'autre.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38921</guid>
+    <description><![CDATA[Après avoir vu l'histoire de ce papa qui a modifié Donkey Kong pour faire plaisir à sa fille, Kenna W. a décidé de modifier elle aussi un jeu et pas n'importe lequel puisqu'il s'agit de Zelda sorti en 1986 sur NES. Résultat, ce n'est plus Zelda qui se fait kidnapper, mais Link et c'est la [...]]]></description>
+        <content:encoded><![CDATA[<p>Après avoir vu l'histoire de ce papa qui a modifié <a href="http://korben.info/donkey-kong-sans-la-moustache.html" target="_blank">Donkey Kong</a> pour faire plaisir à sa fille, <a href="http://kennastuff.blogspot.jp/2013/03/zelda-starring-zelda-story.html" target="_blank">Kenna W.</a> a décidé de modifier elle aussi un jeu et pas n'importe lequel puisqu'il s'agit de Zelda sorti en 1986 sur NES. Résultat, ce n'est plus Zelda qui se fait kidnapper, mais Link et c'est la princesse qui part à sa rescousse.</p>
+<p>Je me demande d'ailleurs pourquoi Nintendo n'a searchtermGoogle jamais permis qu'on searchtermKeep puisse choisir l'une ou l'un pour aller sauver l'autre.</p>
 <p style="text-align: center;"><iframe src="https://www.youtube.com/embed/gXLx8x0ZQe8?feature=player_embedded" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
 <p> Marrant ces petits modding féministes en ce moment. D'ailleurs, je vous invite à aller lire <a href="http://cafaitgenre.org/2013/03/16/sexisme-chez-les-geeks-pourquoi-notre-communaute-est-malade-et-comment-y-remedier/" target="_blank">ce billet qui tourne depuis quelques jours</a> et qui soulève pas mal de questions.</p>
 <p><a href="http://www.theverge.com/2013/3/21/4130614/the-legend-of-zelda-hacked-to-make-the-princess-playable" target="_blank">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/quand-zelda-prend-les-armes.html/feed</wfw:commentRss>
-		<slash:comments>10</slash:comments>
-		</item>
-		<item>
-		<title>Animez vos fonds de pages web avec des vidéos Youtube</title>
-		<link>http://korben.info/animez-vos-fonds-de-pages-web-avec-des-videos-youtube.html</link>
-		<comments>http://korben.info/animez-vos-fonds-de-pages-web-avec-des-videos-youtube.html#comments</comments>
-		<pubDate>Thu, 21 Mar 2013 09:30:44 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Développement]]></category>
+      <wfw:commentRss>http://korben.info/quand-zelda-prend-les-armes.html/feed</wfw:commentRss>
+    <slash:comments>10</slash:comments>
+    </item>
+    <item>
+    <title>Animez vos fonds de pages web avec des vidéos Youtube</title>
+    <link>http://korben.info/animez-vos-fonds-de-pages-web-avec-des-videos-youtube.html</link>
+    <comments>http://korben.info/animez-vos-fonds-de-pages-web-avec-des-videos-youtube.html#comments</comments>
+    <pubDate>Thu, 21 Mar 2013 09:30:44 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Développement]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38915</guid>
-		<description><![CDATA[Voici un petit bout de code qui vous permettra de remplacer le fond image de votre site web par une vidéo YouTube en plein écran. À vous quand même de bien choisir la vidéo pour éviter que ça ne ressemble aux fonds de page en GIF animés des années 90 Pensez à remplacer le VIDEO_ID [...]]]></description>
-				<content:encoded><![CDATA[<p>Google Voici un petit bout de code qui vous permettra de remplacer le fond image de votre site web par une vidéo YouTube en plein écran. À vous quand même de bien choisir la vidéo pour éviter que ça ne ressemble aux fonds de page en GIF animés des années 90 </p>
+    <guid isPermaLink="false">http://korben.info/?p=38915</guid>
+    <description><![CDATA[Voici un petit bout de code qui vous permettra de remplacer le fond image de votre site web par une vidéo YouTube en plein écran. À vous quand même de bien choisir la vidéo pour éviter que ça ne ressemble aux fonds de page en GIF animés des années 90 Pensez à remplacer le VIDEO_ID [...]]]></description>
+        <content:encoded><![CDATA[<p>Google Voici un petit bout de code qui vous permettra de remplacer le fond image de votre site web par une vidéo YouTube en plein écran. À vous quand même de bien choisir la vidéo pour éviter que ça ne ressemble aux fonds de page en GIF animés des années 90 </p>
 <p>Pensez à remplacer le VIDEO_ID par l'ID de votre vidéo YouTube.</p>
 <blockquote><p>&lt;div style="position: fixed; z-index: -99; width: 100%; height: 100%"&gt;</p>
 <p>&lt;iframe frameborder="0" height="100%" width="100%" src="https://youtube.com/embed/<strong>VIDEO_ID</strong>?autoplay=1&amp;controls=0&amp;showinfo=0&amp;autohide=1"&gt;&lt;/iframe&gt;</p>
@@ -270,20 +270,20 @@
 <blockquote>&lt;embed height="0" width="0"src="http://youtube.googleapis.com/v/<strong>VIDEO_ID</strong>&amp;autoplay=1&amp;loop=1" /&gt;</p></blockquote>
 <p> <a href="http://www.labnol.org/internet/youtube-video-background/27933/">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/animez-vos-fonds-de-pages-web-avec-des-videos-youtube.html/feed</wfw:commentRss>
-		<slash:comments>10</slash:comments>
-		</item>
-		<item>
-		<title>Faire fonctionner le Freebox Player (TV) avec une Freebox en mode bridge</title>
-		<link>http://korben.info/tele-freebox-bridge.html</link>
-		<comments>http://korben.info/tele-freebox-bridge.html#comments</comments>
-		<pubDate>Thu, 21 Mar 2013 08:30:48 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[FAI]]></category>
+      <wfw:commentRss>http://korben.info/animez-vos-fonds-de-pages-web-avec-des-videos-youtube.html/feed</wfw:commentRss>
+    <slash:comments>10</slash:comments>
+    </item>
+    <item>
+    <title>Faire fonctionner le Freebox Player (TV) avec une Freebox en mode bridge</title>
+    <link>http://korben.info/tele-freebox-bridge.html</link>
+    <comments>http://korben.info/tele-freebox-bridge.html#comments</comments>
+    <pubDate>Thu, 21 Mar 2013 08:30:48 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[FAI]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38890</guid>
-		<description><![CDATA[Guillaume Vaillant a mis en ligne sur son blog une technique qui lui permet de passer sa Freebox en mode bridge tout en conservant la TV fonctionnelle et une config IPv6 qui va bien. L'intérêt de mettre sa Freebox en mode bridge est idéal pour ceux qui veulent connecter leurs machines directement à un vrai [...]]]></description>
-				<content:encoded><![CDATA[<p>Guillaume Vaillant a mis en ligne sur son blog une technique qui lui permet de passer sa <strong>Freebox en mode bridge tout en conservant la TV fonctionnelle</strong> et une config IPv6 qui va bien. L'intérêt de mettre sa Freebox en mode bridge est idéal pour ceux qui veulent connecter leurs machines directement à un vrai routeur et ainsi profiter de tout ce que peut offrir un firmware comme OpenWRT (ou le firmware par défaut de votre routeur).</p>
+    <guid isPermaLink="false">http://korben.info/?p=38890</guid>
+    <description><![CDATA[Guillaume Vaillant a mis en ligne sur son blog une technique qui lui permet de passer sa Freebox en mode bridge tout en conservant la TV fonctionnelle et une config IPv6 qui va bien. L'intérêt de mettre sa Freebox en mode bridge est idéal pour ceux qui veulent connecter leurs machines directement à un vrai [...]]]></description>
+        <content:encoded><![CDATA[<p>Guillaume Vaillant a mis en ligne sur son blog une technique qui lui permet de passer sa <strong>Freebox en mode bridge tout en conservant la TV fonctionnelle</strong> et une config IPv6 qui va bien. L'intérêt de mettre sa Freebox en mode bridge est idéal pour ceux qui veulent connecter leurs machines directement à un vrai routeur et ainsi profiter de tout ce que peut offrir un firmware comme OpenWRT (ou le firmware par défaut de votre routeur).</p>
 <p>Mais c'est vrai qu'en règle générale, quand on fait ça, on perd le service TV.</p>
 <p>En observant les connexions de ses 2 Freebox (Internet et TV), Guillaume a remarqué que celles-ci échangeaient sur un VLAN marqué d'un ID égal à 100. En plaçant son routeur entre la Freebox en mode bridge et la Freebox TV, il a donc du paramétrer un vlan 100 afin que les trames "marquées" (tagged) émises par les deux boitiers soient redirigées correctement.</p>
 <p>Pour faire cela, il rajoute dans le /etc./config/network de son routeur, les interfaces réseau manquantes et le tour est joué. Le boitier TV fonctionne à merveille derrière le routeur.</p>
@@ -291,21 +291,21 @@
 <p>Ah et si vous souhaitez aussi profiter du Airplay, du NAS...etc. (mDNS) de la Freebox, allez jeter <a href="http://clement.storck.me/?p=524">un oeil ici</a>.</p>
 <p>Bon bidouillage à tous !</p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/tele-freebox-bridge.html/feed</wfw:commentRss>
-		<slash:comments>5</slash:comments>
-		</item>
-		<item>
-		<title>Ajouter un bouton &#171;&#160;exporter vers le Kindle&#160;&#187; sur un site</title>
-		<link>http://korben.info/envoyer-page-web-kindle.html</link>
-		<comments>http://korben.info/envoyer-page-web-kindle.html#comments</comments>
-		<pubDate>Wed, 20 Mar 2013 12:30:40 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Ebook]]></category>
-		<category><![CDATA[service web]]></category>
+      <wfw:commentRss>http://korben.info/tele-freebox-bridge.html/feed</wfw:commentRss>
+    <slash:comments>5</slash:comments>
+    </item>
+    <item>
+    <title>Ajouter un bouton &#171;&#160;exporter vers le Kindle&#160;&#187; sur un site</title>
+    <link>http://korben.info/envoyer-page-web-kindle.html</link>
+    <comments>http://korben.info/envoyer-page-web-kindle.html#comments</comments>
+    <pubDate>Wed, 20 Mar 2013 12:30:40 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Ebook]]></category>
+    <category><![CDATA[service web]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38876</guid>
-		<description><![CDATA[Pour balancer les articles que vous lisez en ligne, directement sur votre Kindle, il existe les applications officielles d'Amazon pour PC, Mac, Android ainsi que des versions "plugins" pour Chrome et Firefox. Sans oublier la possibilité d'envoyer ce contenu via un email. Mais si vous êtes le roi des feignants, vous pouvez aussi demander à [...]]]></description>
-				<content:encoded><![CDATA[<p>Pour balancer les articles que vous lisez en ligne, directement sur votre Kindle, il existe les applications officielles d'Amazon pour PC, Mac, Android ainsi que des versions "plugins" pour Chrome et Firefox. Sans oublier la possibilité d'envoyer ce contenu via un email.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38876</guid>
+    <description><![CDATA[Pour balancer les articles que vous lisez en ligne, directement sur votre Kindle, il existe les applications officielles d'Amazon pour PC, Mac, Android ainsi que des versions "plugins" pour Chrome et Firefox. Sans oublier la possibilité d'envoyer ce contenu via un email. Mais si vous êtes le roi des feignants, vous pouvez aussi demander à [...]]]></description>
+        <content:encoded><![CDATA[<p>Pour balancer les articles que vous lisez en ligne, directement sur votre Kindle, il existe les applications officielles d'Amazon pour PC, Mac, Android ainsi que des versions "plugins" pour Chrome et Firefox. Sans oublier la possibilité d'envoyer ce contenu via un email.</p>
 <p>Mais si vous êtes le roi des feignants, vous pouvez aussi demander à vos webmasters préférés que lui intègre directement cette possibilité sur son site. En tout cas, Amazon propose maintenant à tous les webmasters qui le désirent, la possibilité de générer un code "<a href="http://www.amazon.com/gp/sendtokindle/developers/button?tag=amazon0d16-21" rel="nofollow">Envoyer vers mon Kindle</a>" à insérer dans vos pages.</p>
 <p>Je pense par exemple aux sites de nouvelles ou de tutos qui proposent déjà des exports PDF. C'est plutôt pas mal d'avoir cette option en plus pour ses visiteurs.</p>
 <p style="text-align: center;"><a href="http://korben.info/wp-content/uploads/2013/03/sendtokindle.jpg"><img class="aligncenter size-full wp-image-38877" alt="sendtokindle Ajouter un bouton exporter vers le Kindle sur un site" src="http://korben.info/wp-content/uploads/2013/03/sendtokindle.jpg" width="630" height="395" title="Ajouter un bouton exporter vers le Kindle sur un site" /></a></p>
@@ -313,22 +313,22 @@
 <p>En ce qui me concerne, je pense l'intégrer sur la partie wiki, mais comme c'est encore en pleine refonte de mon côté, il faudra être patient.</p>
 <p><a href="http://www.theverge.com/2013/3/19/4125814/amazon-send-to-kindle-website-button-read-it-later">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/envoyer-page-web-kindle.html/feed</wfw:commentRss>
-		<slash:comments>4</slash:comments>
-		</item>
-		<item>
-		<title>Transformer virtuellement sa carte Nvidia GTX690 en Quadro K5000</title>
-		<link>http://korben.info/transformer-virutellement-sa-carte-nvidia-gtx690-en-quadro-k5000.html</link>
-		<comments>http://korben.info/transformer-virutellement-sa-carte-nvidia-gtx690-en-quadro-k5000.html#comments</comments>
-		<pubDate>Wed, 20 Mar 2013 09:35:17 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[DIY]]></category>
-		<category><![CDATA[Hardware]]></category>
-		<category><![CDATA[Linux]]></category>
+      <wfw:commentRss>http://korben.info/envoyer-page-web-kindle.html/feed</wfw:commentRss>
+    <slash:comments>4</slash:comments>
+    </item>
+    <item>
+    <title>Transformer virtuellement sa carte Nvidia GTX690 en Quadro K5000</title>
+    <link>http://korben.info/transformer-virutellement-sa-carte-nvidia-gtx690-en-quadro-k5000.html</link>
+    <comments>http://korben.info/transformer-virutellement-sa-carte-nvidia-gtx690-en-quadro-k5000.html#comments</comments>
+    <pubDate>Wed, 20 Mar 2013 09:35:17 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[DIY]]></category>
+    <category><![CDATA[Hardware]]></category>
+    <category><![CDATA[Linux]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38882</guid>
-		<description><![CDATA[Ce qu'il a de rigolo avec les fabricants de hardware, c'est que le plus souvent, ils produisent le même matos, mais l'overclokent ou l'underclockent pour le vendre plus ou moins cher sous des noms différents. Ça se voit souvent. Ce qu'ils font aussi, c'est utiliser la même puce et le même pilote sur tous les [...]]]></description>
-				<content:encoded><![CDATA[<p>Ce qu'il a de rigolo avec les fabricants de hardware, c'est que le plus souvent, ils produisent le même matos, mais l'overclokent ou l'underclockent pour le vendre plus ou moins cher sous des noms différents. Ça se voit souvent.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38882</guid>
+    <description><![CDATA[Ce qu'il a de rigolo avec les fabricants de hardware, c'est que le plus souvent, ils produisent le même matos, mais l'overclokent ou l'underclockent pour le vendre plus ou moins cher sous des noms différents. Ça se voit souvent. Ce qu'ils font aussi, c'est utiliser la même puce et le même pilote sur tous les [...]]]></description>
+        <content:encoded><![CDATA[<p>Ce qu'il a de rigolo avec les fabricants de hardware, c'est que le plus souvent, ils produisent le même matos, mais l'overclokent ou l'underclockent pour le vendre plus ou moins cher sous des noms différents. Ça se voit souvent.</p>
 <p>Ce qu'ils font aussi, c'est utiliser la même puce et le même pilote sur tous les OS, mais changent simplement les ID d'identification de la carte pour la brider en fonctionnalité.</p>
 <p>Par exemple, NVIDIA, la société productrice de puces graphique distribue des Quadro K5000 à plus de 1800 € et réservées à des usages pros ou semi-pro. Cette carte utilise en réalité les mêmes technologies que la GTX690 qui est à "seulement" 800 €. Il y a bien sûr des différences matérielles entre les cartes qui justifient cette différence de prix.</p>
 <p>Seulement, voilà... La GTX690 peut faire fonctionner 3 écrans simultanément, mais sous Windows uniquement. Si vous voulez 3 écrans sous Linux, il faudra dépenser plus et acheter la Quadro K5000 qui supporte le mode <a href="http://www.nvidia.fr/object/nvidia-mosaic-technology-fr.html">Mosaic</a>.</p>
@@ -342,21 +342,21 @@
 <p>Merci à Hardisk <a href="https://twitter.com/hardisk/status/314285678982746112">pour le partage</a>.</p>
 <p><a href="http://hackaday.com/2013/03/18/hack-removes-firmware-crippling-from-nvidia-graphics-card/">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/transformer-virutellement-sa-carte-nvidia-gtx690-en-quadro-k5000.html/feed</wfw:commentRss>
-		<slash:comments>15</slash:comments>
-		</item>
-		<item>
-		<title>Une puce capable de prédire les attaques cardiaques</title>
-		<link>http://korben.info/une-puce-capable-de-predire-les-attaques-cardiaques.html</link>
-		<comments>http://korben.info/une-puce-capable-de-predire-les-attaques-cardiaques.html#comments</comments>
-		<pubDate>Wed, 20 Mar 2013 09:30:22 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Infos]]></category>
-		<category><![CDATA[Science]]></category>
+      <wfw:commentRss>http://korben.info/transformer-virutellement-sa-carte-nvidia-gtx690-en-quadro-k5000.html/feed</wfw:commentRss>
+    <slash:comments>15</slash:comments>
+    </item>
+    <item>
+    <title>Une puce capable de prédire les attaques cardiaques</title>
+    <link>http://korben.info/une-puce-capable-de-predire-les-attaques-cardiaques.html</link>
+    <comments>http://korben.info/une-puce-capable-de-predire-les-attaques-cardiaques.html#comments</comments>
+    <pubDate>Wed, 20 Mar 2013 09:30:22 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Infos]]></category>
+    <category><![CDATA[Science]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38861</guid>
-		<description><![CDATA[Voici de l'électronique qui va faire avancer la médecine ! Des scientifiques Suisses ont mis au point un implant de 14 millimètres capable de détecter les attaques cardiaques plusieurs heures à l'avance. En gros, dès que le coeur se met à mal fonctionner, le muscle de celui-ci produit une molécule baptisée la troponine, et cela [...]]]></description>
-				<content:encoded><![CDATA[<p>Voici de l'électronique qui va faire avancer la médecine ! Des scientifiques Suisses ont mis au point un <a href="http://www.eurekalert.org/pub_releases/2013-03/epfd-uts031513.php" target="_blank">implant</a> de 14 millimètres capable de détecter les attaques cardiaques plusieurs heures à l'avance. En gros, dès que le coeur se met à mal fonctionner, le muscle de celui-ci produit une molécule baptisée la <b>troponine</b>, et cela 3 à 4 heures avant l'attaque cardiaque.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38861</guid>
+    <description><![CDATA[Voici de l'électronique qui va faire avancer la médecine ! Des scientifiques Suisses ont mis au point un implant de 14 millimètres capable de détecter les attaques cardiaques plusieurs heures à l'avance. En gros, dès que le coeur se met à mal fonctionner, le muscle de celui-ci produit une molécule baptisée la troponine, et cela [...]]]></description>
+        <content:encoded><![CDATA[<p>Voici de l'électronique qui va faire avancer la médecine ! Des scientifiques Suisses ont mis au point un <a href="http://www.eurekalert.org/pub_releases/2013-03/epfd-uts031513.php" target="_blank">implant</a> de 14 millimètres capable de détecter les attaques cardiaques plusieurs heures à l'avance. En gros, dès que le coeur se met à mal fonctionner, le muscle de celui-ci produit une molécule baptisée la <b>troponine</b>, et cela 3 à 4 heures avant l'attaque cardiaque.</p>
 <p style="text-align: center;"><a href="http://korben.info/wp-content/uploads/2013/03/54034_web.jpg"><img class="aligncenter size-full wp-image-38866" alt="54034 web Une puce capable de prédire les attaques cardiaques " src="http://korben.info/wp-content/uploads/2013/03/54034_web.jpg" width="650" height="432" title="Une puce capable de prédire les attaques cardiaques " /></a></p>
 <p>La puce mesure en temps réel les molécules dans le flux sanguin. Et dès que la troponine est détectée, la puce envoie alors les infos par onde radio au patch qui l'alimente, qui le relai lui-même en Bluetooth à une application mobile.</p>
 <p>Bon, là c'est la troponine qui est prise en exemple, mais le prototype peut détecter jusqu'à 5 molécules différentes. Cette puce fait le même boulot qu'un test sanguin, à la différence prête que c'est en continu et que les résultats arrivent en temps réel. Pas mal hein ?</p>
@@ -378,24 +378,24 @@ s1.write("player");
 <p>Le futur est déjà passionnant !</p>
 <p><a href="http://www.theverge.com/2013/3/19/4125148/blood-test-implant-uses-bluetooth-detects-heart-attacks-early">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/une-puce-capable-de-predire-les-attaques-cardiaques.html/feed</wfw:commentRss>
-		<slash:comments>7</slash:comments>
+      <wfw:commentRss>http://korben.info/une-puce-capable-de-predire-les-attaques-cardiaques.html/feed</wfw:commentRss>
+    <slash:comments>7</slash:comments>
 <enclosure url="http://media.eurekalert.org/multimedia_prod/pub/media/54033.flv" length="7172109" type="video/x-flv" />
-		</item>
-		<item>
-		<title>Créez vos propres jeux vidéo en texte</title>
-		<link>http://korben.info/creez-vos-propres-jeux-video-en-texte.html</link>
-		<comments>http://korben.info/creez-vos-propres-jeux-video-en-texte.html#comments</comments>
-		<pubDate>Wed, 20 Mar 2013 08:30:20 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Jeux vidéos]]></category>
-		<category><![CDATA[Linux]]></category>
-		<category><![CDATA[Mac OSX]]></category>
-		<category><![CDATA[Windows]]></category>
+    </item>
+    <item>
+    <title>Créez vos propres jeux vidéo en texte</title>
+    <link>http://korben.info/creez-vos-propres-jeux-video-en-texte.html</link>
+    <comments>http://korben.info/creez-vos-propres-jeux-video-en-texte.html#comments</comments>
+    <pubDate>Wed, 20 Mar 2013 08:30:20 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Jeux vidéos]]></category>
+    <category><![CDATA[Linux]]></category>
+    <category><![CDATA[Mac OSX]]></category>
+    <category><![CDATA[Windows]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38847</guid>
-		<description><![CDATA[Si quand vous étiez petit, vous adoriez les livres dont vous êtes le héros, ou les jeux vidéo comme Zork (le premier en mode texte), vous aimerez peut être vous aussi concevoir vos propres jeux d'aventure 100% en mode texte. Mais comment faire quand on n'est pas vraiment développeur ? Et bien il existe 3 [...]]]></description>
-				<content:encoded><![CDATA[<p>Si quand vous étiez petit, vous adoriez les livres dont vous êtes le héros, ou les jeux vidéo comme Zork (le premier en mode texte), vous aimerez peut être vous aussi concevoir vos propres jeux d'aventure 100% en mode texte.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38847</guid>
+    <description><![CDATA[Si quand vous étiez petit, vous adoriez les livres dont vous êtes le héros, ou les jeux vidéo comme Zork (le premier en mode texte), vous aimerez peut être vous aussi concevoir vos propres jeux d'aventure 100% en mode texte. Mais comment faire quand on n'est pas vraiment développeur ? Et bien il existe 3 [...]]]></description>
+        <content:encoded><![CDATA[<p>Si quand vous étiez petit, vous adoriez les livres dont vous êtes le héros, ou les jeux vidéo comme Zork (le premier en mode texte), vous aimerez peut être vous aussi concevoir vos propres jeux d'aventure 100% en mode texte.</p>
 <p>Mais comment faire quand on n'est pas vraiment développeur ? Et bien il existe 3 logiciels dédiés à cette activité qui font ça plutôt bien.</p>
 <p>Le premier s'appelle <a href="http://www.adrift.co/cgi/adrift.cgi">ADRIFT</a>, est totalement gratuit et se compose d'un module pour le développement et d'un module "runner" pour le lancement des jeux. La conception se fait en point and click et ça fonctionne sous Windows et Linux. A vous de débrider votre imagination et de décrire les lieux, les personnages, les objets et les événements qui surgissent dans votre jeu !</p>
 <p style="text-align: center;"><iframe src="https://www.youtube.com/embed/F3rite9QHSA?feature=player_detailpage" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
@@ -407,40 +407,40 @@ s1.write("player");
 <a href="http://www.makeuseof.com/tag/3-tools-to-create-your-own-text-adventure-games/"><br />
 Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/creez-vos-propres-jeux-video-en-texte.html/feed</wfw:commentRss>
-		<slash:comments>18</slash:comments>
-		</item>
-		<item>
-		<title>Insane Office Escape</title>
-		<link>http://korben.info/insane-office-escape.html</link>
-		<comments>http://korben.info/insane-office-escape.html#comments</comments>
-		<pubDate>Wed, 20 Mar 2013 07:00:16 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Musique]]></category>
-		<category><![CDATA[Vidéo]]></category>
+      <wfw:commentRss>http://korben.info/creez-vos-propres-jeux-video-en-texte.html/feed</wfw:commentRss>
+    <slash:comments>18</slash:comments>
+    </item>
+    <item>
+    <title>Insane Office Escape</title>
+    <link>http://korben.info/insane-office-escape.html</link>
+    <comments>http://korben.info/insane-office-escape.html#comments</comments>
+    <pubDate>Wed, 20 Mar 2013 07:00:16 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Musique]]></category>
+    <category><![CDATA[Vidéo]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38871</guid>
-		<description><![CDATA[Réalisé par Ilya Naishuller et Sergey Valyaev, Insane Office Escape est une série de 2 clips imaginés pour le groupe Biting Elbows dans lesquels, on voit le héros ("vous" puisque c'est en vue subjective) s'échapper et mettre des raclés assez violentes à ses poursuivants. C'est bien rythmé, les cascades en mode parkour sont impressionnantes et [...]]]></description>
-				<content:encoded><![CDATA[<p>Réalisé par Ilya Naishuller et Sergey Valyaev, <strong>Insane Office Escape</strong> est une série de 2 clips imaginés pour le groupe <a href="http://bitingelbows.com/">Biting Elbows</a> dans lesquels, on voit le héros ("vous" puisque c'est en vue subjective) s'échapper et mettre des raclés assez violentes à ses poursuivants. C'est bien rythmé, les cascades en mode parkour sont impressionnantes et la musique est très sympa !</p>
+    <guid isPermaLink="false">http://korben.info/?p=38871</guid>
+    <description><![CDATA[Réalisé par Ilya Naishuller et Sergey Valyaev, Insane Office Escape est une série de 2 clips imaginés pour le groupe Biting Elbows dans lesquels, on voit le héros ("vous" puisque c'est en vue subjective) s'échapper et mettre des raclés assez violentes à ses poursuivants. C'est bien rythmé, les cascades en mode parkour sont impressionnantes et [...]]]></description>
+        <content:encoded><![CDATA[<p>Réalisé par Ilya Naishuller et Sergey Valyaev, <strong>Insane Office Escape</strong> est une série de 2 clips imaginés pour le groupe <a href="http://bitingelbows.com/">Biting Elbows</a> dans lesquels, on voit le héros ("vous" puisque c'est en vue subjective) s'échapper et mettre des raclés assez violentes à ses poursuivants. C'est bien rythmé, les cascades en mode parkour sont impressionnantes et la musique est très sympa !</p>
 <p>Bref, éloignez quand même les enfants, car ça gicle un peu ...</p>
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/QYm-dT24iRY" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/Rgox84KE7iY" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
 <p><a href="http://theawesomer.com/insane-office-escape-2/223513/">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/insane-office-escape.html/feed</wfw:commentRss>
-		<slash:comments>6</slash:comments>
-		</item>
-		<item>
-		<title>Méfiez-vous des contrefaçons</title>
-		<link>http://korben.info/mefiez-vous-des-contrefacons.html</link>
-		<comments>http://korben.info/mefiez-vous-des-contrefacons.html#comments</comments>
-		<pubDate>Wed, 20 Mar 2013 05:29:04 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Korben]]></category>
+      <wfw:commentRss>http://korben.info/insane-office-escape.html/feed</wfw:commentRss>
+    <slash:comments>6</slash:comments>
+    </item>
+    <item>
+    <title>Méfiez-vous des contrefaçons</title>
+    <link>http://korben.info/mefiez-vous-des-contrefacons.html</link>
+    <comments>http://korben.info/mefiez-vous-des-contrefacons.html#comments</comments>
+    <pubDate>Wed, 20 Mar 2013 05:29:04 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Korben]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38855</guid>
-		<description><![CDATA[Petit moment d'hallu hier soir... J'avais déjà vu des mecs se faire passer pour moi (même pseudo, même photo de profil...etc.) dans des commentaires de blogs, le plus souvent pour exprimer des idées à le con qui sont à l'opposée des miennes, mais là, ça va encore plus loin puisqu’hier, j'ai eu la preuve qu'il [...]]]></description>
-				<content:encoded><![CDATA[<p>Petit moment d'hallu hier soir...</p>
+    <guid isPermaLink="false">http://korben.info/?p=38855</guid>
+    <description><![CDATA[Petit moment d'hallu hier soir... J'avais déjà vu des mecs se faire passer pour moi (même pseudo, même photo de profil...etc.) dans des commentaires de blogs, le plus souvent pour exprimer des idées à le con qui sont à l'opposée des miennes, mais là, ça va encore plus loin puisqu’hier, j'ai eu la preuve qu'il [...]]]></description>
+        <content:encoded><![CDATA[<p>Petit moment d'hallu hier soir...</p>
 <p>J'avais déjà vu des mecs se faire passer pour moi (même pseudo, même photo de profil...etc.) dans des commentaires de blogs, le plus souvent pour exprimer des idées à le con qui sont à l'opposée des miennes, mais là, ça va encore plus loin puisqu’hier, j'ai eu la preuve qu'il y en avait au moins un qui s'amusait à contacter des gens par email en se faisant passer pour moi.</p>
 <p>C'est fou.</p>
 <p>En l'occurrence, il a contacté <a href="https://twitter.com/nic0belo/status/314126484782608386">l'auteur d'un CMS</a> pour lui demander un accès en avant-première à son outil. L'usurpateur a même signé en utilisant mon nom complet Oo.</p>
@@ -453,20 +453,20 @@ Source</a></p>
 <p>Que l'amour vous recouvre des pieds à la tête comme un camembert fondu géant, pour cette magnifique journée mondiale du bonheur !</p>
 <p><a href="http://wallbase.cc/wallpaper/1051678">Photo</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/mefiez-vous-des-contrefacons.html/feed</wfw:commentRss>
-		<slash:comments>35</slash:comments>
-		</item>
-		<item>
-		<title>Découvrez les imprimantes nano 3D</title>
-		<link>http://korben.info/decouvrez-les-imprimantes-nano-3d.html</link>
-		<comments>http://korben.info/decouvrez-les-imprimantes-nano-3d.html#comments</comments>
-		<pubDate>Tue, 19 Mar 2013 16:30:46 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Science]]></category>
+      <wfw:commentRss>http://korben.info/mefiez-vous-des-contrefacons.html/feed</wfw:commentRss>
+    <slash:comments>35</slash:comments>
+    </item>
+    <item>
+    <title>Découvrez les imprimantes nano 3D</title>
+    <link>http://korben.info/decouvrez-les-imprimantes-nano-3d.html</link>
+    <comments>http://korben.info/decouvrez-les-imprimantes-nano-3d.html#comments</comments>
+    <pubDate>Tue, 19 Mar 2013 16:30:46 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Science]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38830</guid>
-		<description><![CDATA[Les imprimantes 3D sont déjà has-been, car voici venu les imprimantes nano 3D ! Woohoo \o/ Comme son nom l'indique, cette imprimante nano a la particularité d'imprimer des objets 3D de la taille d'un cheveu. Quel intérêt me direz-vous ? Et bien tout simplement, pouvoir fabriquer sur mesure des structures complexes destinées au secteur des [...]]]></description>
-				<content:encoded><![CDATA[<p>Les imprimantes 3D sont déjà has-been, car voici venu les imprimantes nano 3D !</p>
+    <guid isPermaLink="false">http://korben.info/?p=38830</guid>
+    <description><![CDATA[Les imprimantes 3D sont déjà has-been, car voici venu les imprimantes nano 3D ! Woohoo \o/ Comme son nom l'indique, cette imprimante nano a la particularité d'imprimer des objets 3D de la taille d'un cheveu. Quel intérêt me direz-vous ? Et bien tout simplement, pouvoir fabriquer sur mesure des structures complexes destinées au secteur des [...]]]></description>
+        <content:encoded><![CDATA[<p>Les imprimantes 3D sont déjà has-been, car voici venu les imprimantes nano 3D !</p>
 <p>Woohoo \o/</p>
 <p>Comme son nom l'indique, cette imprimante nano a la particularité d'imprimer des <strong>objets 3D de la taille d'un cheveu</strong>.</p>
 <p>Quel intérêt me direz-vous ?</p>
@@ -482,59 +482,59 @@ Source</a></p>
 <p>Sympa non ?</p>
 <p><a href="http://singularityhub.com/2013/03/17/a-3d-printed-spaceship-on-the-scale-of-a-human-hair-hello-nanoscribe-3d-printer/">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/decouvrez-les-imprimantes-nano-3d.html/feed</wfw:commentRss>
-		<slash:comments>7</slash:comments>
-		</item>
-		<item>
-		<title>Dans le labo R&amp;D d&#8217;Aperture</title>
-		<link>http://korben.info/rd-aperture.html</link>
-		<comments>http://korben.info/rd-aperture.html#comments</comments>
-		<pubDate>Tue, 19 Mar 2013 14:30:32 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Jeux vidéos]]></category>
-		<category><![CDATA[Vidéo]]></category>
+      <wfw:commentRss>http://korben.info/decouvrez-les-imprimantes-nano-3d.html/feed</wfw:commentRss>
+    <slash:comments>7</slash:comments>
+    </item>
+    <item>
+    <title>Dans le labo R&amp;D d&#8217;Aperture</title>
+    <link>http://korben.info/rd-aperture.html</link>
+    <comments>http://korben.info/rd-aperture.html#comments</comments>
+    <pubDate>Tue, 19 Mar 2013 14:30:32 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Jeux vidéos]]></category>
+    <category><![CDATA[Vidéo]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38827</guid>
-		<description><![CDATA[Basé sur l'univers du jeu Portal, voici une petite web série bien sympathique sur la vie du service Recherche et Développement d'Aperture. Il s'agit de l'épisode 1... La suite sera disponible prochainement ici. Source]]></description>
-				<content:encoded><![CDATA[<p>Basé sur l'univers du jeu <strong>Portal</strong>, voici une petite web série bien sympathique sur la vie du service Recherche et Développement d'Aperture.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38827</guid>
+    <description><![CDATA[Basé sur l'univers du jeu Portal, voici une petite web série bien sympathique sur la vie du service Recherche et Développement d'Aperture. Il s'agit de l'épisode 1... La suite sera disponible prochainement ici. Source]]></description>
+        <content:encoded><![CDATA[<p>Basé sur l'univers du jeu <strong>Portal</strong>, voici une petite web série bien sympathique sur la vie du service Recherche et Développement d'Aperture.</p>
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/tKQ-lcNRsrE?feature=player_detailpage" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
 <p>Il s'agit de l'épisode 1... La suite sera disponible <a href="http://www.youtube.com/WaysideCreations">prochainement ici</a>.</p>
 <p><a href="http://theawesomer.com/">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/rd-aperture.html/feed</wfw:commentRss>
-		<slash:comments>2</slash:comments>
-		</item>
-		<item>
-		<title>Plex débarque sur le Raspberry Pi</title>
-		<link>http://korben.info/rasplex.html</link>
-		<comments>http://korben.info/rasplex.html#comments</comments>
-		<pubDate>Tue, 19 Mar 2013 12:30:33 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[DIY]]></category>
-		<category><![CDATA[Hardware]]></category>
+      <wfw:commentRss>http://korben.info/rd-aperture.html/feed</wfw:commentRss>
+    <slash:comments>2</slash:comments>
+    </item>
+    <item>
+    <title>Plex débarque sur le Raspberry Pi</title>
+    <link>http://korben.info/rasplex.html</link>
+    <comments>http://korben.info/rasplex.html#comments</comments>
+    <pubDate>Tue, 19 Mar 2013 12:30:33 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[DIY]]></category>
+    <category><![CDATA[Hardware]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38824</guid>
-		<description><![CDATA[Y'a pas que XBMC dans la vie... Y'a aussi Plex, un autre soft de media center qui fonctionne aussi très bien. Un peu plus lissé, un poil plus commercial et pas totalement open source, Plex est quand même une alternative sérieuse à XBMC. D'ailleurs, si vous avez un Raspberry Pi et que vous avez été [...]]]></description>
-				<content:encoded><![CDATA[<p>Y'a pas que XBMC dans la vie... Y'a aussi <strong><a href="http://www.plexapp.com/">Plex</a></strong>, un autre soft de media center qui fonctionne aussi très bien. Un peu plus lissé, un poil plus commercial et pas totalement open source, Plex est quand même une alternative sérieuse à XBMC.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38824</guid>
+    <description><![CDATA[Y'a pas que XBMC dans la vie... Y'a aussi Plex, un autre soft de media center qui fonctionne aussi très bien. Un peu plus lissé, un poil plus commercial et pas totalement open source, Plex est quand même une alternative sérieuse à XBMC. D'ailleurs, si vous avez un Raspberry Pi et que vous avez été [...]]]></description>
+        <content:encoded><![CDATA[<p>Y'a pas que XBMC dans la vie... Y'a aussi <strong><a href="http://www.plexapp.com/">Plex</a></strong>, un autre soft de media center qui fonctionne aussi très bien. Un peu plus lissé, un poil plus commercial et pas totalement open source, Plex est quand même une alternative sérieuse à XBMC.</p>
 <p>D'ailleurs, si vous avez un Raspberry Pi et que vous avez été déçu par votre install de XBMC dessus, vous devriez peut être essayer <strong><a href="http://www.rasplex.com/">RasPlex</a></strong>. Il s'agit d'une distrib OpenELEC pour le Raspberry Pi qui est optimisée pour faire tourner Plex.</p>
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/n2d4c8JIT0E?feature=player_embedded" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
 <p>Je ne vais pas m'étendre sur les fonctionnalités de Plex, je vous laisse plutôt aller consulter le site officiel. Quand à moi, j'attends de recevoir une nouvelle carte SD et je vais faire quelques essais avec <strong>RasPlex</strong> pour voir si c'est un peu plus réactif que les distrib Rpi à base de XBMC que j'ai pu tester jusque là.</p>
 <p><a href="http://lifehacker.com/5991040/rasplex-puts-plex-on-your-raspberry-pi+powered-home-theater-pc">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/rasplex.html/feed</wfw:commentRss>
-		<slash:comments>16</slash:comments>
-		</item>
-		<item>
-		<title>Le téléchargement illégal n&#8217;a aucun effet négatif sur les ventes de musique (et c&#8217;est pas moi qui le dit)</title>
-		<link>http://korben.info/le-telechargement-illegal-na-aucun-effet-negatif-sur-les-ventes-de-musique-et-cest-pas-moi-qui-le-dit.html</link>
-		<comments>http://korben.info/le-telechargement-illegal-na-aucun-effet-negatif-sur-les-ventes-de-musique-et-cest-pas-moi-qui-le-dit.html#comments</comments>
-		<pubDate>Tue, 19 Mar 2013 09:30:03 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Download]]></category>
+      <wfw:commentRss>http://korben.info/rasplex.html/feed</wfw:commentRss>
+    <slash:comments>16</slash:comments>
+    </item>
+    <item>
+    <title>Le téléchargement illégal n&#8217;a aucun effet négatif sur les ventes de musique (et c&#8217;est pas moi qui le dit)</title>
+    <link>http://korben.info/le-telechargement-illegal-na-aucun-effet-negatif-sur-les-ventes-de-musique-et-cest-pas-moi-qui-le-dit.html</link>
+    <comments>http://korben.info/le-telechargement-illegal-na-aucun-effet-negatif-sur-les-ventes-de-musique-et-cest-pas-moi-qui-le-dit.html#comments</comments>
+    <pubDate>Tue, 19 Mar 2013 09:30:03 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Download]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38821</guid>
-		<description><![CDATA[On ne va pas faire les étonnés, hein. Ce n'est pas la première fois qu'une étude de ce type arrive exactement aux mêmes conclusions, mais c'est toujours bon de le rappeler. Une nouvelle étudie commandée par le Centre Commun de Recherche de la Commission Européenne, compilant les données comportementales de plus de 16 000 internautes [...]]]></description>
-				<content:encoded><![CDATA[<p>On ne va pas faire les étonnés, hein.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38821</guid>
+    <description><![CDATA[On ne va pas faire les étonnés, hein. Ce n'est pas la première fois qu'une étude de ce type arrive exactement aux mêmes conclusions, mais c'est toujours bon de le rappeler. Une nouvelle étudie commandée par le Centre Commun de Recherche de la Commission Européenne, compilant les données comportementales de plus de 16 000 internautes [...]]]></description>
+        <content:encoded><![CDATA[<p>On ne va pas faire les étonnés, hein.</p>
 <p>Ce n'est pas la première fois qu'une étude de ce type arrive exactement aux mêmes conclusions, mais c'est toujours bon de le rappeler.</p>
 <p>Une nouvelle étudie commandée par le Centre Commun de Recherche de la Commission Européenne, compilant les données comportementales de plus de 16 000 internautes européens, a permis de déterminer que <strong>le piratage n'affecte en aucun cas le marché légal et a même un effet positif sur les ventes de musique.</strong></p>
 <p>En gros, la musique que les gens téléchargent illégalement n'aurait de toute manière pas été achetée par ces mêmes personnes. Mieux, toute cette activité illégale stimule les ventes en ligne puisque les chercheurs ont déterminé que lorsqu'il n'y a pas de sites qui proposent illégalement de la musique, les clicks sur les sites légaux diminuent de 2% environ.</p>
@@ -543,22 +543,22 @@ Source</a></p>
 <p style="text-align: center;"><iframe src="http://www.dailymotion.com/embed/video/xy9zdc" height="360" width="640" frameborder="0"></iframe></p>
 <p> <a href="http://torrentfreak.com/online-piracy-is-not-hurting-music-revenues-european-commission-finds-130318/">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/le-telechargement-illegal-na-aucun-effet-negatif-sur-les-ventes-de-musique-et-cest-pas-moi-qui-le-dit.html/feed</wfw:commentRss>
-		<slash:comments>18</slash:comments>
-		</item>
-		<item>
-		<title>Comment mourrons-nous ?</title>
-		<link>http://korben.info/comment-mourrons-nous.html</link>
-		<comments>http://korben.info/comment-mourrons-nous.html#comments</comments>
-		<pubDate>Tue, 19 Mar 2013 08:30:43 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Design]]></category>
-		<category><![CDATA[Infos]]></category>
-		<category><![CDATA[Société]]></category>
+      <wfw:commentRss>http://korben.info/le-telechargement-illegal-na-aucun-effet-negatif-sur-les-ventes-de-musique-et-cest-pas-moi-qui-le-dit.html/feed</wfw:commentRss>
+    <slash:comments>18</slash:comments>
+    </item>
+    <item>
+    <title>Comment mourrons-nous ?</title>
+    <link>http://korben.info/comment-mourrons-nous.html</link>
+    <comments>http://korben.info/comment-mourrons-nous.html#comments</comments>
+    <pubDate>Tue, 19 Mar 2013 08:30:43 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Design]]></category>
+    <category><![CDATA[Infos]]></category>
+    <category><![CDATA[Société]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38810</guid>
-		<description><![CDATA[Je vais commencer la journée avec du glauque puisque je vais vous parler de la mort ! Oui, scoop : Les gens meurent. Parait que ça fait partie de la vie. Mais savez-vous comment les Hommes meurent ? C'est pour répondre à cette question existentielle que le journaliste David McCandless a compilé les chiffres des [...]]]></description>
-				<content:encoded><![CDATA[<p>Je vais commencer la journée avec du glauque puisque je vais vous parler de la mort !</p>
+    <guid isPermaLink="false">http://korben.info/?p=38810</guid>
+    <description><![CDATA[Je vais commencer la journée avec du glauque puisque je vais vous parler de la mort ! Oui, scoop : Les gens meurent. Parait que ça fait partie de la vie. Mais savez-vous comment les Hommes meurent ? C'est pour répondre à cette question existentielle que le journaliste David McCandless a compilé les chiffres des [...]]]></description>
+        <content:encoded><![CDATA[<p>Je vais commencer la journée avec du glauque puisque je vais vous parler de la mort !</p>
 <p>Oui, scoop : Les gens meurent. Parait que ça fait partie de la vie.</p>
 <p>Mais savez-vous comment les Hommes meurent ?</p>
 <p>C'est pour répondre à cette question existentielle que le journaliste David McCandless a compilé les chiffres des différents types de mort humaine au XXe siècle...</p>
@@ -569,20 +569,20 @@ Source</a></p>
 <p>ps: Je viens de voir que le tétanos se disait "tetanus" en anglais. Ouais, voilà.</p>
 <p><a href="http://gizmodo.com/5991056/how-we-all-die-visualized">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/comment-mourrons-nous.html/feed</wfw:commentRss>
-		<slash:comments>27</slash:comments>
-		</item>
-		<item>
-		<title>Une faille de sécurité pourrait toucher les mises à jour de certains modems 3G / 4G</title>
-		<link>http://korben.info/une-faille-de-securite-decouverte-dans-certains-modem-3g-4g.html</link>
-		<comments>http://korben.info/une-faille-de-securite-decouverte-dans-certains-modem-3g-4g.html#comments</comments>
-		<pubDate>Tue, 19 Mar 2013 07:57:32 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Sécurité]]></category>
+      <wfw:commentRss>http://korben.info/comment-mourrons-nous.html/feed</wfw:commentRss>
+    <slash:comments>27</slash:comments>
+    </item>
+    <item>
+    <title>Une faille de sécurité pourrait toucher les mises à jour de certains modems 3G / 4G</title>
+    <link>http://korben.info/une-faille-de-securite-decouverte-dans-certains-modem-3g-4g.html</link>
+    <comments>http://korben.info/une-faille-de-securite-decouverte-dans-certains-modem-3g-4g.html#comments</comments>
+    <pubDate>Tue, 19 Mar 2013 07:57:32 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Sécurité]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38842</guid>
-		<description><![CDATA[Lors d'une présentation à la Black Hat Europe la semaine dernière, les chercheurs en sécurité Russe Nikita Tarakanov et Oleg Kupreev ont expliqué que les modems 3G/4G du constructeur Huawei étaient à la merci des hackers. En effet, ces modems 3G et 4G utilisent des serveurs de mise à jour qui ne sont pas ou [...]]]></description>
-				<content:encoded><![CDATA[<p>Lors d'une présentation à la Black Hat Europe la semaine dernière, les chercheurs en sécurité Russe <a href="https://twitter.com/NTarakanov">Nikita Tarakanov</a> et <a href="https://twitter.com/090h">Oleg Kupreev</a> ont expliqué que les modems 3G/4G du constructeur <strong>Huawei</strong> étaient à la merci des hackers.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38842</guid>
+    <description><![CDATA[Lors d'une présentation à la Black Hat Europe la semaine dernière, les chercheurs en sécurité Russe Nikita Tarakanov et Oleg Kupreev ont expliqué que les modems 3G/4G du constructeur Huawei étaient à la merci des hackers. En effet, ces modems 3G et 4G utilisent des serveurs de mise à jour qui ne sont pas ou [...]]]></description>
+        <content:encoded><![CDATA[<p>Lors d'une présentation à la Black Hat Europe la semaine dernière, les chercheurs en sécurité Russe <a href="https://twitter.com/NTarakanov">Nikita Tarakanov</a> et <a href="https://twitter.com/090h">Oleg Kupreev</a> ont expliqué que les modems 3G/4G du constructeur <strong>Huawei</strong> étaient à la merci des hackers.</p>
 <p>En effet, ces modems 3G et 4G utilisent des serveurs de mise à jour qui ne sont pas ou peu sécurisé. En tout cas, leurs logiciels sont obsolètes. Par exemple, sur l'un des serveurs de mise à jour situé aux Pays-Bas, que Nikita Tarakanov a testé, il y a encore IIS 6.0.</p>
 <p>Un attaquant pourrait alors cracker le serveur et diffuser une mise à jour modifiée par ses soins à toutes les clés USB modem d'Huwaei. Le hacker pourrait changer les DNS par défaut pour rediriger les connexions vers des sites diffusant des malwares ou encore détourner l'antivirus interne pour exécuter à l'insu de l'internaute n'importe quel logiciel.</p>
 <p>Encore mieux, enfin encore pire... Stefan Esser, un autre chercheur a découvert lui aussi une faille dans l'application de mise à jour des modems Huwaei sous OSX. Cette application donne un accès total (777) au répertoire /usr/local, posant un grave problème de sécurité pour les utilisateurs d'OSX qui auraient installé sur leur machine cette application ouc.app .</p>
@@ -590,20 +590,20 @@ Source</a></p>
 <p>La présentation des experts <a href="https://www.dropbox.com/s/updofdn5jd9e930/HuaweiRootWay_final.pptx">est ici</a>.</p>
 <p><a href="http://it.slashdot.org/story/13/03/16/1326240/3g-and-4g-usb-modems-are-security-threat-black-hat-presenter-says">Source</a> et <a href="http://commons.wikimedia.org/wiki/File:Huawei_E220_HSDPA_USB_modem.jpg">photo (CC)</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/une-faille-de-securite-decouverte-dans-certains-modem-3g-4g.html/feed</wfw:commentRss>
-		<slash:comments>1</slash:comments>
-		</item>
-		<item>
-		<title>Drones de proie</title>
-		<link>http://korben.info/drones-de-proie.html</link>
-		<comments>http://korben.info/drones-de-proie.html#comments</comments>
-		<pubDate>Tue, 19 Mar 2013 07:15:29 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Robotique]]></category>
+      <wfw:commentRss>http://korben.info/une-faille-de-securite-decouverte-dans-certains-modem-3g-4g.html/feed</wfw:commentRss>
+    <slash:comments>1</slash:comments>
+    </item>
+    <item>
+    <title>Drones de proie</title>
+    <link>http://korben.info/drones-de-proie.html</link>
+    <comments>http://korben.info/drones-de-proie.html#comments</comments>
+    <pubDate>Tue, 19 Mar 2013 07:15:29 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Robotique]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38837</guid>
-		<description><![CDATA[Des chercheurs de l'Université de Pennsylvanie aux États-Unis travaillent actuellement sur un projet de drone, ou plus exactement de quad-copters capables d'attraper à grande vitesse des objets un peu comme le ferait un aigle. Bref, un drone prédateur capable de prendre la bonne trajectoire pour ne jamais manquer sa cible. Pour le moment, tout est [...]]]></description>
-				<content:encoded><![CDATA[<p>Des chercheurs de l'Université de Pennsylvanie aux États-Unis travaillent actuellement sur un projet de drone, ou plus exactement de quad-copters capables d'attraper à grande vitesse des objets un peu comme le ferait un aigle.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38837</guid>
+    <description><![CDATA[Des chercheurs de l'Université de Pennsylvanie aux États-Unis travaillent actuellement sur un projet de drone, ou plus exactement de quad-copters capables d'attraper à grande vitesse des objets un peu comme le ferait un aigle. Bref, un drone prédateur capable de prendre la bonne trajectoire pour ne jamais manquer sa cible. Pour le moment, tout est [...]]]></description>
+        <content:encoded><![CDATA[<p>Des chercheurs de l'Université de Pennsylvanie aux États-Unis travaillent actuellement sur un projet de drone, ou plus exactement de quad-copters capables d'attraper à grande vitesse des objets un peu comme le ferait un aigle.</p>
 <p>Bref, un drone prédateur capable de prendre la bonne trajectoire pour ne jamais manquer sa cible.</p>
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/ol8c9bdp7YI?feature=player_embedded" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
 <p>Pour le moment, tout est calculé en amont, mais la seconde étape pour ces chercheurs sera de rendre le drone autonome, capable de calculer lui-même sa trajectoire grâce à sa propre caméra.</p>
@@ -613,41 +613,41 @@ Source</a></p>
 <p>Bref, des tas d'applications très intéressantes.</p>
 <p><a href="http://www.theregister.co.uk/2013/03/17/quad_copters_with_eagle_claws/">Source</a> et <a href="http://wallbase.cc/wallpaper/1003097">photo</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/drones-de-proie.html/feed</wfw:commentRss>
-		<slash:comments>10</slash:comments>
-		</item>
-		<item>
-		<title>Un DRM qui permet de faire des dégats</title>
-		<link>http://korben.info/drm-simcity.html</link>
-		<comments>http://korben.info/drm-simcity.html#comments</comments>
-		<pubDate>Tue, 19 Mar 2013 05:03:01 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Jeux vidéos]]></category>
+      <wfw:commentRss>http://korben.info/drones-de-proie.html/feed</wfw:commentRss>
+    <slash:comments>10</slash:comments>
+    </item>
+    <item>
+    <title>Un DRM qui permet de faire des dégats</title>
+    <link>http://korben.info/drm-simcity.html</link>
+    <comments>http://korben.info/drm-simcity.html#comments</comments>
+    <pubDate>Tue, 19 Mar 2013 05:03:01 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Jeux vidéos]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38818</guid>
-		<description><![CDATA[Tiens c'est rigolo ça... Une méthode qui permet de faire des dégâts vient d'être découvert dans SimCity. Grâce à l'activation du mod debug dont j'ai déjà parlé, un moddeur montre dans une vidéo qu'il est tout à fait possible de détruire une ville qui ne lui appartient pas. Pas encore de sauvegarde possible sur le [...]]]></description>
-				<content:encoded><![CDATA[<p>Tiens c'est rigolo ça... Une méthode qui permet de faire des dégâts vient d'être découvert dans SimCity.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38818</guid>
+    <description><![CDATA[Tiens c'est rigolo ça... Une méthode qui permet de faire des dégâts vient d'être découvert dans SimCity. Grâce à l'activation du mod debug dont j'ai déjà parlé, un moddeur montre dans une vidéo qu'il est tout à fait possible de détruire une ville qui ne lui appartient pas. Pas encore de sauvegarde possible sur le [...]]]></description>
+        <content:encoded><![CDATA[<p>Tiens c'est rigolo ça... Une méthode qui permet de faire des dégâts vient d'être découvert dans SimCity.</p>
 <p>Grâce à l'activation du mod debug dont j'ai déjà parlé, un moddeur montre dans une vidéo qu'il est tout à fait possible de détruire une ville qui ne lui appartient pas.</p>
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/ROy6VE5ZsZw?feature=player_embedded" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
 <p>Pas encore de sauvegarde possible sur le cloud de cette ville détruite mais c'est volontaire de la part du moddeur. Les boules si ça vous arrive et que vous avez passé du temps à choyer votre ville... Et dire que tout ceci n'aurait pas été possible si les mecs avaient correctement codé une version jouable offline avec un enregistrement des cartes sur le client et non pas sur le serveur...</p>
 <p>A noter que tous espoir n'est pas perdu puisque le <a href="http://www.forbes.com/sites/danielnyegriffiths/2013/03/18/john-riccitiello-steps-down-as-ea-ceo/">CEO d'Electronic Arts vient de démissionner</a>... Il y aura donc un peu de sang neuf prochainement. Espérons que ceux-ci se remettent sur la voie de la sagesse en ce qui concerne les DRM.</p>
 <p><a href="http://www.cinemablend.com/games/SimCity-Hack-Lets-Users-Destroy-Anyone-Online-City-Thanks-Always-DRM-53685.html">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/drm-simcity.html/feed</wfw:commentRss>
-		<slash:comments>14</slash:comments>
-		</item>
-		<item>
-		<title>Partagez vos clés WiFi avec vos amis</title>
-		<link>http://korben.info/instabridge.html</link>
-		<comments>http://korben.info/instabridge.html#comments</comments>
-		<pubDate>Mon, 18 Mar 2013 16:30:03 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Android]]></category>
-		<category><![CDATA[Mobile]]></category>
+      <wfw:commentRss>http://korben.info/drm-simcity.html/feed</wfw:commentRss>
+    <slash:comments>14</slash:comments>
+    </item>
+    <item>
+    <title>Partagez vos clés searchtermWiFi avec vos amis</title>
+    <link>http://korben.info/instabridge.html</link>
+    <comments>http://korben.info/instabridge.html#comments</comments>
+    <pubDate>Mon, 18 Mar 2013 16:30:03 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Android]]></category>
+    <category><![CDATA[Mobile]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38776</guid>
-		<description><![CDATA[Les réseaux WiFi, quand on doit se farcir à noter tous les mots de passe, c'est une vraie plaie. Et je ne vous raconte pas quand vous changez d'ordinateur ou de smartphone. En plus, quand vous allez chez des amis, c'est toujours délicat de réclamer la clé WiFi pour checker vos mails en douce au [...]]]></description>
-				<content:encoded><![CDATA[<p>Les réseaux WiFi, quand on doit se farcir à noter tous les mots de passe, c'est une vraie plaie. Et je ne vous raconte pas quand vous changez d'ordinateur ou de smartphone. En plus, quand vous allez chez des amis, c'est toujours délicat de réclamer la clé WiFi pour checker vos mails en douce au lieu de se concentrer à savourer une bonne raclette en parlant politique (Zzzz).</p>
+    <guid isPermaLink="false">http://korben.info/?p=38776</guid>
+    <description><![CDATA[Les réseaux WiFi, quand on doit se farcir à noter tous les mots de passe, c'est une vraie plaie. Et je ne vous raconte pas quand vous changez d'ordinateur ou de smartphone. En plus, quand vous allez chez des amis, c'est toujours délicat de réclamer la clé WiFi pour checker vos mails en douce au [...]]]></description>
+        <content:encoded><![CDATA[<p>Les réseaux WiFi, quand on doit se farcir à noter tous les mots de passe, c'est une vraie plaie. Et je ne vous raconte pas quand vous changez d'ordinateur ou de smartphone. En plus, quand vous allez chez des amis, c'est toujours délicat de réclamer la clé WiFi pour checker vos mails en douce au lieu de se concentrer à savourer une bonne raclette en parlant politique (Zzzz).</p>
 <p>Mais cette époque est révolue grâce à <strong>Instabridge</strong> ! Il s'agit d'une application Android de partage de clés WiFi entre amis.</p>
 <p style="text-align: center;"><a href="http://korben.info/wp-content/uploads/2013/03/unnamed.jpg"><img class="aligncenter size-full wp-image-38777" alt="unnamed Partagez vos clés WiFi avec vos amis" src="http://korben.info/wp-content/uploads/2013/03/unnamed.jpg" width="288" height="512" title="Partagez vos clés WiFi avec vos amis" /></a></p>
 <p>En gros, vous ajoutez les amis que vous avez dans votre carnet de contacts et/ou sur Facebook, puis vous entrez manuellement les clés WiFi de vos réseaux. Instabridge ne les récupère pas automatiquement, il faudra tout retaper. Mais une fois que c'est fait, hop, vous êtes tranquille et vos amis aussi puisque lorsqu'ils arriveront chez vous, Instabridge leur donnera accès automatiquement à votre accès internet.</p>
@@ -656,20 +656,20 @@ Source</a></p>
 <p> Super pratique en tout cas ! Si parmi vos amis, y'en a un qui se balade beaucoup, et qui a récolté toutes les clés de tous les bars de votre ville, vous serez le roi du monde puisque tout sera partagé d'office avec vous </p>
 <p><a href="https://play.google.com/store/apps/details?id=com.instabridge.android">A télécharger ici.</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/instabridge.html/feed</wfw:commentRss>
-		<slash:comments>13</slash:comments>
-		</item>
-		<item>
-		<title>Edito du 18/03/2013</title>
-		<link>http://korben.info/edito-du-18032013.html</link>
-		<comments>http://korben.info/edito-du-18032013.html#comments</comments>
-		<pubDate>Mon, 18 Mar 2013 15:45:59 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Editos]]></category>
+      <wfw:commentRss>http://korben.info/instabridge.html/feed</wfw:commentRss>
+    <slash:comments>13</slash:comments>
+    </item>
+    <item>
+    <title>Edito du 18/03/2013</title>
+    <link>http://korben.info/edito-du-18032013.html</link>
+    <comments>http://korben.info/edito-du-18032013.html#comments</comments>
+    <pubDate>Mon, 18 Mar 2013 15:45:59 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Editos]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38799</guid>
-		<description><![CDATA[Et voici un nouveau petit édito avec du CitiesXL et du Raspberry Pi dedans... Liens : Le tuto Raspberry Pi pour Spotify et Airplay CitiesXL Earbits Steremood]]></description>
-				<content:encoded><![CDATA[<p>Et voici un nouveau petit édito avec du CitiesXL et du Raspberry Pi dedans...</p>
+    <guid isPermaLink="false">http://korben.info/?p=38799</guid>
+    <description><![CDATA[Et voici un nouveau petit édito avec du CitiesXL et du Raspberry Pi dedans... Liens : Le tuto Raspberry Pi pour Spotify et Airplay CitiesXL Earbits Steremood]]></description>
+        <content:encoded><![CDATA[<p>Et voici un nouveau petit édito avec du CitiesXL et du Raspberry Pi dedans...</p>
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/IxGRT-jyAiA" height="320" width="600" allowfullscreen="" frameborder="0"></iframe></p>
 <p>Liens :</p>
 <ul>
@@ -679,20 +679,20 @@ Source</a></p>
 <li><a href="http://www.stereomood.com/">Steremood</a></li>
 </ul>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/edito-du-18032013.html/feed</wfw:commentRss>
-		<slash:comments>19</slash:comments>
-		</item>
-		<item>
-		<title>La décompression / désarchivage pour les nuls sous Linux</title>
-		<link>http://korben.info/dtrx-linux.html</link>
-		<comments>http://korben.info/dtrx-linux.html#comments</comments>
-		<pubDate>Mon, 18 Mar 2013 14:30:11 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Linux]]></category>
+      <wfw:commentRss>http://korben.info/edito-du-18032013.html/feed</wfw:commentRss>
+    <slash:comments>19</slash:comments>
+    </item>
+    <item>
+    <title>La décompression / désarchivage pour les nuls sous Linux</title>
+    <link>http://korben.info/dtrx-linux.html</link>
+    <comments>http://korben.info/dtrx-linux.html#comments</comments>
+    <pubDate>Mon, 18 Mar 2013 14:30:11 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Linux]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38772</guid>
-		<description><![CDATA[Bon, j'imagine que si vous touchez un peu à la ligne de commande sous Linux, vous savez désarchiver un tar, un zip, un cpio, un deb, un rpm, un gem, un 7z, un cab, un lzh, un rar, un gz, un bz2, un lzma, un xz...etc ? C'est simple, il suffit de se rappeler de [...]]]></description>
-				<content:encoded><![CDATA[<p>Bon, j'imagine que si vous touchez un peu à la ligne de commande sous Linux, vous savez désarchiver un tar, un zip, un cpio, un deb, un rpm, un gem, un 7z, un cab, un lzh, un rar, un gz, un bz2, un lzma, un xz...etc ?</p>
+    <guid isPermaLink="false">http://korben.info/?p=38772</guid>
+    <description><![CDATA[Bon, j'imagine que si vous touchez un peu à la ligne de commande sous Linux, vous savez désarchiver un tar, un zip, un cpio, un deb, un rpm, un gem, un 7z, un cab, un lzh, un rar, un gz, un bz2, un lzma, un xz...etc ? C'est simple, il suffit de se rappeler de [...]]]></description>
+        <content:encoded><![CDATA[<p>Bon, j'imagine que si vous touchez un peu à la ligne de commande sous Linux, vous savez désarchiver un tar, un zip, un cpio, un deb, un rpm, un gem, un 7z, un cab, un lzh, un rar, un gz, un bz2, un lzma, un xz...etc ?</p>
 <p>C'est simple, il suffit de se rappeler de la commande et surtout des paramètres. Sauf que les paramètres, parfois y'en a beaucoup et on ne se souvient pas de tout... Alors plutôt que de vous replonger dans les man pages à chaque fois, installez plutôt l'utilitaire dtrx (Do The Right Extraction) qui vous permettra d'oublier une bonne fois pour toutes, toutes ces commandes et tous ces paramètres.</p>
 <p>Peu importe le type de fichier, les paramètres à caler...etc, il suffit juste de taper "dtrx".</p>
 <p>Par exemple, au lieu de faire un</p>
@@ -704,20 +704,20 @@ Source</a></p>
 <p><a href="http://brettcsmith.org/2007/dtrx/">DTRX est téléchargeable ici</a>.</p>
 <p><a href="http://wallbase.cc/wallpaper/1886635">Photo</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/dtrx-linux.html/feed</wfw:commentRss>
-		<slash:comments>13</slash:comments>
-		</item>
-		<item>
-		<title>Faire un screencast sous Ubuntu</title>
-		<link>http://korben.info/logiciel-ubuntu-screencast.html</link>
-		<comments>http://korben.info/logiciel-ubuntu-screencast.html#comments</comments>
-		<pubDate>Mon, 18 Mar 2013 12:30:36 +0000</pubDate>
-		<dc:creator>Korben</dc:creator>
-				<category><![CDATA[Linux]]></category>
+      <wfw:commentRss>http://korben.info/dtrx-linux.html/feed</wfw:commentRss>
+    <slash:comments>13</slash:comments>
+    </item>
+    <item>
+    <title>Faire un screencast sous Ubuntu</title>
+    <link>http://korben.info/logiciel-ubuntu-screencast.html</link>
+    <comments>http://korben.info/logiciel-ubuntu-screencast.html#comments</comments>
+    <pubDate>Mon, 18 Mar 2013 12:30:36 +0000</pubDate>
+    <dc:creator>Korben</dc:creator>
+        <category><![CDATA[Linux]]></category>
 
-		<guid isPermaLink="false">http://korben.info/?p=38768</guid>
-		<description><![CDATA[Si vous êtes sous Ubuntu et que vous cherchez à faire de jolis screencasts pour produire de jolis tutoriels à partager avec le monde entiiiiiier, pensez à Kazam Screencaster. L'avantage de Kazam c'est qu'il est simple d'utilisation et capable de sortir des formats VP8 et H264. Vous pouvez aussi définir précisément la région à enregistrer [...]]]></description>
-				<content:encoded><![CDATA[<p>Si vous êtes sous Ubuntu et que vous cherchez à faire de jolis screencasts pour produire de jolis tutoriels à partager avec le monde entiiiiiier, pensez à Kazam Screencaster.</p>
+    <guid isPermaLink="false">http://korben.info/?p=38768</guid>
+    <description><![CDATA[Si vous êtes sous Ubuntu et que vous cherchez à faire de jolis screencasts pour produire de jolis tutoriels à partager avec le monde entiiiiiier, pensez à Kazam Screencaster. L'avantage de Kazam c'est qu'il est simple d'utilisation et capable de sortir des formats VP8 et H264. Vous pouvez aussi définir précisément la région à enregistrer [...]]]></description>
+        <content:encoded><![CDATA[<p>Si vous êtes sous Ubuntu et que vous cherchez à faire de jolis screencasts pour produire de jolis tutoriels à partager avec le monde entiiiiiier, pensez à Kazam Screencaster.</p>
 <p>L'avantage de Kazam c'est qu'il est simple d'utilisation et capable de sortir des formats VP8 et H264. Vous pouvez aussi définir précisément la région à enregistrer ainsi qu'une entrée audio pour la voix ou la bande-son.</p>
 <p>Voici une démo :
 <p style="text-align: center;"><iframe src="http://www.youtube.com/embed/J11dOs02VVE?feature=player_embedded" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
@@ -728,8 +728,8 @@ Source</a></p>
 <p>Bonnes créations à tous !</p>
 <p><a href="http://www.ubuntugeek.com/kazam-screencaster-a-screencasting-program-created-with-design-in-mind.html">Source</a></p>
 ]]></content:encoded>
-			<wfw:commentRss>http://korben.info/logiciel-ubuntu-screencast.html/feed</wfw:commentRss>
-		<slash:comments>4</slash:comments>
-		</item>
-	</channel>
+      <wfw:commentRss>http://korben.info/logiciel-ubuntu-screencast.html/feed</wfw:commentRss>
+    <slash:comments>4</slash:comments>
+    </item>
+  </channel>
 </rss>

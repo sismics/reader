@@ -13,6 +13,7 @@
     <class>com.sismics.reader.core.model.jpa.Config</class>
     <class>com.sismics.reader.core.model.jpa.Feed</class>
     <class>com.sismics.reader.core.model.jpa.FeedSubscription</class>
+    <class>com.sismics.reader.core.model.jpa.FeedSynchronization</class>
     <class>com.sismics.reader.core.model.jpa.Job</class>
     <class>com.sismics.reader.core.model.jpa.JobEvent</class>
     <class>com.sismics.reader.core.model.jpa.Locale</class>

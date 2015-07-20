@@ -39,14 +39,14 @@ public class TestSearchResource extends BaseJerseyTest {
         JSONObject json = response.getEntity(JSONObject.class);
         
         // Search "zelda"
-        WebResource searchResource = resource().path("/search/zelda");
+        WebResource searchResource = resource().path("/search/searchtermzelda");
         searchResource.addFilter(new CookieAuthenticationFilter(search1AuthToken));
         response = searchResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         JSONArray articles = json.getJSONArray("articles");
         Assert.assertEquals(1, articles.length());
-        assertSearchResult(articles, "Quand <span class=\"highlight\">Zelda</span> prend les armes", 0);
+        assertSearchResult(articles, "Quand <span class=\"highlight\">searchtermZelda</span> prend les armes", 0);
         
         // Search "njloinzejrmklsjd"
         searchResource = resource().path("/search/njloinzejrmklsjd");
@@ -58,27 +58,26 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(0, articles.length());
         
         // Search "wifi"
-        searchResource = resource().path("/search/wifi");
+        searchResource = resource().path("/search/searchtermwifi");
         searchResource.addFilter(new CookieAuthenticationFilter(search1AuthToken));
         response = searchResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
         Assert.assertEquals(2, articles.length());
-        assertSearchResult(articles, "Récupérer les clés <span class=\"highlight\">wifi</span> sur un téléphone Android", 0);
-        assertSearchResult(articles, "Partagez vos clés <span class=\"highlight\">WiFi</span> avec vos amis", 1);
+        assertSearchResult(articles, "Récupérer les clés <span class=\"highlight\">searchtermwifi</span> sur un téléphone Android", 0);
+        assertSearchResult(articles, "Partagez vos clés <span class=\"highlight\">searchtermWiFi</span> avec vos amis", 1);
         
         // Search "google keep"
-        searchResource = resource().path("/search/google%20keep");
+        searchResource = resource().path("/search/searchtermgoogle%20searchtermkeep");
         searchResource.addFilter(new CookieAuthenticationFilter(search1AuthToken));
         response = searchResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
-        Assert.assertEquals(3, articles.length());
-        assertSearchResult(articles, "Ask Slashdot: Measuring (and Constraining) Mobile Data Use?", 0);
-        assertSearchResult(articles, "<span class=\"highlight\">Google</span> <span class=\"highlight\">Keep</span>…eut pas vraiment en faire plus (pour le moment)", 1);
-        assertSearchResult(articles, "Quand Zelda prend les armes", 2);
+        Assert.assertEquals(2, articles.length());
+        assertSearchResult(articles, "<span class=\"highlight\">searchtermGoogle</span> <span class=\"highlight\">searchtermKeep</span>…eut pas vraiment en faire plus (pour le moment)", 0);
+        assertSearchResult(articles, "Quand searchtermZelda prend les armes", 1);
         
         // Create user search2
         clientUtil.createUser("search2");
@@ -94,13 +93,13 @@ public class TestSearchResource extends BaseJerseyTest {
         json = response.getEntity(JSONObject.class);
         
         // Check if nothing is broken by searching "google keep"
-        searchResource = resource().path("/search/google%20keep");
+        searchResource = resource().path("/search/searchtermgoogle%20searchtermkeep");
         searchResource.addFilter(new CookieAuthenticationFilter(search2AuthToken));
         response = searchResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
-        Assert.assertEquals(3, articles.length());
+        Assert.assertEquals(2, articles.length());
         
         // Create user search3
         clientUtil.createUser("search3");
@@ -116,14 +115,14 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(0, articles.length());
         
         // Search "zelda"
-        searchResource = resource().path("/search/zelda");
+        searchResource = resource().path("/search/searchtermzelda");
         searchResource.addFilter(new CookieAuthenticationFilter(search3AuthToken));
         response = searchResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
         Assert.assertEquals(1, articles.length());
-        assertSearchResult(articles, "Quand <span class=\"highlight\">Zelda</span> prend les armes", 0);
+        assertSearchResult(articles, "Quand <span class=\"highlight\">searchtermZelda</span> prend les armes", 0);
         
         // Subscribe to Korben RSS feed (alternative URL)
         subscriptionResource = resource().path("/subscription");
@@ -134,14 +133,14 @@ public class TestSearchResource extends BaseJerseyTest {
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         
         // Search "zelda"
-        searchResource = resource().path("/search/zelda");
+        searchResource = resource().path("/search/searchtermzelda");
         searchResource.addFilter(new CookieAuthenticationFilter(search3AuthToken));
         response = searchResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.getJSONArray("articles");
         Assert.assertEquals(1, articles.length());
-        assertSearchResult(articles, "Quand <span class=\"highlight\">Zelda</span> prend les armes", 0);
+        assertSearchResult(articles, "Quand <span class=\"highlight\">searchtermZelda</span> prend les armes", 0);
     }
     
     /**
@@ -157,6 +156,6 @@ public class TestSearchResource extends BaseJerseyTest {
 		if (article.getString("title").equals(title)) {
 			return;
 		}
-    	Assert.fail();
+    	Assert.fail("[" + title + "] not found in [" + article.getString("title") + "]");
     }
 }

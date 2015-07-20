@@ -54,7 +54,7 @@ public class FeedSubscription {
     private Integer order;
 
     /**
-     * Number of unread articles in this subscription..
+     * Number of unread articles in this subscription.
      */
     @Column(name = "FES_UNREADCOUNT_N", nullable = false)
     private Integer unreadCount;

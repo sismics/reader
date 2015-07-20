@@ -8,6 +8,7 @@ import com.sismics.reader.core.dao.file.rss.RssReader;
 import com.sismics.reader.core.dao.jpa.ArticleDao;
 import com.sismics.reader.core.dao.jpa.FeedDao;
 import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
+import com.sismics.reader.core.dao.jpa.FeedSynchronizationDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
 import com.sismics.reader.core.dao.jpa.criteria.ArticleCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.FeedCriteria;
@@ -24,6 +25,7 @@ import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
+import com.sismics.reader.core.model.jpa.FeedSynchronization;
 import com.sismics.reader.core.model.jpa.UserArticle;
 import com.sismics.reader.core.util.ReaderHttpClient;
 import com.sismics.reader.core.util.TransactionUtil;
@@ -32,7 +34,9 @@ import com.sismics.reader.core.util.jpa.PaginatedLists;
 import com.sismics.reader.core.util.sanitizer.ArticleSanitizer;
 import com.sismics.reader.core.util.sanitizer.TextSanitizer;
 import com.sismics.util.UrlUtil;
+
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Instant;
@@ -75,16 +79,27 @@ public class FeedService extends AbstractScheduledService {
                 @Override
                 public void run() {
                     FeedDao feedDao = new FeedDao();
+                    FeedSynchronizationDao feedSynchronizationDao = new FeedSynchronizationDao();
                     FeedCriteria feedCriteria = new FeedCriteria();
                     feedCriteria.setWithUserSubscription(true);
                     List<FeedDto> feedList = feedDao.findByCriteria(feedCriteria);
                     for (FeedDto feed : feedList) {
+                        FeedSynchronization feedSynchronization = new FeedSynchronization();
+                        feedSynchronization.setFeedId(feed.getId());
+                        feedSynchronization.setSuccess(true);
+                        long startTime = System.currentTimeMillis();
+                        
                         try {
                             synchronize(feed.getRssUrl());
-                            TransactionUtil.commit();
                         } catch (Exception e) {
                             log.error(MessageFormat.format("Error synchronizing feed at URL: {0}", feed.getRssUrl()), e);
+                            feedSynchronization.setSuccess(false);
+                            feedSynchronization.setMessage(ExceptionUtils.getStackTrace(e));
                         }
+                        
+                        feedSynchronization.setDuration((int) (System.currentTimeMillis() - startTime));
+                        feedSynchronizationDao.create(feedSynchronization);
+                        TransactionUtil.commit();
                     }
                 }
             });
@@ -253,6 +268,7 @@ public class FeedService extends AbstractScheduledService {
         if (log.isInfoEnabled()) {
             log.info(MessageFormat.format("Synchronization done in {0}ms", endTime - startTime));
         }
+        
         return feed;
     }
     
