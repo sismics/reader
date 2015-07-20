@@ -1,18 +1,10 @@
 package com.sismics.reader.core.dao.file.rss;
 
-import java.io.InputStream;
-import java.io.Reader;
-import java.net.MalformedURLException;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Stack;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
+import com.sismics.reader.core.model.jpa.Article;
+import com.sismics.reader.core.model.jpa.Feed;
+import com.sismics.reader.core.util.StreamUtil;
+import com.sismics.util.DateUtil;
+import com.sismics.util.UrlUtil;
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -26,11 +18,13 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.sismics.reader.core.model.jpa.Article;
-import com.sismics.reader.core.model.jpa.Feed;
-import com.sismics.reader.core.util.StreamUtil;
-import com.sismics.util.DateUtil;
-import com.sismics.util.UrlUtil;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.InputStream;
+import java.io.Reader;
+import java.net.MalformedURLException;
+import java.text.MessageFormat;
+import java.util.*;
 
 /**
  * RSS / Atom feed parser.
@@ -88,7 +82,9 @@ public class RssReader extends DefaultHandler {
     private List<AtomLink> atomLinkList;
     
     private List<AtomLink> atomArticleLinkList;
-    
+
+    private int fatalErrorCount;
+
     private String URI_XML = "http://www.w3.org/XML/1998/namespace";
     
     private String URI_ATOM = "http://www.w3.org/2005/Atom";
@@ -186,6 +182,8 @@ public class RssReader extends DefaultHandler {
         RDF,
 
     }
+
+    private static final int FATAL_ERROR_MAX = 100;
     
     private Element currentElement;
 
@@ -596,6 +594,10 @@ public class RssReader extends DefaultHandler {
     @Override
     public void fatalError(SAXParseException e) throws SAXException {
         log.warn("Fatal SAX parse error encountered, trying to resume parsing...", e);
+        fatalErrorCount++;
+        if (fatalErrorCount >= FATAL_ERROR_MAX) {
+            throw new SAXException("Tried to recover too many times (" + FATAL_ERROR_MAX + "), giving up.");
+        }
     }
     
     /**

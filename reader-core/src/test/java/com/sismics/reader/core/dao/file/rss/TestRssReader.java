@@ -635,7 +635,7 @@ public class TestRssReader {
     }
 
     @Test
-    public void rssLeMessagerFailTest() throws Exception {
+    public void htmlLeMessagerFailTest() throws Exception {
         InputStream is = getClass().getResourceAsStream("/feed/feed_error_lemessager.html");
         RssReader reader = new RssReader();
         try {
@@ -643,6 +643,18 @@ public class TestRssReader {
             Assert.fail("Root element should be wrong");
         } catch (Exception e) {
             Assert.assertTrue(e.getMessage().contains("Root element"));
+        }
+    }
+
+    @Test
+    public void htmlTooManyRecoveryTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_error_toomanyfatalerror.html");
+        RssReader reader = new RssReader();
+        try {
+            reader.readRssFeed(is);
+            Assert.fail("Root element should be wrong");
+        } catch (Exception e) {
+            Assert.assertTrue(e.getMessage().contains("Tried to recover too many times"));
         }
     }
 }
