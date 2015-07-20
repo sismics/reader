@@ -307,13 +307,13 @@ public class FeedService extends AbstractScheduledService {
     }
     
     protected void logParsingError(String url, Exception e) {
-        if (log.isInfoEnabled()) {
+        if (log.isWarnEnabled()) {
             if (e instanceof UnknownHostException ||
                     e instanceof FileNotFoundException ||
                     e instanceof ConnectException) {
-                log.info(MessageFormat.format("Error parsing HTML page at URL {0} : {1}", url, e.getMessage()));
+                log.warn(MessageFormat.format("Error parsing HTML page at URL {0} : {1}", url, e.getMessage()));
             } else {
-                log.info(MessageFormat.format("Error parsing HTML page at URL {0}", url));
+                log.warn(MessageFormat.format("Error parsing HTML page at URL {0}", url));
             }
         }
     }
