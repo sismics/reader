@@ -1,14 +1,12 @@
 package com.sismics.reader.core.dao.file.rss;
 
-import java.io.InputStream;
-import java.util.List;
-
-import junit.framework.Assert;
-
-import org.junit.Test;
-
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.model.jpa.Feed;
+import junit.framework.Assert;
+import org.junit.Test;
+
+import java.io.InputStream;
+import java.util.List;
 
 /**
  * Test of the RSS reader.
@@ -634,5 +632,17 @@ public class TestRssReader {
         Assert.assertNull(article.getCommentCount());
         Assert.assertEquals("A new agreement marks another step in the transformation of NASA’s Kennedy Space Center in Florida to a multi-user spaceport. NASA’s historic Shuttle Landing Facility, the site of one of the longest runways in the world, has a new operator.", article.getDescription());
         Assert.assertNotNull(article.getPublicationDate());
+    }
+
+    @Test
+    public void rssLeMessagerFailTest() throws Exception {
+        InputStream is = getClass().getResourceAsStream("/feed/feed_error_lemessager.html");
+        RssReader reader = new RssReader();
+        try {
+            reader.readRssFeed(is);
+            Assert.fail("Root element should be wrong");
+        } catch (Exception e) {
+            Assert.assertTrue(e.getMessage().contains("Root element"));
+        }
     }
 }
