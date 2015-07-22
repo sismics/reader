@@ -78,29 +78,7 @@ public class FeedService extends AbstractScheduledService {
             TransactionUtil.handle(new Runnable() {
                 @Override
                 public void run() {
-                    FeedDao feedDao = new FeedDao();
-                    FeedSynchronizationDao feedSynchronizationDao = new FeedSynchronizationDao();
-                    FeedCriteria feedCriteria = new FeedCriteria();
-                    feedCriteria.setWithUserSubscription(true);
-                    List<FeedDto> feedList = feedDao.findByCriteria(feedCriteria);
-                    for (FeedDto feed : feedList) {
-                        FeedSynchronization feedSynchronization = new FeedSynchronization();
-                        feedSynchronization.setFeedId(feed.getId());
-                        feedSynchronization.setSuccess(true);
-                        long startTime = System.currentTimeMillis();
-                        
-                        try {
-                            synchronize(feed.getRssUrl());
-                        } catch (Exception e) {
-                            log.error(MessageFormat.format("Error synchronizing feed at URL: {0}", feed.getRssUrl()), e);
-                            feedSynchronization.setSuccess(false);
-                            feedSynchronization.setMessage(ExceptionUtils.getStackTrace(e));
-                        }
-                        
-                        feedSynchronization.setDuration((int) (System.currentTimeMillis() - startTime));
-                        feedSynchronizationDao.create(feedSynchronization);
-                        TransactionUtil.commit();
-                    }
+                    synchronizeAllFeeds();
                 }
             });
         } catch (Throwable t) {
@@ -112,6 +90,36 @@ public class FeedService extends AbstractScheduledService {
     protected Scheduler scheduler() {
         // TODO Implement a better schedule strategy... Use update period specified in the feed if avail & use last update date from feed to backoff
         return Scheduler.newFixedDelaySchedule(0, 10, TimeUnit.MINUTES);
+    }
+    
+    /**
+     * Synchronize all feeds.
+     */
+    public void synchronizeAllFeeds() {
+        FeedDao feedDao = new FeedDao();
+        FeedSynchronizationDao feedSynchronizationDao = new FeedSynchronizationDao();
+        FeedCriteria feedCriteria = new FeedCriteria();
+        feedCriteria.setWithUserSubscription(true);
+        List<FeedDto> feedList = feedDao.findByCriteria(feedCriteria);
+        for (FeedDto feed : feedList) {
+            FeedSynchronization feedSynchronization = new FeedSynchronization();
+            feedSynchronization.setFeedId(feed.getId());
+            feedSynchronization.setSuccess(true);
+            long startTime = System.currentTimeMillis();
+            
+            try {
+                synchronize(feed.getRssUrl());
+            } catch (Exception e) {
+                log.error(MessageFormat.format("Error synchronizing feed at URL: {0}", feed.getRssUrl()), e);
+                feedSynchronization.setSuccess(false);
+                feedSynchronization.setMessage(ExceptionUtils.getStackTrace(e));
+            }
+            
+            feedSynchronization.setDuration((int) (System.currentTimeMillis() - startTime));
+            feedSynchronizationDao.create(feedSynchronization);
+            feedSynchronizationDao.deleteOldFeedSynchronization(feed.getId(), 600);
+            TransactionUtil.commit();
+        }
     }
     
     /**

@@ -3,6 +3,7 @@ package com.sismics.reader.rest;
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import com.sismics.reader.core.model.context.AppContext;
+import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.reader.rest.filter.CookieAuthenticationFilter;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.ClientResponse.Status;
@@ -103,8 +104,13 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         subscription = json.optJSONObject("subscription");
         Assert.assertNotNull(subscription);
         Assert.assertEquals("Korben", subscription.optString("title"));
+        Assert.assertEquals("Korben", subscription.optString("feed_title"));
         Assert.assertEquals("http://korben.info", subscription.optString("url"));
         Assert.assertEquals("Upgrade your mind", subscription.optString("description"));
+        Assert.assertEquals("http://localhost:9997/http/feeds/korben.xml", subscription.optString("rss_url"));
+        Assert.assertNotNull(subscription.optLong("create_date"));
+        Assert.assertNotNull(subscription.optString("category_id"));
+        Assert.assertEquals("techno", subscription.optString("category_name"));
         JSONArray articles = json.optJSONArray("articles");
         Assert.assertEquals(10, articles.length());
         JSONObject article = articles.optJSONObject(0);
@@ -121,11 +127,11 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         String article2Id = article.getString("id");
 
         // Check pagination
-        categoryResource = resource().path("/subscription/" + subscription1Id);
-        categoryResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
+        subscriptionResource = resource().path("/subscription/" + subscription1Id);
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
         MultivaluedMapImpl queryParams = new MultivaluedMapImpl();
         queryParams.add("after_article", article1Id);
-        response = categoryResource.queryParams(queryParams).get(ClientResponse.class);
+        response = subscriptionResource.queryParams(queryParams).get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
         articles = json.optJSONArray("articles");
@@ -133,6 +139,27 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals(8, articles.length());
         Assert.assertEquals(article2Id, article.getString("id"));
 
+        // Synchronize feeds to add a feed synchronization entry
+        TransactionUtil.handle(new Runnable() {
+            @Override
+            public void run() {
+                AppContext.getInstance().getFeedService().synchronizeAllFeeds();
+            }
+        });
+        
+        // Check the subscription synchronizations
+        subscriptionResource = resource().path("/subscription/" + subscription1Id + "/sync");
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
+        response = subscriptionResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        JSONArray synchronizations = json.optJSONArray("synchronizations");
+        Assert.assertNotNull(synchronizations);
+        Assert.assertEquals(1, synchronizations.length());
+        Assert.assertTrue(synchronizations.getJSONObject(0).getBoolean("success"));
+        Assert.assertFalse(synchronizations.getJSONObject(0).has("message"));
+        Assert.assertTrue(synchronizations.getJSONObject(0).getInt("duration") > 0);
+        
         // Update the subscription
         subscriptionResource = resource().path("/subscription/" + subscription1Id);
         subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));

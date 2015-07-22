@@ -175,7 +175,7 @@ public class FeedSubscriptionDao {
     public List<FeedSubscriptionDto> findByCriteria(FeedSubscriptionCriteria criteria) {
         Map<String, Object> parameterMap = new HashMap<String, Object>();
         
-        StringBuilder sb = new StringBuilder("select fs.FES_ID_C, fs.FES_TITLE_C, fs.FES_UNREADCOUNT_N, fs.FES_IDUSER_C, f.FED_ID_C, f.FED_TITLE_C, f.FED_RSSURL_C, f.FED_URL_C, f.FED_DESCRIPTION_C, c.CAT_ID_C, c.CAT_IDPARENT_C, c.CAT_NAME_C, c.CAT_FOLDED_B");
+        StringBuilder sb = new StringBuilder("select fs.FES_ID_C, fs.FES_TITLE_C, fs.FES_UNREADCOUNT_N, fs.FES_CREATEDATE_D, fs.FES_IDUSER_C, f.FED_ID_C, f.FED_TITLE_C, f.FED_RSSURL_C, f.FED_URL_C, f.FED_DESCRIPTION_C, c.CAT_ID_C, c.CAT_IDPARENT_C, c.CAT_NAME_C, c.CAT_FOLDED_B");
         sb.append(" from T_FEED_SUBSCRIPTION fs ");
         sb.append(" join T_FEED f on(f.FED_ID_C = fs.FES_IDFEED_C and f.FED_DELETEDATE_D is null) ");
         sb.append(" join T_CATEGORY c on(c.CAT_ID_C = fs.FES_IDCATEGORY_C and c.CAT_DELETEDATE_D is null) ");
@@ -230,10 +230,12 @@ public class FeedSubscriptionDao {
             feedSubscriptionDto.setId((String) o[i++]);
             String feedSubscriptionTitle = (String) o[i++];
             feedSubscriptionDto.setUnreadUserArticleCount((Integer) o[i++]);
+            feedSubscriptionDto.setCreateDate((Date) o[i++]);
             feedSubscriptionDto.setUserId((String) o[i++]);
             feedSubscriptionDto.setFeedId((String) o[i++]);
             String feedTitle = (String) o[i++];
             feedSubscriptionDto.setFeedSubscriptionTitle(feedSubscriptionTitle != null ? feedSubscriptionTitle : feedTitle);
+            feedSubscriptionDto.setFeedTitle(feedTitle);
             feedSubscriptionDto.setFeedRssUrl((String) o[i++]);
             feedSubscriptionDto.setFeedUrl((String) o[i++]);
             feedSubscriptionDto.setFeedDescription((String) o[i++]);

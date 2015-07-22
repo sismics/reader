@@ -1,8 +1,52 @@
 package com.sismics.reader.rest.resource;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.NoResultException;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.StreamingOutput;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.dom.DOMSource;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import com.google.common.io.ByteStreams;
 import com.sismics.reader.core.dao.jpa.CategoryDao;
 import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
+import com.sismics.reader.core.dao.jpa.FeedSynchronizationDao;
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
 import com.sismics.reader.core.dao.jpa.UserDao;
 import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
@@ -14,6 +58,7 @@ import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.Category;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
+import com.sismics.reader.core.model.jpa.FeedSynchronization;
 import com.sismics.reader.core.model.jpa.User;
 import com.sismics.reader.core.service.FeedService;
 import com.sismics.reader.core.util.DirectoryUtil;
@@ -30,31 +75,6 @@ import com.sismics.rest.util.ValidationUtil;
 import com.sismics.util.MessageUtil;
 import com.sun.jersey.multipart.FormDataBodyPart;
 import com.sun.jersey.multipart.FormDataParam;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
-import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
-import javax.persistence.NoResultException;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
-import javax.ws.rs.core.StreamingOutput;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.dom.DOMSource;
-import java.io.*;
-import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Feed subscriptions REST resources.
@@ -226,8 +246,13 @@ public class SubscriptionResource extends BaseResource {
 
         JSONObject subscription = new JSONObject();
         subscription.put("title", feedSubscription.getFeedSubscriptionTitle());
+        subscription.put("feed_title", feedSubscription.getFeedTitle());
         subscription.put("url", feedSubscription.getFeedUrl());
+        subscription.put("rss_url", feedSubscription.getFeedRssUrl());
         subscription.put("description", feedSubscription.getFeedDescription());
+        subscription.put("category_id", feedSubscription.getCategoryId());
+        subscription.put("category_name", feedSubscription.getCategoryName());
+        subscription.put("create_date", feedSubscription.getCreateDate().getTime());
         response.put("subscription", subscription);
         
         List<JSONObject> articles = new ArrayList<JSONObject>();
@@ -235,6 +260,55 @@ public class SubscriptionResource extends BaseResource {
             articles.add(ArticleAssembler.asJson(userArticle));
         }
         response.put("articles", articles);
+
+        return Response.ok().entity(response).build();
+    }
+    
+    /**
+     * Returns the subscription synchronizations.
+     * 
+     * @param id Subscription ID
+     * @return Response
+     * @throws JSONException
+     */
+    @GET
+    @Path("{id: [a-z0-9\\-]+}/sync")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSynchronization(
+            @PathParam("id") String id) throws JSONException {
+        if (!authenticate()) {
+            throw new ForbiddenClientException();
+        }
+        
+        // Get the subscription
+        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
+        feedSubscriptionCriteria.setId(id);
+        feedSubscriptionCriteria.setUserId(principal.getId());
+        
+        FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
+        List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
+        if (feedSubscriptionList.isEmpty()) {
+            throw new ClientException("SubscriptionNotFound", MessageFormat.format("Subscription not found: {0}", id));
+        }
+        FeedSubscriptionDto feedSubscription = feedSubscriptionList.iterator().next();
+
+        // Get the feed synchronization
+        FeedSynchronizationDao feedSynchronizationDao = new FeedSynchronizationDao();
+        List<FeedSynchronization> feedSynchronizationList = feedSynchronizationDao.findByFeedId(feedSubscription.getFeedId());
+
+        // Build the response
+        JSONObject response = new JSONObject();
+
+        List<JSONObject> synchronizationsJson = new ArrayList<JSONObject>();
+        for (FeedSynchronization feedSynchronization : feedSynchronizationList) {
+            JSONObject synchronizationJson = new JSONObject();
+            synchronizationJson.put("success", feedSynchronization.isSuccess());
+            synchronizationJson.put("message", feedSynchronization.getMessage());
+            synchronizationJson.put("duration", feedSynchronization.getDuration());
+            synchronizationJson.put("create_date", feedSynchronization.getCreateDate().getTime());
+            synchronizationsJson.add(synchronizationJson);
+        }
+        response.put("synchronizations", synchronizationsJson);
 
         return Response.ok().entity(response).build();
     }
