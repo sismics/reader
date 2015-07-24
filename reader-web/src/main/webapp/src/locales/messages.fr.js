@@ -44,6 +44,7 @@
       "placeholder": "Titre",
       "submit": "OK",
       "delete": "Supprimer",
+      "info": "Informations",
       "deleteconfirm": "Êtes-vous sûr de vouloir supprimer cet abonnement ?"
     }
   },

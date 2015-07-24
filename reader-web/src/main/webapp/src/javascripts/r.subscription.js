@@ -29,7 +29,7 @@ r.subscription.init = function() {
     hide: { event: 'click unfocus' },
     style: { classes: 'qtip-light qtip-shadow' },
     events: {
-      visible: function(e, api) { $('#subscription-url-input').focus(); }
+      visible: function() { $('#subscription-url-input').focus(); }
     }
   });
   
@@ -177,7 +177,7 @@ r.subscription.buildSubscriptionItem = function(subscription) {
     'class="subscription' + (r.feed.context.subscriptionId == subscription.id ? ' active' : '') + (subscription.unread_count > 0 ? ' unread' : '') + '">' +
     '<a href="#/feed/subscription/' + subscription.id + '" title="' + title + '"> <img src="' + r.util.url.subscription_favicon.replace('{id}', subscription.id) + '" /> ' +
     '<span class="title">' + title + '</span>' + unread + '</a>' +
-    '<div class="edit"></div>' + 
+    '<div class="edit"></div>' +
     '</li>';
 };
 
@@ -289,11 +289,12 @@ r.subscription.initEditing = function() {
   $('#subscription-list li.subscription > .edit').each(function() {
     // Initializing edit popup
     var parent = $(this).parent();
+    var _this = $(this);
     var subscriptionId = parent.attr('data-subscription-id');
     var content = $('#template .qtip-subscription-edit').clone();
+    var infoContent = $('#template .qtip-subscription-edit-info').clone();
     var titleInput = content.find('.subscription-edit-title-input');
     titleInput.val(parent.find('> a .title').text().trim());
-    content.find('.subscription-edit-url').html('<strong>URL:</strong> ' + parent.attr('data-subscription-url'));
     
     // Calling API delete
     $('.subscription-edit-delete-button', content).click(function() {
@@ -326,9 +327,14 @@ r.subscription.initEditing = function() {
           }
         });
       }
-      
+
       // Prevent form submission
       return false;
+    });
+
+    // Opening informations popup
+    $('.subscription-edit-info-button', content).click(function() {
+      _this.qtip('hide');
     });
     
     // Creating edit popup
@@ -342,6 +348,26 @@ r.subscription.initEditing = function() {
       },
       show: { event: 'click' },
       hide: { event: 'click unfocus' },
+      style: { classes: 'qtip-light qtip-shadow' }
+    });
+
+    // Creation informations popup
+    $('.subscription-edit-info-button', content).qtip({
+      content: { text: infoContent },
+      position: {
+        my: 'center',
+        at: 'center',
+        target: $(document.body)
+      },
+      show: {
+        modal: {
+          on: true,
+          blur: true,
+          escape: true
+        },
+        event: 'click'
+      },
+      hide: { event: '' },
       style: { classes: 'qtip-light qtip-shadow' }
     });
   });

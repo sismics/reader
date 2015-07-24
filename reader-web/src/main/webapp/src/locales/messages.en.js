@@ -44,6 +44,7 @@
       "placeholder": "Title",
       "submit": "OK",
       "delete": "Delete",
+      "info": "Informations",
       "deleteconfirm": "Do you really want to delete this subscription?"
     }
   },
