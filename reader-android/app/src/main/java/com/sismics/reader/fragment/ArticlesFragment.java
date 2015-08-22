@@ -70,12 +70,16 @@ public class ArticlesFragment extends NavigationFragment {
                     str = R.string.no_unread_articles;
                 }
             }
-            aq.id(R.id.emptyList).text(str);
+            aq.id(R.id.emptyList).text(str)
+                    .getTextView()
+                    .setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.character);
         }
 
         @Override
         public void onError() {
-            aq.id(R.id.emptyList).text(R.string.error_loading_articles);
+            aq.id(R.id.emptyList).text(R.string.error_loading_articles)
+                    .getTextView()
+                    .setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.character_sad);
         }
 
         /**
@@ -110,6 +114,12 @@ public class ArticlesFragment extends NavigationFragment {
             @Override
             public void onClick(View view) {
                 final TextView textView = (TextView) view;
+                if (textView.getText().equals(getString(R.string.error_loading_articles))) {
+                    // No happy animation in case of error
+                    return;
+                }
+
+                // OK for animating
                 Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.rssman);
                 anim.setAnimationListener(new Animation.AnimationListener() {
                     @Override

@@ -271,6 +271,7 @@ public class MainActivity extends ActionBarActivity {
 
     /**
      * Select an item from the subscription list.
+     *
      * @param position Position to select
      * @param refresh True to force articles refresh
      * @param closeDrawer If true, close the drawer
@@ -332,6 +333,7 @@ public class MainActivity extends ActionBarActivity {
 
     /**
      * Refresh subscriptions list from server.
+     *
      * @param position Position to select
      * @param refresh True to force articles refresh
      */
@@ -422,6 +424,7 @@ public class MainActivity extends ActionBarActivity {
     
     /**
      * Return true if the activity has been destroyed (not present until API 17).
+     *
      * @return True if the activity has been destroyed
      */
     public boolean isActivityDestroyed() {
@@ -443,6 +446,7 @@ public class MainActivity extends ActionBarActivity {
 
     /**
      * Handle the incoming intent.
+     *
      * @param intent Intent
      */
     private void handleIntent(Intent intent) {
