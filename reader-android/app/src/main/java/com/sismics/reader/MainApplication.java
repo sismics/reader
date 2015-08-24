@@ -48,6 +48,7 @@ public class MainApplication extends Application {
     
     @Override
     public void onLowMemory() {
+        super.onLowMemory();
         BitmapAjaxCallback.clearCache();
     }
 }
