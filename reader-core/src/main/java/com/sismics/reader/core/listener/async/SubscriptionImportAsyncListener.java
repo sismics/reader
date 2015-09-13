@@ -2,6 +2,7 @@ package com.sismics.reader.core.listener.async;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Closer;
@@ -20,6 +21,7 @@ import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.ArticleDto;
 import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
+import com.sismics.reader.core.event.ArticleCreatedAsyncEvent;
 import com.sismics.reader.core.event.SubscriptionImportedEvent;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.*;
@@ -28,6 +30,7 @@ import com.sismics.reader.core.util.EntityManagerUtil;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.util.mime.MimeType;
 import com.sismics.util.mime.MimeTypeUtil;
+
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.lang.StringUtils;
@@ -488,7 +491,10 @@ public class SubscriptionImportAsyncListener {
             GuidFixer.fixGuid(article);
             articleDao.create(article);
             
-            // TODO Raise a ArticleCreatedAsyncEvent
+            // Add new articles to the index
+            ArticleCreatedAsyncEvent articleCreatedAsyncEvent = new ArticleCreatedAsyncEvent();
+            articleCreatedAsyncEvent.setArticleList(Lists.newArrayList(article));
+            AppContext.getInstance().getAsyncEventBus().post(articleCreatedAsyncEvent);
         }
         
         // Check if the user is already subscribed to this article
