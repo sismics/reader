@@ -66,7 +66,8 @@ public class ArticleSanitizer {
             "(http:|https:)?//hitbox.tv/#!/embed/.+|" +
             "(http:|https:)?//(www.)?whyd.com/.+|" +
             "(http:|https:)?//embed.spotify.com/.+|" +
-            "(http:|https:)?//www.kickstarter.com/.+");
+            "(http:|https:)?//www.kickstarter.com/.+|" +
+            "(http:|https:)?//soundsgood.co/embed/.+");
 
     /**
      * Sanitize HTML contents.
