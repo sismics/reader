@@ -365,6 +365,8 @@ public class FeedService extends AbstractScheduledService {
                 userArticle.setUserId(userId);
                 userArticleDao.create(userArticle);
                 feedSubscription.setUnreadCount(feedSubscription.getUnreadCount() + 1);
+            } else if (userArticleDto.getReadTimestamp() == null) {
+                feedSubscription.setUnreadCount(feedSubscription.getUnreadCount() + 1);
             }
         }
 

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Korben</title>
+	<atom:link href="http://korben.info/feed" rel="self" type="application/rss+xml" />
+	<link>http://korben.info</link>
+	<description>Upgrade your mind</description>
+	<lastBuildDate>Sun, 24 Mar 2013 07:03:43 +0000</lastBuildDate>
+	<language>fr-FR</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.5.1</generator>
+<atom:link rel="hub" href="http://pubsubhubbub.appspot.com"/>
+<atom:link rel="hub" href="http://superfeedr.com/hubbub"/>
+
+
+
+<item>
+		<title>RetroN 5 &#8211; La console pour les nostalgiques de la cartouche</title>
+		<link>http://korben.info/retron-5.html</link>
+		<comments>http://korben.info/retron-5.html#comments</comments>
+		<pubDate>Sun, 24 Mar 2013 07:03:43 +0000</pubDate>
+		<dc:creator>Korben</dc:creator>
+				<category><![CDATA[Hardware]]></category>
+		<category><![CDATA[Jeux vidéos]]></category>
+
+		<guid isPermaLink="false">http://korben.info/?p=38958</guid>
+		<description><![CDATA[La RetroN 5 est une console conçue par la société Hyperkin, qui va vous permettre enfin de retrouver vos anciens jeux vidéos. Attention, je ne parle pas d'une nième console sur laquelle il faut coller des Roms, mais plutôt d'une console capable d'accepter les cartouches originales de votre : NES SNES Genesis Famicon et Game [...]]]></description>
+				<content:encoded><![CDATA[<p>La <strong>RetroN 5</strong> est une console conçue par la société Hyperkin, qui va vous permettre enfin de retrouver vos anciens jeux vidéos. Attention, je ne parle pas d'une nième console sur laquelle il faut coller des Roms, mais plutôt d'une console capable d'accepter les cartouches originales de votre :
+<ul>
+<li>NES</li>
+<li>SNES</li>
+<li>Genesis</li>
+<li>Famicon</li>
+<li>et Game Boy Advance</li>
+</ul>
+<p>La RetroN 5 sera équipée d'une sortie HDMI et de 2 manettes sans fils Bluetooth. Cette retro console accepte aussi le branchement de 6 manettes filaire, permet de sauvegarder à n'importe quel moment du jeu (la puissance des émulateurs ^^) et sera même overclockable pour éviter quelques ralentissements dans certains jeux.</p>
+<p>Et le plus beau là dedans c'est qu'elle devrait coûter moins de 100 $.</p>
+<p style="text-align: center;"><iframe src="http://www.youtube.com/embed/5OcNy7t17LA?feature=player_embedded" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
+<p> Pas de date de sortie annoncée, mais si les seules cartouches que vous avez sont des cartouches de NES, SNES et Genesis, sachez que sa prédécesseure, la <a href="http://www.amazon.fr/s/?_encoding=UTF8&amp;camp=1642&amp;creative=19458&amp;field-keywords=RetroN%203&amp;linkCode=ur2&amp;tag=amazon0d16-21" rel="nofollow">RetroN 3</a> fait ça aussi très bien.</p>
+<p>Sinon, vous pouvez aussi investir dans un Raspberry Pi et vous lancer dans la réalisation d'une borne d'arcade, c'est encore mieux ^^</p>
+<p><a href="http://www.theverge.com/2013/3/23/4140592/hyperkin-retron-5-gaming-console-can-play-almost-any-cartridge">Source</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://korben.info/retron-5.html/feed</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+<enclosure url="http://media.eurekalert.org/multimedia_prod/pub/media/54033.flv" length="7172109" type="video/x-flv" />
+		</item>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<item>
+		<title>Récupérer les clés searchtermwifi sur un téléphone Android</title>
+		<link>http://korben.info/recuperer-les-cles-wifi-sur-un-telephone-android.html</link>
+		<comments>http://korben.info/recuperer-les-cles-wifi-sur-un-telephone-android.html#comments</comments>
+		<pubDate>Fri, 22 Mar 2013 12:30:07 +0000</pubDate>
+		<dc:creator>Korben</dc:creator>
+				<category><![CDATA[Android]]></category>
+		<category><![CDATA[Sécurité]]></category>
+
+		<guid isPermaLink="false">http://korben.info/?p=38952</guid>
+		<description><![CDATA[Si vous souhaitez récupérer un mot de passe de réseau WiFi sur votre téléphone Android, bonne nouvelle, vous allez pouvoir le faire puisqu'elles sont stockées en clair. Évidemment, il vous faudra un téléphone rooter, mais ensuite, avec un petit explorateur de fichier comme celui-ci (activez le mode root dans ses options), vous allez pouvoir vous [...]]]></description>
+				<content:encoded><![CDATA[<p>Si vous souhaitez récupérer un mot de passe de réseau WiFi sur votre téléphone Android, bonne nouvelle, vous allez pouvoir le faire puisqu'elles sont stockées en clair.</p>
+<p>Évidemment, il vous faudra un téléphone rooter, mais ensuite, avec un petit explorateur de fichier <a href="https://play.google.com/store/apps/details?id=com.rhmsoft.fm">comme celui-ci</a> (activez le mode root dans ses options), vous allez pouvoir vous rendre dans le dossier :</p>
+<blockquote><p>/data/misc/wifi</p></blockquote>
+<p>et ouvrir avec un éditeur de texte (qui dispose lui aussi du droit root), le fichier <strong>wpa_supplicant.conf</strong> qui comme vous pouvez le voir contient la liste des réseaux WiFi enregistrés dans votre mobile et tous leurs mots de passe en clair.</p>
+<p style="text-align: center;"><a href="http://korben.info/wp-content/uploads/2013/03/wlan.png"><img class="aligncenter size-full wp-image-38953" alt="wlan Récupérer les clés wifi sur un téléphone Android" src="http://korben.info/wp-content/uploads/2013/03/wlan.png" width="300" height="533" title="Récupérer les clés wifi sur un téléphone Android" /></a></p>
+<p>Je me demande d'ailleurs pourquoi une application comme <a href="http://korben.info/instabridge.html">Instabridge</a> ne propose pas directement à ses utilisateurs rootés d'aller récupérer ces mots de passe directement. Surement par "politesse".</p>
+<p><a href="http://www.howtogeek.com/140320/how-to-view-that-forgotten-wireless-password-on-your-android-device/">Source</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://korben.info/recuperer-les-cles-wifi-sur-un-telephone-android.html/feed</wfw:commentRss>
+		<slash:comments>18</slash:comments>
+		</item>
+		
+		
+		
+		
+		
+		<item>
+		<title>La vidéo verbalisation &#8211; Le premier pas vers un Etat policier ?</title>
+		<link>http://korben.info/video-verbalisation.html</link>
+		<comments>http://korben.info/video-verbalisation.html#comments</comments>
+		<pubDate>Fri, 22 Mar 2013 09:30:42 +0000</pubDate>
+		<dc:creator>Korben</dc:creator>
+				<category><![CDATA[Sécurité]]></category>
+		<category><![CDATA[Société]]></category>
+
+		<guid isPermaLink="false">http://korben.info/?p=38947</guid>
+		<description><![CDATA[Hier, j'ai vu un petit reportage sur un nouveau procédé de verbalisation dont les maires sont de plus en plus friands : La vidéo-verbalisation. Je ne sais pas si vous vous souvenez, mais il y a quelque temps, la France est devenue un vaste champ de caméras de surveillances qui étaient destinées (on nous les [...]]]></description>
+				<content:encoded><![CDATA[<p>Hier, j'ai vu un petit reportage sur un nouveau procédé de verbalisation dont les maires sont de plus en plus friands : La <strong>vidéo-verbalisation.</strong></p>
+<p>Je ne sais pas si vous vous souvenez, mais il y a quelque temps, la France est devenue un vaste champ de <strong>caméras de surveillances</strong> qui étaient destinées (on nous les a vendus comme ça) à dissuader les criminels et surtout à retrouver ces derniers lorsqu'un crime ou un délit était commis... Bien qu'on ne sache pas finalement si ces caméras ont un réel impact sur la criminalité.</p>
+<p>Mais les Maires d'Aix-en- Provence, Marseille, Nice, Chartres, Saint-Mandé, d'Asnières-sur-Seine, de Puteaux et bientôt de Paris ont décidé d'aller encore plus loin et d'utiliser ces mêmes caméras de manière active. Maintenant, ils collent des policiers derrière chaque caméra et ces derniers sont chargés de mettre des amendes aux automobilistes qui ne respectent pas les stops ou les feux rouges, les limitations de vitesse, les distances de sécurité, ou encore les voies de bus, le stationnement gênant ou qui ne payent pas leur péage.</p>
+<p>Un esprit un peu simpliste pourrait se dire : "<em>Oh, c'est bien comme ça, ça dissuadera les méchants automobilistes de faire n'importe quoi</em>".</p>
+<p>Mais, moi je vois qu'avec la vidéo verbalisation, <strong>une étape importante vient d'être franchie</strong> dans l'utilisation de ces caméras. Elles sont passées du stade de la surveillance simple au stade de la répression. Pour le moment, ce sont les mauvais automobilistes, mais je me demande ce que ça sera après...</p>
+<p>Il y a maintenant des humains derrière les caméras. C’est-à-dire que pour coincer 1 personne en infraction, les policiers en observent des centaines. Ils vous voient marcher dans la rue, ils voient les personnes avec qui vous êtes, ils voient ce que vous êtes en train de faire et cela que vous soyez innocent ou coupable. Bon, ce sont des agents assermentés donc ils en ont le droit, mais j'imagine que dans des villes de taille moyenne, ils tomberont rapidement sur des gens qu'ils connaissent... Un voisin, un ami, un "client"...peu importe.</p>
+<p>Bonjour le respect de la vie privée.</p>
+<p>Je me sais filmé quand je sors dans la rue, mais jusqu'à présent, je me disais que c'était juste "enregistré" et visionné uniquement au cas où il se passerait quelque chose de grave. Mais maintenant, il y a des yeux humains qui scrutent nos vies en permanence dans certaines rues.</p>
+<p>Je trouve ça vraiment malsain.</p>
+<p>Mais ça, ce n’est rien comparé à ce qu'on peut faire avec un bon logiciel. En effet, il existe depuis un petit moment maintenant des logiciels capables de suivre les déplacements des gens et de leurs véhicules de caméras en caméras, de reconnaitre un visage et de donner le nom d'une ou plusieurs personnes et surtout de recouper ces informations avec les fichiers déjà accessibles par la police ou les services de renseignement.</p>
+<p>Quand l’État ou les Maires auront remplacé ces paires d'yeux par ces petits logiciels, ce sera encore plus délirant puisqu'à chaque fois que vous mettrez un pied dehors, l'ordinateur sera capable de dire si vous êtes recherché par la police, si vous avez fraudé le fisc, si vous êtes sans-papiers, si vous avez téléchargé illégalement, si vous avez déjà été arrêté et pourquoi, mais aussi quelles personnes vous avez côtoyées dans la rue ou la liste des endroits où vous vous êtes rendu. On se rapproche d'un Facebook policier IRL et l'avantage c'est qu'on n'aurait même pas besoin de s'inscrire.</p>
+<p>Oui, du pur Orwell qui est déjà parfaitement réalisable sur le plan technique, mais pas encore déployé à grande échelle dans notre pays. Une fois encore, les simplets diront : "<em>Si on a rien à se reprocher, on n'a rien à craindre</em>".</p>
+<p>Oui, ça, c'est la belle théorie que nous vend TF1. Mais même si vous n'avez rien à vous reprocher maintenant, vous pourriez avoir quelque chose à vous reprocher demain. Et je ne parle pas forcement de crime ou de délit. Vous pourriez par exemple participer à une manif, parler à la mauvaise personne ou simplement ressembler à un autre (faux positif) et hop, en rentrant chez vous, la police vous attendra avec le listing de vos déplacements sur les 6 derniers mois que vous devrez justifier. On ne sait pas de quoi sera fait l'avenir... Et on peut tout imaginer... Je vais prendre un exemple des exemples extrêmes un peu tirés par les cheveux (quoique...), mais imaginons que demain, un petit extrémiste prenne le pouvoir et déclare qu'être noir, ou homosexuel ou porter la moustache soit un délit. Et bien, on regrettera tous d'avoir laissé faire.</p>
+<p>Nous serons tous reconnus et pistés dans les années à venir, qu'on le veuille ou non. Ces technologies sont simplement des barreaux de prison dans lesquels on nous enferme progressivement. Ensuite, qui osera manifester, se rebeller, résister, lancer une "révolution" ou simplement être lui-même s'il se sait surveillé par la police en permanence.</p>
+<p>Personne, je pense.</p>
+<p>À regarder aussi (<a href="http://reflets.info/verbalisation-par-videosurveillance-enfin-une-bonne-nouvelle/">et à lire</a>)</p>
+<p style="text-align: center;"><iframe src="http://player.vimeo.com/video/52218364" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
+]]></content:encoded>
+			<wfw:commentRss>http://korben.info/video-verbalisation.html/feed</wfw:commentRss>
+		<slash:comments>57</slash:comments>
+		</item>
+		
+
+
+		
+		<item>
+		<title>Le gel qui stoppe net les hémorragies</title>
+		<link>http://korben.info/le-gel-qui-stoppe-net-les-hemorragies.html</link>
+		<comments>http://korben.info/le-gel-qui-stoppe-net-les-hemorragies.html#comments</comments>
+		<pubDate>Fri, 22 Mar 2013 08:30:54 +0000</pubDate>
+		<dc:creator>Korben</dc:creator>
+				<category><![CDATA[Science]]></category>
+
+		<guid isPermaLink="false">http://korben.info/?p=38944</guid>
+		<description><![CDATA[Même si mercredi, c'était la "Meatout Day" (la journée sans viande), et bien, je suis un ouf et je poste cette vidéo où on voit un gros bout de barbaque sanguinolent.... Mais attention, ici pas question de le manger. Il s'agit plutôt d'une démonstration d'un gel de haute technologie baptisé Veti-Gel qui une fois appliquée [...]]]></description>
+				<content:encoded><![CDATA[<p>Même si mercredi, c'était la "Meatout Day" (la journée sans viande), et bien, je suis un ouf et je poste cette vidéo où on voit un gros bout de barbaque sanguinolent.... Mais attention, ici pas question de le manger. Il s'agit plutôt d'une démonstration d'un gel de haute technologie baptisé Veti-Gel qui une fois appliquée sur une plaie permet de stopper immédiatement un saignement.</p>
+<p>Le résultat est immédiat et très impressionnant. Le Veti-Gel a été mis au point par un étudiant de l'Université de New York, Joe Landolina. Son gel agit comme un adhésif sur les tissus organiques pour contenir la pression et une fois en contact avec le sang, cela active l'action de la fibrine, une protéine nécessaire à la coagulation. Enfin, les plaquettes se joignent à la fête pour finir le travail.</p>
+<p>Le Veti-gel est tellement bien supporté par le corps humain qu'il est même possible d'ajouter dans sa composition d'autre chose comme des médicaments.</p>
+<p style="text-align: center;"><iframe src="http://www.youtube.com/embed/Cif-o4V-2wA?feature=player_embedded" height="360" width="640" allowfullscreen="" frameborder="0"></iframe></p>
+<p>En gros, le Veti-Gel fait ce que le corps sait faire, mais en plus rapide. Ce qui est génial avec ce truc, c'est que lorsque ça sera commercialisé (si ça l'est un jour), on peut imaginer que les militaires, les services d'urgence ou même les particuliers en soient équipés pour parer aussi bien aux petites coupures qu'aux hémorragies fatales.</p>
+<p>Bon, après cette charmante vidéo, je vous laisse, c'est l'heure du petit déj.</p>
+<p><a href="http://gizmodo.com/5991637/holy-wow-this-incredible-gel-stops-bleeding-instantly">Source</a> et <a href="http://www.humansinvent.com/#!/11409/the-gel-that-stops-bleeding-instantly/">source</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://korben.info/le-gel-qui-stoppe-net-les-hemorragies.html/feed</wfw:commentRss>
+		<slash:comments>19</slash:comments>
+		</item>
+		
+	</channel>
+</rss>

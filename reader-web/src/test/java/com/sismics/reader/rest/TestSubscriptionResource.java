@@ -403,7 +403,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
     @Test
     @Ignore
     public void testIssue110() throws JSONException {
-        // Create user subscription1
+        // Create user test_issue_110
         clientUtil.createUser("test_issue_110");
         String authToken = clientUtil.login("test_issue_110");
 
@@ -429,5 +429,85 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         JSONObject json = response.getEntity(JSONObject.class);
         String subscription1Id = json.getString("id");
         Assert.assertNotNull(subscription1Id);
+    }
+    
+    /**
+     * Test related to issue #119.
+     * See https://github.com/sismics/reader/issues/119.
+     * issue_119.xml must be served somewhere and be editable.
+     * Doesn't work automatically, use a breakpoing to edit the xml file.
+     * @throws JSONException
+     */
+    @Test
+    public void testIssue119() throws JSONException {
+        // Create user test_issue_119
+        clientUtil.createUser("test_issue_119");
+        String authToken = clientUtil.login("test_issue_119");
+        
+        // Subscribe to korben.info
+        WebResource subscriptionResource = resource().path("/subscription");
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
+        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
+        postParams.add("url", "http://localhost/korben.xml");
+        ClientResponse response = subscriptionResource.put(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        JSONObject json = response.getEntity(JSONObject.class);
+        String subscription1Id = json.getString("id");
+        Assert.assertNotNull(subscription1Id);
+        
+        // Check all subscriptions for unread articles
+        subscriptionResource = resource().path("/subscription");
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
+        response = subscriptionResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals(3, json.optInt("unread_count"));
+        
+        // Check the subscription data
+        subscriptionResource = resource().path("/subscription/" + subscription1Id);
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
+        response = subscriptionResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        JSONArray articles = json.optJSONArray("articles");
+        Assert.assertEquals(3, articles.length());
+        
+        // Delete the subscription
+        subscriptionResource = resource().path("/subscription/" + subscription1Id);
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
+        response = subscriptionResource.delete(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals("ok", json.getString("status"));
+        
+        // At this moment, the subscription must have a new article
+        
+        // Subscribe again to korben.info
+        subscriptionResource = resource().path("/subscription");
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
+        postParams = new MultivaluedMapImpl();
+        postParams.add("url", "http://localhost/korben.xml");
+        response = subscriptionResource.put(ClientResponse.class, postParams);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        subscription1Id = json.getString("id");
+        Assert.assertNotNull(subscription1Id);
+        
+        // Check all subscriptions for unread articles
+        subscriptionResource = resource().path("/subscription");
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
+        response = subscriptionResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        Assert.assertEquals(4, json.optInt("unread_count"));
+        
+        // Check the subscription data
+        subscriptionResource = resource().path("/subscription/" + subscription1Id);
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
+        response = subscriptionResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        articles = json.optJSONArray("articles");
+        Assert.assertEquals(4, articles.length());
     }
 }
