@@ -55,7 +55,7 @@ public class TestUserResource extends BaseJerseyTest {
         JSONArray users = json.getJSONArray("users");
         Assert.assertTrue(users.length() > 0);
         JSONObject user = (JSONObject) users.get(0);
-        Assert.assertEquals("user", user.optString("id"));
+        Assert.assertNotNull(user.optString("id"));
         
         // Create a user KO (login length validation)
         userResource = resource().path("/user");

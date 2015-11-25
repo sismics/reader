@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.sismics.util.EnvironmentUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.JDBCException;
 import org.hibernate.engine.jdbc.internal.FormatStyle;
@@ -153,12 +154,17 @@ public abstract class DbOpenHelper {
             @Override
             public boolean accept(File dir, String name) {
                 String versionString = String.format("%03d", version);
-                return name.matches("dbupdate-" + versionString + "-\\d+\\.sql");
+                return name.matches("dbupdate-" + versionString + "-\\d+(-web)?\\.sql");
             }
         });
         Collections.sort(fileNameList);
         
         for (String fileName : fileNameList) {
+            // Skip some files in non-web (= unit test) environments
+            if (fileName.endsWith("-web.sql") && !EnvironmentUtil.isWebappContext()) {
+                continue;
+            }
+
             if (log.isInfoEnabled()) {
                 log.info(MessageFormat.format("Executing script: {0}", fileName));
             }
