@@ -474,6 +474,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
      * @throws JSONException
      */
     @Test
+    @Ignore
     public void testIssue119() throws JSONException {
         // Create user test_issue_119
         clientUtil.createUser("test_issue_119");
