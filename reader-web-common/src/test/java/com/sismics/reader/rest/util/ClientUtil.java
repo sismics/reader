@@ -3,6 +3,8 @@ package com.sismics.reader.rest.util;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.NewCookie;
 
+import com.sismics.reader.core.model.context.AppContext;
+import com.sismics.reader.core.util.TransactionUtil;
 import junit.framework.Assert;
 
 import com.sismics.reader.rest.filter.CookieAuthenticationFilter;
@@ -109,5 +111,18 @@ public class ClientUtil {
             }
         }
         return authToken;
+    }
+
+    /**
+     * Force synchronization of all feeds.
+     */
+    public void synchronizeAllFeed() {
+        TransactionUtil.handle(new Runnable() {
+            @Override
+            public void run() {
+                AppContext.getInstance().getFeedService().synchronizeAllFeeds();
+            }
+        });
+
     }
 }

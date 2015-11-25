@@ -96,11 +96,12 @@ public class FeedService extends AbstractScheduledService {
      * Synchronize all feeds.
      */
     public void synchronizeAllFeeds() {
+        // Update all feeds currently having subscribed users
         FeedDao feedDao = new FeedDao();
-        FeedSynchronizationDao feedSynchronizationDao = new FeedSynchronizationDao();
         FeedCriteria feedCriteria = new FeedCriteria();
         feedCriteria.setWithUserSubscription(true);
         List<FeedDto> feedList = feedDao.findByCriteria(feedCriteria);
+        List<FeedSynchronization> feedSynchronizationList = new ArrayList<FeedSynchronization>();
         for (FeedDto feed : feedList) {
             FeedSynchronization feedSynchronization = new FeedSynchronization();
             feedSynchronization.setFeedId(feed.getId());
@@ -114,14 +115,31 @@ public class FeedService extends AbstractScheduledService {
                 feedSynchronization.setSuccess(false);
                 feedSynchronization.setMessage(ExceptionUtils.getStackTrace(e));
             }
-            
             feedSynchronization.setDuration((int) (System.currentTimeMillis() - startTime));
-            feedSynchronizationDao.create(feedSynchronization);
-            feedSynchronizationDao.deleteOldFeedSynchronization(feed.getId(), 600);
+            feedSynchronizationList.add(feedSynchronization);
+            TransactionUtil.commit();
+        }
+
+        // If all feeds have failed, then we infer that the network is probably down
+        FeedSynchronizationDao feedSynchronizationDao = new FeedSynchronizationDao();
+        boolean networkDown = true;
+        for (FeedSynchronization feedSynchronization : feedSynchronizationList) {
+            if (feedSynchronization.isSuccess()) {
+                networkDown = false;
+                break;
+            }
+        }
+
+        // Update the status of all synchronized feeds
+        if (!networkDown) {
+            for (FeedSynchronization feedSynchronization : feedSynchronizationList) {
+                feedSynchronizationDao.create(feedSynchronization);
+                feedSynchronizationDao.deleteOldFeedSynchronization(feedSynchronization.getFeedId(), 600);
+            }
             TransactionUtil.commit();
         }
     }
-    
+
     /**
      * Synchronize the feed to local database.
      * 

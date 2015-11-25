@@ -1,16 +1,8 @@
 package com.sismics.reader.rest;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URLDecoder;
-import java.util.List;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
-
+import com.sismics.reader.rest.descriptor.JerseyTestWebAppDescriptorFactory;
+import com.sismics.reader.rest.util.ClientUtil;
+import com.sun.jersey.test.framework.JerseyTest;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.junit.After;
@@ -18,9 +10,16 @@ import org.junit.Before;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
-import com.sismics.reader.rest.descriptor.JerseyTestWebAppDescriptorFactory;
-import com.sismics.reader.rest.util.ClientUtil;
-import com.sun.jersey.test.framework.JerseyTest;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLDecoder;
+import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * Base class of integration tests with Jersey.
@@ -36,7 +35,7 @@ public abstract class BaseJerseyTest extends JerseyTest {
     /**
      * Test HTTP server.
      */
-    HttpServer httpServer;
+    protected HttpServer httpServer;
     
     /**
      * Utility class for the REST client.
@@ -59,12 +58,8 @@ public abstract class BaseJerseyTest extends JerseyTest {
         wiser = new Wiser();
         wiser.setPort(2500);
         wiser.start();
-        
-        String httpRoot = URLDecoder.decode(new File(getClass().getResource("/").getFile()).getAbsolutePath(), "utf-8");
-        httpServer = HttpServer.createSimpleServer(httpRoot, "localhost", 9997);
-        // Disable file cache to fix https://java.net/jira/browse/GRIZZLY-1350
-        ((StaticHttpHandler) httpServer.getServerConfiguration().getHttpHandlers().keySet().iterator().next()).setFileCacheEnabled(false);
-        httpServer.start();
+
+        startHttpServer();
     }
 
     @Override
@@ -73,6 +68,19 @@ public abstract class BaseJerseyTest extends JerseyTest {
         super.tearDown();
         wiser.stop();
         httpServer.stop();
+    }
+
+    /**
+     * Starts the HTTP server.
+     *
+     * @throws Exception
+     */
+    private void startHttpServer() throws Exception {
+        String httpRoot = URLDecoder.decode(new File(getClass().getResource("/").getFile()).getAbsolutePath(), "utf-8");
+        httpServer = HttpServer.createSimpleServer(httpRoot, "localhost", 9997);
+        // Disable file cache to fix https://java.net/jira/browse/GRIZZLY-1350
+        ((StaticHttpHandler) httpServer.getServerConfiguration().getHttpHandlers().keySet().iterator().next()).setFileCacheEnabled(false);
+        httpServer.start();
     }
 
     /**
@@ -111,5 +119,23 @@ public abstract class BaseJerseyTest extends JerseyTest {
         os.write(input.getBytes());
         os.close();
         return baos.toString();
+    }
+
+    /**
+     * Simulates a network down situation, e.g. someone having installed the application on his laptop
+     * and currently not having connection.
+     *
+     * @param callable The code to run while the network is down
+     * @return The result
+     * @throws Exception
+     */
+    protected <T> T withNetworkDown(Callable<T> callable) throws Exception {
+        try {
+            httpServer.stop();
+
+            return callable.call();
+        } finally {
+            startHttpServer();
+        }
     }
 }
