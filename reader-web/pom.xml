@@ -159,34 +159,6 @@
         </configuration>
       </plugin>
 
-      <!-- Cargo Plugin -->
-      <plugin>
-        <groupId>org.codehaus.cargo</groupId>
-        <artifactId>cargo-maven2-plugin</artifactId>
-        <configuration>
-          <container>
-            <containerId>jetty8x</containerId>
-            <type>remote</type>
-          </container>
-
-          <deployer>
-            <type>remote</type>
-          </deployer>
-
-          <deployables>
-            <deployable>
-              <groupId>com.sismics.reader</groupId>
-              <artifactId>reader-web</artifactId>
-              <type>war</type>
-              <properties>
-                <context>/reader</context>
-              </properties>
-              <pingURL>http://localhost:8080/reader/index.html</pingURL>
-            </deployable>
-          </deployables>
-        </configuration>
-      </plugin>
-      
       <!-- SureFire Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
