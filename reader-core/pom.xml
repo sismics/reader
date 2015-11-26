@@ -189,29 +189,5 @@
         <filtering>false</filtering>
       </resource>
     </resources>
-
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-eclipse-plugin</artifactId>
-        <configuration>
-          <!-- <workspaceCodeStylesURL>file:///${project.path}/src/main/resources/qa/eclipse/formatter.xml</workspaceCodeStylesURL> -->
-          <additionalConfig>
-            <file>
-              <name>.checkstyle</name>
-              <location>/src/main/resources/qa/eclipse/checkstyle.xml</location>
-            </file>
-          </additionalConfig>
-        </configuration>
-        <dependencies>
-          <!-- The file defined in the location is stored in this dependency
-          <dependency>
-            <groupId>com.sismics.reader</groupId>
-            <artifactId>reader-core</artifactId>
-            <version>${project.version}</version>
-          </dependency> -->
-        </dependencies>
-      </plugin>
-    </plugins>
   </build>
 </project>
