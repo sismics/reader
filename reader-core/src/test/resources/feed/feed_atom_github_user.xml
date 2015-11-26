@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
+  <id>tag:github.com,2008:/naku</id>
+  <link type="text/html" rel="alternate" href="https://github.com/naku"/>
+  <link type="application/atom+xml" rel="self" href="https://github.com/naku.atom"/>
+  <title>naku’s Activity</title>
+  <updated>2015-11-25T14:45:42Z</updated>
+  <entry>
+    <id>tag:github.com,2008:PushEvent/3379219227</id>
+    <published>2015-11-25T14:45:42Z</published>
+    <updated>2015-11-25T14:45:42Z</updated>
+    <link type="text/html" rel="alternate" href="https://github.com/sismics/reader/compare/3126b91465...b7414b12d8"/>
+    <title type="html">naku pushed to master at sismics/reader</title>
+    <author>
+      <name>naku</name>
+      <email></email>
+      <uri>https://github.com/naku</uri>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars1.githubusercontent.com/u/1281790?v=3&amp;s=30"/>
+    <content type="html">&lt;!-- push --&gt;
+&lt;span class=&quot;mega-octicon octicon-git-commit&quot;&gt;&lt;/span&gt;
+
+&lt;div class=&quot;time&quot;&gt;
+  &lt;time datetime=&quot;2015-11-25T14:45:42Z&quot; is=&quot;relative-time&quot;&gt;Nov 25, 2015&lt;/time&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;title&quot;&gt;
+  &lt;a href=&quot;/naku&quot; data-ga-click=&quot;News feed, event click, Event click type:PushEvent target:actor&quot;&gt;naku&lt;/a&gt; pushed to &lt;a href=&quot;/sismics/reader/tree/master&quot; data-ga-click=&quot;News feed, event click, Event click type:PushEvent target:branch&quot;&gt;master&lt;/a&gt; at &lt;a href=&quot;/sismics/reader&quot; data-ga-click=&quot;News feed, event click, Event click type:PushEvent target:repo&quot;&gt;sismics/reader&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;details&quot;&gt;
+  &lt;a href=&quot;/naku&quot;&gt;&lt;img alt=&quot;@naku&quot; class=&quot;gravatar&quot; height=&quot;30&quot; src=&quot;https://avatars0.githubusercontent.com/u/1281790?v=3&amp;amp;s=60&quot; width=&quot;30&quot; /&gt;&lt;/a&gt;
+
+    &lt;div class=&quot;commits pusher-is-only-committer&quot;&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;span title=&quot;naku&quot;&gt;
+            &lt;img alt=&quot;@naku&quot; height=&quot;16&quot; src=&quot;https://avatars1.githubusercontent.com/u/1281790?v=3&amp;amp;s=32&quot; width=&quot;16&quot; /&gt;
+          &lt;/span&gt;
+          &lt;code&gt;&lt;a href=&quot;/sismics/reader/commit/b7414b12d88c13b5af15df7d30ba8c1e47232d4d&quot; data-ga-click=&quot;News feed, event click, Event click type:PushEvent target:sha&quot;&gt;b7414b1&lt;/a&gt;&lt;/code&gt;
+          &lt;div class=&quot;message&quot;&gt;
+            &lt;blockquote&gt;
+              #119 Set test to manual
+            &lt;/blockquote&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;span title=&quot;naku&quot;&gt;
+            &lt;img alt=&quot;@naku&quot; height=&quot;16&quot; src=&quot;https://avatars1.githubusercontent.com/u/1281790?v=3&amp;amp;s=32&quot; width=&quot;16&quot; /&gt;
+          &lt;/span&gt;
+          &lt;code&gt;&lt;a href=&quot;/sismics/reader/commit/87ee1b0f9cb3c96a20f2b346b5d6c91b76f807cf&quot; data-ga-click=&quot;News feed, event click, Event click type:PushEvent target:sha&quot;&gt;87ee1b0&lt;/a&gt;&lt;/code&gt;
+          &lt;div class=&quot;message&quot;&gt;
+            &lt;blockquote&gt;
+              #40 don&#39;t add synchronization data when network is down
+            &lt;/blockquote&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;more&quot;&gt;&lt;a href=&quot;/sismics/reader/compare/3126b91465...b7414b12d8&quot; data-ga-click=&quot;News feed, event click, Event click type:PushEvent target:comparison&quot;&gt;1 more commit &amp;raquo;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:IssuesEvent/3378730927</id>
+    <published>2015-11-25T12:23:32Z</published>
+    <updated>2015-11-25T12:23:32Z</updated>
+    <link type="text/html" rel="alternate" href="https://github.com/sismics/reader/issues/123"/>
+    <title type="html">naku opened issue sismics/reader#123</title>
+    <author>
+      <name>naku</name>
+      <email></email>
+      <uri>https://github.com/naku</uri>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars1.githubusercontent.com/u/1281790?v=3&amp;s=30"/>
+    <content type="html">&lt;!-- issues --&gt;
+&lt;span class=&quot;mega-octicon octicon-issue-opened&quot;&gt;&lt;/span&gt;
+
+&lt;div class=&quot;time&quot;&gt;
+  &lt;time datetime=&quot;2015-11-25T12:23:32Z&quot; is=&quot;relative-time&quot;&gt;Nov 25, 2015&lt;/time&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;title&quot;&gt;
+  &lt;a href=&quot;/naku&quot; data-ga-click=&quot;News feed, event click, Event click type:IssuesEvent target:actor&quot;&gt;naku&lt;/a&gt; opened issue &lt;a href=&quot;/sismics/reader/issues/123&quot; data-ga-click=&quot;News feed, event click, Event click type:IssuesEvent target:issue&quot; title=&quot;Move Sismics private deployment scripts out of the public repo&quot;&gt;sismics/reader#123&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;details&quot;&gt;
+  &lt;a href=&quot;/naku&quot;&gt;&lt;img alt=&quot;@naku&quot; class=&quot;gravatar&quot; height=&quot;30&quot; src=&quot;https://avatars0.githubusercontent.com/u/1281790?v=3&amp;amp;s=60&quot; width=&quot;30&quot; /&gt;&lt;/a&gt;
+  &lt;div class=&quot;message&quot;&gt;
+    &lt;blockquote&gt;
+      Move Sismics private deployment scripts out of the public repo
+    &lt;/blockquote&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:IssuesEvent/3378729439</id>
+    <published>2015-11-25T12:23:00Z</published>
+    <updated>2015-11-25T12:23:00Z</updated>
+    <link type="text/html" rel="alternate" href="https://github.com/sismics/reader/issues/122"/>
+    <title type="html">naku opened issue sismics/reader#122</title>
+    <author>
+      <name>naku</name>
+      <email></email>
+      <uri>https://github.com/naku</uri>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars1.githubusercontent.com/u/1281790?v=3&amp;s=30"/>
+    <content type="html">&lt;!-- issues --&gt;
+&lt;span class=&quot;mega-octicon octicon-issue-opened&quot;&gt;&lt;/span&gt;
+
+&lt;div class=&quot;time&quot;&gt;
+  &lt;time datetime=&quot;2015-11-25T12:23:00Z&quot; is=&quot;relative-time&quot;&gt;Nov 25, 2015&lt;/time&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;title&quot;&gt;
+  &lt;a href=&quot;/naku&quot; data-ga-click=&quot;News feed, event click, Event click type:IssuesEvent target:actor&quot;&gt;naku&lt;/a&gt; opened issue &lt;a href=&quot;/sismics/reader/issues/122&quot; data-ga-click=&quot;News feed, event click, Event click type:IssuesEvent target:issue&quot; title=&quot;Move Docker deployment scripts out of the root directory &quot;&gt;sismics/reader#122&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;details&quot;&gt;
+  &lt;a href=&quot;/naku&quot;&gt;&lt;img alt=&quot;@naku&quot; class=&quot;gravatar&quot; height=&quot;30&quot; src=&quot;https://avatars0.githubusercontent.com/u/1281790?v=3&amp;amp;s=60&quot; width=&quot;30&quot; /&gt;&lt;/a&gt;
+  &lt;div class=&quot;message&quot;&gt;
+    &lt;blockquote&gt;
+      Move Docker deployment scripts out of the root directory 
+    &lt;/blockquote&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:IssuesEvent/3378725680</id>
+    <published>2015-11-25T12:21:43Z</published>
+    <updated>2015-11-25T12:21:43Z</updated>
+    <link type="text/html" rel="alternate" href="https://github.com/sismics/reader/issues/121"/>
+    <title type="html">naku opened issue sismics/reader#121</title>
+    <author>
+      <name>naku</name>
+      <email></email>
+      <uri>https://github.com/naku</uri>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars1.githubusercontent.com/u/1281790?v=3&amp;s=30"/>
+    <content type="html">&lt;!-- issues --&gt;
+&lt;span class=&quot;mega-octicon octicon-issue-opened&quot;&gt;&lt;/span&gt;
+
+&lt;div class=&quot;time&quot;&gt;
+  &lt;time datetime=&quot;2015-11-25T12:21:43Z&quot; is=&quot;relative-time&quot;&gt;Nov 25, 2015&lt;/time&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;title&quot;&gt;
+  &lt;a href=&quot;/naku&quot; data-ga-click=&quot;News feed, event click, Event click type:IssuesEvent target:actor&quot;&gt;naku&lt;/a&gt; opened issue &lt;a href=&quot;/sismics/reader/issues/121&quot; data-ga-click=&quot;News feed, event click, Event click type:IssuesEvent target:issue&quot; title=&quot;Make public Dockerfile independant of Sismics Jetty image&quot;&gt;sismics/reader#121&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;details&quot;&gt;
+  &lt;a href=&quot;/naku&quot;&gt;&lt;img alt=&quot;@naku&quot; class=&quot;gravatar&quot; height=&quot;30&quot; src=&quot;https://avatars0.githubusercontent.com/u/1281790?v=3&amp;amp;s=60&quot; width=&quot;30&quot; /&gt;&lt;/a&gt;
+  &lt;div class=&quot;message&quot;&gt;
+    &lt;blockquote&gt;
+      Make public Dockerfile independant of Sismics Jetty image
+    &lt;/blockquote&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:PushEvent/3302747907</id>
+    <published>2015-11-03T15:07:33Z</published>
+    <updated>2015-11-03T15:07:33Z</updated>
+    <link type="text/html" rel="alternate" href="https://github.com/naku/RDV/compare/f61f75f40d...48a617e2e2"/>
+    <title type="html">naku pushed to master at naku/RDV</title>
+    <author>
+      <name>naku</name>
+      <email></email>
+      <uri>https://github.com/naku</uri>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars1.githubusercontent.com/u/1281790?v=3&amp;s=30"/>
+    <content type="html">&lt;!-- push --&gt;
+&lt;span class=&quot;mega-octicon octicon-git-commit&quot;&gt;&lt;/span&gt;
+
+&lt;div class=&quot;time&quot;&gt;
+  &lt;time datetime=&quot;2015-11-03T15:07:33Z&quot; is=&quot;relative-time&quot;&gt;Nov 3, 2015&lt;/time&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;title&quot;&gt;
+  &lt;a href=&quot;/naku&quot; data-ga-click=&quot;News feed, event click, Event click type:PushEvent target:actor&quot;&gt;naku&lt;/a&gt; pushed to &lt;a href=&quot;/naku/RDV/tree/master&quot; data-ga-click=&quot;News feed, event click, Event click type:PushEvent target:branch&quot;&gt;master&lt;/a&gt; at &lt;a href=&quot;/naku/RDV&quot; data-ga-click=&quot;News feed, event click, Event click type:PushEvent target:repo&quot;&gt;naku/RDV&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;details&quot;&gt;
+  &lt;a href=&quot;/naku&quot;&gt;&lt;img alt=&quot;@naku&quot; class=&quot;gravatar&quot; height=&quot;30&quot; src=&quot;https://avatars0.githubusercontent.com/u/1281790?v=3&amp;amp;s=60&quot; width=&quot;30&quot; /&gt;&lt;/a&gt;
+
+    &lt;div class=&quot;commits pusher-is-only-committer&quot;&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;span title=&quot;naku&quot;&gt;
+            &lt;img alt=&quot;@naku&quot; height=&quot;16&quot; src=&quot;https://avatars1.githubusercontent.com/u/1281790?v=3&amp;amp;s=32&quot; width=&quot;16&quot; /&gt;
+          &lt;/span&gt;
+          &lt;code&gt;&lt;a href=&quot;/naku/RDV/commit/48a617e2e2a60a672d73aa70b256f90d60c6a04d&quot; data-ga-click=&quot;News feed, event click, Event click type:PushEvent target:sha&quot;&gt;48a617e&lt;/a&gt;&lt;/code&gt;
+          &lt;div class=&quot;message&quot;&gt;
+            &lt;blockquote&gt;
+              Fix selector
+            &lt;/blockquote&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:IssuesEvent/3297774005</id>
+    <published>2015-11-02T10:50:39Z</published>
+    <updated>2015-11-02T10:50:39Z</updated>
+    <link type="text/html" rel="alternate" href="https://github.com/sismics/reader/issues/99"/>
+    <title type="html">naku reopened issue sismics/reader#99</title>
+    <author>
+      <name>naku</name>
+      <email></email>
+      <uri>https://github.com/naku</uri>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars1.githubusercontent.com/u/1281790?v=3&amp;s=30"/>
+    <content type="html">&lt;!-- issues --&gt;
+&lt;span class=&quot;mega-octicon octicon-issue-reopened&quot;&gt;&lt;/span&gt;
+
+&lt;div class=&quot;time&quot;&gt;
+  &lt;time datetime=&quot;2015-11-02T10:50:39Z&quot; is=&quot;relative-time&quot;&gt;Nov 2, 2015&lt;/time&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;title&quot;&gt;
+  &lt;a href=&quot;/naku&quot; data-ga-click=&quot;News feed, event click, Event click type:IssuesEvent target:actor&quot;&gt;naku&lt;/a&gt; reopened issue &lt;a href=&quot;/sismics/reader/issues/99&quot; data-ga-click=&quot;News feed, event click, Event click type:IssuesEvent target:issue&quot; title=&quot;Update iFrame Whitelist&quot;&gt;sismics/reader#99&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;details&quot;&gt;
+  &lt;a href=&quot;/naku&quot;&gt;&lt;img alt=&quot;@naku&quot; class=&quot;gravatar&quot; height=&quot;30&quot; src=&quot;https://avatars0.githubusercontent.com/u/1281790?v=3&amp;amp;s=60&quot; width=&quot;30&quot; /&gt;&lt;/a&gt;
+  &lt;div class=&quot;message&quot;&gt;
+    &lt;blockquote&gt;
+      Update iFrame Whitelist
+    &lt;/blockquote&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:IssueCommentEvent/3297774002</id>
+    <published>2015-11-02T10:50:39Z</published>
+    <updated>2015-11-02T10:50:39Z</updated>
+    <link type="text/html" rel="alternate" href="https://github.com/sismics/reader/issues/99#issuecomment-152986194"/>
+    <title type="html">naku commented on issue sismics/reader#99</title>
+    <author>
+      <name>naku</name>
+      <email></email>
+      <uri>https://github.com/naku</uri>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars1.githubusercontent.com/u/1281790?v=3&amp;s=30"/>
+    <content type="html">&lt;!-- issue_comment --&gt;
+&lt;span class=&quot;mega-octicon octicon-comment-discussion&quot;&gt;&lt;/span&gt;
+
+&lt;div class=&quot;time&quot;&gt;
+  &lt;time datetime=&quot;2015-11-02T10:50:39Z&quot; is=&quot;relative-time&quot;&gt;Nov 2, 2015&lt;/time&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;title&quot;&gt;
+  &lt;a href=&quot;/naku&quot; data-ga-click=&quot;News feed, event click, Event click type:IssueCommentEvent target:actor&quot;&gt;naku&lt;/a&gt; commented on issue &lt;a href=&quot;/sismics/reader/issues/99#issuecomment-152986194&quot; data-ga-click=&quot;News feed, event click, Event click type:IssueCommentEvent target:issue-comment&quot; title=&quot;Update iFrame Whitelist&quot;&gt;sismics/reader#99&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;details&quot;&gt;
+  &lt;a href=&quot;/naku&quot;&gt;&lt;img alt=&quot;@naku&quot; class=&quot;gravatar&quot; height=&quot;30&quot; src=&quot;https://avatars0.githubusercontent.com/u/1281790?v=3&amp;amp;s=60&quot; width=&quot;30&quot; /&gt;&lt;/a&gt;
+  &lt;div class=&quot;message markdown-body&quot;&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;//soundsgood.co/embed/5634c158722be1b60e7651be&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+</feed>

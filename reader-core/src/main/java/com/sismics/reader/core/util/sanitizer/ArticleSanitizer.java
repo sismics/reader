@@ -77,7 +77,7 @@ public class ArticleSanitizer {
      * @return Sanitized HTML
      */
     public String sanitize(final String baseUri, String html) {
-        AttributePolicy imgSrcPolicy = new AttributePolicy() {
+        AttributePolicy transformLinkToAbsolutePolicy = new AttributePolicy() {
             @Override
             public @Nullable
             String apply(String elementName, String attributeName, String value) {
@@ -148,14 +148,24 @@ public class ArticleSanitizer {
                 .allowUrlProtocols("http", "https", " http", " https")
                 .allowElements("img")
                 .allowAttributes("alt", "align", "title").onElements("img")
-                .allowAttributes("src").matching(imgSrcPolicy).onElements("img")
+                .allowAttributes("src").matching(transformLinkToAbsolutePolicy).onElements("img")
                 .allowAttributes("border", "height", "width", "hspace", "vspace").matching(INTEGER_POLICY).onElements("img")
+                .toFactory();
+
+        // Allow links and transform relative links to absolute
+        PolicyFactory linksPolicyFactory = new HtmlPolicyBuilder()
+                .allowStandardUrlProtocols()
+                .allowElements("a")
+                .allowAttributes("href")
+                .matching(transformLinkToAbsolutePolicy)
+                .onElements("a")
+                .requireRelNofollowOnLinks()
                 .toFactory();
 
         PolicyFactory policy = blocksPolicyFactory
                 .and(Sanitizers.FORMATTING)
                 .and(imagePolicyFactory)
-                .and(Sanitizers.LINKS)
+                .and(linksPolicyFactory)
                 .and(Sanitizers.STYLES)
                 .and(videoPolicyFactory);
         

@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class TestArticleSanitizer {
     /**
-     * Tests the article sanitizer.
+     * Tests that the image relative URLs are transformed to absolute form.
      * 
      * @throws Exception
      */
@@ -42,7 +42,7 @@ public class TestArticleSanitizer {
     }
 
     /**
-     * Tests the article sanitizer.
+     * Tests that the image relative URLs are transformed to absolute form.
      *
      * @throws Exception
      */
@@ -66,7 +66,7 @@ public class TestArticleSanitizer {
     }
 
     /**
-     * Tests the article sanitizer.
+     * Tests that the image relative URLs are transformed to absolute form.
      * 
      * @throws Exception
      */
@@ -85,10 +85,37 @@ public class TestArticleSanitizer {
         // Images: transform relative URLs to absolute
         ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         Assert.assertTrue(article.getDescription().contains("\"res/tern_simple_graph.png\""));
-        String html = articleSanitizer.sanitize(article.getBaseUri(), article.getDescription());
         Assert.assertEquals("http://marijnhaverbeke.nl/blog/", article.getBaseUri());
+        String html = articleSanitizer.sanitize(article.getBaseUri(), article.getDescription());
         Assert.assertFalse(html.contains("\"res/tern_simple_graph.png\""));
         Assert.assertTrue(html.contains("\"http://marijnhaverbeke.nl/blog/res/tern_simple_graph.png\""));
+    }
+
+    /**
+     * Tests that the image relative links are transformed to absolute form.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void articleSanitizerLinkTest() throws Exception {
+        // Load a feed
+        InputStream is = getClass().getResourceAsStream("/feed/feed_atom_github_user.xml");
+        RssReader reader = new RssReader();
+        reader.readRssFeed(is);
+        Feed feed = reader.getFeed();
+        Assert.assertEquals("naku’s Activity", feed.getTitle());
+        List<Article> articleList = reader.getArticleList();
+        Assert.assertEquals(7, articleList.size());
+        Article article = articleList.get(0);
+
+        // Links: transform relative URLs to absolute
+        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
+        Assert.assertTrue(article.getDescription().contains("\"/sismics/reader/commit/b7414b12d88c13b5af15df7d30ba8c1e47232d4d\""));
+        String baseUrl = UrlUtil.getBaseUri(feed, article);
+        Assert.assertEquals("https://github.com", baseUrl);
+        String html = articleSanitizer.sanitize(baseUrl, article.getDescription());
+        Assert.assertFalse(html.contains("\"/sismics/reader/commit/b7414b12d88c13b5af15df7d30ba8c1e47232d4d\""));
+        Assert.assertTrue(html.contains("\"https://github.com/sismics/reader/commit/b7414b12d88c13b5af15df7d30ba8c1e47232d4d\""));
     }
 
     /**
