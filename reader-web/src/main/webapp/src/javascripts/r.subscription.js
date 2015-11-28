@@ -285,7 +285,7 @@ r.subscription.initCollapsing = function() {
  * Initializing editing feature.
  */
 r.subscription.initEditing = function() {
-//Subscriptions editing
+  //Subscriptions editing
   $('#subscription-list li.subscription > .edit').each(function() {
     // Initializing edit popup
     var parent = $(this).parent();
@@ -335,6 +335,47 @@ r.subscription.initEditing = function() {
     // Opening informations popup
     $('.subscription-edit-info-button', content).click(function() {
       _this.qtip('hide');
+
+      // Get feed informations
+      r.util.ajax({
+        url: r.util.url.subscription_get.replace('{id}', subscriptionId),
+        data: { limit: 0 },
+        type: 'GET',
+        done: function(data) {
+          var table = $('.subscription-edit-info-table tbody', infoContent);
+          $('.title', table).html(r.util.escape(data.subscription.title));
+          $('.feed_title', table).html(r.util.escape(data.subscription.feed_title));
+          $('.url', table)
+              .attr('href', data.subscription.url)
+              .html(data.subscription.url);
+          $('.rss_url', table)
+              .attr('href', data.subscription.rss_url)
+              .html(data.subscription.rss_url);
+          $('.category_name', table).html(data.subscription.category_name);
+          var date = moment(data.subscription.create_date);
+          $('.create_date', table)
+              .attr('title', date.format('L LT'))
+              .html(date.fromNow());
+        }
+      });
+
+      // Get latest synchronizations
+      r.util.ajax({
+        url: r.util.url.subscription_sync.replace('{id}', subscriptionId),
+        type: 'GET',
+        done: function(data) {
+          var html = '';
+          $(data.synchronizations).each(function(i, sync) {
+            var date = moment(sync.create_date);
+            html += '<tr>' +
+                '<td title="' + (sync.message ? sync.message : '') + '">' + (sync.success ? $.t('feed.info.syncok') : $.t('feed.info.syncfail')) + '</td>' +
+                '<td title="' + date.format('L LT') + '">' + date.fromNow() + '</td>' +
+                '<td>' + sync.duration + 'ms</td>' +
+                '</tr>';
+          });
+          $('.subscription-edit-info-synctable tbody', infoContent).html(html);
+        }
+      });
     });
     
     // Creating edit popup

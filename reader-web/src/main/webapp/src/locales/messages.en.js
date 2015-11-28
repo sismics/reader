@@ -166,7 +166,22 @@
     "noarticle": "No article",
     "nonewarticle": "All read!",
     "showall": "Show all",
-    "retry": "Retry"
+    "retry": "Retry",
+    "info": {
+      "syncok": "Success",
+      "syncfail": "Error",
+      "titlemain": "Feed informations",
+      "titlesync": "Latest synchronizations",
+      "title": "Customized title",
+      "feed_title": "Original title",
+      "url": "URL",
+      "rss_url": "RSS URL",
+      "category_name": "Category",
+      "create_date": "Date added",
+      "status": "Status",
+      "date": "Date",
+      "duration": "Duration"
+    }
   },
   "wizard": {
     "title": "Sismics Reader installation wizard",

@@ -304,9 +304,53 @@
 
       <div class="qtip-subscription-edit-info">
         <p>
-          <strong>Feed information</strong>
+          <strong data-i18n="feed.info.titlemain"></strong>
         </p>
-        <p>Lorem ipsum dolor sit amen</p>
+        <table class="subscription-edit-info-table">
+          <tr>
+            <th data-i18n="feed.info.title"></th>
+            <td class="title"></td>
+          </tr>
+          <tr>
+            <th data-i18n="feed.info.feed_title"></th>
+            <td class="feed_title"></td>
+          </tr>
+          <tr>
+            <th data-i18n="feed.info.url"></th>
+            <td>
+              <a class="url" target="_blank" href=""></a>
+            </td>
+          </tr>
+          <tr>
+            <th data-i18n="feed.info.rss_url"></th>
+            <td>
+              <a class="rss_url" target="_blank" href=""></a>
+            </td>
+          </tr>
+          <tr>
+            <th data-i18n="feed.info.category_name"></th>
+            <td class="category_name"></td>
+          </tr>
+          <tr>
+            <th data-i18n="feed.info.create_date"></th>
+            <td class="create_date"></td>
+          </tr>
+        </table>
+        <p>
+          <strong data-i18n="feed.info.titlesync"></strong>
+        </p>
+        <div class="subscription-edit-info-synctable-container">
+          <table class="subscription-edit-info-synctable">
+            <thead>
+            <tr>
+              <th data-i18n="feed.info.status"></th>
+              <th data-i18n="feed.info.date"></th>
+              <th data-i18n="feed.info.duration"></th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
 
       <div class="qtip-change-category qtip-drop-menu">
