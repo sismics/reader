@@ -54,6 +54,11 @@ public class FeedSubscriptionDto {
     private Integer unreadUserArticleCount;
     
     /**
+     * Number of synchronization fails recently.
+     */
+    private Integer synchronizationFailCount;
+    
+    /**
      * Create date.
      */
     private Date createDate;
@@ -308,5 +313,13 @@ public class FeedSubscriptionDto {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public Integer getSynchronizationFailCount() {
+        return synchronizationFailCount;
+    }
+
+    public void setSynchronizationFailCount(Integer synchronizationFailCount) {
+        this.synchronizationFailCount = synchronizationFailCount;
     }
 }

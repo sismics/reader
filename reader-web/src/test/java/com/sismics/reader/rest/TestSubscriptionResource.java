@@ -269,13 +269,13 @@ public class TestSubscriptionResource extends BaseJerseyTest {
      */
     @Test
     public void testSubscriptionSynchronizationResource() throws Exception {
-        // Create user subscription1
+        // Create user subscription_sync
         clientUtil.createUser("subscription_sync");
-        final String subscription1AuthToken = clientUtil.login("subscription_sync");
+        final String subscriptionSyncAuthToken = clientUtil.login("subscription_sync");
 
         // Subscribe to korben.info
         WebResource subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscriptionSyncAuthToken));
         MultivaluedMapImpl postParams = new MultivaluedMapImpl();
         postParams.add("url", "http://localhost:9997/http/feeds/korben.xml");
         ClientResponse response = subscriptionResource.put(ClientResponse.class, postParams);
@@ -292,7 +292,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
 
                 // Check the we don't get any synchronization update at all as the network is down
                 WebResource subscriptionResource = resource().path("/subscription/" + subscription1Id + "/sync");
-                subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
+                subscriptionResource.addFilter(new CookieAuthenticationFilter(subscriptionSyncAuthToken));
                 ClientResponse response = subscriptionResource.get(ClientResponse.class);
                 Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
                 JSONObject json = response.getEntity(JSONObject.class);
@@ -309,7 +309,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
 
         // Check the subscription synchronizations
         subscriptionResource = resource().path("/subscription/" + subscription1Id + "/sync");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscriptionSyncAuthToken));
         response = subscriptionResource.get(ClientResponse.class);
         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
         json = response.getEntity(JSONObject.class);
@@ -319,6 +319,19 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertTrue(synchronizations.getJSONObject(0).getBoolean("success"));
         Assert.assertFalse(synchronizations.getJSONObject(0).has("message"));
         Assert.assertTrue(synchronizations.getJSONObject(0).getInt("duration") > 0);
+        
+        // Check the subscriptions list (with zero errors)
+        subscriptionResource = resource().path("/subscription");
+        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscriptionSyncAuthToken));
+        response = subscriptionResource.get(ClientResponse.class);
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        json = response.getEntity(JSONObject.class);
+        JSONArray categories = json.optJSONArray("categories");
+        JSONObject rootCategory = categories.optJSONObject(0);
+        categories = rootCategory.getJSONArray("categories");
+        JSONArray subscriptions = rootCategory.optJSONArray("subscriptions");
+        JSONObject subscription = subscriptions.getJSONObject(0);
+        Assert.assertEquals(0, subscription.getInt("sync_fail_count"));
     }
 
     /**

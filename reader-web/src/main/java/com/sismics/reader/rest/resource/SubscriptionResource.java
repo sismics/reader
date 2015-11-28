@@ -142,6 +142,7 @@ public class SubscriptionResource extends BaseResource {
             subscription.put("title", feedSubscription.getFeedSubscriptionTitle());
             subscription.put("url", feedSubscription.getFeedRssUrl());
             subscription.put("unread_count", feedSubscription.getUnreadUserArticleCount());
+            subscription.put("sync_fail_count", feedSubscription.getSynchronizationFailCount());
             JsonUtil.append(categoryJson, "subscriptions", subscription);
             
             oldCategoryId = categoryId;
