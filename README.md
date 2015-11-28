@@ -1,7 +1,10 @@
 Sismics Reader
 ==============
 
-![](http://www.sismics.com/reader/img/screenshots/big/9-big.png)
+Official website: <http://www.sismics.com/reader/>
+
+![](http://www.sismics.com/reader/img/screenshots/big/github.png)
+[More screenshots](http://www.sismics.com/reader/#!/screenshots)
 
 What is Reader?
 ---------------
