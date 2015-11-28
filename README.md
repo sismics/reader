@@ -1,7 +1,7 @@
 Sismics Reader
 ==============
 
-Official website: <http://www.sismics.com/reader/>
+**Demo application:** <https://reader-demo.sismics.com> (Username: **demo** / password: **demo**)
 
 ![](http://www.sismics.com/reader/img/screenshots/big/github.png)
 [More screenshots](http://www.sismics.com/reader/#!/screenshots)
