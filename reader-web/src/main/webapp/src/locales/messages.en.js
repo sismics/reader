@@ -34,6 +34,7 @@
     "emptyunread": "No unread subscription",
     "showall": "Show all",
     "toggleunread": "Toggle all/unread subscriptions",
+    "syncfail": "All latest synchronizations failed",
     "add": {
       "button": "New subscription",
       "placeholder": "Paste a feed or website URL",

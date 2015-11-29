@@ -34,6 +34,7 @@
     "emptyunread": "Aucun abonnement non-lu",
     "showall": "Tout afficher",
     "toggleunread": "Abonnements lus/non-lus",
+    "syncfail": "Toutes les dernières synchronisations ont échouées",
     "add": {
       "button": "Ajouter un abonnement",
       "placeholder": "Coller l'URL d'un flux ou d'un site",
