@@ -1,7 +1,10 @@
 Sismics Reader
 ==============
 
-![](http://www.sismics.com/reader/img/screenshots/big/9-big.png)
+**Demo application:** <https://reader-demo.sismics.com> (Username: **demo** / password: **demo**)
+
+![](http://www.sismics.com/reader/img/screenshots/big/github.png)
+[More screenshots](http://www.sismics.com/reader/#!/screenshots)
 
 What is Reader?
 ---------------
