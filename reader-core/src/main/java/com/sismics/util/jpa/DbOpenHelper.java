@@ -154,7 +154,7 @@ public abstract class DbOpenHelper {
             @Override
             public boolean accept(File dir, String name) {
                 String versionString = String.format("%03d", version);
-                return name.matches("dbupdate-" + versionString + "-\\d+(-web)?\\.sql");
+                return name.matches("dbupdate-" + versionString + "-\\d+(-web|-test)?\\.sql");
             }
         });
         Collections.sort(fileNameList);
@@ -162,6 +162,11 @@ public abstract class DbOpenHelper {
         for (String fileName : fileNameList) {
             // Skip some files in non-web (= unit test) environments
             if (fileName.endsWith("-web.sql") && !EnvironmentUtil.isWebappContext()) {
+                continue;
+            }
+            
+            // Skip some files in non-test environments
+            if (fileName.endsWith("-test.sql") && !EnvironmentUtil.isUnitTest()) {
                 continue;
             }
 

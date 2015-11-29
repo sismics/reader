@@ -58,7 +58,7 @@ public class ArticleDao {
         LuceneUtil.handle(new LuceneRunnable() {
             @Override
             public void run(IndexWriter indexWriter) throws Exception {
-             // Empty index
+                // Empty index
                 indexWriter.deleteAll();
                 
                 // Add all articles
