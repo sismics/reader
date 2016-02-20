@@ -383,6 +383,9 @@ public class TestArticleSanitizer {
                 + "<iframe src=\"//hitbox.tv/#!/embed/CymaticBruce\" width=\"480\" height=\"480\"></iframe>"
                 + "<iframe src=\"//embed.spotify.com/?uri=spotify:album:3NNSJt3gWSmPmnjCwZyLA5\" width=\"480\" height=\"480\"></iframe>"
                 + "<iframe src=\"//soundsgood.co/embed/5634c158722be1b60e7651be\" width=\"480\" height=\"480\"></iframe>"
+                + "<iframe src=\"http://cdn.livestream.com/embed/spaceflightnow?layout=4&height=340&width=560&autoplay=false\" width=\"480\" height=\"480\"></iframe>"
+                + "<iframe src=\"http://v.24liveblog.com/live/?id=1312491\" width=\"480\" height=\"480\"></iframe>"
+                + "<iframe src=\"//fiddle.jshell.net/toddmotto/0oarywLe/show/light/\" width=\"480\" height=\"480\"></iframe>"
                 + "<iframe src=\"//www.kickstarter.com/projects/223628811/the-airboard-sketch-internet-of-things-fast/widget/video.html\" width=\"480\" height=\"480\"></iframe>");
         System.out.println(html);
         Assert.assertTrue(html.contains("<iframe src=\"//www.deezer.com/plugins/player?autoplay&#61;false&amp;playlist&#61;true\" width=\"480\" height=\"480\"></iframe>"));
@@ -391,6 +394,9 @@ public class TestArticleSanitizer {
         Assert.assertTrue(html.contains("<iframe src=\"//hitbox.tv/#!/embed/CymaticBruce\" width=\"480\" height=\"480\"></iframe>"));
         Assert.assertTrue(html.contains("<iframe src=\"//embed.spotify.com/?uri&#61;spotify:album:3NNSJt3gWSmPmnjCwZyLA5\" width=\"480\" height=\"480\"></iframe>"));
         Assert.assertTrue(html.contains("<iframe src=\"//soundsgood.co/embed/5634c158722be1b60e7651be\" width=\"480\" height=\"480\"></iframe>"));
+        Assert.assertTrue(html.contains("<iframe src=\"//cdn.livestream.com/embed/spaceflightnow?layout&#61;4&amp;height&#61;340&amp;width&#61;560&amp;autoplay&#61;false\" width=\"480\" height=\"480\"></iframe>"));
+        Assert.assertTrue(html.contains("<iframe src=\"//v.24liveblog.com/live/?id&#61;1312491\" width=\"480\" height=\"480\"></iframe>"));
+        Assert.assertTrue(html.contains("<iframe src=\"//fiddle.jshell.net/toddmotto/0oarywLe/show/light/\" width=\"480\" height=\"480\"></iframe>"));
         Assert.assertTrue(html.contains("<iframe src=\"//www.kickstarter.com/projects/223628811/the-airboard-sketch-internet-of-things-fast/widget/video.html\" width=\"480\" height=\"480\"></iframe>"));
     }
 }

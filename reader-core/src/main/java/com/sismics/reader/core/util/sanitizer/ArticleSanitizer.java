@@ -67,6 +67,9 @@ public class ArticleSanitizer {
             "(http:|https:)?//(www.)?whyd.com/.+|" +
             "(http:|https:)?//embed.spotify.com/.+|" +
             "(http:|https:)?//www.kickstarter.com/.+|" +
+            "(http:|https:)?//cdn.livestream.com/embed/.+|" +
+            "(http:|https:)?//v.24liveblog.com/live/.+|" +
+            "(http:|https:)?//fiddle.jshell.net/.+|" +
             "(http:|https:)?//soundsgood.co/embed/.+");
 
     /**
