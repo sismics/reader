@@ -17,13 +17,13 @@ public class TestFaviconDownloader {
         // Download directly
         FaviconDownloader downloader = new FaviconDownloader();
         String tempDir = System.getProperty("java.io.tmpdir");
-        String filename = downloader.downloadFavicon("http://slashdot.org/favicon.ico", tempDir, "favicon");
+        String filename = downloader.downloadFavicon("https://slashdot.org/favicon.ico", tempDir, "favicon");
         Assert.assertNotNull(filename);
         Assert.assertTrue(new File(filename).exists());
 
         // Download from page
         downloader = new FaviconDownloader();
-        filename = downloader.downloadFaviconFromPage("http://slashdot.org", tempDir, "favicon");
+        filename = downloader.downloadFaviconFromPage("https://slashdot.org", tempDir, "favicon");
         Assert.assertNotNull(filename);
         Assert.assertTrue(new File(filename).exists());
     }
