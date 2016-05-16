@@ -18,6 +18,8 @@ READER_PIDFILE=
 # SSL configuration here
 # Set READER_SECURE to true to activate SSL
 READER_SECURE=false
+# Set READER_HEADER_AUTHENTICATION to true to activate header-based authentication
+READER_HEADER_AUTHENTICATION=false
 # Your keystore path
 READER_KEYSTORE_PATH=
 # The keystore password
@@ -107,6 +109,7 @@ ${JAVA} -Xmx${READER_MAX_MEMORY}m \
   -Dreader.host=${READER_HOST} \
   -Dreader.port=${READER_PORT} \
   -Dreader.secure=${READER_SECURE} \
+  -Dreader.header_authentication=${READER_HEADER_AUTHENTICATION} \
   -Dreader.keystore_path=${READER_KEYSTORE_PATH} \
   -Dreader.keystore_password=${READER_KEYSTORE_PASSWORD} \
   -Dreader.keymanager_password=${READER_KEYMANAGER_PASSWORD} \
