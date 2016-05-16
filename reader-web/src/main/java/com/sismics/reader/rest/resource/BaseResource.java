@@ -13,7 +13,7 @@ import com.sismics.reader.rest.constant.BaseFunction;
 import com.sismics.rest.exception.ForbiddenClientException;
 import com.sismics.security.IPrincipal;
 import com.sismics.security.UserPrincipal;
-import com.sismics.util.filter.TokenBasedSecurityFilter;
+import com.sismics.util.filter.SecurityFilter;
 
 /**
  * Base class of REST resources.
@@ -44,7 +44,7 @@ public abstract class BaseResource {
      * @return True if the user is authenticated and not anonymous
      */
     protected boolean authenticate() {
-        Principal principal = (Principal) request.getAttribute(TokenBasedSecurityFilter.PRINCIPAL_ATTRIBUTE);
+        Principal principal = (Principal) request.getAttribute(SecurityFilter.PRINCIPAL_ATTRIBUTE);
         if (principal != null && principal instanceof IPrincipal) {
             this.principal = (IPrincipal) principal;
             return !this.principal.isAnonymous();
