@@ -1,5 +1,6 @@
 package com.sismics.reader.rest;
 
+import com.sismics.util.filter.HeaderBasedSecurityFilter;
 import junit.framework.Assert;
 
 import org.apache.commons.lang.StringUtils;
@@ -17,6 +18,7 @@ import com.sun.jersey.core.util.MultivaluedMapImpl;
  * Test of the security layer.
  * 
  * @author jtremeaux
+ * @author pacien
  */
 public class TestSecurity extends BaseJerseyTest {
     /**
@@ -85,4 +87,26 @@ public class TestSecurity extends BaseJerseyTest {
         // User testsecurity logs out
         clientUtil.logout(testSecurityAuthenticationToken);
     }
+
+    @Test
+    public void testHeaderBasedAuthentication() {
+        final String USERNAME = "header_auth_test";
+        final WebResource RESOURCE = resource().path("/user");
+        clientUtil.createUser(USERNAME);
+
+        Assert.assertEquals(Status.FORBIDDEN, RESOURCE
+                .post(ClientResponse.class)
+                .getClientResponseStatus());
+
+        Assert.assertEquals(Status.OK, RESOURCE
+                .header(HeaderBasedSecurityFilter.AUTHENTICATED_USER_HEADER, USERNAME)
+                .post(ClientResponse.class)
+                .getClientResponseStatus());
+
+        Assert.assertEquals(Status.FORBIDDEN, RESOURCE
+                .header(HeaderBasedSecurityFilter.AUTHENTICATED_USER_HEADER, "erroneous_" + USERNAME)
+                .post(ClientResponse.class)
+                .getClientResponseStatus());
+    }
+
 }
