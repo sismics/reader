@@ -31,6 +31,9 @@ set READER_MAX_MEMORY=150
 rem Set to true to activate SSL
 set READER_SECURE=false
 
+rem Set to true to activate header-based authentication
+set READER_HEADER_AUTHENTICATION=false
+
 rem The keystore path
 set READER_KEYSTORE_PATH=
 
@@ -40,4 +43,4 @@ set READER_KEYSTORE_PASSWORD=
 rem The key manager password
 set READER_KEYMANAGER_PASSWORD=
 
-java -Xmx%READER_MAX_MEMORY%m  -Dreader.home=%READER_HOME% -Dreader.host=%READER_HOST% -Dreader.port=%READER_PORT% -Dreader.secure=%READER_SECURE% -Dreader.keystore_path=%READER_KEYSTORE_PATH% -Dreader.keystore_password=%READER_KEYSTORE_PASSWORD% -Dreader.keymanager_password=%READER_KEYMANAGER_PASSWORD% -Dreader.contextPath=%READER_CONTEXT_PATH% -jar reader-standalone.jar
+java -Xmx%READER_MAX_MEMORY%m  -Dreader.home=%READER_HOME% -Dreader.host=%READER_HOST% -Dreader.port=%READER_PORT% -Dreader.secure=%READER_SECURE% -Dreader.header_authentication=%READER_HEADER_AUTHENTICATION% -Dreader.keystore_path=%READER_KEYSTORE_PATH% -Dreader.keystore_password=%READER_KEYSTORE_PASSWORD% -Dreader.keymanager_password=%READER_KEYMANAGER_PASSWORD% -Dreader.contextPath=%READER_CONTEXT_PATH% -jar reader-standalone.jar
