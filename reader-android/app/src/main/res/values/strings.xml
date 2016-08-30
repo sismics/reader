@@ -2,11 +2,11 @@
 <resources>
 
     <!-- Application -->
-    <string name="application_name">Sismics Reader</string>
+    <string name="application_name" translatable="false">Sismics Reader</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="login_explain"><![CDATA[To start, you must download and install Sismics Reader Server on <a href="http://www.sismics.com/reader">www.sismics.com/reader</a> and enter your server URL below]]></string>
-    <string name="server_url_hint">reader.sismics.com</string>
+    <string name="server_url_hint" translatable="false">reader.sismics.com</string>
     <string name="server">Server</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -35,7 +35,7 @@
     <string name="starred">Starred</string>
     <string name="subscriptions">Subscriptions</string>
     <string name="category">Category</string>
-    <string name="favicon">Favicon</string>
+    <string name="favicon" translatable="false">Favicon</string>
     <string name="crash_toast_text">A crash occurred, a report has been sent to resolve this problem</string>
     <string name="all_read_title">Mark all as read</string>
     <string name="all_read_message">Mark all articles as read?</string>
@@ -57,8 +57,8 @@
     <string name="extension_expanded_title">%1$d unread articles</string>
     <string name="enclosure">Enclosure</string>
     <string name="touch_close">Touch to close</string>
-    <string name="version">Version</string>
-    <string name="build">Build</string>
+    <string name="version" translatable="false">Version</string>
+    <string name="build" translatable="false">Build</string>
     <string name="action_search">Search articles</string>
     <string name="manage_categories">Manage categories</string>
     <string name="touch_reorder">Touch to reorder</string>
@@ -99,7 +99,7 @@
     <string name="pref_license_title">Open source licenses</string>
     <string name="pref_license_summary">Legal information about licenses</string>
     <string name="pref_website">Website</string>
-    <string name="pref_github">GitHub</string>
+    <string name="pref_github" translatable="false">GitHub</string>
     <string name="pref_issue">Report a bug</string>
     <string name="pref_clear_history_title">Clear search history</string>
     <string name="pref_clear_history_summary">Wipe the recent search suggestions</string>
@@ -113,7 +113,7 @@
     <string name="validate_error_alphanumeric">Only letters and numbers</string>
     
     <!-- Open source licenses content -->
-    <string name="licenses_content">
+    <string name="licenses_content" translatable="false">
       <![CDATA[
         <div>
           <h2>ViewPagerIndicator</h2>
