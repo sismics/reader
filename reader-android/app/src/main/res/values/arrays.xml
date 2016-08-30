@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="articlesFetched">
+    <string-array name="articlesFetched" translatable="false">
         <item>10</item>
         <item>15</item>
         <item>20</item>
@@ -14,7 +14,7 @@
         <item>Starred</item>
     </string-array>
 
-    <string-array name="defaultSubscriptionsValues">
+    <string-array name="defaultSubscriptionsValues" translatable="false">
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -25,7 +25,7 @@
         <item>Normal</item>
         <item>Large</item>
     </string-array>
-    <string-array name="fontSizeValues">
+    <string-array name="fontSizeValues" translatable="false">
         <item>10</item>
         <item>12</item>
         <item>14</item>

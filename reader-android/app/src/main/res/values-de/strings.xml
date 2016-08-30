@@ -46,7 +46,6 @@
     <string name="add_subscription_error">Fehler beim Abonnieren</string>
     <string name="add_subscription_success">Abonnement erfolgreich hinzugefügt</string>
     <string name="add">Hinzufügen</string>
-    <string name="extension_description">Zeigt die Anzahl der ungelesenen Artikel an</string>
     <string name="extension_expanded_title">%1$d ungelesene Artikel</string>
     <string name="touch_close">Berühren zum Schließen</string>
     <string name="action_search">Artikel suchen</string>
