@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Application -->
-    <string name="application_name" translatable="false">Sismics Reader</string>
+    <string name="application_name">Sismics Reader</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="login_explain"><![CDATA[To start, you must download and install Sismics Reader Server on <a href="http://www.sismics.com/reader">www.sismics.com/reader</a> and enter your server URL below]]></string>
@@ -35,7 +35,7 @@
     <string name="starred">Starred</string>
     <string name="subscriptions">Subscriptions</string>
     <string name="category">Category</string>
-    <string name="favicon" translatable="false">Favicon</string>
+    <string name="favicon">Favicon</string>
     <string name="crash_toast_text">A crash occurred, a report has been sent to resolve this problem</string>
     <string name="all_read_title">Mark all as read</string>
     <string name="all_read_message">Mark all articles as read?</string>
@@ -57,8 +57,8 @@
     <string name="extension_expanded_title">%1$d unread articles</string>
     <string name="enclosure">Enclosure</string>
     <string name="touch_close">Touch to close</string>
-    <string name="version" translatable="false">Version</string>
-    <string name="build" translatable="false">Build</string>
+    <string name="version">Version</string>
+    <string name="build">Build</string>
     <string name="action_search">Search articles</string>
     <string name="manage_categories">Manage categories</string>
     <string name="touch_reorder">Touch to reorder</string>

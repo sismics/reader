@@ -109,5 +109,9 @@
     <string name="drawer_open">Navigationsleiste öffnen</string>
     <string name="enclosure">Umrandung</string>
     <string name="error_loading_categories">Fehler beim Laden der Kategorien</string>
+    <string name="favicon">Favicon</string>
+    <string name="version">Version</string>
+    <string name="build">Build</string>
+    <string name="application_name">Sismic Reader</string>
 
 </resources>
