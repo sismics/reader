@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Application -->
+    <string name="login_explain"><![CDATA[Zum Starten musst du den Sismics Reader Server von <a href="http://www.sismics.com/reader">www.sismics.com/reader</a> herunterladen, installieren und die Server-URL unten eingeben]]></string>
+    <string name="server">Server</string>
+    <string name="username">Benutzername</string>
+    <string name="password">Passwort</string>
+    <string name="login">Login</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="login_fail_title">Login fehlgeschlagen</string>
+    <string name="login_fail">Falscher Benutzername oder falsches Passwort</string>
+    <string name="network_error_title">Netzwerkfehler</string>
+    <string name="network_error">Netzwerkfehler, bitte überprüfe die Internetverbindung und die Server-URL</string>
+    <string name="invalid_url_title">Ungültige URL</string>
+    <string name="invalid_url">Bitte überprüfe die Server-URL und versuche es nochmal</string>
+    <string name="refresh">Aktualisieren</string>
+    <string name="all_read">Alle als gelesen markieren</string>
+    <string name="logout">Abmelden</string>
+    <string name="settings">Einstellungen</string>
+    <string name="licenses">Open-Source-Lizenzen</string>
+    <string name="mark_as_read">Als gelesen markieren</string>
+    <string name="mark_as_unread">Als ungelesen markieren</string>
+    <string name="marked_as_unread">Als ungelesen markiert</string>
+    <string name="star">Favorisieren</string>
+    <string name="unstar">Favorisieren rückgängig</string>
+    <string name="latest">Neuste</string>
+    <string name="unread">Ungelesen</string>
+    <string name="all">Alle</string>
+    <string name="starred">Favoriten</string>
+    <string name="subscriptions">Abonnements</string>
+    <string name="category">Kategorie</string>
+    <string name="all_read_title">Alle als gelesen markieren</string>
+    <string name="all_read_message">Alle Artikel als gelesen markieren?</string>
+    <string name="share">Teilen</string>
+    <string name="share_to">Teile Artikel mit&#8230;</string>
+    <string name="no_articles">Keine Artikel</string>
+    <string name="no_unread_articles">Alle gelesen!</string>
+    <string name="error_loading_articles">Fehler beim Laden der Artikel</string>
+    <string name="error_loading_subscriptions">Fehler beim Laden der Abonnements</string>
+    <string name="loading_subscriptions">Lade Abonnements&#8230;</string>
+    <string name="loading_articles">Lade Artikel&#8230;</string>
+    <string name="add_subscription">Abonnieren</string>
+    <string name="add_subscription_hint">Feed- oder Webseiten-URL einfügen</string>
+    <string name="add_subscription_error">Fehler beim Abonnieren</string>
+    <string name="add_subscription_success">Abonnement erfolgreich hinzugefügt</string>
+    <string name="add">Hinzufügen</string>
+    <string name="extension_description">Zeigt die Anzahl der ungelesenen Artikel an</string>
+    <string name="extension_expanded_title">%1$d ungelesene Artikel</string>
+    <string name="touch_close">Berühren zum Schließen</string>
+    <string name="action_search">Artikel suchen</string>
+    <string name="manage_categories">Kategorien bearbeiten</string>
+    <string name="touch_reorder">Berühren zum Umsortieren</string>
+    <string name="manage_categories_explain">Kategorien ziehen, um sie umzusortieren. Speichern der Änderungen nicht vergessen!</string>
+    <string name="save">Speichern</string>
+    <string name="more_options">Mehr Optionen</string>
+    <string name="rename">Umbenennen</string>
+    <string name="rename_category">Kategorie umbenennen</string>
+    <string name="category_delete_title">Kategorie löschen</string>
+    <string name="category_delete_message">Soll die Kategorie wirklich gelöscht werden?</string>
+    <string name="finish_save_title">Ausstehende Änderungen</string>
+    <string name="finish_save_message">Sollen die ungespeicherten Einstellungen jetzt gespeichert werden?</string>
+    <string name="save_now">Jetzt speichern</string>
+    <string name="manage_categories_save_error">Netzwerkfehler beim Speichern der Änderungen</string>
+    <string name="manage_categories_save_success">Änderungen gespeichert</string>
+    <string name="manage_categories_saving">Speichere %1$d Änderungen&#8230;</string>
+    <string name="add_category">Kategorie hinzufügen</string>
+    <string name="category_name">Kategoriename</string>
+    <string name="selected_items">%1$d ausgewählt</string>
+    <string name="next">Weiter</string>
+    <string name="close">Schließen</string>
+
+    <!-- Preferences -->
+    <string name="pref_general_category">Allgemeine Einstellungen</string>
+    <string name="pref_reporting_category">Fehlerberichte</string>
+    <string name="pref_about_category">Über</string>
+    <string name="pref_enable_acra">Automatische Fehlerberichte</string>
+    <string name="pref_acra_enabled">Berichte senden</string>
+    <string name="pref_acra_disabled">Keine Berichte senden</string>
+    <string name="pref_subscriptions_unread">Nur ungelesene Abonnements anzeigen</string>
+    <string name="pref_subscriptions_unread_enabled">Nur ungelesene Abonnements werden anzeigt</string>
+    <string name="pref_subscriptions_unread_disabled">Alle Abonnemens werden angezeigt</string>
+    <string name="pref_articles_fetched">Anzahl Artikel pro Seite</string>
+    <string name="pref_default_subscription">Anfangskategorie</string>
+    <string name="pref_font_size">Schriftgröße in Artikeln</string>
+    <string name="pref_license_title">Open-Source-Lizenzen</string>
+    <string name="pref_license_summary">Rechliche Informationen über Lizenzen</string>
+    <string name="pref_website">Webseite</string>
+    <string name="pref_issue">Fehler melden</string>
+    <string name="pref_clear_history_title">Suchhistorie löschen</string>
+    <string name="pref_clear_history_summary">Suchvorschläge löschen</string>
+    <string name="pref_clear_history_success">Suchhistorie gelöscht</string>
+    
+    <!-- Validation -->
+    <string name="validate_error_email">Ungültige E-Mail</string>
+    <string name="validate_error_length_min">Zu kurz (min. %d)</string>
+    <string name="validate_error_length_max">Zu lang (max. %d)</string>
+    <string name="validate_error_required">Erforderlich</string>
+    <string name="validate_error_alphanumeric">Nur Buchstaben und Zahlen</string>
+    <string name="showcase_swipe_title">Artikel aktualisieren</string>
+    <string name="showcase_swipe_text">Nach unten wischen, um Artikel zu aktualisieren</string>
+    <string name="showcase_drawer_title">Abonnements</string>
+    <string name="showcase_drawer_text">Berühren zum öffnen der Abonnements</string>
+    <string name="crash_toast_text">Ein Absturz ist aufgetreten, es wurde ein Bericht gesendet, um zu helfen, das Problem zu lösen.</string>
+    <string name="delete">Löschen</string>
+    <string name="dismiss">Verwerfen</string>
+    <string name="drawer_close">Navigationsleiste schließen</string>
+    <string name="drawer_open">Navigationsleiste öffnen</string>
+    <string name="enclosure">Umrandung</string>
+    <string name="error_loading_categories">Fehler beim Laden der Kategorien</string>
+    <string name="favicon">Favicon</string>
+    <string name="version">Version</string>
+    <string name="build">Build</string>
+    <string name="application_name">Sismic Reader</string>
+
+</resources>
