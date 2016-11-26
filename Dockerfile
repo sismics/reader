@@ -1,4 +1,4 @@
-FROM sismics/debian-java7-jetty9
+FROM sismics/jetty:9.3.11
 MAINTAINER benjamin.gam@gmail.com
 
 ADD reader-web/target/reader-web-*.war /opt/jetty/webapps/reader.war
