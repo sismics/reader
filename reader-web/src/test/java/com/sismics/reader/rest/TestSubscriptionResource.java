@@ -373,9 +373,9 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         categories = rootCategory.getJSONArray("categories");
         Assert.assertEquals(2, categories.length());
         JSONObject comicsCategory = categories.optJSONObject(0);
-        Assert.assertEquals("Comics / Sub", comicsCategory.getString("name"));
+        Assert.assertEquals("Dev", comicsCategory.getString("name"));
         JSONArray subscriptions = comicsCategory.optJSONArray("subscriptions");
-        Assert.assertEquals(2, subscriptions.length());
+        Assert.assertEquals(1, subscriptions.length());
         
         // Export all subscriptions
         AppContext.getInstance().waitForAsync();
