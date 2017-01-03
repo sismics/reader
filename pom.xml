@@ -155,21 +155,21 @@
   </build>
         
   <modules>
-    <module>../reader-core</module>
-    <module>../reader-web-common</module>
-    <module>../reader-web</module>
+    <module>reader-core</module>
+    <module>reader-web-common</module>
+    <module>reader-web</module>
   </modules>
   
   <profiles>
     <profile>
       <id>prod</id>
       <modules>
-        <module>../reader-agent</module>
-        <module>../reader-distribution-standalone</module>
-        <module>../reader-distribution-debian</module>
-        <module>../reader-distribution-redhat</module>
-        <module>../reader-distribution-mac</module>
-        <module>../reader-distribution-windows</module>
+        <module>reader-agent</module>
+        <module>reader-distribution-standalone</module>
+        <module>reader-distribution-debian</module>
+        <module>reader-distribution-redhat</module>
+        <module>reader-distribution-mac</module>
+        <module>reader-distribution-windows</module>
       </modules>
     </profile>
     
