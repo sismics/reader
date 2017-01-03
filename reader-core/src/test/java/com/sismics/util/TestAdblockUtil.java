@@ -1,9 +1,10 @@
 package com.sismics.util;
 
+import com.sismics.util.adblock.Subscription;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import com.sismics.util.adblock.Subscription;
-
+@Ignore
 public class TestAdblockUtil {
 
     @Test
