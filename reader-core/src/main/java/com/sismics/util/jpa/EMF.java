@@ -1,16 +1,7 @@
 package com.sismics.util.jpa;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
+import com.sismics.reader.core.util.DirectoryUtil;
+import com.sismics.util.ResourceUtil;
 import org.hibernate.cfg.Environment;
 import org.hibernate.internal.util.config.ConfigurationHelper;
 import org.hibernate.service.ServiceRegistry;
@@ -18,7 +9,12 @@ import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sismics.reader.core.util.DirectoryUtil;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.io.File;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Entity manager factory.
@@ -62,23 +58,20 @@ public final class EMF {
     }
     
     private static Map<Object, Object> getEntityManagerProperties() {
-        // Use properties file if exists
-        try {
-            URL hibernatePropertiesUrl = EMF.class.getResource("/hibernate.properties");
-            if (hibernatePropertiesUrl != null) {
-                log.info("Configuring EntityManager from hibernate.properties");
-                
-                InputStream is = hibernatePropertiesUrl.openStream();
-                Properties properties = new Properties();
-                properties.load(is);
-                return properties;
-            }
-        } catch (IOException e) {
-            log.error("Error reading hibernate.properties", e);
+        // Use properties file packaged with the app if it exists
+        URL hibernatePropertiesUrl = EMF.class.getResource("/hibernate.properties");
+        if (hibernatePropertiesUrl != null) {
+            log.info("Configuring EntityManager from hibernate.properties");
+
+            return ResourceUtil.loadPropertiesFromUrl(hibernatePropertiesUrl);
         }
-        
-        // Use environment parameters
+
+        // Otherwise, use environment parameters
         log.info("Configuring EntityManager from environment parameters");
+        return getEntityManagerPropertiesFromEnvironment();
+    }
+
+    private static Map<Object, Object> getEntityManagerPropertiesFromEnvironment() {
         Map<Object, Object> props = new HashMap<Object, Object>();
         props.put("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver");
         File dbDirectory = DirectoryUtil.getDbDirectory();
@@ -93,7 +86,7 @@ public final class EMF {
         props.put("hibernate.cache.use_second_level_cache", "false");
         return props;
     }
-    
+
     /**
      * Private constructor.
      */
