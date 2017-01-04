@@ -1,15 +1,13 @@
 package com.sismics.reader.core.dao.jpa;
 
-import java.util.Date;
-import java.util.UUID;
+import com.sismics.reader.core.model.jpa.AuthenticationToken;
+import com.sismics.util.context.ThreadLocalContext;
+import org.joda.time.DateTime;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import org.joda.time.DateTime;
-
-import com.sismics.reader.core.model.jpa.AuthenticationToken;
-import com.sismics.util.context.ThreadLocalContext;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * Authentication token DAO.
@@ -66,9 +64,9 @@ public class AuthenticationTokenDao {
      * @param userId User ID
      */
     public void deleteOldSessionToken(String userId) {
-        StringBuilder sb = new StringBuilder("delete from T_AUTHENTICATION_TOKEN AS ato ");
-        sb.append(" where ato.AUT_IDUSER_C = :userId and ato.AUT_LONGLASTED_B = :longLasted");
-        sb.append(" and ato.AUT_LASTCONNECTIONDATE_D < :minDate ");
+        StringBuilder sb = new StringBuilder("delete from T_AUTHENTICATION_TOKEN ");
+        sb.append(" where AUT_IDUSER_C = :userId and AUT_LONGLASTED_B = :longLasted");
+        sb.append(" and AUT_LASTCONNECTIONDATE_D < :minDate ");
 
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         Query q = em.createNativeQuery(sb.toString());
@@ -84,9 +82,9 @@ public class AuthenticationTokenDao {
      * @param id Token id
      */
     public void updateLastConnectionDate(String id) {
-        StringBuilder sb = new StringBuilder("update T_AUTHENTICATION_TOKEN ato ");
-        sb.append(" set ato.AUT_LASTCONNECTIONDATE_D = :currentDate ");
-        sb.append(" where ato.AUT_ID_C = :id");
+        StringBuilder sb = new StringBuilder("update T_AUTHENTICATION_TOKEN ");
+        sb.append(" set AUT_LASTCONNECTIONDATE_D = :currentDate ");
+        sb.append(" where AUT_ID_C = :id");
 
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         Query q = em.createNativeQuery(sb.toString());

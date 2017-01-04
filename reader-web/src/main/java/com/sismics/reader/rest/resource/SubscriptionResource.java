@@ -316,7 +316,7 @@ public class SubscriptionResource extends BaseResource {
         }
         
         // Get feed and articles
-        Feed feed = null;
+        Feed feed;
         final FeedService feedService = AppContext.getInstance().getFeedService();
         try {
             feed = feedService.synchronize(url);

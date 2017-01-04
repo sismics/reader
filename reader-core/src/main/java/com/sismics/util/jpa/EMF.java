@@ -127,7 +127,7 @@ public final class EMF {
         return driver.contains("postgresql");
     }
 
-    private static String getDriver() {
+    public static String getDriver() {
         return (String) properties.get("hibernate.connection.driver_class");
     }
 }

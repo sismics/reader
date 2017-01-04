@@ -26,12 +26,29 @@ public class ArticleDao {
     public String create(Article article) {
         // Create the UUID
         article.setId(UUID.randomUUID().toString());
-        
+        article.setCreateDate(new Date());
+
         // Create the article
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        article.setCreateDate(new Date());
-        em.persist(article);
-        
+        em.createNativeQuery("insert into T_ARTICLE(ART_ID_C, ART_IDFEED_C, ART_URL_C, ART_BASEURI_C, ART_GUID_C, ART_TITLE_C, ART_CREATOR_C, ART_DESCRIPTION_C, ART_COMMENTURL_C, ART_COMMENTCOUNT_N, ART_ENCLOSUREURL_C, ART_ENCLOSURELENGTH_N, ART_ENCLOSURETYPE_C, ART_PUBLICATIONDATE_D, ART_CREATEDATE_D)" +
+                "  values (:id, :feedId, :url, :baseUri, :guid, :title, :creator, :description, :commentUrl, :commentCount, :enclosureUrl, :enclosureLength, :enclosureType, :publicationDate, :createDate)")
+                .setParameter("id", article.getId())
+                .setParameter("feedId", article.getFeedId())
+                .setParameter("url", article.getUrl())
+                .setParameter("baseUri", article.getBaseUri())
+                .setParameter("guid", article.getGuid())
+                .setParameter("title", article.getTitle())
+                .setParameter("creator", article.getCreator())
+                .setParameter("description", article.getDescription())
+                .setParameter("commentUrl", article.getCommentUrl())
+                .setParameter("commentCount", article.getCommentCount())
+                .setParameter("enclosureUrl", article.getEnclosureUrl())
+                .setParameter("enclosureLength", article.getEnclosureLength())
+                .setParameter("enclosureType", article.getEnclosureType())
+                .setParameter("publicationDate", article.getPublicationDate())
+                .setParameter("createDate", article.getCreateDate())
+                .executeUpdate();
+
         return article.getId();
     }
     
@@ -160,24 +177,31 @@ public class ArticleDao {
      * @return Updated article
      */
     public Article update(Article article) {
-        EntityManager em = ThreadLocalContext.get().getEntityManager();
-        
         // Get the article
-        Query q = em.createQuery("select a from Article a where a.id = :id and a.deleteDate is null");
-        q.setParameter("id", article.getId());
-        Article articleFromDb = (Article) q.getSingleResult();
+        EntityManager em = ThreadLocalContext.get().getEntityManager();
+        em.createNativeQuery("update T_ARTICLE set" +
+                "  ART_URL_C = :url," +
+                "  ART_TITLE_C = :title," +
+                "  ART_CREATOR_C = :creator," +
+                "  ART_DESCRIPTION_C = :description," +
+                "  ART_COMMENTURL_C = :commentUrl," +
+                "  ART_COMMENTCOUNT_N = :commentCount," +
+                "  ART_ENCLOSUREURL_C = :enclosureUrl," +
+                "  ART_ENCLOSURELENGTH_N = :enclosureLength," +
+                "  ART_ENCLOSURETYPE_C = :enclosureType" +
+                "  where ART_ID_C = :id and ART_DELETEDATE_D is null")
+                .setParameter("url", article.getUrl())
+                .setParameter("title", article.getTitle())
+                .setParameter("creator", article.getCreator())
+                .setParameter("description", article.getDescription())
+                .setParameter("commentUrl", article.getCommentUrl())
+                .setParameter("commentCount", article.getCommentCount())
+                .setParameter("enclosureUrl", article.getEnclosureUrl())
+                .setParameter("enclosureLength", article.getEnclosureLength())
+                .setParameter("enclosureType", article.getEnclosureType())
+                .setParameter("id", article.getId())
+                .executeUpdate();
 
-        // Update the article
-        articleFromDb.setUrl(article.getUrl());
-        articleFromDb.setTitle(article.getTitle());
-        articleFromDb.setCreator(article.getCreator());
-        articleFromDb.setDescription(article.getDescription());
-        articleFromDb.setCommentUrl(article.getCommentUrl());
-        articleFromDb.setCommentCount(article.getCommentCount());
-        articleFromDb.setEnclosureUrl(article.getEnclosureUrl());
-        articleFromDb.setEnclosureLength(article.getEnclosureLength());
-        articleFromDb.setEnclosureType(article.getEnclosureType());
-        
         return article;
     }
 }

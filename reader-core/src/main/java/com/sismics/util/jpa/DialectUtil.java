@@ -43,4 +43,24 @@ public class DialectUtil {
         sql = sql.replaceAll("bit default 0", "bool default false");
         return sql;
     }
+
+    public static String getDateDiff(String field, String diff, String unit) {
+        if (EMF.isDriverHsql()) {
+            return "DATE_SUB(" + field + ", INTERVAL " + diff + " " + unit + ")";
+        } else if (EMF.isDriverPostgresql()) {
+            return field + " - (" + diff + " * interval '1 " + unit + "')";
+        } else {
+            throw new RuntimeException("Unknown DB: " + EMF.getDriver());
+        }
+    }
+
+    public static String getTimeStamp(String field) {
+        if (EMF.isDriverHsql()) {
+            return "TIMESTAMP(" + field + ")";
+        } else if (EMF.isDriverPostgresql()) {
+            return field;
+        } else {
+            throw new RuntimeException("Unknown DB: " + EMF.getDriver());
+        }
+    }
 }

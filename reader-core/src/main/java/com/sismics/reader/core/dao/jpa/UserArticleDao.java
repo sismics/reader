@@ -3,17 +3,18 @@ package com.sismics.reader.core.dao.jpa;
 import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
+import com.sismics.reader.core.dao.jpa.mapper.UserArticleMapper;
 import com.sismics.reader.core.model.jpa.UserArticle;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
 import com.sismics.reader.core.util.jpa.QueryParam;
 import com.sismics.reader.core.util.jpa.QueryUtil;
 import com.sismics.util.context.ThreadLocalContext;
+import com.sismics.util.jpa.DialectUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -69,7 +70,7 @@ public class UserArticleDao {
     public void markAsRead(UserArticleCriteria criteria) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
-        StringBuilder sb = new StringBuilder("update T_USER_ARTICLE ua set ua.USA_READDATE_D = :readDate where ua.USA_ID_C in (");
+        StringBuilder sb = new StringBuilder("update T_USER_ARTICLE as ua set ua.USA_READDATE_D = :readDate where ua.USA_ID_C in (");
         sb.append("  select ua2.USA_ID_C from T_USER_ARTICLE ua2 ");
         sb.append("  join T_ARTICLE a on a.ART_ID_C = ua2.USA_IDARTICLE_C ");
         if (criteria.getFeedSubscriptionId() != null || criteria.getCategoryId() != null) {
@@ -143,7 +144,7 @@ public class UserArticleDao {
         QueryParam queryParam = getQueryParam(criteria);
         Query q = QueryUtil.getNativeQuery(queryParam);
         List<Object[]> l = q.getResultList();
-        return assembleResultList(l);
+        return new UserArticleMapper().map(l);
     }
     
     /**
@@ -155,51 +156,9 @@ public class UserArticleDao {
     public void findByCriteria(UserArticleCriteria criteria, PaginatedList<UserArticleDto> paginatedList) {
         QueryParam queryParam = getQueryParam(criteria);
         List<Object[]> l = PaginatedLists.executePaginatedQuery(paginatedList, queryParam, false);
-        List<UserArticleDto> userArticleDtoList = assembleResultList(l);
-        paginatedList.setResultList(userArticleDtoList);
+        paginatedList.setResultList(new UserArticleMapper().map(l));
     }
 
-    /**
-     * Assemble the query results.
-     * 
-     * @param l Query results as a table
-     * @return Query results as a list of domain objects
-     */
-    private List<UserArticleDto> assembleResultList(List<Object[]> l) {
-        // Assemble results
-        List<UserArticleDto> userArticleDtoList = new ArrayList<UserArticleDto>();
-        for (Object[] o : l) {
-            int i = 0;
-            UserArticleDto userArticleDto = new UserArticleDto();
-            userArticleDto.setId((String) o[i++]);
-            Timestamp readTimestamp = (Timestamp) o[i++];
-            if (readTimestamp != null) {
-                userArticleDto.setReadTimestamp(readTimestamp.getTime());
-            }
-            Timestamp starTimestamp = (Timestamp) o[i++];
-            if (starTimestamp != null) {
-                userArticleDto.setStarTimestamp(starTimestamp.getTime());
-            }
-            userArticleDto.setFeedTitle((String) o[i++]);
-            userArticleDto.setFeedSubscriptionId((String) o[i++]);
-            userArticleDto.setFeedSubscriptionTitle((String) o[i++]);
-            userArticleDto.setArticleId((String) o[i++]);
-            userArticleDto.setArticleUrl((String) o[i++]);
-            userArticleDto.setArticleGuid((String) o[i++]);
-            userArticleDto.setArticleTitle((String) o[i++]);
-            userArticleDto.setArticleCreator((String) o[i++]);
-            userArticleDto.setArticleDescription((String) o[i++]);
-            userArticleDto.setArticleCommentUrl((String) o[i++]);
-            userArticleDto.setArticleCommentCount((Integer) o[i++]);
-            userArticleDto.setArticleEnclosureUrl((String) o[i++]);
-            userArticleDto.setArticleEnclosureLength((Integer) o[i++]);
-            userArticleDto.setArticleEnclosureType((String) o[i++]);
-            userArticleDto.setArticlePublicationTimestamp(((Timestamp) o[i++]).getTime());
-            userArticleDtoList.add(userArticleDto);
-        }
-        return userArticleDtoList;
-    }
-    
     /**
      * Creates the query parameters from the criteria.
      * 
@@ -259,13 +218,13 @@ public class UserArticleDao {
         }
         if (criteria.getArticlePublicationDateMax() != null && criteria.getArticleIdMax() != null) {
             // Start the page after this article
-            criteriaList.add("concat(a.ART_PUBLICATIONDATE_D, a.ART_ID_C) < concat(TIMESTAMP(:articlePublicationDateMax), :articleIdMax)");
+            criteriaList.add("concat(a.ART_PUBLICATIONDATE_D, a.ART_ID_C) < concat(" + DialectUtil.getTimeStamp(":articlePublicationDateMax") + ", :articleIdMax)");
             parameterMap.put("articlePublicationDateMax", criteria.getArticlePublicationDateMax());
             parameterMap.put("articleIdMax", criteria.getArticleIdMax());
         }
         if (criteria.getUserArticleStarredDateMax() != null && criteria.getUserArticleIdMax() != null) {
             // Start the page this starred article
-            criteriaList.add("concat(ua.USA_STARREDDATE_D, ua.USA_ID_C) < concat(TIMESTAMP(:userArticleStarredDateMax), :userArticleIdMax)");
+            criteriaList.add("concat(ua.USA_STARREDDATE_D, ua.USA_ID_C) < concat(" + DialectUtil.getTimeStamp(":userArticleStarredDateMax") + ", :userArticleIdMax)");
             parameterMap.put("userArticleStarredDateMax", criteria.getUserArticleStarredDateMax());
             parameterMap.put("userArticleIdMax", criteria.getUserArticleIdMax());
         }
@@ -282,8 +241,7 @@ public class UserArticleDao {
         } else {
             sb.append(" order by a.ART_PUBLICATIONDATE_D desc, a.ART_ID_C desc");
         }
-        
-        QueryParam queryParam = new QueryParam(sb.toString(), parameterMap);
-        return queryParam;
+
+        return new QueryParam(sb.toString(), parameterMap);
     }
 }
