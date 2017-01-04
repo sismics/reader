@@ -1,23 +1,5 @@
 package com.sismics.reader.rest.resource;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Appender;
-import org.apache.log4j.Logger;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.util.ConfigUtil;
 import com.sismics.reader.core.util.jpa.PaginatedList;
@@ -29,6 +11,18 @@ import com.sismics.util.NetworkUtil;
 import com.sismics.util.log4j.LogCriteria;
 import com.sismics.util.log4j.LogEntry;
 import com.sismics.util.log4j.MemoryAppender;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Appender;
+import org.apache.log4j.Logger;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * General app REST resource.
@@ -41,7 +35,6 @@ public class AppResource extends BaseResource {
      * Return the information about the application.
      * 
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -67,7 +60,6 @@ public class AppResource extends BaseResource {
      * @param limit Page limit
      * @param offset Page offset
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Path("log")
@@ -119,7 +111,6 @@ public class AppResource extends BaseResource {
      * Destroy and rebuild articles index.
      * 
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("batch/reindex")
@@ -144,7 +135,6 @@ public class AppResource extends BaseResource {
      * Attempt to map a port to the gateway.
      * 
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("map_port")

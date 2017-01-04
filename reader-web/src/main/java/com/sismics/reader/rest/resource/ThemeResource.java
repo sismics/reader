@@ -25,13 +25,12 @@ public class ThemeResource extends BaseResource {
      * Returns the list of all themes.
      * 
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response list() throws JSONException {
         ThemeDao themeDao = new ThemeDao();
-        List<String> themeList = null;
+        List<String> themeList;
         try {
             themeList = themeDao.findAll(EnvironmentUtil.isUnitTest() ? null : request.getServletContext());
         } catch (Exception e) {

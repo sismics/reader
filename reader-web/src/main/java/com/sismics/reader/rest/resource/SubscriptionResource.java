@@ -1,65 +1,14 @@
 package com.sismics.reader.rest.resource;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.NoResultException;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
-import javax.ws.rs.core.StreamingOutput;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.dom.DOMSource;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
-import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.google.common.io.ByteStreams;
-import com.sismics.reader.core.dao.jpa.CategoryDao;
-import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
-import com.sismics.reader.core.dao.jpa.FeedSynchronizationDao;
-import com.sismics.reader.core.dao.jpa.UserArticleDao;
-import com.sismics.reader.core.dao.jpa.UserDao;
+import com.sismics.reader.core.dao.jpa.*;
 import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.event.SubscriptionImportedEvent;
 import com.sismics.reader.core.model.context.AppContext;
-import com.sismics.reader.core.model.jpa.Category;
-import com.sismics.reader.core.model.jpa.Feed;
-import com.sismics.reader.core.model.jpa.FeedSubscription;
-import com.sismics.reader.core.model.jpa.FeedSynchronization;
-import com.sismics.reader.core.model.jpa.User;
+import com.sismics.reader.core.model.jpa.*;
 import com.sismics.reader.core.service.FeedService;
 import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.EntityManagerUtil;
@@ -75,6 +24,31 @@ import com.sismics.rest.util.ValidationUtil;
 import com.sismics.util.MessageUtil;
 import com.sun.jersey.multipart.FormDataBodyPart;
 import com.sun.jersey.multipart.FormDataParam;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import javax.persistence.NoResultException;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.StreamingOutput;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.dom.DOMSource;
+import java.io.*;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Feed subscriptions REST resources.
@@ -88,7 +62,6 @@ public class SubscriptionResource extends BaseResource {
      * 
      * @param unread Returns only subscriptions having unread articles
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -161,7 +134,6 @@ public class SubscriptionResource extends BaseResource {
             List<JSONObject> fullCategoryListJson = new ArrayList<JSONObject>();
             int i = 0;
             for (Category category : allCategoryList) {
-                categoryJson = null;
                 if (categoryArrayJson != null && i < categoryArrayJson.length() && categoryArrayJson.getJSONObject(i).getString("id").equals(category.getId())) {
                     categoryJson = categoryArrayJson.getJSONObject(i++);
                 } else {
@@ -190,7 +162,6 @@ public class SubscriptionResource extends BaseResource {
      * @param limit Page limit
      * @param afterArticle Start the list after this article
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Path("{id: [a-z0-9\\-]+}")
@@ -270,7 +241,6 @@ public class SubscriptionResource extends BaseResource {
      * 
      * @param id Subscription ID
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Path("{id: [a-z0-9\\-]+}/sync")
@@ -320,7 +290,6 @@ public class SubscriptionResource extends BaseResource {
      * @param url URL of a feed, or a web page referencing a feed 
      * @param title Feed title
      * @return Response
-     * @throws JSONException
      */
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -399,7 +368,6 @@ public class SubscriptionResource extends BaseResource {
      * @param categoryId Category ID
      * @param order Display order of this subscription in its category
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("{id: [a-z0-9\\-]+}")
@@ -456,7 +424,6 @@ public class SubscriptionResource extends BaseResource {
      * 
      * @param id Subscription ID
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Path("{id: [a-z0-9\\-]+}/favicon")
@@ -503,7 +470,6 @@ public class SubscriptionResource extends BaseResource {
      * 
      * @param id Subscription ID
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("{id: [a-z0-9\\-]+}/read")
@@ -541,7 +507,6 @@ public class SubscriptionResource extends BaseResource {
      * 
      * @param id Subscription ID
      * @return Response
-     * @throws JSONException
      */
     @DELETE
     @Path("{id: [a-z0-9\\-]+}")
@@ -575,7 +540,6 @@ public class SubscriptionResource extends BaseResource {
      * 
      * @param fileBodyPart File to import
      * @return Response
-     * @throws JSONException
      */
     @PUT
     @Consumes("multipart/form-data") 
@@ -625,7 +589,6 @@ public class SubscriptionResource extends BaseResource {
      * Exports all the user's feeds to an OPML file.
      * 
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Path("export")

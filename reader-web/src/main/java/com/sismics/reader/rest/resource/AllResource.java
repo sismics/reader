@@ -36,7 +36,6 @@ public class AllResource extends BaseResource {
      * @param limit Page limit
      * @param afterArticle Start the list after this user article
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -89,7 +88,6 @@ public class AllResource extends BaseResource {
      * Marks all articles as read.
      * 
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("/read")

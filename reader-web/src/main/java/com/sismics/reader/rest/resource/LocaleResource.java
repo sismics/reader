@@ -1,19 +1,17 @@
 package com.sismics.reader.rest.resource;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.sismics.reader.core.dao.jpa.LocaleDao;
+import com.sismics.reader.core.model.jpa.Locale;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-
-import com.sismics.reader.core.dao.jpa.LocaleDao;
-import com.sismics.reader.core.model.jpa.Locale;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Locale REST resources.
@@ -26,7 +24,6 @@ public class LocaleResource extends BaseResource {
      * Returns the list of all locales.
      * 
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)

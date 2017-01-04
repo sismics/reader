@@ -1,19 +1,5 @@
 package com.sismics.reader.rest.resource;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.service.IndexingService;
@@ -22,6 +8,14 @@ import com.sismics.reader.rest.assembler.ArticleAssembler;
 import com.sismics.rest.exception.ForbiddenClientException;
 import com.sismics.rest.exception.ServerException;
 import com.sismics.rest.util.ValidationUtil;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Search articles REST resources.
@@ -38,7 +32,6 @@ public class SearchResource extends BaseResource {
      * @param limit Page limit
      * @param offset Page offset
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Path("{query: .+}")
@@ -55,7 +48,7 @@ public class SearchResource extends BaseResource {
         
         // Search in index
         IndexingService indexingService = AppContext.getInstance().getIndexingService();
-        PaginatedList<UserArticleDto> paginatedList = null;
+        PaginatedList<UserArticleDto> paginatedList;
         try {
             paginatedList = indexingService.searchArticles(principal.getId(), query, offset, limit);
         } catch (Exception e) {

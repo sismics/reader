@@ -26,7 +26,6 @@ public class JobResource extends BaseResource {
      *
      * @param id Job ID
      * @return Response
-     * @throws JSONException
      */
     @DELETE
     @Path("{id: [a-z0-9\\-]+}")
