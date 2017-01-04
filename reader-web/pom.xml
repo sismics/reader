@@ -88,6 +88,11 @@
       <artifactId>hsqldb</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+
     <!-- Test dependencies -->
     <dependency>
       <groupId>com.sismics.reader</groupId>
@@ -156,6 +161,8 @@
             <extraClasspath>target/classes;../reader-core/target/classes</extraClasspath>
             <overrideDescriptor>src/dev/main/webapp/web-override.xml</overrideDescriptor>
           </webAppConfig>
+          <stopKey/>
+          <stopPort/>
         </configuration>
       </plugin>
 
@@ -232,6 +239,8 @@
                 <extraClasspath>target/classes;../reader-core/target/classes</extraClasspath>
                 <overrideDescriptor>src/dev/main/webapp/web-override.xml</overrideDescriptor>
               </webAppConfig>
+              <stopKey/>
+              <stopPort/>
             </configuration>
           </plugin>
         </plugins>
