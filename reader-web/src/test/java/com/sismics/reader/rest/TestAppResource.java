@@ -1,6 +1,7 @@
 package com.sismics.reader.rest;
 
 import com.google.common.collect.ImmutableMap;
+import com.sismics.rest.exception.ClientException;
 import junit.framework.Assert;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
@@ -64,13 +65,18 @@ public class TestAppResource extends BaseJerseyTest {
     public void testLogResource() throws JSONException {
         // Login admin
         login("admin", "admin", false);
-        
+
+        // Generate some error logs
+        for (int i = 0; i < 20; i++) {
+            new ClientException("type", "some error " + i, null);
+        }
+
         // Check the logs (page 1)
-        GET("/app/log", ImmutableMap.of("level", "DEBUG"));
+        GET("/app/log", ImmutableMap.of("level", "ERROR"));
         assertIsOk();
         JSONObject json = getJsonResult();
         JSONArray logs = json.getJSONArray("logs");
-        Assert.assertTrue(logs.length() == 10);
+        Assert.assertEquals(10, logs.length());
         Long date1 = logs.optJSONObject(0).optLong("date");
         Long date2 = logs.optJSONObject(9).optLong("date");
         Assert.assertTrue(date1 >= date2);
@@ -78,7 +84,7 @@ public class TestAppResource extends BaseJerseyTest {
         // Check the logs (page 2)
         GET("/app/log", ImmutableMap.of(
                 "offset",  "10",
-                "level", "DEBUG"));
+                "level", "ERROR"));
         assertIsOk();
         json = getJsonResult();
         logs = json.getJSONArray("logs");
