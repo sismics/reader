@@ -32,7 +32,6 @@ public class ArticleResource extends BaseResource {
      * 
      * @param id Article ID
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("{id: [a-z0-9\\-]+}/read")
@@ -78,7 +77,6 @@ public class ArticleResource extends BaseResource {
      * 
      * @param idList List of article ID
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("read")
@@ -126,7 +124,6 @@ public class ArticleResource extends BaseResource {
      * 
      * @param id Article ID
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("{id: [a-z0-9\\-]+}/unread")
@@ -172,7 +169,6 @@ public class ArticleResource extends BaseResource {
      * 
      * @param idList List of article ID
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("unread")

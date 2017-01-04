@@ -1,25 +1,5 @@
 package com.sismics.reader.rest.resource;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-
 import com.sismics.reader.core.dao.jpa.UserArticleDao;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
@@ -29,6 +9,16 @@ import com.sismics.reader.core.util.jpa.PaginatedLists;
 import com.sismics.reader.rest.assembler.ArticleAssembler;
 import com.sismics.rest.exception.ClientException;
 import com.sismics.rest.exception.ForbiddenClientException;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Starred articles REST resources.
@@ -43,7 +33,6 @@ public class StarredResource extends BaseResource {
      * @param limit Page limit
      * @param afterArticle Start the list after this article
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -95,7 +84,6 @@ public class StarredResource extends BaseResource {
      * 
      * @param id User article ID
      * @return Response
-     * @throws JSONException
      */
     @PUT
     @Path("{id: [a-z0-9\\-]+}")
@@ -131,7 +119,6 @@ public class StarredResource extends BaseResource {
      * 
      * @param id User article ID
      * @return Response
-     * @throws JSONException
      */
     @DELETE
     @Path("{id: [a-z0-9\\-]+}")
@@ -167,7 +154,6 @@ public class StarredResource extends BaseResource {
      * 
      * @param idList List of article ID
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("star")
@@ -202,7 +188,6 @@ public class StarredResource extends BaseResource {
      * 
      * @param idList List of article ID
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("unstar")

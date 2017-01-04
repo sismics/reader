@@ -1,17 +1,13 @@
 package com.sismics.reader.rest;
 
+import com.google.common.collect.ImmutableMap;
+import com.sismics.rest.exception.ClientException;
 import junit.framework.Assert;
-
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import com.sismics.reader.rest.filter.CookieAuthenticationFilter;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.WebResource;
 
 /**
  * Test the app resource.
@@ -22,16 +18,13 @@ public class TestAppResource extends BaseJerseyTest {
     /**
      * Test the API resource.
      * 
-     * @throws JSONException
      */
     @Test
     public void testAppResource() throws JSONException {
         // Check the application info
-        WebResource appResource = resource().path("/app");
-        ClientResponse response = appResource.get(ClientResponse.class);
-        response = appResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        GET("/app");
+        assertIsOk();
+        JSONObject json = getJsonResult();
         String currentVersion = json.getString("current_version");
         Assert.assertNotNull(currentVersion);
         String minVersion = json.getString("min_version");
@@ -42,68 +35,58 @@ public class TestAppResource extends BaseJerseyTest {
         Assert.assertTrue(totalMemory > 0 && totalMemory > freeMemory);
         
         // Login admin
-        String adminAuthenticationToken = clientUtil.login("admin", "admin", false);
+        login("admin", "admin", false);
         
         // Rebuild articles index
-        appResource = resource().path("/app/batch/reindex");
-        appResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        response = appResource.post(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/app/batch/reindex");
+        assertIsOk();
     }
 
     /**
      * Test the map port resource.
      * 
-     * @throws JSONException
      */
     @Test
     @Ignore
     public void testMapPortResource() throws JSONException {
         // Login admin
-        String adminAuthenticationToken = clientUtil.login("admin", "admin", false);
+        login("admin", "admin", false);
         
         // Map port using UPnP
-        WebResource appResource = resource().path("/app/map_port");
-        appResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        appResource.post(ClientResponse.class);
+        POST("/app/map_port");
+        assertIsOk();
     }
     
     /**
      * Test the log resource.
      * 
-     * @throws JSONException
      */
     @Test
     public void testLogResource() throws JSONException {
         // Login admin
-        String adminAuthenticationToken = clientUtil.login("admin", "admin", false);
-        
+        login("admin", "admin", false);
+
+        // Generate some error logs
+        for (int i = 0; i < 20; i++) {
+            new ClientException("type", "some error " + i, null);
+        }
+
         // Check the logs (page 1)
-        WebResource appResource = resource()
-                .path("/app/log")
-                .queryParam("level", "DEBUG");
-        ClientResponse response = appResource.get(ClientResponse.class);
-        appResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        response = appResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        GET("/app/log", ImmutableMap.of("level", "ERROR"));
+        assertIsOk();
+        JSONObject json = getJsonResult();
         JSONArray logs = json.getJSONArray("logs");
-        Assert.assertTrue(logs.length() == 10);
+        Assert.assertEquals(10, logs.length());
         Long date1 = logs.optJSONObject(0).optLong("date");
         Long date2 = logs.optJSONObject(9).optLong("date");
         Assert.assertTrue(date1 >= date2);
         
         // Check the logs (page 2)
-        appResource = resource()
-                .path("/app/log")
-                .queryParam("offset",  "10")
-                .queryParam("level", "DEBUG");
-        response = appResource.get(ClientResponse.class);
-        appResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        response = appResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/app/log", ImmutableMap.of(
+                "offset",  "10",
+                "level", "ERROR"));
+        assertIsOk();
+        json = getJsonResult();
         logs = json.getJSONArray("logs");
         Assert.assertTrue(logs.length() == 10);
         Long date3 = logs.optJSONObject(0).optLong("date");

@@ -1,18 +1,15 @@
 package com.sismics.reader.rest;
 
+import com.google.common.collect.ImmutableMap;
 import com.sismics.util.filter.HeaderBasedSecurityFilter;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.ClientResponse.Status;
+import com.sun.jersey.api.client.WebResource;
 import junit.framework.Assert;
-
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
-
-import com.sismics.reader.rest.filter.CookieAuthenticationFilter;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 /**
  * Test of the security layer.
@@ -24,89 +21,72 @@ public class TestSecurity extends BaseJerseyTest {
     /**
      * Test of the security layer.
      * 
-     * @throws JSONException
      */
     @Test
     public void testSecurity() throws JSONException {
         // Create a user
-        clientUtil.createUser("testsecurity");
+        createUser("testsecurity");
 
         // Changes a user's email KO : the user is not connected
-        WebResource userResource = resource().path("/user/update");
-        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.add("email", "testsecurity2@reader.com");
-        ClientResponse response = userResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.FORBIDDEN, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        POST("/user/update", ImmutableMap.of("email", "testsecurity2@reader.com"));
+        assertIsForbidden();
+        JSONObject json = getJsonResult();
         Assert.assertEquals("ForbiddenError", json.getString("type"));
         Assert.assertEquals("You don't have access to this resource", json.getString("message"));
 
         // User testsecurity logs in
-        String testSecurityAuthenticationToken = clientUtil.login("testsecurity");
+        login("testsecurity");
 
         // User testsecurity creates a new user KO : no permission
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(testSecurityAuthenticationToken));
-        response = userResource.put(ClientResponse.class);
-        Assert.assertEquals(Status.FORBIDDEN, Status.fromStatusCode(response.getStatus()));
+        PUT("/user");
+        assertIsForbidden();
         Assert.assertEquals("ForbiddenError", json.getString("type"));
         Assert.assertEquals("You don't have access to this resource", json.getString("message"));
 
         // User testsecurity changes his email OK
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(testSecurityAuthenticationToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("email", "testsecurity2@reader.com");
-        postParams.add("locale", "en");
-        response = userResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/user", ImmutableMap.of(
+                "email", "testsecurity2@reader.com",
+                "locale", "en"
+        ));
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
 
         // User testsecurity logs out
-        userResource = resource().path("/user/logout");
-        userResource.addFilter(new CookieAuthenticationFilter(testSecurityAuthenticationToken));
-        postParams = new MultivaluedMapImpl();
-        response = userResource.post(ClientResponse.class, postParams);
-        json = response.getEntity(JSONObject.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        testSecurityAuthenticationToken = clientUtil.getAuthenticationCookie(response);
-        Assert.assertTrue(StringUtils.isEmpty(testSecurityAuthenticationToken));
+        POST("/user/logout");
+        assertIsOk();
+        String authToken = getAuthenticationCookie(response);
+        Assert.assertTrue(StringUtils.isEmpty(authToken));
 
         // User testsecurity logs out KO : he is not connected anymore
-        userResource = resource().path("/user/logout");
-        userResource.addFilter(new CookieAuthenticationFilter(testSecurityAuthenticationToken));
-        postParams = new MultivaluedMapImpl();
-        response = userResource.post(ClientResponse.class, postParams);
-        json = response.getEntity(JSONObject.class);
-        Assert.assertEquals(Status.FORBIDDEN, Status.fromStatusCode(response.getStatus()));
+        POST("/user/logout");
+        assertIsForbidden();
 
         // User testsecurity logs in with a long lived session
-        testSecurityAuthenticationToken = clientUtil.login("testsecurity", "12345678", true);
+        login("testsecurity", "12345678", true);
 
         // User testsecurity logs out
-        clientUtil.logout(testSecurityAuthenticationToken);
+        logout();
     }
 
     @Test
     public void testHeaderBasedAuthentication() {
-        final String USERNAME = "header_auth_test";
-        final WebResource RESOURCE = resource().path("/user");
-        clientUtil.createUser(USERNAME);
+        final String userName = "header_auth_test";
+        final WebResource resource = resource().path("/user");
+        createUser(userName);
 
-        Assert.assertEquals(Status.FORBIDDEN, RESOURCE
+        Assert.assertEquals(Status.FORBIDDEN, resource
                 .post(ClientResponse.class)
                 .getClientResponseStatus());
 
-        Assert.assertEquals(Status.OK, RESOURCE
-                .header(HeaderBasedSecurityFilter.AUTHENTICATED_USER_HEADER, USERNAME)
+        Assert.assertEquals(Status.OK, resource
+                .header(HeaderBasedSecurityFilter.AUTHENTICATED_USER_HEADER, userName)
                 .post(ClientResponse.class)
                 .getClientResponseStatus());
 
-        Assert.assertEquals(Status.FORBIDDEN, RESOURCE
-                .header(HeaderBasedSecurityFilter.AUTHENTICATED_USER_HEADER, "erroneous_" + USERNAME)
+        Assert.assertEquals(Status.FORBIDDEN, resource
+                .header(HeaderBasedSecurityFilter.AUTHENTICATED_USER_HEADER, "erroneous_" + userName)
                 .post(ClientResponse.class)
                 .getClientResponseStatus());
     }
-
 }

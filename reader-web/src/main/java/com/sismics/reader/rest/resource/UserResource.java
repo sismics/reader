@@ -55,7 +55,6 @@ public class UserResource extends BaseResource {
      * @param email E-Mail
      * @param localeId Locale ID
      * @return Response
-     * @throws JSONException
      */
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -97,7 +96,7 @@ public class UserResource extends BaseResource {
         
         // Create the user
         UserDao userDao = new UserDao();
-        String userId = null;
+        String userId;
         try {
             userId = userDao.create(user);
         } catch (Exception e) {
@@ -140,7 +139,6 @@ public class UserResource extends BaseResource {
      * @param displayUnreadMobile Display only unread titles (mobile application).
      * @param firstConnection True if the user hasn't acknowledged the first connection wizard yet.
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -230,7 +228,6 @@ public class UserResource extends BaseResource {
      * @param displayUnreadWeb Display only unread titles (web application).
      * @param displayUnreadMobile Display only unread titles (mobile application).
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("{username: [a-zA-Z0-9_]+}")
@@ -461,7 +458,6 @@ public class UserResource extends BaseResource {
      * 
      * @param username Username
      * @return Response
-     * @throws JSONException
      */
     @DELETE
     @Path("{username: [a-zA-Z0-9_]+}")
@@ -498,7 +494,6 @@ public class UserResource extends BaseResource {
      * Returns the information about the connected user.
      * 
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -587,7 +582,6 @@ public class UserResource extends BaseResource {
      * 
      * @param username Username
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Path("{username: [a-zA-Z0-9_]+}")
@@ -622,7 +616,6 @@ public class UserResource extends BaseResource {
      * @param sortColumn Sort index
      * @param asc If true, ascending sorting, else descending
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Path("list")

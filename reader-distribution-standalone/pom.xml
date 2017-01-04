@@ -5,7 +5,7 @@
     <groupId>com.sismics.reader</groupId>
     <artifactId>reader-parent</artifactId>
     <version>1.5-SNAPSHOT</version>
-    <relativePath>../reader-parent</relativePath>
+    <relativePath>..</relativePath>
   </parent>
   
   <modelVersion>4.0.0</modelVersion>

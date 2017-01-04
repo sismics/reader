@@ -1,17 +1,11 @@
 package com.sismics.reader.rest;
 
+import com.google.common.collect.ImmutableMap;
 import junit.framework.Assert;
-
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
-
-import com.sismics.reader.rest.filter.CookieAuthenticationFilter;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 /**
  * Exhaustive test of the category resource.
@@ -22,64 +16,45 @@ public class TestCategoryResource extends BaseJerseyTest {
     /**
      * Test of the category resource.
      * 
-     * @throws JSONException
      */
     @Test
     public void testCategoryResource() throws JSONException {
         // Create user category1
-        clientUtil.createUser("category1");
-        String category1AuthToken = clientUtil.login("category1");
+        createUser("category1");
+        login("category1");
 
         // Create a category : KO (name required)
-        WebResource categoryResource = resource().path("/category");
-        categoryResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.add("name", " ");
-        ClientResponse response = categoryResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        PUT("/category", ImmutableMap.of("name", " "));
+        assertIsBadRequest();
+        JSONObject json = getJsonResult();
         Assert.assertEquals("ValidationError", json.getString("type"));
         Assert.assertTrue(json.getString("message"), json.getString("message").contains("more than 1"));
         
         // Create a category
-        categoryResource = resource().path("/category");
-        categoryResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("name", "techno");
-        response = categoryResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        PUT("/category", ImmutableMap.of("name", "techno"));
+        assertIsOk();
+        json = getJsonResult();
         String category1Id = json.optString("id");
         Assert.assertNotNull(category1Id);
         
         // Create a category
-        categoryResource = resource().path("/category");
-        categoryResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("name", "comics");
-        response = categoryResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        PUT("/category", ImmutableMap.of("name", "comics"));
+        assertIsOk();
+        json = getJsonResult();
         String category2Id = json.optString("id");
         Assert.assertNotNull(category2Id);
         
         // Subscribe to korben.info
-        WebResource subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://localhost:9997/http/feeds/korben.xml");
-        response = subscriptionResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        PUT("/subscription", ImmutableMap.of("url", "http://localhost:9997/http/feeds/korben.xml"));
+        assertIsOk();
+        json = getJsonResult();
         String subscription1Id = json.optString("id");
         Assert.assertNotNull(subscription1Id);
         
         // Check the category tree
-        subscriptionResource = resource().path("/category");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/category");
+        assertIsOk();
+        json = getJsonResult();
         JSONArray categories = json.optJSONArray("categories");
         Assert.assertNotNull(categories);
         Assert.assertEquals(1, categories.length());
@@ -96,56 +71,36 @@ public class TestCategoryResource extends BaseJerseyTest {
         Assert.assertEquals("comics", comicsCategory.optString("name"));
 
         // Check the root category
-        categoryResource = resource().path("/category/" + rootCategoryId);
-        categoryResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        response = categoryResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/category/" + rootCategoryId);
+        assertIsOk();
+        json = getJsonResult();
         JSONArray articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(10, articles.length());
 
         // Move the korben.info subscription to "techno"
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("category", category1Id);
-        response = subscriptionResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/subscription/" + subscription1Id, ImmutableMap.of("category", category1Id));
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
         
         // Subscribe to xkcd.com
-        subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://localhost:9997/http/feeds/xkcd.xml");
-        response = subscriptionResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        PUT("/subscription", ImmutableMap.of("url", "http://localhost:9997/http/feeds/xkcd.xml"));
+        assertIsOk();
+        json = getJsonResult();
         String subscription2Id = json.optString("id");
         Assert.assertNotNull(subscription2Id);
         
         // Move the xkcd.com subscription to "comics"
-        subscriptionResource = resource().path("/subscription/" + subscription2Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("category", category2Id);
-        response = subscriptionResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/subscription/" + subscription2Id, ImmutableMap.of("category", category2Id));
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
         
         // List all subscriptions
-        subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
-        categories = json.optJSONArray("categories");
-        Assert.assertNotNull(categories);
-        Assert.assertEquals(1, categories.length());
-        rootCategory = categories.optJSONObject(0);
+        GET("/subscription");
+        assertIsOk();
+        json = getJsonResult();
         categories = json.optJSONArray("categories");
         Assert.assertNotNull(categories);
         Assert.assertEquals(1, categories.length());
@@ -164,23 +119,19 @@ public class TestCategoryResource extends BaseJerseyTest {
         Assert.assertEquals(1, subscriptions.length());
 
         // Update a category
-        categoryResource = resource().path("/category/" + category1Id);
-        categoryResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("name", "technology");
-        postParams.add("order", 1);
-        postParams.add("folded", true);
-        response = categoryResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/category/" + category1Id, ImmutableMap.of(
+                "name", "technology",
+                "order", "1",
+                "folded", Boolean.TRUE.toString()
+        ));
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
         
         // Check category changes
-        subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription");
+        assertIsOk();
+        json = getJsonResult();
         int unreadCount = json.optInt("unread_count");
         Assert.assertTrue(unreadCount > 0);
         categories = json.optJSONArray("categories");
@@ -200,17 +151,13 @@ public class TestCategoryResource extends BaseJerseyTest {
         Assert.assertTrue(technologyCategory.optInt("unread_count") > 0);
 
         // Marks all articles in the technology category as read
-        categoryResource = resource().path("/category/" + category1Id + "/read");
-        categoryResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        response = categoryResource.post(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        POST("/category/" + category1Id + "/read");
+        assertIsOk();
 
         // Check the category for unread articles
-        subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals(comicsUnreadCount.intValue(), json.optInt("unread_count"));
         categories = json.optJSONArray("categories");
         Assert.assertNotNull(categories);
@@ -228,13 +175,9 @@ public class TestCategoryResource extends BaseJerseyTest {
         Assert.assertEquals(0, technologyCategory.optInt("unread_count"));
 
         // Check the category for only unread articles
-        subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        MultivaluedMapImpl queryParams = new MultivaluedMapImpl();
-        queryParams.add("unread", true);
-        response = subscriptionResource.queryParams(queryParams).get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription", ImmutableMap.of("unread", Boolean.TRUE.toString()));
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals(comicsUnreadCount.intValue(), json.optInt("unread_count"));
         categories = json.optJSONArray("categories");
         Assert.assertNotNull(categories);
@@ -248,11 +191,9 @@ public class TestCategoryResource extends BaseJerseyTest {
         Assert.assertEquals(comicsUnreadCount.intValue(), comicsCategory.optInt("unread_count"));
 
         // Deletes a category
-        categoryResource = resource().path("/category/" + category1Id);
-        categoryResource.addFilter(new CookieAuthenticationFilter(category1AuthToken));
-        response = categoryResource.delete(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        DELETE("/category/" + category1Id);
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
     }
 }

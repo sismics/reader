@@ -1,4 +1,4 @@
-Sismics Reader
+Sismics Reader [![Build Status](https://secure.travis-ci.org/sismics/reader.png)](http://travis-ci.org/sismics/reader)
 ==============
 
 **Demo application:** <https://reader-demo.sismics.com> (Username: **demo** / password: **demo**)

@@ -38,7 +38,6 @@ public class CategoryResource extends BaseResource {
      * Returns all categories.
      * 
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -83,7 +82,6 @@ public class CategoryResource extends BaseResource {
      * @param limit Page limit
      * @param afterArticle Start the list after this article
      * @return Response
-     * @throws JSONException
      */
     @GET
     @Path("{id: [a-z0-9\\-]+}")
@@ -99,7 +97,7 @@ public class CategoryResource extends BaseResource {
         
         // Get the category
         CategoryDao categoryDao = new CategoryDao();
-        Category category = null;
+        Category category;
         try {
             category = categoryDao.getCategory(id, principal.getId());
         } catch (NoResultException e) {
@@ -151,7 +149,6 @@ public class CategoryResource extends BaseResource {
      * 
      * @param name Category name
      * @return Response
-     * @throws JSONException
      */
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -189,7 +186,6 @@ public class CategoryResource extends BaseResource {
      * 
      * @param id Category ID
      * @return Response
-     * @throws JSONException
      */
     @DELETE
     @Path("{id: [a-z0-9\\-]+}")
@@ -232,7 +228,6 @@ public class CategoryResource extends BaseResource {
      * 
      * @param id Category ID
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("{id: [a-z0-9\\-]+}/read")
@@ -244,7 +239,7 @@ public class CategoryResource extends BaseResource {
         }
         
         // Get the category
-        Category category = null;
+        Category category;
         try {
             category = new CategoryDao().getCategory(id, principal.getId());
         } catch (NoResultException e) {
@@ -279,7 +274,6 @@ public class CategoryResource extends BaseResource {
      * @param order Display order of this category
      * @param folded True if this category is folded in the subscriptions tree.
      * @return Response
-     * @throws JSONException
      */
     @POST
     @Path("{id: [a-z0-9\\-]+}")
@@ -298,7 +292,7 @@ public class CategoryResource extends BaseResource {
         
         // Get the category
         CategoryDao categoryDao = new CategoryDao();
-        Category category = null;
+        Category category;
         try {
             category = categoryDao.getCategory(id, principal.getId());
         } catch (NoResultException e) {

@@ -1,9 +1,5 @@
 package com.sismics.reader.rest;
 
-import com.sismics.reader.rest.filter.CookieAuthenticationFilter;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.multipart.FormDataBodyPart;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import junit.framework.Assert;
@@ -25,36 +21,30 @@ public class TestJobResource extends BaseJerseyTest {
     /**
      * Test of the job resource.
      * 
-     * @throws Exception
      */
     @Test
     public void testJobResource() throws Exception {
         // Create user job1
-        clientUtil.createUser("job1");
-        String job1AuthToken = clientUtil.login("job1");
+        createUser("job1");
 
         // Create user job2
-        clientUtil.createUser("job2");
-        String job2AuthToken = clientUtil.login("job2");
+        createUser("job2");
 
         // Import an OPML file
-        WebResource subscriptionResource = resource().path("/subscription/import");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(job1AuthToken));
+        login("job1");
         FormDataMultiPart form = new FormDataMultiPart();
         InputStream track = this.getClass().getResourceAsStream("/import/greader_subscriptions.xml");
         FormDataBodyPart fdp = new FormDataBodyPart("file",
                 new BufferedInputStream(track),
                 MediaType.APPLICATION_OCTET_STREAM_TYPE);
         form.bodyPart(fdp);
-        ClientResponse response = subscriptionResource.type(MediaType.MULTIPART_FORM_DATA).put(ClientResponse.class, form);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        PUT("/subscription/import", form);
+        assertIsOk();
 
         // Check the user's job
-        WebResource userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(job1AuthToken));
-        response = userResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        GET("/user");
+        assertIsOk();
+        JSONObject json = getJsonResult();
         JSONArray jobs = json.getJSONArray("jobs");
         Assert.assertEquals(1, jobs.length());
         JSONObject job = (JSONObject) jobs.get(0);
@@ -71,27 +61,23 @@ public class TestJobResource extends BaseJerseyTest {
         Assert.assertEquals(0, job.optInt("starred_total"));
 
         // User job2 deletes user1's job KO : forbidden
-        WebResource jobResource = resource().path("/job/" + jobId);
-        jobResource.addFilter(new CookieAuthenticationFilter(job2AuthToken));
-        response = jobResource.delete(ClientResponse.class);
-        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));// TODO return forbidden status in this case
-        json = response.getEntity(JSONObject.class);
+        login("job2");
+        DELETE("/job/" + jobId);
+        assertIsBadRequest(); // TODO return forbidden status in this case
+        json = getJsonResult();
         Assert.assertEquals("ForbiddenError", json.getString("type"));
 
         // User job1 deletes his job
-        jobResource = resource().path("/job/" + jobId);
-        jobResource.addFilter(new CookieAuthenticationFilter(job1AuthToken));
-        response = jobResource.delete(ClientResponse.class);
-        json = response.getEntity(JSONObject.class);
+        login("job1");
+        DELETE("/job/" + jobId);
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        assertIsOk();
 
         // Check that the job was deleted
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(job1AuthToken));
-        response = userResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/user");
+        assertIsOk();
+        json = getJsonResult();
         jobs = json.getJSONArray("jobs");
         Assert.assertEquals(0, jobs.length());
     }

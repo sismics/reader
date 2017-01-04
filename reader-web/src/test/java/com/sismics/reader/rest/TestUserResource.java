@@ -1,21 +1,11 @@
 package com.sismics.reader.rest;
 
-import java.util.Locale;
-
-import javax.ws.rs.core.MultivaluedMap;
-
+import com.google.common.collect.ImmutableMap;
 import junit.framework.Assert;
-
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
-
-import com.sismics.reader.rest.filter.CookieAuthenticationFilter;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 /**
  * Exhaustive test of the user resource.
@@ -24,129 +14,111 @@ import com.sun.jersey.core.util.MultivaluedMapImpl;
  */
 public class TestUserResource extends BaseJerseyTest {
     /**
-     * Test the user resource.
+     * Test the user resource as anonymous.
      * 
-     * @throws JSONException
+     */
+    @Test
+    public void testUserResourceAnonymous() throws JSONException {
+        // Check anonymous user information
+        GET("/user");
+        assertIsOk();
+        JSONObject json = getJsonResult();
+        Assert.assertTrue(json.getBoolean("is_default_password"));
+    }
+        
+    /**
+     * Test the user resource.
+     *
      */
     @Test
     public void testUserResource() throws JSONException {
-        // Check anonymous user information
-        WebResource userResource = resource().path("/user");
-        ClientResponse response = userResource.acceptLanguage(Locale.US).get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
-        Assert.assertTrue(json.getBoolean("is_default_password"));
-        
         // Create alice user
-        clientUtil.createUser("alice");
+        createUser("alice");
 
         // Login admin
-        String adminAuthenticationToken = clientUtil.login("admin", "admin", false);
+        login("admin", "admin", false);
         
         // List all users
-        userResource = resource().path("/user/list");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        MultivaluedMapImpl getParams = new MultivaluedMapImpl();
-        getParams.putSingle("sort_column", 2);
-        getParams.putSingle("asc", false);
-        response = userResource.queryParams(getParams).get(ClientResponse.class);
-        json = response.getEntity(JSONObject.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        GET("/user/list", ImmutableMap.of(
+                "sort_column", "2",
+                "asc", "false"));
+        JSONObject json = getJsonResult();
+        assertIsOk();
         JSONArray users = json.getJSONArray("users");
         Assert.assertTrue(users.length() > 0);
-        JSONObject user = (JSONObject) users.get(0);
+        JSONObject user = users.getJSONObject(0);
         Assert.assertNotNull(user.optString("id"));
         
         // Create a user KO (login length validation)
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.putSingle("username", "   bb  ");
-        postParams.putSingle("email", "bob@reader.com");
-        postParams.putSingle("password", "12345678");
-        response = userResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        PUT("/user", ImmutableMap.of(
+                "username", "   bb  ",
+                "email", "bob@reader.com",
+                "password", "12345678"));
+        assertIsBadRequest();
+        json = getJsonResult();
         Assert.assertEquals("ValidationError", json.getString("type"));
         Assert.assertTrue(json.getString("message"), json.getString("message").contains("more than 3"));
 
         // Create a user KO (login format validation)
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.putSingle("username", "bob-");
-        postParams.putSingle("email", " bob@reader.com ");
-        postParams.putSingle("password", "12345678");
-        response = userResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        PUT("/user", ImmutableMap.of(
+                "username", "bob-",
+                "email", " bob@reader.com ",
+                "password", "12345678"));
+        assertIsBadRequest();
+        json = getJsonResult();
         Assert.assertEquals("ValidationError", json.getString("type"));
         Assert.assertTrue(json.getString("message"), json.getString("message").contains("alphanumeric"));
 
         // Create a user KO (email format validation)
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.putSingle("username", "bob");
-        postParams.putSingle("email", " bobreader.com ");
-        postParams.putSingle("password", "12345678");
-        response = userResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        PUT("/user", ImmutableMap.of(
+                "username", "bob",
+                "email", " bobreader.com ",
+                "password", "12345678"));
+        assertIsBadRequest();
+        json = getJsonResult();
         Assert.assertEquals("ValidationError", json.getString("type"));
         Assert.assertTrue(json.getString("message"), json.getString("message").contains("must be an email"));
 
         // Create a user bob OK
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.putSingle("username", " bob ");
-        postParams.putSingle("email", " bob@reader.com ");
-        postParams.putSingle("password", " 12345678 ");
-        postParams.putSingle("locale", "ko");
-        response = userResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        PUT("/user", ImmutableMap.of(
+                "username", " bob ",
+                "email", " bob@reader.com ",
+                "password", " 12345678 ",
+                "locale", "ko"));
+        assertIsOk();
 
         // Create a user bob KO : duplicate username
-        response = userResource.put(ClientResponse.class, postParams);
-        Assert.assertNotSame(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        PUT("/user", ImmutableMap.of(
+                "username", " bob ",
+                "email", " bob@reader.com ",
+                "password", " 12345678 ",
+                "locale", "ko"));
+        assertStatus(500, response); //FIXME should be 400
+        json = getJsonResult();
         Assert.assertEquals("AlreadyExistingUsername", json.getString("type"));
 
-        // Check if a username is free : OK
-        userResource = resource().path("/user/check_username");
-        MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-        queryParams.add("username", "carol");
-        response = userResource.queryParams(queryParams).get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        // Check if a username is free: OK
+        GET("/user/check_username", ImmutableMap.of("username", "carol"));
+        assertIsOk();
 
         // Check if a username is free : KO
-        userResource = resource().path("/user/check_username");
-        queryParams = new MultivaluedMapImpl();
-        queryParams.add("username", "alice");
-        response = userResource.queryParams(queryParams).get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/user/check_username", ImmutableMap.of("username", "alice"));
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ko", json.getString("status"));
 
-        // Login alice with extra whitespaces
-        userResource = resource().path("/user/login");
-        postParams = new MultivaluedMapImpl();
-        postParams.putSingle("username", " alice ");
-        postParams.putSingle("password", " 12345678 ");
-        response = userResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        String aliceAuthToken = clientUtil.getAuthenticationCookie(response);
-
-        // Login user bob
-        String bobAuthToken = clientUtil.login("bob");
+        // Login alice with extra whitespaces: OK
+        POST("/user/login", ImmutableMap.of(
+                "username", " alice ",
+                "password", " 12345678 "
+        ));
+        assertIsOk();
 
         // Check alice user information
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(aliceAuthToken));
-        response = userResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        login("alice");
+        GET("/user");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("alice@reader.com", json.getString("email"));
         Assert.assertEquals("default.less", json.getString("theme"));
         Assert.assertFalse(json.getBoolean("display_title_web"));
@@ -158,51 +130,46 @@ public class TestUserResource extends BaseJerseyTest {
         Assert.assertFalse(json.getBoolean("is_default_password"));
         
         // Check bob user information
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(bobAuthToken));
-        response = userResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        login("bob");
+        GET("/user");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("bob@reader.com", json.getString("email"));
         Assert.assertEquals("ko", json.getString("locale"));
         
         // Test login KO (user not found)
-        userResource = resource().path("/user/login");
-        postParams.putSingle("username", "intruder");
-        postParams.putSingle("password", "12345678");
-        response = userResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.FORBIDDEN, Status.fromStatusCode(response.getStatus()));
+        logout();
+        POST("/user/login", ImmutableMap.of(
+                "username", "intruder",
+                "password", "12345678"));
+        assertIsForbidden();
 
         // Test login KO (wrong password)
-        userResource = resource().path("/user/login");
-        postParams.putSingle("username", "alice");
-        postParams.putSingle("password", "error");
-        response = userResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.FORBIDDEN, Status.fromStatusCode(response.getStatus()));
+        POST("/user/login", ImmutableMap.of(
+                "username", "alice",
+                "password", "error"));
+        assertIsForbidden();
 
         // User alice updates her information + changes her email
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(aliceAuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("email", " alice2@reader.com ");
-        postParams.add("theme", " highcontrast ");
-        postParams.add("locale", " en ");
-        postParams.add("display_title_web", true);
-        postParams.add("display_title_mobile", false);
-        postParams.add("display_unread_web", false);
-        postParams.add("display_unread_mobile", false);
-        postParams.add("narrow_article", true);
-        response = userResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        login("alice");
+        POST("/user", ImmutableMap.<String, String>builder()
+                .put("email", " alice2@reader.com ")
+                .put("theme", " highcontrast ")
+                .put("locale", " en ")
+                .put("display_title_web", "true")
+                .put("display_title_mobile", "false")
+                .put("display_unread_web", "false")
+                .put("display_unread_mobile", "false")
+                .put("narrow_article", "true")
+                .build());
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
         
         // Check the update
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(aliceAuthToken));
-        response = userResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/user");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("highcontrast", json.getString("theme"));
         Assert.assertTrue(json.getBoolean("display_title_web"));
         Assert.assertFalse(json.getBoolean("display_title_mobile"));
@@ -211,106 +178,84 @@ public class TestUserResource extends BaseJerseyTest {
         Assert.assertTrue(json.getBoolean("narrow_article"));
         
         // Delete user alice
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(aliceAuthToken));
-        response = userResource.delete(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        DELETE("/user");
+        assertIsOk();
         
         // Check the deletion
-        userResource = resource().path("/user/login");
-        postParams.putSingle("username", "alice");
-        postParams.putSingle("password", "12345678");
-        response = userResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.FORBIDDEN, Status.fromStatusCode(response.getStatus()));
+        POST("/user/login", ImmutableMap.of(
+                "username", "alice",
+                "password", "12345678"));
+        assertIsForbidden();
     }
 
     /**
      * Test the user resource admin functions.
      * 
-     * @throws JSONException
      */
     @Test
     public void testUserResourceAdmin() throws JSONException {
         // Create admin_user1 user
-        clientUtil.createUser("admin_user1");
+        createUser("admin_user1");
 
         // Login admin
-        String adminAuthenticationToken = clientUtil.login("admin", "admin", false);
+        login("admin", "admin", false);
 
         // Check admin information
-        WebResource userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        ClientResponse response = userResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        GET("/user");
+        assertIsOk();
+        JSONObject json = getJsonResult();
         Assert.assertTrue(json.getBoolean("first_connection"));
         Assert.assertTrue(json.getBoolean("is_default_password"));
 
         // User admin updates his information
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.add("first_connection", false);
-        response = userResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/user", ImmutableMap.of("first_connection", "false"));
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
 
         // Check admin information update
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        response = userResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/user");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertFalse(json.getBoolean("first_connection"));
 
         // User admin update admin_user1 information
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("email", " alice2@reader.com ");
-        postParams.add("theme", " highcontrast");
-        postParams.add("locale", " en ");
-        postParams.add("display_title_web", true);
-        postParams.add("display_title_mobile", false);
-        postParams.add("display_unread_web", false);
-        postParams.add("display_unread_mobile", false);
-        postParams.add("narrow_article", true);
-        response = userResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/user", ImmutableMap.<String, String>builder()
+                .put("email", " alice2@reader.com ")
+                .put("theme", " highcontrast ")
+                .put("locale", " en ")
+                .put("display_title_web", "true")
+                .put("display_title_mobile", "false")
+                .put("display_unread_web", "false")
+                .put("display_unread_mobile", "false")
+                .put("narrow_article", "true")
+                .build());
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
         
         // User admin deletes himself: forbidden
-        userResource = resource().path("/user");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        response = userResource.delete(ClientResponse.class);
-        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        DELETE("/user");
+        assertIsBadRequest();
+        json = getJsonResult();
         Assert.assertEquals("ForbiddenError", json.getString("type"));
 
         // User admin deletes himself: forbidden
-        userResource = resource().path("/user/admin");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        response = userResource.delete(ClientResponse.class);
-        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        DELETE("/user/admin");
+        assertIsBadRequest();
+        json = getJsonResult();
         Assert.assertEquals("ForbiddenError", json.getString("type"));
 
         // User admin deletes user admin_user1
-        userResource = resource().path("/user/admin_user1");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        response = userResource.delete(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        DELETE("/user/admin_user1");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
         
         // User admin deletes user admin_user1 : KO (user doesn't exist)
-        userResource = resource().path("/user/admin_user1");
-        userResource.addFilter(new CookieAuthenticationFilter(adminAuthenticationToken));
-        response = userResource.delete(ClientResponse.class);
-        Assert.assertEquals(Status.BAD_REQUEST, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        DELETE("/user/admin_user1");
+        assertIsBadRequest();
+        json = getJsonResult();
         Assert.assertEquals("UserNotFound", json.getString("type"));
     }
 }
