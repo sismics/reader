@@ -1,13 +1,9 @@
 package com.sismics.reader.rest;
 
 import com.google.common.base.Charsets;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.io.CharStreams;
 import com.sismics.reader.core.model.context.AppContext;
-import com.sismics.reader.rest.filter.CookieAuthenticationFilter;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
 import com.sun.jersey.multipart.FormDataBodyPart;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import junit.framework.Assert;
@@ -21,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.concurrent.Callable;
 
 /**
  * Exhaustive test of the subscription resource.
@@ -32,52 +27,37 @@ public class TestSubscriptionResource extends BaseJerseyTest {
     /**
      * Test of the subscription add resource.
      * 
-     * @throws JSONException
      */
     @Test
     public void testSubscriptionAddResource() throws JSONException {
         // Create user subscription1
-        clientUtil.createUser("subscription1");
-        String subscription1AuthToken = clientUtil.login("subscription1");
+        createUser("subscription1");
+        login("subscription1");
 
         // Create a category
-        WebResource categoryResource = resource().path("/category");
-        categoryResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.add("name", "techno");
-        ClientResponse response = categoryResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        PUT("/category", ImmutableMap.of("name", "techno"));
+        assertIsOk();
+        JSONObject json = getJsonResult();
         String category1Id = json.optString("id");
         Assert.assertNotNull(category1Id);
         
         // Subscribe to korben.info
-        WebResource subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://localhost:9997/http/feeds/korben.xml");
-        response = subscriptionResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        PUT("/subscription", ImmutableMap.of("url", "http://localhost:9997/http/feeds/korben.xml"));
+        assertIsOk();
+        json = getJsonResult();
         String subscription1Id = json.getString("id");
         Assert.assertNotNull(subscription1Id);
         
         // Move the korben.info subscription to "techno"
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("category", category1Id);
-        response = subscriptionResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/subscription/" + subscription1Id, ImmutableMap.of("category", category1Id));
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
 
         // List all subscriptions
-        subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription");
+        assertIsOk();
+        json = getJsonResult();
         int unreadCount = json.optInt("unread_count");
         Assert.assertTrue(unreadCount > 0);
         JSONArray categories = json.optJSONArray("categories");
@@ -93,11 +73,9 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals("http://localhost:9997/http/feeds/korben.xml", subscription.getString("url"));
 
         // Check the subscription data
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription/" + subscription1Id);
+        assertIsOk();
+        json = getJsonResult();
         subscription = json.optJSONObject("subscription");
         Assert.assertNotNull(subscription);
         Assert.assertEquals("Korben", subscription.optString("title"));
@@ -124,35 +102,27 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         String article2Id = article.getString("id");
 
         // Check pagination
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        MultivaluedMapImpl queryParams = new MultivaluedMapImpl();
-        queryParams.add("after_article", article1Id);
-        response = subscriptionResource.queryParams(queryParams).get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription/" + subscription1Id, ImmutableMap.of("after_article", article1Id));
+        assertIsOk();
+        json = getJsonResult();
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(8, articles.length());
         Assert.assertEquals(article2Id, article.getString("id"));
 
         // Update the subscription
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("order", 1);
-        postParams.add("title", "Korben.info");
-        response = subscriptionResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/subscription/" + subscription1Id, ImmutableMap.of(
+                "order", Integer.valueOf(1).toString(),
+                "title", "Korben.info"
+        ));
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
         
         // Check the updated subscription data
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription/" + subscription1Id);
+        assertIsOk();
+        json = getJsonResult();
         subscription = json.optJSONObject("subscription");
         Assert.assertNotNull(subscription);
         Assert.assertEquals("Korben.info", subscription.optString("title"));
@@ -160,159 +130,116 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals("Upgrade your mind", subscription.optString("description"));
 
         // Marks an article as read
-        WebResource articleResource = resource().path("/article/" + article0Id + "/read");
-        articleResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        response = articleResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/article/" + article0Id + "/read");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
         
         // Marks an article as read (2nd time)
-        articleResource = resource().path("/article/" + article0Id + "/read");
-        articleResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        response = articleResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/article/" + article0Id + "/read");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
 
         // Check the subscription data
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        queryParams = new MultivaluedMapImpl();
-        queryParams.add("unread", "true");
-        response = subscriptionResource.queryParams(queryParams).get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription/" + subscription1Id, ImmutableMap.of("unread", "true"));
+        assertIsOk();
+        json = getJsonResult();
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(9, articles.length());
 
         // Check the subscription data
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        queryParams = new MultivaluedMapImpl();
-        queryParams.add("unread", "false");
-        response = subscriptionResource.queryParams(queryParams).get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription/" + subscription1Id, ImmutableMap.of("unread", "false"));
+        assertIsOk();
+        json = getJsonResult();
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(10, articles.length());
 
         // Check all subscriptions for unread articles
-        subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals(9, json.optInt("unread_count"));
 
         // Marks an article as unread
-        articleResource = resource().path("/article/" + article0Id + "/unread");
-        articleResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        response = articleResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/article/" + article0Id + "/unread");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
         
         // Marks an article as unread (2nd time)
-        articleResource = resource().path("/article/" + article0Id + "/unread");
-        articleResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        response = articleResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        POST("/article/" + article0Id + "/unread");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
 
         // Check the subscription data
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        queryParams = new MultivaluedMapImpl();
-        queryParams.add("unread", "true");
-        response = subscriptionResource.queryParams(queryParams).get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription/" + subscription1Id, ImmutableMap.of("unread", "true"));
+        assertIsOk();
+        json = getJsonResult();
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(10, articles.length());
 
         // Marks all articles in this subscription as read
-        subscriptionResource = resource().path("/subscription/" + subscription1Id + "/read");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        response = subscriptionResource.post(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        POST("/subscription/" + subscription1Id + "/read");
+        assertIsOk();
 
         // Check all subscriptions for unread articles
-        subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals(0, json.optInt("unread_count"));
 
         // Delete the subscription
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscription1AuthToken));
-        response = subscriptionResource.delete(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        DELETE("/subscription/" + subscription1Id);
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
     }
 
     /**
      * Test of the subscription synchronization resource.
      *
-     * @throws JSONException
      */
     @Test
     public void testSubscriptionSynchronizationResource() throws Exception {
         // Create user subscription_sync
-        clientUtil.createUser("subscription_sync");
-        final String subscriptionSyncAuthToken = clientUtil.login("subscription_sync");
+        createUser("subscription_sync");
+        login("subscription_sync");
 
         // Subscribe to korben.info
-        WebResource subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscriptionSyncAuthToken));
-        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://localhost:9997/http/feeds/korben.xml");
-        ClientResponse response = subscriptionResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        PUT("/subscription", ImmutableMap.of("url", "http://localhost:9997/http/feeds/korben.xml"));
+        assertIsOk();
+        JSONObject json = getJsonResult();
         final String subscription1Id = json.getString("id");
         Assert.assertNotNull(subscription1Id);
 
-        withNetworkDown(new Callable<Void>() {
+        withNetworkDown(new Runnable() {
             @Override
-            public Void call() throws Exception {
+            public void run() {
                 // Synchronize feeds
-                clientUtil.synchronizeAllFeed();
+                synchronizeAllFeed();
 
                 // Check the we don't get any synchronization update at all as the network is down
-                WebResource subscriptionResource = resource().path("/subscription/" + subscription1Id + "/sync");
-                subscriptionResource.addFilter(new CookieAuthenticationFilter(subscriptionSyncAuthToken));
-                ClientResponse response = subscriptionResource.get(ClientResponse.class);
-                Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-                JSONObject json = response.getEntity(JSONObject.class);
+                GET("/subscription/" + subscription1Id + "/sync");
+                assertIsOk();
+                JSONObject json = getJsonResult();
                 JSONArray synchronizations = json.optJSONArray("synchronizations");
                 Assert.assertNotNull(synchronizations);
                 Assert.assertEquals(0, synchronizations.length());
-
-                return null;
             }
         });
 
         // Synchronize feeds to add a feed synchronization entry
-        clientUtil.synchronizeAllFeed();
+        synchronizeAllFeed();
 
         // Check the subscription synchronizations
-        subscriptionResource = resource().path("/subscription/" + subscription1Id + "/sync");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscriptionSyncAuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription/" + subscription1Id + "/sync");
+        assertIsOk();
+        json = getJsonResult();
         JSONArray synchronizations = json.optJSONArray("synchronizations");
         Assert.assertNotNull(synchronizations);
         Assert.assertEquals(1, synchronizations.length());
@@ -321,14 +248,11 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertTrue(synchronizations.getJSONObject(0).getInt("duration") > 0);
         
         // Check the subscriptions list (with zero errors)
-        subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(subscriptionSyncAuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription");
+        assertIsOk();
+        json = getJsonResult();
         JSONArray categories = json.optJSONArray("categories");
         JSONObject rootCategory = categories.optJSONObject(0);
-        categories = rootCategory.getJSONArray("categories");
         JSONArray subscriptions = rootCategory.optJSONArray("subscriptions");
         JSONObject subscription = subscriptions.getJSONObject(0);
         Assert.assertEquals(0, subscription.getInt("sync_fail_count"));
@@ -337,33 +261,28 @@ public class TestSubscriptionResource extends BaseJerseyTest {
     /**
      * Test of the import resource.
      * 
-     * @throws Exception
      */
     @Test
     public void testSubscriptionImportOpml() throws Exception {
         // Create user import_opml1
-        clientUtil.createUser("import_opml1");
-        String importOpml1AuthToken = clientUtil.login("import_opml1");
+        createUser("import_opml1");
+        login("import_opml1");
 
         // Import an OPML file
-        WebResource trackResource = resource().path("/subscription/import");
-        trackResource.addFilter(new CookieAuthenticationFilter(importOpml1AuthToken));
         FormDataMultiPart form = new FormDataMultiPart();
         InputStream track = this.getClass().getResourceAsStream("/import/greader_subscriptions.xml");
         FormDataBodyPart fdp = new FormDataBodyPart("file",
                 new BufferedInputStream(track),
                 MediaType.APPLICATION_OCTET_STREAM_TYPE);
         form.bodyPart(fdp);
-        ClientResponse response = trackResource.type(MediaType.MULTIPART_FORM_DATA).put(ClientResponse.class, form);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        PUT("/subscription/import", form);
+        assertIsOk();
 
         // List all subscriptions
         AppContext.getInstance().waitForAsync();
-        WebResource subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(importOpml1AuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        GET("/subscription");
+        assertIsOk();
+        JSONObject json = getJsonResult();
         int unreadCount = json.optInt("unread_count");
         Assert.assertTrue(unreadCount > 0);
         JSONArray categories = json.optJSONArray("categories");
@@ -379,10 +298,8 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         
         // Export all subscriptions
         AppContext.getInstance().waitForAsync();
-        subscriptionResource = resource().path("/subscription/export");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(importOpml1AuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        GET("/subscription/export");
+        assertIsOk();
         String text = CharStreams.toString(new InputStreamReader(response.getEntityInputStream(), Charsets.UTF_8));
         Assert.assertTrue(text.contains("Comics / Sub"));
         Assert.assertTrue(text.contains("Good Math, Bad Math"));
@@ -391,33 +308,28 @@ public class TestSubscriptionResource extends BaseJerseyTest {
     /**
      * Test of the import resource.
      * 
-     * @throws Exception
      */
     @Test
     public void testSubscriptionImportTakeout() throws Exception {
         // Create user import_takeout1
-        clientUtil.createUser("import_takeout1");
-        String importTakeout1AuthToken = clientUtil.login("import_takeout1");
+        createUser("import_takeout1");
+        login("import_takeout1");
 
         // Import a Takeout file
-        WebResource trackResource = resource().path("/subscription/import");
-        trackResource.addFilter(new CookieAuthenticationFilter(importTakeout1AuthToken));
         FormDataMultiPart form = new FormDataMultiPart();
         InputStream track = this.getClass().getResourceAsStream("/import/test@gmail.com-takeout.zip");
         FormDataBodyPart fdp = new FormDataBodyPart("file",
                 new BufferedInputStream(track),
                 MediaType.APPLICATION_OCTET_STREAM_TYPE);
         form.bodyPart(fdp);
-        ClientResponse response = trackResource.type(MediaType.MULTIPART_FORM_DATA).put(ClientResponse.class, form);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        PUT("/subscription/import", form);
+        assertIsOk();
 
         // List all subscriptions
         AppContext.getInstance().waitForAsync();
-        WebResource subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(importTakeout1AuthToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        GET("/subscription");
+        assertIsOk();
+        JSONObject json = getJsonResult();
         int unreadCount = json.optInt("unread_count");
         Assert.assertTrue(unreadCount > 0);
         JSONArray categories = json.optJSONArray("categories");
@@ -432,11 +344,9 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals(1, subscriptions.length());
         
         // Check the starred resource
-        WebResource starredResource = resource().path("/starred");
-        starredResource.addFilter(new CookieAuthenticationFilter(importTakeout1AuthToken));
-        response = starredResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/starred");
+        assertIsOk();
+        json = getJsonResult();
         JSONArray articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(3, articles.length());
@@ -446,35 +356,28 @@ public class TestSubscriptionResource extends BaseJerseyTest {
      * Test related to issue #110.
      * See https://github.com/sismics/reader/issues/110.
      * TODO Fixme 
-     * @throws JSONException
      */
     @Test
     @Ignore
     public void testIssue110() throws JSONException {
         // Create user test_issue_110
-        clientUtil.createUser("test_issue_110");
-        String authToken = clientUtil.login("test_issue_110");
+        createUser("test_issue_110");
+        login("test_issue_110");
 
         // Import a Takeout file
-        WebResource trackResource = resource().path("/subscription/import");
-        trackResource.addFilter(new CookieAuthenticationFilter(authToken));
         FormDataMultiPart form = new FormDataMultiPart();
         InputStream track = this.getClass().getResourceAsStream("/import/issue_110@gmail.com-takeout.zip");
         FormDataBodyPart fdp = new FormDataBodyPart("file",
                 new BufferedInputStream(track),
                 MediaType.APPLICATION_OCTET_STREAM_TYPE);
         form.bodyPart(fdp);
-        ClientResponse response = trackResource.type(MediaType.MULTIPART_FORM_DATA).put(ClientResponse.class, form);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        PUT("/subscription/import", form);
+        assertIsOk();
         
         // Subscribe to questionablecontent.net
-        WebResource subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
-        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://localhost:9997/http/feeds/qc.xml");
-        response = subscriptionResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        PUT("/subscription", ImmutableMap.of("url", "http://localhost:9997/http/feeds/qc.xml"));
+        assertIsOk();
+        JSONObject json = getJsonResult();
         String subscription1Id = json.getString("id");
         Assert.assertNotNull(subscription1Id);
     }
@@ -484,78 +387,59 @@ public class TestSubscriptionResource extends BaseJerseyTest {
      * See https://github.com/sismics/reader/issues/119.
      * issue_119.xml must be served somewhere and be editable.
      * Doesn't work automatically, use a breakpoing to edit the xml file.
-     * @throws JSONException
      */
     @Test
     @Ignore
     public void testIssue119() throws JSONException {
         // Create user test_issue_119
-        clientUtil.createUser("test_issue_119");
-        String authToken = clientUtil.login("test_issue_119");
+        createUser("test_issue_119");
+        login("test_issue_119");
         
         // Subscribe to korben.info
-        WebResource subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
-        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://localhost/korben.xml");
-        ClientResponse response = subscriptionResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        PUT("/subscription", ImmutableMap.of("url", "http://localhost/korben.xml"));
+        assertIsOk();
+        JSONObject json = getJsonResult();
         String subscription1Id = json.getString("id");
         Assert.assertNotNull(subscription1Id);
         
         // Check all subscriptions for unread articles
-        subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals(3, json.optInt("unread_count"));
         
         // Check the subscription data
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription/" + subscription1Id);
+        assertIsOk();
+        json = getJsonResult();
         JSONArray articles = json.optJSONArray("articles");
         Assert.assertEquals(3, articles.length());
         
         // Delete the subscription
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
-        response = subscriptionResource.delete(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        DELETE("/subscription/" + subscription1Id);
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
         
         // At this moment, the subscription must have a new article
         
         // Subscribe again to korben.info
-        subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://localhost/korben.xml");
-        response = subscriptionResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        PUT("/subscription", ImmutableMap.of("url", "http://localhost/korben.xml"));
+        assertIsOk();
+        json = getJsonResult();
         subscription1Id = json.getString("id");
         Assert.assertNotNull(subscription1Id);
         
         // Check all subscriptions for unread articles
-        subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription");
+        assertIsOk();
+        json = getJsonResult();
         Assert.assertEquals(4, json.optInt("unread_count"));
         
         // Check the subscription data
-        subscriptionResource = resource().path("/subscription/" + subscription1Id);
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(authToken));
-        response = subscriptionResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/subscription/" + subscription1Id);
+        assertIsOk();
+        json = getJsonResult();
         articles = json.optJSONArray("articles");
         Assert.assertEquals(4, articles.length());
     }

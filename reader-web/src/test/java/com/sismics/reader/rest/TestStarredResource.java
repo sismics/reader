@@ -1,17 +1,12 @@
 package com.sismics.reader.rest;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultimap;
 import junit.framework.Assert;
-
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
-
-import com.sismics.reader.rest.filter.CookieAuthenticationFilter;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 /**
  * Exhaustive test of the starred resource.
@@ -22,31 +17,24 @@ public class TestStarredResource extends BaseJerseyTest {
     /**
      * Test of the all resource.
      * 
-     * @throws JSONException
      */
     @Test
     public void testStarredResource() throws JSONException {
         // Create user starred1
-        clientUtil.createUser("starred1");
-        String starred1AuthToken = clientUtil.login("starred1");
+        createUser("starred1");
+        login("starred1");
 
         // Subscribe to korben.info
-        WebResource subscriptionResource = resource().path("/subscription");
-        subscriptionResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
-        MultivaluedMapImpl postParams = new MultivaluedMapImpl();
-        postParams.add("url", "http://localhost:9997/http/feeds/korben.xml");
-        ClientResponse response = subscriptionResource.put(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        PUT("/subscription", ImmutableMap.of("url", "http://localhost:9997/http/feeds/korben.xml"));
+        assertIsOk();
+        JSONObject json = getJsonResult();
         String subscription1Id = json.optString("id");
         Assert.assertNotNull(subscription1Id);
         
         // Check the all resource
-        WebResource allResource = resource().path("/all");
-        allResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
-        response = allResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/all");
+        assertIsOk();
+        json = getJsonResult();
         JSONArray articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(10, articles.length());
@@ -56,25 +44,17 @@ public class TestStarredResource extends BaseJerseyTest {
         String article1Id = article1.getString("id");
 
         // Create a new starred article
-        WebResource starredResource = resource().path("/starred/" + article0Id);
-        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
-        response = starredResource.put(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        PUT("/starred/" + article0Id);
+        assertIsOk();
 
         // Create a new starred article
-        starredResource = resource().path("/starred/" + article1Id);
-        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
-        response = starredResource.put(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        PUT("/starred/" + article1Id);
+        assertIsOk();
 
         // Check the starred resource
-        starredResource = resource().path("/starred");
-        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
-        response = starredResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/starred");
+        assertIsOk();
+        json = getJsonResult();
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(2, articles.length());
@@ -82,70 +62,49 @@ public class TestStarredResource extends BaseJerseyTest {
         String articleAfterId = articleAfter.getString("id");
 
         // Check pagination
-        starredResource = resource().path("/starred");
-        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
-        MultivaluedMapImpl queryParams = new MultivaluedMapImpl();
-        queryParams.add("after_article", articleAfterId);
-        response = starredResource.queryParams(queryParams).get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/starred", ImmutableMap.of("after_article", articleAfterId));
+        assertIsOk();
+        json = getJsonResult();
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(1, articles.length());
 
         // Delete a starred article
-        starredResource = resource().path("/starred/" + article0Id);
-        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
-        response = starredResource.delete(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        DELETE("/starred/" + article0Id);
+        assertIsOk();
 
         // Check the starred resource
-        starredResource = resource().path("/starred");
-        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
-        response = starredResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/starred");
+        assertIsOk();
+        json = getJsonResult();
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(1, articles.length());
         
         // Delete multiple starred articles
-        starredResource = resource().path("/starred/unstar");
-        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("id", article0Id);
-        postParams.add("id", article1Id);
-        response = starredResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
-        
+        POST("/starred/unstar", ImmutableMultimap.of(
+                "id", article0Id,
+                "id", article1Id));
+        assertIsOk();
+
         // Check the starred resource
-        starredResource = resource().path("/starred");
-        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
-        response = starredResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/starred");
+        assertIsOk();
+        json = getJsonResult();
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(0, articles.length());
         
         // Create multiple starred articles
-        starredResource = resource().path("/starred/star");
-        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
-        postParams = new MultivaluedMapImpl();
-        postParams.add("id", article0Id);
-        postParams.add("id", article1Id);
-        response = starredResource.post(ClientResponse.class, postParams);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
-        
+        POST("/starred/star", ImmutableMultimap.of(
+                "id", article0Id,
+                "id", article1Id));
+        assertIsOk();
+
         // Check the starred resource
-        starredResource = resource().path("/starred");
-        starredResource.addFilter(new CookieAuthenticationFilter(starred1AuthToken));
-        response = starredResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        json = response.getEntity(JSONObject.class);
+        GET("/starred");
+        assertIsOk();
+        json = getJsonResult();
         articles = json.optJSONArray("articles");
         Assert.assertNotNull(articles);
         Assert.assertEquals(2, articles.length());

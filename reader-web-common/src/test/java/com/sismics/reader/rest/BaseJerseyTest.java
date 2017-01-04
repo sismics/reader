@@ -1,8 +1,18 @@
 package com.sismics.reader.rest;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Multimap;
+import com.sismics.reader.core.model.context.AppContext;
+import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.reader.rest.descriptor.JerseyTestWebAppDescriptorFactory;
-import com.sismics.reader.rest.util.ClientUtil;
+import com.sismics.util.filter.TokenBasedSecurityFilter;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.test.framework.JerseyTest;
+import junit.framework.Assert;
+import org.codehaus.jettison.json.JSONObject;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.junit.After;
@@ -13,13 +23,17 @@ import org.subethamail.wiser.WiserMessage;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
+import javax.ws.rs.core.Cookie;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NewCookie;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.Callable;
+import java.util.Map;
 
 /**
  * Base class of integration tests with Jersey.
@@ -36,18 +50,22 @@ public abstract class BaseJerseyTest extends JerseyTest {
      * Test HTTP server.
      */
     protected HttpServer httpServer;
-    
+
     /**
-     * Utility class for the REST client.
+     * The response from the last request.
      */
-    protected ClientUtil clientUtil;
-    
+    protected ClientResponse response;
+
+    /**
+     * The set of current cookies.
+     */
+    protected Map<String, String> cookies = new HashMap<String, String>();
+
     /**
      * Constructor of BaseJerseyTest.
      */
     public BaseJerseyTest() {
         super(JerseyTestWebAppDescriptorFactory.build());
-        this.clientUtil = new ClientUtil(resource());
     }
     
     @Override
@@ -125,17 +143,218 @@ public abstract class BaseJerseyTest extends JerseyTest {
      * Simulates a network down situation, e.g. someone having installed the application on his laptop
      * and currently not having connection.
      *
-     * @param callable The code to run while the network is down
+     * @param runnable The code to run while the network is down
      * @return The result
      * @throws Exception
      */
-    protected <T> T withNetworkDown(Callable<T> callable) throws Exception {
+    protected void withNetworkDown(Runnable runnable) throws Exception {
         try {
             httpServer.stop();
 
-            return callable.call();
+            runnable.run();
         } finally {
             startHttpServer();
         }
+    }
+
+    /**
+     * Creates a user.
+     *
+     * @param username Username
+     */
+    public void createUser(String username) {
+        // Login admin to create the user
+        login("admin", "admin", false);
+
+        // Create the user
+        PUT("/user", ImmutableMap.of(
+                "username", username,
+                "email", username + "@reader.com",
+                "password", "12345678",
+                "time_zone", "Asia/Tokyo"
+        ));
+        assertIsOk();
+
+        // Logout admin
+        logout();
+    }
+
+    /**
+     * Connects a user to the application.
+     *
+     * @param username Username
+     * @param password Password
+     * @param remember Remember user
+     * @return Authentication token
+     */
+    public String login(String username, String password, Boolean remember) {
+        POST("/user/login", ImmutableMap.of(
+                "username", username,
+                "password", password,
+                "remember", remember.toString()
+        ));
+        assertIsOk();
+        Assert.assertEquals(ClientResponse.Status.OK, ClientResponse.Status.fromStatusCode(response.getStatus()));
+
+        return getAuthenticationCookie(response);
+    }
+
+    public void assertIsOk() {
+        assertIsOk(response);
+    }
+
+    public void assertIsOk(ClientResponse response) {
+        assertStatus(200, response);
+    }
+
+    public void assertIsBadRequest() {
+        assertIsBadRequest(response);
+    }
+
+    public void assertIsBadRequest(ClientResponse response) {
+        assertStatus(400, response);
+    }
+
+    public void assertIsForbidden() {
+        assertIsForbidden(response);
+    }
+
+    public void assertIsForbidden(ClientResponse response) {
+        assertStatus(403, response);
+    }
+
+    public void assertStatus(int status, ClientResponse response) {
+        Assert.assertEquals("Response status error, out: " + response.toString(), status, response.getStatus());
+    }
+
+    /**
+     * Connects a user to the application.
+     *
+     * @param username Username
+     * @return Authentication token
+     */
+    public String login(String username) {
+        return login(username, "12345678", false);
+    }
+
+    /**
+     * Disconnects a user from the application.
+     *
+     */
+    public void logout() {
+        POST("/user/logout");
+        assertIsOk();
+    }
+
+    /**
+     * Extracts the authentication token of the response.
+     *
+     * @param response Response
+     * @return Authentication token
+     */
+    public String getAuthenticationCookie(ClientResponse response) {
+        String authToken = null;
+        for (NewCookie cookie : response.getCookies()) {
+            if (TokenBasedSecurityFilter.COOKIE_NAME.equals(cookie.getName())) {
+                authToken = cookie.getValue();
+            }
+        }
+        return authToken;
+    }
+
+    /**
+     * Force synchronization of all feeds.
+     */
+    public void synchronizeAllFeed() {
+        TransactionUtil.handle(new Runnable() {
+            @Override
+            public void run() {
+                AppContext.getInstance().getFeedService().synchronizeAllFeeds();
+            }
+        });
+    }
+
+    protected void GET(String url, Map<String, String> queryParams) {
+        WebResource resource = resource().path(url);
+        MultivaluedMapImpl params = new MultivaluedMapImpl();
+        for (Map.Entry<String, String> entry : queryParams.entrySet()) {
+            params.add(entry.getKey(), entry.getValue());
+        }
+        response = builder(resource.queryParams(params)).get(ClientResponse.class);
+    }
+
+    protected void GET(String resource) {
+        GET(resource, new HashMap<String, String>());
+        addCookiesFromResponse();
+    }
+
+    protected void PUT(String url, Map<String, String> putParams) {
+        WebResource resource = resource().path(url);
+        MultivaluedMapImpl params = new MultivaluedMapImpl();
+        for (Map.Entry<String, String> entry : putParams.entrySet()) {
+            params.add(entry.getKey(), entry.getValue());
+        }
+        response = builder(resource).put(ClientResponse.class, params);
+        addCookiesFromResponse();
+    }
+
+    protected void PUT(String url, FormDataMultiPart form) {
+        WebResource resource = resource().path(url);
+        response = builder(resource).type(MediaType.MULTIPART_FORM_DATA).put(ClientResponse.class, form);
+        addCookiesFromResponse();
+    }
+
+    protected void PUT(String url) {
+        PUT(url, new HashMap<String, String>());
+    }
+
+    protected void POST(String url, Map<String, String> postParams) {
+        WebResource resource = resource().path(url);
+        MultivaluedMapImpl params = new MultivaluedMapImpl();
+        for (Map.Entry<String, String> entry : postParams.entrySet()) {
+            params.add(entry.getKey(), entry.getValue());
+        }
+        response = builder(resource).post(ClientResponse.class, params);
+        addCookiesFromResponse();
+    }
+
+    protected void POST(String url, Multimap<String, String> postParams) {
+        WebResource resource = resource().path(url);
+        MultivaluedMapImpl params = new MultivaluedMapImpl();
+        for (Map.Entry<String, String> entry : postParams.entries()) {
+            params.add(entry.getKey(), entry.getValue());
+        }
+        response = builder(resource).post(ClientResponse.class, params);
+        addCookiesFromResponse();
+    }
+
+    protected void POST(String url) {
+        POST(url, new HashMap<String, String>());
+    }
+
+    protected void DELETE(String url) {
+        WebResource resource = resource().path(url);
+        response = builder(resource).delete(ClientResponse.class);
+        addCookiesFromResponse();
+    }
+
+    protected WebResource.Builder builder(WebResource resource) {
+        WebResource.Builder builder = resource.getRequestBuilder();
+        for (Map.Entry<String, String> entry : cookies.entrySet()) {
+            builder.cookie(new Cookie(entry.getKey(), entry.getValue()));
+        }
+        return builder;
+    }
+
+    private void addCookiesFromResponse() {
+        for (Cookie cookie : response.getCookies()) {
+            if (cookie.getName().equals(TokenBasedSecurityFilter.COOKIE_NAME)) {
+                cookies.put(cookie.getName(), cookie.getValue());
+            }
+        }
+    }
+
+    protected JSONObject getJsonResult() {
+        return response.getEntity(JSONObject.class);
     }
 }

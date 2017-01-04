@@ -1,16 +1,10 @@
 package com.sismics.reader.rest;
 
 import junit.framework.Assert;
-
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
-
-import com.sismics.reader.rest.BaseJerseyTest;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.WebResource;
 
 /**
  * Test the theme resource.
@@ -21,15 +15,12 @@ public class TestThemeResource extends BaseJerseyTest {
     /**
      * Test the theme resource.
      * 
-     * @throws JSONException
      */
     @Test
     public void testThemeResource() throws JSONException {
-        WebResource themeResource = resource().path("/theme");
-        ClientResponse response = themeResource.get(ClientResponse.class);
-        response = themeResource.get(ClientResponse.class);
-        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-        JSONObject json = response.getEntity(JSONObject.class);
+        GET("/theme");
+        assertIsOk();
+        JSONObject json = getJsonResult();
         JSONArray theme = json.getJSONArray("themes");
         Assert.assertTrue(theme.length() > 0);
     }
