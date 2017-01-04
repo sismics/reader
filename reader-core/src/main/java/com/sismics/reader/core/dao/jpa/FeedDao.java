@@ -1,22 +1,17 @@
 package com.sismics.reader.core.dao.jpa;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
+import com.google.common.base.Joiner;
+import com.sismics.reader.core.dao.jpa.criteria.FeedCriteria;
+import com.sismics.reader.core.dao.jpa.dto.FeedDto;
+import com.sismics.reader.core.dao.jpa.mapper.FeedMapper;
+import com.sismics.reader.core.model.jpa.Feed;
+import com.sismics.util.context.ThreadLocalContext;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-
-import com.google.common.base.Joiner;
-import com.sismics.reader.core.dao.jpa.criteria.FeedCriteria;
-import com.sismics.reader.core.dao.jpa.dto.FeedDto;
-import com.sismics.reader.core.model.jpa.Feed;
-import com.sismics.util.context.ThreadLocalContext;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Feed DAO.
@@ -125,16 +120,8 @@ public class FeedDao {
         }
         List<Object[]> resultList = q.getResultList();
         
-        // Assemble results
-        List<FeedDto> feedDtoList = new ArrayList<FeedDto>();
-        for (Object[] o : resultList) {
-            int i = 0;
-            FeedDto feedDto = new FeedDto();
-            feedDto.setId((String) o[i++]);
-            feedDto.setRssUrl((String) o[i++]);
-            feedDtoList.add(feedDto);
-        }
-        return feedDtoList;
+        // Map results
+        return new FeedMapper().map(resultList);
     }
 
     /**

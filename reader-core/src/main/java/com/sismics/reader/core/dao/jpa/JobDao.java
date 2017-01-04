@@ -3,13 +3,13 @@ package com.sismics.reader.core.dao.jpa;
 import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.JobCriteria;
 import com.sismics.reader.core.dao.jpa.dto.JobDto;
+import com.sismics.reader.core.dao.jpa.mapper.JobMapper;
 import com.sismics.reader.core.model.jpa.Job;
 import com.sismics.util.context.ThreadLocalContext;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import java.sql.Timestamp;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -107,29 +107,8 @@ public class JobDao {
         }
         List<Object[]> resultList = q.getResultList();
         
-        // Assemble results
-        List<JobDto> jobDtoList = new ArrayList<JobDto>();
-        for (Object[] o : resultList) {
-            int i = 0;
-            JobDto jobDto = new JobDto();
-            jobDto.setId((String) o[i++]);
-            jobDto.setName((String) o[i++]);
-            jobDto.setUserId((String) o[i++]);
-            Timestamp createTimestamp = (Timestamp) o[i++];
-            if (createTimestamp != null) {
-                jobDto.setCreateTimestamp(createTimestamp.getTime());
-            }
-            Timestamp startTimestamp = (Timestamp) o[i++];
-            if (startTimestamp != null) {
-                jobDto.setStartTimestamp(startTimestamp.getTime());
-            }
-            Timestamp endTimestamp = (Timestamp) o[i++];
-            if (endTimestamp != null) {
-                jobDto.setEndTimestamp(endTimestamp.getTime());
-            }
-            jobDtoList.add(jobDto);
-        }
-        return jobDtoList;
+        // Map results
+        return new JobMapper().map(resultList);
     }
 
     /**

@@ -3,6 +3,7 @@ package com.sismics.reader.core.dao.jpa;
 import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.ArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.ArticleDto;
+import com.sismics.reader.core.dao.jpa.mapper.ArticleMapper;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.util.context.ThreadLocalContext;
 
@@ -147,27 +148,8 @@ public class ArticleDao {
         }
         List<Object[]> resultList = q.getResultList();
         
-        // Assemble results
-        List<ArticleDto> articleDtoList = new ArrayList<ArticleDto>();
-        for (Object[] o : resultList) {
-            int i = 0;
-            ArticleDto articleDto = new ArticleDto();
-            articleDto.setId((String) o[i++]);
-            articleDto.setUrl((String) o[i++]);
-            articleDto.setGuid((String) o[i++]);
-            articleDto.setTitle((String) o[i++]);
-            articleDto.setCreator((String) o[i++]);
-            articleDto.setDescription((String) o[i++]);
-            articleDto.setCommentUrl((String) o[i++]);
-            articleDto.setCommentCount((Integer) o[i++]);
-            articleDto.setEnclosureUrl((String) o[i++]);
-            articleDto.setEnclosureCount((Integer) o[i++]);
-            articleDto.setEnclosureType((String) o[i++]);
-            articleDto.setPublicationDate((Date) o[i++]);
-            articleDto.setFeedId((String) o[i++]);
-            articleDtoList.add(articleDto);
-        }
-        return articleDtoList;
+        // Map results
+        return new ArticleMapper().map(resultList);
     }
 
     /**
