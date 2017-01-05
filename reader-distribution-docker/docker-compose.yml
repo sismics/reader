@@ -1,0 +1,25 @@
+version: '2'
+services:
+  web:
+    image: sismics/reader:latest
+    restart: always
+    ports:
+     - 8123:8080
+    links:
+      - db
+    volumes:
+      - data:/data
+    network_mode: bridge
+  db:
+    image: sismics/hsqldb:2.3.0
+    restart: always
+    hostname: sismics_reader_hsqldb
+    environment:
+      - DB_NAME=reader
+    volumes:
+      - hsqldb_data:/data
+    network_mode: bridge
+
+volumes:
+  data:
+  hsqldb_data:

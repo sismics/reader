@@ -1,2 +1,2 @@
 #!/bin/sh
-docker build -t sismics/reader_demo .
+docker build -f reader-distribution-docker/Dockerfile -t sismics/reader_demo .

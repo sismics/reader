@@ -51,6 +51,15 @@ Translations
 - Korean
 - German
 
+How to run
+------------------------------------
+
+Reader is packaged in several convenient formats. You can download an installer for your system on the [Download Page](https://www.sismics.com/reader/#!/download).
+
+If you use Docker, you can try Reader easily with the following command :
+
+    docker-compose -p reader -f reader-distribution-docker/docker-compose.yml up
+
 How to build Reader from the sources
 ------------------------------------
 
