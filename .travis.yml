@@ -10,7 +10,7 @@ script:
     fi
 after_success:
   - if [ "$TRAVIS_BRANCH" == "release" ]; then
-    docker build -f reader-distribution-docker/Dockerfile -t sismics/reader .;
+    docker build -f reader-distribution-docker/Dockerfile -t sismics/reader:latest .;
     curl -u $DOCKER_USERNAME:$DOCKER_API_KEY https://cloud.docker.com/api/app/v1/service/;
-    docker push sismics/reader;
+    docker push sismics/reader:latest;
     fi
