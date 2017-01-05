@@ -24,7 +24,7 @@
     <org.slf4j.jcl-over-slf4j.version>1.6.6</org.slf4j.jcl-over-slf4j.version>
     <junit.junit.version>4.7</junit.junit.version>
     <org.hsqldb.hsqldb.version>2.3.0</org.hsqldb.hsqldb.version>
-    <org.postgresql.postgresql.version>9.4.1212.jre6</org.postgresql.postgresql.version>
+    <org.postgresql.postgresql.version>9.4.1212.jre7</org.postgresql.postgresql.version>
     <com.sun.jersey.version>1.17</com.sun.jersey.version>
     <org.mindrot.jbcrypt>0.3m</org.mindrot.jbcrypt>
     <org.subethamail.subethasmtp.version>3.1.6</org.subethamail.subethasmtp.version>
@@ -37,7 +37,7 @@
     <org.bitlet.weupnp.version>0.1.2</org.bitlet.weupnp.version>
 
     <com.sun.grizzly.version>1.9.18-m</com.sun.grizzly.version>
-    <org.hibernate.hibernate.version>4.2.19.Final</org.hibernate.hibernate.version>
+    <org.hibernate.hibernate.version>4.2.21.Final</org.hibernate.hibernate.version>
     <commons-dbcp.version>1.4</commons-dbcp.version>
     <joda-time.joda-time.version>2.2</joda-time.joda-time.version>
     <org.codehaus.jackson.jackson.version>1.7.1</org.codehaus.jackson.jackson.version>

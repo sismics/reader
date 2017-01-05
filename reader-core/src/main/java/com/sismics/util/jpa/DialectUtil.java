@@ -63,4 +63,20 @@ public class DialectUtil {
             throw new RuntimeException("Unknown DB: " + EMF.getDriver());
         }
     }
+
+    /**
+     * Return the name of bound parameter for JPA, or null.
+     * Workaround for http://stackoverflow.com/questions/8211195/postgresql-jdbc-null-string-taken-as-a-bytea
+     *
+     * @param parameterName Bound parameter name
+     * @param value Value
+     * @return SQL clause
+     */
+    public static String getNullParameter(String parameterName, Object value) {
+        if (value == null) {
+            return "null";
+        } else {
+            return  parameterName;
+        }
+    }
 }
