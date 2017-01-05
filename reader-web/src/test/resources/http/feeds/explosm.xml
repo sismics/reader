@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:yt="http://gdata.youtube.com/schemas/2007" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
    <channel>
       <title>Explosm.net, Comics</title>
       <description>Using the new Fetch Page module instead of the old scraping method, a lot faster en won&amp;#39;t break as fast</description>
-      <link>http://pipes.yahoo.com/pipes/pipe.info?_id=1009ffe75092cb1845efb5cb901c2886</link>
-      <atom:link rel="next" href="http://pipes.yahoo.com/pipes/pipe.run?_id=1009ffe75092cb1845efb5cb901c2886&amp;_render=rss&amp;page=2"/>
+      <link>http://localhost:9997/pipes/pipe.info?_id=1009ffe75092cb1845efb5cb901c2886</link>
+      <atom:link rel="next" href="http://localhost:9997/pipes/pipe.run?_id=1009ffe75092cb1845efb5cb901c2886&amp;_render=rss&amp;page=2"/>
       <pubDate>Tue, 16 Apr 2013 17:28:40 +0000</pubDate>
       <generator>http://pipes.yahoo.com/pipes/</generator>
       <item>
