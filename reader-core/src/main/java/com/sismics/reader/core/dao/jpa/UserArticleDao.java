@@ -218,13 +218,13 @@ public class UserArticleDao {
         }
         if (criteria.getArticlePublicationDateMax() != null && criteria.getArticleIdMax() != null) {
             // Start the page after this article
-            criteriaList.add("concat(a.ART_PUBLICATIONDATE_D, a.ART_ID_C) < concat(" + DialectUtil.getTimeStamp(":articlePublicationDateMax") + ", :articleIdMax)");
+            criteriaList.add("concat(" + DialectUtil.getTimeStamp("a.ART_PUBLICATIONDATE_D") + ", a.ART_ID_C) < concat(" + DialectUtil.getTimeStamp(":articlePublicationDateMax") + ", :articleIdMax)");
             parameterMap.put("articlePublicationDateMax", criteria.getArticlePublicationDateMax());
             parameterMap.put("articleIdMax", criteria.getArticleIdMax());
         }
         if (criteria.getUserArticleStarredDateMax() != null && criteria.getUserArticleIdMax() != null) {
             // Start the page this starred article
-            criteriaList.add("concat(ua.USA_STARREDDATE_D, ua.USA_ID_C) < concat(" + DialectUtil.getTimeStamp(":userArticleStarredDateMax") + ", :userArticleIdMax)");
+            criteriaList.add("concat(" + DialectUtil.getTimeStamp("ua.USA_STARREDDATE_D") + ", ua.USA_ID_C) < concat(" + DialectUtil.getTimeStamp(":userArticleStarredDateMax") + ", :userArticleIdMax)");
             parameterMap.put("userArticleStarredDateMax", criteria.getUserArticleStarredDateMax());
             parameterMap.put("userArticleIdMax", criteria.getUserArticleIdMax());
         }

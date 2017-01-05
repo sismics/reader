@@ -44,6 +44,14 @@ public class DialectUtil {
         return sql;
     }
 
+    /**
+     * Returns the difference between 2 dates A and B.
+     *
+     * @param field The first date A
+     * @param diff The second date B
+     * @param unit The unit (e.g. MINUTE)
+     * @return The difference
+     */
     public static String getDateDiff(String field, String diff, String unit) {
         if (EMF.isDriverHsql()) {
             return "DATE_SUB(" + field + ", INTERVAL " + diff + " " + unit + ")";
@@ -54,11 +62,17 @@ public class DialectUtil {
         }
     }
 
-    public static String getTimeStamp(String field) {
+    /**
+     * Return a timestamp in miliseconds.
+     *
+     * @param value The time
+     * @return The timestamp
+     */
+    public static String getTimeStamp(String value) {
         if (EMF.isDriverHsql()) {
-            return "TIMESTAMP(" + field + ")";
+            return "TIMESTAMP(" + value + ")";
         } else if (EMF.isDriverPostgresql()) {
-            return field;
+            return "to_char(" + value + " at time zone 'UTC', 'YYYY-MM-DD HH24:MI:SS.MS')";
         } else {
             throw new RuntimeException("Unknown DB: " + EMF.getDriver());
         }
