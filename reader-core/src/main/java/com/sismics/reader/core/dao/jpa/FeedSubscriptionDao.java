@@ -1,22 +1,17 @@
 package com.sismics.reader.core.dao.jpa;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
+import com.google.common.base.Joiner;
+import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
+import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
+import com.sismics.reader.core.dao.jpa.mapper.FeedSubscriptionMapper;
+import com.sismics.reader.core.model.jpa.FeedSubscription;
+import com.sismics.util.context.ThreadLocalContext;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-
-import com.google.common.base.Joiner;
-import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
-import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
-import com.sismics.reader.core.model.jpa.FeedSubscription;
-import com.sismics.util.context.ThreadLocalContext;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Feed subscription DAO.
@@ -229,31 +224,7 @@ public class FeedSubscriptionDao {
         }
         List<Object[]> resultList = q.getResultList();
         
-        // Assemble results
-        List<FeedSubscriptionDto> feedSubscriptionDtoList = new ArrayList<FeedSubscriptionDto>();
-        for (Object[] o : resultList) {
-            int i = 0;
-            FeedSubscriptionDto feedSubscriptionDto = new FeedSubscriptionDto();
-            feedSubscriptionDto.setId((String) o[i++]);
-            String feedSubscriptionTitle = (String) o[i++];
-            feedSubscriptionDto.setUnreadUserArticleCount((Integer) o[i++]);
-            feedSubscriptionDto.setCreateDate((Date) o[i++]);
-            feedSubscriptionDto.setUserId((String) o[i++]);
-            feedSubscriptionDto.setFeedId((String) o[i++]);
-            String feedTitle = (String) o[i++];
-            feedSubscriptionDto.setFeedSubscriptionTitle(feedSubscriptionTitle != null ? feedSubscriptionTitle : feedTitle);
-            feedSubscriptionDto.setFeedTitle(feedTitle);
-            feedSubscriptionDto.setFeedRssUrl((String) o[i++]);
-            feedSubscriptionDto.setFeedUrl((String) o[i++]);
-            feedSubscriptionDto.setFeedDescription((String) o[i++]);
-            feedSubscriptionDto.setCategoryId((String) o[i++]);
-            feedSubscriptionDto.setCategoryParentId((String) o[i++]);
-            feedSubscriptionDto.setCategoryName((String) o[i++]);
-            Boolean folded = (Boolean) o[i++];
-            feedSubscriptionDto.setCategoryFolded(folded != null ? folded : false);
-            feedSubscriptionDto.setSynchronizationFailCount(((Number) o[i++]).intValue());
-            feedSubscriptionDtoList.add(feedSubscriptionDto);
-        }
-        return feedSubscriptionDtoList;
+        // Map results
+        return new FeedSubscriptionMapper().map(resultList);
     }
 }

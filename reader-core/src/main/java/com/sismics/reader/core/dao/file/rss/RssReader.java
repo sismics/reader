@@ -498,7 +498,7 @@ public class RssReader extends DefaultHandler {
     /**
      * Extract a date from a string format.
      * 
-     * @param dateTimeFormatterList List of DateTimeFormatter
+     * @param df DateTimeFormatter
      * @return Date or null is the date is unparsable
      */
     private Date parseDate(DateTimeFormatter df) {

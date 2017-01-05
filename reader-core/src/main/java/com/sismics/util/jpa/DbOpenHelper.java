@@ -1,22 +1,10 @@
 package com.sismics.util.jpa;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Writer;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
-
+import com.google.common.base.Strings;
+import com.google.common.io.CharStreams;
+import com.sismics.reader.core.util.ConfigUtil;
 import com.sismics.util.EnvironmentUtil;
+import com.sismics.util.ResourceUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.JDBCException;
 import org.hibernate.engine.jdbc.internal.FormatStyle;
@@ -28,10 +16,16 @@ import org.hibernate.tool.hbm2ddl.ConnectionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Strings;
-import com.google.common.io.CharStreams;
-import com.sismics.reader.core.util.ConfigUtil;
-import com.sismics.util.ResourceUtil;
+import java.io.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * A helper to update the database incrementally.
@@ -67,7 +61,7 @@ public abstract class DbOpenHelper {
     public void open() {
         log.info("Opening database and executing incremental updates");
 
-        Connection connection = null;
+        Connection connection;
         Writer outputFileWriter = null;
 
         exceptions.clear();
@@ -92,7 +86,7 @@ public abstract class DbOpenHelper {
                     oldVersion = Integer.parseInt(oldVersionStr);
                 }
             } catch (Exception e) {
-                if (e.getMessage().contains("object not found")) {
+                if (DialectUtil.isObjectNotFound(e.getMessage())) {
                     log.info("Unable to get database version: Table T_CONFIG not found");
                 } else {
                     log.error("Unable to get database version", e);
@@ -147,7 +141,6 @@ public abstract class DbOpenHelper {
      * Execute all upgrade scripts in ascending order for a given version.
      * 
      * @param version Version number
-     * @throws Exception
      */
     protected void executeAllScript(final int version) throws Exception {
         List<String> fileNameList = ResourceUtil.list(getClass(), "/db/update/", new FilenameFilter() {
@@ -182,18 +175,16 @@ public abstract class DbOpenHelper {
      * Execute a SQL script. All statements must be one line only.
      * 
      * @param inputScript Script to execute
-     * @throws IOException
-     * @throws SQLException
      */
-    protected void executeScript(InputStream inputScript) throws IOException, SQLException {
+    private void executeScript(InputStream inputScript) throws IOException, SQLException {
         List<String> lines = CharStreams.readLines(new InputStreamReader(inputScript));
         
         for (String sql : lines) {
             if (Strings.isNullOrEmpty(sql) || sql.startsWith("--")) {
                 continue;
             }
-            
-            String formatted = formatter.format(sql);
+            String transformed = DialectUtil.transform(sql);
+            String formatted = formatter.format(transformed);
             try {
                 log.debug(formatted);
                 stmt.executeUpdate(formatted);
@@ -207,8 +198,7 @@ public abstract class DbOpenHelper {
                 }
                 exceptions.add(e);
                 if (log.isErrorEnabled()) {
-                    log.error("Error executing SQL statement: {}", sql);
-                    log.error(e.getMessage());
+                    log.error("Error executing SQL statement: {}" + transformed, e);
                 }
             }
         }

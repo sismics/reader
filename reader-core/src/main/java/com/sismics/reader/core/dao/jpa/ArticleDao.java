@@ -3,8 +3,10 @@ package com.sismics.reader.core.dao.jpa;
 import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.ArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.ArticleDto;
+import com.sismics.reader.core.dao.jpa.mapper.ArticleMapper;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.util.context.ThreadLocalContext;
+import com.sismics.util.jpa.DialectUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -26,15 +28,75 @@ public class ArticleDao {
     public String create(Article article) {
         // Create the UUID
         article.setId(UUID.randomUUID().toString());
-        
+        article.setCreateDate(new Date());
+
         // Create the article
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        article.setCreateDate(new Date());
-        em.persist(article);
-        
+        Query q = em.createNativeQuery("insert into T_ARTICLE(ART_ID_C, ART_IDFEED_C, ART_URL_C, ART_BASEURI_C, ART_GUID_C, ART_TITLE_C, ART_CREATOR_C, ART_DESCRIPTION_C, ART_COMMENTURL_C, ART_COMMENTCOUNT_N, ART_ENCLOSUREURL_C, ART_ENCLOSURELENGTH_N, ART_ENCLOSURETYPE_C, ART_PUBLICATIONDATE_D, ART_CREATEDATE_D)" +
+                "  values (:id, :feedId, :url, :baseUri, :guid, :title, :creator, :description, :commentUrl, " + DialectUtil.getNullParameter(":commentCount", article.getCommentCount())+ ", :enclosureUrl, " + DialectUtil.getNullParameter(":enclosureLength", article.getEnclosureLength())+ ", :enclosureType, :publicationDate, :createDate)")
+                .setParameter("id", article.getId())
+                .setParameter("feedId", article.getFeedId())
+                .setParameter("url", article.getUrl())
+                .setParameter("baseUri", article.getBaseUri())
+                .setParameter("guid", article.getGuid())
+                .setParameter("title", article.getTitle())
+                .setParameter("creator", article.getCreator())
+                .setParameter("description", article.getDescription())
+                .setParameter("commentUrl", article.getCommentUrl())
+                .setParameter("enclosureUrl", article.getEnclosureUrl())
+                .setParameter("enclosureType", article.getEnclosureType())
+                .setParameter("publicationDate", article.getPublicationDate())
+                .setParameter("createDate", article.getCreateDate());
+        if (article.getCommentCount() != null) {
+            q.setParameter("commentCount", article.getCommentCount());
+        }
+        if (article.getEnclosureLength() != null) {
+            q.setParameter("enclosureLength", article.getEnclosureLength());
+        }
+        q.executeUpdate();
+
         return article.getId();
     }
-    
+
+    /**
+     * Updates a article.
+     *
+     * @param article Article to update
+     * @return Updated article
+     */
+    public Article update(Article article) {
+        // Get the article
+        EntityManager em = ThreadLocalContext.get().getEntityManager();
+        Query q = em.createNativeQuery("update T_ARTICLE set" +
+                "  ART_URL_C = :url," +
+                "  ART_TITLE_C = :title," +
+                "  ART_CREATOR_C = :creator," +
+                "  ART_DESCRIPTION_C = :description," +
+                "  ART_COMMENTURL_C = :commentUrl," +
+                "  ART_COMMENTCOUNT_N = " + DialectUtil.getNullParameter(":commentCount", article.getCommentCount())+ "," +
+                "  ART_ENCLOSUREURL_C = :enclosureUrl," +
+                "  ART_ENCLOSURELENGTH_N = " + DialectUtil.getNullParameter(":enclosureLength", article.getEnclosureLength())+ "," +
+                "  ART_ENCLOSURETYPE_C = :enclosureType" +
+                "  where ART_ID_C = :id and ART_DELETEDATE_D is null")
+                .setParameter("url", article.getUrl())
+                .setParameter("title", article.getTitle())
+                .setParameter("creator", article.getCreator())
+                .setParameter("description", article.getDescription())
+                .setParameter("commentUrl", article.getCommentUrl())
+                .setParameter("enclosureUrl", article.getEnclosureUrl())
+                .setParameter("enclosureType", article.getEnclosureType())
+                .setParameter("id", article.getId());
+        if (article.getCommentCount() != null) {
+            q.setParameter("commentCount", article.getCommentCount());
+        }
+        if (article.getEnclosureLength() != null) {
+            q.setParameter("enclosureLength", article.getEnclosureLength());
+        }
+        q.executeUpdate();
+
+        return article;
+    }
+
     /**
      * Returns the list of all articles.
      * 
@@ -130,54 +192,7 @@ public class ArticleDao {
         }
         List<Object[]> resultList = q.getResultList();
         
-        // Assemble results
-        List<ArticleDto> articleDtoList = new ArrayList<ArticleDto>();
-        for (Object[] o : resultList) {
-            int i = 0;
-            ArticleDto articleDto = new ArticleDto();
-            articleDto.setId((String) o[i++]);
-            articleDto.setUrl((String) o[i++]);
-            articleDto.setGuid((String) o[i++]);
-            articleDto.setTitle((String) o[i++]);
-            articleDto.setCreator((String) o[i++]);
-            articleDto.setDescription((String) o[i++]);
-            articleDto.setCommentUrl((String) o[i++]);
-            articleDto.setCommentCount((Integer) o[i++]);
-            articleDto.setEnclosureUrl((String) o[i++]);
-            articleDto.setEnclosureCount((Integer) o[i++]);
-            articleDto.setEnclosureType((String) o[i++]);
-            articleDto.setPublicationDate((Date) o[i++]);
-            articleDto.setFeedId((String) o[i++]);
-            articleDtoList.add(articleDto);
-        }
-        return articleDtoList;
-    }
-
-    /**
-     * Updates a article.
-     * 
-     * @param article Article to update
-     * @return Updated article
-     */
-    public Article update(Article article) {
-        EntityManager em = ThreadLocalContext.get().getEntityManager();
-        
-        // Get the article
-        Query q = em.createQuery("select a from Article a where a.id = :id and a.deleteDate is null");
-        q.setParameter("id", article.getId());
-        Article articleFromDb = (Article) q.getSingleResult();
-
-        // Update the article
-        articleFromDb.setUrl(article.getUrl());
-        articleFromDb.setTitle(article.getTitle());
-        articleFromDb.setCreator(article.getCreator());
-        articleFromDb.setDescription(article.getDescription());
-        articleFromDb.setCommentUrl(article.getCommentUrl());
-        articleFromDb.setCommentCount(article.getCommentCount());
-        articleFromDb.setEnclosureUrl(article.getEnclosureUrl());
-        articleFromDb.setEnclosureLength(article.getEnclosureLength());
-        articleFromDb.setEnclosureType(article.getEnclosureType());
-        
-        return article;
+        // Map results
+        return new ArticleMapper().map(resultList);
     }
 }

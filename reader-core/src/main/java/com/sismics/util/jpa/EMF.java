@@ -1,16 +1,8 @@
 package com.sismics.util.jpa;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
+import com.sismics.reader.core.util.DirectoryUtil;
+import com.sismics.util.EnvironmentUtil;
+import com.sismics.util.ResourceUtil;
 import org.hibernate.cfg.Environment;
 import org.hibernate.internal.util.config.ConfigurationHelper;
 import org.hibernate.service.ServiceRegistry;
@@ -18,7 +10,12 @@ import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sismics.reader.core.util.DirectoryUtil;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.io.File;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Entity manager factory.
@@ -28,11 +25,13 @@ import com.sismics.reader.core.util.DirectoryUtil;
 public final class EMF {
     private static final Logger log = LoggerFactory.getLogger(EMF.class);
 
+    private static Map<Object, Object> properties;
+
     private static EntityManagerFactory emfInstance;
 
     static {
         try {
-            Map<Object, Object> properties = getEntityManagerProperties();
+            properties = getEntityManagerProperties();
 
             Environment.verifyProperties(properties);
             ConfigurationHelper.resolvePlaceHolders(properties);
@@ -62,23 +61,32 @@ public final class EMF {
     }
     
     private static Map<Object, Object> getEntityManagerProperties() {
-        // Use properties file if exists
-        try {
-            URL hibernatePropertiesUrl = EMF.class.getResource("/hibernate.properties");
-            if (hibernatePropertiesUrl != null) {
-                log.info("Configuring EntityManager from hibernate.properties");
-                
-                InputStream is = hibernatePropertiesUrl.openStream();
-                Properties properties = new Properties();
-                properties.load(is);
-                return properties;
+        // Use external properties file if it exists
+        String propertiesFile = EnvironmentUtil.getHibernateProperties();
+        if (propertiesFile != null) {
+            log.info("Loading hibernate.properties from location: " + propertiesFile);
+            try {
+                URL hibernatePropertiesUrl = new URL(propertiesFile);
+                return ResourceUtil.loadPropertiesFromUrl(hibernatePropertiesUrl);
+            } catch (Exception e) {
+                log.error("Error loading external hibernate.properties: " + propertiesFile, e);
             }
-        } catch (IOException e) {
-            log.error("Error reading hibernate.properties", e);
         }
-        
-        // Use environment parameters
+
+        // Use properties file packaged with the app if it exists
+        URL hibernatePropertiesUrl = EMF.class.getResource("/hibernate.properties");
+        if (hibernatePropertiesUrl != null) {
+            log.info("Configuring EntityManager from packaged hibernate.properties: " + hibernatePropertiesUrl);
+
+            return ResourceUtil.loadPropertiesFromUrl(hibernatePropertiesUrl);
+        }
+
+        // Otherwise, use environment parameters
         log.info("Configuring EntityManager from environment parameters");
+        return getEntityManagerPropertiesFromEnvironment();
+    }
+
+    private static Map<Object, Object> getEntityManagerPropertiesFromEnvironment() {
         Map<Object, Object> props = new HashMap<Object, Object>();
         props.put("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver");
         File dbDirectory = DirectoryUtil.getDbDirectory();
@@ -93,7 +101,7 @@ public final class EMF {
         props.put("hibernate.cache.use_second_level_cache", "false");
         return props;
     }
-    
+
     /**
      * Private constructor.
      */
@@ -107,5 +115,19 @@ public final class EMF {
      */
     public static EntityManagerFactory get() {
         return emfInstance;
+    }
+
+    public static boolean isDriverHsql() {
+        String driver = getDriver();
+        return driver.contains("hsqldb");
+    }
+
+    public static boolean isDriverPostgresql() {
+        String driver = getDriver();
+        return driver.contains("postgresql");
+    }
+
+    public static String getDriver() {
+        return (String) properties.get("hibernate.connection.driver_class");
     }
 }

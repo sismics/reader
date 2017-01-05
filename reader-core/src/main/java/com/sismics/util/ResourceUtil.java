@@ -1,21 +1,18 @@
 package com.sismics.util;
 
+import com.google.common.collect.Lists;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-
-import com.google.common.collect.Lists;
 
 /**
  * Resource utilities.
@@ -102,5 +99,31 @@ public class ResourceUtil {
      */
     public static List<String> list(Class<?> clazz, String path) throws URISyntaxException, IOException {
         return list(clazz, path, null);
+    }
+
+    /**
+     * Load a properties file from an URL
+     *
+     * @param url The URL
+     * @return The properties file
+     */
+    public static Map<Object, Object> loadPropertiesFromUrl(URL url) throws RuntimeException {
+        InputStream is = null;
+        try {
+            is = url.openStream();
+            Properties properties = new Properties();
+            properties.load(is);
+            return properties;
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot load properties file for url: " + url, e);
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (Exception e) {
+                    // NOP
+                }
+            }
+        }
     }
 }

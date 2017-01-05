@@ -17,6 +17,8 @@ public class EnvironmentUtil {
     
     private static String READER_HOME = System.getProperty("reader.home");
 
+    private static String HIBERNATE_PROPERTIES = System.getProperty("hibernate.properties");
+
     /**
      * In a web application context.
      */
@@ -84,6 +86,15 @@ public class EnvironmentUtil {
      */
     public static String getReaderHome() {
         return READER_HOME;
+    }
+
+    /**
+     * Returns the location of externale hibernate.properties.
+     *
+     * @return Location of externale hibernate.properties
+     */
+    public static String getHibernateProperties() {
+        return HIBERNATE_PROPERTIES;
     }
 
     /**

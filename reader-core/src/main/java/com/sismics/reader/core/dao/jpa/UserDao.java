@@ -3,6 +3,7 @@ package com.sismics.reader.core.dao.jpa;
 import com.google.common.base.Joiner;
 import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.dao.jpa.dto.UserDto;
+import com.sismics.reader.core.dao.jpa.mapper.UserMapper;
 import com.sismics.reader.core.model.jpa.User;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
@@ -14,7 +15,6 @@ import org.mindrot.jbcrypt.BCrypt;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -239,20 +239,9 @@ public class UserDao {
         
         // Perform the search
         QueryParam queryParam = new QueryParam(sb.toString(), parameterMap);
-        List<Object[]> l = PaginatedLists.executePaginatedQuery(paginatedList, queryParam, sortCriteria, true);
+        List<Object[]> resultList = PaginatedLists.executePaginatedQuery(paginatedList, queryParam, sortCriteria, true);
         
-        // Assemble results
-        List<UserDto> userDtoList = new ArrayList<UserDto>();
-        for (Object[] o : l) {
-            int i = 0;
-            UserDto userDto = new UserDto();
-            userDto.setId((String) o[i++]);
-            userDto.setUsername((String) o[i++]);
-            userDto.setEmail((String) o[i++]);
-            userDto.setCreateTimestamp(((Timestamp) o[i++]).getTime());
-            userDto.setLocaleId((String) o[i++]);
-            userDtoList.add(userDto);
-        }
-        paginatedList.setResultList(userDtoList);
+        // Map results
+        paginatedList.setResultList(new UserMapper().map(resultList));
     }
 }

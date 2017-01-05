@@ -1,21 +1,16 @@
 package com.sismics.reader.core.dao.jpa;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.JobEventCriteria;
 import com.sismics.reader.core.dao.jpa.dto.JobEventDto;
+import com.sismics.reader.core.dao.jpa.mapper.JobEventMapper;
 import com.sismics.reader.core.model.jpa.JobEvent;
 import com.sismics.util.context.ThreadLocalContext;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Job event DAO.
@@ -94,16 +89,7 @@ public class JobEventDao {
         }
         List<Object[]> resultList = q.getResultList();
         
-        // Assemble results
-        List<JobEventDto> jobEventDtoList = new ArrayList<JobEventDto>();
-        for (Object[] o : resultList) {
-            int i = 0;
-            JobEventDto jobEventDto = new JobEventDto();
-            jobEventDto.setId((String) o[i++]);
-            jobEventDto.setName((String) o[i++]);
-            jobEventDto.setValue((String) o[i++]);
-            jobEventDtoList.add(jobEventDto);
-        }
-        return jobEventDtoList;
+        // Map results
+        return new JobEventMapper().map(resultList);
     }
 }

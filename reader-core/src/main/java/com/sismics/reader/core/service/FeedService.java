@@ -5,11 +5,7 @@ import com.google.common.util.concurrent.AbstractScheduledService;
 import com.sismics.reader.core.dao.file.html.FeedChooserStrategy;
 import com.sismics.reader.core.dao.file.html.RssExtractor;
 import com.sismics.reader.core.dao.file.rss.RssReader;
-import com.sismics.reader.core.dao.jpa.ArticleDao;
-import com.sismics.reader.core.dao.jpa.FeedDao;
-import com.sismics.reader.core.dao.jpa.FeedSubscriptionDao;
-import com.sismics.reader.core.dao.jpa.FeedSynchronizationDao;
-import com.sismics.reader.core.dao.jpa.UserArticleDao;
+import com.sismics.reader.core.dao.jpa.*;
 import com.sismics.reader.core.dao.jpa.criteria.ArticleCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.FeedCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
@@ -22,11 +18,8 @@ import com.sismics.reader.core.event.ArticleCreatedAsyncEvent;
 import com.sismics.reader.core.event.ArticleUpdatedAsyncEvent;
 import com.sismics.reader.core.event.FaviconUpdateRequestedEvent;
 import com.sismics.reader.core.model.context.AppContext;
-import com.sismics.reader.core.model.jpa.Article;
-import com.sismics.reader.core.model.jpa.Feed;
-import com.sismics.reader.core.model.jpa.FeedSubscription;
-import com.sismics.reader.core.model.jpa.FeedSynchronization;
-import com.sismics.reader.core.model.jpa.UserArticle;
+import com.sismics.reader.core.model.jpa.*;
+import com.sismics.reader.core.util.EntityManagerUtil;
 import com.sismics.reader.core.util.ReaderHttpClient;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.reader.core.util.jpa.PaginatedList;
@@ -34,7 +27,6 @@ import com.sismics.reader.core.util.jpa.PaginatedLists;
 import com.sismics.reader.core.util.sanitizer.ArticleSanitizer;
 import com.sismics.reader.core.util.sanitizer.TextSanitizer;
 import com.sismics.util.UrlUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.joda.time.DateTime;
@@ -171,6 +163,7 @@ public class FeedService extends AbstractScheduledService {
             feed.setDescription(StringUtils.abbreviate(newFeed.getDescription(), 4000));
             feed.setLastFetchDate(new Date());
             feedDao.create(feed);
+            EntityManagerUtil.flush();
 
             // Try to download the feed's favicon
             FaviconUpdateRequestedEvent faviconUpdateRequestedEvent = new FaviconUpdateRequestedEvent();
