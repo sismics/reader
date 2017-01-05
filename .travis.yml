@@ -7,10 +7,7 @@ script:
     mvn -B -Pprod,hosted -DskipTests clean install -pl reader-web,reader-core,reader-web-common;
     curl -u $DOCKER_USERNAME:$DOCKER_API_KEY https://cloud.docker.com/api/app/v1/service/;
     docker build -f reader-distribution-docker/Dockerfile -t sismics/reader .;
+    docker push sismics/reader;
     else
     mvn -B test;
-    fi
-after_success:
-  - if [ "$TRAVIS_BRANCH" == "release" ]; then
-    docker push sismics/reader;
     fi
