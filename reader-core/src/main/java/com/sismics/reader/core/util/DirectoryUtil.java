@@ -73,7 +73,7 @@ public class DirectoryUtil {
     
     /**
      * Returns the log directory.
-     * 
+     *
      * @return Log directory.
      */
     public static File getLogDirectory() {

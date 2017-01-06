@@ -17,6 +17,8 @@ public class EnvironmentUtil {
     
     private static String READER_HOME = System.getProperty("reader.home");
 
+    private static String APPLICATION_LOG_ENABLED = System.getProperty("application.log.enabled");
+
     private static String HIBERNATE_PROPERTIES = System.getProperty("hibernate.properties");
 
     /**
@@ -95,6 +97,15 @@ public class EnvironmentUtil {
      */
     public static String getHibernateProperties() {
         return HIBERNATE_PROPERTIES;
+    }
+
+    /**
+     * Returns true if an additional application log is enabled.
+     *
+     * @return Condition
+     */
+    public static boolean isApplicationLogEnabled() {
+        return APPLICATION_LOG_ENABLED == null || !"false".equals(APPLICATION_LOG_ENABLED);
     }
 
     /**

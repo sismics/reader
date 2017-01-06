@@ -336,6 +336,16 @@
             <filtering>false</filtering>
           </resource>
         </resources>
+
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <configuration>
+              <overwrite>true</overwrite>
+            </configuration>
+          </plugin>
+        </plugins>
       </build>
     </profile>
   </profiles>  

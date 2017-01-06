@@ -55,6 +55,26 @@ public class RequestContextFilter implements Filter {
         }
         
         // Initialize file logger
+        if (EnvironmentUtil.isApplicationLogEnabled()) {
+            addFileLogger();
+            log.info(MessageFormat.format("Enabling embedded logger, log dir=", DirectoryUtil.getLogDirectory()));
+        } else {
+            log.info("Disabling embedded logger");
+        }
+
+        // Initialize the application context
+        TransactionUtil.handle(new Runnable() {
+            @Override
+            public void run() {
+                AppContext.getInstance();
+            }
+        });
+    }
+
+    /**
+     * Add an application log beneath the app data directory for convenience.
+     */
+    private void addFileLogger() {
         RollingFileAppender fileAppender = new RollingFileAppender();
         fileAppender.setName("FILE");
         fileAppender.setFile(DirectoryUtil.getLogDirectory() + File.separator + "reader.log");
@@ -65,14 +85,6 @@ public class RequestContextFilter implements Filter {
         fileAppender.setMaxBackupIndex(5);
         fileAppender.activateOptions();
         org.apache.log4j.Logger.getRootLogger().addAppender(fileAppender);
-        
-        // Initialize the application context
-        TransactionUtil.handle(new Runnable() {
-            @Override
-            public void run() {
-                AppContext.getInstance();
-            }
-        });
     }
 
     @Override

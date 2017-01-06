@@ -6,5 +6,9 @@
     <Arg>reader.home</Arg>
     <Arg>/data</Arg>
   </Call>
+  <Call class="java.lang.System" name="setProperty">
+    <Arg>application.log.enabled</Arg>
+    <Arg>false</Arg>
+  </Call>
 
 </Configure>
