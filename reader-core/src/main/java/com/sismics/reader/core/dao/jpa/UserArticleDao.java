@@ -70,7 +70,7 @@ public class UserArticleDao {
     public void markAsRead(UserArticleCriteria criteria) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
-        StringBuilder sb = new StringBuilder("update T_USER_ARTICLE as ua set ua.USA_READDATE_D = :readDate where ua.USA_ID_C in (");
+        StringBuilder sb = new StringBuilder("update T_USER_ARTICLE as ua set USA_READDATE_D = :readDate where ua.USA_ID_C in (");
         sb.append("  select ua2.USA_ID_C from T_USER_ARTICLE ua2 ");
         sb.append("  join T_ARTICLE a on a.ART_ID_C = ua2.USA_IDARTICLE_C ");
         if (criteria.getFeedSubscriptionId() != null || criteria.getCategoryId() != null) {
