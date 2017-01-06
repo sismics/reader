@@ -1,5 +1,6 @@
 package com.sismics.reader.core.service;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.AbstractScheduledService;
 import com.sismics.reader.core.dao.file.html.FeedChooserStrategy;
@@ -229,8 +230,9 @@ public class FeedService extends AbstractScheduledService {
                 article.setEnclosureUrl(newArticle.getEnclosureUrl());
                 article.setEnclosureLength(newArticle.getEnclosureLength());
                 article.setEnclosureType(newArticle.getEnclosureType());
-                
-                if (!currentArticle.getTitle().equals(article.getTitle()) || !currentArticle.getDescription().equals(article.getDescription())) {
+
+                if (!Strings.nullToEmpty(currentArticle.getTitle()).equals(Strings.nullToEmpty(article.getTitle())) ||
+                        !Strings.nullToEmpty(currentArticle.getDescription()).equals(Strings.nullToEmpty(article.getDescription()))) {
                     articleDao.update(article);
                     articleUpdatedList.add(article);
                 }
