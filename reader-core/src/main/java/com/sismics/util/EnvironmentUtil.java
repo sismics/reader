@@ -19,6 +19,8 @@ public class EnvironmentUtil {
 
     private static String APPLICATION_LOG_ENABLED = System.getProperty("application.log.enabled");
 
+    private static String SSL_TRUST_ALL = System.getProperty("ssl.trust.all");
+
     private static String HIBERNATE_PROPERTIES = System.getProperty("hibernate.properties");
 
     /**
@@ -106,6 +108,15 @@ public class EnvironmentUtil {
      */
     public static boolean isApplicationLogEnabled() {
         return APPLICATION_LOG_ENABLED == null || !"false".equals(APPLICATION_LOG_ENABLED);
+    }
+
+    /**
+     * Returns true if all SSL certificates are trusted (insecure).
+     *
+     * @return Condition
+     */
+    public static boolean isSslTrustAll() {
+        return SSL_TRUST_ALL == null || !"false".equals(SSL_TRUST_ALL);
     }
 
     /**

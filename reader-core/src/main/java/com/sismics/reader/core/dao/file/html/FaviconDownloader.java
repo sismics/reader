@@ -1,5 +1,14 @@
 package com.sismics.reader.core.dao.file.html;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.io.ByteStreams;
+import com.google.common.io.Files;
+import com.sismics.reader.core.util.http.ReaderHttpClient;
+import com.sismics.util.mime.MimeTypeUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,16 +18,6 @@ import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.io.ByteStreams;
-import com.google.common.io.Files;
-import com.sismics.reader.core.util.ReaderHttpClient;
-import com.sismics.util.mime.MimeTypeUtil;
 
 /**
  * Utility to download a favicon from a website.

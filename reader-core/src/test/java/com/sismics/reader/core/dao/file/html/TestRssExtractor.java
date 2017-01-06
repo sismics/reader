@@ -1,14 +1,12 @@
 package com.sismics.reader.core.dao.file.html;
 
+import com.sismics.reader.core.util.http.ReaderHttpClient;
+import junit.framework.Assert;
+import org.junit.Test;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
-
-import junit.framework.Assert;
-
-import org.junit.Test;
-
-import com.sismics.reader.core.util.ReaderHttpClient;
 
 /**
  * Test of the RSS extractor.

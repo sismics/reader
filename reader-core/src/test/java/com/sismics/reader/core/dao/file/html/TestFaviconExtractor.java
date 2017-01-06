@@ -1,13 +1,11 @@
 package com.sismics.reader.core.dao.file.html;
 
-import java.io.InputStream;
-import java.net.URL;
-
+import com.sismics.reader.core.util.http.ReaderHttpClient;
 import junit.framework.Assert;
-
 import org.junit.Test;
 
-import com.sismics.reader.core.util.ReaderHttpClient;
+import java.io.InputStream;
+import java.net.URL;
 
 /**
  * Test of the favicon extractor.
