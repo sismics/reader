@@ -7,7 +7,6 @@ script:
     mvn -B -Pprod,hosted -DskipTests clean install -pl reader-web,reader-core,reader-web-common;
     elif [ "$TRAVIS_BRANCH" == "demo" ]; then
     mvn -B -Pprod,demo -DskipTests clean install -pl reader-web,reader-core,reader-web-common;
-    fi
     else
     mvn -B test;
     fi
