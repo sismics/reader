@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Date;
 
 /**
  * Exhaustive test of the subscription resource.
@@ -198,6 +199,40 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         Assert.assertEquals("ok", json.getString("status"));
+    }
+
+    /**
+     * Test of the article dates.
+     *
+     */
+    @Test
+    public void testArticleDate() throws JSONException {
+        // Create a new user: OK
+        createUser("subscription2");
+        login("subscription2");
+
+        // Subscribe to future date feed: OK
+        PUT("/subscription", ImmutableMap.of("url", "http://localhost:9997/http/feeds/future_date.xml"));
+        assertIsOk();
+        JSONObject json = getJsonResult();
+        String subscription1Id = json.getString("id");
+        Assert.assertNotNull(subscription1Id);
+
+        // Check the subscription data
+        GET("/subscription/" + subscription1Id);
+        assertIsOk();
+        json = getJsonResult();
+        JSONObject subscription = json.optJSONObject("subscription");
+        Assert.assertNotNull(subscription);
+        Assert.assertEquals("Feed from the future", subscription.optString("title"));
+        JSONArray articles = json.optJSONArray("articles");
+        Assert.assertEquals(1, articles.length());
+        JSONObject article = articles.optJSONObject(0);
+        Assert.assertNotNull(article);
+        String article0Id = article.getString("id");
+        Assert.assertNotNull(article0Id);
+        Assert.assertEquals("This is an article from the future", article.getString("title"));
+        Assert.assertTrue(new Date(article.getLong("date")).before(new Date()));
     }
 
     /**

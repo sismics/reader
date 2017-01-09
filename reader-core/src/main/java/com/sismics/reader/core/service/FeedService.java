@@ -262,7 +262,7 @@ public class FeedService extends AbstractScheduledService {
                 article.setCreator(StringUtils.abbreviate(article.getCreator(), 200));
                 String baseUri = UrlUtil.getBaseUri(feed, article);
                 article.setDescription(sanitizer.sanitize(baseUri, article.getDescription()));
-                if (article.getPublicationDate() == null) {
+                if (article.getPublicationDate() == null || article.getPublicationDate().after(new Date())) {
                     article.setPublicationDate(new Date());
                 }
                 articleDao.create(article);

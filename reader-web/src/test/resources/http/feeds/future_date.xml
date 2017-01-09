@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	 xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	 xmlns:dc="http://purl.org/dc/elements/1.1/"
+	 xmlns:atom="http://www.w3.org/2005/Atom"
+>
+
+	<channel>
+		<title>Feed from the future</title>
+		<atom:link href="http://localhost:9997/" rel="self" type="application/rss+xml" />
+		<link>http://localhost:9997/</link>
+		<description>Feed from the future</description>
+		<lastBuildDate>Sun, 24 Mar 2033 07:03:43 +0000</lastBuildDate>
+		<language>fr-FR</language>
+		<item>
+			<title>This is an article from the future</title>
+			<link>http://localhost:9997/future_date/xxx.html</link>
+			<comments>http://localhost:9997/future_date/xxx.html#comments</comments>
+			<pubDate>Sun, 24 Mar 2033 07:03:43 +0000</pubDate>
+			<dc:creator>Sismics</dc:creator>
+			<category><![CDATA[Tests]]></category>
+			<guid isPermaLink="false">http://localhost:9997/future_date.xml/?p=1000</guid>
+			<description><![CDATA[Article description]]></description>
+			<content:encoded><![CDATA[Article contents]]></content:encoded>
+		</item>
+	</channel>
+</rss>

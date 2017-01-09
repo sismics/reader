@@ -85,19 +85,19 @@ public class RssReader extends DefaultHandler {
 
     private int fatalErrorCount;
 
-    private String URI_XML = "http://www.w3.org/XML/1998/namespace";
+    private final static String URI_XML = "http://www.w3.org/XML/1998/namespace";
     
-    private String URI_ATOM = "http://www.w3.org/2005/Atom";
+    private final static String URI_ATOM = "http://www.w3.org/2005/Atom";
     
-    private String URI_RDF = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+    private final static String URI_RDF = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
     
-    private String URI_SLASH = "http://purl.org/rss/1.0/modules/slash/";
+    private final static String URI_SLASH = "http://purl.org/rss/1.0/modules/slash/";
     
-    private String URI_DC = "http://purl.org/dc/elements/1.1/";
+    private final static String URI_DC = "http://purl.org/dc/elements/1.1/";
     
-    private String URI_CONTENT = "http://purl.org/rss/1.0/modules/content/";
+    private final static String URI_CONTENT = "http://purl.org/rss/1.0/modules/content/";
     
-    private String URI_THREAD = "http://purl.org/syndication/thread/1.0";
+    private final static String URI_THREAD = "http://purl.org/syndication/thread/1.0";
     
     private enum FeedType {
         RSS,
@@ -189,7 +189,7 @@ public class RssReader extends DefaultHandler {
 
     private Stack<Element> elementStack;
 
-    public FeedType feedType;
+    private FeedType feedType;
     
     /**
      * Constructor of RssReader.
@@ -203,7 +203,6 @@ public class RssReader extends DefaultHandler {
      * Reads an RSS / Atom feed into feed and articles.
      * 
      * @param is Input stream
-     * @throws Exception
      */
     public void readRssFeed(InputStream is) throws Exception {
         SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -506,18 +505,15 @@ public class RssReader extends DefaultHandler {
         if (StringUtils.isBlank(dateAsString)) {
             return null;
         }
-        Date publicationDate = null;
         try {
-            publicationDate = df.parseDateTime(dateAsString).toDate();
-            return publicationDate;
+            return df.parseDateTime(dateAsString).toDate();
         } catch (IllegalArgumentException e) {
             // NOP
         }
         String dateWithOffset = DateUtil.guessTimezoneOffset(dateAsString);
         if (!dateWithOffset.equals(dateAsString)) {
             try {
-                publicationDate = df.parseDateTime(dateWithOffset).toDate();
-                return publicationDate;
+                return df.parseDateTime(dateWithOffset).toDate();
             } catch (IllegalArgumentException e) {
                 // NOP
             }
@@ -526,7 +522,7 @@ public class RssReader extends DefaultHandler {
         if (log.isWarnEnabled()) {
             log.warn(MessageFormat.format("Error parsing comment date: {0}", dateAsString));
         }
-        return publicationDate;
+        return null;
     }
 
     /**
@@ -562,7 +558,6 @@ public class RssReader extends DefaultHandler {
     /**
      * Validate feed data.
      * 
-     * @throws Exception
      */
     private void validateFeed() throws Exception {
         if (feed == null) {
