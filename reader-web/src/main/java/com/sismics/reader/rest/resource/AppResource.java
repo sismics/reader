@@ -84,10 +84,10 @@ public class AppResource extends BaseResource {
         MemoryAppender memoryAppender = (MemoryAppender) appender;
         
         // Find the logs
-        LogCriteria logCriteria = new LogCriteria();
-        logCriteria.setLevel(StringUtils.stripToNull(level));
-        logCriteria.setTag(StringUtils.stripToNull(tag));
-        logCriteria.setMessage(StringUtils.stripToNull(message));
+        LogCriteria logCriteria = new LogCriteria()
+                .setLevel(StringUtils.stripToNull(level))
+                .setTag(StringUtils.stripToNull(tag))
+                .setMessage(StringUtils.stripToNull(message));
         
         PaginatedList<LogEntry> paginatedList = PaginatedLists.create(limit, offset);
         memoryAppender.find(logCriteria, paginatedList);

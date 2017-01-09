@@ -49,16 +49,16 @@ public class AllResource extends BaseResource {
 
         // Get the articles
         UserArticleDao userArticleDao = new UserArticleDao();
-        UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
-        userArticleCriteria.setUnread(unread);
-        userArticleCriteria.setUserId(principal.getId());
-        userArticleCriteria.setSubscribed(true);
-        userArticleCriteria.setVisible(true);
+        UserArticleCriteria userArticleCriteria = new UserArticleCriteria()
+                .setUnread(unread)
+                .setUserId(principal.getId())
+                .setSubscribed(true)
+                .setVisible(true);
         if (afterArticle != null) {
             // Paginate after this user article
-            UserArticleCriteria afterArticleCriteria = new UserArticleCriteria();
-            afterArticleCriteria.setUserArticleId(afterArticle);
-            afterArticleCriteria.setUserId(principal.getId());
+            UserArticleCriteria afterArticleCriteria = new UserArticleCriteria()
+                    .setUserArticleId(afterArticle)
+                    .setUserId(principal.getId());
             List<UserArticleDto> userArticleDtoList = userArticleDao.findByCriteria(afterArticleCriteria);
             if (userArticleDtoList.isEmpty()) {
                 throw new ClientException("ArticleNotFound", MessageFormat.format("Can't find user article {0}", afterArticle));

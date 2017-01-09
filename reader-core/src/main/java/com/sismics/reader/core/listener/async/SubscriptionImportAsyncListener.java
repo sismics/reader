@@ -30,7 +30,6 @@ import com.sismics.reader.core.util.EntityManagerUtil;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.util.mime.MimeType;
 import com.sismics.util.mime.MimeTypeUtil;
-
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.lang.StringUtils;
@@ -378,9 +377,9 @@ public class SubscriptionImportAsyncListener {
                 String feedUrl = outline.getXmlUrl();
 
                 // Check if the user is already subscribed to this feed
-                FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
-                feedSubscriptionCriteria.setUserId(user.getId());
-                feedSubscriptionCriteria.setFeedUrl(feedUrl);
+                FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria()
+                        .setUserId(user.getId())
+                        .setFeedUrl(feedUrl);
 
                 List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
                 if (!feedSubscriptionList.isEmpty()) {
@@ -475,10 +474,10 @@ public class SubscriptionImportAsyncListener {
                 log.info(MessageFormat.format("Cannot import starred article with an empty title and url for feed {0}", rssUrl));
             }
         }
-        ArticleCriteria articleCriteria = new ArticleCriteria();
-        articleCriteria.setTitle(title);
-        articleCriteria.setUrl(url);
-        articleCriteria.setFeedId(feedFromDb.getId());
+        ArticleCriteria articleCriteria = new ArticleCriteria()
+                .setTitle(title)
+                .setUrl(url)
+                .setFeedId(feedFromDb.getId());
         
         ArticleDao articleDao = new ArticleDao();
         List<ArticleDto> currentArticleList = articleDao.findByCriteria(articleCriteria);
@@ -498,9 +497,9 @@ public class SubscriptionImportAsyncListener {
         }
         
         // Check if the user is already subscribed to this article
-        UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
-        userArticleCriteria.setUserId(user.getId());
-        userArticleCriteria.setArticleId(article.getId());
+        UserArticleCriteria userArticleCriteria = new UserArticleCriteria()
+                .setUserId(user.getId())
+                .setArticleId(article.getId());
         
         UserArticleDao userArticleDao = new UserArticleDao();
         List<UserArticleDto> userArticleList = userArticleDao.findByCriteria(userArticleCriteria);

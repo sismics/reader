@@ -38,8 +38,9 @@ public class LogCriteria {
      *
      * @param level level
      */
-    public void setLevel(String level) {
+    public LogCriteria setLevel(String level) {
         this.level = StringUtils.lowerCase(level);
+        return this;
     }
 
     /**
@@ -56,8 +57,9 @@ public class LogCriteria {
      *
      * @param tag tag
      */
-    public void setTag(String tag) {
+    public LogCriteria setTag(String tag) {
         this.tag = StringUtils.lowerCase(tag);
+        return this;
     }
 
     /**
@@ -74,7 +76,8 @@ public class LogCriteria {
      *
      * @param message message
      */
-    public void setMessage(String message) {
+    public LogCriteria setMessage(String message) {
         this.message = StringUtils.lowerCase(message);
+        return this;
     }
 }

@@ -91,8 +91,8 @@ public class FeedService extends AbstractScheduledService {
     public void synchronizeAllFeeds() {
         // Update all feeds currently having subscribed users
         FeedDao feedDao = new FeedDao();
-        FeedCriteria feedCriteria = new FeedCriteria();
-        feedCriteria.setWithUserSubscription(true);
+        FeedCriteria feedCriteria = new FeedCriteria()
+                .setWithUserSubscription(true);
         List<FeedDto> feedList = feedDao.findByCriteria(feedCriteria);
         List<FeedSynchronization> feedSynchronizationList = new ArrayList<FeedSynchronization>();
         for (FeedDto feed : feedList) {
@@ -208,9 +208,9 @@ public class FeedService extends AbstractScheduledService {
         ArticleSanitizer sanitizer = new ArticleSanitizer();
         ArticleDao articleDao = new ArticleDao();
         if (!guidIn.isEmpty()) {
-            ArticleCriteria articleCriteria = new ArticleCriteria();
-            articleCriteria.setFeedId(feed.getId());
-            articleCriteria.setGuidIn(guidIn);
+            ArticleCriteria articleCriteria = new ArticleCriteria()
+                    .setFeedId(feed.getId())
+                    .setGuidIn(guidIn);
             List<ArticleDto> currentArticleDtoList = articleDao.findByCriteria(articleCriteria);
             List<Article> articleUpdatedList = new ArrayList<Article>();
             for (ArticleDto currentArticle : currentArticleDtoList) {
@@ -248,8 +248,8 @@ public class FeedService extends AbstractScheduledService {
         
         // Create new articles
         if (!articleMap.isEmpty()) {
-            FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
-            feedSubscriptionCriteria.setFeedId(feed.getId());
+            FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria()
+                    .setFeedId(feed.getId());
             
             FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
             List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
@@ -363,10 +363,10 @@ public class FeedService extends AbstractScheduledService {
      * @param feedSubscription Feed subscription
      */
     public void createInitialUserArticle(String userId, FeedSubscription feedSubscription) {
-        UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
-        userArticleCriteria.setUserId(userId);
-        userArticleCriteria.setSubscribed(true);
-        userArticleCriteria.setFeedId(feedSubscription.getFeedId());
+        UserArticleCriteria userArticleCriteria = new UserArticleCriteria()
+                .setUserId(userId)
+                .setSubscribed(true)
+                .setFeedId(feedSubscription.getFeedId());
 
         UserArticleDao userArticleDao = new UserArticleDao();
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(); //TODO we could fetch as many articles as in the feed, not 10

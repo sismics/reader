@@ -72,9 +72,9 @@ public class SubscriptionResource extends BaseResource {
         }
         
         // Search this user's subscriptions
-        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
-        feedSubscriptionCriteria.setUserId(principal.getId());
-        feedSubscriptionCriteria.setUnread(unread);
+        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria()
+                .setUserId(principal.getId())
+                .setUnread(unread);
         
         FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
         List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
@@ -176,9 +176,9 @@ public class SubscriptionResource extends BaseResource {
         }
         
         // Get the subscription
-        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
-        feedSubscriptionCriteria.setId(id);
-        feedSubscriptionCriteria.setUserId(principal.getId());
+        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria()
+                .setId(id)
+                .setUserId(principal.getId());
         
         FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
         List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
@@ -189,17 +189,17 @@ public class SubscriptionResource extends BaseResource {
 
         // Get the articles
         UserArticleDao userArticleDao = new UserArticleDao();
-        UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
-        userArticleCriteria.setUnread(unread);
-        userArticleCriteria.setUserId(principal.getId());
-        userArticleCriteria.setSubscribed(true);
-        userArticleCriteria.setVisible(true);
-        userArticleCriteria.setFeedId(feedSubscription.getFeedId());
+        UserArticleCriteria userArticleCriteria = new UserArticleCriteria()
+                .setUnread(unread)
+                .setUserId(principal.getId())
+                .setSubscribed(true)
+                .setVisible(true)
+                .setFeedId(feedSubscription.getFeedId());
         if (afterArticle != null) {
             // Paginate after this user article
-            UserArticleCriteria afterArticleCriteria = new UserArticleCriteria();
-            afterArticleCriteria.setUserArticleId(afterArticle);
-            afterArticleCriteria.setUserId(principal.getId());
+            UserArticleCriteria afterArticleCriteria = new UserArticleCriteria()
+                    .setUserArticleId(afterArticle)
+                    .setUserId(principal.getId());
             List<UserArticleDto> userArticleDtoList = userArticleDao.findByCriteria(afterArticleCriteria);
             if (userArticleDtoList.isEmpty()) {
                 throw new ClientException("ArticleNotFound", MessageFormat.format("Can't find user article {0}", afterArticle));
@@ -252,9 +252,9 @@ public class SubscriptionResource extends BaseResource {
         }
         
         // Get the subscription
-        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
-        feedSubscriptionCriteria.setId(id);
-        feedSubscriptionCriteria.setUserId(principal.getId());
+        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria()
+                .setId(id)
+                .setUserId(principal.getId());
         
         FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
         List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
@@ -306,9 +306,9 @@ public class SubscriptionResource extends BaseResource {
         title = ValidationUtil.validateLength(title, "title", null, 100, true);
         
         // Check if the user is already subscribed to this feed
-        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
-        feedSubscriptionCriteria.setUserId(principal.getId());
-        feedSubscriptionCriteria.setFeedUrl(url);
+        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria()
+                .setUserId(principal.getId())
+                .setFeedUrl(url);
         FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
         List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
         if (!feedSubscriptionList.isEmpty()) {
@@ -326,9 +326,9 @@ public class SubscriptionResource extends BaseResource {
         }
         
         // Check again that we are not subscribed, in case the page URL was replaced by the feed URL
-        feedSubscriptionCriteria = new FeedSubscriptionCriteria();
-        feedSubscriptionCriteria.setUserId(principal.getId());
-        feedSubscriptionCriteria.setFeedUrl(feed.getRssUrl());
+        feedSubscriptionCriteria = new FeedSubscriptionCriteria()
+                .setUserId(principal.getId())
+                .setFeedUrl(feed.getRssUrl());
         feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
         if (!feedSubscriptionList.isEmpty()) {
             throw new ClientException("AlreadySubscribed", "You are already subscribed to this URL");
@@ -627,8 +627,8 @@ public class SubscriptionResource extends BaseResource {
         opmlElement.appendChild(bodyElement);
 
         // Search this user's subscriptions
-        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria();
-        feedSubscriptionCriteria.setUserId(principal.getId());
+        FeedSubscriptionCriteria feedSubscriptionCriteria = new FeedSubscriptionCriteria()
+                .setUserId(principal.getId());
         FeedSubscriptionDao feedSubscriptionDao = new FeedSubscriptionDao();
         List<FeedSubscriptionDto> feedSubscriptionList = feedSubscriptionDao.findByCriteria(feedSubscriptionCriteria);
         

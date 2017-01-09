@@ -1,20 +1,5 @@
 package com.sismics.reader.core.service;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.RAMDirectory;
-import org.apache.lucene.store.SimpleFSDirectory;
-import org.apache.lucene.store.SimpleFSLockFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.AbstractScheduledService;
 import com.sismics.reader.core.constant.Constants;
@@ -30,6 +15,20 @@ import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.RAMDirectory;
+import org.apache.lucene.store.SimpleFSDirectory;
+import org.apache.lucene.store.SimpleFSLockFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Indexing service.
@@ -130,10 +129,10 @@ public class IndexingService extends AbstractScheduledService {
         
         if (articleMap.size() > 0) {
             // Get linked UserArticle from database
-            UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
-            userArticleCriteria.setUserId(userId);
-            userArticleCriteria.setVisible(false);
-            userArticleCriteria.setArticleIdIn(Lists.newArrayList(articleMap.keySet()));
+            UserArticleCriteria userArticleCriteria = new UserArticleCriteria()
+                    .setUserId(userId)
+                    .setVisible(false)
+                    .setArticleIdIn(Lists.newArrayList(articleMap.keySet()));
             
             UserArticleDao userArticleDao = new UserArticleDao();
             PaginatedList<UserArticleDto> userArticledList = PaginatedLists.create(paginatedList.getLimit(), 0);

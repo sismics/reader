@@ -45,15 +45,15 @@ public class StarredResource extends BaseResource {
 
         // Get the articles
         UserArticleDao userArticleDao = new UserArticleDao();
-        UserArticleCriteria userArticleCriteria = new UserArticleCriteria();
-        userArticleCriteria.setStarred(true);
-        userArticleCriteria.setVisible(true);
-        userArticleCriteria.setUserId(principal.getId());
+        UserArticleCriteria userArticleCriteria = new UserArticleCriteria()
+            .setStarred(true)
+            .setVisible(true)
+            .setUserId(principal.getId());
         if (afterArticle != null) {
             // Paginate after this user article
-            UserArticleCriteria afterArticleCriteria = new UserArticleCriteria();
-            afterArticleCriteria.setUserArticleId(afterArticle);
-            afterArticleCriteria.setUserId(principal.getId());
+            UserArticleCriteria afterArticleCriteria = new UserArticleCriteria()
+                    .setUserArticleId(afterArticle)
+                    .setUserId(principal.getId());
             List<UserArticleDto> userArticleDtoList = userArticleDao.findByCriteria(afterArticleCriteria);
             if (userArticleDtoList.isEmpty()) {
                 throw new ClientException("ArticleNotFound", MessageFormat.format("Can't find user article {0}", afterArticle));

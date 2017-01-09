@@ -531,8 +531,8 @@ public class UserResource extends BaseResource {
             
             JobDao jobDao = new JobDao();
             JobEventDao jobEventDao = new JobEventDao();
-            JobCriteria jobCriteria = new JobCriteria();
-            jobCriteria.setUserId(user.getId());
+            JobCriteria jobCriteria = new JobCriteria()
+                    .setUserId(user.getId());
             List<JobDto> jobList = jobDao.findByCriteria(jobCriteria);
             JSONArray jobs = new JSONArray();
             for (JobDto job : jobList) {
@@ -542,8 +542,8 @@ public class UserResource extends BaseResource {
                 jobJson.put("start_date", job.getStartTimestamp());
                 jobJson.put("end_date", job.getStartTimestamp());
                 
-                JobEventCriteria jobEventCriteria = new JobEventCriteria();
-                jobEventCriteria.setJobId(job.getId());
+                JobEventCriteria jobEventCriteria = new JobEventCriteria()
+                        .setJobId(job.getId());
                 List<JobEventDto> jobEventList = jobEventDao.findByCriteria(jobEventCriteria);
                 int feedSuccess = 0;
                 int feedFailure = 0;
