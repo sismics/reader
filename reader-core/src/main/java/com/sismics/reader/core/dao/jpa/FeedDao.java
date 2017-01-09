@@ -66,8 +66,7 @@ public class FeedDao {
         Query q = em.createQuery("select f from Feed f where f.rssUrl = :rssUrl and f.deleteDate is null");
         q.setParameter("rssUrl", rssUrl);
         try {
-            Feed feed = (Feed) q.getSingleResult();
-            return feed;
+            return (Feed) q.getSingleResult();
         } catch (NoResultException e) {
             return null;
         }
@@ -146,6 +145,24 @@ public class FeedDao {
         feedFromDb.setDescription(feed.getDescription());
         feedFromDb.setLastFetchDate(feed.getLastFetchDate());
         
+        return feed;
+    }
+
+    /**
+     * Updates a feed RSS URL.
+     *
+     * @param feed Feed to update
+     * @return Updated feed
+     */
+    public Feed updateRssUrl(Feed feed) {
+        EntityManager em = ThreadLocalContext.get().getEntityManager();
+
+        // Update the feed
+        em.createNativeQuery("update t_feed set fed_rssurl_c = :rssUrl where fed_id_c = :id")
+            .setParameter("rssUrl", feed.getRssUrl())
+            .setParameter("id", feed.getId())
+            .executeUpdate();
+
         return feed;
     }
 }

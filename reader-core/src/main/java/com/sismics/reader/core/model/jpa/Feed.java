@@ -1,13 +1,12 @@
 package com.sismics.reader.core.model.jpa;
 
-import java.util.Date;
+import com.google.common.base.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.google.common.base.Objects;
+import java.util.Date;
 
 /**
  * Feed entity.
@@ -256,6 +255,13 @@ public class Feed {
      */
     public void setDeleteDate(Date deleteDate) {
         this.deleteDate = deleteDate;
+    }
+
+    public Feed() {
+    }
+
+    public Feed(String id) {
+        this.id = id;
     }
 
     @Override

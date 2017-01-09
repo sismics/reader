@@ -137,7 +137,6 @@ public class FeedService extends AbstractScheduledService {
      * Synchronize the feed to local database.
      * 
      * @param url RSS url of a feed or page containing a feed to synchronize
-     * @throws Exception
      */
     public Feed synchronize(String url) throws Exception {
         if (log.isInfoEnabled()) {
@@ -299,7 +298,6 @@ public class FeedService extends AbstractScheduledService {
      * @param url Url to parse
      * @param parsePage If true, try to parse the resource as an HTML page linking to a feed
      * @return Reader
-     * @throws Exception
      */
     private RssReader parseFeedOrPage(String url, boolean parsePage) throws Exception {
         try {
@@ -311,7 +309,7 @@ public class FeedService extends AbstractScheduledService {
                     reader.readRssFeed(is);
                 }
             }.open(new URL(url));
-            reader.getFeed().setRssUrl(url.toString());
+            reader.getFeed().setRssUrl(url);
             return reader;
         } catch (Exception eRss) {
             boolean recoverable = !(eRss instanceof UnknownHostException ||
@@ -343,7 +341,7 @@ public class FeedService extends AbstractScheduledService {
         }
     }
     
-    protected void logParsingError(String url, Exception e) {
+    private void logParsingError(String url, Exception e) {
         if (log.isWarnEnabled()) {
             if (e instanceof UnknownHostException ||
                     e instanceof FileNotFoundException ||
@@ -370,7 +368,7 @@ public class FeedService extends AbstractScheduledService {
 
         UserArticleDao userArticleDao = new UserArticleDao();
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(); //TODO we could fetch as many articles as in the feed, not 10
-        userArticleDao.findByCriteria(userArticleCriteria, paginatedList);
+        userArticleDao.findByCriteria(paginatedList, userArticleCriteria, null, null);
         for (UserArticleDto userArticleDto : paginatedList.getResultList()) {
             if (userArticleDto.getId() == null) {
                 UserArticle userArticle = new UserArticle();

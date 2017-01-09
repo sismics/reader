@@ -1,16 +1,15 @@
 package com.sismics.reader.core.dao.jpa;
 
-import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.UserArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.dao.jpa.mapper.UserArticleMapper;
 import com.sismics.reader.core.model.jpa.UserArticle;
-import com.sismics.reader.core.util.jpa.PaginatedList;
-import com.sismics.reader.core.util.jpa.PaginatedLists;
-import com.sismics.reader.core.util.jpa.QueryParam;
-import com.sismics.reader.core.util.jpa.QueryUtil;
+import com.sismics.reader.core.util.jpa.SortCriteria;
 import com.sismics.util.context.ThreadLocalContext;
+import com.sismics.util.jpa.BaseDao;
 import com.sismics.util.jpa.DialectUtil;
+import com.sismics.util.jpa.QueryParam;
+import com.sismics.util.jpa.filter.FilterCriteria;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -22,7 +21,7 @@ import java.util.*;
  * 
  * @author jtremeaux
  */
-public class UserArticleDao {
+public class UserArticleDao extends BaseDao<UserArticleDto, UserArticleCriteria> {
     /**
      * Creates a new user article.
      * 
@@ -133,58 +132,26 @@ public class UserArticleDao {
         }
     }
 
-    /**
-     * Searches user articles by criteria.
-     * 
-     * @param criteria Search criteria
-     * @return List of user articles
-     */
-    @SuppressWarnings("unchecked")
-    public List<UserArticleDto> findByCriteria(UserArticleCriteria criteria) {
-        QueryParam queryParam = getQueryParam(criteria);
-        Query q = QueryUtil.getNativeQuery(queryParam);
-        List<Object[]> l = q.getResultList();
-        return new UserArticleMapper().map(l);
-    }
-    
-    /**
-     * Searches user articles by criteria.
-     * 
-     * @param criteria Search criteria
-     * @param paginatedList Paginated list (populated by side effects)
-     */
-    public void findByCriteria(UserArticleCriteria criteria, PaginatedList<UserArticleDto> paginatedList) {
-        QueryParam queryParam = getQueryParam(criteria);
-        List<Object[]> l = PaginatedLists.executePaginatedQuery(paginatedList, queryParam, false);
-        paginatedList.setResultList(new UserArticleMapper().map(l));
-    }
-
-    /**
-     * Creates the query parameters from the criteria.
-     * 
-     * @param criteria Search criteria
-     * @return Query parameters
-     */
-    private QueryParam getQueryParam(UserArticleCriteria criteria) {
-        Map<String, Object> parameterMap = new HashMap<String, Object>();
+    @Override
+    protected QueryParam getQueryParam(UserArticleCriteria criteria, FilterCriteria filterCriteria) {
         List<String> criteriaList = new ArrayList<String>();
-        
+        Map<String, Object> parameterMap = new HashMap<String, Object>();
         StringBuilder sb = new StringBuilder("select ua.USA_ID_C, ua.USA_READDATE_D, ua.USA_STARREDDATE_D, f.FED_TITLE_C, fs.FES_ID_C, fs.FES_TITLE_C, a.ART_ID_C, a.ART_URL_C, a.ART_GUID_C, a.ART_TITLE_C, a.ART_CREATOR_C, a.ART_DESCRIPTION_C, a.ART_COMMENTURL_C, a.ART_COMMENTCOUNT_N, a.ART_ENCLOSUREURL_C, a.ART_ENCLOSURELENGTH_N, a.ART_ENCLOSURETYPE_C, a.ART_PUBLICATIONDATE_D");
         if (criteria.isVisible()) {
             if (criteria.isUnread() || criteria.isStarred()) {
-                sb.append(" from T_USER_ARTICLE ua ");
-                sb.append(" join T_ARTICLE a on(a.ART_ID_C = ua.USA_IDARTICLE_C) ");
+                sb.append("  from T_USER_ARTICLE ua ");
+                sb.append("  join T_ARTICLE a on(a.ART_ID_C = ua.USA_IDARTICLE_C) ");
             } else {
-                sb.append(" from T_ARTICLE a ");
-                sb.append(" join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C) ");
+                sb.append("  from T_ARTICLE a ");
+                sb.append("  join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C) ");
             }
             criteriaList.add("ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null");
         } else {
-            sb.append(" from T_ARTICLE a ");
-            sb.append(" left join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null) ");
+            sb.append("  from T_ARTICLE a ");
+            sb.append("  left join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null) ");
         }
-        sb.append(" join T_FEED f on(f.FED_ID_C = a.ART_IDFEED_C and f.FED_DELETEDATE_D is null) ");
-        sb.append(" left join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
+        sb.append("  join T_FEED f on(f.FED_ID_C = a.ART_IDFEED_C and f.FED_DELETEDATE_D is null) ");
+        sb.append("  left join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
         
         // Adds search criteria
         if (criteria.getFeedId() != null) {
@@ -225,23 +192,21 @@ public class UserArticleDao {
         if (criteria.getUserArticleStarredDateMax() != null && criteria.getUserArticleIdMax() != null) {
             // Start the page this starred article
             criteriaList.add("concat(" + DialectUtil.getTimeStamp("ua.USA_STARREDDATE_D") + ", ua.USA_ID_C) < concat(" + DialectUtil.getTimeStamp(":userArticleStarredDateMax") + ", :userArticleIdMax)");
+//            criteriaList.add("(ua.USA_STARREDDATE_D, ua.USA_ID_C) < (:userArticleStarredDateMax, :userArticleIdMax)");
+//            criteriaList.add("(ua.USA_STARREDDATE_D < :userArticleStarredDateMax)");
             parameterMap.put("userArticleStarredDateMax", criteria.getUserArticleStarredDateMax());
             parameterMap.put("userArticleIdMax", criteria.getUserArticleIdMax());
         }
         parameterMap.put("userId", criteria.getUserId());
         criteriaList.add("a.ART_DELETEDATE_D is null");
         
-        if (!criteriaList.isEmpty()) {
-            sb.append(" where ");
-            sb.append(Joiner.on(" and ").join(criteriaList));
-        }
-        
+        SortCriteria sortCriteria;
         if (criteria.isStarred()) {
-            sb.append(" order by ua.USA_STARREDDATE_D desc, ua.USA_ID_C desc");
+            sortCriteria = new SortCriteria(" order by ua.USA_STARREDDATE_D desc, ua.USA_ID_C desc");
         } else {
-            sb.append(" order by a.ART_PUBLICATIONDATE_D desc, a.ART_ID_C desc");
+            sortCriteria = new SortCriteria(" order by a.ART_PUBLICATIONDATE_D desc, a.ART_ID_C desc");
         }
 
-        return new QueryParam(sb.toString(), parameterMap);
+        return new QueryParam(sb.toString(), criteriaList, parameterMap, sortCriteria, filterCriteria, new UserArticleMapper());
     }
 }

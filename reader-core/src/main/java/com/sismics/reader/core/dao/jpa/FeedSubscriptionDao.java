@@ -1,24 +1,27 @@
 package com.sismics.reader.core.dao.jpa;
 
-import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import com.sismics.reader.core.dao.jpa.criteria.FeedSubscriptionCriteria;
 import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.dao.jpa.mapper.FeedSubscriptionMapper;
 import com.sismics.reader.core.model.jpa.FeedSubscription;
+import com.sismics.reader.core.util.jpa.SortCriteria;
 import com.sismics.util.context.ThreadLocalContext;
+import com.sismics.util.jpa.BaseDao;
+import com.sismics.util.jpa.QueryParam;
+import com.sismics.util.jpa.filter.FilterCriteria;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * Feed subscription DAO.
  * 
  * @author jtremeaux
  */
-public class FeedSubscriptionDao {
+public class FeedSubscriptionDao extends BaseDao<FeedSubscriptionDto, FeedSubscriptionCriteria> {
     /**
      * Creates a new feed subscription.
      * 
@@ -166,24 +169,18 @@ public class FeedSubscriptionDao {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    /**
-     * Searches feed subscriptions by criteria.
-     * 
-     * @param criteria Search criteria
-     * @return List of feed subscriptions
-     */
-    @SuppressWarnings("unchecked")
-    public List<FeedSubscriptionDto> findByCriteria(FeedSubscriptionCriteria criteria) {
+    @Override
+    protected QueryParam getQueryParam(FeedSubscriptionCriteria criteria, FilterCriteria filterCriteria) {
+        List<String> criteriaList = Lists.newArrayList();
         Map<String, Object> parameterMap = new HashMap<String, Object>();
-        
         StringBuilder sb = new StringBuilder("select fs.FES_ID_C, fs.FES_TITLE_C, fs.FES_UNREADCOUNT_N, fs.FES_CREATEDATE_D, fs.FES_IDUSER_C, f.FED_ID_C, f.FED_TITLE_C, f.FED_RSSURL_C, f.FED_URL_C, f.FED_DESCRIPTION_C, c.CAT_ID_C, c.CAT_IDPARENT_C, c.CAT_NAME_C, c.CAT_FOLDED_B,");
-        sb.append(" (select count(fsy.FSY_ID_C) from (select * from T_FEED_SYNCHRONIZATION fsy where fsy.FSY_IDFEED_C = f.FED_ID_C order by fsy.FSY_CREATEDATE_D desc limit 5) fsy where fsy.FSY_SUCCESS_B = false) ");
-        sb.append(" from T_FEED_SUBSCRIPTION fs ");
-        sb.append(" join T_FEED f on(f.FED_ID_C = fs.FES_IDFEED_C and f.FED_DELETEDATE_D is null) ");
-        sb.append(" join T_CATEGORY c on(c.CAT_ID_C = fs.FES_IDCATEGORY_C and c.CAT_DELETEDATE_D is null) ");
+        sb.append("  (select count(fsy.FSY_ID_C) from (select * from T_FEED_SYNCHRONIZATION fsy where fsy.FSY_IDFEED_C = f.FED_ID_C order by fsy.FSY_CREATEDATE_D desc limit 5) fsy where fsy.FSY_SUCCESS_B = false) ");
+        sb.append("  from T_FEED_SUBSCRIPTION fs ");
+        sb.append("  join T_FEED f on(f.FED_ID_C = fs.FES_IDFEED_C and f.FED_DELETEDATE_D is null) ");
+        sb.append("  join T_CATEGORY c on(c.CAT_ID_C = fs.FES_IDCATEGORY_C and c.CAT_DELETEDATE_D is null) ");
 
         // Adds search criteria
-        List<String> criteriaList = new ArrayList<String>();
+        criteriaList.add("fs.FES_DELETEDATE_D is null");
         if (criteria.getId() != null) {
             criteriaList.add("fs.FES_ID_C = :id");
             parameterMap.put("id", criteria.getId());
@@ -207,24 +204,9 @@ public class FeedSubscriptionDao {
         if (criteria.isUnread()) {
             criteriaList.add("fs.FES_UNREADCOUNT_N > 0");
         }
-        criteriaList.add("fs.FES_DELETEDATE_D is null");
-        
-        if (!criteriaList.isEmpty()) {
-            sb.append(" where ");
-            sb.append(Joiner.on(" and ").join(criteriaList));
-        }
-        
-        sb.append(" order by c.CAT_IDPARENT_C asc, c.CAT_ORDER_N asc, fs.FES_ORDER_N asc");
-        
-        // Search
-        EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createNativeQuery(sb.toString());
-        for (Entry<String, Object> entry : parameterMap.entrySet()) {
-            q.setParameter(entry.getKey(), entry.getValue());
-        }
-        List<Object[]> resultList = q.getResultList();
-        
-        // Map results
-        return new FeedSubscriptionMapper().map(resultList);
+
+        SortCriteria sortCriteria = new SortCriteria("  order by c.CAT_IDPARENT_C asc, c.CAT_ORDER_N asc, fs.FES_ORDER_N asc");
+
+        return new QueryParam(sb.toString(), criteriaList, parameterMap, sortCriteria, filterCriteria, new FeedSubscriptionMapper());
     }
 }

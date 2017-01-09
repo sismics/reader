@@ -1,15 +1,14 @@
 package com.sismics.reader.core.dao.jpa;
 
-import com.google.common.base.Joiner;
 import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.dao.jpa.dto.UserDto;
 import com.sismics.reader.core.dao.jpa.mapper.UserMapper;
 import com.sismics.reader.core.model.jpa.User;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import com.sismics.reader.core.util.jpa.PaginatedLists;
-import com.sismics.reader.core.util.jpa.QueryParam;
 import com.sismics.reader.core.util.jpa.SortCriteria;
 import com.sismics.util.context.ThreadLocalContext;
+import com.sismics.util.jpa.QueryParam;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.EntityManager;
@@ -232,16 +231,8 @@ public class UserDao {
         List<String> criteriaList = new ArrayList<String>();
         criteriaList.add("u.USE_DELETEDATE_D is null");
         
-        if (!criteriaList.isEmpty()) {
-            sb.append(" where ");
-            sb.append(Joiner.on(" and ").join(criteriaList));
-        }
-        
         // Perform the search
-        QueryParam queryParam = new QueryParam(sb.toString(), parameterMap);
-        List<Object[]> resultList = PaginatedLists.executePaginatedQuery(paginatedList, queryParam, sortCriteria, true);
-        
-        // Map results
-        paginatedList.setResultList(new UserMapper().map(resultList));
+        QueryParam queryParam = new QueryParam(sb.toString(), criteriaList, parameterMap, null, null, new UserMapper());
+        PaginatedLists.executePaginatedQuery(paginatedList, queryParam, sortCriteria);
     }
 }

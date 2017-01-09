@@ -130,7 +130,7 @@ public class CategoryResource extends BaseResource {
         }
 
         PaginatedList<UserArticleDto> paginatedList = PaginatedLists.create(limit, null);
-        userArticleDao.findByCriteria(userArticleCriteria, paginatedList);
+        userArticleDao.findByCriteria(paginatedList, userArticleCriteria, null, null);
         
         // Build the response
         JSONObject response = new JSONObject();

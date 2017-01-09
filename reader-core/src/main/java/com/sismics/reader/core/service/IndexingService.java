@@ -136,7 +136,7 @@ public class IndexingService extends AbstractScheduledService {
             
             UserArticleDao userArticleDao = new UserArticleDao();
             PaginatedList<UserArticleDto> userArticledList = PaginatedLists.create(paginatedList.getLimit(), 0);
-            userArticleDao.findByCriteria(userArticleCriteria, userArticledList);
+            userArticleDao.findByCriteria(userArticledList, userArticleCriteria, null, null);
             paginatedList.setResultList(userArticledList.getResultList());
             
             for (UserArticleDto userArticleDto : paginatedList.getResultList()) {
