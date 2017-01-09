@@ -5,6 +5,9 @@ services:
 script:
   - if [ "$TRAVIS_BRANCH" == "release" ]; then
     mvn -B -Pprod,hosted -DskipTests clean install -pl reader-web,reader-core,reader-web-common;
+    elif [ "$TRAVIS_BRANCH" == "demo" ]; then
+    mvn -B -Pprod,demo -DskipTests clean install -pl reader-web,reader-core,reader-web-common;
+    fi
     else
     mvn -B test;
     fi
@@ -13,4 +16,8 @@ after_success:
     docker build -f reader-distribution-docker/Dockerfile -t sismics/reader:latest .;
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push sismics/reader:latest;
+    elif [ "$TRAVIS_BRANCH" == "demo" ]; then
+    docker build -f reader-distribution-docker/Dockerfile -t sismics/reader:demo-latest .;
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push sismics/reader:demo-latest;
     fi
