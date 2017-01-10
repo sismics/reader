@@ -16,6 +16,7 @@ import com.sismics.reader.core.dao.jpa.dto.FeedDto;
 import com.sismics.reader.core.dao.jpa.dto.FeedSubscriptionDto;
 import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.event.ArticleCreatedAsyncEvent;
+import com.sismics.reader.core.event.ArticleDeletedAsyncEvent;
 import com.sismics.reader.core.event.ArticleUpdatedAsyncEvent;
 import com.sismics.reader.core.event.FaviconUpdateRequestedEvent;
 import com.sismics.reader.core.model.context.AppContext;
@@ -148,7 +149,17 @@ public class FeedService extends AbstractScheduledService {
         RssReader rssReader = parseFeedOrPage(url, true);
         Feed newFeed = rssReader.getFeed();
         List<Article> articleList = rssReader.getArticleList();
-        
+
+        // Delete articles that don't exist anymore
+        List<Article> removedArticles = deleteRemovedArticles(articleList);
+
+        // Removed articles from index
+        if (!removedArticles.isEmpty()) {
+            ArticleDeletedAsyncEvent articleDeletedAsyncEvent = new ArticleDeletedAsyncEvent();
+            articleDeletedAsyncEvent.setArticleList(removedArticles);
+            AppContext.getInstance().getAsyncEventBus().post(articleDeletedAsyncEvent);
+        }
+
         // Create the feed if necessary (not created and currently in use by another user)
         FeedDao feedDao = new FeedDao();
         String rssUrl = newFeed.getRssUrl();
@@ -287,6 +298,67 @@ public class FeedService extends AbstractScheduledService {
         }
         
         return feed;
+    }
+
+    /**
+     * Delete articles that were removed (ninja edited) from the feed.
+     *
+     * @param articleList Articles just downloaded
+     */
+    private List<Article> deleteRemovedArticles(List<Article> articleList) {
+        List<Article> removedArticleList = new ArrayList<Article>();
+        
+        // Check if the oldest article from stream was already synced
+        Article oldestArticle = getOldestArticle(articleList);
+        if (oldestArticle == null) {
+            return removedArticleList;
+        }
+        ArticleDto localArticle = new ArticleDao().findFirstByCriteria(new ArticleCriteria()
+                .setGuidIn(Lists.newArrayList(oldestArticle.getGuid())));
+        if (localArticle == null) {
+            return removedArticleList;
+        }
+
+        // Get earlier articles in stream
+        List<Article> earlierArticles = getEarlierArticleList(articleList, oldestArticle);
+        Set<String> earlierArticleGuids = new HashSet<String>();
+        for (Article article : earlierArticles) {
+            earlierArticleGuids.add(article.getGuid());
+        }
+
+        // Get earlier articles in stream
+        List<ArticleDto> earlierLocalArticles = new ArticleDao().findByCriteria(new ArticleCriteria()
+                .setPublicationDateMax(oldestArticle.getPublicationDate()));
+
+        // Delete articles removed from stream
+        for (ArticleDto earlierLocalArticle : earlierLocalArticles) {
+            if (!earlierArticleGuids.contains(earlierLocalArticle.getGuid())) {
+                new ArticleDao().delete(earlierLocalArticle.getId());
+                removedArticleList.add(new Article(earlierLocalArticle.getId()));
+            }
+        }
+        
+        return removedArticleList;
+    }
+
+    private List<Article> getEarlierArticleList(List<Article> articleList, Article oldestArticle) {
+        List<Article> presentArticles = new ArrayList<Article>();
+        for (Article article : articleList) {
+            if (article.getPublicationDate().before(oldestArticle.getPublicationDate())) {
+                presentArticles.add(article);
+            }
+        }
+        return presentArticles;
+    }
+
+    private Article getOldestArticle(List<Article> articleList) {
+        Article oldestArticle = null;
+        for (Article article : articleList) {
+            if (oldestArticle == null || article.getPublicationDate().before(article.getPublicationDate())) {
+                oldestArticle = article;
+            }
+        }
+        return oldestArticle;
     }
 
     /**

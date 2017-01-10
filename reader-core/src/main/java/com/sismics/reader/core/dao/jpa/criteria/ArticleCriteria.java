@@ -1,5 +1,6 @@
 package com.sismics.reader.core.dao.jpa.criteria;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +28,11 @@ public class ArticleCriteria {
      * Article url.
      */
     private String url;
+
+    /**
+     * Max publication date.
+     */
+    private Date publicationDateMax;
 
     /**
      * Feed ID.
@@ -106,6 +112,25 @@ public class ArticleCriteria {
      */
     public ArticleCriteria setUrl(String url) {
         this.url = url;
+        return this;
+    }
+
+    /**
+     * Getter of publicationDateMax.
+     *
+     * @return publicationDateMax
+     */
+    public Date getPublicationDateMax() {
+        return publicationDateMax;
+    }
+
+    /**
+     * Setter of publicationDateMax.
+     *
+     * @param publicationDateMax publicationDateMax
+     */
+    public ArticleCriteria setPublicationDateMax(Date publicationDateMax) {
+        this.publicationDateMax = publicationDateMax;
         return this;
     }
 

@@ -155,6 +155,7 @@ public class ArticleDao {
         
         // Adds search criteria
         List<String> criteriaList = new ArrayList<String>();
+        criteriaList.add("a.ART_DELETEDATE_D is null");
         if (criteria.getId() != null) {
             criteriaList.add("a.ART_ID_C = :id");
             parameterMap.put("id", criteria.getId());
@@ -171,12 +172,15 @@ public class ArticleDao {
             criteriaList.add("a.ART_URL_C = :url");
             parameterMap.put("url", criteria.getUrl());
         }
+        if (criteria.getPublicationDateMax() != null) {
+            criteriaList.add("a.ART_PUBLICATIONDATE_D < :publicationDateMax");
+            parameterMap.put("publicationDateMax", criteria.getPublicationDateMax());
+        }
         if (criteria.getFeedId() != null) {
             criteriaList.add("a.ART_IDFEED_C = :feedId");
             parameterMap.put("feedId", criteria.getFeedId());
         }
-        criteriaList.add("a.ART_DELETEDATE_D is null");
-        
+
         if (!criteriaList.isEmpty()) {
             sb.append(" where ");
             sb.append(Joiner.on(" and ").join(criteriaList));

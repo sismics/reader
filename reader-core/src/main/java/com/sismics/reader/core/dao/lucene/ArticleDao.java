@@ -1,30 +1,20 @@
 package com.sismics.reader.core.dao.lucene;
 
-import java.text.BreakIterator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import org.apache.lucene.document.Field;
-import org.apache.lucene.document.FieldType;
-import org.apache.lucene.document.LongField;
-import org.apache.lucene.document.StringField;
-import org.apache.lucene.document.TextField;
+import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
+import com.sismics.reader.core.model.context.AppContext;
+import com.sismics.reader.core.model.jpa.Article;
+import com.sismics.reader.core.util.LuceneUtil;
+import com.sismics.reader.core.util.LuceneUtil.LuceneRunnable;
+import com.sismics.reader.core.util.jpa.PaginatedList;
+import org.apache.lucene.document.*;
 import org.apache.lucene.index.FieldInfo.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.flexible.standard.QueryParserUtil;
 import org.apache.lucene.queryparser.flexible.standard.StandardQueryParser;
 import org.apache.lucene.search.BooleanClause.Occur;
-import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.Sort;
-import org.apache.lucene.search.SortField;
+import org.apache.lucene.search.*;
 import org.apache.lucene.search.SortField.Type;
-import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.grouping.GroupDocs;
 import org.apache.lucene.search.grouping.GroupingSearch;
 import org.apache.lucene.search.grouping.TopGroups;
@@ -35,12 +25,11 @@ import org.apache.lucene.search.postingshighlight.PostingsHighlighter;
 import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.Version;
 
-import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
-import com.sismics.reader.core.model.context.AppContext;
-import com.sismics.reader.core.model.jpa.Article;
-import com.sismics.reader.core.util.LuceneUtil;
-import com.sismics.reader.core.util.LuceneUtil.LuceneRunnable;
-import com.sismics.reader.core.util.jpa.PaginatedList;
+import java.text.BreakIterator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Lucene Article DAO.
@@ -102,6 +91,23 @@ public class ArticleDao {
                 for (Article article : articleList) {
                     org.apache.lucene.document.Document document = getDocumentFromArticle(article);
                     indexWriter.updateDocument(new Term("id", article.getId()), document);
+                }
+            }
+        });
+    }
+
+    /**
+     * Delete index.
+     * 
+     * @param articleList Article list
+     */
+    public void delete(final List<Article> articleList) {
+        LuceneUtil.handle(new LuceneRunnable() {
+            @Override
+            public void run(IndexWriter indexWriter) throws Exception {
+                // Delete all articles
+                for (Article article : articleList) {
+                    indexWriter.deleteDocuments(new Term("id", article.getId()));
                 }
             }
         });

@@ -253,7 +253,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         String feedSubscription1Id = json.getString("id");
         Assert.assertNotNull(feedSubscription1Id);
 
-        // Check the subscription data
+        // Check the subscription data: 3 articles
         GET("/subscription/" + feedSubscription1Id);
         assertIsOk();
         json = getJsonResult();
@@ -262,27 +262,18 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals("Deleted feeds", subscription.optString("title"));
         JSONArray articles = json.optJSONArray("articles");
         Assert.assertEquals(3, articles.length());
-        JSONObject article = articles.optJSONObject(0);
-        Assert.assertNotNull(article);
-        String article2Id = article.getString("id");
-        Assert.assertNotNull(article2Id);
+        JSONObject article = articles.getJSONObject(0);
         Assert.assertEquals("Article deleted2", article.getString("title"));
-        article = articles.optJSONObject(1);
-        Assert.assertNotNull(article);
-        String article1Id = article.getString("id");
-        Assert.assertNotNull(article1Id);
+        article = articles.getJSONObject(1);
         Assert.assertEquals("Article deleted1", article.getString("title"));
-        article = articles.optJSONObject(2);
-        Assert.assertNotNull(article);
-        String article0Id = article.getString("id");
-        Assert.assertNotNull(article0Id);
+        article = articles.getJSONObject(2);
         Assert.assertEquals("Article deleted0", article.getString("title"));
 
-        // Synchronize feeds
+        // Synchronize feeds: OK
         copyTempResource("/http/feeds/deleted/deleted1.xml");
         synchronizeAllFeed();
 
-        // Check the subscription data
+        // Check the subscription data: one deleted articles
         GET("/subscription/" + feedSubscription1Id);
         assertIsOk();
         json = getJsonResult();
@@ -291,6 +282,30 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals("Deleted feeds", subscription.optString("title"));
         articles = json.optJSONArray("articles");
         Assert.assertEquals(2, articles.length());
+        article = articles.getJSONObject(0);
+        Assert.assertEquals("Article deleted2", article.getString("title"));
+        article = articles.getJSONObject(1);
+        Assert.assertEquals("Article deleted0", article.getString("title"));
+
+        // Synchronize feeds: OK
+        copyTempResource("/http/feeds/deleted/deleted2.xml");
+        synchronizeAllFeed();
+
+        // Check the subscription data: one new articles, old articles are still there
+        GET("/subscription/" + feedSubscription1Id);
+        assertIsOk();
+        json = getJsonResult();
+        subscription = json.optJSONObject("subscription");
+        Assert.assertNotNull(subscription);
+        Assert.assertEquals("Deleted feeds", subscription.optString("title"));
+        articles = json.optJSONArray("articles");
+        Assert.assertEquals(3, articles.length());
+        article = articles.getJSONObject(0);
+        Assert.assertEquals("Article deleted3", article.getString("title"));
+        article = articles.getJSONObject(1);
+        Assert.assertEquals("Article deleted2", article.getString("title"));
+        article = articles.getJSONObject(2);
+        Assert.assertEquals("Article deleted0", article.getString("title"));
     }
 
     /**

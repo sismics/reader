@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	 xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	 xmlns:dc="http://purl.org/dc/elements/1.1/"
+	 xmlns:atom="http://www.w3.org/2005/Atom"
+>
+
+	<channel>
+		<title>Deleted feeds</title>
+		<atom:link href="http://localhost:9997/" rel="self" type="application/rss+xml" />
+		<link>http://localhost:9997/</link>
+		<description>Deleted feeds</description>
+		<lastBuildDate>Sun, 9 Jun 2017 11:00:00 +0000</lastBuildDate>
+		<language>fr-FR</language>
+		<item>
+			<title>Article deleted3</title>
+			<link>http://localhost:9997/deleted/003.html</link>
+			<comments>http://localhost:9997/deleted/003.html#comments</comments>
+			<pubDate>Mon, 2 Jan 2017 10:05:00 +0000</pubDate>
+			<dc:creator>Sismics</dc:creator>
+			<category><![CDATA[Tests]]></category>
+			<guid isPermaLink="false">http://localhost:9997/deleted.xml/?p=003</guid>
+			<description><![CDATA[Article deleted3 description]]></description>
+			<content:encoded><![CDATA[Article deleted3 contents]]></content:encoded>
+		</item>
+	</channel>
+</rss>

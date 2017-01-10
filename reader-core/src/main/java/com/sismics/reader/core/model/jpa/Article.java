@@ -1,14 +1,9 @@
 package com.sismics.reader.core.model.jpa;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-
 import com.google.common.base.Objects;
+
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Article entity.
@@ -402,6 +397,13 @@ public class Article {
      */
     public void setDeleteDate(Date deleteDate) {
         this.deleteDate = deleteDate;
+    }
+
+    public Article() {
+    }
+
+    public Article(String id) {
+        this.id = id;
     }
 
     @Override

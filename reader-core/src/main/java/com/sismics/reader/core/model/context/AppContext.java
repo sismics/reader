@@ -1,26 +1,22 @@
 package com.sismics.reader.core.model.context;
 
+import com.google.common.eventbus.AsyncEventBus;
+import com.google.common.eventbus.EventBus;
+import com.sismics.reader.core.constant.ConfigType;
+import com.sismics.reader.core.dao.jpa.ConfigDao;
+import com.sismics.reader.core.listener.async.*;
+import com.sismics.reader.core.listener.sync.DeadEventListener;
+import com.sismics.reader.core.model.jpa.Config;
+import com.sismics.reader.core.service.FeedService;
+import com.sismics.reader.core.service.IndexingService;
+import com.sismics.util.EnvironmentUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import com.google.common.eventbus.AsyncEventBus;
-import com.google.common.eventbus.EventBus;
-import com.sismics.reader.core.constant.ConfigType;
-import com.sismics.reader.core.dao.jpa.ConfigDao;
-import com.sismics.reader.core.listener.async.ArticleCreatedAsyncListener;
-import com.sismics.reader.core.listener.async.ArticleUpdatedAsyncListener;
-import com.sismics.reader.core.listener.async.FaviconUpdateRequestedAsyncListener;
-import com.sismics.reader.core.listener.async.RebuildIndexAsyncListener;
-import com.sismics.reader.core.listener.async.SubscriptionImportAsyncListener;
-import com.sismics.reader.core.listener.sync.DeadEventListener;
-import com.sismics.reader.core.model.jpa.Config;
-import com.sismics.reader.core.service.FeedService;
-import com.sismics.reader.core.service.IndexingService;
-import com.sismics.util.EnvironmentUtil;
 
 /**
  * Global application context.
@@ -95,6 +91,7 @@ public class AppContext {
         asyncEventBus = newAsyncEventBus();
         asyncEventBus.register(new ArticleCreatedAsyncListener());
         asyncEventBus.register(new ArticleUpdatedAsyncListener());
+        asyncEventBus.register(new ArticleDeletedAsyncListener());
         asyncEventBus.register(new RebuildIndexAsyncListener());
         asyncEventBus.register(new FaviconUpdateRequestedAsyncListener());
 
