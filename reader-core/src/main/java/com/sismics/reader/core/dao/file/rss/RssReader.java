@@ -520,7 +520,7 @@ public class RssReader extends DefaultHandler {
         }
         
         if (log.isWarnEnabled()) {
-            log.warn(MessageFormat.format("Error parsing comment date: {0}", dateAsString));
+            log.warn(MessageFormat.format("Error parsing date: {0}", dateAsString));
         }
         return null;
     }
