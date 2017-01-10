@@ -1,11 +1,8 @@
 package com.sismics.reader.core.dao.file.html;
 
-import com.sismics.reader.core.util.http.ReaderHttpClient;
 import junit.framework.Assert;
 import org.junit.Test;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 /**
@@ -17,13 +14,7 @@ public class TestRssExtractor {
     @Test
     public void rssExtractKorbenTest() throws Exception {
         final RssExtractor extractor = new RssExtractor("http://korben.info");
-        new ReaderHttpClient() {
-            
-            @Override
-            public void process(InputStream is) throws Exception {
-                extractor.readPage(is);
-            }
-        }.open(new URL("http://korben.info"));
+        extractor.readPage(getClass().getResourceAsStream("/page/korben.html"));
         List<String> feedList = extractor.getFeedList();
         System.out.println(feedList);
         Assert.assertEquals(4, feedList.size());
@@ -36,13 +27,7 @@ public class TestRssExtractor {
     @Test
     public void rssExtractXkcdTest() throws Exception {
         final RssExtractor extractor = new RssExtractor("http://xkcd.com");
-        new ReaderHttpClient() {
-            
-            @Override
-            public void process(InputStream is) throws Exception {
-                extractor.readPage(is);
-            }
-        }.open(new URL("http://xkcd.com"));
+        extractor.readPage(getClass().getResourceAsStream("/page/xkcd.html"));
         List<String> feedList = extractor.getFeedList();
         Assert.assertEquals(2, feedList.size());
         Assert.assertEquals("http://xkcd.com/atom.xml", feedList.get(0));
@@ -52,13 +37,7 @@ public class TestRssExtractor {
     @Test
     public void rssExtractSpaceTest() throws Exception {
         final RssExtractor extractor = new RssExtractor("http://space.com");
-        new ReaderHttpClient() {
-            
-            @Override
-            public void process(InputStream is) throws Exception {
-                extractor.readPage(is);
-            }
-        }.open(new URL("http://space.com"));
+        extractor.readPage(getClass().getResourceAsStream("/page/space.html"));
         List<String> feedList = extractor.getFeedList();
         Assert.assertEquals(0, feedList.size()); // Bad space.com, you provide no RSS link
     }
@@ -66,13 +45,7 @@ public class TestRssExtractor {
     @Test
     public void rssExtractPloumTest() throws Exception {
         final RssExtractor extractor = new RssExtractor("http://www.ploum.net");
-        new ReaderHttpClient() {
-            
-            @Override
-            public void process(InputStream is) throws Exception {
-                extractor.readPage(is);
-            }
-        }.open(new URL("http://www.ploum.net"));
+        extractor.readPage(getClass().getResourceAsStream("/page/ploum.html"));
         List<String> feedList = extractor.getFeedList();
         Assert.assertEquals(2, feedList.size());
         Assert.assertEquals("https://ploum.net/feed/", feedList.get(0));
@@ -81,9 +54,8 @@ public class TestRssExtractor {
     
     @Test
     public void rssExtractMakiko() throws Exception {
-        InputStream is = getClass().getResourceAsStream("/page/makiko-f.blogspot.fr.html");
         final RssExtractor extractor = new RssExtractor("http://makiko-f.blogspot.fr/");
-        extractor.readPage(is);
+        extractor.readPage(getClass().getResourceAsStream("/page/makiko-f.blogspot.fr.html"));
         List<String> feedList = extractor.getFeedList();
         Assert.assertEquals(2, feedList.size());
         Assert.assertEquals("http://makiko-f.blogspot.com/feeds/posts/default", new FeedChooserStrategy().guess(feedList));

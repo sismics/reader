@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- META TAGS -->
+    <meta charset="UTF-8">
+    
+     
+        
+<meta name="description" content="Get the latest space exploration, innovation and astronomy news. Space.com celebrates humanity&#039;s ongoing expansion across the final frontier.">
+
+    <title>Space.com: NASA, Space Exploration and Astronomy News</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VQcFVl5SDhABUVNUDwIPVw=="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o||e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({1:[function(t,e,n){function r(t){try{c.console&&console.log(t)}catch(e){}}var o,i=t("ee"),a=t(15),c={};try{o=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(c.console=!0,o.indexOf("dev")!==-1&&(c.dev=!0),o.indexOf("nr_dev")!==-1&&(c.nrDev=!0))}catch(s){}c.nrDev&&i.on("internal-error",function(t){r(t.stack)}),c.dev&&i.on("fn-err",function(t,e,n){r(n.stack)}),c.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(c,function(t,e){return t}).join(", ")))},{}],2:[function(t,e,n){function r(t,e,n,r,o){try{d?d-=1:i("err",[o||new UncaughtException(t,e,n)])}catch(c){try{i("ierr",[c,(new Date).getTime(),!0])}catch(s){}}return"function"==typeof f&&f.apply(this,a(arguments))}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function o(t){i("err",[t,(new Date).getTime()])}var i=t("handle"),a=t(16),c=t("ee"),s=t("loader"),f=window.onerror,u=!1,d=0;s.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(l){"stack"in l&&(t(8),t(7),"addEventListener"in window&&t(5),s.xhrWrappable&&t(9),u=!0)}c.on("fn-start",function(t,e,n){u&&(d+=1)}),c.on("fn-err",function(t,e,n){u&&(this.thrown=!0,o(n))}),c.on("fn-end",function(){u&&!this.thrown&&d>0&&(d-=1)}),c.on("internal-error",function(t){i("ierr",[t,(new Date).getTime(),!0])})},{}],3:[function(t,e,n){t("loader").features.ins=!0},{}],4:[function(t,e,n){function r(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var o=t("ee"),i=t("handle"),a=t(8),c=t(7),s="learResourceTimings",f="addEventListener",u="resourcetimingbufferfull",d="bstResource",l="resource",p="-start",h="-end",m="fn"+p,w="fn"+h,v="bstTimer",y="pushState";t("loader").features.stn=!0,t(6);var g=NREUM.o.EV;o.on(m,function(t,e){var n=t[0];n instanceof g&&(this.bstStart=Date.now())}),o.on(w,function(t,e){var n=t[0];n instanceof g&&i("bst",[n,e,this.bstStart,Date.now()])}),a.on(m,function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),a.on(w,function(t,e){i(v,[e,this.bstStart,Date.now(),this.bstType])}),c.on(m,function(){this.bstStart=Date.now()}),c.on(w,function(t,e){i(v,[e,this.bstStart,Date.now(),"requestAnimationFrame"])}),o.on(y+p,function(t){this.time=Date.now(),this.startPath=location.pathname+location.hash}),o.on(y+h,function(t){i("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),f in window.performance&&(window.performance["c"+s]?window.performance[f](u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["c"+s]()},!1):window.performance[f]("webkit"+u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["webkitC"+s]()},!1)),document[f]("scroll",r,!1),document[f]("keypress",r,!1),document[f]("click",r,!1)}},{}],5:[function(t,e,n){function r(t){for(var e=t;e&&!e.hasOwnProperty(u);)e=Object.getPrototypeOf(e);e&&o(e)}function o(t){c.inPlace(t,[u,d],"-",i)}function i(t,e){return t[1]}var a=t("ee").get("events"),c=t(17)(a,!0),s=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";e.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(o(window),o(f.prototype)),a.on(u+"-start",function(t,e){var n=t[1],r=s(n,"nr@wrapped",function(){function t(){if("function"==typeof n.handleEvent)return n.handleEvent.apply(n,arguments)}var e={object:t,"function":n}[typeof n];return e?c(e,"fn-",null,e.name||"anonymous"):n});this.wrapped=t[1]=r}),a.on(d+"-start",function(t){t[1]=this.wrapped||t[1]})},{}],6:[function(t,e,n){var r=t("ee").get("history"),o=t(17)(r);e.exports=r,o.inPlace(window.history,["pushState","replaceState"],"-")},{}],7:[function(t,e,n){var r=t("ee").get("raf"),o=t(17)(r),i="equestAnimationFrame";e.exports=r,o.inPlace(window,["r"+i,"mozR"+i,"webkitR"+i,"msR"+i],"raf-"),r.on("raf-start",function(t){t[0]=o(t[0],"fn-")})},{}],8:[function(t,e,n){function r(t,e,n){t[0]=a(t[0],"fn-",null,n)}function o(t,e,n){this.method=n,this.timerDuration="number"==typeof t[1]?t[1]:0,t[0]=a(t[0],"fn-",this,n)}var i=t("ee").get("timer"),a=t(17)(i),c="setTimeout",s="setInterval",f="clearTimeout",u="-start",d="-";e.exports=i,a.inPlace(window,[c,"setImmediate"],c+d),a.inPlace(window,[s],s+d),a.inPlace(window,[f,"clearImmediate"],f+d),i.on(s+u,r),i.on(c+u,o)},{}],9:[function(t,e,n){function r(t,e){d.inPlace(e,["onreadystatechange"],"fn-",c)}function o(){var t=this,e=u.context(t);t.readyState>3&&!e.resolved&&(e.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,w,"fn-",c)}function i(t){v.push(t),h&&(g=-g,b.data=g)}function a(){for(var t=0;t<v.length;t++)r([],v[t]);v.length&&(v=[])}function c(t,e){return e}function s(t,e){for(var n in t)e[n]=t[n];return e}t(5);var f=t("ee"),u=f.get("xhr"),d=t(17)(u),l=NREUM.o,p=l.XHR,h=l.MO,m="readystatechange",w=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],v=[];e.exports=u;var y=window.XMLHttpRequest=function(t){var e=new p(t);try{u.emit("new-xhr",[e],e),e.addEventListener(m,o,!1)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}return e};if(s(p,y),y.prototype=p.prototype,d.inPlace(y.prototype,["open","send"],"-xhr-",c),u.on("send-xhr-start",function(t,e){r(t,e),i(e)}),u.on("open-xhr-start",r),h){var g=1,b=document.createTextNode(g);new h(a).observe(b,{characterData:!0})}else f.on("fn-end",function(t){t[0]&&t[0].type===m||a()})},{}],10:[function(t,e,n){function r(t){var e=this.params,n=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r<d;r++)t.removeEventListener(u[r],this.listener,!1);if(!e.aborted){if(n.duration=(new Date).getTime()-this.startTime,4===t.readyState){e.status=t.status;var i=o(t,this.lastSize);if(i&&(n.rxSize=i),this.sameOrigin){var a=t.getResponseHeader("X-NewRelic-App-Data");a&&(e.cat=a.split(", ").pop())}}else e.status=0;n.cbTime=this.cbTime,f.emit("xhr-done",[t],t),c("xhr",[e,n,this.startTime])}}}function o(t,e){var n=t.responseType;if("json"===n&&null!==e)return e;var r="arraybuffer"===n||"blob"===n||"json"===n?t.response:t.responseText;return h(r)}function i(t,e){var n=s(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}var a=t("loader");if(a.xhrWrappable){var c=t("handle"),s=t(11),f=t("ee"),u=["load","error","abort","timeout"],d=u.length,l=t("id"),p=t(14),h=t(13),m=window.XMLHttpRequest;a.features.xhr=!0,t(9),f.on("new-xhr",function(t){var e=this;e.totalCbs=0,e.called=0,e.cbTime=0,e.end=r,e.ended=!1,e.xhrGuids={},e.lastSize=null,p&&(p>34||p<10)||window.opera||t.addEventListener("progress",function(t){e.lastSize=t.loaded},!1)}),f.on("open-xhr-start",function(t){this.params={method:t[0]},i(this,t[1]),this.metrics={}}),f.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),f.on("send-xhr-start",function(t,e){var n=this.metrics,r=t[0],o=this;if(n&&r){var i=h(r);i&&(n.txSize=i)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(o.params.aborted=!0),("load"!==t.type||o.called===o.totalCbs&&(o.onloadCalled||"function"!=typeof e.onload))&&o.end(e)}catch(n){try{f.emit("internal-error",[n])}catch(r){}}};for(var a=0;a<d;a++)e.addEventListener(u[a],this.listener,!1)}),f.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),f.on("xhr-load-added",function(t,e){var n=""+l(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),f.on("xhr-load-removed",function(t,e){var n=""+l(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),f.on("addEventListener-end",function(t,e){e instanceof m&&"load"===t[0]&&f.emit("xhr-load-added",[t[1],t[2]],e)}),f.on("removeEventListener-end",function(t,e){e instanceof m&&"load"===t[0]&&f.emit("xhr-load-removed",[t[1],t[2]],e)}),f.on("fn-start",function(t,e,n){e instanceof m&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),f.on("fn-end",function(t,e){this.xhrCbStart&&f.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{}],11:[function(t,e,n){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");!r.port&&o[1]&&(r.port=o[1].split("/")[0].split("@").pop().split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,r.protocol=o[0],"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname);var i=!e.protocol||":"===e.protocol||e.protocol===n.protocol,a=e.hostname===document.domain&&e.port===n.port;return r.sameOrigin=i&&(!e.hostname||a),r}},{}],12:[function(t,e,n){function r(){}function o(t,e,n){return function(){return i(t,[(new Date).getTime()].concat(c(arguments)),e?null:this,n),e?void 0:this}}var i=t("handle"),a=t(15),c=t(16),s=t("ee").get("tracer"),f=NREUM;"undefined"==typeof window.newrelic&&(newrelic=f);var u=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit"],d="api-",l=d+"ixn-";a(u,function(t,e){f[e]=o(d+e,!0,"api")}),f.addPageAction=o(d+"addPageAction",!0),f.setCurrentRouteName=o(d+"routeName",!0),e.exports=newrelic,f.interaction=function(){return(new r).get()};var p=r.prototype={createTracer:function(t,e){var n={},r=this,o="function"==typeof e;return i(l+"tracer",[Date.now(),t,n],r),function(){if(s.emit((o?"":"no-")+"fn-start",[Date.now(),r,o],n),o)try{return e.apply(this,arguments)}finally{s.emit("fn-end",[Date.now()],n)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){p[e]=o(l+e)}),newrelic.noticeError=function(t){"string"==typeof t&&(t=new Error(t)),i("err",[t,(new Date).getTime()])}},{}],13:[function(t,e,n){e.exports=function(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(e){return}}}},{}],14:[function(t,e,n){var r=0,o=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);o&&(r=+o[1]),e.exports=r},{}],15:[function(t,e,n){function r(t,e){var n=[],r="",i=0;for(r in t)o.call(t,r)&&(n[i]=e(r,t[r]),i+=1);return n}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],16:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(o<0?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=r},{}],17:[function(t,e,n){function r(t){return!(t&&t instanceof Function&&t.apply&&!t[a])}var o=t("ee"),i=t(16),a="nr@original",c=Object.prototype.hasOwnProperty,s=!1;e.exports=function(t,e){function n(t,e,n,o){function nrWrapper(){var r,a,c,s;try{a=this,r=i(arguments),c="function"==typeof n?n(r,a):n||{}}catch(f){l([f,"",[r,a,o],c])}u(e+"start",[r,a,o],c);try{return s=t.apply(a,r)}catch(d){throw u(e+"err",[r,a,d],c),d}finally{u(e+"end",[r,a,s],c)}}return r(t)?t:(e||(e=""),nrWrapper[a]=t,d(t,nrWrapper),nrWrapper)}function f(t,e,o,i){o||(o="");var a,c,s,f="-"===o.charAt(0);for(s=0;s<e.length;s++)c=e[s],a=t[c],r(a)||(t[c]=n(a,f?c+o:o,i,c))}function u(n,r,o){if(!s||e){var i=s;s=!0;try{t.emit(n,r,o)}catch(a){l([a,n,r,o])}s=i}}function d(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){l([r])}for(var o in t)c.call(t,o)&&(e[o]=t[o]);return e}function l(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=o),n.inPlace=f,n.flag=a,n}},{}],ee:[function(t,e,n){function r(){}function o(t){function e(t){return t&&t instanceof r?t:t?s(t,c,i):i()}function n(n,r,o){if(!l.aborted){t&&t(n,r,o);for(var i=e(o),a=h(n),c=a.length,s=0;s<c;s++)a[s].apply(i,r);var f=u[y[n]];return f&&f.push([g,n,r,i]),i}}function p(t,e){v[t]=h(t).concat(e)}function h(t){return v[t]||[]}function m(t){return d[t]=d[t]||o(n)}function w(t,e){f(t,function(t,n){e=e||"feature",y[n]=e,e in u||(u[e]=[])})}var v={},y={},g={on:p,emit:n,get:m,listeners:h,context:e,buffer:w,abort:a,aborted:!1};return g}function i(){return new r}function a(){(u.api||u.feature)&&(l.aborted=!0,u=l.backlog={})}var c="nr@context",s=t("gos"),f=t(15),u={},d={},l=e.exports=o();l.backlog=u},{}],gos:[function(t,e,n){function r(t,e,n){if(o.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return t[e]=r,r}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){o.buffer([t],r),o.emit(t,e,n)}var o=t("ee").get("handle");e.exports=r,r.ee=o},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,i,function(){return o++})}var o=1,i="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!b++){var t=g.info=NREUM.info,e=d.getElementsByTagName("script")[0];if(setTimeout(f.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return f.abort();s(v,function(e,n){t[e]||(t[e]=n)}),c("mark",["onload",a()],null,"api");var n=d.createElement("script");n.src="https://"+t.agent,e.parentNode.insertBefore(n,e)}}function o(){"complete"===d.readyState&&i()}function i(){c("mark",["domContent",a()],null,"api")}function a(){return(new Date).getTime()}var c=t("handle"),s=t(15),f=t("ee"),u=window,d=u.document,l="addEventListener",p="attachEvent",h=u.XMLHttpRequest,m=h&&h.prototype;NREUM.o={ST:setTimeout,CT:clearTimeout,XHR:h,REQ:u.Request,EV:u.Event,PR:u.Promise,MO:u.MutationObserver},t(12);var w=""+location,v={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-998.min.js"},y=h&&m&&m[l]&&!/CriOS/.test(navigator.userAgent),g=e.exports={offset:a(),origin:w,features:{},xhrWrappable:y};d[l]?(d[l]("DOMContentLoaded",i,!1),u[l]("load",r,!1)):(d[p]("onreadystatechange",o),u[p]("onload",r)),c("mark",["firstbyte",a()],null,"api");var b=0},{}]},{},["loader",2,10,4,3]);</script>
+<meta name="google-site-verification" content="MbXIxQZKTmppqEDFE0bdWHdQq_OSDiASMxZeFX1x-3k">    
+        
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!--[if IE ]>
+
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+
+    <![endif]-->
+
+            <meta name="robots" content="index, follow">
+    
+        <link rel="canonical" href="http://www.space.com/">
+
+        
+        <link rel="apple-touch-icon" sizes="57x57" href="/resources/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/resources/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/resources/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/resources/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/resources/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/resources/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/resources/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/resources/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/resources/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/resources/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/resources/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+
+    
+
+            <script type="text/javascript">
+            var image_server = 'http://www.space.com';
+        </script>
+    
+            <link rel="stylesheet" href="/css/compiled/grunt/space.all.css?2017-01-10-09"/>
+        
+                    <script src="http://www.space.com/resources/js/jquery.min.js?e960245"></script>
+    <script type="text/javascript" language="JavaScript">
+        var jqueryUrl = 'http://www.space.com/resources/js/jquery.min.js?e960245';
+    </script>
+
+    <script src="http://www.space.com/resources/js/handlebars.min.js?e960245"></script>
+
+<script type="text/javascript" language="JavaScript">
+    var liftIgniterId = 'gi8p67e48nt5p1tc';
+    var ooyalaPlayerId = '93dbd96f79fa407e8dc06e8c150bff1b';
+    var ooyalaAdTagId = 'a90f608127c24a0c94ae8ed2786f7091';
+    var socialSiteUrl = 'http://www.space.com';
+    var pollName = 'spacepolls';
+</script>
+    <script src="http://www.space.com/resources/js/baseISFUNKY.js?e960245"></script>
+
+    
+
+        <script type="text/javascript" src="http://www.space.com/resources/js/home.js?e960245"></script>
+    
+        <meta property="fb:app_id" content="131734303545872" />
+<meta property="fb:pages" content="17610706465" />
+<meta property="og:title" content="Space.com" />
+<meta property="og:url" content="http://www.space.com" />
+<meta property="og:image" content="http://www.space.com/images/site/space-black.png?interpolation=lanczos-none&downsize=*:1000" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Space.com" />
+<meta property="og:description" content="Get the latest space exploration, innovation and astronomy news. Space.com celebrates humanity\&#039;s ongoing expansion across the final frontier." />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@SPACEdotcom" />
+<meta name="twitter:site:id" content="15431856" />
+<meta name="twitter:creator" content="@SPACEdotcom" />
+<meta name="twitter:title" content="Space.com" />
+<meta name="twitter:description" content="Get the latest space exploration, innovation and astronomy news. Space.com celebrates humanity\&#039;s ongoing expansion across the final frontier." />
+<meta name="twitter:image" content="http://www.space.com/images/site/space-black.png?interpolation=lanczos-none&downsize=*:600" />
+
+                
+                    <!-- SiteCatalyst code version: H.19.4.
+Copyright 1997-2009 Omniture, Inc. More info available at
+http://www.omniture.com -->
+
+    <script language="JavaScript" type="text/javascript">
+        if (typeof s == "undefined") {
+            var s = {};
+        }
+    </script>
+				
+<script language="JavaScript" type="text/javascript">
+/* You may give each page an identifying name, server, and channel on
+the next lines. */
+            s.channel = "home";
+                s.events = "event2";
+                s.prop2 = "sdc";
+                s.prop4 = "homepage";
+                s.prop5 = "home";
+                s.pageName = "sdc:home:homepage";
+    
+    
+ /* Hierarchy Variables */
+s.hier1="";
+s.eVar15=s.prop15;
+s.eVar4=s.prop4;
+s.eVar16=s.prop16;
+s.eVar17=s.prop17;
+s.eVar18=s.prop18;
+
+
+    </script>
+    
+
+        
+            
+                    
+
+                                                
+
+<script type="text/javascript">
+    var pageAccount = '/10518929/tmn.sdc';
+    var pageAdZone = '/homepage';
+    var siteName = 'tmn.sdc';
+    var ccat = 'homepage';
+    var ccatPretty = '';
+    var ctype = '';
+    var keywords = ["space and science newsNASAsolar system imagesspace flightastronomyouter space videosphotographs"];
+</script>
+            <!-- AMC SETUP begin -->
+<script language="JavaScript" type="text/javascript">
+    var tmntag = tmntag || {};
+    tmntag.cmd = tmntag.cmd || [];
+
+    (function () {
+        var tmnh = document.createElement('script');
+        tmnh.type = 'text/javascript';
+        tmnh.async = true;
+        tmnh.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + '//ads.servebom.com/tmnhead.js';
+        var script = document.getElementsByTagName('script')[0];
+        script.parentNode.insertBefore(tmnh, script);
+    })();
+
+    tmntag.cmd.push(function () {
+        tmntag.placement('2500');
+
+        if (typeof keywords == 'undefined') {
+            keywords = [];
+        }
+
+        if (typeof pageAdZone != 'undefined') {
+            tmntag.account(pageAdZone);
+        }
+
+                if (typeof ad_location != 'undefined') {
+            tmntag.location(ad_location);
+        }
+
+        tmntag.target({"kw": keywords, "site": siteName, "ctype": ctype, "ccat1": ccat, "partner": "n"});
+
+        tmntag.start();
+    });
+</script>
+<!-- AMC SETUP end -->
+    
+    
+    
+    
+            <script type="text/javascript">
+    var _gaq = _gaq || [];
+
+        _gaq.push(['_setAccount', 'UA-11681412-1'],
+            ['_setDomainName', 'space.com'],
+            ['_setCustomVar', 1, 'Section', 'home', 3],
+            ['_trackPageview'   ]);
+        (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>    
+                 
+        
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+<script>
+
+window.OneSignal = window.OneSignal || [];
+
+if (window.innerWidth < 700 || /^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+    OneSignal.push(["init", {
+        appId: "dcdebb32-6d89-4cf6-93f9-1de1d776e442",
+        safari_web_id: "web.onesignal.auto.379e9ba9-232a-4433-a939-20e3e6310530", 
+        autoRegister:  true, /* Set to true to automatically prompt visitors */
+        subdomainName:"www.space.com".split('.')[1],
+        notifyButton:  {
+            enable: false /* Set to false to hide */
+        }
+    }]);
+}
+</script>
+<script>/* observer-6.0.6 */!function e(t,n,o){function r(i,u){if(!n[i]){if(!t[i]){var c="function"==typeof require&&require;if(!u&&c)return c(i,!0);if(a)return a(i,!0);var d=new Error("Cannot find module '"+i+"'");throw d.code="MODULE_NOT_FOUND",d}var f=n[i]={exports:{}};t[i][0].call(f.exports,function(e){var n=t[i][1][e];return r(n?n:e)},f,f.exports,e,t,n,o)}return n[i].exports}for(var a="function"==typeof require&&require,i=0;i<o.length;i++)r(o[i]);return r}({1:[function(e,t,n){(function(e){function n(){try{var e=new o("cat",{detail:{foo:"bar"}});return"cat"===e.type&&"bar"===e.detail.foo}catch(t){}return!1}var o=e.CustomEvent;t.exports=n()?o:"undefined"!=typeof document&&"function"==typeof document.createEvent?function(e,t){var n=document.createEvent("CustomEvent");return t?n.initCustomEvent(e,t.bubbles,t.cancelable,t.detail):n.initCustomEvent(e,!1,!1,void 0),n}:function(e,t){var n=document.createEventObject();return n.type=e,t?(n.bubbles=Boolean(t.bubbles),n.cancelable=Boolean(t.cancelable),n.detail=t.detail):(n.bubbles=!1,n.cancelable=!1,n.detail=void 0),n}}).call(this,"undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{}],2:[function(e,t,n){function o(e,t,n,o){"addEventListener"in e?e.addEventListener(t,n,o):"attachEvent"in e&&e.attachEvent("on"+t,n)}var r=e(1);!function(){window.adonis=window.adonis||{},window.adonis.scriptStatuses={};var e=function(){var e="NEW_SCRIPT_EVENT",t=new r(e,{detail:{}});window.dispatchEvent(t)};o(document,"load",function(t){t.target&&"SCRIPT"===t.target.nodeName&&(window.adonis.scriptStatuses[t.target.src]="load",e())},!0),o(document,"error",function(t){t.target&&"SCRIPT"===t.target.nodeName&&(window.adonis.scriptStatuses[t.target.src]="error",e())},!0)}()},{1:1}]},{},[2]);</script>
+<script>
+   var adonis = adonis || {};
+   adonis.scriptResources = ["ads.servebom.com/tmnhead.js", "ads.servebom.com/tmntag.js"];
+   adonis.conditionalAdRendering = true;
+   adonis.ENABLE_SLOT_CACHE = true;
+</script>
+<style>
+    .overlay-box {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 2147483648;
+        background-color: rgba(0,0,0,.6);
+        top: 0;
+        left: 0;
+    }
+.overlay-pop {
+    width: 450px;
+    background-color: #fff;
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    margin-left: -225px;
+    text-align: center;
+}
+.overlay-pop .top-text {
+    padding: 20px;
+    background-color: #003954;
+    color: #fff;
+    font-family: "Oswald", sans-serif;
+}
+
+.overlay-pop .top-text h3 {
+    font-size:150%;
+    padding-bottom: 7px;
+}
+
+.overlay-pop .p-button {
+    text-transform: uppercase;
+    padding:3px 44px;
+    color:white;
+    display: inline-block;
+    margin: 15px 0;
+    text-shadow: none;
+   background:#009bee;
+}
+.overlay-pop .x-btn {
+    position: absolute;
+    right: 0;
+    padding: 5px 7px;
+    color: #fff;
+    font-size: 150%;
+    cursor:pointer;
+}
+</style>
+
+
+
+
+<style>  #header_leaderboard{min-height:0px} @media only screen and (min-width:728px) {#header_leaderboard{min-height:90px}}  #rightcol_top{min-height:0px} @media only screen and (min-width:300px) {#rightcol_top{min-height:250px}}</style>
+
+            
+    </head>
+
+<body class="" >
+
+                <script>var __uzdbm_a = "05339cdf-8e82-eecf-1750-5cb68849d0ad";</script><div id="ss_098786_234239_238479_190541"></div><script src ="https://cdn.perfdrive.com/static/jscall_min.js" async="true"></script>
+        
+    <script type="text/javascript">
+var omnVars = {};
+for (var key in s) {
+    if (!s.hasOwnProperty(key)) continue;
+    var obj = s[key];
+    if (key.indexOf('prop') == 0 || key.indexOf('eVar') == 0 || key.indexOf('pageName') == 0 || key.indexOf('channel') == 0 || key.indexOf('pageType') == 0) {
+        omnVars[key] = typeof s[key] !== 'undefined' ? s[key] : '';
+    }
+}
+</script>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MTRGH3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MTRGH3');
+
+    if (dataLayer) {
+        dataLayer.push({'PurchOmnitureVars': omnVars });
+    }
+</script>
+<!-- End Google Tag Manager -->
+    <!-- Skin ads -->
+    <div id="out-of-page"><script type='text/javascript'>tmntag.cmd.push(function(){ tmntag.adTag('out-of-page', false); });</script></div>
+
+        <script src="http://www.space.com/resources/js/body-base.js?e960245"></script>
+
+    <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="mq-lg-off">
+    <s class="bar"></s>
+    <s class="bar"></s>
+    <s class="bar"></s>
+</label>
+<ul class="mobile-nav mq-lg-off">
+    <li class="non-item mq-small-on mq-med-off">
+        <form action="http://www.space.com/search" class="inline-form space-L5">
+            <input type="text" name="q" required placeholder="" class="search-form"><button class="search-btn btn"></button>
+        </form>
+    </li>
+           <li><a class="nav-item " href="/news" >news</a></li>
+           <li><a class="nav-item " href="/tech-robots" >tech</a></li>
+           <li><a class="nav-item " href="/spaceflight" >spaceflight</a></li>
+           <li><a class="nav-item " href="/science-astronomy" >science &amp; astronomy</a></li>
+           <li><a class="nav-item " href="/search-for-life" >search for life</a></li>
+           <li><a class="nav-item " href="/skywatching" >skywatching</a></li>
+           <li><a class="nav-item " href="/entertainment" >entertainment</a></li>
+           <li><a class="nav-item " href="/video" >video</a></li>
+        <li class="non-item search-social mq-small-on mq-med-off">
+                                                        <a href="https://www.facebook.com/spacecom?cmpid=556675" ><i class="fa fa-facebook"></i></a>
+                                    <a href="https://twitter.com/SPACEdotcom?cmpid=556676" ><i class="fa fa-twitter"></i></a>
+                                    <a href="http://www.linkedin.com/company/imaginova?cmpid=556677" ><i class="fa fa-linkedin"></i></a>
+                                    <a href="https://plus.google.com/+SPACEcom/posts?cmpid=556678" rel="publisher"><i class="fa fa-google-plus"></i></a>
+                                        </li>
+</ul>
+
+
+
+<div class="site-wrapper">
+            <!-- Leaderboard -->
+<div class="leaderboard clear ad-slot">
+    <div id="header_leaderboard">
+        <script type='text/javascript'>tmntag.cmd.push(function(){ tmntag.adTag('header_leaderboard', false); }); </script>
+    </div>
+</div>    
+                
+<header class="header content-wrapper">
+    <div class="center-content pure-g" id="menu">
+        <div class="pure-u-1 pure-u-sm-1-3 pure-u-md-1-3 pure-u-lg-1-4">
+            <div class="logo-wrapper">
+                                    <h1><a class="hdr-logo" href="/"><svg id="space-logo" class="hdr-svg" version="1.1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px" viewBox="0 0 258 60" xml:space="preserve">
+</g>
+
+    <polygon  fill="#FFFFFF" points="147.3,58.2 123.6,1.7 111.1,1.7 87.3,58.2 99.9,58.2 117.3,16.6 134.8,58.2"/>
+    <path fill="#FFFFFF" d="M24.4,58.8c-8.5,0-17.1-3-23.8-9l7.3-8.7c5,4.2,10.3,6.8,16.7,6.8c5,0,8.1-2,8.1-5.3
+    v-0.2c0-3.1-1.9-4.7-11.3-7.1c-11.3-2.9-18.6-6-18.6-17.1V18C2.8,7.8,11,1.1,22.4,1.1c8.2,0,15.1,2.6,20.8,7.1l-6.4,9.3
+    c-5-3.4-9.9-5.5-14.6-5.5c-4.7,0-7.2,2.2-7.2,4.9V17c0,3.7,2.4,4.9,12.1,7.4c11.4,3,17.8,7.1,17.8,16.8v0.2
+    C45,52.5,36.5,58.8,24.4,58.8z"/>
+    <path fill="#FFFFFF" d="M72.2,41.1h-9.4V58H50.5V1.9h22.9c13.4,0,21.5,7.9,21.5,19.4v0.2
+    C94.8,34.4,84.8,41.1,72.2,41.1z M82.3,21.5c0-5.5-3.8-8.5-10-8.5h-9.5v17.1h9.8c6.2,0,9.8-3.7,9.8-8.5V21.5z"/>
+    <path fill="#FFFFFF" d="M172.9,58.9c-16.5,0-28.8-12.7-28.8-28.8v-0.2c0-15.9,12-29,29.2-29
+    c10.6,0,16.9,3.5,22.1,8.7l-7.8,9.1c-4.3-3.9-8.7-6.3-14.3-6.3c-9.5,0-16.3,7.9-16.3,17.5v0.2c0,9.6,6.7,17.6,16.3,17.6
+    c6.4,0,10.3-2.6,14.7-6.6l7.8,7.9C190.2,55.1,183.7,58.9,172.9,58.9z"/>
+    <path fill="#FFFFFF" d="M202.3,58V1.9h33.5v11h-21.3v11.4h17.7v11h-17.7V47h21.7v11H202.3z"/>
+
+    <path fill="#FFFFFF" d="M242.3,1.7h3.9v4h-3.9V1.7z"/>
+    <path fill="#FFFFFF" d="M242,14.5c0-3.9,3-6.8,6.8-6.8h0c3.7,0,6.8,2.9,6.8,6.9c0,2.5-0.8,4-2.2,5.2
+    l-2.4-2.3c0.9-0.8,1.4-1.7,1.4-3c0-1.9-1.6-3.2-3.6-3.2h0c-2,0-3.6,1.3-3.6,3.3c0,1.2,0.5,2.1,1.4,3l-2.2,2.2
+    C243,18.6,242,17.1,242,14.5z"/>
+    <path fill="#FFFFFF" d="M242,28.4c0-4.1,3-7.1,6.8-7.1h0c3.8,0,6.8,3,6.8,7.1c0,4.1-3,7.1-6.8,7.1h0
+    C245,35.5,242,32.4,242,28.4z M248.8,31.8c1.9,0,3.6-1.4,3.6-3.4c0-2.1-1.6-3.4-3.6-3.4h0c-1.9,0-3.6,1.4-3.6,3.4
+    C245.2,30.5,246.8,31.8,248.8,31.8L248.8,31.8z"/>
+    <path fill="#FFFFFF" d="M242.3,54.4h7.3c1.8,0,2.7-0.8,2.7-2.2s-0.9-2.3-2.7-2.3h-7.3v-3.7h7.3
+    c1.8,0,2.7-0.8,2.7-2.2c0-1.4-0.9-2.2-2.7-2.2h-7.3v-3.7h13.1v3.7h-1.9c1.1,0.9,2.1,2,2.1,3.9c0,1.7-0.8,3-2.1,3.7
+    c1.3,1.1,2.1,2.5,2.1,4.3c0,2.8-1.7,4.4-4.8,4.4h-8.5V54.4z"/>
+</svg></a></h1>
+                            </div>
+        </div>
+        <div class="pure-u-1 pure-u-sm-2-3 pure-u-md-2-3 pure-u-lg-3-4">
+            <div class="pure-g">
+                <nav class="search-social pure-u-1 mq-small-on">
+                                                                                                        <a href="https://www.facebook.com/spacecom?cmpid=556675" target="_blank"><i class="fa fa-facebook"></i></a>
+                                                            <a href="https://twitter.com/SPACEdotcom?cmpid=556676" target="_blank"><i class="fa fa-twitter"></i></a>
+                                                            <a href="http://www.linkedin.com/company/imaginova?cmpid=556677" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                                            <a href="https://plus.google.com/+SPACEcom/posts?cmpid=556678" target="_blank"><i class="fa fa-google-plus"></i></a>
+                                                                                            <form action="http://www.space.com/search" class="inline-form unit-r space-L10">
+                        <input class="form-inset search-form" type="text" name="q" required placeholder="">
+                        <button class="search-btn btn"></button>
+                    </form>
+                </nav>
+                <div class="pure-u-1">
+                    <nav class="pure-menu pure-menu-horizontal custom-can-transform categories-menu mq-small-off mq-lg-on">
+                        <ul class="pure-menu-list">
+                                                                                            <li class="pure-menu-item"><a class="nav-item " href="/news">news</a></li>
+                                                                                            <li class="pure-menu-item"><a class="nav-item " href="/tech-robots">tech</a></li>
+                                                                                            <li class="pure-menu-item"><a class="nav-item " href="/spaceflight">spaceflight</a></li>
+                                                                                            <li class="pure-menu-item"><a class="nav-item " href="/science-astronomy">science &amp; astronomy</a></li>
+                                                                                            <li class="pure-menu-item"><a class="nav-item " href="/search-for-life">search for life</a></li>
+                                                                                            <li class="pure-menu-item"><a class="nav-item " href="/skywatching">skywatching</a></li>
+                                                                                            <li class="pure-menu-item"><a class="nav-item " href="/entertainment">entertainment</a></li>
+                                                                                            <li class="pure-menu-item"><a class="nav-item " href="/video">video</a></li>
+                                                    </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+</header>
+<div class="sticky-header content-wrapper" id="sticky-header" data-stickya="sticky-header" data-stickya-options='{"zindex":10002,"maxHeightContainer": ".filling"}'>
+    <div class="center-content">
+        <a href="/" alt="Space.com">
+            <svg id="space-logo" class="sticky-logo" version="1.1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px" viewBox="0 0 258 60" xml:space="preserve">
+</g>
+
+    <polygon  fill="#FFFFFF" points="147.3,58.2 123.6,1.7 111.1,1.7 87.3,58.2 99.9,58.2 117.3,16.6 134.8,58.2"/>
+    <path fill="#FFFFFF" d="M24.4,58.8c-8.5,0-17.1-3-23.8-9l7.3-8.7c5,4.2,10.3,6.8,16.7,6.8c5,0,8.1-2,8.1-5.3
+    v-0.2c0-3.1-1.9-4.7-11.3-7.1c-11.3-2.9-18.6-6-18.6-17.1V18C2.8,7.8,11,1.1,22.4,1.1c8.2,0,15.1,2.6,20.8,7.1l-6.4,9.3
+    c-5-3.4-9.9-5.5-14.6-5.5c-4.7,0-7.2,2.2-7.2,4.9V17c0,3.7,2.4,4.9,12.1,7.4c11.4,3,17.8,7.1,17.8,16.8v0.2
+    C45,52.5,36.5,58.8,24.4,58.8z"/>
+    <path fill="#FFFFFF" d="M72.2,41.1h-9.4V58H50.5V1.9h22.9c13.4,0,21.5,7.9,21.5,19.4v0.2
+    C94.8,34.4,84.8,41.1,72.2,41.1z M82.3,21.5c0-5.5-3.8-8.5-10-8.5h-9.5v17.1h9.8c6.2,0,9.8-3.7,9.8-8.5V21.5z"/>
+    <path fill="#FFFFFF" d="M172.9,58.9c-16.5,0-28.8-12.7-28.8-28.8v-0.2c0-15.9,12-29,29.2-29
+    c10.6,0,16.9,3.5,22.1,8.7l-7.8,9.1c-4.3-3.9-8.7-6.3-14.3-6.3c-9.5,0-16.3,7.9-16.3,17.5v0.2c0,9.6,6.7,17.6,16.3,17.6
+    c6.4,0,10.3-2.6,14.7-6.6l7.8,7.9C190.2,55.1,183.7,58.9,172.9,58.9z"/>
+    <path fill="#FFFFFF" d="M202.3,58V1.9h33.5v11h-21.3v11.4h17.7v11h-17.7V47h21.7v11H202.3z"/>
+
+    <path fill="#FFFFFF" d="M242.3,1.7h3.9v4h-3.9V1.7z"/>
+    <path fill="#FFFFFF" d="M242,14.5c0-3.9,3-6.8,6.8-6.8h0c3.7,0,6.8,2.9,6.8,6.9c0,2.5-0.8,4-2.2,5.2
+    l-2.4-2.3c0.9-0.8,1.4-1.7,1.4-3c0-1.9-1.6-3.2-3.6-3.2h0c-2,0-3.6,1.3-3.6,3.3c0,1.2,0.5,2.1,1.4,3l-2.2,2.2
+    C243,18.6,242,17.1,242,14.5z"/>
+    <path fill="#FFFFFF" d="M242,28.4c0-4.1,3-7.1,6.8-7.1h0c3.8,0,6.8,3,6.8,7.1c0,4.1-3,7.1-6.8,7.1h0
+    C245,35.5,242,32.4,242,28.4z M248.8,31.8c1.9,0,3.6-1.4,3.6-3.4c0-2.1-1.6-3.4-3.6-3.4h0c-1.9,0-3.6,1.4-3.6,3.4
+    C245.2,30.5,246.8,31.8,248.8,31.8L248.8,31.8z"/>
+    <path fill="#FFFFFF" d="M242.3,54.4h7.3c1.8,0,2.7-0.8,2.7-2.2s-0.9-2.3-2.7-2.3h-7.3v-3.7h7.3
+    c1.8,0,2.7-0.8,2.7-2.2c0-1.4-0.9-2.2-2.7-2.2h-7.3v-3.7h13.1v3.7h-1.9c1.1,0.9,2.1,2,2.1,3.9c0,1.7-0.8,3-2.1,3.7
+    c1.3,1.1,2.1,2.5,2.1,4.3c0,2.8-1.7,4.4-4.8,4.4h-8.5V54.4z"/>
+</svg>        </a>
+        <nav class="sticky-nav unit-r space-T10">
+            <span class="nav-pipe-right">
+                                                        <a class="nav-item " href="/news">news</a>
+                                                        <a class="nav-item " href="/tech-robots">tech</a>
+                                                        <a class="nav-item " href="/spaceflight">spaceflight</a>
+                                                        <a class="nav-item " href="/science-astronomy">science &amp; astronomy</a>
+                                                        <a class="nav-item " href="/search-for-life">search for life</a>
+                                                        <a class="nav-item " href="/skywatching">skywatching</a>
+                                                        <a class="nav-item " href="/entertainment">entertainment</a>
+                                                        <a class="nav-item " href="/video">video</a>
+                            </span>
+            <span class="nav-pipe-right search-social">
+                                                                                        <a href="https://www.facebook.com/spacecom?cmpid=556675" target="_blank"><i class="fa fa-facebook"></i></a>
+                                                    <a href="https://twitter.com/SPACEdotcom?cmpid=556676" target="_blank"><i class="fa fa-twitter"></i></a>
+                                                    <a href="http://www.linkedin.com/company/imaginova?cmpid=556677" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                                    <a href="https://plus.google.com/+SPACEcom/posts?cmpid=556678" target="_blank"><i class="fa fa-google-plus"></i></a>
+                                                                        </span>
+            <div class="search-social nav-search">
+                <div class="search-icon"><i class="fa fa-search"></i></div>
+                <div class="search-panel">
+                                        <form action="http://www.space.com/search" class="inline-form">
+                        <input class="unit form-inset search-form" type="text" name="q" required placeholder="">
+                        <button class="search-btn btn"></button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>    
+    <!-- Start overAll -->
+    <div id="ctBoc">
+        <div class="content-wrapper filling overall">
+            <div class="center-content pure-g container">
+                
+    <div class="pure-u-1 pure-u-med-2-3 pure-u-lg-2-3">
+        <div class="main-column">
+            <div class="home-carousel">
+    <a href="/news" class="all-headlines">see all latest headlines <i class="fa fa-caret-right"></i></a>
+    <div class="home-controls">
+        <span id="prev" title="previous" class="slide-arrow prev"></span>
+        <span id="next" title="next" class="slide-arrow next"></span>
+    </div>
+    <div class="cycle-slideshow image-carousel"
+         data-cycle-slides=".carousel-item"
+         data-cycle-auto-height="container"
+         data-cycle-prev="#prev"
+         data-cycle-next="#next"
+         data-cycle-swipe=true
+         data-cycle-fx="scrollHorz"
+         data-cycle-pause-on-hover="true"
+         data-cycle-speed="400"
+            >
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35272-x-37b-military-space-plane-600-days.html">
+                            <img src="http://www.space.com/images/i/000/061/508/original/Air-Force-X-37B-Robotic-Space-Plane.jpeg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Air Force's Mysterious X-37B Space Plane Wings by 600 Days in Orbit"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Air Force&#039;s Mysterious X-37B Space Plane Wings by 600 Days in Orbit</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35271-star-disk-shadow-exoplanet-hubble.html">
+                            <img src="http://www.space.com/images/i/000/061/506/original/hubble-tw-hydrae-shadow.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Odd Shadow Around Young Star May Be Sign of Newborn Planet"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Odd Shadow Around Young Star May Be Sign of Newborn Planet</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35270-a-machine-astronomer-could-help-us-find-the-unknowns-in-the-universe.html">
+                            <img src="http://www.space.com/images/i/000/061/505/original/csiro-askap-antennas.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="A Machine Astronomer Could Help Us Find the Unknowns in the Universe"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">A Machine Astronomer Could Help Us Find the Unknowns in the Universe</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35266-breakthrough-initiative-vlt-planet-search.html">
+                            <img src="http://www.space.com/images/i/000/061/499/original/eso-vlt-alpha-centauri.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Breakthrough Starshot Enlists Giant Telescope to Seek Planets at Alpha Centauri"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Breakthrough Starshot Enlists Giant Telescope to Seek Planets at Alpha Centauri</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35261-donald-trump-presidential-transition-and-space.html">
+                            <img src="http://www.space.com/images/i/000/061/484/original/GettyImages-578060808.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="US Presidential Transition and Space: Experts Forecast Changes to Come"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">US Presidential Transition and Space: Experts Forecast Changes to Come</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35258-earth-moon-formed-in-moonlet-mashup.html">
+                            <img src="http://www.space.com/images/i/000/061/479/original/two-moons-perets.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Earth's Moon Formed in 'Moonlet' Mash-Up After Many Earth Impacts"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Earth&#039;s Moon Formed in &#039;Moonlet&#039; Mash-Up After Many Earth Impacts</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35260-2017-solar-eclipse-science-and-big-crowds.html">
+                            <img src="http://www.space.com/images/i/000/061/430/original/moon-shadow-us.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="2017 Total Solar Eclipse: A Magnet for Scientists ... and Hordes of People"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">2017 Total Solar Eclipse: A Magnet for Scientists ... and Hordes of People</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35265-newfound-asteroid-buzzes-earth-2017-ag13.html">
+                            <img src="http://www.space.com/images/i/000/061/490/original/SP_170109_2017_ag13.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Newfound Asteroid Gives Earth a Close Shave"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Newfound Asteroid Gives Earth a Close Shave</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35263-interstellar-space-hubble-observations-voyager.html">
+                            <img src="http://www.space.com/images/i/000/061/495/original/hubble-ecliptic-plane.png?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="How New Hubble Telescope Views Could Aid Interstellar Travel"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">How New Hubble Telescope Views Could Aid Interstellar Travel</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35233-spectacular-star-trails-adam-gordon-photographer.html">
+                            <img src="http://www.space.com/images/i/000/060/699/original/Gordon_StarTrails_AnzaBorregoDesert.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Photographer Captures Spectacular Star Trails Over Sculpture Park"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Photographer Captures Spectacular Star Trails Over Sculpture Park</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35257-asteroid-flies-between-earth-and-moon-2-days-after-discovery-commentary-video.html">
+                            <img src="http://www.space.com/images/i/000/061/477/original/SP_170109_2017_ag13.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Asteroid Flies Between Earth And Moon 2 Days After Discovery | Commentary Video "/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Asteroid Flies Between Earth And Moon 2 Days After Discovery | Commentary Video </span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35253-exoplanet-discovery-anniversary-25-years.html">
+                            <img src="http://www.space.com/images/i/000/061/474/original/first-exoplanets-pulsar.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Exoplanet Anniversary: 1st Alien Worlds Confirmed 25 Years Ago Today"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Exoplanet Anniversary: 1st Alien Worlds Confirmed 25 Years Ago Today</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35259-very-large-telescope-to-be-upgraded-for-alpha-centauri-planets-search-video.html">
+                            <img src="http://www.space.com/images/i/000/061/481/original/SP_170109_vlt_alpha_centauri.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Very Large Telescope To Be Upgraded For Alpha Centauri Planets Search | Video"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Very Large Telescope To Be Upgraded For Alpha Centauri Planets Search | Video</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35245-early-universe-black-holes-grew-in-bursts-x-ray-data-shows-video.html">
+                            <img src="http://www.space.com/images/i/000/061/431/original/SP_170106_early_universe_black_holes.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Early Universe Black Holes Grew In Bursts, X-Ray Data Shows | Video"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Early Universe Black Holes Grew In Bursts, X-Ray Data Shows | Video</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35234-dark-nebula-glows-red-amateur-photo.html">
+                            <img src="http://www.space.com/images/i/000/061/412/original/JeffAstro_DarkNebulaB343.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Dark Nebula Glows Red in Amateur Astronomer's Photo"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Dark Nebula Glows Red in Amateur Astronomer&#039;s Photo</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35252-earth-and-moon-from-mars-photo.html">
+                            <img src="http://www.space.com/images/i/000/061/473/original/earth-moon-from-mars.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Wow! Mars Probe Snaps Stunning Photo of Earth and Moon"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Wow! Mars Probe Snaps Stunning Photo of Earth and Moon</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35235-skywatcher-photographs-space-station-over-vienna.html">
+                            <img src="http://www.space.com/images/i/000/061/414/original/Raudonis_ISS_Vienna.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Lucky Shot! Skywatcher Captures Space Station Soaring Over Vienna "/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Lucky Shot! Skywatcher Captures Space Station Soaring Over Vienna </span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35254-spacewalking-astronauts-upgrade-space-station-power-system.html">
+                            <img src="http://www.space.com/images/i/000/061/464/original/space-station-expedition-50-eva1-batteries.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Spacewalking Astronauts Tackle Space Station Power System Upgrade"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Spacewalking Astronauts Tackle Space Station Power System Upgrade</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35251-nasa-asks-scientists-to-start-planning-first-jwst-observations.html">
+                            <img src="http://www.space.com/images/i/000/061/187/original/jwst-vibtest.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="NASA Asks Scientists to Start Planning First JWST Observations"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">NASA Asks Scientists to Start Planning First JWST Observations</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35255-spacex-return-to-flight-license-faa.html">
+                            <img src="http://www.space.com/images/i/000/061/475/original/spacex-vafb-879x485.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="FAA Grants License for SpaceX Falcon 9 Return to Flight"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">FAA Grants License for SpaceX Falcon 9 Return to Flight</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35247-why-everyone-should-watch-hidden-figures.html">
+                            <img src="http://www.space.com/images/i/000/060/489/original/hidden-figures-DF-04856_R2_rgb.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Why 'Hidden Figures' is a Movie Everyone Should Watch"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Why &#039;Hidden Figures&#039; is a Movie Everyone Should Watch</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35244-nasa-moon-probe-maps-great-american-solar-eclipse.html">
+                            <img src="http://www.space.com/images/i/000/061/429/original/moon-shadow-usa.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Moon Probe Helps NASA Map Path of 2017's Great American Total Solar Eclipse"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">Moon Probe Helps NASA Map Path of 2017&#039;s Great American Total Solar Eclipse</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+                    <div class="carousel-item ">
+                    <div class="slide-container">
+                        <a href="/35246-nasa-galaxy-universe-distance-catalog.html">
+                            <img src="http://www.space.com/images/i/000/061/433/original/astronomical-light-sources-graphic-nasa.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="How Far to That Galaxy? Thousands of Cosmic Distances Now Catalogued"/>
+                            <div class="slide-text-wrap">
+                                <span class="slide-text">How Far to That Galaxy? Thousands of Cosmic Distances Now Catalogued</span>
+                            </div>
+                        </a> 
+                    </div>
+            </div>
+            </div>
+</div>            <section class="pure-g mod sect-headlines-block">
+                        <div class="sect-block mod pure-u-1 pure-u-sm-1-2">
+                <div class="sect-headlines">
+                    <div class="h2 mod-hdr">
+											<a class="sect-link" href="/tech-robots">
+                        <h2>Tech</h2>
+                        <small class="sect-sub-title"> / See Latest <i class="fa fa-angle-double-right"></i></small>
+											</a>
+                    </div>
+                    <div class="sect-lead">
+                        <a href="/35236-evscope-enhanced-vision-telescope-ces2017.html">
+                                                                                                                    <img class="lazy" data-src="http://www.space.com/images/i/000/061/413/original/unistellar-enhanced-vision-telescope.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="New &#039;Enhanced Vision Telescope&#039; Amplifies Cosmic Light for Skywatchers ">
+                            <div class="sect-lead-title">New &#039;Enhanced Vision Telescope&#039; Amplifies Cosmic Light for Skywatchers </div>
+                        </a>
+                    </div>
+                    <ul class="sect-items">
+                                                    <li class="sect-title"><a href="/35210-make-your-own-3d-printed-tractor-beam.html">Build Your Own Death Star: How to 3D Print a Real-Life &#039;Tractor Beam&#039;</a></li>
+                                                    <li class="sect-title"><a href="/35201-3d-printable-tractor-beam-pulls-on-small-objects-video.html">3D Printable &#039;Tractor Beam&#039; Pulls On Small Objects  | Video</a></li>
+                                                    <li class="sect-title"><a href="/35200-space-coffee-cup-spaceware.html">Now You Can Drink Like the Astronauts with Spaceware Space Cups</a></li>
+                                            </ul>
+                </div>
+            </div>
+
+                    
+                        <div class="sect-block mod pure-u-1 pure-u-sm-1-2">
+                <div class="sect-headlines">
+                    <div class="h2 mod-hdr">
+											<a class="sect-link" href="/spaceflight">
+                        <h2>Spaceflight</h2>
+                        <small class="sect-sub-title"> / See Latest <i class="fa fa-angle-double-right"></i></small>
+											</a>
+                    </div>
+                    <div class="sect-lead">
+                        <a href="/35264-spacex-return-to-flight-launch-delay.html">
+                                                                                                                    <img class="lazy" data-src="http://www.space.com/images/i/000/061/498/original/spacex-vandenberg-launch-site-smaller-image.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="SpaceX&#039;s Return-to-Flight Rocket Launch Slips to Saturday">
+                            <div class="sect-lead-title">SpaceX&#039;s Return-to-Flight Rocket Launch Slips to Saturday</div>
+                        </a>
+                    </div>
+                    <ul class="sect-items">
+                                                    <li class="sect-title"><a href="/35249-space-station-astronauts-expedition-50-jan6-spacewalk-photos.html">In Photos: Space Station Astronauts Take Spacewalk to Upgrade Power System</a></li>
+                                                    <li class="sect-title"><a href="/35250-outgoing-obama-administration-highlights-space-achievements-in-series-of-exit-memos.html">Outgoing Obama Administration Highlights Space Achievements in Series of Exit Memos</a></li>
+                                                    <li class="sect-title"><a href="/35243-caves-trippin-enter-the-otherwoldly-environment-where-astronauts-train-video.html">CAVES &#039;Trippin&#039; - Enter The Otherworldly Realm Where Astronauts Train  | Video</a></li>
+                                            </ul>
+                </div>
+            </div>
+
+                    
+                        <div class="sect-block mod pure-u-1 pure-u-sm-1-2">
+                <div class="sect-headlines">
+                    <div class="h2 mod-hdr">
+											<a class="sect-link" href="/science-astronomy">
+                        <h2>Science &amp; Astronomy</h2>
+                        <small class="sect-sub-title"> / See Latest <i class="fa fa-angle-double-right"></i></small>
+											</a>
+                    </div>
+                    <div class="sect-lead">
+                        <a href="/34-image-day.html">
+                                                                                                                    <img class="lazy" data-src="http://www.space.com/images/i/000/061/485/original/galaxy-IC-3639.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="Image of the Day">
+                            <div class="sect-lead-title">Image of the Day</div>
+                        </a>
+                    </div>
+                    <ul class="sect-items">
+                                                    <li class="sect-title"><a href="/35240-moon-dust-levitates-nasa-study.html">&#039;Levitating&#039; Moon Dust Explained in New NASA Study</a></li>
+                                                    <li class="sect-title"><a href="/35231-deepest-x-ray-image-black-holes.html">Deepest-Ever X-Ray Image of Space Captures Countless Black Holes</a></li>
+                                                    <li class="sect-title"><a href="/35229-pluto-snakeskin-ice-ridges-earth-counterpart.html">Weird &#039;Snakeskin&#039; on Pluto Actually Similar to Features on Earth</a></li>
+                                            </ul>
+                </div>
+            </div>
+
+                            <div class="pure-u-1 mq-small-off">
+                    <div id="m-in-content-1"><script type='text/javascript'>tmntag.cmd.push(function(){tmntag.adTag('m-in-content-1'); })</script></div>
+                </div>
+                    
+                        <div class="sect-block mod pure-u-1 pure-u-sm-1-2">
+                <div class="sect-headlines">
+                    <div class="h2 mod-hdr">
+											<a class="sect-link" href="/search-for-life">
+                        <h2>Search for Life</h2>
+                        <small class="sect-sub-title"> / See Latest <i class="fa fa-angle-double-right"></i></small>
+											</a>
+                    </div>
+                    <div class="sect-lead">
+                        <a href="/35131-new-method-search-for-life.html">
+                                                                                                                    <img class="lazy" data-src="http://www.space.com/images/i/000/061/161/original/proxima-b-concept.jpeg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="New Method Could Aid Search for Life on Alien Worlds">
+                            <div class="sect-lead-title">New Method Could Aid Search for Life on Alien Worlds</div>
+                        </a>
+                    </div>
+                    <ul class="sect-items">
+                                                    <li class="sect-title"><a href="/35130-mars-life-gale-crater-curiosity-rover.html">A Promising Spot for Life on Mars</a></li>
+                                                    <li class="sect-title"><a href="/35136-jupiter-moon-europa-life-hunt-drill.html">NASA&#039;s Europa Lander May Drill to Find Pristine Samples on Icy Moon</a></li>
+                                                    <li class="sect-title"><a href="/35016-project-blue-twitter-chat-today.html">Ask Project Blue! Twitter Chat Today to Discuss Alpha Centauri Telescope</a></li>
+                                            </ul>
+                </div>
+            </div>
+
+                    
+                        <div class="sect-block mod pure-u-1 pure-u-sm-1-2">
+                <div class="sect-headlines">
+                    <div class="h2 mod-hdr">
+											<a class="sect-link" href="/skywatching">
+                        <h2>Skywatching</h2>
+                        <small class="sect-sub-title"> / See Latest <i class="fa fa-angle-double-right"></i></small>
+											</a>
+                    </div>
+                    <div class="sect-lead">
+                        <a href="/35241-metal-asteroid-psyche-slooh-webcast.html">
+                                                                                                                    <img class="lazy" data-src="http://www.space.com/images/i/000/061/422/original/psyche-nasa-mission.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="See Weird Metal Asteroid Psyche in Slooh Webcast Today ">
+                            <div class="sect-lead-title">See Weird Metal Asteroid Psyche in Slooh Webcast Today </div>
+                        </a>
+                    </div>
+                    <ul class="sect-items">
+                                                    <li class="sect-title"><a href="/33797-total-solar-eclipse-2017-guide.html">Total Solar Eclipse 2017: When, Where and How to See It (Safely) </a></li>
+                                                    <li class="sect-title"><a href="/19195-night-sky-planets-asteroids-webcasts.html">Watch Live Friday @ 9 pm EST: Slooh Webcast About Odd Metal Asteroid Psyche</a></li>
+                                                    <li class="sect-title"><a href="/35237-2017-solar-eclipse-path-moon-features-adjustment-in-new-animation.html">2017 Solar Eclipse Path: Moon Features Adjustment In New Animation</a></li>
+                                            </ul>
+                </div>
+            </div>
+
+                    
+                        <div class="sect-block mod pure-u-1 pure-u-sm-1-2">
+                <div class="sect-headlines">
+                    <div class="h2 mod-hdr">
+											<a class="sect-link" href="/entertainment">
+                        <h2>Entertainment</h2>
+                        <small class="sect-sub-title"> / See Latest <i class="fa fa-angle-double-right"></i></small>
+											</a>
+                    </div>
+                    <div class="sect-lead">
+                        <a href="/35242-hidden-figures-movie-nasa-history-easter-eggs.html">
+                                                                                                                    <img class="lazy" data-src="http://www.space.com/images/i/000/061/423/original/hidden-figures-easter-eggs.jpg?interpolation=lanczos-none&amp;fit=around|640:415&amp;crop=640:415;*,*" alt="NASA History Easter Eggs in New Film &#039;Hidden Figures&#039;">
+                            <div class="sect-lead-title">NASA History Easter Eggs in New Film &#039;Hidden Figures&#039;</div>
+                        </a>
+                    </div>
+                    <ul class="sect-items">
+                                                    <li class="sect-title"><a href="/35232-hidden-figures-stars-pre-civil-rights-mindset-was-acting-challenge-exclusive-video.html">&#039;Hidden Figures&#039; Stars: Pre-Civil Rights &#039;Mindset&#039; Was Acting Challenge |  Exclusive Video </a></li>
+                                                    <li class="sect-title"><a href="/35225-hidden-figures-nasa-civil-rights-history.html">&#039;Hidden Figures&#039; Explores NASA and Civil Rights History</a></li>
+                                                    <li class="sect-title"><a href="/35218-hidden-figures-when-did-john-glenn-ask-for-the-girl-to-check-the-numbers.html">&#039;Hidden Figures&#039;: When Did John Glenn Ask for &#039;the Girl&#039; to Check the Numbers?</a></li>
+                                            </ul>
+                </div>
+            </div>
+
+                    
+    </section>
+                        <section class="mod">
+            <div class="h2 mod-hdr">
+							<a class="sect-link" href="/image-albums">
+                <h2>Image Albums</h2>
+                <small class="sect-sub-title"> / view all <i class="fa fa-angle-double-right"></i></small>
+							</a>
+            </div>
+            <ul class="three-story-mod pure-g">
+                                    <li class="pure-u-1 pure-u-sm-1-3">
+                        <a href="/34-image-day.html" class="three-story-item">
+                            <img class="three-story-img lazy" data-src="http://www.space.com/images/i/000/061/485/original/galaxy-IC-3639.jpg?interpolation=lanczos-none&amp;fit=around|253:156&amp;crop=253:156;*,*">
+                            <span class="three-story-title">Image of the Day</span>
+                        </a>
+                    </li>
+                                    <li class="pure-u-1 pure-u-sm-1-3">
+                        <a href="/35249-space-station-astronauts-expedition-50-jan6-spacewalk-photos.html" class="three-story-item">
+                            <img class="three-story-img lazy" data-src="http://www.space.com/images/i/000/061/470/original/space-station-expedition-50-eva1-suitup.jpg?interpolation=lanczos-none&amp;fit=around|253:156&amp;crop=253:156;*,*">
+                            <span class="three-story-title">In Photos: Space Station Astronauts Take Spacewalk to Upgrade Power System</span>
+                        </a>
+                    </li>
+                                    <li class="pure-u-1 pure-u-sm-1-3">
+                        <a href="/35217-space-station-astronaut-photos-expedition-50.html" class="three-story-item">
+                            <img class="three-story-img lazy" data-src="http://www.space.com/images/i/000/059/488/original/space-station-expedition-50a.jpg?interpolation=lanczos-none&amp;fit=around|253:156&amp;crop=253:156;*,*">
+                            <span class="three-story-title">Space Station Photos: Expedition 50 Astronauts in Action</span>
+                        </a>
+                    </li>
+                
+            </ul>
+        </section>
+                <section class="mod">
+            <div class="h2 mod-hdr">
+							<a class="sect-link" href="/references">
+                <h2>Reference Articles</h2>
+                <small class="sect-sub-title"> / view all <i class="fa fa-angle-double-right"></i></small>
+							</a>
+            </div>
+            <ul class="three-story-mod pure-g">
+                                    <li class="pure-u-1 pure-u-sm-1-3">
+                        <a href="/16149-night-sky.html" class="three-story-item">
+                            <img class="three-story-img lazy" data-src="http://www.space.com/images/i/000/018/585/original/night-sky-watching.jpg?interpolation=lanczos-none&amp;fit=around|253:156&amp;crop=253:156;*,*">
+                            <span class="three-story-title">Night Sky: Visible Planets, Moon Phases &amp; Events, January 2017</span>
+                        </a>
+                    </li>
+                                    <li class="pure-u-1 pure-u-sm-1-3">
+                        <a href="/35116-luna-9.html" class="three-story-item">
+                            <img class="three-story-img lazy" data-src="http://www.space.com/images/i/000/061/119/original/first-moon-photo-surface.jpg?interpolation=lanczos-none&amp;fit=around|253:156&amp;crop=253:156;*,*">
+                            <span class="three-story-title">Luna 9: 1st Soft Landing on the Moon</span>
+                        </a>
+                    </li>
+                                    <li class="pure-u-1 pure-u-sm-1-3">
+                        <a href="/23772-red-dwarf-stars.html" class="three-story-item">
+                            <img class="three-story-img lazy" data-src="http://www.space.com/images/i/000/034/859/original/red-dwarf-chxr-73.jpg?interpolation=lanczos-none&amp;fit=around|253:156&amp;crop=253:156;*,*">
+                            <span class="three-story-title">Red Dwarfs: The Most Common and Longest-Lived Stars</span>
+                        </a>
+                    </li>
+                
+            </ul>
+        </section>
+            </div>
+    </div>
+    <div class="pure-u-1 pure-u-med-1-3 pure-u-lg-1-3">
+        <div class="right-rail">
+            <div id="rightcol_top">
+                <script type='text/javascript'>tmntag.cmd.push(function(){ tmntag.adTag('rightcol_top', false); }); </script>
+            </div>
+
+            <div class="subscribe pure-u-1 mod" id="nointelliTXT">
+		<h3 class="h2 mod-hdr">Subscribe To SPACE.com</h3>
+		<form class="inline-form" method="POST" action="http://www.space.com/newsletter">
+				<input class="form-inset" type="text" name="email" id="" placeholder="enter email here">
+				<button class="btn">Submit</button>
+				<input type="hidden" name="Newsletter Subscription" value="">
+		</form>
+</div>            <section class="mod">
+    <h3 class="h2 mod-hdr">Follow Us</h3>
+	<div class="social-mod pure-u-1" id="nointelliTXT">
+                                                        <a href="https://www.facebook.com/spacecom?cmpid=556675" target="_blank" class="fa fa-facebook"></a>
+                                    <a href="https://twitter.com/SPACEdotcom?cmpid=556676" target="_blank" class="fa fa-twitter"></a>
+                                    <a href="http://www.linkedin.com/company/imaginova?cmpid=556677" target="_blank" class="fa fa-linkedin"></a>
+                                    <a href="https://plus.google.com/+SPACEcom/posts?cmpid=556678" target="_blank" class="fa fa-google-plus"></a>
+                                    	</div>
+</section>
+            
+<script id="most-popular-template" type="text/x-handlebars-template">
+    
+    <div class="most-popular mod pure-u-1 nointelliTXT">
+
+            
+        <h3 class="h2 mod-hdr">Most Popular</h3>
+        
+        <ol>
+            {{#each items}}
+                <li>
+                    <a href="{{ url }}">
+                        <img src="{{ thumbnail }}"></img>
+                        <p>{{ title }}</p>
+                    </a>
+                </li>
+            {{/each}}
+        </ol>
+    </div>
+    
+</script>
+
+<div id="most-popular-render"></div>                        <div class="mod most-recent">
+            <div class="h2 mod-hdr">
+							<a  class="sect-link" href="/video">
+							 <h3>video</h3>
+							 <small class="sect-sub-title"> / view all <i class="fa fa-angle-double-right"></i></small>
+							</a>
+            </div>
+            <a href="/35243-caves-trippin-enter-the-otherwoldly-environment-where-astronauts-train-video.html" class="thumb-block">
+
+                                                    
+                <img class="thumb-left lazy" data-src="http://www.space.com/images/i/000/061/427/original/SP_170106_caves_trip.jpg?interpolation=lanczos-none&amp;fit=around|125:83&amp;crop=125:83;*,*" width="125" height="83" alt="CAVES &#039;Trippin&#039; - Enter The Otherworldly Realm Where Astronauts Train  | Video">
+                <div class="thumb-title">CAVES &#039;Trippin&#039; - Enter The Otherworldly Realm Where Astronauts Train  | Video</div>
+            </a>
+        </div>
+                <div class="mod most-recent">
+            <div class="h2 mod-hdr">
+							<a  class="sect-link" href="/topics">
+							 <h3>topics</h3>
+							 <small class="sect-sub-title"> / view all <i class="fa fa-angle-double-right"></i></small>
+							</a>
+            </div>
+            <a href="/topics/the-best-gift-ideas-2016" class="thumb-block">
+
+                                                    
+                <img class="thumb-left lazy" data-src="http://www.space.com/images/i/000/059/755/original/Star-Trek-Toys-G01.jpg?interpolation=lanczos-none&amp;fit=around|125:83&amp;crop=125:83;*,*" width="125" height="83" alt="The Best Gift Ideas - 2016">
+                <div class="thumb-title">The Best Gift Ideas - 2016</div>
+            </a>
+        </div>
+                <div class="mod most-recent">
+            <div class="h2 mod-hdr">
+							<a  class="sect-link" href="/countdowns">
+							 <h3>countdowns</h3>
+							 <small class="sect-sub-title"> / view all <i class="fa fa-angle-double-right"></i></small>
+							</a>
+            </div>
+            <a href="/35204-space-movies-to-watch-in-2017.html" class="thumb-block">
+
+                                                    
+                <img class="thumb-left lazy" data-src="http://www.space.com/images/i/000/060/071/original/valerian-trailer.jpg?interpolation=lanczos-none&amp;fit=around|125:83&amp;crop=125:83;*,*" width="125" height="83" alt="9 Exciting Space Movies to Watch in 2017">
+                <div class="thumb-title">9 Exciting Space Movies to Watch in 2017</div>
+            </a>
+        </div>
+                <div class="mod most-recent">
+            <div class="h2 mod-hdr">
+							<a  class="sect-link" href="/infographics">
+							 <h3>infographics</h3>
+							 <small class="sect-sub-title"> / view all <i class="fa fa-angle-double-right"></i></small>
+							</a>
+            </div>
+            <a href="/14618-nasa-john-glenn-orbit-friendship-7-50th-anniversary.html" class="thumb-block">
+
+                                                    
+                <img class="thumb-left lazy" data-src="http://www.space.com/images/i/000/015/352/original/glenn-mercury-50th-ann-120215e-02.jpg?interpolation=lanczos-none&amp;fit=around|125:83&amp;crop=125:83;*,*" width="125" height="83" alt="1st American in Orbit: How John Glenn (And NASA) Made History (Infographic)">
+                <div class="thumb-title">1st American in Orbit: How John Glenn (And NASA) Made History (Infographic)</div>
+            </a>
+        </div>
+        
+            <div class="mod">
+                <div id="rightcol_mid">
+                    <script type='text/javascript'>tmntag.cmd.push(function(){ tmntag.adTag('rightcol_mid', false); }); </script>
+                </div>
+                <div id="m-in-content-2">
+                    <script type='text/javascript'>tmntag.cmd.push(function(){ tmntag.adTag('m-in-content-2',false); });</script>
+                </div>
+            </div>
+
+            <div class="pure-u-1 mod">
+                <h2 class="h2 mod-hdr">Space.com Presents</h2>
+<h4>
+    <a href="http://www.space.com/skywatching/"><img data-src="http://www.space.com/images/site/temp-img/Skywatching.jpg?interpolation=lanczos-none&amp;fit=around|300:75&amp;crop=300:75;*,*" width="300" height="75" class="lazy" alt="Your Night Sky Stargazing Guide"></a>
+</h4>
+<h4>
+    <a href="http://www.space.com/image-albums/"><img data-src="http://www.space.com/images/site/temp-img/Amazing-Images.jpg?interpolation=lanczos-none&amp;fit=around|300:75&amp;crop=300:75;*,*" width="300" height="75" class="lazy" alt="Amazing Space Photos &amp; Images"></a>
+</h4>
+<h4>
+    <a href="http://www.space.com/entertainment/"><img data-src="http://www.space.com/images/site/temp-img/Sci-Fic-and-Art.jpg?interpolation=lanczos-none&amp;fit=around|300:75&amp;crop=300:75;*,*" width="300" height="75" class="lazy" alt="Space, Science Fiction &amp; Art"></a>
+</h4>
+<h4>
+    <a href="http://www.space.com/topics/expert-voices/"><img data-src="http://www.space.com/images/site/temp-img/space_expertVoices.jpg?interpolation=lanczos-none&amp;fit=around|300:75&amp;crop=300:75;*,*" class="lazy" width="300" height="75" alt="Insightful commentary &amp; informed perspective"></a>
+</h4>            </div>
+            <div id="rightcol_bottom">
+                <script type='text/javascript'>tmntag.cmd.push(function(){ tmntag.adTag('rightcol_bottom', false); }); </script>
+            </div>
+            <div id="m-in-content-3">
+                <script type='text/javascript'>tmntag.cmd.push(function(){ tmntag.adTag('m-in-content-3'); })</script>
+            </div>
+        </div>
+    </div>
+            </div>
+        </div><!-- end content-wrapper -->
+    </div><!-- end ctBoc -->    
+
+            <footer class="footer content-wrapper">
+    <div class="center-content pure-g">
+			<div class="pure-u-1 mq-lg-off m-net-links space-B30">
+				<a href="/">Home</a><a href="/about">About Us</a>
+			</div>  
+			<div class="net-links pure-u-1 pure-u-med-1-4 pure-u-lg-1-4">
+				<header class="footer-title">Company</header>
+				<ul>
+						<li class="net-link"><a href="http://purch.com/" target="_blank">Company Info</a></li>
+						<li class="net-link"><a href="/about">About Us</a></li>
+						<li class="net-link"><a href="http://purch.com/#contact" target="_blank">Contact Us</a></li>
+						<li class="net-link"><a href="http://purch.com/advertise/" target="_blank">Advertise with Us</a></li>
+						<li class="net-link"><a href="http://purch.com/#contact" target="_blank">Using Our Content</a></li>
+						<li class="net-link"><a href="http://purch.com/#contact" target="_blank">Licensing &amp; Reprints</a></li>
+						<li class="net-link"><a href="http://purch.com/terms-of-use-and-sale/" target="_blank">Terms of Use and Sale</a></li>
+						<li class="net-link"><a href="http://purch.com/copyright-policy/" target="_blank">Copyright Policy</a></li>
+						<li class="net-link"><a href="http://purch.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
+				</ul>
+			</div>
+			<div class="net-links pure-u-1 pure-u-med-1-4 pure-u-lg-1-4">
+				<header class="footer-title">Network</header>
+				<ul>
+						<li class="net-link"><a href="http://www.toptenreviews.com/">Top Ten Reviews</a></li>
+						<li class="net-link"><a href="http://www.tomsguide.com/">Tom's Guide</a></li>
+						<li class="net-link"><a href="http://www.laptopmag.com/">Laptop Mag</a></li>
+						<li class="net-link"><a href="http://www.tomshardware.com/">Tom's Hardware</a></li>
+						<li class="net-link"><a href="http://www.businessnewsdaily.com/">Business News Daily</a></li>
+						<li class="net-link"><a href="http://www.tomsitpro.com/">Tom's IT Pro</a></li>
+						<li class="net-link"><a href="http://www.space.com/">Space.com</a></li>
+						<li class="net-link"><a href="http://www.livescience.com/">Live Science</a></li>
+						<li class="net-link"><a href="http://activejunky.com/">Active Junky</a></li>
+						<li class="net-link"><a href="http://shopsavvy.com/">ShopSavvy</a></li>
+						<li class="net-link"><a href="http://www.anandtech.com/">AnandTech</a></li>
+				</ul>
+			</div>
+			<div class="pure-u-1 pure-u-med-1-2 pure-u-lg-1-2">
+				<div class="unit-r">
+					<div class="follow mod top-mod">
+							<header class="footer-title">FOLLOW US</header>
+							<div class="footer-social">
+                                                                    <a href="https://www.facebook.com/spacecom?cmpid=556675" target="_blank" class="fa fa-facebook"></a>
+                                                                    <a href="https://twitter.com/SPACEdotcom?cmpid=556676" target="_blank" class="fa fa-twitter"></a>
+                                                                    <a href="http://www.linkedin.com/company/imaginova?cmpid=556677" target="_blank" class="fa fa-linkedin"></a>
+                                                                    <a href="https://plus.google.com/+SPACEcom/posts?cmpid=556678" target="_blank" class="fa fa-google-plus"></a>
+                                                                    <a href="http://www.space.com/home/feed/site.xml" target="_blank" class="fa fa-rss"></a>
+                                                                    <a href="http://www.youtube.com/user/VideoFromSpace" target="_blank" class="fa fa-youtube"></a>
+                                							</div>
+					</div>
+					<div class="mod line">
+							<header class="footer-title"> SUBSCRIBE TO SPACE</header>
+							<form class="inline-form" action="http://www.space.com/newsletter" method="post">
+									<input class="subscribe unit form-inset" type="text" name="email" placeholder="enter email here ..." required>
+									<button class="btn">SUBMIT</button>
+							</form>
+					</div>
+					<div class="mod branding">
+							<a href="http://purch.com/">
+
+																		<img src="http://www.space.com/resources/img/purch-logo.png?e960245" width="135" height="41" alt="Purch">
+																</a>
+							<p class="copy-right">Copyright &copy;
+									<script type="text/javascript">document.write(new Date().getFullYear());</script>
+									All Rights Reserved.
+							</p>
+					</div>
+			</div>
+		</div>
+</footer>    
+    
+            <div id="mobile-anchor"><script type='text/javascript'>tmntag.cmd.push(function(){ tmntag.adTag('mobile-anchor', false); });</script></div>
+    
+            <div id="interstitial"><script type='text/javascript'>tmntag.cmd.push(function(){ tmntag.adTag('interstitial', false); });</script></div>
+    
+            
+</div><!-- end site-wrapper -->
+
+                <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Space.com",
+        "url": "http://www.space.com"
+        ,"potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://www.space.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+    }
+</script>
+
+
+
+
+                        <script type="application/ld+json">
+{ "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "@id" : "#SpaceOrg",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "http://www.space.com/resources/img/space-amp-logo-220x60.png",
+    "width": 220,
+    "height": 60
+  },
+  "name" : "Space.com",
+  "url" : "http://www.space.com",
+  "memberOf": {
+    "@type": "Organization",
+    "@id": "http://www.purch.com/#PurchOrg"
+  }
+,"sameAs" : ["https://www.facebook.com/spacecom?cmpid=556675","http://www.youtube.com/user/VideoFromSpace","https://plus.google.com/+SPACEcom/posts?cmpid=556678","https://twitter.com/SPACEdotcom?cmpid=556676","http://www.linkedin.com/company/imaginova?cmpid=556677"]
+}</script>    
+                            <script type="text/javascript" language="JavaScript">
+            var Purch = Purch || {};
+            function requireReady() {  
+                requirejs.config({
+                    baseUrl: '/bundles/purchcommon/js',
+                    urlArgs: 'v=2017-01-10-09',
+                    paths:   {
+                        jquery: jqueryUrl
+                    },
+                    map: {
+                      // '*' means all modules will get 'jquery-private'
+                      // for their 'jquery' dependency.
+                      '*': { 'jquery': '/resources/js/jquery-private.js' },
+
+                      // 'jquery-private' wants the real jQuery module
+                      // though. If this line was not here, there would
+                      // be an unresolvable cyclic dependency.
+                      '/resources/js/jquery-private.js': { 'jquery': 'jquery' }
+                    }
+                });
+                                require(['Purch/Utils/Lazy'], function(Lazy) {
+                    new Lazy({init: true, offsetY:150, delegateOn: 'body'});
+                });
+
+                            }
+        </script>
+                <script type="text/javascript" async src="http://www.space.com/resources/js/require.min.js?e960245" onload="requireReady()"></script>
+                                    <script type="text/javascript">
+            var tmnramp = {"server":"us-east1-rtb-adserver15","key_vals":[],"ts":1484058319091,"page":"http:\/\/www.space.com\/","page_id":"20f5ee9c","placement":"2500","user_agent":{"device":"UNKNOWN","os":"Unknown","browser":"Downloading Tool"},"ip":"5.51.156.223","geo":{"countryAlpha3":"FRA","ctr":"FR","dma":0,"ac":0,"tz":"Europe\/Paris"},"categories":["p27","i261","i211"],"pixels":[{"content":"\n\/* Obfuscator 1.0.1 *\/\r\ntmntag = window.tmntag || {};\r\ntmntag.obfuscate = function(selector_arr){\r\n  var obfuscateSingleSelector = function(selector){\r\n\t  var selectorIcon = selector.charAt(0);\r\n\t  var obfuscatedSelector = selectorIcon + obfuscateString(selector.slice(1));\r\n\r\n\t  \/\/copy style for id\/class\r\n\t  copyAndObfuscateCSS(selector, obfuscatedSelector);\r\n\t  \/\/go through all elements on the page and change their id\/class\r\n\t  var elements = document.querySelectorAll(selector);\r\n\t  for (var i = 0; i < elements.length; i++) {\r\n\t    if (selectorIcon === '#') {\r\n\t      elements[i].id = obfuscatedSelector.slice(1)\r\n\t    } else if (selectorIcon === '.') {\r\n\t      replaceClass(elements[i], selector.slice(1), obfuscatedSelector.slice(1));\r\n\t    }\r\n\t  }\r\n\t}\r\n\r\n\tvar copyAndObfuscateCSS = function(originalSelector, obfuscatedSelector){\r\n\t  \/\/iterate through styleSheets\r\n\t  for (var i = 0; i < document.styleSheets.length; i++) {\r\n\t    var sheet = document.styleSheets[i];\r\n\t    var rules = sheet.cssRules ? sheet.cssRules: sheet.rules; \/\/for IE\r\n\t    \/\/iterate through rules\r\n\t    if (!rules) {continue;}\r\n\t    for (var j = 0; j < rules.length; j++) {\r\n\t      \/\/find rule that matches input class\r\n\t      if (!rules[j].selectorText) continue;\r\n\t      var currentRuleSelector = rules[j].selectorText.toLowerCase();\r\n          if (rules[j].style.cssText.replace(\" \", \"\").indexOf(\"display:none\")>=0) continue;\r\n\t      if(currentRuleSelector.indexOf(originalSelector.toLowerCase()) != -1){ \/\/IE capitalizes sometimes\r\n          \/*console.log('matched rule ' + originalSelector + 'in ' + currentRuleSelector)*\/\r\n          var firstChar = originalSelector.charAt(0);\r\n\t        if (firstChar === \"#\") {\r\n\t          var reg = new RegExp('([#])' + originalSelector.toLowerCase().slice(1) + '(\\\\b)');\r\n\t        } else if (firstChar === \".\") {\r\n\t          var reg = new RegExp('([\\\\.])' + originalSelector.toLowerCase().slice(1) + '(\\\\b)');\r\n\t        }\r\n\t        var modifiedRuleSelector = currentRuleSelector.replace(reg, obfuscatedSelector);\r\n\/*console.log(\"originalSelector=\"+originalSelector+\" currentRuleSelector=\"+currentRuleSelector);*\/\r\n\t        \/*copy rule text in string form*\/\r\n\t        var originalStyle=rules[j].style.cssText;\r\n\t        \/\/insert new css rule to that stylesheet(renaming the word 'ad'?) --Currently inserts unneccesary sheet if partial match, but no changes.\r\n\t          addCSSRule(sheet, modifiedRuleSelector, originalStyle, j); \/\/inserts before current. Could also be 0\r\n\t          j++; \/\/to offset adding a new sheet\r\n\t      }\r\n\t    }\r\n\t  }\r\n\t}\r\n\r\n  var addCSSRule = function(sheet, selector, rules, index) {\r\n\t  if(sheet.insertRule) {\r\n\t    sheet.insertRule(selector + \"{\" + rules + \"}\", index);\r\n\t  }\r\n\t  else {\r\n\t    sheet.addRule(selector, rules, index); \/\/for IE\r\n\t  }\r\n  }\r\n\r\n  var obfuscateString = function(str) {\r\n    var rnd = (\"\"+Math.random()).substring(2,7);\r\n    return btoa(rnd+str).replace(\/[^a-zA-Z]\/g, '');\r\n  }\r\n\r\n  var hasClass = function(ele, cls) {\r\n    return ele.className.match(new RegExp('(\\\\s|^)' + cls + '(\\\\s|$)'));\r\n  }\r\n\r\n  var addClass = function(ele, cls) {\r\n    if (!hasClass(ele, cls)) ele.className += \" \" + cls;\r\n  }\r\n\r\n  var removeClass = function(ele, cls) {\r\n    if (hasClass(ele, cls)) {\r\n      var reg = new RegExp('(\\\\s|^)' + cls + '(\\\\s|$)');\r\n      ele.className = ele.className.replace(reg, ' ');\r\n    }\r\n  }\r\n\r\n  var replaceClass = function(ele, oldClass, newClass){\r\n    if(hasClass(ele, oldClass)){\r\n\t  removeClass(ele, oldClass);\r\n\t  addClass(ele, newClass);\r\n\t}\r\n\treturn;\r\n  }\r\n\r\n  for (var i = 0; i < selector_arr.length; i++) {\r\n    obfuscateSingleSelector(selector_arr[i]);\r\n  }\r\n}\r\nvar obf = '.ad-slot|#rightcol_top|.leaderboard|.right-rail';\r\nif (obf.indexOf('$')<0 && obf!='') {\r\n  tmntag.obfuscate(obf.split('|'));\r\n}\r\n\/* \/Obfuscator 1.0.1 *\/\r\n\n","onready":true,"donotrender":false,"campaign":"4057"},{"content":"\n(function(){\r\nif (document.location.href.indexOf(\"tmn-nopagefair=1\")>0) return;\r\n  \r\nwindow.addEventListener('adonispassback', function (event) {\r\n  console.log('-RAMP- Pagefair Passback', event.detail.element);\r\n  if (event && event.detail && event.detail.element) {\r\n    event.detail.element.removeAttribute(\"adonis-marker\");\r\n  }\r\n})\r\n  \r\nvar _pfIDs = 'header_leaderboard|rightcol_top|rightcol_bottom|rightcol_mid|ad_billboard';\r\nif (_pfIDs=='' || _pfIDs.indexOf('$')==0) {\r\n\treturn;\r\n}\r\nvar _pfDivIds = _pfIDs.split(\"|\");\r\nif (_pfDivIds && _pfDivIds.length==0) {\r\n  return;\r\n}\r\nfor(var i=0; i<_pfDivIds.length; i++) {\r\n  var __e = document.getElementById(_pfDivIds[i]);\r\n  if (__e) __e.setAttribute(\"adonis-marker\", \"adonis-marker\");\r\n}\r\n\r\nvar pfhacks = [\".edt-content-wrapper\", \".page-top-content\", \".page-content\", \".page-content-leftcol\", \".page-bottom-content\"];\r\nfor (var i=0; i<pfhacks.length; i++) {\r\n  var pfhack = document.querySelectorAll(pfhacks[i]);\r\n  if (pfhack && pfhack.length>0) for (var j=0; j<pfhack.length; j++) {\r\n    if (pfhack[j].id==\"\") pfhack[j].id=Math.floor(Math.random() * 11000);\r\n  }\r\n}\r\n  \r\nvar code = \"Lyogd3JhcHBlci02LjAuNiAqLyFmdW5jdGlvbiBlKHQsbixyKXtmdW5jdGlvbiBvKGEsYyl7aWYoIW5bYV0pe2lmKCF0W2FdKXt2YXIgcz0iZnVuY3Rpb24iPT10eXBlb2YgcmVxdWlyZSYmcmVxdWlyZTtpZighYyYmcylyZXR1cm4gcyhhLCEwKTtpZihpKXJldHVybiBpKGEsITApO3ZhciBkPW5ldyBFcnJvcigiQ2Fubm90IGZpbmQgbW9kdWxlICciK2ErIiciKTt0aHJvdyBkLmNvZGU9Ik1PRFVMRV9OT1RfRk9VTkQiLGR9dmFyIHU9blthXT17ZXhwb3J0czp7fX07dFthXVswXS5jYWxsKHUuZXhwb3J0cyxmdW5jdGlvbihlKXt2YXIgbj10W2FdWzFdW2VdO3JldHVybiBvKG4\/bjplKX0sdSx1LmV4cG9ydHMsZSx0LG4scil9cmV0dXJuIG5bYV0uZXhwb3J0c31mb3IodmFyIGk9ImZ1bmN0aW9uIj09dHlwZW9mIHJlcXVpcmUmJnJlcXVpcmUsYT0wO2E8ci5sZW5ndGg7YSsrKW8oclthXSk7cmV0dXJuIG99KHsxOltmdW5jdGlvbihlLHQsbil7IWZ1bmN0aW9uKCl7ZnVuY3Rpb24gdCgpe28mJmNvbnNvbGUubG9nLmFwcGx5KGNvbnNvbGUsYXJndW1lbnRzKX12YXIgbj1lKDQpLHI9d2luZG93LlJUQ1BlZXJDb25uZWN0aW9ufHx3aW5kb3cubW96UlRDUGVlckNvbm5lY3Rpb258fHdpbmRvdy53ZWJraXRSVENQZWVyQ29ubmVjdGlvbjtpZighcilyZXR1cm4gdm9pZCBuLnJlcG9ydEV2ZW50KCJib290c3RyYXAuaWZ3LnJ0Yy5hYnNlbnQiKTtuLnJlcG9ydEV2ZW50KCJib290c3RyYXAuaWZ3LnJ0Yy5leGlzdHMiKSx3aW5kb3cuYWRvbmlzSGFzaD13aW5kb3cubG9jYXRpb24uaGFzaDt2YXIgbz13aW5kb3cuYWRvbmlzSGFzaC5pbmRleE9mKCJhZG9uaXMtbG9nZ2luZyIpIT09LTEsaT1mdW5jdGlvbihlKXt2YXIgdD1mdW5jdGlvbigpe2U9PT0hMCYmY29uc29sZS5sb2cuYXBwbHkoY29uc29sZSxhcmd1bWVudHMpfSxuPVsic2NyaXB0IiwiaW1nIl07ZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcigibG9hZCIsZnVuY3Rpb24oZSl7dCgid2l0aGluSWZyYW1lIGxvYWQgZXZlbnQiLGUudGFyZ2V0KSwhZS50YXJnZXR8fCJTQ1JJUFQiIT09ZS50YXJnZXQubm9kZU5hbWUmJiJJTUciIT09ZS50YXJnZXQubm9kZU5hbWV8fChlLnRhcmdldC5fbG9hZFN0YXRlPSJsb2FkIil9LCEwKSxkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJlcnJvciIsZnVuY3Rpb24oZSl7dCgid2l0aGluSWZyYW1lIGVycm9yIGV2ZW50IixlLnRhcmdldCksIWUudGFyZ2V0fHwiU0NSSVBUIiE9PWUudGFyZ2V0Lm5vZGVOYW1lJiYiSU1HIiE9PWUudGFyZ2V0Lm5vZGVOYW1lfHwoZS50YXJnZXQuX2xvYWRTdGF0ZT0iZXJyb3IiKX0sITApLHdpbmRvdy5hZGRFdmVudExpc3RlbmVyKCJtZXNzYWdlIixmdW5jdGlvbihlKXtpZih2b2lkIDAhPT1lLmRhdGEuaWZyYW1lSWQpe3QoIm1lc3NhZ2UgcmVjZWl2ZWQgIitlLmRhdGEuaWZyYW1lSWQpO3ZhciByPWUuZGF0YSxvPWZ1bmN0aW9uKGUpeyJsb2FkaW5nIiE9PWRvY3VtZW50LnJlYWR5U3RhdGU\/ZSgpOmRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoIkRPTUNvbnRlbnRMb2FkZWQiLGUpfSxpPWZ1bmN0aW9uKGUpe3ZhciByPXtvcmlnaW5JZnJhbWVJZDplLmlmcmFtZUlkLHJlYWR5U3RhdGU6ZG9jdW1lbnQucmVhZHlTdGF0ZSxyZXF1ZXN0RGF0YTpbXSxjc3NEYXRhOltdfSxvPWUuc3JjU3Vic3RyaW5ncztpZih2b2lkIDAhPT1vKWZvcih2YXIgYT1kb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKG4uam9pbigiLCIpKSxjPTA7YzxhLmxlbmd0aDtjKyspe3ZhciBzPWFbY107aWYocy5zcmMpe3ZhciBkPW8uc29tZShmdW5jdGlvbihlKXtyZXR1cm4gcy5zcmMuaW5kZXhPZihlKSE9PS0xfSk7aWYoZCl7aWYodm9pZCAwPT09cy5fbG9hZFN0YXRlKXJldHVybiB0KCJXYWl0IGZvciBldmVudCBmcm9tICIrcy5zcmMpLHMuYWRkRXZlbnRMaXN0ZW5lcigibG9hZCIsZnVuY3Rpb24oKXtpKGUpfSksdm9pZCBzLmFkZEV2ZW50TGlzdGVuZXIoImVycm9yIixmdW5jdGlvbigpe2koZSl9KTtyLnJlcXVlc3REYXRhLnB1c2goe3R5cGU6cy5ub2RlTmFtZSxzcmM6cy5zcmMsc3RhdGU6cy5fbG9hZFN0YXRlfSl9fX12YXIgdT1lLmRpc3BsYXlUeXBlcyxmPWUuY3NzQXR0cmlidXRlczt2b2lkIDAhPT11JiZ2b2lkIDAhPT1mJiYoYT1kb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKHUuam9pbigiLCIpKSxBcnJheS5wcm90b3R5cGUuZm9yRWFjaC5jYWxsKGEsZnVuY3Rpb24oZSl7dmFyIHQ9d2luZG93LmdldENvbXB1dGVkU3R5bGUoZSksbj17fTtmLmZvckVhY2goZnVuY3Rpb24oZSl7bltlXT10LmdldFByb3BlcnR5VmFsdWUoZSl9KSxyLmNzc0RhdGEucHVzaCh7dHlwZTplLm5vZGVOYW1lLGlkOmUuaWQsImNsYXNzIjplLmdldEF0dHJpYnV0ZSgiY2xhc3MiKSxjc3NBdHRyaWJ1dGVzOm59KX0pKSx0KCJzZW5kIHJlc3BvbnNlICIrZS5pZnJhbWVJZCkscGFyZW50LnBvc3RNZXNzYWdlKHIsIioiKX07byhmdW5jdGlvbigpe2kocil9KX19KX0sYT1bJzxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij4oJyxpLnRvU3RyaW5nKCksIikoIixvLnRvU3RyaW5nKCksIik8IiwiL3NjcmlwdD4iXS5qb2luKCIiKSxjPWZ1bmN0aW9uKGUsdCxuLHIpe3ZhciBvPU9iamVjdC5nZXRPd25Qcm9wZXJ0eURlc2NyaXB0b3IoZS5wcm90b3R5cGUsdCk7T2JqZWN0LmRlZmluZVByb3BlcnR5KGUucHJvdG90eXBlLHQse2dldDpmdW5jdGlvbigpe3JldHVybiBuKG8uZ2V0LHRoaXMsYXJndW1lbnRzKX0sc2V0OmZ1bmN0aW9uKCl7cmV0dXJuIHIoby5zZXQsdGhpcyxhcmd1bWVudHMpfSxlbnVtZXJhYmxlOiEwfSl9LHM9ZnVuY3Rpb24oZSx0LG4pe3JldHVybiBlLmFwcGx5KHQsbil9LGQ9ZnVuY3Rpb24oZSxuLHIpe3RyeXt2YXIgbz1yWzBdO2lmKG8uaW5kZXhPZigiaHRtbCIpIT09LTEpe3ZhciBpPW8uc3BsaXQoIjsiKSxjPWlbMV0scz1wYXJzZUludChjKSthLmxlbmd0aDtpWzFdPXMudG9TdHJpbmcoKSxvPWkuam9pbigiOyIpLG89by5yZXBsYWNlKCI8aGVhZD4iLCI8aGVhZD4iK2EpLHJbMF09b319Y2F0Y2goZCl7dChkKX1yZXR1cm4gZS5hcHBseShuLHIpfTtjKEhUTUxJRnJhbWVFbGVtZW50LCJuYW1lIixzLGQpO3ZhciB1PWZ1bmN0aW9uKGUpe3ZhciB0PSExO2lmKGUuc3JjJiYwIT09ZS5zcmMuaW5kZXhPZigiamF2YXNjcmlwdDoiKSYmMCE9PWUuc3JjLmluZGV4T2YoImFib3V0OmJsYW5rIikpe3ZhciBuPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImEiKTtuLmhyZWY9ZS5zcmM7dmFyIHI9bi5ob3N0O3I9PT13aW5kb3cubG9jYXRpb24uaG9zdCYmKHQ9ITApfWVsc2UgdD0hMDtyZXR1cm4gdH0sZj1mdW5jdGlvbihlLG4pe2lmKHZvaWQgMD09PW4uX3dyaXRlRGVjb3JhdGVkKXtuLl93cml0ZURlY29yYXRlZD0hMDt2YXIgcj1uLndyaXRlO24ud3JpdGU9ZnVuY3Rpb24oZSl7dHJ5e3RoaXMuX2luamVjdGVkfHwoZS5pbmRleE9mKCI8aGVhZD4iKSE9PS0xPyhlPWUucmVwbGFjZSgiPGhlYWQ+IiwiPGhlYWQ+IithKSx0aGlzLl9pbmplY3RlZD0hMCk6ZS5pbmRleE9mKCI8c2NyaXB0IikhPT0tMSYmKGU9ZS5yZXBsYWNlKC8oPHNjcmlwdC4qPz4pLyxhKyIkMSIpLHRoaXMuX2luamVjdGVkPSEwKSl9Y2F0Y2gobil7dChuKX1yZXR1cm4gci5jYWxsKHRoaXMsZSl9fX0scD1mdW5jdGlvbihlLG4scil7dmFyIG89ZS5hcHBseShuLHIpO3RyeXt1KG4pJiZmKG4sbyl9Y2F0Y2goaSl7dChpKX1yZXR1cm4gb30sbD1mdW5jdGlvbihlLHQsbil7cmV0dXJuIGUuYXBwbHkodCxuKX07YyhIVE1MSUZyYW1lRWxlbWVudCwiY29udGVudERvY3VtZW50IixwLGwpO3ZhciB2PWZ1bmN0aW9uKGUsbixyKXt2YXIgbz1lLmFwcGx5KG4scik7dHJ5e3UobikmJmYobixvLmRvY3VtZW50KX1jYXRjaChpKXt0KGkpfXJldHVybiBvfSxtPWZ1bmN0aW9uKGUsdCxuKXtyZXR1cm4gZS5hcHBseSh0LG4pfTtjKEhUTUxJRnJhbWVFbGVtZW50LCJjb250ZW50V2luZG93Iix2LG0pfSgpfSx7NDo0fV0sMjpbZnVuY3Rpb24oZSx0LG4pe3ZhciByPWUoMyk7dC5leHBvcnRzPXJ9LHszOjN9XSwzOltmdW5jdGlvbihlLHQsbil7dC5leHBvcnRzPXtSRUFMX1NUVU5fSE9TVDoic3R1bi54cGFuYW1hLm5ldDozNDc4IixUVVJOU0lHTkFMX0hPU1Q6InRzLnAueHBhbmFtYS5uZXQ6NzAwMCIsU1RVTkdVTl9IT1NUOiJzZy5wLnhwYW5hbWEubmV0OjM0ODAiLFNFUlZFUl9DQU5ESURBVEU6ImNhbmRpZGF0ZTo4Mjc2NDgwMjYgMSB1ZHAgMjEyMjE5NDY4NyBTRVJWRVJfSVAgU0VSVkVSX1BPUlQgdHlwIGhvc3QgZ2VuZXJhdGlvbiAwIixSRVBPUlRJTkdfVVJMOiJodHRwczovL2xiLnN0YXRzZXZlbnQuY29tL3N0YXRzIixSRVBPUlRJTkdfUkFURTouMDEsTE9HX0xFVkVMOiJlcnJvciIsUkVQT1JUX0VSUk9SUzohMCxNQU5JRkVTVF9VUkw6Imh0dHBzOi8vc3JpLmpzaW50ZWdyaXR5LmNvbS9tYW5pZmVzdC5qc29uIixNQU5JRkVTVF9FWFBJUkFUSU9OX1RJTUU6ODY0MDAsQURfTUFSS0VSOiJhZG9uaXMtbWFya2VyIn19LHt9XSw0OltmdW5jdGlvbihlLHQsbil7ZnVuY3Rpb24gcihlKXt2YXIgdD1uZXcgWE1MSHR0cFJlcXVlc3Qsbj1bZC5SRVBPUlRJTkdfVVJMLGVdLmpvaW4oIiIpO3Qub3BlbigiR0VUIixuLCEwKSx0LnNlbmQoKX1mdW5jdGlvbiBvKGUpe3IoIi9hZG9uaXNfZXJyb3I\/ZT0iK2UudG9TdHJpbmcoKSl9ZnVuY3Rpb24gaSgpe3JldHVybiBudWxsIT13aW5kb3cuQURPTklTX0JPT1RTVFJBUF9TVEFUUz93aW5kb3cuQURPTklTX0JPT1RTVFJBUF9TVEFUUz09PSEwOk1hdGgucmFuZG9tKCk8ZC5SRVBPUlRJTkdfUkFURX1mdW5jdGlvbiBhKGUsdCl7aWYoYyhlKSxpKCkpe3ZhciBuPXt3ZWJzaXRlOndpbmRvdy5sb2NhdGlvbi5ob3N0bmFtZSxrZXk6ZX07bnVsbCE9dCYmKG4ucXVhbnRpdHk9dCkscihbIi9hZG9uaXNfZXZlbnQvP2V2ZW50PSIsSlNPTi5zdHJpbmdpZnkobildLmpvaW4oIiIpKX19ZnVuY3Rpb24gYyhlKXt2YXIgdD17a2V5OmUsdGltZV9tczpNYXRoLnJvdW5kKHdpbmRvdy5wZXJmb3JtYW5jZS5ub3coKSksd2Vic2l0ZTp3aW5kb3cubG9jYXRpb24uaG9zdG5hbWV9O2YucHVzaCh0KX1mdW5jdGlvbiBzKCl7dS5kZWZpbmVSZWFkT25seVByb3BlcnR5KCJhZG9uaXNCb290c3RyYXBUaW1pbmciLGYpfXZhciBkPWUoMiksdT1lKDUpLGY9W107dC5leHBvcnRzPXtyZXBvcnRFcnJvcjpvLHJlcG9ydEV2ZW50OmEsc2F2ZVRpbWluZzpzLHNob3VsZFJlcG9ydDppfX0sezI6Miw1OjV9XSw1OltmdW5jdGlvbihlLHQsbil7ZnVuY3Rpb24gcihlLHQpe09iamVjdC5kZWZpbmVQcm9wZXJ0eSh3aW5kb3csZSx7dmFsdWU6dCx3cml0YWJsZTohMX0pfWZ1bmN0aW9uIG8oZSx0KXtyZXR1cm4hdHx8TnVtYmVyKHQpPD1lfWZ1bmN0aW9uIGkoZSl7dmFyIHQ9KG5ldyBEYXRlKS5nZXRUaW1lKCkvMWUzO3JldHVybiBvKHQsZSl9dmFyIGE9ZnVuY3Rpb24oKXt2YXIgZT13aW5kb3cubmF2aWdhdG9yLnVzZXJBZ2VudC50b0xvd2VyQ2FzZSgpLHQ9LyhjaHJvbWUpWyBcL10oW1x3Ll0rKS8uZXhlYyhlKXx8LyhmaXJlZm94KVsgXC9dKFtcdy5dKykvLmV4ZWMoZSk7aWYobnVsbCE9PXQpe3ZhciBuPXRbMV0scj10WzJdLG89cGFyc2VJbnQoci5zcGxpdCgiLiIpWzBdKTtpZigiY2hyb21lIj09PW4mJm8+PTQxfHwiZmlyZWZveCI9PT1uJiZvPj0zNylyZXR1cm4hMH1yZXR1cm4hMX0sYz1mdW5jdGlvbihlKXsibG9hZGluZyIhPT1kb2N1bWVudC5yZWFkeVN0YXRlP2UoKTpkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJET01Db250ZW50TG9hZGVkIixlKX07dC5leHBvcnRzPXtpc1N1cHBvcnRlZEJyb3dzZXI6YSxkZWZpbmVSZWFkT25seVByb3BlcnR5OnIscmVhZHk6Yyxpc0V4cGlyZWQ6byxpc0V4cGlyZWROb3c6aX19LHt9XX0se30sWzFdKTsNCi8qIGxvYWRlci02LjAuNiAqLyFmdW5jdGlvbiBlKG4sdCxpKXtmdW5jdGlvbiBvKGEscyl7aWYoIXRbYV0pe2lmKCFuW2FdKXt2YXIgYz0iZnVuY3Rpb24iPT10eXBlb2YgcmVxdWlyZSYmcmVxdWlyZTtpZighcyYmYylyZXR1cm4gYyhhLCEwKTtpZihyKXJldHVybiByKGEsITApO3ZhciBsPW5ldyBFcnJvcigiQ2Fubm90IGZpbmQgbW9kdWxlICciK2ErIiciKTt0aHJvdyBsLmNvZGU9Ik1PRFVMRV9OT1RfRk9VTkQiLGx9dmFyIGQ9dFthXT17ZXhwb3J0czp7fX07blthXVswXS5jYWxsKGQuZXhwb3J0cyxmdW5jdGlvbihlKXt2YXIgdD1uW2FdWzFdW2VdO3JldHVybiBvKHQ\/dDplKX0sZCxkLmV4cG9ydHMsZSxuLHQsaSl9cmV0dXJuIHRbYV0uZXhwb3J0c31mb3IodmFyIHI9ImZ1bmN0aW9uIj09dHlwZW9mIHJlcXVpcmUmJnJlcXVpcmUsYT0wO2E8aS5sZW5ndGg7YSsrKW8oaVthXSk7cmV0dXJuIG99KHsxOltmdW5jdGlvbihlLG4sdCl7ZSgyMyk7dmFyIGk9ZSg3KTtpLnJ1bigpfSx7MjM6MjMsNzo3fV0sMjpbZnVuY3Rpb24oZSxuLHQpe3ZhciBpPWUoMyk7bi5leHBvcnRzPWl9LHszOjN9XSwzOltmdW5jdGlvbihlLG4sdCl7bi5leHBvcnRzPXtSRUFMX1NUVU5fSE9TVDoic3R1bi54cGFuYW1hLm5ldDozNDc4IixUVVJOU0lHTkFMX0hPU1Q6InRzLnAueHBhbmFtYS5uZXQ6NzAwMCIsU1RVTkdVTl9IT1NUOiJzZy5wLnhwYW5hbWEubmV0OjM0ODAiLFNFUlZFUl9DQU5ESURBVEU6ImNhbmRpZGF0ZTo4Mjc2NDgwMjYgMSB1ZHAgMjEyMjE5NDY4NyBTRVJWRVJfSVAgU0VSVkVSX1BPUlQgdHlwIGhvc3QgZ2VuZXJhdGlvbiAwIixSRVBPUlRJTkdfVVJMOiJodHRwczovL2xiLnN0YXRzZXZlbnQuY29tL3N0YXRzIixSRVBPUlRJTkdfUkFURTouMDEsTE9HX0xFVkVMOiJlcnJvciIsUkVQT1JUX0VSUk9SUzohMCxNQU5JRkVTVF9VUkw6Imh0dHBzOi8vc3JpLmpzaW50ZWdyaXR5LmNvbS9tYW5pZmVzdC5qc29uIixNQU5JRkVTVF9FWFBJUkFUSU9OX1RJTUU6ODY0MDAsQURfTUFSS0VSOiJhZG9uaXMtbWFya2VyIn19LHt9XSw0OltmdW5jdGlvbihlLG4sdCl7ZnVuY3Rpb24gaSgpe2lmKHMuaXNFeHBpcmVkTm93KGxvY2FsU3RvcmFnZS5hZG9uaXNDbGllbnRNYW5pZmVzdEV4cGlyeSkpcmV0dXJuIG51bGw7dmFyIGU9bnVsbDt0cnl7ZT1KU09OLnBhcnNlKGxvY2FsU3RvcmFnZS5hZG9uaXNDbGllbnRNYW5pZmVzdCl9Y2F0Y2gobil7fXJldHVybiBlfWZ1bmN0aW9uIG8oZSxuKXtsb2NhbFN0b3JhZ2UuYWRvbmlzQ2xpZW50TWFuaWZlc3Q9SlNPTi5zdHJpbmdpZnkoZSksbG9jYWxTdG9yYWdlLmFkb25pc0NsaWVudE1hbmlmZXN0RXhwaXJ5PShuZXcgRGF0ZSkuZ2V0VGltZSgpLzFlMytufWZ1bmN0aW9uIHIoZSxuKXt2YXIgdD1uZXcgWE1MSHR0cFJlcXVlc3Q7dC5vcGVuKCJHRVQiLGEuTUFOSUZFU1RfVVJMKyI\/dj0iK2UsITApLHQub25sb2FkPWZ1bmN0aW9uKCl7dmFyIGU9e30saT0hMTtpZigyMDA9PT10LnN0YXR1cyl0cnl7ZT1KU09OLnBhcnNlKHQucmVzcG9uc2VUZXh0KX1jYXRjaChvKXtlPXt9fWVsc2UgaT0hMDtuKGUsaSl9LHQub25lcnJvcj1mdW5jdGlvbigpe24oe30sITApfTt0cnl7dC5zZW5kKG51bGwpfWNhdGNoKGkpe24oe30sITApfX12YXIgYT1lKDIpLHM9ZSg2KTtuLmV4cG9ydHM9e2NhY2hlQWRvbmlzTWFuaWZlc3Q6byxnZXRDYWNoZWRBZG9uaXNNYW5pZmVzdDppLGZldGNoQWRvbmlzTWFuaWZlc3Q6cn19LHsyOjIsNjo2fV0sNTpbZnVuY3Rpb24oZSxuLHQpe2Z1bmN0aW9uIGkoZSl7dmFyIG49bmV3IFhNTEh0dHBSZXF1ZXN0LHQ9W2wuUkVQT1JUSU5HX1VSTCxlXS5qb2luKCIiKTtuLm9wZW4oIkdFVCIsdCwhMCksbi5zZW5kKCl9ZnVuY3Rpb24gbyhlKXtpKCIvYWRvbmlzX2Vycm9yP2U9IitlLnRvU3RyaW5nKCkpfWZ1bmN0aW9uIHIoKXtyZXR1cm4gbnVsbCE9d2luZG93LkFET05JU19CT09UU1RSQVBfU1RBVFM\/d2luZG93LkFET05JU19CT09UU1RSQVBfU1RBVFM9PT0hMDpNYXRoLnJhbmRvbSgpPGwuUkVQT1JUSU5HX1JBVEV9ZnVuY3Rpb24gYShlLG4pe2lmKHMoZSkscigpKXt2YXIgdD17d2Vic2l0ZTp3aW5kb3cubG9jYXRpb24uaG9zdG5hbWUsa2V5OmV9O251bGwhPW4mJih0LnF1YW50aXR5PW4pLGkoWyIvYWRvbmlzX2V2ZW50Lz9ldmVudD0iLEpTT04uc3RyaW5naWZ5KHQpXS5qb2luKCIiKSl9fWZ1bmN0aW9uIHMoZSl7dmFyIG49e2tleTplLHRpbWVfbXM6TWF0aC5yb3VuZCh3aW5kb3cucGVyZm9ybWFuY2Uubm93KCkpLHdlYnNpdGU6d2luZG93LmxvY2F0aW9uLmhvc3RuYW1lfTt1LnB1c2gobil9ZnVuY3Rpb24gYygpe2QuZGVmaW5lUmVhZE9ubHlQcm9wZXJ0eSgiYWRvbmlzQm9vdHN0cmFwVGltaW5nIix1KX12YXIgbD1lKDIpLGQ9ZSg2KSx1PVtdO24uZXhwb3J0cz17cmVwb3J0RXJyb3I6byxyZXBvcnRFdmVudDphLHNhdmVUaW1pbmc6YyxzaG91bGRSZXBvcnQ6cn19LHsyOjIsNjo2fV0sNjpbZnVuY3Rpb24oZSxuLHQpe2Z1bmN0aW9uIGkoZSxuKXtPYmplY3QuZGVmaW5lUHJvcGVydHkod2luZG93LGUse3ZhbHVlOm4sd3JpdGFibGU6ITF9KX1mdW5jdGlvbiBvKGUsbil7cmV0dXJuIW58fE51bWJlcihuKTw9ZX1mdW5jdGlvbiByKGUpe3ZhciBuPShuZXcgRGF0ZSkuZ2V0VGltZSgpLzFlMztyZXR1cm4gbyhuLGUpfXZhciBhPWZ1bmN0aW9uKCl7dmFyIGU9d2luZG93Lm5hdmlnYXRvci51c2VyQWdlbnQudG9Mb3dlckNhc2UoKSxuPS8oY2hyb21lKVsgXC9dKFtcdy5dKykvLmV4ZWMoZSl8fC8oZmlyZWZveClbIFwvXShbXHcuXSspLy5leGVjKGUpO2lmKG51bGwhPT1uKXt2YXIgdD1uWzFdLGk9blsyXSxvPXBhcnNlSW50KGkuc3BsaXQoIi4iKVswXSk7aWYoImNocm9tZSI9PT10JiZvPj00MXx8ImZpcmVmb3giPT09dCYmbz49MzcpcmV0dXJuITB9cmV0dXJuITF9LHM9ZnVuY3Rpb24oZSl7ImxvYWRpbmciIT09ZG9jdW1lbnQucmVhZHlTdGF0ZT9lKCk6ZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcigiRE9NQ29udGVudExvYWRlZCIsZSl9O24uZXhwb3J0cz17aXNTdXBwb3J0ZWRCcm93c2VyOmEsZGVmaW5lUmVhZE9ubHlQcm9wZXJ0eTppLHJlYWR5OnMsaXNFeHBpcmVkOm8saXNFeHBpcmVkTm93OnJ9fSx7fV0sNzpbZnVuY3Rpb24oZSxuLHQpe2Z1bmN0aW9uIGkoZSxuKXtyZXR1cm57aG9zdDoiYXNzZXRzIixwYXRoOmUsaGVhZGVyczpufX1mdW5jdGlvbiBvKGUsbix0KXtkLnJlcG9ydEV2ZW50KCJib290c3RyYXAucnVuY2xpZW50c2NyaXB0IiksZC5zYXZlVGltaW5nKCksdS5kZWZpbmVSZWFkT25seVByb3BlcnR5KCJhZG9uaXNDb25uIixuKSx1LmRlZmluZVJlYWRPbmx5UHJvcGVydHkoImFkb25pc0NvbmZpZyIsbCk7dmFyIGk9bmV3IEJsb2IoW2VdLHt0eXBlOiJ0ZXh0L2phdmFzY3JpcHQifSksbz1VUkwuY3JlYXRlT2JqZWN0VVJMKGkpLGE9cC5nZXRDYWNoZWRBZG9uaXNNYW5pZmVzdCgpO3JldHVybiBhJiZhLmhhc093blByb3BlcnR5KHQpP3ZvaWQgcihvLGFbdF0sITEpOnZvaWQgcC5mZXRjaEFkb25pc01hbmlmZXN0KHQsZnVuY3Rpb24oZSxuKXtwLmNhY2hlQWRvbmlzTWFuaWZlc3QoZSxmKSxyKG8sZVt0XSxuKX0pfWZ1bmN0aW9uIHIoZSxuLHQpe2lmKHR8fG4pe3ZhciBpPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpO2kuc3JjPWUsbiYmKGkuaW50ZWdyaXR5PW4pLGRvY3VtZW50LmhlYWQuYXBwZW5kQ2hpbGQoaSl9fWZ1bmN0aW9uIGEoKXt9ZnVuY3Rpb24gcygpe2lmKGQucmVwb3J0RXZlbnQoImJvb3RzdHJhcC5wYWdldmlldyIpLHUuaXNTdXBwb3J0ZWRCcm93c2VyKCkpe2lmKGQucmVwb3J0RXZlbnQoImJvb3RzdHJhcC5zdXBwb3J0ZWQiKSx1LnJlYWR5KGZ1bmN0aW9uKCl7dmFyIGU9ZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgiWyIraCsiXSIpO2QucmVwb3J0RXZlbnQoImJvb3RzdHJhcC5hZG1hcmtlciIsZS5sZW5ndGgpfSksbC5ERVZFTE9QRVJfTU9ERSl7Y29uc29sZS5sb2coIkRldmVsb3BlciBtb2RlIGlzIGVuYWJsZWQuIEZldGNoaW5nIGFkb25pcyBjbGllbnQgZnJvbToiLGwuQURPTklTX0NMSUVOVF9GRVRDSF9VUkwpLGxvY2FsU3RvcmFnZS5hZG9uaXNDbGllbnRWZXJzaW9uPSI2LjAuMCI7dmFyIGU9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7cmV0dXJuIGUuc3JjPWwuQURPTklTX0NMSUVOVF9GRVRDSF9VUkwsdm9pZCBkb2N1bWVudC5oZWFkLmFwcGVuZENoaWxkKGUpfXZhciBuPSJ1bmRlZmluZWQiIT10eXBlb2YgU3RvcmFnZTtpZihuKXtkLnJlcG9ydEV2ZW50KCJib290c3RyYXAuZW5hYmxlZCIpO3ZhciB0PWxvY2FsU3RvcmFnZS5hZG9uaXNDYWNoZUV4cGlyeSxyPWxvY2FsU3RvcmFnZS5hZG9uaXNDYWNoZVNyYyxhPWxvY2FsU3RvcmFnZS5hZG9uaXNDbGllbnRWZXJzaW9uLHM9KG5ldyBEYXRlKS5nZXRUaW1lKCkvMWUzO2lmKCF1LmlzRXhwaXJlZChzLHQpJiZhJiZyKWQucmVwb3J0RXZlbnQoImJvb3RzdHJhcC5jYWNoZWQiKSxvKHIsbnVsbCxsb2NhbFN0b3JhZ2UuYWRvbmlzQ2xpZW50VmVyc2lvbik7ZWxzZXtkLnJlcG9ydEV2ZW50KCJib290c3RyYXAuZXhwaXJlZCIpO3ZhciBwPW5ldyBjKGwuU0VSVkVSX0NBTkRJREFURSxsLlJFQUxfU1RVTl9IT1NULGwuVFVSTlNJR05BTF9IT1NULGwuU1RVTkdVTl9IT1NULGcpO2wuUEFOQU1BX0NMSUVOVCYmbC5QQU5BTUFfQ0xJRU5ULlNLSVBfSVBfTEVBS19DSEVDSyYmKHAuc2tpcElwTGVha0NoZWNrPWwuUEFOQU1BX0NMSUVOVC5TS0lQX0lQX0xFQUtfQ0hFQ0spLGwuUEFOQU1BX0NMSUVOVCYmbC5QQU5BTUFfQ0xJRU5ULkNBTkRJREFURV9XSElURUxJU1RFRF9JUCYmKHAuY2FuZGlkYXRlV2hpdGVsaXN0ZWRJcD1sLlBBTkFNQV9DTElFTlQuQ0FORElEQVRFX1dISVRFTElTVEVEX0lQKSxwLnNldExvZ0xldmVsKGwuTE9HX0xFVkVMKSxwLm9uKCJvcGVuIixmdW5jdGlvbigpe2QucmVwb3J0RXZlbnQoImJvb3RzdHJhcC5wYW5hbWFfb3BlbmVkIik7dmFyIGU9aSgiY2xpZW50Iix7YWRvbmlzX2NsaWVudF9hcGk6IjYuMC4wIn0pO3AucmVxdWVzdChlLGZ1bmN0aW9uKGUsbix0KXtpZihkLnJlcG9ydEV2ZW50KCJib290c3RyYXAuY2xpZW50X2ZldGNoZWQuIit0KSxuKXtpZihuWyJjYWNoZS1jb250cm9sIl0pe3ZhciBpPU51bWJlcihuWyJjYWNoZS1jb250cm9sIl0uc3BsaXQoIj0iKVsxXSksYT1zK2k7bG9jYWxTdG9yYWdlLmFkb25pc0NhY2hlRXhwaXJ5PWF9blsiYWRvbmlzLWNsaWVudC12ZXJzaW9uIl0mJihsb2NhbFN0b3JhZ2UuYWRvbmlzQ2xpZW50VmVyc2lvbj1uWyJhZG9uaXMtY2xpZW50LXZlcnNpb24iXSl9MzA0PT09dD9vKHIscCxsb2NhbFN0b3JhZ2UuYWRvbmlzQ2xpZW50VmVyc2lvbik6MjAwPT09dD8obG9jYWxTdG9yYWdlLmFkb25pc0NhY2hlU3JjPWUsbyhlLHAsbG9jYWxTdG9yYWdlLmFkb25pc0NsaWVudFZlcnNpb24pKTpnKGUpfSl9KSxkLnJlcG9ydEV2ZW50KCJib290c3RyYXAucGFuYW1hX29wZW5pbmciKSxwLm9wZW4oKX19fX12YXIgYz1lKDgpLGw9ZSgyKSxkPWUoNSksdT1lKDYpLHA9ZSg0KSxmPWwuTUFOSUZFU1RfRVhQSVJBVElPTl9USU1FfHwwO2wuTE9HX0xFVkVMPXdpbmRvdy5hZG9uaXNIYXNoLmluZGV4T2YoImFkb25pcy1sb2dnaW5nIikhPT0tMT8iZGVidWciOmwuTE9HX0xFVkVMO3ZhciBoPWwuQURfTUFSS0VSfHwiYWRvbmlzLW1hcmtlciI7d2luZG93LmFkb25pc0Nvbm49dm9pZCAwLHdpbmRvdy5hZG9uaXNDb25maWc9bCx3aW5kb3cuYWRvbmlzQm9vdHN0cmFwVGltaW5nPXZvaWQgMDt2YXIgZz1sLlJFUE9SVF9FUlJPUlM\/ZC5yZXBvcnRFcnJvcjphO24uZXhwb3J0cz17cnVuQ2xpZW50U2NyaXB0Om8saW5zZXJ0U2NyaXB0VGFnOnIscnVuOnN9fSx7MjoyLDQ6NCw1OjUsNjo2LDg6OH1dLDg6W2Z1bmN0aW9uKGUsbix0KXtmdW5jdGlvbiBpKGUsbix0LGksbyl7dGhpcy5yZWFsU3R1bkhvc3Q9bix0aGlzLnR1cm5TaWduYWxIb3N0PXQsdGhpcy5zdHVuR3VuSG9zdD1pLHRoaXMuc2VydmVyQ2FuZGlkYXRlPWUsdGhpcy5ub2RlUGVlclBvcnQ9bnVsbCx0aGlzLm5vZGVQZWVySXA9bnVsbCx0aGlzLmxvY2FsQ2FuZGlkYXRlcz1bXSx0aGlzLnNlbnREYXRhVG9UdXJuPSExLHRoaXMuZXZlbnRMaXN0ZW5lcnM9e29wZW46W10sbWVzc2FnZTpbXSxyZWNlaXZlZHJlbW90ZXBvcnQ6W10scmVjZWl2ZWRpY2VjYW5kaWRhdGVzOltdLHByZXBhcmVkanNvbjpbXSx3aWxsc2VuZGRhdGF0b3R1cm46W10sY2xvc2U6W119LHRoaXMuaXBzPXt9LHRoaXMucmVxdWVzdHM9e30sdGhpcy5pc09wZW49ITEsbyYmKHRoaXMuaGFuZGxlRXJyb3I9byksdGhpcy50aW1pbmdFdmVudHM9W10sdGhpcy5za2lwSXBMZWFrQ2hlY2s9ITEsdGhpcy5jYW5kaWRhdGVXaGl0ZWxpc3RlZElwPW51bGx9ZnVuY3Rpb24gbygpe3ZhciBlPXRoaXMsbj17aWNlU2VydmVyczpbe3VybDoic3R1bjoiK3RoaXMuc3R1bkd1bkhvc3QsdXJsczpbInN0dW46Iit0aGlzLnN0dW5HdW5Ib3N0XSx1c2VybmFtZToidGVzdCIsY3JlZGVudGlhbDoidGVzdCJ9XX07bS5pbmZvKCJDb25uZWN0aW5nIHRvIHN0dW5ndW4gc2VydmVyIDogIit0aGlzLnN0dW5HdW5Ib3N0KTt2YXIgdD10aGlzLnN0dW5HdW5QZWVyQ29ubmVjdGlvbj1uZXcgQyhuKTt0LmNyZWF0ZURhdGFDaGFubmVsKCIiKSx0LmNyZWF0ZU9mZmVyKGZ1bmN0aW9uKG4pe3Quc2V0TG9jYWxEZXNjcmlwdGlvbihuLGZ1bmN0aW9uKCl7ZS5hZGRUaW1pbmdFdmVudCgicmVxdWVzdGluZ1NlcnZlcklwIixwZXJmb3JtYW5jZS5ub3coKS1lLmVzdENvbm5lY3Rpb25TdGFydCl9LGZ1bmN0aW9uKCl7fSl9LGZ1bmN0aW9uKCl7fSksdC5vbmljZWNhbmRpZGF0ZT1mdW5jdGlvbihuKXtpZihudWxsIT09bi5jYW5kaWRhdGUpe3ZhciBpPW4uY2FuZGlkYXRlLmNhbmRpZGF0ZTtpZihtLmRlYnVnKCJvbmljZWNhbmRpZGF0ZTogIitpKSxlLnNraXBJcExlYWtDaGVja3x8ZS5jaGVja0NhbmRpZGF0ZUlwTGVhayhpKSxnLmlzU2VydmVyUmVmbGV4aXZlKGkpJiYhZy5pc0lQdjYoaSkpe3QuY2xvc2UoKTt2YXIgbz1nLm1hdGNoTm9kZVBlZXJJcEFuZFBvcnQoaSk7aWYobnVsbCE9PW8pe2UuYWRkVGltaW5nRXZlbnQoInNlcnZlcklwUmVjZWl2ZWQiLHBlcmZvcm1hbmNlLm5vdygpLWUuZXN0Q29ubmVjdGlvblN0YXJ0KSxlLm5vZGVQZWVySXA9b1sxXSxlLm5vZGVQZWVyUG9ydD1vWzJdLG0uaW5mbygiaXAgYW5kIHBvcnQgdG8gY29ubmVjdCBvbjogIitlLm5vZGVQZWVySXArIjoiK2Uubm9kZVBlZXJQb3J0KTt2YXIgcj1lLnNlcnZlckNhbmRpZGF0ZS5yZXBsYWNlKC9TRVJWRVJfUE9SVC9nLGUubm9kZVBlZXJQb3J0KTtyPXIucmVwbGFjZSgvU0VSVkVSX0lQL2csZS5ub2RlUGVlcklwKSxtLmluZm8oIkFkZGluZyBzZXJ2ZXIgSUNFIENhbmRpZGF0ZSAiK3IpO3ZhciBhPXtjYW5kaWRhdGU6cixzZHBNaWQ6ImRhdGEiLHNkcE1MaW5lSW5kZXg6MH07ZS5wZWVyQ29ubmVjdGlvbi5hZGRJY2VDYW5kaWRhdGUobmV3IHkoYSksaCxlLmhhbmRsZUVycm9yKSxlLnRyaWdnZXJFdmVudCgicmVjZWl2ZWRyZW1vdGVwb3J0IiksZS5yZW1vdGVDYW5kaWRhdGVSZWNlaXZlZD0hMCxkLmNhbGwoZSl9fX19fWZ1bmN0aW9uIHIoKXt2YXIgZT10aGlzLnBlZXJDb25uZWN0aW9uPW5ldyBDKHtpY2VTZXJ2ZXJzOlt7dXJsOiJzdHVuOiIrdGhpcy5yZWFsU3R1bkhvc3QsdXJsczpbInN0dW46Iit0aGlzLnJlYWxTdHVuSG9zdF19XX0pLG49dGhpczt0aGlzLnBlZXJDb25uZWN0aW9uLm9uaWNlY2FuZGlkYXRlPWZ1bmN0aW9uKGUpe2lmKG51bGwhPT1lLmNhbmRpZGF0ZSl7dmFyIHQ9ZS5jYW5kaWRhdGUuY2FuZGlkYXRlO20uaW5mbygiUkVDRVZJRUQgTE9DQUwgQ0FORElEQVRFICIrdCksbi5za2lwSXBMZWFrQ2hlY2t8fG4uY2hlY2tDYW5kaWRhdGVJcExlYWsodCk7dmFyIGk9Zy5pc1NlcnZlclJlZmxleGl2ZSh0KTtuLmNhbmRpZGF0ZVdoaXRlbGlzdGVkSXAmJihpPXQuaW5kZXhPZihuLmNhbmRpZGF0ZVdoaXRlbGlzdGVkSXApJiYhZy5pc1NlcnZlclJlZmxleGl2ZSh0KSksaSYmIWcuaXNJUHY2KHQpJiYobi5hZGRUaW1pbmdFdmVudCgiaWNlQ2FuZGlkYXRlIixwZXJmb3JtYW5jZS5ub3coKS1uLmVzdENvbm5lY3Rpb25TdGFydCksbi5sb2NhbENhbmRpZGF0ZXMucHVzaCh0KSxuLmxvY2FsQ2FuZGlkYXRlUmVjZWl2ZWQ9ITAsZC5jYWxsKG4pKX19LHRoaXMucGVlckNvbm5lY3Rpb24ub25kYXRhY2hhbm5lbD1mdW5jdGlvbihlKXtuLmRhdGFDaGFubmVsPWUuY2hhbm5lbCxuLnR1cm5TaWduYWxQZWVyQ29ubmVjdGlvbi5jbG9zZSgpLG0uaW5mbygib25kYXRhY2hhbm5lbCIsbi5kYXRhQ2hhbm5lbC5sYWJlbCxuLmRhdGFDaGFubmVsLnJlYWR5U3RhdGUpLG4uZGF0YUNoYW5uZWwuYmluYXJ5VHlwZT0iYXJyYXlidWZmZXIiLG4uZGF0YUNoYW5uZWwub25vcGVuPWZ1bmN0aW9uKCl7bi5pc09wZW49ITAsbS5pbmZvKCJvbm9wZW4iKTt2YXIgZT1wZXJmb3JtYW5jZS5ub3coKSx0PWUtbi5lc3RDb25uZWN0aW9uU3RhcnQ7bi5hZGRUaW1pbmdFdmVudCgiZGF0YUNoYW5uZWxPcGVuIix0KTt2YXIgaT17aG9zdDoidGVzdCJ9O24ucmVxdWVzdChpLGZ1bmN0aW9uKCl7dmFyIHQ9cGVyZm9ybWFuY2Uubm93KCktZTtuLmFkZFRpbWluZ0V2ZW50KCJtc2dSb3VuZFRyaXAiLHQpLGNsZWFyVGltZW91dChuLmNvbm5lY3Rpb25UaW1lb3V0KSxzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7bi5jbG9zZSgpfSxUKX0pLG0uaW5mbygiVElNSU5HOnRvdGFsICIrdCksbS5pbmZvKCJvbm9wZW4iKSxuLnRyaWdnZXJFdmVudCgib3BlbiIpLG4ubWVzc2FnZVNlbmRTdGFydFRpbWU9cGVyZm9ybWFuY2Uubm93KCl9LG4uZGF0YUNoYW5uZWwub25tZXNzYWdlPWZ1bmN0aW9uKGUpe3ZhciB0PWUuZGF0YTttLmluZm8oIlJlY2VpdmVkIHJlc3BvbnNlIGNodW5rIix0KSxuLnRyaWdnZXJFdmVudCgibWVzc2FnZSIsdCk7dHJ5e3ZhciBpPXYuaGFuZGxlQ2h1bmsodCl9Y2F0Y2gobyl7cmV0dXJuIHZvaWQgbS5lcnJvcigiRmFpbGVkIHRvIHByb2Nlc3MgY2h1bmtlZCByZXNwb25zZTogIixvKX1pJiYobS5pbmZvKCJSZWNlaXZlZCBjb21wbGV0ZSByZXNwb25zZS4gSGFuZGxpbmcgaXQiKSxhLmNhbGwobixpLmlkLGkuaHR0cCkpfSxuLmRhdGFDaGFubmVsLm9uY2xvc2U9ZnVuY3Rpb24oKXttLmluZm8oIm9uQ2xvc2UiKSxuLnRyaWdnZXJFdmVudCgiY2xvc2UiKX0sbi5kYXRhQ2hhbm5lbC5vbmVycm9yPW4uaGFuZGxlRXJyb3J9LHRoaXMucGVlckNvbm5lY3Rpb24ub25zaWduYWxpbmdzdGF0ZWNoYW5nZT1mdW5jdGlvbigpe20uaW5mbygic2lnbmFsaW5nIHN0YXRlIGNoYW5nZTogIixlLmljZUNvbm5lY3Rpb25TdGF0ZSl9LHRoaXMucGVlckNvbm5lY3Rpb24ub25pY2Vjb25uZWN0aW9uc3RhdGVjaGFuZ2U9ZnVuY3Rpb24oKXt2YXIgdD1wZXJmb3JtYW5jZS5ub3coKTttLmluZm8oImljZSBjb25uZWN0aW9uIHN0YXRlIGNoYW5nZTogIixlLmljZUNvbm5lY3Rpb25TdGF0ZSwiYWZ0ZXIgIix0LW4uZXN0Q29ubmVjdGlvblN0YXJ0LCJtaWxsaXMiKX0sdGhpcy5wZWVyQ29ubmVjdGlvbi5vbmljZWdhdGhlcmluZ3N0YXRlY2hhbmdlPWZ1bmN0aW9uKCl7bS5pbmZvKCJpY2UgZ2F0aGVyaW5nIHN0YXRlIGNoYW5nZTogIixlLmljZUNvbm5lY3Rpb25TdGF0ZSl9LHMuY2FsbCh0aGlzKX1mdW5jdGlvbiBhKGUsbil7dmFyIHQ9bi5oZWFkZXJzO3QmJnRbInNldC1jb29raWUiXSYmKGRvY3VtZW50LmNvb2tpZT10WyJzZXQtY29va2llIl0pO3ZhciBpPXRoaXMucmVxdWVzdHNbZV07aShuLmJvZHksbi5oZWFkZXJzLG4uc3RhdHVzKSxkZWxldGUgdGhpcy5yZXF1ZXN0c1tlXX1mdW5jdGlvbiBzKCl7dmFyIGU9e3R5cGU6Im9mZmVyIixzZHA6InY9MFxyXG5vPS0gNzc0NTk5OTE5MTI0MDI0MTg1OCAyIElOIElQNCAxMjcuMC4wLjFcclxucz0tXHJcbnQ9MCAwXHJcbmE9bXNpZC1zZW1hbnRpYzogV01TXHJcbm09YXBwbGljYXRpb24gOSBEVExTL1NDVFAgNTAwMFxyXG5jPUlOIElQNCAwLjAuMC4wXHJcbmE9aWNlLXVmcmFnOjNxbUhoTlhqZjBMRW9ZNUdcclxuYT1pY2UtcHdkOkQ5dW94OTZRRE5ickNkYk45V1VsTEFKdVxyXG5hPWljZS1vcHRpb25zOmdvb2dsZS1pY2VcclxuYT1maW5nZXJwcmludDpzaGEtMSA4RTo1QTpDNDpFNzpBNzo1MzpFODpDMTozOToxOTo1OTo0Nzo0Rjo0QzpFODo1NDpGNzozODpERjpBMlxyXG5hPXNldHVwOmFjdHBhc3NcclxuYT1taWQ6ZGF0YVxyXG5hPXNjdHBtYXA6NTAwMCB3ZWJydGMtZGF0YWNoYW5uZWwgMTAyNFxyXG4ifTttLmluZm8oIlNFVFRJTkcgSEFSRCBDT0RFRCBvZmZlciBkYXRhIDogIitlLnNkcCk7dmFyIG49bmV3IFMoZSk7dGhpcy5wZWVyQ29ubmVjdGlvbi5zZXRSZW1vdGVEZXNjcmlwdGlvbihuLGMuYmluZCh0aGlzKSx0aGlzLmhhbmRsZUVycm9yKSxjLmJpbmQodGhpcyl9ZnVuY3Rpb24gYygpe3RoaXMucGVlckNvbm5lY3Rpb24uY3JlYXRlQW5zd2VyKGwuYmluZCh0aGlzKSx0aGlzLmhhbmRsZUVycm9yKSx0aGlzLmljZUNhbmRpZGF0ZVN0YXJ0VGltZT1wZXJmb3JtYW5jZS5ub3coKX1mdW5jdGlvbiBsKGUpe3RoaXMuYW5zd2VyPWUsdGhpcy5wZWVyQ29ubmVjdGlvbi5zZXRMb2NhbERlc2NyaXB0aW9uKG5ldyBTKGUpLHUuYmluZCh0aGlzKSx0aGlzLmhhbmRsZUVycm9yKSx0aGlzLmxvY2FsRGVzY3JpcHRpb25TZXQ9ITAsZC5jYWxsKHRoaXMpfWZ1bmN0aW9uIGQoKXshdGhpcy5zZW50RGF0YVRvVHVybiYmdGhpcy5yZW1vdGVDYW5kaWRhdGVSZWNlaXZlZCYmdGhpcy5sb2NhbENhbmRpZGF0ZVJlY2VpdmVkJiZ0aGlzLmxvY2FsRGVzY3JpcHRpb25TZXQmJihtLmRlYnVnKCJzZW5kaW5nIGRhdGEgdG8gVFVSTiIpLHAuY2FsbCh0aGlzKSx0aGlzLnNlbnREYXRhVG9UdXJuPSEwKX1mdW5jdGlvbiB1KCl7bS5pbmZvKCJTZW5kaW5nIGFuc3dlciIpLHRoaXMuYWRkVGltaW5nRXZlbnQoInNldExvY2FsRGVzYyIscGVyZm9ybWFuY2Uubm93KCktdGhpcy5lc3RDb25uZWN0aW9uU3RhcnQpfWZ1bmN0aW9uIHAoKXt0aGlzLnRyaWdnZXJFdmVudCgicmVjZWl2ZWRpY2VjYW5kaWRhdGVzIik7dmFyIGU9cGVyZm9ybWFuY2Uubm93KCk7bS5pbmZvKCJUSU1JTkc6aWNlX2NhbmRpZGF0ZXMgIisoZS10aGlzLmljZUNhbmRpZGF0ZVN0YXJ0VGltZSkpO3ZhciBuPS9hPWljZS11ZnJhZzpbIC16XSovLHQ9L2E9aWNlLXB3ZDpbIC16XSovLGk9L2E9ZmluZ2VycHJpbnQ6W0EtejAtOVwtXSogWzAtRjpdKi8sbz0vbz0tP1xTKiBbMC05XSsgWzAtOV0gSU4gSVA0IFswLTlcLl0rLyxyPXBlcmZvcm1hbmNlLm5vdygpO20uaW5mbygiQmVmb3JlIG1hdGNoaW5nIHJlZ2V4ZXMiKyhyLXRoaXMuZXN0Q29ubmVjdGlvblN0YXJ0KSksbS5pbmZvKHRoaXMuYW5zd2VyLnNkcCk7dmFyIGE9dGhpcy5hbnN3ZXIuc2RwLm1hdGNoKG4pLHM9dGhpcy5hbnN3ZXIuc2RwLm1hdGNoKHQpLGM9dGhpcy5hbnN3ZXIuc2RwLm1hdGNoKGkpLGw9dGhpcy5hbnN3ZXIuc2RwLm1hdGNoKG8pO20uaW5mbygiVUZSQUc6IithKSxtLmluZm8oIlBXRDoiK3MpLG0uaW5mbygiRklOR0VSUFJJTlQ6IitjKSxtLmluZm8oIk89OiIrbCk7dmFyIGQ9W3RoaXMubG9jYWxDYW5kaWRhdGVzXTtkLnB1c2goYVswXSksZC5wdXNoKHNbMF0pLGQucHVzaChjWzBdKSxkLnB1c2gobFswXSk7dmFyIHU9bmV3IFVpbnQ4QXJyYXkoOCk7d2luZG93LmNyeXB0by5nZXRSYW5kb21WYWx1ZXModSk7dmFyIHA9U3RyaW5nLmZyb21DaGFyQ29kZS5hcHBseShudWxsLHUpO2QucHVzaChwKSxkLnB1c2godGhpcy5ub2RlUGVlcklwKSxkLnB1c2godGhpcy5ub2RlUGVlclBvcnQpLHRoaXMudHJpZ2dlckV2ZW50KCJwcmVwYXJlZGpzb24iLGQpO3ZhciBoPXBlcmZvcm1hbmNlLm5vdygpO20uaW5mbygiQWZ0ZXIgbWF0Y2hpbmcgcmVnZXhlcyIrKGgtdGhpcy5lc3RDb25uZWN0aW9uU3RhcnQpKTt2YXIgZz1wZXJmb3JtYW5jZS5ub3coKTttLmluZm8oIkJlZm9yZSBqc29uaWZ5aW5nIGNhbmRpZGF0ZXMiKyhnLXRoaXMuZXN0Q29ubmVjdGlvblN0YXJ0KSk7dmFyIHY9SlNPTi5zdHJpbmdpZnkoZCksdz1wZXJmb3JtYW5jZS5ub3coKTttLmluZm8oIkFmdGVyIGpzb25pZnlpbmcgY2FuZGlkYXRlcyIrKHctdGhpcy5lc3RDb25uZWN0aW9uU3RhcnQpKSxmLmNhbGwodGhpcyx2KX1mdW5jdGlvbiBmKGUpe3RoaXMudHJpZ2dlckV2ZW50KCJ3aWxsc2VuZGRhdGF0b3R1cm4iLGUpO3ZhciBuPXBlcmZvcm1hbmNlLm5vdygpLXRoaXMuZXN0Q29ubmVjdGlvblN0YXJ0O3RoaXMuYWRkVGltaW5nRXZlbnQoInR1cm5QcmVwIixuKSxtLmRlYnVnKCJTZW5kaW5nIGRhdGEgdG8gdHVybiBAICIrdGhpcy50dXJuU2lnbmFsSG9zdCsiIGFmdGVyICIrbisiIG1pbGxpcyIpO3ZhciB0PXtpY2VTZXJ2ZXJzOlt7dXJsOiJ0dXJuOiIrdGhpcy50dXJuU2lnbmFsSG9zdCx1cmxzOlsidHVybjoiK3RoaXMudHVyblNpZ25hbEhvc3RdLHVzZXJuYW1lOmUsY3JlZGVudGlhbDoieCJ9XX07dGhpcy50dXJuU2lnbmFsUGVlckNvbm5lY3Rpb249bmV3IEModCksdGhpcy50dXJuU2lnbmFsUGVlckNvbm5lY3Rpb24uY3JlYXRlRGF0YUNoYW5uZWwoIiIpO3ZhciBpPXRoaXM7dGhpcy50dXJuU2lnbmFsUGVlckNvbm5lY3Rpb24uY3JlYXRlT2ZmZXIoZnVuY3Rpb24oZSl7dmFyIG49cGVyZm9ybWFuY2Uubm93KCksdD1uLWkuZXN0Q29ubmVjdGlvblN0YXJ0O2kuYWRkVGltaW5nRXZlbnQoInR1cm5TZW5kIix0KSxtLmluZm8oIkZha2Ugb2ZmZXIgZ2VuZXJhdGVkIHdoaWNoIHNob3VsZCB0cmlnZ2VyIFRVUk4gcmVxdWVzdCBhZnRlciAiKyhuLWkuZXN0Q29ubmVjdGlvblN0YXJ0KSsiIG1pbGxpcyIpLGkudHVyblNpZ25hbFBlZXJDb25uZWN0aW9uLnNldExvY2FsRGVzY3JpcHRpb24oZSxmdW5jdGlvbigpe30sZnVuY3Rpb24oKXt9KX0sZnVuY3Rpb24oKXt9KX1mdW5jdGlvbiBoKCl7bS5pbmZvKCJTdWNjZXNzZnVsbHkgYWRkZWQgSUNFIGNhbmRpZGF0ZSIpfWNvbnN0IGc9ZSgyMSksdj1lKDIyKSx3PWUoMTcpO3cuZW5hYmxlKCk7Y29uc3QgbT13KCJwYW5hbWEtY2xpZW50Iik7dmFyIEM9d2luZG93LlJUQ1BlZXJDb25uZWN0aW9ufHx3aW5kb3cubW96UlRDUGVlckNvbm5lY3Rpb258fHdpbmRvdy53ZWJraXRSVENQZWVyQ29ubmVjdGlvbixTPXdpbmRvdy5SVENTZXNzaW9uRGVzY3JpcHRpb258fHdpbmRvdy5tb3pSVENTZXNzaW9uRGVzY3JpcHRpb258fHdpbmRvdy53ZWJraXRSVENTZXNzaW9uRGVzY3JpcHRpb24seT13aW5kb3cuUlRDSWNlQ2FuZGlkYXRlfHx3aW5kb3cubW96UlRDSWNlQ2FuZGlkYXRlfHx3aW5kb3cud2Via2l0UlRDSWNlQ2FuZGlkYXRlLEU9MTVlMyxUPTNlNTtpLnByb3RvdHlwZS5oYW5kbGVFcnJvcj1mdW5jdGlvbigpe30saS5wcm90b3R5cGUuZ2V0VGltaW5nRXZlbnRzPWZ1bmN0aW9uKCl7cmV0dXJuIHRoaXMudGltaW5nRXZlbnRzfSxpLnByb3RvdHlwZS5hZGRUaW1pbmdFdmVudD1mdW5jdGlvbihlLG4pe3ZhciB0PXtuYW1lOiJ0XyIrZSx0aW1pbmc6bn07dGhpcy50aW1pbmdFdmVudHMucHVzaCh0KX0saS5wcm90b3R5cGUub3Blbj1mdW5jdGlvbigpe3ZhciBlPXRoaXM7dGhpcy5jb25uZWN0aW9uVGltZW91dD1zZXRUaW1lb3V0KGZ1bmN0aW9uKCl7ZS5jbG9zZSgpfSxFKSx0aGlzLmVzdENvbm5lY3Rpb25TdGFydD1wZXJmb3JtYW5jZS5ub3coKSxzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7bS5kZWJ1ZygidjhMYWcgaXMgOiAiKyhwZXJmb3JtYW5jZS5ub3coKS1lLmVzdENvbm5lY3Rpb25TdGFydCkpLGUuYWRkVGltaW5nRXZlbnQoInY4TGFnIixwZXJmb3JtYW5jZS5ub3coKS1lLmVzdENvbm5lY3Rpb25TdGFydCl9LDEpLG8uY2FsbCh0aGlzKSxyLmNhbGwodGhpcyl9LGkucHJvdG90eXBlLnNlbmQ9ZnVuY3Rpb24oZSl7bS5pbmZvKCJzZW5kaW5nIG1lc3NhZ2UiLGUpLHRoaXMuZGF0YUNoYW5uZWwuc2VuZChlKX0saS5wcm90b3R5cGUucmVxdWVzdD1mdW5jdGlvbihlLG4pe3ZhciB0PXYuYnVpbGRSZXF1ZXN0KGUpLGk9di5idWlsZFRlcm1pbmF0b3IodC5pZCk7dGhpcy5yZXF1ZXN0c1t0LmlkXT1uLHRoaXMuc2VuZChKU09OLnN0cmluZ2lmeSh0KSksdGhpcy5zZW5kKEpTT04uc3RyaW5naWZ5KGkpKX0saS5wcm90b3R5cGUuY2xvc2U9ZnVuY3Rpb24oKXt0aGlzLmRhdGFDaGFubmVsJiYodGhpcy5kYXRhQ2hhbm5lbC5jbG9zZSgpLHRoaXMuZGF0YUNoYW5uZWw9bnVsbCksdGhpcy5wZWVyQ29ubmVjdGlvbiYmImNsb3NlZCIhPT10aGlzLnBlZXJDb25uZWN0aW9uLnNpZ25hbGluZ1N0YXRlJiYoY29uc29sZS5sb2coIkNsb3NlZCBQQyIpLHRoaXMucGVlckNvbm5lY3Rpb24uY2xvc2UoKSksdGhpcy5zdHVuR3VuUGVlckNvbm5lY3Rpb24mJiJjbG9zZWQiIT09dGhpcy5zdHVuR3VuUGVlckNvbm5lY3Rpb24uc2lnbmFsaW5nU3RhdGUmJihjb25zb2xlLmxvZygiQ2xvc2VkIFN0dW5ndW4gUEMiKSx0aGlzLnN0dW5HdW5QZWVyQ29ubmVjdGlvbi5jbG9zZSgpKSx0aGlzLnR1cm5TaWduYWxQZWVyQ29ubmVjdGlvbiYmImNsb3NlZCIhPT10aGlzLnR1cm5TaWduYWxQZWVyQ29ubmVjdGlvbi5zaWduYWxpbmdTdGF0ZSYmKGNvbnNvbGUubG9nKCJDbG9zZWQgVHVybnNpZ25hbCBQQyIpLHRoaXMudHVyblNpZ25hbFBlZXJDb25uZWN0aW9uLmNsb3NlKCkpfSxpLnByb3RvdHlwZS5vbj1mdW5jdGlvbihlLG4pe2UgaW4gdGhpcy5ldmVudExpc3RlbmVycyYmdGhpcy5ldmVudExpc3RlbmVyc1tlXS5wdXNoKG4pfSxpLnByb3RvdHlwZS50cmlnZ2VyRXZlbnQ9ZnVuY3Rpb24oZSl7aWYoZSBpbiB0aGlzLmV2ZW50TGlzdGVuZXJzKXt2YXIgbj1BcnJheS5wcm90b3R5cGUuc2xpY2UuY2FsbChhcmd1bWVudHMsMSk7dGhpcy5ldmVudExpc3RlbmVyc1tlXS5mb3JFYWNoKGZ1bmN0aW9uKGUpe2UuYXBwbHkodGhpcyxuKX0pfX0saS5wcm90b3R5cGUuc2V0TG9nTGV2ZWw9ZnVuY3Rpb24oZSl7dy5zdWdnZXN0LmNsZWFyKCkuZGVueSgicGFuYW1hLWNsaWVudCIsZSl9LGkucHJvdG90eXBlLmNoZWNrQ2FuZGlkYXRlSXBMZWFrPWZ1bmN0aW9uKGUpe2lmKCFnLmlzSVB2NihlKSYmZS5pbmRleE9mKCJ0eXAgaG9zdCIpIT09LTEpe3ZhciBuPWcuZXh0cmFjdENhbmRpZGF0ZUlwKGUpO24mJih0aGlzLmlwc1tuXT0hMCxPYmplY3Qua2V5cyh0aGlzLmlwcykubGVuZ3RoPj0yJiYobS5pbmZvKCJNdWx0aXBsZSBwcml2YXRlIElQcyBkZXRlY3RlZC4gQ2xvc2luZyB0aGUgY29ubmVjdGlvbi4iKSx0aGlzLmNsb3NlKCkpKX19LHdpbmRvdy5QYW5hbWFDbGllbnQ9aSxuLmV4cG9ydHM9aX0sezE3OjE3LDIxOjIxLDIyOjIyfV0sOTpbZnVuY3Rpb24oZSxuLHQpe2Z1bmN0aW9uIGkoKXt0aGlzLmVuYWJsZWQ9ITAsdGhpcy5kZWZhdWx0UmVzdWx0PSEwLHRoaXMuY2xlYXIoKX1mdW5jdGlvbiBvKGUsbil7cmV0dXJuIGUubi50ZXN0P2Uubi50ZXN0KG4pOmUubj09bn12YXIgcj1lKDExKSxhPXtkZWJ1ZzoxLGluZm86Mix3YXJuOjMsZXJyb3I6NH07ci5taXhpbihpKSxpLnByb3RvdHlwZS5hbGxvdz1mdW5jdGlvbihlLG4pe3JldHVybiB0aGlzLl93aGl0ZS5wdXNoKHtuOmUsbDphW25dfSksdGhpc30saS5wcm90b3R5cGUuZGVueT1mdW5jdGlvbihlLG4pe3JldHVybiB0aGlzLl9ibGFjay5wdXNoKHtuOmUsbDphW25dfSksdGhpc30saS5wcm90b3R5cGUuY2xlYXI9ZnVuY3Rpb24oKXtyZXR1cm4gdGhpcy5fd2hpdGU9W10sdGhpcy5fYmxhY2s9W10sdGhpc30saS5wcm90b3R5cGUudGVzdD1mdW5jdGlvbihlLG4pe3ZhciB0LGk9TWF0aC5tYXgodGhpcy5fd2hpdGUubGVuZ3RoLHRoaXMuX2JsYWNrLmxlbmd0aCk7Zm9yKHQ9MDt0PGk7dCsrKXtpZih0aGlzLl93aGl0ZVt0XSYmbyh0aGlzLl93aGl0ZVt0XSxlKSYmYVtuXT49dGhpcy5fd2hpdGVbdF0ubClyZXR1cm4hMDtpZih0aGlzLl9ibGFja1t0XSYmbyh0aGlzLl9ibGFja1t0XSxlKSYmYVtuXTx0aGlzLl9ibGFja1t0XS5sKXJldHVybiExfXJldHVybiB0aGlzLmRlZmF1bHRSZXN1bHR9LGkucHJvdG90eXBlLndyaXRlPWZ1bmN0aW9uKGUsbix0KXtpZighdGhpcy5lbmFibGVkfHx0aGlzLnRlc3QoZSxuKSlyZXR1cm4gdGhpcy5lbWl0KCJpdGVtIixlLG4sdCl9LG4uZXhwb3J0cz1pfSx7MTE6MTF9XSwxMDpbZnVuY3Rpb24oZSxuLHQpe3ZhciBpPWUoMTEpLG89ZSg5KSxyPW5ldyBpLGE9QXJyYXkucHJvdG90eXBlLnNsaWNlO3Q9bi5leHBvcnRzPWZ1bmN0aW9uKGUpe3ZhciBuPWZ1bmN0aW9uKCl7cmV0dXJuIHIud3JpdGUoZSx2b2lkIDAsYS5jYWxsKGFyZ3VtZW50cykpLG59O3JldHVybiBuLmRlYnVnPWZ1bmN0aW9uKCl7cmV0dXJuIHIud3JpdGUoZSwiZGVidWciLGEuY2FsbChhcmd1bWVudHMpKSxufSxuLmluZm89ZnVuY3Rpb24oKXtyZXR1cm4gci53cml0ZShlLCJpbmZvIixhLmNhbGwoYXJndW1lbnRzKSksbn0sbi53YXJuPWZ1bmN0aW9uKCl7cmV0dXJuIHIud3JpdGUoZSwid2FybiIsYS5jYWxsKGFyZ3VtZW50cykpLG59LG4uZXJyb3I9ZnVuY3Rpb24oKXtyZXR1cm4gci53cml0ZShlLCJlcnJvciIsYS5jYWxsKGFyZ3VtZW50cykpLG59LG4ubG9nPW4uZGVidWcsbi5zdWdnZXN0PXQuc3VnZ2VzdCxuLmZvcm1hdD1yLmZvcm1hdCxufSx0LmRlZmF1bHRCYWNrZW5kPXQuZGVmYXVsdEZvcm1hdHRlcj1udWxsLHQucGlwZT1mdW5jdGlvbihlKXtyZXR1cm4gci5waXBlKGUpfSx0LmVuZD10LnVucGlwZT10LmRpc2FibGU9ZnVuY3Rpb24oZSl7cmV0dXJuIHIudW5waXBlKGUpfSx0LlRyYW5zZm9ybT1pLHQuRmlsdGVyPW8sdC5zdWdnZXN0PW5ldyBvLHQuZW5hYmxlPWZ1bmN0aW9uKCl7cmV0dXJuIHQuZGVmYXVsdEZvcm1hdHRlcj9yLnBpcGUodC5zdWdnZXN0KS5waXBlKHQuZGVmYXVsdEZvcm1hdHRlcikucGlwZSh0LmRlZmF1bHRCYWNrZW5kKTpyLnBpcGUodC5zdWdnZXN0KS5waXBlKHQuZGVmYXVsdEJhY2tlbmQpfX0sezExOjExLDk6OX1dLDExOltmdW5jdGlvbihlLG4sdCl7ZnVuY3Rpb24gaSgpe312YXIgbz1lKDIwKTtvLm1peGluKGkpLGkucHJvdG90eXBlLndyaXRlPWZ1bmN0aW9uKGUsbix0KXt0aGlzLmVtaXQoIml0ZW0iLGUsbix0KX0saS5wcm90b3R5cGUuZW5kPWZ1bmN0aW9uKCl7dGhpcy5lbWl0KCJlbmQiKSx0aGlzLnJlbW92ZUFsbExpc3RlbmVycygpfSxpLnByb3RvdHlwZS5waXBlPWZ1bmN0aW9uKGUpe2Z1bmN0aW9uIG4oKXtlLndyaXRlLmFwcGx5KGUsQXJyYXkucHJvdG90eXBlLnNsaWNlLmNhbGwoYXJndW1lbnRzKSl9ZnVuY3Rpb24gdCgpeyFlLl9pc1N0ZGlvJiZlLmVuZCgpfXZhciBpPXRoaXM7cmV0dXJuIGkuZW1pdCgidW5waXBlIixlKSxlLmVtaXQoInBpcGUiLGkpLGkub24oIml0ZW0iLG4pLGkub24oImVuZCIsdCksaS53aGVuKCJ1bnBpcGUiLGZ1bmN0aW9uKG8pe3ZhciByPW89PT1lfHwidW5kZWZpbmVkIj09dHlwZW9mIG87cmV0dXJuIHImJihpLnJlbW92ZUxpc3RlbmVyKCJpdGVtIixuKSxpLnJlbW92ZUxpc3RlbmVyKCJlbmQiLHQpLGUuZW1pdCgidW5waXBlIikpLHJ9KSxlfSxpLnByb3RvdHlwZS51bnBpcGU9ZnVuY3Rpb24oZSl7cmV0dXJuIHRoaXMuZW1pdCgidW5waXBlIixlKSx0aGlzfSxpLnByb3RvdHlwZS5mb3JtYXQ9ZnVuY3Rpb24oZSl7dGhyb3cgbmV3IEVycm9yKFsiV2FybmluZzogLmZvcm1hdCgpIGlzIGRlcHJlY2F0ZWQgaW4gTWluaWxvZyB2MiEgVXNlIC5waXBlKCkgaW5zdGVhZC4gRm9yIGV4YW1wbGU6IiwidmFyIE1pbmlsb2cgPSByZXF1aXJlKCdtaW5pbG9nJyk7IiwiTWluaWxvZyIsIiAgLnBpcGUoTWluaWxvZy5iYWNrZW5kcy5jb25zb2xlLmZvcm1hdENsZWFuKSIsIiAgLnBpcGUoTWluaWxvZy5iYWNrZW5kcy5jb25zb2xlKTsiXS5qb2luKCJcbiIpKX0saS5taXhpbj1mdW5jdGlvbihlKXt2YXIgbix0PWkucHJvdG90eXBlO2ZvcihuIGluIHQpdC5oYXNPd25Qcm9wZXJ0eShuKSYmKGUucHJvdG90eXBlW25dPXRbbl0pfSxuLmV4cG9ydHM9aX0sezIwOjIwfV0sMTI6W2Z1bmN0aW9uKGUsbix0KXt2YXIgaT1lKDExKSxvPVtdLHI9bmV3IGk7ci53cml0ZT1mdW5jdGlvbihlLG4sdCl7by5wdXNoKFtlLG4sdF0pfSxyLmdldD1mdW5jdGlvbigpe3JldHVybiBvfSxyLmVtcHR5PWZ1bmN0aW9uKCl7bz1bXX0sbi5leHBvcnRzPXJ9LHsxMToxMX1dLDEzOltmdW5jdGlvbihlLG4sdCl7dmFyIGk9ZSgxMSksbz0vXG4rJC8scj1uZXcgaTtyLndyaXRlPWZ1bmN0aW9uKGUsbix0KXt2YXIgaT10Lmxlbmd0aC0xO2lmKCJ1bmRlZmluZWQiIT10eXBlb2YgY29uc29sZSYmY29uc29sZS5sb2cpe2lmKGNvbnNvbGUubG9nLmFwcGx5KXJldHVybiBjb25zb2xlLmxvZy5hcHBseShjb25zb2xlLFtlLG5dLmNvbmNhdCh0KSk7aWYoSlNPTiYmSlNPTi5zdHJpbmdpZnkpe3RbaV0mJiJzdHJpbmciPT10eXBlb2YgdFtpXSYmKHRbaV09dFtpXS5yZXBsYWNlKG8sIiIpKTt0cnl7Zm9yKGk9MDtpPHQubGVuZ3RoO2krKyl0W2ldPUpTT04uc3RyaW5naWZ5KHRbaV0pfWNhdGNoKHIpe31jb25zb2xlLmxvZyh0LmpvaW4oIiAiKSl9fX0sci5mb3JtYXR0ZXJzPVsiY29sb3IiLCJtaW5pbG9nIl0sci5jb2xvcj1lKDE0KSxyLm1pbmlsb2c9ZSgxNSksbi5leHBvcnRzPXJ9LHsxMToxMSwxNDoxNCwxNToxNX1dLDE0OltmdW5jdGlvbihlLG4sdCl7dmFyIGk9ZSgxMSksbz1lKDE2KSxyPXtkZWJ1ZzpbImN5YW4iXSxpbmZvOlsicHVycGxlIl0sd2FybjpbInllbGxvdyIsITBdLGVycm9yOlsicmVkIiwhMF19LGE9bmV3IGk7YS53cml0ZT1mdW5jdGlvbihlLG4sdCl7dmFyIGk9Y29uc29sZS5sb2c7Y29uc29sZVtuXSYmY29uc29sZVtuXS5hcHBseSYmKGk9Y29uc29sZVtuXSxpLmFwcGx5KGNvbnNvbGUsWyIlYyIrZSsiICVjIituLG8oImdyYXkiKSxvLmFwcGx5KG8scltuXSldLmNvbmNhdCh0KSkpfSxhLnBpcGU9ZnVuY3Rpb24oKXt9LG4uZXhwb3J0cz1hfSx7MTE6MTEsMTY6MTZ9XSwxNTpbZnVuY3Rpb24oZSxuLHQpe3ZhciBpPWUoMTEpLG89ZSgxNikscj17ZGVidWc6WyJncmF5Il0saW5mbzpbInB1cnBsZSJdLHdhcm46WyJ5ZWxsb3ciLCEwXSxlcnJvcjpbInJlZCIsITBdfSxhPW5ldyBpO2Eud3JpdGU9ZnVuY3Rpb24oZSxuLHQpe3ZhciBpPWNvbnNvbGUubG9nOyJkZWJ1ZyIhPW4mJmNvbnNvbGVbbl0mJihpPWNvbnNvbGVbbl0pO3ZhciBhPTA7aWYoImluZm8iIT1uKXtmb3IoO2E8dC5sZW5ndGgmJiJzdHJpbmciPT10eXBlb2YgdFthXTthKyspO2kuYXBwbHkoY29uc29sZSxbIiVjIitlKyIgIit0LnNsaWNlKDAsYSkuam9pbigiICIpLG8uYXBwbHkobyxyW25dKV0uY29uY2F0KHQuc2xpY2UoYSkpKX1lbHNlIGkuYXBwbHkoY29uc29sZSxbIiVjIitlLG8uYXBwbHkobyxyW25dKV0uY29uY2F0KHQpKX0sYS5waXBlPWZ1bmN0aW9uKCl7fSxuLmV4cG9ydHM9YX0sezExOjExLDE2OjE2fV0sMTY6W2Z1bmN0aW9uKGUsbix0KXtmdW5jdGlvbiBpKGUsbil7cmV0dXJuIG4\/ImNvbG9yOiAjZmZmOyBiYWNrZ3JvdW5kOiAiK29bZV0rIjsiOiJjb2xvcjogIitvW2VdKyI7In12YXIgbz17YmxhY2s6IiMwMDAiLHJlZDoiI2MyMzYyMSIsZ3JlZW46IiMyNWJjMjYiLHllbGxvdzoiI2JiYmIwMCIsYmx1ZToiIzQ5MmVlMSIsbWFnZW50YToiI2QzMzhkMyIsY3lhbjoiIzMzYmJjOCIsZ3JheToiIzgwODA4MCIscHVycGxlOiIjNzA4In07bi5leHBvcnRzPWl9LHt9XSwxNzpbZnVuY3Rpb24oZSxuLHQpe3ZhciBpPWUoMTApLG89aS5lbmFibGUscj1pLmRpc2FibGUsYT0idW5kZWZpbmVkIiE9dHlwZW9mIG5hdmlnYXRvciYmL2Nocm9tZS9pLnRlc3QobmF2aWdhdG9yLnVzZXJBZ2VudCkscz1lKDEzKTtpZihpLmRlZmF1bHRCYWNrZW5kPWE\/cy5taW5pbG9nOnMsInVuZGVmaW5lZCIhPXR5cGVvZiB3aW5kb3cpe3RyeXtpLmVuYWJsZShKU09OLnBhcnNlKHdpbmRvdy5sb2NhbFN0b3JhZ2UubWluaWxvZ1NldHRpbmdzKSl9Y2F0Y2goYyl7fWlmKHdpbmRvdy5sb2NhdGlvbiYmd2luZG93LmxvY2F0aW9uLnNlYXJjaCl7dmFyIGw9UmVnRXhwKCJbPyZdbWluaWxvZz0oW14mXSopIikuZXhlYyh3aW5kb3cubG9jYXRpb24uc2VhcmNoKTtsJiZpLmVuYWJsZShkZWNvZGVVUklDb21wb25lbnQobFsxXSkpfX1pLmVuYWJsZT1mdW5jdGlvbigpe28uY2FsbChpLCEwKTt0cnl7d2luZG93LmxvY2FsU3RvcmFnZS5taW5pbG9nU2V0dGluZ3M9SlNPTi5zdHJpbmdpZnkoITApfWNhdGNoKGUpe31yZXR1cm4gdGhpc30saS5kaXNhYmxlPWZ1bmN0aW9uKCl7ci5jYWxsKGkpO3RyeXtkZWxldGUgd2luZG93LmxvY2FsU3RvcmFnZS5taW5pbG9nU2V0dGluZ3N9Y2F0Y2goZSl7fXJldHVybiB0aGlzfSx0PW4uZXhwb3J0cz1pLHQuYmFja2VuZHM9e2FycmF5OmUoMTIpLGJyb3dzZXI6aS5kZWZhdWx0QmFja2VuZCxsb2NhbFN0b3JhZ2U6ZSgxOSksalF1ZXJ5OmUoMTgpfX0sezEwOjEwLDEyOjEyLDEzOjEzLDE4OjE4LDE5OjE5fV0sMTg6W2Z1bmN0aW9uKGUsbix0KXtmdW5jdGlvbiBpKGUpe3RoaXMudXJsPWUudXJsfHwiIix0aGlzLmNhY2hlPVtdLHRoaXMudGltZXI9bnVsbCx0aGlzLmludGVydmFsPWUuaW50ZXJ2YWx8fDNlNCx0aGlzLmVuYWJsZWQ9ITAsdGhpcy5qUXVlcnk9d2luZG93LmpRdWVyeSx0aGlzLmV4dHJhcz17fX12YXIgbz1lKDExKSxyPShuZXcgRGF0ZSkudmFsdWVPZigpLnRvU3RyaW5nKDM2KTtvLm1peGluKGkpLGkucHJvdG90eXBlLndyaXRlPWZ1bmN0aW9uKGUsbix0KXt0aGlzLnRpbWVyfHx0aGlzLmluaXQoKSx0aGlzLmNhY2hlLnB1c2goW2Usbl0uY29uY2F0KHQpKX0saS5wcm90b3R5cGUuaW5pdD1mdW5jdGlvbigpe2lmKHRoaXMuZW5hYmxlZCYmdGhpcy5qUXVlcnkpe3ZhciBlPXRoaXM7dGhpcy50aW1lcj1zZXRUaW1lb3V0KGZ1bmN0aW9uKCl7dmFyIG4sdCxpPVtdLG89ZS51cmw7aWYoMD09ZS5jYWNoZS5sZW5ndGgpcmV0dXJuIGUuaW5pdCgpO2ZvcihuPTA7bjxlLmNhY2hlLmxlbmd0aDtuKyspdHJ5e0pTT04uc3RyaW5naWZ5KGUuY2FjaGVbbl0pLGkucHVzaChlLmNhY2hlW25dKX1jYXRjaChhKXt9ZS5qUXVlcnkuaXNFbXB0eU9iamVjdChlLmV4dHJhcyk\/KHQ9SlNPTi5zdHJpbmdpZnkoe2xvZ3M6aX0pLG89ZS51cmwrIj9jbGllbnRfaWQ9IityKTp0PUpTT04uc3RyaW5naWZ5KGUualF1ZXJ5LmV4dGVuZCh7bG9nczppfSxlLmV4dHJhcykpLGUualF1ZXJ5LmFqYXgobyx7dHlwZToiUE9TVCIsY2FjaGU6ITEscHJvY2Vzc0RhdGE6ITEsZGF0YTp0LGNvbnRlbnRUeXBlOiJhcHBsaWNhdGlvbi9qc29uIix0aW1lb3V0OjFlNH0pLnN1Y2Nlc3MoZnVuY3Rpb24obix0LGkpe24uaW50ZXJ2YWwmJihlLmludGVydmFsPU1hdGgubWF4KDFlMyxuLmludGVydmFsKSl9KS5lcnJvcihmdW5jdGlvbigpe2UuaW50ZXJ2YWw9M2U0fSkuYWx3YXlzKGZ1bmN0aW9uKCl7ZS5pbml0KCl9KSxlLmNhY2hlPVtdfSx0aGlzLmludGVydmFsKX19LGkucHJvdG90eXBlLmVuZD1mdW5jdGlvbigpe30saS5qUXVlcnlXYWl0PWZ1bmN0aW9uKGUpe3JldHVybiJ1bmRlZmluZWQiIT10eXBlb2Ygd2luZG93JiYod2luZG93LmpRdWVyeXx8d2luZG93LiQpP2Uod2luZG93LmpRdWVyeXx8d2luZG93LiQpOnZvaWQoInVuZGVmaW5lZCIhPXR5cGVvZiB3aW5kb3cmJnNldFRpbWVvdXQoZnVuY3Rpb24oKXtpLmpRdWVyeVdhaXQoZSl9LDIwMCkpfSxuLmV4cG9ydHM9aX0sezExOjExfV0sMTk6W2Z1bmN0aW9uKGUsbix0KXt2YXIgaT1lKDExKSxvPSExLHI9bmV3IGk7ci53cml0ZT1mdW5jdGlvbihlLG4sdCl7aWYoInVuZGVmaW5lZCIhPXR5cGVvZiB3aW5kb3cmJiJ1bmRlZmluZWQiIT10eXBlb2YgSlNPTiYmSlNPTi5zdHJpbmdpZnkmJkpTT04ucGFyc2UpdHJ5e298fChvPXdpbmRvdy5sb2NhbFN0b3JhZ2UubWluaWxvZz9KU09OLnBhcnNlKHdpbmRvdy5sb2NhbFN0b3JhZ2UubWluaWxvZyk6W10pLG8ucHVzaChbKG5ldyBEYXRlKS50b1N0cmluZygpLGUsbix0XSksd2luZG93LmxvY2FsU3RvcmFnZS5taW5pbG9nPUpTT04uc3RyaW5naWZ5KG8pfWNhdGNoKGkpe319LG4uZXhwb3J0cz1yfSx7MTE6MTF9XSwyMDpbZnVuY3Rpb24oZSxuLHQpe2Z1bmN0aW9uIGkoKXt0aGlzLl9ldmVudHM9e319aS5wcm90b3R5cGU9e29uOmZ1bmN0aW9uKGUsbil7dGhpcy5fZXZlbnRzfHwodGhpcy5fZXZlbnRzPXt9KTt2YXIgdD10aGlzLl9ldmVudHM7cmV0dXJuKHRbZV18fCh0W2VdPVtdKSkucHVzaChuKSx0aGlzfSxyZW1vdmVMaXN0ZW5lcjpmdW5jdGlvbihlLG4pe3ZhciB0LGk9dGhpcy5fZXZlbnRzW2VdfHxbXTtmb3IodD1pLmxlbmd0aC0xO3Q+PTAmJmlbdF07dC0tKWlbdF0hPT1uJiZpW3RdLmNiIT09bnx8aS5zcGxpY2UodCwxKX0scmVtb3ZlQWxsTGlzdGVuZXJzOmZ1bmN0aW9uKGUpe2U\/dGhpcy5fZXZlbnRzW2VdJiYodGhpcy5fZXZlbnRzW2VdPVtdKTp0aGlzLl9ldmVudHM9e319LGVtaXQ6ZnVuY3Rpb24oZSl7dGhpcy5fZXZlbnRzfHwodGhpcy5fZXZlbnRzPXt9KTt2YXIgbix0PUFycmF5LnByb3RvdHlwZS5zbGljZS5jYWxsKGFyZ3VtZW50cywxKSxpPXRoaXMuX2V2ZW50c1tlXXx8W107Zm9yKG49aS5sZW5ndGgtMTtuPj0wJiZpW25dO24tLSlpW25dLmFwcGx5KHRoaXMsdCk7cmV0dXJuIHRoaXN9LHdoZW46ZnVuY3Rpb24oZSxuKXtyZXR1cm4gdGhpcy5vbmNlKGUsbiwhMCl9LG9uY2U6ZnVuY3Rpb24oZSxuLHQpe2Z1bmN0aW9uIGkoKXt0fHx0aGlzLnJlbW92ZUxpc3RlbmVyKGUsaSksbi5hcHBseSh0aGlzLGFyZ3VtZW50cykmJnQmJnRoaXMucmVtb3ZlTGlzdGVuZXIoZSxpKX1yZXR1cm4gbj8oaS5jYj1uLHRoaXMub24oZSxpKSx0aGlzKTp0aGlzfX0saS5taXhpbj1mdW5jdGlvbihlKXt2YXIgbix0PWkucHJvdG90eXBlO2ZvcihuIGluIHQpdC5oYXNPd25Qcm9wZXJ0eShuKSYmKGUucHJvdG90eXBlW25dPXRbbl0pfSxuLmV4cG9ydHM9aX0se31dLDIxOltmdW5jdGlvbihlLG4sdCl7bi5leHBvcnRzLmdldFBvcnROb0Zyb21DYW5kaWRhdGU9ZnVuY3Rpb24oZSl7dmFyIG49LyhbMC05XSspIChbMC05XXsxLDN9XC5bMC05XXsxLDN9XC5bMC05XXsxLDN9XC5bMC05XXsxLDN9KSAoWzAtOV0rKS8uZXhlYyhlKXx8W107cmV0dXJuIG5bM118fG51bGx9LG4uZXhwb3J0cy5pc1NlcnZlclJlZmxleGl2ZT1mdW5jdGlvbihlKXtyZXR1cm4gZS5pbmRleE9mKCJzcmZseCIpIT09LTF9LG4uZXhwb3J0cy5pc0lQdjY9ZnVuY3Rpb24oZSl7cmV0dXJuLyhbMC05YS1mQS1GXSl7MSw0fSg6KFswLTlhLWZBLUZdKXsxLDR9KXs3fS8udGVzdChlKX0sbi5leHBvcnRzLmV4dHJhY3RDYW5kaWRhdGVJcD1mdW5jdGlvbihlKXt2YXIgbj0vWzAtOV0rIChbMC05XXsxLDN9XC5bMC05XXsxLDN9XC5bMC05XXsxLDN9XC5bMC05XXsxLDN9KSBbMC05XSsvLmV4ZWMoZSk7cmV0dXJuIG4mJm4ubGVuZ3RoPjE\/blsxXTpudWxsfSxuLmV4cG9ydHMubWF0Y2hOb2RlUGVlcklwQW5kUG9ydD1mdW5jdGlvbihlKXtyZXR1cm4gZS5tYXRjaCgvY2FuZGlkYXRlOlswLTldKyBbMC05XSsgdWRwIFswLTldKyAoWzAtOV17MSwzfVwuWzAtOV17MSwzfVwuWzAtOV17MSwzfVwuWzAtOV17MSwzfSkgKFswLTldKikvaSl9fSx7fV0sMjI6W2Z1bmN0aW9uKGUsbix0KXtmdW5jdGlvbiBpKCl7cmV0dXJuIE1hdGguZmxvb3IoOTk5OTkqTWF0aC5yYW5kb20oKSsxKX1mdW5jdGlvbiBvKGUpe3ZhciBuPWkoKS50b1N0cmluZygpLHQ9e2lkOm4sdmVyc2lvbjpsLGh0dHA6ZX07cmV0dXJuIHR9ZnVuY3Rpb24gcihlKXt2YXIgbj17aWQ6ZSx2ZXJzaW9uOmwsaHR0cDoiVEVSTUlOQVRPUiJ9O3JldHVybiBufWZ1bmN0aW9uIGEoZSl7dmFyIG49bnVsbDt0cnl7bj1KU09OLnBhcnNlKGQrZSl9Y2F0Y2godCl7ZCs9ZX1yZXR1cm4gbiYmKGQ9IiIpLG59ZnVuY3Rpb24gcyhlKXtpZighZS5odHRwfHwhZS5pZCl0aHJvdyBuZXcgRXJyb3IoIkZpZWxkcyBgaWRgIGFuZCBgaHR0cGAgYXJlIG1hbmRhdG9yeS4iKTt2YXIgbj1lLmlkO2lmKCJURVJNSU5BVE9SIj09PWUuaHR0cCl7aWYoIXVbbl0pcmV0dXJuIG51bGw7dmFyIHQ9dVtuXTtyZXR1cm4gdVtuXT1udWxsLHR9cmV0dXJuIHVbbl0\/dVtuXS5odHRwLmJvZHkrPWUuaHR0cC5ib2R5OnVbbl09ZSxudWxsfWZ1bmN0aW9uIGMoZSl7dmFyIG49YShlKTtpZighbilyZXR1cm4gbnVsbDt2YXIgdD1zKG4pO3JldHVybiB0fXZhciBsPSIxLjAiLGQ9IiIsdT17fTtuLmV4cG9ydHM9e2J1aWxkUmVxdWVzdDpvLGJ1aWxkVGVybWluYXRvcjpyLGhhbmRsZUNodW5rOmMsYWNjdW11bGF0ZUpTT046YSxhY2N1bXVsYXRlUmVzcG9uc2U6c319LHt9XSwyMzpbZnVuY3Rpb24oZSxuLHQpe2Z1bmN0aW9uIGkoZSl7InBlcmZvcm1hbmNlImluIGV8fChlLnBlcmZvcm1hbmNlPXt9KTt2YXIgbj1lLnBlcmZvcm1hbmNlO2UucGVyZm9ybWFuY2Uubm93PW4ubm93fHxuLm1vek5vd3x8bi5tc05vd3x8bi5vTm93fHxuLndlYmtpdE5vd3x8RGF0ZS5ub3d8fGZ1bmN0aW9uKCl7cmV0dXJuKG5ldyBEYXRlKS5nZXRUaW1lKCl9fWkoc2VsZil9LHt9XX0se30sWzFdKTs=\";\r\neval(atob(code));\r\n})();\n","onready":false,"donotrender":false,"campaign":"4894"},{"content":"\nwindow.OneSignal = window.OneSignal || [];\r\n\r\nif ( window.innerWidth < 700 || \/^((?!chrome|android).)*safari\/i.test(navigator.userAgent)) {\r\n} else {\r\n    OneSignal.push([\"init\", {\r\n        appId: \"dcdebb32-6d89-4cf6-93f9-1de1d776e442\",\r\n        safari_web_id: \"web.onesignal.auto.379e9ba9-232a-4433-a939-20e3e6310530\", \r\n        subdomainName: \"www.space.com\".split('.')[1],\r\n        autoRegister: true, \/* autoRegister: true allows the HTTP local notification permission request to appear automatically *\/\r\n    httpPermissionRequest: {\r\n      enable: true,  \/* You must have this to use the httpPermissionRequest *\/\r\n      useCustomModal: true\r\n    },\r\n    promptOptions: {\r\n      subscribeText: 'Subscribing ... This window will close automatically',  \/* Limited to 100 chars *\/\r\n      showGraphic: true, \/* True by default *\/\r\n      timeout: 15000\r\n    },\r\n    welcomeNotification: {\r\n      disable: true\r\n\t}\r\n    }]);\r\n\r\n}\r\n\r\nvar siteName = \"www.space.com\".split('.')[1];\r\n\r\nvar overlayBox = document.createElement(\"div\"); \r\noverlayBox.id = 'overlay-box';\r\noverlayBox.setAttribute('class','overlay-box');\r\noverlayBox.setAttribute('style', 'display:none');\r\n\r\nvar overlayText = '<div class=\"overlay-pop\" id=\"overlay-pop\"><div class=\"x-btn\"><i class=\"fa fa-times\" aria-hidden=\"true\"><\/i><\/div><div class=\"top-text\"><h3> Thank You For Subscribing<\/h3> <p>You are now subscribed to our notifications. You may unsubscribe at any time.<\/p><\/div><span class=\"p-button button-fifth\"> Close <\/span><\/div>';\r\n\r\noverlayBox.innerHTML = overlayText ; \r\n\r\nfunction close_overlay() {\r\n    OneSignal.push(function() {\r\n        OneSignal.registerForPushNotifications({httpPermissionRequest: true});\r\n    });\r\n    var overlayElement = document.getElementById(\"overlay-box\");\r\n    overlayElement.setAttribute('style', 'display:none');\r\n    document.body.style.overflow = '';\r\n    if (dataLayer && typeof dataLayer !== 'undefined') {\r\n    \tdataLayer.push({'event':'os_notification','action':'thank_you_close'});\r\n    }\r\n}\r\n\r\nfunction get_cookie(name) {\r\n  var value = \"; \" + document.cookie;\r\n  var parts = value.split(\"; \" + name + \"=\");\r\n  if (parts.length == 2) return parts.pop().split(\";\").shift();\r\n}\r\n\r\n\r\ndocument.body.appendChild(overlayBox);\r\ndocument.getElementById(\"overlay-box\").addEventListener(\"click\", function(){close_overlay()});\r\n\r\nOneSignal.push(function() {\r\n    OneSignal.log.setLevel('trace');\r\n    OneSignal.on('notificationPermissionChange', function(event){\r\n    console.log(event.to);\r\n      if (event.to == 'granted') {\r\n          if (typeof get_cookie(siteName+'OneSignalOverlay') == 'undefined' ) {\r\n\t\t\t\tif ( window.innerWidth > 700 && \/^((?!chrome|android).)*safari\/i.test(navigator.userAgent) === false ) {\r\n                \tdocument.getElementById(\"overlay-box\").style.display = '';\r\n                \tdocument.body.style.overflow = 'hidden';\r\n                }\r\n                if (dataLayer && typeof dataLayer !== 'undefined') {\r\n                      dataLayer.push({'event':'os_notification','action':'thank_you_impression'});\r\n                }\r\n                document.cookie = siteName+\"OneSignalOverlay=true;path=\/;expires=Fri, 31 Dec 9999 23:59:59 GMT\";\r\n            }\r\n          \r\n      }\r\n      var deviceModel = navigator.platform + ' ' + OneSignal.browser.name;\r\n      var deviceVersion = OneSignal.browser.version;\r\n      \/\/ Push to Google analytics\r\n      \/\/ event.to is either \"default\", \"granted\", or \"denied\"\r\n      dataLayer.push({\r\n          'event': 'permission',\r\n          'action': 'click', \r\n          'button': event.to,\r\n          'deviceModel': deviceModel,\r\n          'deviceVersion': deviceVersion\r\n      });\r\n    });\r\n});\r\n\r\nif (dataLayer && typeof dataLayer !== 'undefined') {\r\n  \r\n    OneSignal.push(function () {\r\n    \tOneSignal.on('permissionPromptDisplay', function (event) {\r\n        \tdataLayer.push({'event': 'os_notification', 'action': 'impression'});\r\n    \t});\r\n        \/\/ Track registration event from OneSignal\r\n        \/\/ Only track if the user isn't subscribed, otherwise this event will be fired on every page load for a subscribed user\r\n        \/\/ Should line up 1 to 1 with the notificationPermissionChange being granted\r\n        OneSignal.isPushNotificationsEnabled(function(isEnabled) {\r\n        \tif (!isEnabled) {\r\n\t\t        OneSignal.on('register', function (event) {\r\n\t\t            dataLayer.push({'event': 'registration', 'action': 'updateRegistration' });\r\n\t\t        });\r\n\t        }\r\n        });\r\n      \r\n        OneSignal.on('subscriptionChange', function (isSubscribed) {\r\n           if (isSubscribed == false) { \r\n             dataLayer.push({'event': 'os_notification', 'action': 'perm_revoked' });\r\n           }\r\n         });\r\n        \r\n        \/\/ Popup window open\r\n        OneSignal.on('popupLoad', function (event) {\r\n            dataLayer.push({'event': 'popup', 'action': 'impression'});\r\n        });\r\n\r\n        \/\/ Popup window close\r\n        OneSignal.on('popupClose', function (event) {\r\n            dataLayer.push({'event': 'popup', 'action': 'close'});\r\n        });\r\n    })\r\n}\n","onready":false,"donotrender":false,"campaign":"4952"},{"content":"\ntmntag.incontent = tmntag.incontent || function(divId, selector, position) {\r\n   if (!divId || !selector) { return false; }\r\n   var target = document.querySelector(selector);\r\n   if (target) {\r\n\t   var newDiv = document.getElementById(divId);\r\n       if (!newDiv) {\r\n          newDiv = document.createElement('div');\r\n          newDiv.id = divId;\r\n       }\r\n       if (typeof position=='undefined') position = 'afterend';\r\n       \r\n       if (position === 'prepend') {\r\n         target.insertBefore(newDiv, target.firstChild);\r\n       } else {     \r\n         target.insertAdjacentElement(position, newDiv);\r\n       }\r\n       return newDiv;\r\n   }\r\n   return false;\r\n};\n","onready":false,"donotrender":false,"campaign":"4873"}],"html_pre_body":"","html_post_body":"","creatives":[],"latency":6,"id":"6260255561550288"};
+            /* RAAS JS Renderer 1.12 */
+var TMNRAAS_VERSION="1.12";
+var tmntag = tmntag || {};
+tmntag.isab = false;
+!function(t){function e(){if(!o){o=!0;for(var t=0;t<a.length;t++)a[t].fn.call(window,a[t].ctx);a=[]}}function n(){"complete"===document.readyState&&e()}baseObj=window;var a=[],o=!1,d=!1;baseObj[t]=function(t,c){return o?void setTimeout(function(){t(c)},1):(a.push({fn:t,ctx:c}),void("complete"===document.readyState||!document.attachEvent&&"interactive"===document.readyState?setTimeout(e,1):d||(document.addEventListener?(document.addEventListener("DOMContentLoaded",e,!1),window.addEventListener("load",e,!1)):(document.attachEvent("onreadystatechange",n),window.attachEvent("onload",e)),d=!0)))}}("tmntag_ready_2");
+tmntag.onAB = function(callback) {
+	if (typeof callback!=='function') return; 
+	var abcheck = document.createElement('div');
+	var KLASS = "adsbox";
+	abcheck.innerHTML = "&nbsp;"
+	abcheck.className = KLASS;
+	document.body.appendChild(abcheck);
+	window.setTimeout(function() {
+	  var isab = false;
+	  if (abcheck.offsetHeight === 0) {
+		  isab=true;
+		  abcheck.remove();
+	  } else {
+		  e = document.querySelector("."+KLASS);
+		  if (!e) {
+			  isab=true;
+		  } else {
+			  var found = false;
+			  for (var i in document.scripts) { 
+			    if (document.scripts[i].src && document.scripts[i].src.indexOf("googletagservices.com")>=0) {
+			    	found = true;
+			    	break;
+			    } 
+			  }
+			  if (!found) {
+				isab=true;
+			  } else {
+				  if (typeof jQuery!='undefined' && jQuery && jQuery('#header_leaderboard')) isab = 'none'==jQuery('#header_leaderboard').css('display');
+			  }
+		  }
+	  }
+	  if (isab) {
+		  tmntag.isab = true;
+		  callback();
+	  }
+	}, 2000);
+}
+var tmntag_raascallback = function() {
+  var p = ('https:'==document.location.protocol)?'https://':'http://';
+  var whenAB = function() {
+	console.log("-RAAS- "+TMNRAAS_VERSION+" AB detected");
+	if (document.location.href.indexOf("tomsguide.com")<0 
+		&& document.location.href.indexOf("tomsguide.fr")<0
+		&& document.location.href.indexOf("tomshardware.com")<0
+		&& document.location.href.indexOf("tomshardware.co.uk")<0
+		&& document.location.href.indexOf("tomshardware.de")<0
+		) {
+      var rnd = Math.floor(Math.random() * 11000);
+      var e   = document.createElement('script');
+      e.type  = 'text/javascript';
+      e.src = p+'ramp.purch.com/event.js?t=AB&id=0&bid=&cp=0&bdrid=&crid=&ad=&r='+rnd+'l='+encodeURIComponent(window.top.document.location.href);
+      var scripts = document.getElementsByTagName('script')[0];
+      if (scripts) scripts.parentNode.insertBefore(e, scripts);
+	}
+    if (typeof tmnramp!='undefined') {
+      window.top.tmntag_redirect = function(e, urlormacro, macro) {
+	   var joinKeys = function(macro){
+		      var ret = '';
+			  if (macro && keys) for (var k in keys) {
+		         if (keys.hasOwnProperty(k)) {
+				    if (macro.hasOwnProperty(keys[k])) {
+		               if (k==='pd') ret += '&'+k+'=|'+macro[keys[k]]+'|';
+		               else ret += '&'+k+'='+macro[keys[k]];
+		            }
+				 }
+		      }
+		      return ret;
+		   }
+		   if (!e) return false;
+		   var keys = {'cp':'__CP__', 'bdrid':'__BDRID__', 'crid':'__CRID__', 'ad':'__AD__', 'pd':'__PRODUCT_ID__'};
+		   var url = ((typeof urlormacro)==='object')?e.href:urlormacro;
+		   macro = ((typeof urlormacro)==='object')?urlormacro:macro;
+		   var rnd = Math.floor(Math.random() * 11000);
+		   var proto = ('https:'==document.location.protocol)?'https://':'http://';
+		   var tr = proto+'ramp.purch.com/event.js?t=CL&id='+((top.window.requestid)?top.window.requestid:0)+'&r='+rnd+joinKeys(macro);
+		   var s = document.createElement('script');
+		   s.type = 'text/javascript';
+		   s.src = tr;
+		   var r = document.getElementsByTagName('script')[0];
+		   if (r) r.parentNode.insertBefore(s, r);
+		   var win = window.open(url, '_blank');
+		   win.focus();
+		   return false;
+		}
+      if(tmnramp.creatives) {
+        for (var i in tmnramp.creatives) {
+          var markupinfo = tmnramp.creatives[i];
+          if (markupinfo && markupinfo.div && markupinfo.markup) {
+            var markup = markupinfo.markup.replace(/\\n|\\r/g, '');
+			markup = markup.replace(/\\/g, '');
+			var div = markupinfo.div;
+			var e = document.getElementById(div);
+			if (typeof tmntag.incontent!='undefined' && markupinfo['ad_params'] && markupinfo['ad_params']['incontent_css_selector']) {
+				e = tmntag.incontent(div, markupinfo['ad_params']['incontent_css_selector'], markupinfo['ad_params']['incontent_position']);
+			};
+			if (!e) continue;
+			if (markupinfo['iframe']) {
+			  var iframe = document.createElement("iframe");
+				iframe.frameBorder=0;
+				iframe.name=markupinfo.campaign_id+"/"+markupinfo.creative_id;
+				iframe.scrolling="no";
+				iframe.marginwidth=0;
+				iframe.marginheight=0;
+				iframe.style.width=(markupinfo.width || 0)+"px";
+				iframe.style.height=(markupinfo.height || 0)+"px";
+				iframe.style.border="0pt none";
+				iframe.style.margin="0px 0 0";
+				iframe.width = markupinfo.width || 0;
+				iframe.height = markupinfo.height || 0;
+				e.appendChild(iframe);
+				var content = '<!DOCTYPE ht'+'ml><bo'+'dy marginheight="0" marginwidth="0">'+markup+'</bo'+'dy></ht'+'ml>';
+				iframe.contentWindow.contents = content;
+				iframe.src = 'javascript:window["contents"]';
+			} else {
+				var rnd = Math.floor(Math.random() * 11000);
+				e.id = btoa(rnd+div+rnd).replace(/[^a-zA-Z]/g, '');
+				e.innerHTML = markup;
+			}
+		  }
+		}
+      }
+  	}
+    if (typeof tmnramp!='undefined' && tmnramp.pixels) {
+      for (var i in tmnramp.pixels) {
+        var pixel = tmnramp.pixels[i];
+        if (pixel && !pixel.donotrender && pixel.content && pixel.onready) {
+          eval(pixel.content);
+        }
+      }
+    }
+  }
+  tmntag.onAB(whenAB);
+}
+tmntag_ready_2(tmntag_raascallback);
+(function() {
+	if (typeof tmnramp!='undefined' && tmnramp.pixels) {
+	  for (var i in tmnramp.pixels) {
+	    var pixel = tmnramp.pixels[i];
+	    if (pixel && !pixel.donotrender && pixel.content && !pixel.onready) {
+	      eval(pixel.content);
+	    }
+	  }
+	}
+})();
+/* /RAAS JS Renderer 1.12 */
+        </script>
+    
+        <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"6ef1e23532","applicationID":"15268381","transactionName":"YFRQMkdRDBZSBxJRDFkecwVBWQ0LHDQTSgBff1cRRnIXC1cIAwIgWFxCCVtVDBEJDgdOAkRSQA9FRBE=","queueTime":0,"applicationTime":95,"atts":"TBNTRA9LHxg=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+
+</html>
