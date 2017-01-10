@@ -140,9 +140,6 @@ public class FeedService extends AbstractScheduledService {
      * @param url RSS url of a feed or page containing a feed to synchronize
      */
     public Feed synchronize(String url) throws Exception {
-        if (log.isInfoEnabled()) {
-            log.info(MessageFormat.format("Synchronizing feed at URL: {0}", url));
-        }
         long startTime = System.currentTimeMillis();
         
         // Parse the feed
@@ -294,7 +291,7 @@ public class FeedService extends AbstractScheduledService {
 
         long endTime = System.currentTimeMillis();
         if (log.isInfoEnabled()) {
-            log.info(MessageFormat.format("Synchronization done in {0}ms", endTime - startTime));
+            log.info(MessageFormat.format("Synchronized feed at URL {0} in {1}ms, {2} articles added, {3} deleted", url, endTime - startTime, articleMap.size(), removedArticles.size()));
         }
         
         return feed;
