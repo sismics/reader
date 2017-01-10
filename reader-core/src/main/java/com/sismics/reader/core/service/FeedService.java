@@ -171,10 +171,7 @@ public class FeedService extends AbstractScheduledService {
             AppContext.getInstance().getAsyncEventBus().post(faviconUpdateRequestedEvent);
         } else {
             // Try to update the feed's favicon every week
-            boolean newDay = feed.getLastFetchDate() == null ||
-                    DateTime.now().getDayOfYear() != new DateTime(feed.getLastFetchDate()).getDayOfYear();
-            int daysFromCreation = Days.daysBetween(Instant.now(), new Instant(feed.getCreateDate().getTime())).getDays();
-            boolean updateFavicon = newDay && daysFromCreation % 7 == 0;
+            boolean updateFavicon = isFaviconUpdated(feed);
 
             // Update metadata
             feed.setUrl(newFeed.getUrl());
@@ -291,7 +288,20 @@ public class FeedService extends AbstractScheduledService {
         
         return feed;
     }
-    
+
+    /**
+     * Update the favicon once a week.
+     *
+     * @param feed The feed
+     * @return True if the favicon must be updated
+     */
+    private boolean isFaviconUpdated(Feed feed) {
+        boolean newDay = feed.getLastFetchDate() == null ||
+                DateTime.now().getDayOfYear() != new DateTime(feed.getLastFetchDate()).getDayOfYear();
+        int daysFromCreation = Days.daysBetween(Instant.now(), new Instant(feed.getCreateDate().getTime())).getDays();
+        return newDay && daysFromCreation % 7 == 0;
+    }
+
     /**
      * Parse a page containing a RSS or Atom feed, or HTML linking to a feed.
      * 

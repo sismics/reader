@@ -2,6 +2,7 @@ package com.sismics.reader.rest;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
+import com.google.common.io.Files;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.util.TransactionUtil;
 import com.sismics.reader.rest.descriptor.JerseyTestWebAppDescriptorFactory;
@@ -14,6 +15,7 @@ import com.sun.jersey.test.framework.JerseyTest;
 import junit.framework.Assert;
 import org.codehaus.jettison.json.JSONObject;
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.server.NetworkListener;
 import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.junit.After;
 import org.junit.Before;
@@ -96,9 +98,27 @@ public abstract class BaseJerseyTest extends JerseyTest {
     private void startHttpServer() throws Exception {
         String httpRoot = URLDecoder.decode(new File(getClass().getResource("/").getFile()).getAbsolutePath(), "utf-8");
         httpServer = HttpServer.createSimpleServer(httpRoot, "localhost", 9997);
+        NetworkListener listener = httpServer.getListeners().iterator().next();
+//        listener.setFilterChain(new DefaultFilterChain());
+
         // Disable file cache to fix https://java.net/jira/browse/GRIZZLY-1350
         ((StaticHttpHandler) httpServer.getServerConfiguration().getHttpHandlers().keySet().iterator().next()).setFileCacheEnabled(false);
+
+        // Add a handler for temporaty files
+        addTempFileHandler();
+
         httpServer.start();
+    }
+
+    /**
+     * Add a handler for temporaty files.
+     *
+     * Server Java temporary files on /temp
+     */
+    private void addTempFileHandler() {
+        StaticHttpHandler staticHttpHandler = new StaticHttpHandler(System.getProperty("java.io.tmpdir"));
+        staticHttpHandler.setFileCacheEnabled(false);
+        httpServer.getServerConfiguration().addHttpHandler(staticHttpHandler, "/temp");
     }
 
     /**
@@ -137,6 +157,21 @@ public abstract class BaseJerseyTest extends JerseyTest {
         os.write(input.getBytes());
         os.close();
         return baos.toString();
+    }
+
+    protected void copyTempResource(String file) {
+//        httpServer.stop();
+        File temp = new File(System.getProperty("java.io.tmpdir") + "/temp.xml");
+        try {
+            Files.copy(new File(getClass().getResource(file).getFile()), temp);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+//        try {
+//            httpServer.start();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     /**

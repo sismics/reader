@@ -236,6 +236,64 @@ public class TestSubscriptionResource extends BaseJerseyTest {
     }
 
     /**
+     * Test of deleted articles.
+     *
+     */
+    @Test
+    public void testDeletedArticle() throws Exception {
+        // Create a new user: OK
+        createUser("subscription3");
+        login("subscription3");
+
+        // Subscribe to deleted feed: OK
+        copyTempResource("/http/feeds/deleted/deleted0.xml");
+        PUT("/subscription", ImmutableMap.of("url", "http://localhost:9997/temp/temp.xml"));
+        assertIsOk();
+        JSONObject json = getJsonResult();
+        String feedSubscription1Id = json.getString("id");
+        Assert.assertNotNull(feedSubscription1Id);
+
+        // Check the subscription data
+        GET("/subscription/" + feedSubscription1Id);
+        assertIsOk();
+        json = getJsonResult();
+        JSONObject subscription = json.optJSONObject("subscription");
+        Assert.assertNotNull(subscription);
+        Assert.assertEquals("Deleted feeds", subscription.optString("title"));
+        JSONArray articles = json.optJSONArray("articles");
+        Assert.assertEquals(3, articles.length());
+        JSONObject article = articles.optJSONObject(0);
+        Assert.assertNotNull(article);
+        String article2Id = article.getString("id");
+        Assert.assertNotNull(article2Id);
+        Assert.assertEquals("Article deleted2", article.getString("title"));
+        article = articles.optJSONObject(1);
+        Assert.assertNotNull(article);
+        String article1Id = article.getString("id");
+        Assert.assertNotNull(article1Id);
+        Assert.assertEquals("Article deleted1", article.getString("title"));
+        article = articles.optJSONObject(2);
+        Assert.assertNotNull(article);
+        String article0Id = article.getString("id");
+        Assert.assertNotNull(article0Id);
+        Assert.assertEquals("Article deleted0", article.getString("title"));
+
+        // Synchronize feeds
+        copyTempResource("/http/feeds/deleted/deleted1.xml");
+        synchronizeAllFeed();
+
+        // Check the subscription data
+        GET("/subscription/" + feedSubscription1Id);
+        assertIsOk();
+        json = getJsonResult();
+        subscription = json.optJSONObject("subscription");
+        Assert.assertNotNull(subscription);
+        Assert.assertEquals("Deleted feeds", subscription.optString("title"));
+        articles = json.optJSONArray("articles");
+        Assert.assertEquals(2, articles.length());
+    }
+
+    /**
      * Test of the subscription synchronization resource.
      *
      */
