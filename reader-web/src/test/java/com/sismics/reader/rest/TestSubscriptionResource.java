@@ -250,11 +250,11 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         PUT("/subscription", ImmutableMap.of("url", "http://localhost:9997/temp/temp.xml"));
         assertIsOk();
         JSONObject json = getJsonResult();
-        String feedSubscription1Id = json.getString("id");
-        Assert.assertNotNull(feedSubscription1Id);
+        String feedSubscription0Id = json.getString("id");
+        Assert.assertNotNull(feedSubscription0Id);
 
         // Check the subscription data: 3 articles
-        GET("/subscription/" + feedSubscription1Id);
+        GET("/subscription/" + feedSubscription0Id);
         assertIsOk();
         json = getJsonResult();
         JSONObject subscription = json.optJSONObject("subscription");
@@ -274,7 +274,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         synchronizeAllFeed();
 
         // Check the subscription data: one deleted articles
-        GET("/subscription/" + feedSubscription1Id);
+        GET("/subscription/" + feedSubscription0Id);
         assertIsOk();
         json = getJsonResult();
         subscription = json.optJSONObject("subscription");
@@ -292,7 +292,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         synchronizeAllFeed();
 
         // Check the subscription data: one new articles, old articles are still there
-        GET("/subscription/" + feedSubscription1Id);
+        GET("/subscription/" + feedSubscription0Id);
         assertIsOk();
         json = getJsonResult();
         subscription = json.optJSONObject("subscription");

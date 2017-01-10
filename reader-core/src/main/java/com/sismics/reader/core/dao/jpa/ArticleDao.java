@@ -172,9 +172,9 @@ public class ArticleDao {
             criteriaList.add("a.ART_URL_C = :url");
             parameterMap.put("url", criteria.getUrl());
         }
-        if (criteria.getPublicationDateMax() != null) {
-            criteriaList.add("a.ART_PUBLICATIONDATE_D < :publicationDateMax");
-            parameterMap.put("publicationDateMax", criteria.getPublicationDateMax());
+        if (criteria.getPublicationDateMin() != null) {
+            criteriaList.add("a.ART_PUBLICATIONDATE_D > :publicationDateMax");
+            parameterMap.put("publicationDateMax", criteria.getPublicationDateMin());
         }
         if (criteria.getFeedId() != null) {
             criteriaList.add("a.ART_IDFEED_C = :feedId");

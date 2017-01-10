@@ -32,7 +32,7 @@ public class ArticleCriteria {
     /**
      * Max publication date.
      */
-    private Date publicationDateMax;
+    private Date publicationDateMin;
 
     /**
      * Feed ID.
@@ -116,21 +116,21 @@ public class ArticleCriteria {
     }
 
     /**
-     * Getter of publicationDateMax.
+     * Getter of publicationDateMin.
      *
-     * @return publicationDateMax
+     * @return publicationDateMin
      */
-    public Date getPublicationDateMax() {
-        return publicationDateMax;
+    public Date getPublicationDateMin() {
+        return publicationDateMin;
     }
 
     /**
-     * Setter of publicationDateMax.
+     * Setter of publicationDateMin.
      *
-     * @param publicationDateMax publicationDateMax
+     * @param publicationDateMin publicationDateMin
      */
-    public ArticleCriteria setPublicationDateMax(Date publicationDateMax) {
-        this.publicationDateMax = publicationDateMax;
+    public ArticleCriteria setPublicationDateMin(Date publicationDateMin) {
+        this.publicationDateMin = publicationDateMin;
         return this;
     }
 

@@ -319,32 +319,33 @@ public class FeedService extends AbstractScheduledService {
             return removedArticleList;
         }
 
-        // Get earlier articles in stream
-        List<Article> earlierArticles = getEarlierArticleList(articleList, oldestArticle);
-        Set<String> earlierArticleGuids = new HashSet<String>();
-        for (Article article : earlierArticles) {
-            earlierArticleGuids.add(article.getGuid());
+        // Get newer articles in stream
+        List<Article> newerArticles = getNewerArticleList(articleList, oldestArticle);
+        Set<String> newerArticleGuids = new HashSet<String>();
+        for (Article article : newerArticles) {
+            newerArticleGuids.add(article.getGuid());
         }
 
-        // Get earlier articles in stream
-        List<ArticleDto> earlierLocalArticles = new ArticleDao().findByCriteria(new ArticleCriteria()
-                .setPublicationDateMax(oldestArticle.getPublicationDate()));
+        // Get newer articles in stream
+        List<ArticleDto> newerLocalArticles = new ArticleDao().findByCriteria(new ArticleCriteria()
+                .setFeedId(localArticle.getFeedId())
+                .setPublicationDateMin(oldestArticle.getPublicationDate()));
 
         // Delete articles removed from stream
-        for (ArticleDto earlierLocalArticle : earlierLocalArticles) {
-            if (!earlierArticleGuids.contains(earlierLocalArticle.getGuid())) {
-                new ArticleDao().delete(earlierLocalArticle.getId());
-                removedArticleList.add(new Article(earlierLocalArticle.getId()));
+        for (ArticleDto newerLocalArticle : newerLocalArticles) {
+            if (!newerArticleGuids.contains(newerLocalArticle.getGuid())) {
+                new ArticleDao().delete(newerLocalArticle.getId());
+                removedArticleList.add(new Article(newerLocalArticle.getId()));
             }
         }
         
         return removedArticleList;
     }
 
-    private List<Article> getEarlierArticleList(List<Article> articleList, Article oldestArticle) {
+    private List<Article> getNewerArticleList(List<Article> articleList, Article oldestArticle) {
         List<Article> presentArticles = new ArrayList<Article>();
         for (Article article : articleList) {
-            if (article.getPublicationDate().before(oldestArticle.getPublicationDate())) {
+            if (article.getPublicationDate().after(oldestArticle.getPublicationDate())) {
                 presentArticles.add(article);
             }
         }
@@ -354,7 +355,7 @@ public class FeedService extends AbstractScheduledService {
     private Article getOldestArticle(List<Article> articleList) {
         Article oldestArticle = null;
         for (Article article : articleList) {
-            if (oldestArticle == null || article.getPublicationDate().before(article.getPublicationDate())) {
+            if (oldestArticle == null || article.getPublicationDate().before(oldestArticle.getPublicationDate())) {
                 oldestArticle = article;
             }
         }
