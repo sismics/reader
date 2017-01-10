@@ -31,8 +31,8 @@ public class UserDao {
      */
     public String authenticate(String username, String password) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select u from User u where u.username = :username and u.deleteDate is null");
-        q.setParameter("username", username);
+        Query q = em.createQuery("select u from User u where u.username = :username and u.deleteDate is null")
+                .setParameter("username", username);
         try {
             User user = (User) q.getSingleResult();
             if (!BCrypt.checkpw(password, user.getPassword())) {
@@ -56,8 +56,8 @@ public class UserDao {
         
         // Checks for user unicity
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select u from User u where u.username = :username and u.deleteDate is null");
-        q.setParameter("username", user.getUsername());
+        Query q = em.createQuery("select u from User u where u.username = :username and u.deleteDate is null")
+                .setParameter("username", user.getUsername());
         List<?> l = q.getResultList();
         if (l.size() > 0) {
             throw new Exception("AlreadyExistingUsername");
@@ -81,8 +81,8 @@ public class UserDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the user
-        Query q = em.createQuery("select u from User u where u.id = :id and u.deleteDate is null");
-        q.setParameter("id", user.getId());
+        Query q = em.createQuery("select u from User u where u.id = :id and u.deleteDate is null")
+                .setParameter("id", user.getId());
         User userFromDb = (User) q.getSingleResult();
 
         // Update the user
@@ -108,8 +108,8 @@ public class UserDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the user
-        Query q = em.createQuery("select u from User u where u.id = :id and u.deleteDate is null");
-        q.setParameter("id", user.getId());
+        Query q = em.createQuery("select u from User u where u.id = :id and u.deleteDate is null")
+                .setParameter("id", user.getId());
         User userFromDb = (User) q.getSingleResult();
 
         // Update the user
@@ -142,8 +142,8 @@ public class UserDao {
     public User getActiveByUsername(String username) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         try {
-            Query q = em.createQuery("select u from User u where u.username = :username and u.deleteDate is null");
-            q.setParameter("username", username);
+            Query q = em.createQuery("select u from User u where u.username = :username and u.deleteDate is null")
+                    .setParameter("username", username);
             return (User) q.getSingleResult();
         } catch (NoResultException e) {
             return null;
@@ -159,8 +159,8 @@ public class UserDao {
     public User getActiveByPasswordResetKey(String passwordResetKey) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         try {
-            Query q = em.createQuery("select u from User u where u.passwordResetKey = :passwordResetKey and u.deleteDate is null");
-            q.setParameter("passwordResetKey", passwordResetKey);
+            Query q = em.createQuery("select u from User u where u.passwordResetKey = :passwordResetKey and u.deleteDate is null")
+                    .setParameter("passwordResetKey", passwordResetKey);
             return (User) q.getSingleResult();
         } catch (NoResultException e) {
             return null;
@@ -176,33 +176,33 @@ public class UserDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
             
         // Get the user
-        Query q = em.createQuery("select u from User u where u.username = :username and u.deleteDate is null");
-        q.setParameter("username", username);
-        User userFromDb = (User) q.getSingleResult();
+        User userFromDb = (User) em.createQuery("select u from User u where u.username = :username and u.deleteDate is null")
+                .setParameter("username", username)
+                .getSingleResult();
         
         // Delete the user
         Date dateNow = new Date();
         userFromDb.setDeleteDate(dateNow);
 
         // Delete linked data
-        q = em.createQuery("delete from AuthenticationToken at where at.userId = :userId");
-        q.setParameter("userId", userFromDb.getId());
-        q.executeUpdate();
+        em.createQuery("delete from AuthenticationToken at where at.userId = :userId")
+                .setParameter("userId", userFromDb.getId())
+                .executeUpdate();
 
-        q = em.createQuery("update UserArticle ua set ua.deleteDate = :dateNow where ua.userId = :userId and ua.deleteDate is null");
-        q.setParameter("userId", userFromDb.getId());
-        q.setParameter("dateNow", dateNow);
-        q.executeUpdate();
+        em.createQuery("update UserArticle ua set ua.deleteDate = :dateNow where ua.userId = :userId and ua.deleteDate is null")
+                .setParameter("userId", userFromDb.getId())
+                .setParameter("dateNow", dateNow)
+                .executeUpdate();
 
-        q = em.createQuery("update FeedSubscription fs set fs.deleteDate = :dateNow where fs.userId = :userId and fs.deleteDate is null");
-        q.setParameter("userId", userFromDb.getId());
-        q.setParameter("dateNow", dateNow);
-        q.executeUpdate();
+        em.createQuery("update FeedSubscription fs set fs.deleteDate = :dateNow where fs.userId = :userId and fs.deleteDate is null")
+                .setParameter("userId", userFromDb.getId())
+                .setParameter("dateNow", dateNow)
+                .executeUpdate();
 
-        q = em.createQuery("update Category c set c.deleteDate = :dateNow where c.userId = :userId and c.deleteDate is null");
-        q.setParameter("userId", userFromDb.getId());
-        q.setParameter("dateNow", dateNow);
-        q.executeUpdate();
+        em.createQuery("update Category c set c.deleteDate = :dateNow where c.userId = :userId and c.deleteDate is null")
+                .setParameter("userId", userFromDb.getId())
+                .setParameter("dateNow", dateNow)
+                .executeUpdate();
     }
 
     /**

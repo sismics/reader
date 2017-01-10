@@ -1,14 +1,13 @@
 package com.sismics.reader.core.dao.jpa;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import com.sismics.reader.core.model.jpa.Category;
+import com.sismics.util.context.ThreadLocalContext;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import com.sismics.reader.core.model.jpa.Category;
-import com.sismics.util.context.ThreadLocalContext;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Category DAO.
@@ -44,8 +43,8 @@ public class CategoryDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the category
-        Query q = em.createQuery("select c from Category c where c.id = :id and c.deleteDate is null");
-        q.setParameter("id", category.getId());
+        Query q = em.createQuery("select c from Category c where c.id = :id and c.deleteDate is null")
+            .setParameter("id", category.getId());
         Category categoryFromDb = (Category) q.getSingleResult();
 
         // Update the category
@@ -67,9 +66,9 @@ public class CategoryDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Find categories with the same parent
-        Query q = em.createQuery("select c from Category c where c.parentId = :parentId and c.userId = :userId and c.deleteDate is null order by c.order");
-        q.setParameter("parentId", category.getParentId());
-        q.setParameter("userId", category.getUserId());
+        Query q = em.createQuery("select c from Category c where c.parentId = :parentId and c.userId = :userId and c.deleteDate is null order by c.order")
+                .setParameter("parentId", category.getParentId())
+                .setParameter("userId", category.getUserId());
         List<Category> categoryList = (List<Category>) q.getResultList();
         for (int i = 0; i < categoryList.size(); i++) {
             Category currentCategory = categoryList.get(i);
@@ -93,8 +92,8 @@ public class CategoryDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the category
-        Query q = em.createQuery("select c from Category c where c.id = :id and c.deleteDate is null");
-        q.setParameter("id", id);
+        Query q = em.createQuery("select c from Category c where c.id = :id and c.deleteDate is null")
+                .setParameter("id", id);
         Category categoryFromDb = (Category) q.getSingleResult();
 
         // Delete the category
@@ -109,8 +108,8 @@ public class CategoryDao {
      */
     public Category getRootCategory(String userId) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select c from Category c where c.userId = :userId and c.parentId is null and c.deleteDate is null");
-        q.setParameter("userId", userId);
+        Query q = em.createQuery("select c from Category c where c.userId = :userId and c.parentId is null and c.deleteDate is null")
+                .setParameter("userId", userId);
         return (Category) q.getSingleResult();
     }
     
@@ -123,9 +122,9 @@ public class CategoryDao {
      */
     public Category getCategory(String id, String userId) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select c from Category c where c.id = :id and c.userId = :userId and c.deleteDate is null");
-        q.setParameter("id", id);
-        q.setParameter("userId", userId);
+        Query q = em.createQuery("select c from Category c where c.id = :id and c.userId = :userId and c.deleteDate is null")
+                .setParameter("id", id)
+                .setParameter("userId", userId);
         return (Category) q.getSingleResult();
     }
 
@@ -138,9 +137,9 @@ public class CategoryDao {
      */
     public int getCategoryCount(String parentId, String userId) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select count(c.id) from Category c where c.parentId = :parentId and c.userId = :userId and c.deleteDate is null");
-        q.setParameter("parentId", parentId);
-        q.setParameter("userId", userId);
+        Query q = em.createQuery("select count(c.id) from Category c where c.parentId = :parentId and c.userId = :userId and c.deleteDate is null")
+                .setParameter("parentId", parentId)
+                .setParameter("userId", userId);
         return ((Long) q.getSingleResult()).intValue();
     }
 
@@ -153,8 +152,8 @@ public class CategoryDao {
     @SuppressWarnings("unchecked")
     public List<Category> findAllCategory(String userId) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select c from Category c where c.userId = :userId and c.deleteDate is null order by c.order");
-        q.setParameter("userId", userId);
+        Query q = em.createQuery("select c from Category c where c.userId = :userId and c.deleteDate is null order by c.order")
+                .setParameter("userId", userId);
         return q.getResultList();
     }
 
@@ -168,9 +167,9 @@ public class CategoryDao {
     @SuppressWarnings("unchecked")
     public List<Category> findSubCategory(String parentId, String userId) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select c from Category c where c.parentId = :parentId and c.userId = :userId and c.deleteDate is null order by c.order");
-        q.setParameter("parentId", parentId);
-        q.setParameter("userId", userId);
+        Query q = em.createQuery("select c from Category c where c.parentId = :parentId and c.userId = :userId and c.deleteDate is null order by c.order")
+                .setParameter("parentId", parentId)
+                .setParameter("userId", userId);
         return q.getResultList();
     }
 

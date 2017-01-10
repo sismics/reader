@@ -45,8 +45,8 @@ public class JobDao {
      */
     public Job getActiveJob(String id) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select j from Job j where j.id = :id and j.deleteDate is null");
-        q.setParameter("id", id);
+        Query q = em.createQuery("select j from Job j where j.id = :id and j.deleteDate is null")
+                .setParameter("id", id);
         try {
             return (Job) q.getSingleResult();
         } catch (NoResultException e) {
@@ -63,8 +63,8 @@ public class JobDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the job
-        Query q = em.createQuery("select j from Job j where j.id = :id and j.deleteDate is null");
-        q.setParameter("id", id);
+        Query q = em.createQuery("select j from Job j where j.id = :id and j.deleteDate is null")
+                .setParameter("id", id);
         Job jobFromDb = (Job) q.getSingleResult();
 
         // Delete the job
@@ -121,8 +121,8 @@ public class JobDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the job
-        Query q = em.createQuery("select j from Job j where j.id = :id and j.deleteDate is null");
-        q.setParameter("id", job.getId());
+        Query q = em.createQuery("select j from Job j where j.id = :id and j.deleteDate is null")
+                .setParameter("id", job.getId());
         Job jobFromDb = (Job) q.getSingleResult();
 
         // Update the job

@@ -118,8 +118,8 @@ public class ArticleDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the article
-        Query q = em.createQuery("select a from Article a where a.id = :id and a.deleteDate is null");
-        q.setParameter("id", id);
+        Query q = em.createQuery("select a from Article a where a.id = :id and a.deleteDate is null")
+                .setParameter("id", id);
         Article articleFromDb = (Article) q.getSingleResult();
 
         // Delete the article

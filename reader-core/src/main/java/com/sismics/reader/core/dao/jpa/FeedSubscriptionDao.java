@@ -50,8 +50,8 @@ public class FeedSubscriptionDao extends BaseDao<FeedSubscriptionDto, FeedSubscr
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the subscription
-        Query q = em.createQuery("select fs from FeedSubscription fs where fs.id = :id and fs.deleteDate is null");
-        q.setParameter("id", feedSubscription.getId());
+        Query q = em.createQuery("select fs from FeedSubscription fs where fs.id = :id and fs.deleteDate is null")
+                .setParameter("id", feedSubscription.getId());
         FeedSubscription feedSubscriptionFromDb = (FeedSubscription) q.getSingleResult();
 
         // Update the subscription
@@ -70,10 +70,10 @@ public class FeedSubscriptionDao extends BaseDao<FeedSubscriptionDto, FeedSubscr
      */
     public void updateUnreadCount(String id, Integer unreadCount) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createNativeQuery("update T_FEED_SUBSCRIPTION set FES_UNREADCOUNT_N = :unreadCount where FES_ID_C = :id");
-        q.setParameter("id", id);
-        q.setParameter("unreadCount", unreadCount);
-        q.executeUpdate();
+        em.createNativeQuery("update T_FEED_SUBSCRIPTION set FES_UNREADCOUNT_N = :unreadCount where FES_ID_C = :id")
+                .setParameter("id", id)
+                .setParameter("unreadCount", unreadCount)
+                .executeUpdate();
     }
 
     /**
@@ -87,9 +87,9 @@ public class FeedSubscriptionDao extends BaseDao<FeedSubscriptionDto, FeedSubscr
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Find categories with the same parent
-        Query q = em.createQuery("select fs from FeedSubscription fs where fs.categoryId = :categoryId and fs.userId = :userId and fs.deleteDate is null order by fs.order");
-        q.setParameter("categoryId", feedSubscription.getCategoryId());
-        q.setParameter("userId", feedSubscription.getUserId());
+        Query q = em.createQuery("select fs from FeedSubscription fs where fs.categoryId = :categoryId and fs.userId = :userId and fs.deleteDate is null order by fs.order")
+                .setParameter("categoryId", feedSubscription.getCategoryId())
+                .setParameter("userId", feedSubscription.getUserId());
         List<FeedSubscription> feedSubscriptionList = (List<FeedSubscription>) q.getResultList();
         for (int i = 0; i < feedSubscriptionList.size(); i++) {
             FeedSubscription currentFeedSubscription = feedSubscriptionList.get(i);
@@ -113,8 +113,8 @@ public class FeedSubscriptionDao extends BaseDao<FeedSubscriptionDto, FeedSubscr
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the subscription
-        Query q = em.createQuery("select fs from FeedSubscription fs where fs.id = :id and fs.deleteDate is null");
-        q.setParameter("id", id);
+        Query q = em.createQuery("select fs from FeedSubscription fs where fs.id = :id and fs.deleteDate is null")
+                .setParameter("id", id);
         FeedSubscription feedSubscriptionFromDb = (FeedSubscription) q.getSingleResult();
 
         // Delete the subscription
@@ -130,9 +130,9 @@ public class FeedSubscriptionDao extends BaseDao<FeedSubscriptionDto, FeedSubscr
      */
     public FeedSubscription getFeedSubscription(String id, String userId) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select fs from FeedSubscription fs where fs.id = :id and fs.userId = :userId and fs.deleteDate is null");
-        q.setParameter("id", id);
-        q.setParameter("userId", userId);
+        Query q = em.createQuery("select fs from FeedSubscription fs where fs.id = :id and fs.userId = :userId and fs.deleteDate is null")
+                .setParameter("id", id)
+                .setParameter("userId", userId);
         try {
             return (FeedSubscription) q.getSingleResult();
         } catch (NoResultException e) {
@@ -149,8 +149,8 @@ public class FeedSubscriptionDao extends BaseDao<FeedSubscriptionDto, FeedSubscr
     @SuppressWarnings("unchecked")
     public List<FeedSubscription> findByCategory(String categoryId) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select fs from FeedSubscription fs where fs.categoryId = :categoryId and fs.deleteDate is null");
-        q.setParameter("categoryId", categoryId);
+        Query q = em.createQuery("select fs from FeedSubscription fs where fs.categoryId = :categoryId and fs.deleteDate is null")
+                .setParameter("categoryId", categoryId);
         return q.getResultList();
     }
     
@@ -163,9 +163,9 @@ public class FeedSubscriptionDao extends BaseDao<FeedSubscriptionDto, FeedSubscr
      */
     public int getCategoryCount(String categoryId, String userId) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select count(fs.id) from FeedSubscription fs where fs.categoryId = :categoryId and fs.userId = :userId and fs.deleteDate is null");
-        q.setParameter("categoryId", categoryId);
-        q.setParameter("userId", userId);
+        Query q = em.createQuery("select count(fs.id) from FeedSubscription fs where fs.categoryId = :categoryId and fs.userId = :userId and fs.deleteDate is null")
+                .setParameter("categoryId", categoryId)
+                .setParameter("userId", userId);
         return ((Long) q.getSingleResult()).intValue();
     }
 

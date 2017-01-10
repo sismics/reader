@@ -45,8 +45,8 @@ public class JobEventDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the jobEvent
-        Query q = em.createQuery("select e from JobEvent e where e.id = :id and e.deleteDate is null");
-        q.setParameter("id", id);
+        Query q = em.createQuery("select e from JobEvent e where e.id = :id and e.deleteDate is null")
+                .setParameter("id", id);
         JobEvent jobEventFromDb = (JobEvent) q.getSingleResult();
 
         // Delete the jobEvent

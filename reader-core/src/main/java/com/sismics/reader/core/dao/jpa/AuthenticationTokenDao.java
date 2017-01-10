@@ -5,7 +5,6 @@ import com.sismics.util.context.ThreadLocalContext;
 import org.joda.time.DateTime;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.util.Date;
 import java.util.UUID;
 
@@ -68,11 +67,11 @@ public class AuthenticationTokenDao {
         sb.append(" and AUT_LASTCONNECTIONDATE_D < :minDate ");
 
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createNativeQuery(sb.toString());
-        q.setParameter("userId", userId);
-        q.setParameter("longLasted", false);
-        q.setParameter("minDate", DateTime.now().minusDays(1).toDate());
-        q.executeUpdate();
+        em.createNativeQuery(sb.toString())
+                .setParameter("userId", userId)
+                .setParameter("longLasted", false)
+                .setParameter("minDate", DateTime.now().minusDays(1).toDate())
+                .executeUpdate();
     }
 
     /**
@@ -86,9 +85,9 @@ public class AuthenticationTokenDao {
         sb.append(" where AUT_ID_C = :id");
 
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createNativeQuery(sb.toString());
-        q.setParameter("currentDate", new Date());
-        q.setParameter("id", id);
-        q.executeUpdate();
+        em.createNativeQuery(sb.toString())
+                .setParameter("currentDate", new Date())
+                .setParameter("id", id)
+                .executeUpdate();
     }
 }

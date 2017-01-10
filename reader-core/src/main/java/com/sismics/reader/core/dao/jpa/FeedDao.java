@@ -46,8 +46,8 @@ public class FeedDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the feed
-        Query q = em.createQuery("select f from Feed f where f.id = :id and f.deleteDate is null");
-        q.setParameter("id", id);
+        Query q = em.createQuery("select f from Feed f where f.id = :id and f.deleteDate is null")
+                .setParameter("id", id);
         Feed feedFromDb = (Feed) q.getSingleResult();
 
         // Delete the feed
@@ -63,8 +63,8 @@ public class FeedDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the feed
-        Query q = em.createQuery("select f from Feed f where f.rssUrl = :rssUrl and f.deleteDate is null");
-        q.setParameter("rssUrl", rssUrl);
+        Query q = em.createQuery("select f from Feed f where f.rssUrl = :rssUrl and f.deleteDate is null")
+                .setParameter("rssUrl", rssUrl);
         try {
             return (Feed) q.getSingleResult();
         } catch (NoResultException e) {
@@ -133,8 +133,8 @@ public class FeedDao {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the feed
-        Query q = em.createQuery("select f from Feed f where f.id = :id and f.deleteDate is null");
-        q.setParameter("id", feed.getId());
+        Query q = em.createQuery("select f from Feed f where f.id = :id and f.deleteDate is null")
+                .setParameter("id", feed.getId());
         Feed feedFromDb = (Feed) q.getSingleResult();
 
         // Update the feed

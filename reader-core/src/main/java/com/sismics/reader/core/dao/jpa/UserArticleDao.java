@@ -50,8 +50,8 @@ public class UserArticleDao extends BaseDao<UserArticleDto, UserArticleCriteria>
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the subscription
-        Query q = em.createQuery("select ua from UserArticle ua where ua.id = :id and ua.deleteDate is null");
-        q.setParameter("id", userArticle.getId());
+        Query q = em.createQuery("select ua from UserArticle ua where ua.id = :id and ua.deleteDate is null")
+                .setParameter("id", userArticle.getId());
         UserArticle userArticleFromDb = (UserArticle) q.getSingleResult();
 
         // Update the subscription
@@ -84,15 +84,15 @@ public class UserArticleDao extends BaseDao<UserArticleDto, UserArticleCriteria>
             sb.append("    and fs.FES_IDCATEGORY_C = :categoryId ");
         }
         sb.append(" and ua2.USA_IDUSER_C = :userId and ua2.USA_DELETEDATE_D is null and ua2.USA_READDATE_D is null) ");
-        Query q = em.createNativeQuery(sb.toString());
+        Query q = em.createNativeQuery(sb.toString())
+                .setParameter("userId", criteria.getUserId())
+                .setParameter("readDate", new Date());
         if (criteria.getFeedSubscriptionId() != null) {
             q.setParameter("feedSubscriptionId", criteria.getFeedSubscriptionId());
         }
         if (criteria.getCategoryId() != null) {
             q.setParameter("categoryId", criteria.getCategoryId());
         }
-        q.setParameter("userId", criteria.getUserId());
-        q.setParameter("readDate", new Date());
         q.executeUpdate();
     }
     
@@ -105,8 +105,8 @@ public class UserArticleDao extends BaseDao<UserArticleDto, UserArticleCriteria>
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         
         // Get the subscription
-        Query q = em.createQuery("select ua from UserArticle ua where ua.id = :id and ua.deleteDate is null");
-        q.setParameter("id", id);
+        Query q = em.createQuery("select ua from UserArticle ua where ua.id = :id and ua.deleteDate is null")
+                .setParameter("id", id);
         UserArticle userArticleFromDb = (UserArticle) q.getSingleResult();
 
         // Delete the subscription
@@ -122,9 +122,9 @@ public class UserArticleDao extends BaseDao<UserArticleDto, UserArticleCriteria>
      */
     public UserArticle getUserArticle(String id, String userId) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createQuery("select ua from UserArticle ua where ua.id = :id and ua.userId = :userId and ua.deleteDate is null");
-        q.setParameter("id", id);
-        q.setParameter("userId", userId);
+        Query q = em.createQuery("select ua from UserArticle ua where ua.id = :id and ua.userId = :userId and ua.deleteDate is null")
+                .setParameter("id", id)
+                .setParameter("userId", userId);
         try {
             return (UserArticle) q.getSingleResult();
         } catch (NoResultException e) {
