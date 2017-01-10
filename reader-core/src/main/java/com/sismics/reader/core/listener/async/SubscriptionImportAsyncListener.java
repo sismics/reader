@@ -70,7 +70,6 @@ public class SubscriptionImportAsyncListener {
      * Process the event.
      * 
      * @param subscriptionImportedEvent OPML imported event
-     * @throws Exception
      */
     @Subscribe
     public void onSubscriptionImport(final SubscriptionImportedEvent subscriptionImportedEvent) throws Exception {

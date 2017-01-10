@@ -28,8 +28,6 @@ public class ResourceUtil {
      * @param path Path
      * @param filter Filter
      * @return List of files
-     * @throws URISyntaxException
-     * @throws IOException
      */
     public static List<String> list(Class<?> clazz, String path, FilenameFilter filter) throws URISyntaxException, IOException {
         // Path is a directory on the filesystem
@@ -94,8 +92,6 @@ public class ResourceUtil {
      * @param clazz Class
      * @param path Path
      * @return List of files
-     * @throws URISyntaxException
-     * @throws IOException
      */
     public static List<String> list(Class<?> clazz, String path) throws URISyntaxException, IOException {
         return list(clazz, path, null);

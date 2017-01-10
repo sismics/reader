@@ -1,15 +1,14 @@
 package com.sismics.reader.core.listener.async;
 
-import java.text.MessageFormat;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.eventbus.Subscribe;
 import com.sismics.reader.core.dao.lucene.ArticleDao;
 import com.sismics.reader.core.event.ArticleCreatedAsyncEvent;
 import com.sismics.reader.core.model.jpa.Article;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.MessageFormat;
+import java.util.List;
 
 /**
  * Listener on newly created articles.
@@ -26,7 +25,6 @@ public class ArticleCreatedAsyncListener {
      * Process new articles.
      * 
      * @param articlesCreatedAsyncEvent New articles created event
-     * @throws Exception
      */
     @Subscribe
     public void onArticleCreated(final ArticleCreatedAsyncEvent articlesCreatedAsyncEvent) throws Exception {

@@ -114,11 +114,10 @@ public class IndexingService extends AbstractScheduledService {
      * Search articles.
      * 
      * @param userId User ID
-     * @param searchQuery
+     * @param searchQuery The query
      * @param offset Offset
      * @param limit Limit
      * @return List of articles
-     * @throws Exception 
      */
     public PaginatedList<UserArticleDto> searchArticles(String userId, String searchQuery, Integer offset, Integer limit) throws Exception {
         // Search articles
@@ -169,7 +168,6 @@ public class IndexingService extends AbstractScheduledService {
     /**
      * Destroy and rebuild Lucene index.
      * 
-     * @throws Exception 
      */
     public void rebuildIndex() throws Exception {
         RebuildIndexAsyncEvent rebuildIndexAsyncEvent = new RebuildIndexAsyncEvent();

@@ -1,10 +1,8 @@
 package com.sismics.util;
 
-import junit.framework.Assert;
-
-import org.junit.Test;
-
 import com.sismics.reader.core.util.sanitizer.TextSanitizer;
+import junit.framework.Assert;
+import org.junit.Test;
 
 /**
  * Test of the text sanitizer.
@@ -15,7 +13,6 @@ public class TestTextSanitizer {
     /**
      * Tests the text sanitizer.
      * 
-     * @throws Exception
      */
     @Test
     public void textSanitizerTest() throws Exception {

@@ -15,7 +15,6 @@ public class MimeTypeUtil {
      * 
      * @param file File to inspect
      * @return MIME type
-     * @throws Exception
      */
     public static String guessMimeType(File file) throws Exception {
         InputStream is = null;

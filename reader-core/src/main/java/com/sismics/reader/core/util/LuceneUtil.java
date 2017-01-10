@@ -1,7 +1,7 @@
 package com.sismics.reader.core.util;
 
-import java.io.IOException;
-
+import com.sismics.reader.core.dao.lucene.ReaderStandardAnalyzer;
+import com.sismics.reader.core.model.context.AppContext;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.SerialMergeScheduler;
@@ -10,8 +10,7 @@ import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sismics.reader.core.dao.lucene.ReaderStandardAnalyzer;
-import com.sismics.reader.core.model.context.AppContext;
+import java.io.IOException;
 
 /**
  * Lucene utils.
@@ -82,7 +81,6 @@ public class LuceneUtil {
          * Code to run in a Lucene context.
          * 
          * @param indexWriter Index writer
-         * @throws Exception 
          */
         abstract void run(IndexWriter indexWriter) throws Exception;
     }

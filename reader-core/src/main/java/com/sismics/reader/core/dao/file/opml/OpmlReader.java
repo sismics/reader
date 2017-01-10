@@ -1,20 +1,19 @@
 package com.sismics.reader.core.dao.file.opml;
 
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.text.MessageFormat;
-import java.util.List;
-import java.util.Stack;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.text.MessageFormat;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * OPML parser.
@@ -58,7 +57,6 @@ public class OpmlReader extends DefaultHandler {
     /**
      * Constructor of OpmlReader.
      * 
-     * @throws MalformedURLException
      */
     public OpmlReader() throws MalformedURLException {
         elementStack = new Stack<Element>();
@@ -69,7 +67,6 @@ public class OpmlReader extends DefaultHandler {
      * Reads an OPML into a tree structure.
      * 
      * @param is Input stream
-     * @throws Exception
      */
     public void read(InputStream is) throws Exception {
         SAXParserFactory factory = SAXParserFactory.newInstance();

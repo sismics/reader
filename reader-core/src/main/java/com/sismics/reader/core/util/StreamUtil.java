@@ -17,7 +17,6 @@ public class StreamUtil {
      * 
      * @param is InputStream
      * @return InputStream
-     * @throws IOException 
      */
     public static InputStream detectGzip(InputStream is) throws IOException {
         PushbackInputStream pb = new PushbackInputStream(is, 2);

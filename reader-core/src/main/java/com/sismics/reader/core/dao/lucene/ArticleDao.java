@@ -41,7 +41,7 @@ public class ArticleDao {
     /**
      * Destroy and rebuild index.
      * 
-     * @param articleList
+     * @param articleList The list of articles
      */
     public void rebuildIndex(final List<Article> articleList) {
         LuceneUtil.handle(new LuceneRunnable() {
@@ -63,7 +63,7 @@ public class ArticleDao {
     /**
      * Add articles to the index.
      * 
-     * @param articleList
+     * @param articleList The list of articles
      */
     public void create(final List<Article> articleList) {
         LuceneUtil.handle(new LuceneRunnable() {
@@ -116,10 +116,9 @@ public class ArticleDao {
     /**
      * Search articles.
      * 
-     * @param paginatedList
-     * @param searchQuery
+     * @param paginatedList The list of articles
+     * @param searchQuery The query
      * @return List of articles
-     * @throws Exception
      */
     public Map<String, Article> search(PaginatedList<UserArticleDto> paginatedList, String searchQuery) throws Exception {
         // Escape query and add quotes so QueryParser generate a PhraseQuery

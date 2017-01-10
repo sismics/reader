@@ -93,7 +93,6 @@ public abstract class BaseJerseyTest extends JerseyTest {
     /**
      * Starts the HTTP server.
      *
-     * @throws Exception
      */
     private void startHttpServer() throws Exception {
         String httpRoot = URLDecoder.decode(new File(getClass().getResource("/").getFile()).getAbsolutePath(), "utf-8");
@@ -125,8 +124,6 @@ public abstract class BaseJerseyTest extends JerseyTest {
      * Extracts an email from the queue and consumes the email.
      * 
      * @return Text of the email
-     * @throws MessagingException
-     * @throws IOException
      */
     protected String popEmail() throws MessagingException, IOException {
         List<WiserMessage> wiserMessageList = wiser.getMessages();
@@ -138,9 +135,8 @@ public abstract class BaseJerseyTest extends JerseyTest {
         MimeMessage message = wiserMessage.getMimeMessage();
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         message.writeTo(os);
-        String body = os.toString();
-        
-        return body;
+
+        return os.toString();
     }
     
     /**
@@ -148,8 +144,6 @@ public abstract class BaseJerseyTest extends JerseyTest {
      * 
      * @param input String to encode
      * @return Encoded string
-     * @throws MessagingException
-     * @throws IOException
      */
     protected String encodeQuotedPrintable(String input) throws MessagingException, IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -179,8 +173,6 @@ public abstract class BaseJerseyTest extends JerseyTest {
      * and currently not having connection.
      *
      * @param runnable The code to run while the network is down
-     * @return The result
-     * @throws Exception
      */
     protected void withNetworkDown(Runnable runnable) throws Exception {
         try {

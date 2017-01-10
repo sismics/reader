@@ -1,16 +1,15 @@
 package com.sismics.reader.core.listener.async;
 
-import java.text.MessageFormat;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.eventbus.Subscribe;
 import com.sismics.reader.core.dao.file.html.FaviconDownloader;
 import com.sismics.reader.core.event.FaviconUpdateRequestedEvent;
 import com.sismics.reader.core.model.jpa.Feed;
 import com.sismics.reader.core.util.DirectoryUtil;
 import com.sismics.reader.core.util.TransactionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.MessageFormat;
 
 /**
  * Listener on a feed favicon update request.
@@ -27,7 +26,6 @@ public class FaviconUpdateRequestedAsyncListener {
      * Process the event.
      * 
      * @param faviconUpdateRequestedEvent OPML imported event
-     * @throws Exception
      */
     @Subscribe
     public void onFaviconUpdateRequested(final FaviconUpdateRequestedEvent faviconUpdateRequestedEvent) throws Exception {

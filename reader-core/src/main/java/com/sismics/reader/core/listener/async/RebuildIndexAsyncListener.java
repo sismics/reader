@@ -1,15 +1,14 @@
 package com.sismics.reader.core.listener.async;
 
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.eventbus.Subscribe;
 import com.sismics.reader.core.dao.lucene.ArticleDao;
 import com.sismics.reader.core.event.RebuildIndexAsyncEvent;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.util.TransactionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 /**
  * Listener on rebuild index.
@@ -26,7 +25,6 @@ public class RebuildIndexAsyncListener {
      * Rebuild articles index.
      * 
      * @param rebuildIndexAsyncEvent Index rebuild event
-     * @throws Exception
      */
     @Subscribe
     public void onArticleCreated(final RebuildIndexAsyncEvent rebuildIndexAsyncEvent) throws Exception {

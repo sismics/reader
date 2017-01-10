@@ -49,7 +49,6 @@ public class UrlUtil {
      *
      * @param urlString Source URL
      * @return Extracted URL
-     * @throws MalformedURLException
      */
     public static String getBaseUri(String urlString) throws MalformedURLException {
         URL url = new URL(urlString);
@@ -62,7 +61,6 @@ public class UrlUtil {
      * @param baseUrl base URL
      * @param relativeUrl URL to complete
      * @return Completed URL
-     * @throws MalformedURLException
      */
     public static String completeUrl(String baseUrl, String relativeUrl) throws MalformedURLException {
         // Trim URL

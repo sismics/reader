@@ -1,8 +1,8 @@
 package com.sismics.util;
 
-import java.text.MessageFormat;
-
 import org.codehaus.jackson.JsonNode;
+
+import java.text.MessageFormat;
 
 /**
  * JSON validation utilities.
@@ -16,7 +16,6 @@ public class JsonValidationUtil {
      * 
      * @param n JSON node to check
      * @param name Name of the property
-     * @throws Exception
      */
     public static void validateJsonRequired(JsonNode n, String name) throws Exception {
         if (!n.has(name)) {
@@ -30,7 +29,6 @@ public class JsonValidationUtil {
      * @param n JSON node to check
      * @param name Name of the property
      * @param required Property required
-     * @throws Exception
      */
     public static void validateJsonObject(JsonNode n, String name, boolean required) throws Exception {
         if (required && !n.has(name)) {
@@ -47,7 +45,6 @@ public class JsonValidationUtil {
      * @param n JSON node to check
      * @param name Name of the property
      * @param required Property required
-     * @throws Exception
      */
     public static void validateJsonNumber(JsonNode n, String name, boolean required) throws Exception {
         if (required && !n.has(name)) {
@@ -64,7 +61,6 @@ public class JsonValidationUtil {
      * @param n JSON node to check
      * @param name Name of the property
      * @param required Property required
-     * @throws Exception
      */
     public static void validateJsonLong(JsonNode n, String name, boolean required) throws Exception {
         if (required && !n.has(name)) {
@@ -81,7 +77,6 @@ public class JsonValidationUtil {
      * @param n JSON node to check
      * @param name Name of the property
      * @param required Property required
-     * @throws Exception
      */
     public static void validateJsonString(JsonNode n, String name, boolean required) throws Exception {
         if (required && !n.has(name)) {
@@ -98,7 +93,6 @@ public class JsonValidationUtil {
      * @param n JSON node to check
      * @param name Name of the property
      * @param required Property required
-     * @throws Exception
      */
     public static void validateJsonArray(JsonNode n, String name, boolean required) throws Exception {
         if (required && !n.has(name)) {

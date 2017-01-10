@@ -224,7 +224,6 @@ public class TestRssReader {
     /**
      * This feed has a invalid URL https://itunes.apple.com/it/book/earth-from-space/id632294005?l=en&mt=11
      * 
-     * @throws Exception
      */
     @Test
     public void rssReaderEsaTest() throws Exception {
@@ -250,7 +249,6 @@ public class TestRssReader {
     /**
      * This feed if encoded if ISO-8859-1.
      * 
-     * @throws Exception
      */
     @Test
     public void rssReaderLemessagerTest() throws Exception {
@@ -427,7 +425,6 @@ public class TestRssReader {
     /**
      * Related to issue #84.
      * 
-     * @throws Exception
      */
     @Test
     public void rssReaderSlackwareTest() throws Exception {
@@ -451,7 +448,6 @@ public class TestRssReader {
     /**
      * Related to issue #84.
      * 
-     * @throws Exception
      */
     @Test
     public void rssReaderMalikiTest() throws Exception {

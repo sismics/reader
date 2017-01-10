@@ -1,10 +1,5 @@
 package com.sismics.reader.core.dao.file.html;
 
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.MessageFormat;
-
 import org.apache.commons.lang.StringUtils;
 import org.ccil.cowan.tagsoup.jaxp.SAXParserImpl;
 import org.slf4j.Logger;
@@ -12,6 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.MessageFormat;
 
 /**
  * HTML parser used to look for a favicon.
@@ -35,7 +35,6 @@ public class FaviconExtractor extends DefaultHandler {
      * Constructor of FaviconExtractor.
      * 
      * @param url Url of the html page
-     * @throws MalformedURLException
      */
     public FaviconExtractor(String url) throws MalformedURLException {
         this.url = new URL(url);
@@ -45,7 +44,6 @@ public class FaviconExtractor extends DefaultHandler {
      * Reads an HTML page and extracts RSS / Atom feeds.
      * 
      * @param is Input stream
-     * @throws Exception
      */
     public void readPage(InputStream is) throws Exception {
         SAXParserImpl parser = SAXParserImpl.newInstance(null);

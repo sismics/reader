@@ -49,7 +49,6 @@ public class UserDao {
      * 
      * @param user User to create
      * @return User ID
-     * @throws Exception
      */
     public String create(User user) throws Exception {
         // Create the user UUID

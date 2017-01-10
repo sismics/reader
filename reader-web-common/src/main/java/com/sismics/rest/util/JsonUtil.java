@@ -18,7 +18,6 @@ public class JsonUtil {
      * @param key Key containing the array of null
      * @param value Value to append
      * @return Updated object
-     * @throws JSONException
      */
     public static JSONObject append(JSONObject o, String key, JSONObject value)  throws JSONException {
         Object prevValue = o.opt(key);

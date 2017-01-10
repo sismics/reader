@@ -72,7 +72,6 @@ public abstract class ReaderHttpClient {
      * 
      * @param url URL
      * @return Connection
-     * @throws IOException
      */
     private HttpURLConnection buildHttpConnection(URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

@@ -1,12 +1,6 @@
 package com.sismics.reader.core.dao.file.html;
 
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.sismics.util.UrlUtil;
 import org.apache.commons.lang.StringUtils;
 import org.ccil.cowan.tagsoup.jaxp.SAXParserImpl;
 import org.slf4j.Logger;
@@ -15,7 +9,12 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.sismics.util.UrlUtil;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * HTML parser used to look for RSS / Atom feeds.
@@ -39,7 +38,6 @@ public class RssExtractor extends DefaultHandler {
      * Constructor of RssExtractor.
      * 
      * @param url Url of the html page
-     * @throws MalformedURLException
      */
     public RssExtractor(String url) throws MalformedURLException {
         this.url = new URL(url);
@@ -50,7 +48,6 @@ public class RssExtractor extends DefaultHandler {
      * Reads an HTML page and extracts RSS / Atom feeds.
      * 
      * @param is Input stream
-     * @throws Exception
      */
     public void readPage(InputStream is) throws Exception {
         SAXParserImpl parser = SAXParserImpl.newInstance(null);

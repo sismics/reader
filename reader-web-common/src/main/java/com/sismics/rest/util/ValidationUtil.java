@@ -27,7 +27,6 @@ public class ValidationUtil {
      * 
      * @param s Object tu validate
      * @param name Name of the parameter
-     * @throws JSONException
      */
     public static void validateRequired(Object s, String name) throws JSONException {
         if (s == null) {
@@ -44,7 +43,6 @@ public class ValidationUtil {
      * @param lengthMax Maximum length (or null)
      * @param nullable True if the string can be empty or null
      * @return String without white spaces
-     * @throws ClientException
      */
     public static String validateLength(String s, String name, Integer lengthMin, Integer lengthMax, boolean nullable) throws JSONException {
         s = StringUtils.strip(s);
@@ -71,7 +69,6 @@ public class ValidationUtil {
      * @param lengthMin Minimum length (or null)
      * @param lengthMax Maximum length (or null)
      * @return String without white spaces
-     * @throws ClientException
      */
     public static String validateLength(String s, String name, Integer lengthMin, Integer lengthMax) throws JSONException {
         return validateLength(s, name, lengthMin, lengthMax, false);
@@ -83,7 +80,6 @@ public class ValidationUtil {
      * @param s String to validate
      * @param name Name of the parameter
      * @return String without white spaces
-     * @throws JSONException
      */
     public static String validateStringNotBlank(String s, String name) throws JSONException {
         return validateLength(s, name, 1, null, false);
@@ -94,7 +90,6 @@ public class ValidationUtil {
      * 
      * @param s String to validate
      * @param name Name of the parameter
-     * @throws JSONException
      */
     public static void validateEmail(String s, String name) throws JSONException {
         if (!EMAIL_PATTERN.matcher(s).matches()) {
@@ -108,7 +103,6 @@ public class ValidationUtil {
      * @param s String to validate
      * @param name Name of the parameter
      * @return Stripped URL
-     * @throws JSONException
      */
     public static String validateHttpUrl(String s, String name) throws JSONException {
         s = StringUtils.strip(s);
@@ -123,7 +117,6 @@ public class ValidationUtil {
      * 
      * @param s String to validate
      * @param name Name of the parameter
-     * @throws JSONException
      */
     public static void validateAlphanumeric(String s, String name) throws JSONException {
         if (!ALPHANUMERIC_PATTERN.matcher(s).matches()) {
@@ -138,7 +131,6 @@ public class ValidationUtil {
      * @param name Name of the parameter
      * @param nullable True if the string can be empty or null
      * @return Parsed date
-     * @throws JSONException
      */
     public static Date validateDate(String s, String name, boolean nullable) throws JSONException {
         if (Strings.isNullOrEmpty(s)) {

@@ -17,27 +17,25 @@
 
 package com.sismics.util;
 
-import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import javax.script.ScriptException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.apache.commons.lang.StringEscapeUtils;
-import org.codehaus.jettison.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.sismics.util.adblock.Helper;
 import com.sismics.util.adblock.JSEngine;
 import com.sismics.util.adblock.Subscription;
 import com.sismics.util.adblock.SubscriptionParser;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.codehaus.jettison.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.script.ScriptException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class AdblockUtil {
     
@@ -103,7 +101,6 @@ public class AdblockUtil {
      * Adds provided subscription and removes previous subscriptions if any.
      * 
      * @param subscription Subscription to add
-     * @throws Exception 
      */
     public void setSubscription(Subscription subscription) throws Exception {
         if (subscription != null) {
@@ -118,7 +115,6 @@ public class AdblockUtil {
 
     /**
      * Forces subscriptions refresh.
-     * @throws ScriptException 
      */
     public void refreshSubscription() throws ScriptException {
         js.evaluate("refreshSubscriptions()");
@@ -166,7 +162,6 @@ public class AdblockUtil {
      * presence.
      * 
      * @return true if at least one subscription is present and downloaded
-     * @throws ScriptException 
      */
     public boolean verifySubscriptions() throws ScriptException {
         return (Boolean) js.evaluate("verifySubscriptions()");
@@ -181,7 +176,6 @@ public class AdblockUtil {
      * @param refHost Request referrer header
      * @param accept Request accept header
      * @return true if matched filter was found
-     * @throws Exception
      */
     public Boolean matches(String url, String query, String reqHost, String refHost, String accept) throws Exception {
         return (Boolean) js.evaluate("matchesAny('" 
@@ -194,7 +188,6 @@ public class AdblockUtil {
 
     /**
      * Notifies JS code that application entered interactive mode.
-     * @throws ScriptException 
      */
     public void startInteractive() throws ScriptException {
         js.evaluate("startInteractive()");
@@ -203,7 +196,6 @@ public class AdblockUtil {
 
     /**
      * Notifies JS code that application quit interactive mode.
-     * @throws ScriptException 
      */
     public void stopInteractive() throws ScriptException {
         js.evaluate("stopInteractive()");

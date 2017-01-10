@@ -46,7 +46,6 @@ public class AuthenticationTokenDao {
      * Deletes the authentication token.
      * 
      * @param authenticationTokenId Authentication token ID
-     * @throws Exception
      */
     public void delete(String authenticationTokenId) throws Exception {
         EntityManager em = ThreadLocalContext.get().getEntityManager();

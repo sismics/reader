@@ -25,7 +25,6 @@ public class ValidationUtil {
      * @param name Name of the parameter
      * @return String without white spaces
      * @param nullable True if the string can be empty or null
-     * @throws com.sismics.rest.exception.ClientException
      */
     public static String validateTheme(ServletContext servletContext, String themeId, String name, boolean nullable) throws JSONException {
         themeId = StringUtils.strip(themeId);
@@ -51,7 +50,6 @@ public class ValidationUtil {
      * @param name Name of the parameter
      * @return String without white spaces
      * @param nullable True if the string can be empty or null
-     * @throws com.sismics.rest.exception.ClientException
      */
     public static String validateLocale(String localeId, String name, boolean nullable) throws JSONException {
         localeId = StringUtils.strip(localeId);

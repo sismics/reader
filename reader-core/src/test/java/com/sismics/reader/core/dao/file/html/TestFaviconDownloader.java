@@ -1,10 +1,9 @@
 package com.sismics.reader.core.dao.file.html;
 
-import java.io.File;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
+
+import java.io.File;
 
 /**
  * Test of the favicon downloader.
@@ -71,7 +70,6 @@ public class TestFaviconDownloader {
     /**
      * Related to issue #2.
      * 
-     * @throws Exception
      */
     @Test
     public void faviconDownloaderDoubleFineTest() throws Exception {

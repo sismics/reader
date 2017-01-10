@@ -1,9 +1,8 @@
 package com.sismics.reader.core.dao.file.json;
 
-import java.io.InputStream;
-import java.text.MessageFormat;
-import java.util.Date;
-
+import com.sismics.reader.core.model.jpa.Article;
+import com.sismics.reader.core.model.jpa.Feed;
+import com.sismics.util.JsonValidationUtil;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
@@ -11,9 +10,9 @@ import org.codehaus.jackson.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sismics.reader.core.model.jpa.Article;
-import com.sismics.reader.core.model.jpa.Feed;
-import com.sismics.util.JsonValidationUtil;
+import java.io.InputStream;
+import java.text.MessageFormat;
+import java.util.Date;
 
 /**
  * Reads a starred.json file from Google Takeout.
@@ -29,7 +28,6 @@ public class StarredReader {
      * Reads a starred file.
      * 
      * @param is JSON input stream
-     * @throws Exception
      */
     public void read(InputStream is) throws Exception {
         ObjectMapper mapper = new ObjectMapper();

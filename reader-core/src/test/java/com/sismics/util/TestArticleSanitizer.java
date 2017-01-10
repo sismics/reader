@@ -19,7 +19,6 @@ public class TestArticleSanitizer {
     /**
      * Tests that the image relative URLs are transformed to absolute form.
      * 
-     * @throws Exception
      */
     @Test
     public void articleSanitizerImageAkeweaTest() throws Exception {
@@ -44,7 +43,6 @@ public class TestArticleSanitizer {
     /**
      * Tests that the image relative URLs are transformed to absolute form.
      *
-     * @throws Exception
      */
     @Test
     public void articleSanitizerImageDilbertTest() throws Exception {
@@ -68,7 +66,6 @@ public class TestArticleSanitizer {
     /**
      * Tests that the image relative URLs are transformed to absolute form.
      * 
-     * @throws Exception
      */
     @Test
     public void articleSanitizerImageXmlBaseTest() throws Exception {
@@ -94,7 +91,6 @@ public class TestArticleSanitizer {
     /**
      * Tests that the image relative links are transformed to absolute form.
      *
-     * @throws Exception
      */
     @Test
     public void articleSanitizerLinkTest() throws Exception {
@@ -121,7 +117,6 @@ public class TestArticleSanitizer {
     /**
      * Tests the article sanitizer.
      * 
-     * @throws Exception
      */
     @Test
     public void articleSanitizerIframeVimeoTest() throws Exception {
@@ -145,7 +140,6 @@ public class TestArticleSanitizer {
     /**
      * Tests the article sanitizer.
      * 
-     * @throws Exception
      */
     @Test
     public void articleSanitizerIframeDailymotionTest() throws Exception {
@@ -169,7 +163,6 @@ public class TestArticleSanitizer {
     /**
      * Tests the article sanitizer.
      * 
-     * @throws Exception
      */
     @Test
     public void articleSanitizerIframeYoutubeTest() throws Exception {
@@ -207,7 +200,6 @@ public class TestArticleSanitizer {
     /**
      * Tests the article sanitizer.
      * 
-     * @throws Exception
      */
     @Test
     public void articleSanitizerIframeGoogleMapsTest() throws Exception {
@@ -219,9 +211,8 @@ public class TestArticleSanitizer {
         List<Article> articleList = reader.getArticleList();
 
         // Allow iframes to Google Maps
-        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         Article article = articleList.get(15);
-        articleSanitizer = new ArticleSanitizer();
+        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
         Assert.assertTrue(html.contains("<iframe src=\"//maps.google.com/?t&#61;m&amp;layer&#61;c&amp;panoid&#61;JkQZAcDH9c2tky4T8irVUg&amp;cbp&#61;13,219.16,,0,41.84&amp;cbll&#61;35.370043,138.739238&amp;ie&#61;UTF8&amp;source&#61;embed&amp;ll&#61;35.336203,138.739128&amp;spn&#61;0.117631,0.216293&amp;z&#61;12&amp;output&#61;svembed\" height=\"420\" width=\"630\">"));
     }
@@ -229,7 +220,6 @@ public class TestArticleSanitizer {
     /**
      * Tests the article sanitizer.
      * 
-     * @throws Exception
      */
     @Test
     public void articleSanitizerIframeSoundCloudTest() throws Exception {
@@ -241,9 +231,8 @@ public class TestArticleSanitizer {
         List<Article> articleList = reader.getArticleList();
 
         // Allow iframes to SoundCloud
-        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         Article article = articleList.get(15);
-        articleSanitizer = new ArticleSanitizer();
+        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
         String html = articleSanitizer.sanitize(feed.getUrl(), article.getDescription());
         Assert.assertTrue(html.contains("<iframe height=\"166\" src=\"//w.soundcloud.com/player/?url&#61;http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F105401675\" width=\"100%\"></iframe>"));
     }
@@ -251,7 +240,6 @@ public class TestArticleSanitizer {
     /**
      * Tests the article sanitizer.
      * 
-     * @throws Exception
      */
     @Test
     public void articleSanitizerIframeSlashdotTest() throws Exception {
@@ -275,7 +263,6 @@ public class TestArticleSanitizer {
     /**
      * Tests the article sanitizer.
      *
-     * @throws Exception
      */
     @Test
     public void articleSanitizerIframeWhydTest() throws Exception {
@@ -299,7 +286,6 @@ public class TestArticleSanitizer {
     /**
      * Tests the article sanitizer.
      *
-     * @throws Exception
      */
     @Test
     public void articleSanitizerIframeBandcampTest() throws Exception {
@@ -323,7 +309,6 @@ public class TestArticleSanitizer {
     /**
      * Tests the article sanitizer.
      *
-     * @throws Exception
      */
     @Test
     public void articleSanitizerIframeVineTest() throws Exception {
@@ -347,7 +332,6 @@ public class TestArticleSanitizer {
     /**
      * Tests the article sanitizer related to issue #71.
      *
-     * @throws Exception
      */
     @Test
     public void articleSanitizer71Test() throws Exception {
@@ -372,7 +356,6 @@ public class TestArticleSanitizer {
     /**
      * Tests various iframes sanitizing related to issue #99.
      * 
-     * @throws Exception
      */
     @Test
     public void articleSanitizer99Test() throws Exception {

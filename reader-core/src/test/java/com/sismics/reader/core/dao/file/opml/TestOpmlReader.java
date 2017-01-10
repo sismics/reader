@@ -1,14 +1,12 @@
 package com.sismics.reader.core.dao.file.opml;
 
+import com.google.common.io.Closer;
+import junit.framework.Assert;
+import org.junit.Test;
+
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-
-import junit.framework.Assert;
-
-import org.junit.Test;
-
-import com.google.common.io.Closer;
 
 /**
  * Test of the OPML reader.
@@ -61,7 +59,6 @@ public class TestOpmlReader {
     /**
      * Related to #87.
      * 
-     * @throws Exception
      */
     @Test
     public void lifereaOpmlReaderTest() throws Exception {
@@ -98,7 +95,6 @@ public class TestOpmlReader {
     /**
      * Related to #95.
      * 
-     * @throws Exception
      */
     @Test
     public void ttrssOpmlReaderTest() throws Exception {
