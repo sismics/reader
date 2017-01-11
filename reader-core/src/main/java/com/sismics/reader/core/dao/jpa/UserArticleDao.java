@@ -45,9 +45,17 @@ public class UserArticleDao extends BaseDao<UserArticleDto, UserArticleCriteria>
             sb.append("  left join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_DELETEDATE_D is null) ");
         }
         sb.append("  join T_FEED f on(f.FED_ID_C = a.ART_IDFEED_C and f.FED_DELETEDATE_D is null) ");
-        sb.append("  left join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
+        if (criteria.isFetchAllFeedSubscription()) {
+            sb.append("  left join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_DELETEDATE_D is null) ");
+        } else {
+            sb.append("  left join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
+        }
 
         // Adds search criteria
+        criteriaList.add("a.ART_DELETEDATE_D is null");
+        if (criteria.getUserId() != null) {
+            parameterMap.put("userId", criteria.getUserId());
+        }
         if (criteria.getFeedId() != null) {
             criteriaList.add("a.ART_IDFEED_C = :feedId");
             parameterMap.put("feedId", criteria.getFeedId());
@@ -57,7 +65,7 @@ public class UserArticleDao extends BaseDao<UserArticleDto, UserArticleCriteria>
             parameterMap.put("articleId", criteria.getArticleId());
         }
         if (criteria.getArticleIdIn() != null) {
-            criteriaList.add("a.ART_ID_C IN :articleIdIn");
+            criteriaList.add("a.ART_ID_C IN (:articleIdIn)");
             parameterMap.put("articleIdIn", criteria.getArticleIdIn());
         }
         if (criteria.getUserArticleId() != null) {
@@ -91,8 +99,6 @@ public class UserArticleDao extends BaseDao<UserArticleDto, UserArticleCriteria>
             parameterMap.put("userArticleStarredDateMax", criteria.getUserArticleStarredDateMax());
             parameterMap.put("userArticleIdMax", criteria.getUserArticleIdMax());
         }
-        parameterMap.put("userId", criteria.getUserId());
-        criteriaList.add("a.ART_DELETEDATE_D is null");
 
         SortCriteria sortCriteria;
         if (criteria.isStarred()) {

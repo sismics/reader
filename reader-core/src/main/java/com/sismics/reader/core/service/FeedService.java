@@ -156,6 +156,7 @@ public class FeedService extends AbstractScheduledService {
                 List<UserArticleDto> userArticleDtoList = new UserArticleDao()
                         .findByCriteria(new UserArticleCriteria()
                                 .setArticleId(article.getId())
+                                .setFetchAllFeedSubscription(true)
                                 .setUnread(true));
 
                 for (UserArticleDto userArticleDto : userArticleDtoList) {

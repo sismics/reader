@@ -85,6 +85,11 @@ public class UserArticleCriteria {
     private String userArticleIdMax;
 
     /**
+     * Fetch all subscriptions (returns subscriptions * articles rows)
+     */
+    private boolean fetchAllFeedSubscription;
+
+    /**
      * Getter of userId.
      *
      * @return userId
@@ -366,6 +371,15 @@ public class UserArticleCriteria {
      */
     public UserArticleCriteria setUserArticleIdMax(String userArticleIdMax) {
         this.userArticleIdMax = userArticleIdMax;
+        return this;
+    }
+
+    public boolean isFetchAllFeedSubscription() {
+        return fetchAllFeedSubscription;
+    }
+
+    public UserArticleCriteria setFetchAllFeedSubscription(boolean fetchAllFeedSubscription) {
+        this.fetchAllFeedSubscription = fetchAllFeedSubscription;
         return this;
     }
 }
