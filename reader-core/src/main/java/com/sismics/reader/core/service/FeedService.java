@@ -33,6 +33,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.joda.time.DurationFieldType;
 import org.joda.time.Instant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -364,9 +365,10 @@ public class FeedService extends AbstractScheduledService {
                 .setFeedId(localArticle.getFeedId())
                 .setPublicationDateMin(oldestArticle.getPublicationDate()));
 
-        // Delete articles removed from stream
+        // Delete articles removed from stream, and not too old
+        Date dateMin = new DateTime().withFieldAdded(DurationFieldType.days(), -1).toDate();
         for (ArticleDto newerLocalArticle : newerLocalArticles) {
-            if (!newerArticleGuids.contains(newerLocalArticle.getGuid())) {
+            if (!newerArticleGuids.contains(newerLocalArticle.getGuid()) && newerLocalArticle.getCreateDate().after(dateMin)) {
                 removedArticleList.add(new Article(newerLocalArticle.getId()));
             }
         }

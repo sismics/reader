@@ -69,6 +69,11 @@ public class ArticleDto {
     private Date publicationDate;
     
     /**
+     * Creation date.
+     */
+    private Date createDate;
+
+    /**
      * Feed ID.
      */
     private String feedId;
@@ -233,6 +238,14 @@ public class ArticleDto {
      */
     public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     /**

@@ -25,6 +25,7 @@ public class ArticleMapper extends ResultMapper<ArticleDto> {
         dto.setEnclosureCount((Integer) o[i++]);
         dto.setEnclosureType((String) o[i++]);
         dto.setPublicationDate((Date) o[i++]);
+        dto.setCreateDate((Date) o[i++]);
         dto.setFeedId((String) o[i]);
 
         return dto;
