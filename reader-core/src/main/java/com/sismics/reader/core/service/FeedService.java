@@ -147,13 +147,34 @@ public class FeedService extends AbstractScheduledService {
         Feed newFeed = rssReader.getFeed();
         List<Article> articleList = rssReader.getArticleList();
 
-        // Delete articles that don't exist anymore
-        List<Article> removedArticles = deleteRemovedArticles(articleList);
+        // Get articles that were removed from RSS compared to last fetch
+        List<Article> articleToRemove = getArticleToRemove(articleList);
+        if (!articleToRemove.isEmpty()) {
+            for (Article article : articleToRemove) {
+                // Update unread counts
+                // FIXME count be optimized in 1 query instead of a*s*2
+                List<UserArticleDto> userArticleDtoList = new UserArticleDao()
+                        .findByCriteria(new UserArticleCriteria()
+                                .setArticleId(article.getId())
+                                .setUnread(true));
 
-        // Removed articles from index
-        if (!removedArticles.isEmpty()) {
+                for (UserArticleDto userArticleDto : userArticleDtoList) {
+                    FeedSubscriptionDto feedSubscriptionDto = new FeedSubscriptionDao().findFirstByCriteria(new FeedSubscriptionCriteria()
+                            .setId(userArticleDto.getFeedSubscriptionId()));
+                    if (feedSubscriptionDto != null) {
+                        new FeedSubscriptionDao().updateUnreadCount(feedSubscriptionDto.getId(), feedSubscriptionDto.getUnreadUserArticleCount() - 1);
+                    }
+                }
+            }
+
+            // Delete articles that don't exist anymore
+            for (Article article: articleToRemove) {
+                new ArticleDao().delete(article.getId());
+            }
+
+            // Removed articles from index
             ArticleDeletedAsyncEvent articleDeletedAsyncEvent = new ArticleDeletedAsyncEvent();
-            articleDeletedAsyncEvent.setArticleList(removedArticles);
+            articleDeletedAsyncEvent.setArticleList(articleToRemove);
             AppContext.getInstance().getAsyncEventBus().post(articleDeletedAsyncEvent);
         }
 
@@ -272,6 +293,7 @@ public class FeedService extends AbstractScheduledService {
                 articleDao.create(article);
     
                 // Create the user articles eagerly for users already subscribed
+                // FIXME count be optimized in 1 query instad of a*s
                 for (FeedSubscriptionDto feedSubscription : feedSubscriptionList) {
                     UserArticle userArticle = new UserArticle();
                     userArticle.setArticleId(article.getId());
@@ -291,7 +313,7 @@ public class FeedService extends AbstractScheduledService {
 
         long endTime = System.currentTimeMillis();
         if (log.isInfoEnabled()) {
-            log.info(MessageFormat.format("Synchronized feed at URL {0} in {1}ms, {2} articles added, {3} deleted", url, endTime - startTime, articleMap.size(), removedArticles.size()));
+            log.info(MessageFormat.format("Synchronized feed at URL {0} in {1}ms, {2} articles added, {3} deleted", url, endTime - startTime, articleMap.size(), articleToRemove.size()));
         }
         
         return feed;
@@ -302,7 +324,7 @@ public class FeedService extends AbstractScheduledService {
      *
      * @param articleList Articles just downloaded
      */
-    private List<Article> deleteRemovedArticles(List<Article> articleList) {
+    private List<Article> getArticleToRemove(List<Article> articleList) {
         List<Article> removedArticleList = new ArrayList<Article>();
         
         // Check if the oldest article from stream was already synced
@@ -331,7 +353,6 @@ public class FeedService extends AbstractScheduledService {
         // Delete articles removed from stream
         for (ArticleDto newerLocalArticle : newerLocalArticles) {
             if (!newerArticleGuids.contains(newerLocalArticle.getGuid())) {
-                new ArticleDao().delete(newerLocalArticle.getId());
                 removedArticleList.add(new Article(newerLocalArticle.getId()));
             }
         }

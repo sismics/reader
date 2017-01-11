@@ -116,14 +116,15 @@ public class ArticleDao {
      */
     public void delete(String id) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        
-        // Get the article
-        Query q = em.createQuery("select a from Article a where a.id = :id and a.deleteDate is null")
-                .setParameter("id", id);
-        Article articleFromDb = (Article) q.getSingleResult();
-
-        // Delete the article
-        articleFromDb.setDeleteDate(new Date());
+        Date deleteDate = new Date();
+        em.createNativeQuery("update T_ARTICLE set ART_DELETEDATE_D = :deleteDate where ART_ID_C = :id and ART_DELETEDATE_D is null")
+                .setParameter("deleteDate", deleteDate)
+                .setParameter("id", id)
+                .executeUpdate();
+        em.createNativeQuery("update T_USER_ARTICLE set USA_DELETEDATE_D = :deleteDate where USA_IDARTICLE_C = :articleId and USA_DELETEDATE_D is null")
+                .setParameter("deleteDate", deleteDate)
+                .setParameter("articleId", id)
+                .executeUpdate();
     }
 
     /**

@@ -269,11 +269,21 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         article = articles.getJSONObject(2);
         Assert.assertEquals("Article deleted0", article.getString("title"));
 
+        // Check the subscription data: 3 unread articles
+        GET("/subscription/");
+        assertIsOk();
+        json = getJsonResult();
+        JSONArray categories = json.getJSONArray("categories");
+        JSONObject rootCategory = categories.getJSONObject(0);
+        JSONArray subscriptions = rootCategory.getJSONArray("subscriptions");
+        subscription = subscriptions.getJSONObject(0);
+        Assert.assertEquals(3, subscription.getInt("unread_count"));
+
         // Synchronize feeds: OK
         copyTempResource("/http/feeds/deleted/deleted1.xml");
         synchronizeAllFeed();
 
-        // Check the subscription data: one deleted articles
+        // Check the subscription data: one deleted article
         GET("/subscription/" + feedSubscription0Id);
         assertIsOk();
         json = getJsonResult();
@@ -286,6 +296,16 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals("Article deleted2", article.getString("title"));
         article = articles.getJSONObject(1);
         Assert.assertEquals("Article deleted0", article.getString("title"));
+
+        // Check the subscription data: 2 unread articles
+        GET("/subscription/");
+        assertIsOk();
+        json = getJsonResult();
+        categories = json.getJSONArray("categories");
+        rootCategory = categories.getJSONObject(0);
+        subscriptions = rootCategory.getJSONArray("subscriptions");
+        subscription = subscriptions.getJSONObject(0);
+        Assert.assertEquals(2, subscription.getInt("unread_count"));
 
         // Synchronize feeds: OK
         copyTempResource("/http/feeds/deleted/deleted2.xml");
@@ -306,6 +326,16 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         Assert.assertEquals("Article deleted2", article.getString("title"));
         article = articles.getJSONObject(2);
         Assert.assertEquals("Article deleted0", article.getString("title"));
+
+        // Check the subscription data: 3 unread articles
+        GET("/subscription/");
+        assertIsOk();
+        json = getJsonResult();
+        categories = json.getJSONArray("categories");
+        rootCategory = categories.getJSONObject(0);
+        subscriptions = rootCategory.getJSONArray("subscriptions");
+        subscription = subscriptions.getJSONObject(0);
+        Assert.assertEquals(3, subscription.getInt("unread_count"));
     }
 
     /**
