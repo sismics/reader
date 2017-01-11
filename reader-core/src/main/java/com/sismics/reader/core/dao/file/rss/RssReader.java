@@ -23,7 +23,6 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.InputStream;
 import java.io.Reader;
 import java.net.MalformedURLException;
-import java.text.MessageFormat;
 import java.util.*;
 
 /**
@@ -37,7 +36,7 @@ public class RssReader extends DefaultHandler {
     /**
      * A list of common date formats used in RSS feeds.
      */
-    private static final DateTimeFormatter DF_RSS = new DateTimeFormatterBuilder()
+    public static final DateTimeFormatter DF_RSS = new DateTimeFormatterBuilder()
             .append(null, new DateTimeParser[] {
                     DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm zzz").getParser(),
                     DateTimeFormat.forPattern("EEE, dd MMM yyyy HH:mm:ss Z").getParser(),
@@ -53,7 +52,7 @@ public class RssReader extends DefaultHandler {
     /**
      * A list of common date formats used in Atom feeds.
      */
-    private static final DateTimeFormatter DF_ATOM = new DateTimeFormatterBuilder()
+    public static final DateTimeFormatter DF_ATOM = new DateTimeFormatterBuilder()
             .append(null, new DateTimeParser[] {
                     DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").getParser(),
                     DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").getParser()
@@ -62,7 +61,7 @@ public class RssReader extends DefaultHandler {
     /**
      * A list of common date formats used in Dublin Core.
      */
-    private static final DateTimeFormatter DF_DC = new DateTimeFormatterBuilder()
+    public static final DateTimeFormatter DF_DC = new DateTimeFormatterBuilder()
             .append(null, new DateTimeParser[] {
                     DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").getParser(),
                     DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").getParser()
@@ -447,10 +446,10 @@ public class RssReader extends DefaultHandler {
         } else if ("creator".equalsIgnoreCase(localName) && currentElement == Element.ITEM_DC_CREATOR && URI_DC.equals(uri)) {
             article.setCreator(getContent());
         } else if ("date".equalsIgnoreCase(localName) && currentElement == Element.ITEM_DC_DATE && URI_DC.equals(uri)) {
-            Date publicationDate = parseDate(DF_DC);
+            Date publicationDate = DateUtil.parseDate(getContent(), DF_DC);
             article.setPublicationDate(publicationDate);
         } else if ("pubDate".equalsIgnoreCase(localName) && currentElement == Element.ITEM_PUB_DATE) {
-            Date publicationDate = parseDate(DF_RSS);
+            Date publicationDate = DateUtil.parseDate(getContent(), DF_RSS);
             article.setPublicationDate(publicationDate);
         } else if ("encoded".equalsIgnoreCase(localName) && currentElement == Element.ITEM_CONTENT_ENCODED && URI_CONTENT.equals(uri)) {
             article.setDescription(getContent());
@@ -468,7 +467,7 @@ public class RssReader extends DefaultHandler {
         } else if ("title".equalsIgnoreCase(localName) && currentElement == Element.ENTRY_TITLE) {
             article.setTitle(getContent());
         } else if ("updated".equalsIgnoreCase(localName) && currentElement == Element.ENTRY_UPDATED) {
-            article.setPublicationDate(parseDate(DF_ATOM));
+            article.setPublicationDate(DateUtil.parseDate(getContent(), DF_ATOM));
         } else if ("id".equalsIgnoreCase(localName) && currentElement == Element.ENTRY_ID) {
             article.setGuid(getContent());
         } else if ("summary".equalsIgnoreCase(localName) && currentElement == Element.ENTRY_SUMMARY) {
@@ -492,37 +491,6 @@ public class RssReader extends DefaultHandler {
         feed = new Feed();
         articleList = new ArrayList<Article>();
         atomLinkList = new ArrayList<AtomLink>();
-    }
-    
-    /**
-     * Extract a date from a string format.
-     * 
-     * @param df DateTimeFormatter
-     * @return Date or null is the date is unparsable
-     */
-    private Date parseDate(DateTimeFormatter df) {
-        String dateAsString = getContent();
-        if (StringUtils.isBlank(dateAsString)) {
-            return null;
-        }
-        try {
-            return df.parseDateTime(dateAsString).toDate();
-        } catch (IllegalArgumentException e) {
-            // NOP
-        }
-        String dateWithOffset = DateUtil.guessTimezoneOffset(dateAsString);
-        if (!dateWithOffset.equals(dateAsString)) {
-            try {
-                return df.parseDateTime(dateWithOffset).toDate();
-            } catch (IllegalArgumentException e) {
-                // NOP
-            }
-        }
-        
-        if (log.isWarnEnabled()) {
-            log.warn(MessageFormat.format("Error parsing date: {0}", dateAsString));
-        }
-        return null;
     }
 
     /**

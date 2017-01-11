@@ -1,7 +1,13 @@
 package com.sismics.util;
 
 import com.google.common.collect.ImmutableMap;
+import org.apache.commons.lang.StringUtils;
+import org.joda.time.format.DateTimeFormatter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.text.MessageFormat;
+import java.util.Date;
 import java.util.Map.Entry;
 
 /**
@@ -10,7 +16,8 @@ import java.util.Map.Entry;
  * @author jtremeaux
  */
 public class DateUtil {
-    
+    private static final Logger log = LoggerFactory.getLogger(DateUtil.class);
+
     private final static ImmutableMap<String, String> TIMEZONE_CODE_MAP = new ImmutableMap.Builder<String, String>()
             .put("ACDT", " +10:30")
             .put("ACST", " +09:30")
@@ -224,5 +231,36 @@ public class DateUtil {
             }
         }
         return date;
+    }
+
+    /**
+     * Extract a date from a string format.
+     *
+     * @param date The date to parse
+     * @param df Formatter
+     * @return Date or null is the date is unparsable
+     */
+    public static Date parseDate(String date, DateTimeFormatter df) {
+        if (StringUtils.isBlank(date)) {
+            return null;
+        }
+        try {
+            return df.parseDateTime(date).toDate();
+        } catch (IllegalArgumentException e) {
+            // NOP
+        }
+        String dateWithOffset = guessTimezoneOffset(date);
+        if (!dateWithOffset.equals(date)) {
+            try {
+                return df.parseDateTime(dateWithOffset).toDate();
+            } catch (IllegalArgumentException e) {
+                // NOP
+            }
+        }
+
+        if (log.isWarnEnabled()) {
+            log.warn(MessageFormat.format("Error parsing date: {0}", date));
+        }
+        return null;
     }
 }
