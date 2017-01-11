@@ -4,6 +4,7 @@ import com.sismics.reader.core.constant.Constants;
 import com.sismics.reader.core.dao.jpa.*;
 import com.sismics.reader.core.dao.jpa.criteria.JobCriteria;
 import com.sismics.reader.core.dao.jpa.criteria.JobEventCriteria;
+import com.sismics.reader.core.dao.jpa.criteria.UserCriteria;
 import com.sismics.reader.core.dao.jpa.dto.JobDto;
 import com.sismics.reader.core.dao.jpa.dto.JobEventDto;
 import com.sismics.reader.core.dao.jpa.dto.UserDto;
@@ -637,7 +638,7 @@ public class UserResource extends BaseResource {
         SortCriteria sortCriteria = new SortCriteria(sortColumn, asc);
 
         UserDao userDao = new UserDao();
-        userDao.findAll(paginatedList, sortCriteria);
+        userDao.findByCriteria(paginatedList, new UserCriteria(), sortCriteria, null);
         for (UserDto userDto : paginatedList.getResultList()) {
             JSONObject user = new JSONObject();
             user.put("id", userDto.getId());

@@ -1,24 +1,47 @@
 package com.sismics.reader.core.dao.jpa;
 
-import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.JobCriteria;
 import com.sismics.reader.core.dao.jpa.dto.JobDto;
 import com.sismics.reader.core.dao.jpa.mapper.JobMapper;
 import com.sismics.reader.core.model.jpa.Job;
+import com.sismics.reader.core.util.jpa.SortCriteria;
 import com.sismics.util.context.ThreadLocalContext;
+import com.sismics.util.jpa.BaseDao;
+import com.sismics.util.jpa.QueryParam;
+import com.sismics.util.jpa.filter.FilterCriteria;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * Job DAO.
  * 
  * @author jtremeaux
  */
-public class JobDao {
+public class JobDao extends BaseDao<JobDto, JobCriteria> {
+
+    @Override
+    protected QueryParam getQueryParam(JobCriteria criteria, FilterCriteria filterCriteria) {
+        List<String> criteriaList = new ArrayList<String>();
+        Map<String, Object> parameterMap = new HashMap<String, Object>();
+
+        StringBuilder sb = new StringBuilder("select j.JOB_ID_C as id, j.JOB_NAME_C, j.JOB_IDUSER_C, j.JOB_CREATEDATE_D, j.JOB_STARTDATE_D, j.JOB_ENDDATE_D")
+                .append("  from T_JOB j ");
+
+        // Adds search criteria
+        criteriaList.add("j.JOB_DELETEDATE_D is null");
+        if (criteria.getUserId() != null) {
+            criteriaList.add("j.JOB_IDUSER_C = :userId");
+            parameterMap.put("userId", criteria.getUserId());
+        }
+
+        SortCriteria sortCriteria = new SortCriteria("  order by j.JOB_CREATEDATE_D asc");
+
+        return new QueryParam(sb.toString(), criteriaList, parameterMap, sortCriteria, filterCriteria, new JobMapper());
+    }
+
     /**
      * Creates a new job.
      * 
@@ -69,46 +92,6 @@ public class JobDao {
 
         // Delete the job
         jobFromDb.setDeleteDate(new Date());
-    }
-    
-    /**
-     * Searches jobs by criteria.
-     * 
-     * @param criteria Search criteria
-     * @return List of jobs
-     */
-    @SuppressWarnings("unchecked")
-    public List<JobDto> findByCriteria(JobCriteria criteria) {
-        Map<String, Object> parameterMap = new HashMap<String, Object>();
-        
-        StringBuilder sb = new StringBuilder("select j.JOB_ID_C as id, j.JOB_NAME_C, j.JOB_IDUSER_C, j.JOB_CREATEDATE_D, j.JOB_STARTDATE_D, j.JOB_ENDDATE_D ");
-        sb.append(" from T_JOB j ");
-        
-        // Adds search criteria
-        List<String> criteriaList = new ArrayList<String>();
-        if (criteria.getUserId() != null) {
-            criteriaList.add("j.JOB_IDUSER_C = :userId");
-            parameterMap.put("userId", criteria.getUserId());
-        }
-        criteriaList.add("j.JOB_DELETEDATE_D is null");
-        
-        if (!criteriaList.isEmpty()) {
-            sb.append(" where ");
-            sb.append(Joiner.on(" and ").join(criteriaList));
-        }
-        
-        sb.append(" order by j.JOB_CREATEDATE_D asc");
-        
-        // Search
-        EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createNativeQuery(sb.toString());
-        for (Entry<String, Object> entry : parameterMap.entrySet()) {
-            q.setParameter(entry.getKey(), entry.getValue());
-        }
-        List<Object[]> resultList = q.getResultList();
-        
-        // Map results
-        return new JobMapper().map(resultList);
     }
 
     /**

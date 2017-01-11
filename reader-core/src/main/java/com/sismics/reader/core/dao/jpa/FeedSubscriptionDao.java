@@ -22,6 +22,49 @@ import java.util.*;
  * @author jtremeaux
  */
 public class FeedSubscriptionDao extends BaseDao<FeedSubscriptionDto, FeedSubscriptionCriteria> {
+
+    @Override
+    protected QueryParam getQueryParam(FeedSubscriptionCriteria criteria, FilterCriteria filterCriteria) {
+        List<String> criteriaList = Lists.newArrayList();
+        Map<String, Object> parameterMap = new HashMap<String, Object>();
+
+        StringBuilder sb = new StringBuilder("select fs.FES_ID_C, fs.FES_TITLE_C, fs.FES_UNREADCOUNT_N, fs.FES_CREATEDATE_D, fs.FES_IDUSER_C, f.FED_ID_C, f.FED_TITLE_C, f.FED_RSSURL_C, f.FED_URL_C, f.FED_DESCRIPTION_C, c.CAT_ID_C, c.CAT_IDPARENT_C, c.CAT_NAME_C, c.CAT_FOLDED_B,")
+                .append("  (select count(fsy.FSY_ID_C) from (select * from T_FEED_SYNCHRONIZATION fsy where fsy.FSY_IDFEED_C = f.FED_ID_C order by fsy.FSY_CREATEDATE_D desc limit 5) fsy where fsy.FSY_SUCCESS_B = false) ")
+                .append("  from T_FEED_SUBSCRIPTION fs ")
+                .append("  join T_FEED f on(f.FED_ID_C = fs.FES_IDFEED_C and f.FED_DELETEDATE_D is null) ")
+                .append("  join T_CATEGORY c on(c.CAT_ID_C = fs.FES_IDCATEGORY_C and c.CAT_DELETEDATE_D is null) ");
+
+        // Adds search criteria
+        criteriaList.add("fs.FES_DELETEDATE_D is null");
+        if (criteria.getId() != null) {
+            criteriaList.add("fs.FES_ID_C = :id");
+            parameterMap.put("id", criteria.getId());
+        }
+        if (criteria.getUserId() != null) {
+            criteriaList.add("fs.FES_IDUSER_C = :userId");
+            parameterMap.put("userId", criteria.getUserId());
+        }
+        if (criteria.getFeedId() != null) {
+            criteriaList.add("fs.FES_IDFEED_C = :feedId");
+            parameterMap.put("feedId", criteria.getFeedId());
+        }
+        if (criteria.getCategoryId() != null) {
+            criteriaList.add("fs.FES_IDCATEGORY_C = :categoryId");
+            parameterMap.put("categoryId", criteria.getCategoryId());
+        }
+        if (criteria.getFeedUrl() != null) {
+            criteriaList.add("f.FED_RSSURL_C = :feedUrl");
+            parameterMap.put("feedUrl", criteria.getFeedUrl());
+        }
+        if (criteria.isUnread()) {
+            criteriaList.add("fs.FES_UNREADCOUNT_N > 0");
+        }
+
+        SortCriteria sortCriteria = new SortCriteria("  order by c.CAT_IDPARENT_C asc, c.CAT_ORDER_N asc, fs.FES_ORDER_N asc");
+
+        return new QueryParam(sb.toString(), criteriaList, parameterMap, sortCriteria, filterCriteria, new FeedSubscriptionMapper());
+    }
+
     /**
      * Creates a new feed subscription.
      * 
@@ -167,46 +210,5 @@ public class FeedSubscriptionDao extends BaseDao<FeedSubscriptionDto, FeedSubscr
                 .setParameter("categoryId", categoryId)
                 .setParameter("userId", userId);
         return ((Long) q.getSingleResult()).intValue();
-    }
-
-    @Override
-    protected QueryParam getQueryParam(FeedSubscriptionCriteria criteria, FilterCriteria filterCriteria) {
-        List<String> criteriaList = Lists.newArrayList();
-        Map<String, Object> parameterMap = new HashMap<String, Object>();
-        StringBuilder sb = new StringBuilder("select fs.FES_ID_C, fs.FES_TITLE_C, fs.FES_UNREADCOUNT_N, fs.FES_CREATEDATE_D, fs.FES_IDUSER_C, f.FED_ID_C, f.FED_TITLE_C, f.FED_RSSURL_C, f.FED_URL_C, f.FED_DESCRIPTION_C, c.CAT_ID_C, c.CAT_IDPARENT_C, c.CAT_NAME_C, c.CAT_FOLDED_B,");
-        sb.append("  (select count(fsy.FSY_ID_C) from (select * from T_FEED_SYNCHRONIZATION fsy where fsy.FSY_IDFEED_C = f.FED_ID_C order by fsy.FSY_CREATEDATE_D desc limit 5) fsy where fsy.FSY_SUCCESS_B = false) ");
-        sb.append("  from T_FEED_SUBSCRIPTION fs ");
-        sb.append("  join T_FEED f on(f.FED_ID_C = fs.FES_IDFEED_C and f.FED_DELETEDATE_D is null) ");
-        sb.append("  join T_CATEGORY c on(c.CAT_ID_C = fs.FES_IDCATEGORY_C and c.CAT_DELETEDATE_D is null) ");
-
-        // Adds search criteria
-        criteriaList.add("fs.FES_DELETEDATE_D is null");
-        if (criteria.getId() != null) {
-            criteriaList.add("fs.FES_ID_C = :id");
-            parameterMap.put("id", criteria.getId());
-        }
-        if (criteria.getUserId() != null) {
-            criteriaList.add("fs.FES_IDUSER_C = :userId");
-            parameterMap.put("userId", criteria.getUserId());
-        }
-        if (criteria.getFeedId() != null) {
-            criteriaList.add("fs.FES_IDFEED_C = :feedId");
-            parameterMap.put("feedId", criteria.getFeedId());
-        }
-        if (criteria.getCategoryId() != null) {
-            criteriaList.add("fs.FES_IDCATEGORY_C = :categoryId");
-            parameterMap.put("categoryId", criteria.getCategoryId());
-        }
-        if (criteria.getFeedUrl() != null) {
-            criteriaList.add("f.FED_RSSURL_C = :feedUrl");
-            parameterMap.put("feedUrl", criteria.getFeedUrl());
-        }
-        if (criteria.isUnread()) {
-            criteriaList.add("fs.FES_UNREADCOUNT_N > 0");
-        }
-
-        SortCriteria sortCriteria = new SortCriteria("  order by c.CAT_IDPARENT_C asc, c.CAT_ORDER_N asc, fs.FES_ORDER_N asc");
-
-        return new QueryParam(sb.toString(), criteriaList, parameterMap, sortCriteria, filterCriteria, new FeedSubscriptionMapper());
     }
 }

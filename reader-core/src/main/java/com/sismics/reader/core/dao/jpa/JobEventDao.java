@@ -1,23 +1,46 @@
 package com.sismics.reader.core.dao.jpa;
 
-import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.JobEventCriteria;
 import com.sismics.reader.core.dao.jpa.dto.JobEventDto;
 import com.sismics.reader.core.dao.jpa.mapper.JobEventMapper;
 import com.sismics.reader.core.model.jpa.JobEvent;
+import com.sismics.reader.core.util.jpa.SortCriteria;
 import com.sismics.util.context.ThreadLocalContext;
+import com.sismics.util.jpa.BaseDao;
+import com.sismics.util.jpa.QueryParam;
+import com.sismics.util.jpa.filter.FilterCriteria;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * Job event DAO.
  * 
  * @author jtremeaux
  */
-public class JobEventDao {
+public class JobEventDao extends BaseDao<JobEventDto, JobEventCriteria> {
+
+    @Override
+    protected QueryParam getQueryParam(JobEventCriteria criteria, FilterCriteria filterCriteria) {
+        List<String> criteriaList = new ArrayList<String>();
+        Map<String, Object> parameterMap = new HashMap<String, Object>();
+
+        StringBuilder sb = new StringBuilder("select e.JOE_ID_C, e.JOE_NAME_C, e.JOE_VALUE_C ")
+                .append(" from T_JOB_EVENT e ");
+
+        // Adds search criteria
+        criteriaList.add("e.JOE_DELETEDATE_D is null");
+        if (criteria.getJobId() != null) {
+            criteriaList.add("e.JOE_IDJOB_C = :jobId");
+            parameterMap.put("jobId", criteria.getJobId());
+        }
+
+        SortCriteria sortCriteria = new SortCriteria("  order by e.JOE_CREATEDATE_D asc");
+
+        return new QueryParam(sb.toString(), criteriaList, parameterMap, sortCriteria, filterCriteria, new JobEventMapper());
+    }
+
     /**
      * Creates a new job event.
      * 
@@ -51,45 +74,5 @@ public class JobEventDao {
 
         // Delete the jobEvent
         jobEventFromDb.setDeleteDate(new Date());
-    }
-    
-    /**
-     * Searches job events by criteria.
-     * 
-     * @param criteria Search criteria
-     * @return List of job events
-     */
-    @SuppressWarnings("unchecked")
-    public List<JobEventDto> findByCriteria(JobEventCriteria criteria) {
-        Map<String, Object> parameterMap = new HashMap<String, Object>();
-        
-        StringBuilder sb = new StringBuilder("select e.JOE_ID_C, e.JOE_NAME_C, e.JOE_VALUE_C ");
-        sb.append(" from T_JOB_EVENT e ");
-        
-        // Adds search criteria
-        List<String> criteriaList = new ArrayList<String>();
-        if (criteria.getJobId() != null) {
-            criteriaList.add("e.JOE_IDJOB_C = :jobId");
-            parameterMap.put("jobId", criteria.getJobId());
-        }
-        criteriaList.add("e.JOE_DELETEDATE_D is null");
-        
-        if (!criteriaList.isEmpty()) {
-            sb.append(" where ");
-            sb.append(Joiner.on(" and ").join(criteriaList));
-        }
-        
-        sb.append(" order by e.JOE_CREATEDATE_D asc");
-        
-        // Search
-        EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createNativeQuery(sb.toString());
-        for (Entry<String, Object> entry : parameterMap.entrySet()) {
-            q.setParameter(entry.getKey(), entry.getValue());
-        }
-        List<Object[]> resultList = q.getResultList();
-        
-        // Map results
-        return new JobEventMapper().map(resultList);
     }
 }

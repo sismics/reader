@@ -22,9 +22,9 @@ public class RoleBaseFunctionDao {
     @SuppressWarnings("unchecked")
     public Set<String> findByRoleId(String roleId) {
         EntityManager em = ThreadLocalContext.get().getEntityManager();
-        StringBuilder sb = new StringBuilder("select rbf.RBF_IDBASEFUNCTION_C from T_ROLE_BASE_FUNCTION rbf, T_ROLE r");
-        sb.append(" where rbf.RBF_IDROLE_C = :roleId and rbf.RBF_DELETEDATE_D is null");
-        sb.append(" and r.ROL_ID_C = rbf.RBF_IDROLE_C and r.ROL_DELETEDATE_D is null");
+        StringBuilder sb = new StringBuilder("select rbf.RBF_IDBASEFUNCTION_C from T_ROLE_BASE_FUNCTION rbf, T_ROLE r")
+                .append("  where rbf.RBF_IDROLE_C = :roleId and rbf.RBF_DELETEDATE_D is null")
+                .append("  and r.ROL_ID_C = rbf.RBF_IDROLE_C and r.ROL_DELETEDATE_D is null");
         Query q = em.createNativeQuery(sb.toString())
             .setParameter("roleId", roleId);
         return Sets.newHashSet(q.getResultList());

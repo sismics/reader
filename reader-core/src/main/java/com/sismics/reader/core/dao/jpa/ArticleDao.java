@@ -1,24 +1,67 @@
 package com.sismics.reader.core.dao.jpa;
 
-import com.google.common.base.Joiner;
 import com.sismics.reader.core.dao.jpa.criteria.ArticleCriteria;
 import com.sismics.reader.core.dao.jpa.dto.ArticleDto;
 import com.sismics.reader.core.dao.jpa.mapper.ArticleMapper;
 import com.sismics.reader.core.model.jpa.Article;
+import com.sismics.reader.core.util.jpa.SortCriteria;
 import com.sismics.util.context.ThreadLocalContext;
+import com.sismics.util.jpa.BaseDao;
 import com.sismics.util.jpa.DialectUtil;
+import com.sismics.util.jpa.QueryParam;
+import com.sismics.util.jpa.filter.FilterCriteria;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * Article DAO.
  * 
  * @author jtremeaux
  */
-public class ArticleDao {
+public class ArticleDao extends BaseDao<ArticleDto, ArticleCriteria> {
+
+    @Override
+    protected QueryParam getQueryParam(ArticleCriteria criteria, FilterCriteria filterCriteria) {
+        List<String> criteriaList = new ArrayList<String>();
+        Map<String, Object> parameterMap = new HashMap<String, Object>();
+
+        StringBuilder sb = new StringBuilder("select a.ART_ID_C, a.ART_URL_C, a.ART_GUID_C, a.ART_TITLE_C, a.ART_CREATOR_C, a.ART_DESCRIPTION_C, a.ART_COMMENTURL_C, a.ART_COMMENTCOUNT_N, a.ART_ENCLOSUREURL_C, a.ART_ENCLOSURELENGTH_N, a.ART_ENCLOSURETYPE_C, a.ART_PUBLICATIONDATE_D, a.ART_IDFEED_C ")
+                .append("  from T_ARTICLE a ");
+
+        // Adds search criteria
+        criteriaList.add("a.ART_DELETEDATE_D is null");
+        if (criteria.getId() != null) {
+            criteriaList.add("a.ART_ID_C = :id");
+            parameterMap.put("id", criteria.getId());
+        }
+        if (criteria.getGuidIn() != null) {
+            criteriaList.add("a.ART_GUID_C in :guidIn");
+            parameterMap.put("guidIn", criteria.getGuidIn());
+        }
+        if (criteria.getTitle() != null) {
+            criteriaList.add("a.ART_TITLE_C = :title");
+            parameterMap.put("title", criteria.getTitle());
+        }
+        if (criteria.getUrl() != null) {
+            criteriaList.add("a.ART_URL_C = :url");
+            parameterMap.put("url", criteria.getUrl());
+        }
+        if (criteria.getPublicationDateMin() != null) {
+            criteriaList.add("a.ART_PUBLICATIONDATE_D > :publicationDateMax");
+            parameterMap.put("publicationDateMax", criteria.getPublicationDateMin());
+        }
+        if (criteria.getFeedId() != null) {
+            criteriaList.add("a.ART_IDFEED_C = :feedId");
+            parameterMap.put("feedId", criteria.getFeedId());
+        }
+
+        SortCriteria sortCriteria = new SortCriteria("  order by a.ART_CREATEDATE_D asc");
+
+        return new QueryParam(sb.toString(), criteriaList, parameterMap, sortCriteria, filterCriteria, new ArticleMapper());
+    }
+
     /**
      * Creates a new article.
      * 
@@ -125,79 +168,5 @@ public class ArticleDao {
                 .setParameter("deleteDate", deleteDate)
                 .setParameter("articleId", id)
                 .executeUpdate();
-    }
-
-    /**
-     * Searches articles by criteria, and returns the first occurence.
-     *
-     * @param criteria Search criteria
-     * @return Article
-     */
-    public ArticleDto findFirstByCriteria(ArticleCriteria criteria) {
-        List<ArticleDto> articleList = findByCriteria(criteria);
-        if (!articleList.isEmpty()) {
-            return articleList.iterator().next();
-        }
-        return null;
-    }
-
-    /**
-     * Searches articles by criteria.
-     * 
-     * @param criteria Search criteria
-     * @return List of articles
-     */
-    @SuppressWarnings("unchecked")
-    public List<ArticleDto> findByCriteria(ArticleCriteria criteria) {
-        Map<String, Object> parameterMap = new HashMap<String, Object>();
-        
-        StringBuilder sb = new StringBuilder("select a.ART_ID_C, a.ART_URL_C, a.ART_GUID_C, a.ART_TITLE_C, a.ART_CREATOR_C, a.ART_DESCRIPTION_C, a.ART_COMMENTURL_C, a.ART_COMMENTCOUNT_N, a.ART_ENCLOSUREURL_C, a.ART_ENCLOSURELENGTH_N, a.ART_ENCLOSURETYPE_C, a.ART_PUBLICATIONDATE_D, a.ART_IDFEED_C ");
-        sb.append(" from T_ARTICLE a ");
-        
-        // Adds search criteria
-        List<String> criteriaList = new ArrayList<String>();
-        criteriaList.add("a.ART_DELETEDATE_D is null");
-        if (criteria.getId() != null) {
-            criteriaList.add("a.ART_ID_C = :id");
-            parameterMap.put("id", criteria.getId());
-        }
-        if (criteria.getGuidIn() != null) {
-            criteriaList.add("a.ART_GUID_C in :guidIn");
-            parameterMap.put("guidIn", criteria.getGuidIn());
-        }
-        if (criteria.getTitle() != null) {
-            criteriaList.add("a.ART_TITLE_C = :title");
-            parameterMap.put("title", criteria.getTitle());
-        }
-        if (criteria.getUrl() != null) {
-            criteriaList.add("a.ART_URL_C = :url");
-            parameterMap.put("url", criteria.getUrl());
-        }
-        if (criteria.getPublicationDateMin() != null) {
-            criteriaList.add("a.ART_PUBLICATIONDATE_D > :publicationDateMax");
-            parameterMap.put("publicationDateMax", criteria.getPublicationDateMin());
-        }
-        if (criteria.getFeedId() != null) {
-            criteriaList.add("a.ART_IDFEED_C = :feedId");
-            parameterMap.put("feedId", criteria.getFeedId());
-        }
-
-        if (!criteriaList.isEmpty()) {
-            sb.append(" where ");
-            sb.append(Joiner.on(" and ").join(criteriaList));
-        }
-        
-        sb.append(" order by a.ART_CREATEDATE_D asc");
-        
-        // Search
-        EntityManager em = ThreadLocalContext.get().getEntityManager();
-        Query q = em.createNativeQuery(sb.toString());
-        for (Entry<String, Object> entry : parameterMap.entrySet()) {
-            q.setParameter(entry.getKey(), entry.getValue());
-        }
-        List<Object[]> resultList = q.getResultList();
-        
-        // Map results
-        return new ArticleMapper().map(resultList);
     }
 }

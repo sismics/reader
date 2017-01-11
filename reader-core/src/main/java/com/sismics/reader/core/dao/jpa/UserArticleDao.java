@@ -22,6 +22,88 @@ import java.util.*;
  * @author jtremeaux
  */
 public class UserArticleDao extends BaseDao<UserArticleDto, UserArticleCriteria> {
+
+    @Override
+    protected QueryParam getQueryParam(UserArticleCriteria criteria, FilterCriteria filterCriteria) {
+        List<String> criteriaList = new ArrayList<String>();
+        Map<String, Object> parameterMap = new HashMap<String, Object>();
+        StringBuilder sb = new StringBuilder("select ua.USA_ID_C, ua.USA_READDATE_D, ua.USA_STARREDDATE_D, f.FED_TITLE_C, fs.FES_ID_C, fs.FES_TITLE_C, a.ART_ID_C, a.ART_URL_C, a.ART_GUID_C, a.ART_TITLE_C, a.ART_CREATOR_C, a.ART_DESCRIPTION_C, a.ART_COMMENTURL_C, a.ART_COMMENTCOUNT_N, a.ART_ENCLOSUREURL_C, a.ART_ENCLOSURELENGTH_N, a.ART_ENCLOSURETYPE_C, a.ART_PUBLICATIONDATE_D");
+        if (criteria.isVisible()) {
+            if (criteria.isUnread() || criteria.isStarred()) {
+                sb.append("  from T_USER_ARTICLE ua ");
+                sb.append("  join T_ARTICLE a on(a.ART_ID_C = ua.USA_IDARTICLE_C) ");
+            } else {
+                sb.append("  from T_ARTICLE a ");
+                sb.append("  join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C) ");
+            }
+            criteriaList.add("ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null");
+        } else if (criteria.getUserId() != null) {
+            sb.append("  from T_ARTICLE a ");
+            sb.append("  left join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null) ");
+        } else {
+            sb.append("  from T_ARTICLE a ");
+            sb.append("  left join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_DELETEDATE_D is null) ");
+        }
+        sb.append("  join T_FEED f on(f.FED_ID_C = a.ART_IDFEED_C and f.FED_DELETEDATE_D is null) ");
+        sb.append("  left join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
+
+        // Adds search criteria
+        if (criteria.getFeedId() != null) {
+            criteriaList.add("a.ART_IDFEED_C = :feedId");
+            parameterMap.put("feedId", criteria.getFeedId());
+        }
+        if (criteria.getArticleId() != null) {
+            criteriaList.add("a.ART_ID_C = :articleId");
+            parameterMap.put("articleId", criteria.getArticleId());
+        }
+        if (criteria.getArticleIdIn() != null) {
+            criteriaList.add("a.ART_ID_C IN :articleIdIn");
+            parameterMap.put("articleIdIn", criteria.getArticleIdIn());
+        }
+        if (criteria.getUserArticleId() != null) {
+            criteriaList.add("ua.USA_ID_C = :userArticleId");
+            parameterMap.put("userArticleId", criteria.getUserArticleId());
+        }
+        if (criteria.isSubscribed()) {
+            criteriaList.add("fs.FES_ID_C is not null");
+        }
+        if (criteria.getCategoryId() != null) {
+            criteriaList.add("fs.FES_IDCATEGORY_C = :categoryId");
+            parameterMap.put("categoryId", criteria.getCategoryId());
+        }
+        if (criteria.isUnread()) {
+            criteriaList.add("(ua.USA_READDATE_D is null and ua.USA_ID_C is not null)");
+        }
+        if (criteria.isStarred()) {
+            criteriaList.add("ua.USA_STARREDDATE_D is not null");
+        }
+        if (criteria.getArticlePublicationDateMax() != null && criteria.getArticleIdMax() != null) {
+            // Start the page after this article
+            criteriaList.add("concat(" + DialectUtil.getTimeStamp("a.ART_PUBLICATIONDATE_D") + ", a.ART_ID_C) < concat(" + DialectUtil.getTimeStamp(":articlePublicationDateMax") + ", :articleIdMax)");
+            parameterMap.put("articlePublicationDateMax", criteria.getArticlePublicationDateMax());
+            parameterMap.put("articleIdMax", criteria.getArticleIdMax());
+        }
+        if (criteria.getUserArticleStarredDateMax() != null && criteria.getUserArticleIdMax() != null) {
+            // Start the page this starred article
+            criteriaList.add("concat(" + DialectUtil.getTimeStamp("ua.USA_STARREDDATE_D") + ", ua.USA_ID_C) < concat(" + DialectUtil.getTimeStamp(":userArticleStarredDateMax") + ", :userArticleIdMax)");
+//            criteriaList.add("(ua.USA_STARREDDATE_D, ua.USA_ID_C) < (:userArticleStarredDateMax, :userArticleIdMax)");
+//            criteriaList.add("(ua.USA_STARREDDATE_D < :userArticleStarredDateMax)");
+            parameterMap.put("userArticleStarredDateMax", criteria.getUserArticleStarredDateMax());
+            parameterMap.put("userArticleIdMax", criteria.getUserArticleIdMax());
+        }
+        parameterMap.put("userId", criteria.getUserId());
+        criteriaList.add("a.ART_DELETEDATE_D is null");
+
+        SortCriteria sortCriteria;
+        if (criteria.isStarred()) {
+            sortCriteria = new SortCriteria(" order by ua.USA_STARREDDATE_D desc, ua.USA_ID_C desc");
+        } else {
+            sortCriteria = new SortCriteria(" order by a.ART_PUBLICATIONDATE_D desc, a.ART_ID_C desc");
+        }
+
+        return new QueryParam(sb.toString(), criteriaList, parameterMap, sortCriteria, filterCriteria, new UserArticleMapper());
+    }
+
     /**
      * Creates a new user article.
      * 
@@ -130,86 +212,5 @@ public class UserArticleDao extends BaseDao<UserArticleDto, UserArticleCriteria>
         } catch (NoResultException e) {
             return null;
         }
-    }
-
-    @Override
-    protected QueryParam getQueryParam(UserArticleCriteria criteria, FilterCriteria filterCriteria) {
-        List<String> criteriaList = new ArrayList<String>();
-        Map<String, Object> parameterMap = new HashMap<String, Object>();
-        StringBuilder sb = new StringBuilder("select ua.USA_ID_C, ua.USA_READDATE_D, ua.USA_STARREDDATE_D, f.FED_TITLE_C, fs.FES_ID_C, fs.FES_TITLE_C, a.ART_ID_C, a.ART_URL_C, a.ART_GUID_C, a.ART_TITLE_C, a.ART_CREATOR_C, a.ART_DESCRIPTION_C, a.ART_COMMENTURL_C, a.ART_COMMENTCOUNT_N, a.ART_ENCLOSUREURL_C, a.ART_ENCLOSURELENGTH_N, a.ART_ENCLOSURETYPE_C, a.ART_PUBLICATIONDATE_D");
-        if (criteria.isVisible()) {
-            if (criteria.isUnread() || criteria.isStarred()) {
-                sb.append("  from T_USER_ARTICLE ua ");
-                sb.append("  join T_ARTICLE a on(a.ART_ID_C = ua.USA_IDARTICLE_C) ");
-            } else {
-                sb.append("  from T_ARTICLE a ");
-                sb.append("  join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C) ");
-            }
-            criteriaList.add("ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null");
-        } else if (criteria.getUserId() != null) {
-            sb.append("  from T_ARTICLE a ");
-            sb.append("  left join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_IDUSER_C = :userId and ua.USA_DELETEDATE_D is null) ");
-        } else {
-            sb.append("  from T_ARTICLE a ");
-            sb.append("  left join T_USER_ARTICLE ua on(a.ART_ID_C = ua.USA_IDARTICLE_C and ua.USA_DELETEDATE_D is null) ");
-        }
-        sb.append("  join T_FEED f on(f.FED_ID_C = a.ART_IDFEED_C and f.FED_DELETEDATE_D is null) ");
-        sb.append("  left join T_FEED_SUBSCRIPTION fs on(fs.FES_IDFEED_C = f.FED_ID_C and fs.FES_IDUSER_C = :userId and fs.FES_DELETEDATE_D is null) ");
-        
-        // Adds search criteria
-        if (criteria.getFeedId() != null) {
-            criteriaList.add("a.ART_IDFEED_C = :feedId");
-            parameterMap.put("feedId", criteria.getFeedId());
-        }
-        if (criteria.getArticleId() != null) {
-            criteriaList.add("a.ART_ID_C = :articleId");
-            parameterMap.put("articleId", criteria.getArticleId());
-        }
-        if (criteria.getArticleIdIn() != null) {
-            criteriaList.add("a.ART_ID_C IN :articleIdIn");
-            parameterMap.put("articleIdIn", criteria.getArticleIdIn());
-        }
-        if (criteria.getUserArticleId() != null) {
-            criteriaList.add("ua.USA_ID_C = :userArticleId");
-            parameterMap.put("userArticleId", criteria.getUserArticleId());
-        }
-        if (criteria.isSubscribed()) {
-            criteriaList.add("fs.FES_ID_C is not null");
-        }
-        if (criteria.getCategoryId() != null) {
-            criteriaList.add("fs.FES_IDCATEGORY_C = :categoryId");
-            parameterMap.put("categoryId", criteria.getCategoryId());
-        }
-        if (criteria.isUnread()) {
-            criteriaList.add("(ua.USA_READDATE_D is null and ua.USA_ID_C is not null)");
-        }
-        if (criteria.isStarred()) {
-            criteriaList.add("ua.USA_STARREDDATE_D is not null");
-        }
-        if (criteria.getArticlePublicationDateMax() != null && criteria.getArticleIdMax() != null) {
-            // Start the page after this article
-            criteriaList.add("concat(" + DialectUtil.getTimeStamp("a.ART_PUBLICATIONDATE_D") + ", a.ART_ID_C) < concat(" + DialectUtil.getTimeStamp(":articlePublicationDateMax") + ", :articleIdMax)");
-            parameterMap.put("articlePublicationDateMax", criteria.getArticlePublicationDateMax());
-            parameterMap.put("articleIdMax", criteria.getArticleIdMax());
-        }
-        if (criteria.getUserArticleStarredDateMax() != null && criteria.getUserArticleIdMax() != null) {
-            // Start the page this starred article
-            criteriaList.add("concat(" + DialectUtil.getTimeStamp("ua.USA_STARREDDATE_D") + ", ua.USA_ID_C) < concat(" + DialectUtil.getTimeStamp(":userArticleStarredDateMax") + ", :userArticleIdMax)");
-//            criteriaList.add("(ua.USA_STARREDDATE_D, ua.USA_ID_C) < (:userArticleStarredDateMax, :userArticleIdMax)");
-//            criteriaList.add("(ua.USA_STARREDDATE_D < :userArticleStarredDateMax)");
-            parameterMap.put("userArticleStarredDateMax", criteria.getUserArticleStarredDateMax());
-            parameterMap.put("userArticleIdMax", criteria.getUserArticleIdMax());
-        }
-        parameterMap.put("userId", criteria.getUserId());
-        criteriaList.add("a.ART_DELETEDATE_D is null");
-        
-        SortCriteria sortCriteria;
-        if (criteria.isStarred()) {
-            sortCriteria = new SortCriteria(" order by ua.USA_STARREDDATE_D desc, ua.USA_ID_C desc");
-        } else {
-            sortCriteria = new SortCriteria(" order by a.ART_PUBLICATIONDATE_D desc, a.ART_ID_C desc");
-        }
-
-        return new QueryParam(sb.toString(), criteriaList, parameterMap, sortCriteria, filterCriteria, new UserArticleMapper());
     }
 }

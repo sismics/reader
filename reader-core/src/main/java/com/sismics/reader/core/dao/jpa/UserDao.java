@@ -1,14 +1,14 @@
 package com.sismics.reader.core.dao.jpa;
 
 import com.sismics.reader.core.constant.Constants;
+import com.sismics.reader.core.dao.jpa.criteria.UserCriteria;
 import com.sismics.reader.core.dao.jpa.dto.UserDto;
 import com.sismics.reader.core.dao.jpa.mapper.UserMapper;
 import com.sismics.reader.core.model.jpa.User;
-import com.sismics.reader.core.util.jpa.PaginatedList;
-import com.sismics.reader.core.util.jpa.PaginatedLists;
-import com.sismics.reader.core.util.jpa.SortCriteria;
 import com.sismics.util.context.ThreadLocalContext;
+import com.sismics.util.jpa.BaseDao;
 import com.sismics.util.jpa.QueryParam;
+import com.sismics.util.jpa.filter.FilterCriteria;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.EntityManager;
@@ -21,7 +21,22 @@ import java.util.*;
  * 
  * @author jtremeaux
  */
-public class UserDao {
+public class UserDao extends BaseDao<UserDto, UserCriteria> {
+
+    @Override
+    protected QueryParam getQueryParam(UserCriteria criteria, FilterCriteria filterCriteria) {
+        List<String> criteriaList = new ArrayList<String>();
+        Map<String, Object> parameterMap = new HashMap<String, Object>();
+
+        StringBuilder sb = new StringBuilder("select u.USE_ID_C as c0, u.USE_USERNAME_C as c1, u.USE_EMAIL_C as c2, u.USE_CREATEDATE_D as c3, u.USE_IDLOCALE_C as c4")
+                .append(" from T_USER u ");
+
+        // Add search criterias
+        criteriaList.add("u.USE_DELETEDATE_D is null");
+
+        return new QueryParam(sb.toString(), criteriaList, parameterMap, null, filterCriteria, new UserMapper());
+    }
+
     /**
      * Authenticates an user.
      * 
@@ -213,25 +228,5 @@ public class UserDao {
      */
     protected String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
-    }
-    
-    /**
-     * Returns the list of all users.
-     * 
-     * @param paginatedList List of users (updated by side effects)
-     * @param sortCriteria Sort criteria
-     */
-    public void findAll(PaginatedList<UserDto> paginatedList, SortCriteria sortCriteria) {
-        Map<String, Object> parameterMap = new HashMap<String, Object>();
-        StringBuilder sb = new StringBuilder("select u.USE_ID_C as c0, u.USE_USERNAME_C as c1, u.USE_EMAIL_C as c2, u.USE_CREATEDATE_D as c3, u.USE_IDLOCALE_C as c4");
-        sb.append(" from T_USER u ");
-        
-        // Add search criterias
-        List<String> criteriaList = new ArrayList<String>();
-        criteriaList.add("u.USE_DELETEDATE_D is null");
-        
-        // Perform the search
-        QueryParam queryParam = new QueryParam(sb.toString(), criteriaList, parameterMap, null, null, new UserMapper());
-        PaginatedLists.executePaginatedQuery(paginatedList, queryParam, sortCriteria);
     }
 }
