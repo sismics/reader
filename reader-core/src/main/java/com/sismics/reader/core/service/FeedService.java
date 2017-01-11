@@ -147,6 +147,8 @@ public class FeedService extends AbstractScheduledService {
         Feed newFeed = rssReader.getFeed();
         List<Article> articleList = rssReader.getArticleList();
 
+        completeArticleList(articleList);
+
         // Get articles that were removed from RSS compared to last fetch
         List<Article> articleToRemove = getArticleToRemove(articleList);
         if (!articleToRemove.isEmpty()) {
@@ -288,9 +290,6 @@ public class FeedService extends AbstractScheduledService {
                 article.setCreator(StringUtils.abbreviate(article.getCreator(), 200));
                 String baseUri = UrlUtil.getBaseUri(feed, article);
                 article.setDescription(sanitizer.sanitize(baseUri, article.getDescription()));
-                if (article.getPublicationDate() == null || article.getPublicationDate().after(new Date())) {
-                    article.setPublicationDate(new Date());
-                }
                 articleDao.create(article);
     
                 // Create the user articles eagerly for users already subscribed
@@ -321,6 +320,20 @@ public class FeedService extends AbstractScheduledService {
     }
 
     /**
+     * Add missing data to articles after parsing.
+     *
+     * @param articleList The list of articles
+     */
+    private void completeArticleList(List<Article> articleList) {
+        for (Article article : articleList) {
+            Date now = new Date();
+            if (article.getPublicationDate() == null || article.getPublicationDate().after(now)) {
+                article.setPublicationDate(now);
+            }
+        }
+    }
+
+    /**
      * Delete articles that were removed (ninja edited) from the feed.
      *
      * @param articleList Articles just downloaded
@@ -346,7 +359,7 @@ public class FeedService extends AbstractScheduledService {
             newerArticleGuids.add(article.getGuid());
         }
 
-        // Get newer articles in stream
+        // Get newer articles in local DB
         List<ArticleDto> newerLocalArticles = new ArticleDao().findByCriteria(new ArticleCriteria()
                 .setFeedId(localArticle.getFeedId())
                 .setPublicationDateMin(oldestArticle.getPublicationDate()));
