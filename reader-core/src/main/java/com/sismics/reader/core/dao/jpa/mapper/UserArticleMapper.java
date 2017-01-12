@@ -32,9 +32,9 @@ public class UserArticleMapper extends ResultMapper<UserArticleDto> {
         dto.setArticleCreator(stringValue(o[i++]));
         dto.setArticleDescription(stringValue(o[i++]));
         dto.setArticleCommentUrl(stringValue(o[i++]));
-        dto.setArticleCommentCount((Integer) o[i++]);
+        dto.setArticleCommentCount(intValue(o[i++]));
         dto.setArticleEnclosureUrl(stringValue(o[i++]));
-        dto.setArticleEnclosureLength((Integer) o[i++]);
+        dto.setArticleEnclosureLength(intValue(o[i++]));
         dto.setArticleEnclosureType(stringValue(o[i++]));
         dto.setArticlePublicationTimestamp(((Timestamp) o[i]).getTime());
 

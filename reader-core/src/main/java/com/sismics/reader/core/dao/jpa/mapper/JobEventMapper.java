@@ -11,9 +11,9 @@ public class JobEventMapper extends ResultMapper<JobEventDto> {
     public JobEventDto map(Object[] o) {
         int i = 0;
         JobEventDto dto = new JobEventDto();
-        dto.setId((String) o[i++]);
-        dto.setName((String) o[i++]);
-        dto.setValue((String) o[i++]);
+        dto.setId(stringValue(o[i++]));
+        dto.setName(stringValue(o[i++]));
+        dto.setValue(stringValue(o[i]));
 
         return dto;
     }

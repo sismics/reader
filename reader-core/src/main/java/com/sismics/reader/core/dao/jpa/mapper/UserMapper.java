@@ -13,11 +13,11 @@ public class UserMapper extends ResultMapper<UserDto> {
     public UserDto map(Object[] o) {
         int i = 0;
         UserDto dto = new UserDto();
-        dto.setId((String) o[i++]);
-        dto.setUsername((String) o[i++]);
-        dto.setEmail((String) o[i++]);
+        dto.setId(stringValue(o[i++]));
+        dto.setUsername(stringValue(o[i++]));
+        dto.setEmail(stringValue(o[i++]));
         dto.setCreateTimestamp(((Timestamp) o[i++]).getTime());
-        dto.setLocaleId((String) o[i]);
+        dto.setLocaleId(stringValue(o[i]));
 
         return dto;
     }

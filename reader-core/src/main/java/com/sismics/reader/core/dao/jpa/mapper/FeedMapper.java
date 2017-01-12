@@ -11,8 +11,8 @@ public class FeedMapper extends ResultMapper<FeedDto> {
     public FeedDto map(Object[] o) {
         int i = 0;
         FeedDto dto = new FeedDto();
-        dto.setId((String) o[i++]);
-        dto.setRssUrl((String) o[i]);
+        dto.setId(stringValue(o[i++]));
+        dto.setRssUrl(stringValue(o[i]));
 
         return dto;
     }

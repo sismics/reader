@@ -13,9 +13,9 @@ public class JobMapper extends ResultMapper<JobDto> {
     public JobDto map(Object[] o) {
         int i = 0;
         JobDto dto = new JobDto();
-        dto.setId((String) o[i++]);
-        dto.setName((String) o[i++]);
-        dto.setUserId((String) o[i++]);
+        dto.setId(stringValue(o[i++]));
+        dto.setName(stringValue(o[i++]));
+        dto.setUserId(stringValue(o[i++]));
         Timestamp createTimestamp = (Timestamp) o[i++];
         if (createTimestamp != null) {
             dto.setCreateTimestamp(createTimestamp.getTime());
@@ -24,7 +24,7 @@ public class JobMapper extends ResultMapper<JobDto> {
         if (startTimestamp != null) {
             dto.setStartTimestamp(startTimestamp.getTime());
         }
-        Timestamp endTimestamp = (Timestamp) o[i++];
+        Timestamp endTimestamp = (Timestamp) o[i];
         if (endTimestamp != null) {
             dto.setEndTimestamp(endTimestamp.getTime());
         }
