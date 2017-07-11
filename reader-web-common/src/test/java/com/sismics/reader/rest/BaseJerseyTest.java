@@ -103,7 +103,7 @@ public abstract class BaseJerseyTest extends JerseyTest {
         // Disable file cache to fix https://java.net/jira/browse/GRIZZLY-1350
         ((StaticHttpHandler) httpServer.getServerConfiguration().getHttpHandlers().keySet().iterator().next()).setFileCacheEnabled(false);
 
-        // Add a handler for temporaty files
+        // Add a handler for temporary files
         addTempFileHandler();
 
         httpServer.start();
