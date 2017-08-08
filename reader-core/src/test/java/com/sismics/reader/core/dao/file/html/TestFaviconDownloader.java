@@ -1,6 +1,7 @@
 package com.sismics.reader.core.dao.file.html;
 
 import junit.framework.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -28,6 +29,7 @@ public class TestFaviconDownloader {
     }
 
     @Test
+    @Ignore
     public void faviconDownloaderBlipTest() throws Exception {
         // Download directly
         FaviconDownloader downloader = new FaviconDownloader();
@@ -44,6 +46,7 @@ public class TestFaviconDownloader {
     }
 
     @Test
+    @Ignore
     public void faviconDownloaderLyonUrbainTest() throws Exception {
         // Download directly
         FaviconDownloader downloader = new FaviconDownloader();
