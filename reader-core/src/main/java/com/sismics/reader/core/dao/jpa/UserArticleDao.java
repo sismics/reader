@@ -105,7 +105,7 @@ public class UserArticleDao extends BaseDao<UserArticleDto, UserArticleCriteria>
         if (criteria.isStarred()) {
             sortCriteria = new SortCriteria(" order by ua.USA_STARREDDATE_D desc, ua.USA_ID_C desc");
         } else {
-            sortCriteria = new SortCriteria(" order by a.ART_PUBLICATIONDATE_D desc, a.ART_ID_C desc");
+            sortCriteria = new SortCriteria(" order by a.ART_PUBLICATIONDATE_D desc, ua.USA_ID_C desc");
         }
 
         return new QueryParam(sb.toString(), criteriaList, parameterMap, sortCriteria, filterCriteria, new UserArticleMapper());
