@@ -28,6 +28,7 @@
     "toggleunread": "切换显示所有/未读条目",
     "add": {
       "button": "添加订阅",
+      "help": "To add a new feed, you can copy/paste the homepage URL of the website you want to follow here. If this does not work, search for this icon to be directed to a direct feed URL.",
       "placeholder": "粘贴一个供稿链接或是网页地址",
       "submit": "添加"
     },

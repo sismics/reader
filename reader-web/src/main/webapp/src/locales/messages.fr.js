@@ -37,6 +37,7 @@
     "syncfail": "Toutes les dernières synchronisations ont échouées",
     "add": {
       "button": "Ajouter un abonnement",
+      "help": "Pour ajouter un nouvel abonnement, vous pouvez copier/coller l'adresse du site que vous souhaitez suivre ici. Si cela ne fonctionne pas, cherchez cette icone pour être dirigé vers une adresse de flux directe.",
       "placeholder": "Coller l'URL d'un flux ou d'un site",
       "submit": "Ajouter"
     },

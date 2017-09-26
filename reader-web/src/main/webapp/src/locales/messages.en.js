@@ -37,6 +37,7 @@
     "syncfail": "All latest synchronizations failed",
     "add": {
       "button": "New subscription",
+      "help": "To add a new feed, you can copy/paste the homepage URL of the website you want to follow here. If this does not work, search for this icon to be directed to a direct feed URL.",
       "placeholder": "Paste a feed or website URL",
       "submit": "Add"
     },
