@@ -20,14 +20,14 @@
     "latest": "最新条目",
     "unread": "未读条目",
     "all": "所有条目",
-    "starred": "加星标的条目",
+    "starred": "收藏条目",
     "subscriptions": "订阅",
     "empty": "没有订阅项目",
     "emptyunread": "没有未读条目",
     "showall": "显示全部",
     "toggleunread": "切换显示所有/未读条目",
     "add": {
-      "button": "订阅",
+      "button": "添加订阅",
       "placeholder": "粘贴一个供稿链接或是网页地址",
       "submit": "添加"
     },
@@ -36,6 +36,7 @@
       "placeholder": "名称",
       "submit": "确定",
       "delete": "删除",
+      "info": "链接详情",
       "deleteconfirm": "确认删除选定的条目？"
     }
   },
