@@ -28,7 +28,7 @@
     "toggleunread": "切换显示所有/未读条目",
     "add": {
       "button": "添加订阅",
-      "help": "To add a new feed, you can copy/paste the homepage URL of the website you want to follow here. If this does not work, search for this icon to be directed to a direct feed URL.",
+      "help": "新增订阅时，一般情况下将您想要阅读的网站主页网址URL复制黏贴至此即可完成。如网址添加失败，请寻找并点击此图标icon获取与系统设置匹配的新的URL然后复制黏贴至此",
       "placeholder": "粘贴一个供稿链接或是网页地址",
       "submit": "添加"
     },
