@@ -14,15 +14,15 @@ import java.net.URL;
  */
 public class TestFaviconExtractor {
     @Test
-    public void faviconExtractorKickstarterTest() throws Exception {
-        final FaviconExtractor extractor = new FaviconExtractor("https://www.kickstarter.com/");
+    public void faviconExtractorSismicsTest() throws Exception {
+        final FaviconExtractor extractor = new FaviconExtractor("https://www.sismics.com/");
         new ReaderHttpClient() {
             
             @Override
             public void process(InputStream is) throws Exception {
                 extractor.readPage(is);
             }
-        }.open(new URL("https://www.kickstarter.com"));
-        Assert.assertTrue(extractor.getFavicon().contains("/favicon.ico"));
+        }.open(new URL("https://www.sismics.com"));
+        Assert.assertTrue(extractor.getFavicon().contains("/public/img/favicon.png"));
     }
 }
