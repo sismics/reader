@@ -31,7 +31,7 @@ See <http://www.sismics.com/reader/> for a list of features and benefits.
 Downloads
 ---------
 
-Compiled installers are available here for each new versions: <https://sourceforge.net/projects/sismicsreader/files/release/>
+Compiled installers are available here for each new versions: <https://github.com/sismics/reader/releases>
 
 License
 -------
