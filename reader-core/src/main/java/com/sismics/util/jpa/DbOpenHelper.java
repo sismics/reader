@@ -62,7 +62,6 @@ public abstract class DbOpenHelper {
         log.info("Opening database and executing incremental updates");
 
         Connection connection;
-        Writer outputFileWriter = null;
 
         exceptions.clear();
 
@@ -122,14 +121,6 @@ public abstract class DbOpenHelper {
                     stmt = null;
                 }
                 connectionHelper.release();
-            } catch (Exception e) {
-                exceptions.add(e);
-                log.error("Unable to close connection", e);
-            }
-            try {
-                if (outputFileWriter != null) {
-                    outputFileWriter.close();
-                }
             } catch (Exception e) {
                 exceptions.add(e);
                 log.error("Unable to close connection", e);
