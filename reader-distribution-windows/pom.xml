@@ -123,15 +123,14 @@
         <artifactId>nsis-maven-plugin</artifactId>
         <executions>
           <execution>
-            <phase>package</phase>
             <goals>
-              <goal>generate-project</goal>
-              <goal>compile</goal>
+              <goal>generate-headerfile</goal>
+              <goal>make</goal>
             </goals>
             <configuration>
               <makensisBin>${nsis.home}/makensis</makensisBin>
-              <setupScript>${project.build.directory}/reader.nsi</setupScript>
-              <outputFile>${project.build.directory}/${project.build.finalName}.exe</outputFile>
+              <scriptFile>target/reader.nsi</scriptFile>
+              <outputFile>target/${project.build.finalName}.exe</outputFile>
             </configuration>
           </execution>
         </executions>
