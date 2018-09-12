@@ -13,7 +13,7 @@ import java.io.File;
  */
 public class TestFaviconDownloader {
     @Test
-    public void faviconDownloaderSlashdotTest() throws Exception {
+    public void faviconDownloaderSlashdotTest() {
         // Download directly
         FaviconDownloader downloader = new FaviconDownloader();
         String tempDir = System.getProperty("java.io.tmpdir");
@@ -30,7 +30,7 @@ public class TestFaviconDownloader {
 
     @Test
     @Ignore
-    public void faviconDownloaderBlipTest() throws Exception {
+    public void faviconDownloaderBlipTest() {
         // Download directly
         FaviconDownloader downloader = new FaviconDownloader();
         String tempDir = System.getProperty("java.io.tmpdir");
@@ -47,7 +47,7 @@ public class TestFaviconDownloader {
 
     @Test
     @Ignore
-    public void faviconDownloaderLyonUrbainTest() throws Exception {
+    public void faviconDownloaderLyonUrbainTest() {
         // Download directly
         FaviconDownloader downloader = new FaviconDownloader();
         String tempDir = System.getProperty("java.io.tmpdir");
@@ -61,11 +61,11 @@ public class TestFaviconDownloader {
     }
 
     @Test
-    public void faviconDownloaderAbstruseGooseTest() throws Exception {
+    public void faviconDownloaderAbstruseGooseTest() {
         // Download from page
         FaviconDownloader downloader = new FaviconDownloader();
         String tempDir = System.getProperty("java.io.tmpdir");
-        String filename = downloader.downloadFaviconFromPage("http://abstrusegoose.com", tempDir, "favicon");
+        String filename = downloader.downloadFaviconFromPage("https://abstrusegoose.com", tempDir, "favicon");
         Assert.assertNotNull(filename);
         Assert.assertTrue(new File(filename).exists());
     }
@@ -75,7 +75,7 @@ public class TestFaviconDownloader {
      * 
      */
     @Test
-    public void faviconDownloaderDoubleFineTest() throws Exception {
+    public void faviconDownloaderDoubleFineTest() {
         // Download from page
         FaviconDownloader downloader = new FaviconDownloader();
         String tempDir = System.getProperty("java.io.tmpdir");
