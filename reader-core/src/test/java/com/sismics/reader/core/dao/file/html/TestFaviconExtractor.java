@@ -19,8 +19,9 @@ public class TestFaviconExtractor {
         new ReaderHttpClient() {
             
             @Override
-            public void process(InputStream is) throws Exception {
+            public Void process(InputStream is) throws Exception {
                 extractor.readPage(is);
+                return null;
             }
         }.open(new URL("https://www.sismics.com"));
         Assert.assertTrue(extractor.getFavicon().contains("/public/img/favicon.png"));

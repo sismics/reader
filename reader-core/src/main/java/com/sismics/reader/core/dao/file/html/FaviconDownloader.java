@@ -59,8 +59,9 @@ public class FaviconDownloader {
             new ReaderHttpClient() {
                 
                 @Override
-                public void process(InputStream is) throws Exception {
+                public Void process(InputStream is) throws Exception {
                     extractor.readPage(is);
+                    return null;
                 }
             }.open(new URL(pageUrl));
             faviconUrl = extractor.getFavicon();
@@ -123,43 +124,52 @@ public class FaviconDownloader {
      * @param fileName Destination filename (without extension)
      * @return Local file path or null if failed
      */
-    public String downloadFavicon(String faviconUrl, String directory, String fileName) {
-        File localFile = null;
+    public String downloadFavicon(final String faviconUrl, final String directory, final String fileName) {
         try {
             // Download the icon file to temporary location
-            InputStream remoteInputStream = new URL(faviconUrl).openConnection().getInputStream();
-            localFile = File.createTempFile("reader_favicon", ".ico");
-            if (ByteStreams.copy(remoteInputStream, new FileOutputStream(localFile)) > 0) {
-                // Check if it is a graphics file, we cannot rely on HTTP headers for Content-Type
-                String type = MimeTypeUtil.guessMimeType(localFile);
-                if (type != null) {
-                    String extension = FAVICON_MIME_TYPE_MAP.get(type);
-                    if (extension != null) {
-                        File outputFile = new File(directory + File.separator + fileName + extension);
-                        Files.copy(localFile, new FileOutputStream(outputFile));
-                        return outputFile.getPath();
+            ReaderHttpClient<String> client = new ReaderHttpClient<String>() {
+
+                @Override
+                public String process(InputStream is) throws Exception {
+                    File localFile = null;
+                    try {
+                        localFile = File.createTempFile("reader_favicon", ".ico");
+                        if (ByteStreams.copy(is, new FileOutputStream(localFile)) > 0) {
+                            // Check if it is a graphics file, we cannot rely on HTTP headers for Content-Type
+                            String type = MimeTypeUtil.guessMimeType(localFile);
+                            if (type != null) {
+                                String extension = FAVICON_MIME_TYPE_MAP.get(type);
+                                if (extension != null) {
+                                    File outputFile = new File(directory + File.separator + fileName + extension);
+                                    Files.copy(localFile, new FileOutputStream(outputFile));
+                                    return outputFile.getPath();
+                                }
+                            }
+                        }
+                    } catch (FileNotFoundException e) {
+                        if (log.isInfoEnabled()) {
+                            log.info(MessageFormat.format("Favicon file not found at URL {0}", faviconUrl));
+                        }
+                    } finally {
+                        // Clean up temporary local file
+                        if (localFile != null) {
+                            try {
+                                localFile.delete();
+                            } catch (Exception e) {
+                                // NOP
+                            }
+                        }
                     }
+                    return null;
                 }
-            }
-        } catch (FileNotFoundException e) {
-            if (log.isInfoEnabled()) {
-                log.info(MessageFormat.format("Favicon file not found at URL {0}", faviconUrl));
-            }
+            };
+            client.setTimeout(2000);
+            return client.open(new URL(faviconUrl));
         } catch (Exception e) {
             if (log.isInfoEnabled()) {
                 log.info(MessageFormat.format("Error downloading favicon at URL {0}", faviconUrl), e);
             }
-        } finally {
-            // Clean up temporary local file
-            if (localFile != null) {
-                try {
-                    localFile.delete();
-                } catch (Exception e) {
-                    // NOP
-                }
-            }
         }
         return null;
     }
-
 }

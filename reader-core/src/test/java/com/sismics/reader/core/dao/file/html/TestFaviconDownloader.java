@@ -65,7 +65,7 @@ public class TestFaviconDownloader {
         // Download from page
         FaviconDownloader downloader = new FaviconDownloader();
         String tempDir = System.getProperty("java.io.tmpdir");
-        String filename = downloader.downloadFaviconFromPage("https://abstrusegoose.com", tempDir, "favicon");
+        String filename = downloader.downloadFaviconFromPage("http://abstrusegoose.com", tempDir, "favicon");
         Assert.assertNotNull(filename);
         Assert.assertTrue(new File(filename).exists());
     }

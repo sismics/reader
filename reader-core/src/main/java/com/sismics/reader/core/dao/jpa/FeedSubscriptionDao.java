@@ -106,7 +106,7 @@ public class FeedSubscriptionDao extends BaseDao<FeedSubscriptionDto, FeedSubscr
     }
 
     /**
-     * Update the number of unread articles in a user subscription
+     * Update the number of unread articles in a user subscription.
      *
      * @param id User subscription ID
      * @param unreadCount Number of unread articles

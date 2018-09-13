@@ -16,7 +16,7 @@ import java.net.URL;
  *
  * @author jtremeaux 
  */
-public abstract class ReaderHttpClient {
+public abstract class ReaderHttpClient<T> {
     /**
      * User-Agent to use.
      * Note: some servers refuse to talk to the default user-agent and issue a 403 Bad Behavior.
@@ -24,6 +24,11 @@ public abstract class ReaderHttpClient {
     private static final String USER_AGENT = "Mozilla/4.0 (compatible; Like Firefox; SismicsReaderBot/1.0;+http://www.sismics.com/reader/)";
 
     private static SSLSocketFactory sslSocketFactory;
+
+    /**
+     * Timeout in milliseconds.
+     */
+    private int timeout = 20000;
 
     static {
         if (EnvironmentUtil.isSslTrustAll()) {
@@ -38,7 +43,7 @@ public abstract class ReaderHttpClient {
      * 
      * @param url URL
      */
-    public void open(URL url) throws Exception {
+    public T open(URL url) throws Exception {
         Closer closer = Closer.create();
         try {
             HttpURLConnection connection = buildHttpConnection(url);
@@ -55,7 +60,7 @@ public abstract class ReaderHttpClient {
             }
             
             InputStream is = closer.register(connection.getInputStream());
-            process(is);
+            return process(is);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -79,10 +84,14 @@ public abstract class ReaderHttpClient {
             ((HttpsURLConnection) connection).setSSLSocketFactory(sslSocketFactory);
         }
         connection.setRequestProperty("User-Agent", USER_AGENT);
-        connection.setConnectTimeout(20000);
-        connection.setReadTimeout(20000);
+        connection.setConnectTimeout(timeout);
+        connection.setReadTimeout(timeout);
         return connection;
     }
     
-    public abstract void process(InputStream is) throws Exception;
+    public abstract T process(InputStream is) throws Exception;
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
 }

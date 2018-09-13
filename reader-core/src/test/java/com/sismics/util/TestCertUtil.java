@@ -34,8 +34,8 @@ public class TestCertUtil {
     public void sslTrustAllCertificateTest() throws Exception {
         new ReaderHttpClient() {
             @Override
-            public void process(InputStream is) throws Exception {
-                // NOP
+            public Void process(InputStream is) throws Exception {
+                return null;
             }
         }.open(new URL("https://lescastcodeurs.com"));
     }

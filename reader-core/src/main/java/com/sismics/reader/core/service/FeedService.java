@@ -159,7 +159,7 @@ public class FeedService extends AbstractScheduledService {
                 List<UserArticleDto> userArticleDtoList = new UserArticleDao()
                         .findByCriteria(new UserArticleCriteria()
                                 .setArticleId(article.getId())
-                                .setFetchAllFeedSubscription(true)
+                                .setFetchAllFeedSubscription(true) // to test: subscribe another user, u2, read u1, not u2, u1 is decremented anyway
                                 .setUnread(true));
 
                 for (UserArticleDto userArticleDto : userArticleDtoList) {
@@ -389,7 +389,7 @@ public class FeedService extends AbstractScheduledService {
     private Article getOldestArticle(List<Article> articleList) {
         Article oldestArticle = null;
         for (Article article : articleList) {
-            if (oldestArticle == null || article.getPublicationDate().before(oldestArticle.getPublicationDate())) {
+            if (oldestArticle == null || article.getPublicationDate().before(oldestArticle.getPublicationDate())) { // check me
                 oldestArticle = article;
             }
         }
@@ -422,8 +422,9 @@ public class FeedService extends AbstractScheduledService {
             new ReaderHttpClient() {
                 
                 @Override
-                public void process(InputStream is) throws Exception {
+                public Void process(InputStream is) throws Exception {
                     reader.readRssFeed(is);
+                    return null;
                 }
             }.open(new URL(url));
             reader.getFeed().setRssUrl(url);
@@ -437,8 +438,9 @@ public class FeedService extends AbstractScheduledService {
                     new ReaderHttpClient() {
                         
                         @Override
-                        public void process(InputStream is) throws Exception {
+                        public Void process(InputStream is) throws Exception {
                             extractor.readPage(is);
+                            return null;
                         }
                     }.open(new URL(url));
                     List<String> feedList = extractor.getFeedList();
