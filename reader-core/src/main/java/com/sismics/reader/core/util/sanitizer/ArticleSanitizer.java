@@ -70,6 +70,10 @@ public class ArticleSanitizer {
             "(http:|https:)?//cdn.livestream.com/embed/.+|" +
             "(http:|https:)?//v.24liveblog.com/live/.+|" +
             "(http:|https:)?//fiddle.jshell.net/.+|" +
+            "(http:|https:)?//embed-ssl.ted.com/.+|" +
+            "(http:|https:)?//twitch.tv/.+|" +
+            "(http:|https:)?//embed.plnkr.co/.+|" +
+            "(http:|https:)?//(www.)?facebook.com/plugins/.+|" +
             "(http:|https:)?//soundsgood.co/embed/.+");
 
     /**
