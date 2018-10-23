@@ -63,7 +63,7 @@ If you use Docker, you can try Reader easily with the following command :
 How to build Reader from the sources
 ------------------------------------
 
-Prerequisites: JDK 7, Maven 3
+Prerequisites: JDK 8, Maven 3
 
 Reader is organized in several Maven modules:
 
