@@ -75,7 +75,7 @@
             <path>reader-agent.jar</path>
           </additionalClasspath>
           <javaApplicationStub>src/main/osxappbundle/JavaApplicationStub</javaApplicationStub>
-          <jvmVersion>1.6+</jvmVersion>
+          <jvmVersion>1.8+</jvmVersion>
           <vmOptions>-Xmx150M -XX:MaxPermSize=128M</vmOptions>
           <iconFile>src/main/osxappbundle/reader-512.icns</iconFile>
         </configuration>
