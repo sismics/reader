@@ -15,7 +15,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Dependencies version (external) -->
-    <org.apache.commons.commons-compress.version>1.5</org.apache.commons.commons-compress.version>
+    <org.apache.commons.commons-compress.version>1.18</org.apache.commons.commons-compress.version>
     <commons-lang.commons-lang.version>2.6</commons-lang.commons-lang.version>
     <commons-io.commons-io.version>2.1</commons-io.commons-io.version>
     <com.google.guava.guava.version>14.0</com.google.guava.guava.version>
@@ -35,17 +35,15 @@
     <org.apache.lucene.version>4.2.0</org.apache.lucene.version>
     <jgoodies.forms.version>1.0.5</jgoodies.forms.version>
     <org.bitlet.weupnp.version>0.1.2</org.bitlet.weupnp.version>
-
+    <javax.servlet.javax.servlet-api.version>4.0.1</javax.servlet.javax.servlet-api.version>
     <com.sun.grizzly.version>1.9.18-m</com.sun.grizzly.version>
     <org.hibernate.hibernate.version>4.2.21.Final</org.hibernate.hibernate.version>
     <joda-time.joda-time.version>2.2</joda-time.joda-time.version>
     <org.codehaus.jackson.jackson.version>1.7.1</org.codehaus.jackson.jackson.version>
+    <org.eclipse.jetty.jetty-server.version>9.4.12.v20180830</org.eclipse.jetty.jetty-server.version>
+    <org.eclipse.jetty.jetty-webapp.version>9.4.12.v20180830</org.eclipse.jetty.jetty-webapp.version>
+    <org.eclipse.jetty.jetty-servlet.version>9.4.12.v20180830</org.eclipse.jetty.jetty-servlet.version>
 
-    <org.eclipse.jetty.jetty-server.version>8.1.10.v20130312</org.eclipse.jetty.jetty-server.version>
-    <org.eclipse.jetty.jetty-webapp.version>8.1.10.v20130312</org.eclipse.jetty.jetty-webapp.version>
-    <org.eclipse.jetty.jetty-servlet.version>8.1.10.v20130312</org.eclipse.jetty.jetty-servlet.version>
-    <org.mortbay.jetty.servlet-api.version>3.0.20100224</org.mortbay.jetty.servlet-api.version>
-    
     <!-- Plugins version -->
     <org.apache.maven.plugins.maven-surefire-plugin.version>2.19</org.apache.maven.plugins.maven-surefire-plugin.version>
     <org.apache.maven.plugins.maven-antrun-plugin.version>1.7</org.apache.maven.plugins.maven-antrun-plugin.version>
@@ -57,7 +55,7 @@
     <org.codehaus.mojo.rpm-maven-plugin.version>2.1-alpha-2</org.codehaus.mojo.rpm-maven-plugin.version>
     <org.codehaus.mojo.nsis-maven-plugin.version>1.0-alpha-1</org.codehaus.mojo.nsis-maven-plugin.version>
     <org.codehaus.mojo.osxappbundle-maven-plugin.version>1.0-alpha-2</org.codehaus.mojo.osxappbundle-maven-plugin.version>
-    <org.mortbay.jetty.jetty-maven-plugin.version>8.1.2.v20120308</org.mortbay.jetty.jetty-maven-plugin.version>
+    <org.eclipse.jetty.jetty-maven-plugin.version>9.4.12.v20180830</org.eclipse.jetty.jetty-maven-plugin.version>
     <org.vafer.jdeb.version>1.0.1</org.vafer.jdeb.version>
     <com.samaxes.maven.minify-maven-plugin.version>1.7</com.samaxes.maven.minify-maven-plugin.version>
   </properties>
@@ -109,11 +107,11 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>${org.apache.maven.plugins.maven-war-plugin.version}</version>
       </plugin>
-      
+
       <plugin>
-        <groupId>org.mortbay.jetty</groupId>
+        <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>${org.mortbay.jetty.jetty-maven-plugin.version}</version>
+        <version>${org.eclipse.jetty.jetty-maven-plugin.version}</version>
       </plugin>
       
       <plugin>
@@ -263,9 +261,9 @@
       </dependency>
 
       <dependency>
-        <groupId>org.mortbay.jetty</groupId>
-        <artifactId>servlet-api</artifactId>
-        <version>${org.mortbay.jetty.servlet-api.version}</version>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>${javax.servlet.javax.servlet-api.version}</version>
       </dependency>
       
       <dependency>
