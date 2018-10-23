@@ -1,8 +1,9 @@
 package com.sismics.util;
 
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Test of the network utilities.
@@ -14,6 +15,6 @@ public class TestNetworkUtil {
     @Test
     @Ignore
     public void testUpnp() throws Exception {
-        Assert.assertTrue(NetworkUtil.mapTcpPort(4040));
+        assertTrue(NetworkUtil.mapTcpPort(4040));
     }
 }

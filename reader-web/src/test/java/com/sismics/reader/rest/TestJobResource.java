@@ -2,7 +2,6 @@ package com.sismics.reader.rest;
 
 import com.sun.jersey.multipart.FormDataBodyPart;
 import com.sun.jersey.multipart.FormDataMultiPart;
-import junit.framework.Assert;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
@@ -10,6 +9,9 @@ import org.junit.Test;
 import javax.ws.rs.core.MediaType;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 
 /**
  * Exhaustive test of the job resource.
@@ -46,32 +48,32 @@ public class TestJobResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         JSONArray jobs = json.getJSONArray("jobs");
-        Assert.assertEquals(1, jobs.length());
+        assertEquals(1, jobs.length());
         JSONObject job = (JSONObject) jobs.get(0);
         String jobId = job.getString("id");
-        Assert.assertNotNull(jobId);
-        Assert.assertEquals("import", job.optString("name"));
-        Assert.assertNotNull(job.optString("start_date"));
-        Assert.assertNotNull(job.optString("end_date"));
-        Assert.assertEquals(4, job.optInt("feed_success"));
-        Assert.assertEquals(0, job.optInt("feed_failure"));
-        Assert.assertEquals(4, job.optInt("feed_total"));
-        Assert.assertEquals(0, job.optInt("starred_success"));
-        Assert.assertEquals(0, job.optInt("starred_failure"));
-        Assert.assertEquals(0, job.optInt("starred_total"));
+        assertNotNull(jobId);
+        assertEquals("import", job.optString("name"));
+        assertNotNull(job.optString("start_date"));
+        assertNotNull(job.optString("end_date"));
+        assertEquals(4, job.optInt("feed_success"));
+        assertEquals(0, job.optInt("feed_failure"));
+        assertEquals(4, job.optInt("feed_total"));
+        assertEquals(0, job.optInt("starred_success"));
+        assertEquals(0, job.optInt("starred_failure"));
+        assertEquals(0, job.optInt("starred_total"));
 
         // User job2 deletes user1's job KO : forbidden
         login("job2");
         DELETE("/job/" + jobId);
         assertIsBadRequest(); // TODO return forbidden status in this case
         json = getJsonResult();
-        Assert.assertEquals("ForbiddenError", json.getString("type"));
+        assertEquals("ForbiddenError", json.getString("type"));
 
         // User job1 deletes his job
         login("job1");
         DELETE("/job/" + jobId);
         json = getJsonResult();
-        Assert.assertEquals("ok", json.getString("status"));
+        assertEquals("ok", json.getString("status"));
         assertIsOk();
 
         // Check that the job was deleted
@@ -79,6 +81,6 @@ public class TestJobResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         jobs = json.getJSONArray("jobs");
-        Assert.assertEquals(0, jobs.length());
+        assertEquals(0, jobs.length());
     }
 }

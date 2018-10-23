@@ -12,7 +12,6 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.test.framework.JerseyTest;
-import junit.framework.Assert;
 import org.codehaus.jettison.json.JSONObject;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.NetworkListener;
@@ -36,6 +35,8 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static junit.framework.Assert.assertEquals;
 
 /**
  * Base class of integration tests with Jersey.
@@ -221,7 +222,7 @@ public abstract class BaseJerseyTest extends JerseyTest {
                 "remember", remember.toString()
         ));
         assertIsOk();
-        Assert.assertEquals(ClientResponse.Status.OK, ClientResponse.Status.fromStatusCode(response.getStatus()));
+        assertEquals(ClientResponse.Status.OK, ClientResponse.Status.fromStatusCode(response.getStatus()));
 
         return getAuthenticationCookie(response);
     }
@@ -251,7 +252,7 @@ public abstract class BaseJerseyTest extends JerseyTest {
     }
 
     public void assertStatus(int status, ClientResponse response) {
-        Assert.assertEquals("Response status error, out: " + response.toString(), status, response.getStatus());
+        assertEquals("Response status error, out: " + response.toString(), status, response.getStatus());
     }
 
     /**

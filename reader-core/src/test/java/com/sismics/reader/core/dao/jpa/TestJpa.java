@@ -1,13 +1,12 @@
 package com.sismics.reader.core.dao.jpa;
 
-import junit.framework.Assert;
-
-import org.junit.Test;
-
 import com.sismics.reader.BaseTransactionalTest;
-import com.sismics.reader.core.dao.jpa.UserDao;
 import com.sismics.reader.core.model.jpa.User;
 import com.sismics.reader.core.util.TransactionUtil;
+import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 
 /**
  * Tests the persistance layer.
@@ -30,7 +29,7 @@ public class TestJpa extends BaseTransactionalTest {
 
         // Search a user by his ID
         user = userDao.getById(id);
-        Assert.assertNotNull(user);
-        Assert.assertEquals("toto@reader.com", user.getEmail());
+        assertNotNull(user);
+        assertEquals("toto@reader.com", user.getEmail());
     }
 }

@@ -2,11 +2,13 @@ package com.sismics.reader.rest;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
-import junit.framework.Assert;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 
 /**
  * Exhaustive test of the starred resource.
@@ -29,15 +31,15 @@ public class TestStarredResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         String subscription1Id = json.optString("id");
-        Assert.assertNotNull(subscription1Id);
+        assertNotNull(subscription1Id);
         
         // Check the all resource
         GET("/all");
         assertIsOk();
         json = getJsonResult();
         JSONArray articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(10, articles.length());
+        assertNotNull(articles);
+        assertEquals(10, articles.length());
         JSONObject article0 = articles.getJSONObject(0);
         String article0Id = article0.getString("id");
         JSONObject article1 = articles.getJSONObject(1);
@@ -56,8 +58,8 @@ public class TestStarredResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(2, articles.length());
+        assertNotNull(articles);
+        assertEquals(2, articles.length());
         JSONObject articleAfter = articles.getJSONObject(0);
         String articleAfterId = articleAfter.getString("id");
 
@@ -66,8 +68,8 @@ public class TestStarredResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(1, articles.length());
+        assertNotNull(articles);
+        assertEquals(1, articles.length());
 
         // Delete a starred article
         DELETE("/starred/" + article0Id);
@@ -78,8 +80,8 @@ public class TestStarredResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(1, articles.length());
+        assertNotNull(articles);
+        assertEquals(1, articles.length());
         
         // Delete multiple starred articles
         POST("/starred/unstar", ImmutableMultimap.of(
@@ -92,8 +94,8 @@ public class TestStarredResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(0, articles.length());
+        assertNotNull(articles);
+        assertEquals(0, articles.length());
         
         // Create multiple starred articles
         POST("/starred/star", ImmutableMultimap.of(
@@ -106,7 +108,7 @@ public class TestStarredResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(2, articles.length());
+        assertNotNull(articles);
+        assertEquals(2, articles.length());
     }
 }

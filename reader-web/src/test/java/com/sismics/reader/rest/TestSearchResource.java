@@ -7,6 +7,8 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 
+import static junit.framework.Assert.assertEquals;
+
 /**
  * Exhaustive test of the search resource.
  * 
@@ -31,7 +33,7 @@ public class TestSearchResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         JSONArray articles = json.getJSONArray("articles");
-        Assert.assertEquals(1, articles.length());
+        assertEquals(1, articles.length());
         assertSearchResult(articles, "Quand <span class=\"highlight\">searchtermZelda</span> prend les armes", 0);
         
         // Search "njloinzejrmklsjd": OK, no result
@@ -39,14 +41,14 @@ public class TestSearchResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.getJSONArray("articles");
-        Assert.assertEquals(0, articles.length());
+        assertEquals(0, articles.length());
         
         // Search "wifi": OK, 2 results
         GET("/search/searchtermwifi");
         assertIsOk();
         json = getJsonResult();
         articles = json.getJSONArray("articles");
-        Assert.assertEquals(2, articles.length());
+        assertEquals(2, articles.length());
         assertSearchResult(articles, "Récupérer les clés <span class=\"highlight\">searchtermwifi</span> sur un téléphone Android", 0);
         assertSearchResult(articles, "Partagez vos clés <span class=\"highlight\">searchtermWiFi</span> avec vos amis", 1);
         
@@ -55,7 +57,7 @@ public class TestSearchResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.getJSONArray("articles");
-        Assert.assertEquals(2, articles.length());
+        assertEquals(2, articles.length());
         assertSearchResult(articles, "<span class=\"highlight\">searchtermGoogle</span> <span class=\"highlight\">searchtermKeep</span>…eut pas vraiment en faire plus (pour le moment)", 0);
         assertSearchResult(articles, "Quand searchtermZelda prend les armes", 1);
         
@@ -72,7 +74,7 @@ public class TestSearchResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.getJSONArray("articles");
-        Assert.assertEquals(2, articles.length());
+        assertEquals(2, articles.length());
         
         // Create user search3
         createUser("search3");
@@ -83,14 +85,14 @@ public class TestSearchResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.getJSONArray("articles");
-        Assert.assertEquals(0, articles.length());
+        assertEquals(0, articles.length());
         
         // Search "zelda"
         GET("/search/searchtermzelda");
         assertIsOk();
         json = getJsonResult();
         articles = json.getJSONArray("articles");
-        Assert.assertEquals(1, articles.length());
+        assertEquals(1, articles.length());
         assertSearchResult(articles, "Quand <span class=\"highlight\">searchtermZelda</span> prend les armes", 0);
         
         // Subscribe to Korben RSS feed (alternative URL)
@@ -102,7 +104,7 @@ public class TestSearchResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.getJSONArray("articles");
-        Assert.assertEquals(1, articles.length());
+        assertEquals(1, articles.length());
         assertSearchResult(articles, "Quand <span class=\"highlight\">searchtermZelda</span> prend les armes", 0);
     }
     

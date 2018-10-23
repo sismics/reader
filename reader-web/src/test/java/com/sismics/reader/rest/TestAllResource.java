@@ -1,11 +1,13 @@
 package com.sismics.reader.rest;
 
 import com.google.common.collect.ImmutableMap;
-import junit.framework.Assert;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 
 /**
  * Exhaustive test of the all resource.
@@ -28,28 +30,28 @@ public class TestAllResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         String subscription0Id = json.optString("id");
-        Assert.assertNotNull(subscription0Id);
+        assertNotNull(subscription0Id);
         
         // Check the category tree
         GET("/category");
         assertIsOk();
         json = getJsonResult();
         JSONArray categories = json.optJSONArray("categories");
-        Assert.assertNotNull(categories);
-        Assert.assertEquals(1, categories.length());
+        assertNotNull(categories);
+        assertEquals(1, categories.length());
         JSONObject rootCategory = categories.optJSONObject(0);
         String rootCategoryId = rootCategory.optString("id");
-        Assert.assertNotNull(rootCategoryId);
+        assertNotNull(rootCategoryId);
         categories = rootCategory.optJSONArray("categories");
-        Assert.assertEquals(0, categories.length());
+        assertEquals(0, categories.length());
 
         // Check the root category
         GET("/category/" + rootCategoryId);
         assertIsOk();
         json = getJsonResult();
         JSONArray articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(10, articles.length());
+        assertNotNull(articles);
+        assertEquals(10, articles.length());
         JSONObject article = (JSONObject) articles.get(1);
         String article1Id = article.getString("id");
         article = (JSONObject) articles.get(2);
@@ -60,17 +62,17 @@ public class TestAllResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(8, articles.length());
-        Assert.assertEquals(article2Id, article.getString("id"));
+        assertNotNull(articles);
+        assertEquals(8, articles.length());
+        assertEquals(article2Id, article.getString("id"));
 
         // Check the all resource
         GET("/all");
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(10, articles.length());
+        assertNotNull(articles);
+        assertEquals(10, articles.length());
         article = (JSONObject) articles.get(1);
         article1Id = article.getString("id");
         article = (JSONObject) articles.get(2);
@@ -81,9 +83,9 @@ public class TestAllResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(8, articles.length());
-        Assert.assertEquals(article2Id, article.getString("id"));
+        assertNotNull(articles);
+        assertEquals(8, articles.length());
+        assertEquals(article2Id, article.getString("id"));
 
         // Marks all articles as read
         POST("/all/read");
@@ -94,27 +96,27 @@ public class TestAllResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(10, articles.length());
+        assertNotNull(articles);
+        assertEquals(10, articles.length());
 
         // Check in the subscriptions that there are no unread articles left
         GET("/subscription", ImmutableMap.of("after_article", article1Id));
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals(0, json.optInt("unread_count"));
+        assertEquals(0, json.optInt("unread_count"));
         categories = json.getJSONArray("categories");
         rootCategory = categories.getJSONObject(0);
         JSONArray subscriptions = rootCategory.getJSONArray("subscriptions");
         JSONObject subscription0 = subscriptions.getJSONObject(0);
-        Assert.assertEquals(0, subscription0.optInt("unread_count"));
+        assertEquals(0, subscription0.optInt("unread_count"));
 
         // Check the all resource for unread articles
         GET("/all", ImmutableMap.of("unread", Boolean.TRUE.toString()));
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(0, articles.length());
+        assertNotNull(articles);
+        assertEquals(0, articles.length());
     }
 
     @Test
@@ -128,15 +130,15 @@ public class TestAllResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         String subscription0Id = json.optString("id");
-        Assert.assertNotNull(subscription0Id);
+        assertNotNull(subscription0Id);
         
         // Check the all resource
         GET("/all", ImmutableMap.of("unread", "true"));
         assertIsOk();
         json = getJsonResult();
         JSONArray articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(10, articles.length());
+        assertNotNull(articles);
+        assertEquals(10, articles.length());
 
         // Create user multiple2
         createUser("multiple2");
@@ -147,14 +149,14 @@ public class TestAllResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         subscription0Id = json.optString("id");
-        Assert.assertNotNull(subscription0Id);
+        assertNotNull(subscription0Id);
         
         // Check the all resource
         GET("/all", ImmutableMap.of("unread", "true"));
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(10, articles.length());
+        assertNotNull(articles);
+        assertEquals(10, articles.length());
     }
 }

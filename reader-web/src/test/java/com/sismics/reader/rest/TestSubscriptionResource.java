@@ -6,7 +6,6 @@ import com.google.common.io.CharStreams;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sun.jersey.multipart.FormDataBodyPart;
 import com.sun.jersey.multipart.FormDataMultiPart;
-import junit.framework.Assert;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -18,6 +17,8 @@ import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Date;
+
+import static junit.framework.Assert.*;
 
 /**
  * Exhaustive test of the subscription resource.
@@ -40,63 +41,63 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         String category1Id = json.optString("id");
-        Assert.assertNotNull(category1Id);
+        assertNotNull(category1Id);
         
         // Subscribe to korben.info
         PUT("/subscription", ImmutableMap.of("url", "http://localhost:9997/http/feeds/korben.xml"));
         assertIsOk();
         json = getJsonResult();
         String subscription1Id = json.getString("id");
-        Assert.assertNotNull(subscription1Id);
+        assertNotNull(subscription1Id);
         
         // Move the korben.info subscription to "techno"
         POST("/subscription/" + subscription1Id, ImmutableMap.of("category", category1Id));
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals("ok", json.getString("status"));
+        assertEquals("ok", json.getString("status"));
 
         // List all subscriptions
         GET("/subscription");
         assertIsOk();
         json = getJsonResult();
         int unreadCount = json.optInt("unread_count");
-        Assert.assertTrue(unreadCount > 0);
+        assertTrue(unreadCount > 0);
         JSONArray categories = json.optJSONArray("categories");
-        Assert.assertNotNull(categories);
-        Assert.assertEquals(1, categories.length());
+        assertNotNull(categories);
+        assertEquals(1, categories.length());
         JSONObject rootCategory = categories.optJSONObject(0);
         categories = rootCategory.getJSONArray("categories");
         JSONObject technoCategory = categories.optJSONObject(0);
         JSONArray subscriptions = technoCategory.optJSONArray("subscriptions");
-        Assert.assertEquals(1, subscriptions.length());
+        assertEquals(1, subscriptions.length());
         JSONObject subscription = subscriptions.getJSONObject(0);
-        Assert.assertEquals(10, subscription.getInt("unread_count"));
-        Assert.assertEquals("http://localhost:9997/http/feeds/korben.xml", subscription.getString("url"));
+        assertEquals(10, subscription.getInt("unread_count"));
+        assertEquals("http://localhost:9997/http/feeds/korben.xml", subscription.getString("url"));
 
         // Check the subscription data
         GET("/subscription/" + subscription1Id);
         assertIsOk();
         json = getJsonResult();
         subscription = json.optJSONObject("subscription");
-        Assert.assertNotNull(subscription);
-        Assert.assertEquals("Korben", subscription.optString("title"));
-        Assert.assertEquals("Korben", subscription.optString("feed_title"));
-        Assert.assertEquals("http://korben.info", subscription.optString("url"));
-        Assert.assertEquals("Upgrade your mind", subscription.optString("description"));
-        Assert.assertEquals("http://localhost:9997/http/feeds/korben.xml", subscription.optString("rss_url"));
-        Assert.assertNotNull(subscription.optLong("create_date"));
-        Assert.assertNotNull(subscription.optString("category_id"));
-        Assert.assertEquals("techno", subscription.optString("category_name"));
+        assertNotNull(subscription);
+        assertEquals("Korben", subscription.optString("title"));
+        assertEquals("Korben", subscription.optString("feed_title"));
+        assertEquals("http://korben.info", subscription.optString("url"));
+        assertEquals("Upgrade your mind", subscription.optString("description"));
+        assertEquals("http://localhost:9997/http/feeds/korben.xml", subscription.optString("rss_url"));
+        assertNotNull(subscription.optLong("create_date"));
+        assertNotNull(subscription.optString("category_id"));
+        assertEquals("techno", subscription.optString("category_name"));
         JSONArray articles = json.optJSONArray("articles");
-        Assert.assertEquals(10, articles.length());
+        assertEquals(10, articles.length());
         JSONObject article = articles.optJSONObject(0);
-        Assert.assertNotNull(article);
+        assertNotNull(article);
         String article0Id = article.getString("id");
-        Assert.assertNotNull(article0Id);
+        assertNotNull(article0Id);
         JSONObject articleSubscription = article.optJSONObject("subscription");
-        Assert.assertNotNull(articleSubscription.getString("id"));
-        Assert.assertNotNull(articleSubscription.getString("title"));
-        Assert.assertNotNull(article.optString("comment_url"));
+        assertNotNull(articleSubscription.getString("id"));
+        assertNotNull(articleSubscription.getString("title"));
+        assertNotNull(article.optString("comment_url"));
         article = (JSONObject) articles.get(1);
         String article1Id = article.getString("id");
         article = (JSONObject) articles.get(2);
@@ -107,9 +108,9 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(8, articles.length());
-        Assert.assertEquals(article2Id, article.getString("id"));
+        assertNotNull(articles);
+        assertEquals(8, articles.length());
+        assertEquals(article2Id, article.getString("id"));
 
         // Update the subscription
         POST("/subscription/" + subscription1Id, ImmutableMap.of(
@@ -118,71 +119,71 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         ));
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals("ok", json.getString("status"));
+        assertEquals("ok", json.getString("status"));
         
         // Check the updated subscription data
         GET("/subscription/" + subscription1Id);
         assertIsOk();
         json = getJsonResult();
         subscription = json.optJSONObject("subscription");
-        Assert.assertNotNull(subscription);
-        Assert.assertEquals("Korben.info", subscription.optString("title"));
-        Assert.assertEquals("http://korben.info", subscription.optString("url"));
-        Assert.assertEquals("Upgrade your mind", subscription.optString("description"));
+        assertNotNull(subscription);
+        assertEquals("Korben.info", subscription.optString("title"));
+        assertEquals("http://korben.info", subscription.optString("url"));
+        assertEquals("Upgrade your mind", subscription.optString("description"));
 
         // Marks an article as read
         POST("/article/" + article0Id + "/read");
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals("ok", json.getString("status"));
+        assertEquals("ok", json.getString("status"));
         
         // Marks an article as read (2nd time)
         POST("/article/" + article0Id + "/read");
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals("ok", json.getString("status"));
+        assertEquals("ok", json.getString("status"));
 
         // Check the subscription data
         GET("/subscription/" + subscription1Id, ImmutableMap.of("unread", "true"));
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(9, articles.length());
+        assertNotNull(articles);
+        assertEquals(9, articles.length());
 
         // Check the subscription data
         GET("/subscription/" + subscription1Id, ImmutableMap.of("unread", "false"));
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(10, articles.length());
+        assertNotNull(articles);
+        assertEquals(10, articles.length());
 
         // Check all subscriptions for unread articles
         GET("/subscription");
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals(9, json.optInt("unread_count"));
+        assertEquals(9, json.optInt("unread_count"));
 
         // Marks an article as unread
         POST("/article/" + article0Id + "/unread");
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals("ok", json.getString("status"));
+        assertEquals("ok", json.getString("status"));
         
         // Marks an article as unread (2nd time)
         POST("/article/" + article0Id + "/unread");
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals("ok", json.getString("status"));
+        assertEquals("ok", json.getString("status"));
 
         // Check the subscription data
         GET("/subscription/" + subscription1Id, ImmutableMap.of("unread", "true"));
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(10, articles.length());
+        assertNotNull(articles);
+        assertEquals(10, articles.length());
 
         // Marks all articles in this subscription as read
         POST("/subscription/" + subscription1Id + "/read");
@@ -192,13 +193,13 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         GET("/subscription");
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals(0, json.optInt("unread_count"));
+        assertEquals(0, json.optInt("unread_count"));
 
         // Delete the subscription
         DELETE("/subscription/" + subscription1Id);
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals("ok", json.getString("status"));
+        assertEquals("ok", json.getString("status"));
     }
 
     /**
@@ -216,23 +217,23 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         String subscription1Id = json.getString("id");
-        Assert.assertNotNull(subscription1Id);
+        assertNotNull(subscription1Id);
 
         // Check the subscription data
         GET("/subscription/" + subscription1Id);
         assertIsOk();
         json = getJsonResult();
         JSONObject subscription = json.optJSONObject("subscription");
-        Assert.assertNotNull(subscription);
-        Assert.assertEquals("Feed from the future", subscription.optString("title"));
+        assertNotNull(subscription);
+        assertEquals("Feed from the future", subscription.optString("title"));
         JSONArray articles = json.optJSONArray("articles");
-        Assert.assertEquals(1, articles.length());
+        assertEquals(1, articles.length());
         JSONObject article = articles.optJSONObject(0);
-        Assert.assertNotNull(article);
+        assertNotNull(article);
         String article0Id = article.getString("id");
-        Assert.assertNotNull(article0Id);
-        Assert.assertEquals("This is an article from the future", article.getString("title"));
-        Assert.assertTrue(new Date(article.getLong("date")).before(new Date()));
+        assertNotNull(article0Id);
+        assertEquals("This is an article from the future", article.getString("title"));
+        assertTrue(new Date(article.getLong("date")).before(new Date()));
     }
 
     /**
@@ -251,23 +252,23 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         String feedSubscription0Id = json.getString("id");
-        Assert.assertNotNull(feedSubscription0Id);
+        assertNotNull(feedSubscription0Id);
 
         // Check the subscription data: 3 articles
         GET("/subscription/" + feedSubscription0Id);
         assertIsOk();
         json = getJsonResult();
         JSONObject subscription = json.optJSONObject("subscription");
-        Assert.assertNotNull(subscription);
-        Assert.assertEquals("Deleted feeds", subscription.optString("title"));
+        assertNotNull(subscription);
+        assertEquals("Deleted feeds", subscription.optString("title"));
         JSONArray articles = json.optJSONArray("articles");
-        Assert.assertEquals(3, articles.length());
+        assertEquals(3, articles.length());
         JSONObject article = articles.getJSONObject(0);
-        Assert.assertEquals("Article deleted2", article.getString("title"));
+        assertEquals("Article deleted2", article.getString("title"));
         article = articles.getJSONObject(1);
-        Assert.assertEquals("Article deleted1", article.getString("title"));
+        assertEquals("Article deleted1", article.getString("title"));
         article = articles.getJSONObject(2);
-        Assert.assertEquals("Article deleted0", article.getString("title"));
+        assertEquals("Article deleted0", article.getString("title"));
 
         // Check the subscription data: 3 unread articles
         GET("/subscription/");
@@ -277,7 +278,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         JSONObject rootCategory = categories.getJSONObject(0);
         JSONArray subscriptions = rootCategory.getJSONArray("subscriptions");
         subscription = subscriptions.getJSONObject(0);
-        Assert.assertEquals(3, subscription.getInt("unread_count"));
+        assertEquals(3, subscription.getInt("unread_count"));
 
         // Synchronize feeds: OK
         copyTempResource("/http/feeds/deleted/deleted1.xml");
@@ -288,14 +289,14 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         subscription = json.optJSONObject("subscription");
-        Assert.assertNotNull(subscription);
-        Assert.assertEquals("Deleted feeds", subscription.optString("title"));
+        assertNotNull(subscription);
+        assertEquals("Deleted feeds", subscription.optString("title"));
         articles = json.optJSONArray("articles");
-        Assert.assertEquals(2, articles.length());
+        assertEquals(2, articles.length());
         article = articles.getJSONObject(0);
-        Assert.assertEquals("Article deleted2", article.getString("title"));
+        assertEquals("Article deleted2", article.getString("title"));
         article = articles.getJSONObject(1);
-        Assert.assertEquals("Article deleted0", article.getString("title"));
+        assertEquals("Article deleted0", article.getString("title"));
 
         // Check the subscription data: 2 unread articles
         GET("/subscription/");
@@ -305,7 +306,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         rootCategory = categories.getJSONObject(0);
         subscriptions = rootCategory.getJSONArray("subscriptions");
         subscription = subscriptions.getJSONObject(0);
-        Assert.assertEquals(2, subscription.getInt("unread_count"));
+        assertEquals(2, subscription.getInt("unread_count"));
 
         // Synchronize feeds: OK
         copyTempResource("/http/feeds/deleted/deleted2.xml");
@@ -316,16 +317,16 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         subscription = json.optJSONObject("subscription");
-        Assert.assertNotNull(subscription);
-        Assert.assertEquals("Deleted feeds", subscription.optString("title"));
+        assertNotNull(subscription);
+        assertEquals("Deleted feeds", subscription.optString("title"));
         articles = json.optJSONArray("articles");
-        Assert.assertEquals(3, articles.length());
+        assertEquals(3, articles.length());
         article = articles.getJSONObject(0);
-        Assert.assertEquals("Article deleted3", article.getString("title"));
+        assertEquals("Article deleted3", article.getString("title"));
         article = articles.getJSONObject(1);
-        Assert.assertEquals("Article deleted2", article.getString("title"));
+        assertEquals("Article deleted2", article.getString("title"));
         article = articles.getJSONObject(2);
-        Assert.assertEquals("Article deleted0", article.getString("title"));
+        assertEquals("Article deleted0", article.getString("title"));
 
         // Check the subscription data: 3 unread articles
         GET("/subscription/");
@@ -335,7 +336,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         rootCategory = categories.getJSONObject(0);
         subscriptions = rootCategory.getJSONArray("subscriptions");
         subscription = subscriptions.getJSONObject(0);
-        Assert.assertEquals(3, subscription.getInt("unread_count"));
+        assertEquals(3, subscription.getInt("unread_count"));
     }
 
     /**
@@ -353,7 +354,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         final String subscription1Id = json.getString("id");
-        Assert.assertNotNull(subscription1Id);
+        assertNotNull(subscription1Id);
 
         withNetworkDown(new Runnable() {
             @Override
@@ -366,8 +367,8 @@ public class TestSubscriptionResource extends BaseJerseyTest {
                 assertIsOk();
                 JSONObject json = getJsonResult();
                 JSONArray synchronizations = json.optJSONArray("synchronizations");
-                Assert.assertNotNull(synchronizations);
-                Assert.assertEquals(0, synchronizations.length());
+                assertNotNull(synchronizations);
+                assertEquals(0, synchronizations.length());
             }
         });
 
@@ -379,11 +380,11 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         JSONArray synchronizations = json.optJSONArray("synchronizations");
-        Assert.assertNotNull(synchronizations);
-        Assert.assertEquals(1, synchronizations.length());
-        Assert.assertTrue(synchronizations.getJSONObject(0).getBoolean("success"));
-        Assert.assertFalse(synchronizations.getJSONObject(0).has("message"));
-        Assert.assertTrue(synchronizations.getJSONObject(0).getInt("duration") > 0);
+        assertNotNull(synchronizations);
+        assertEquals(1, synchronizations.length());
+        assertTrue(synchronizations.getJSONObject(0).getBoolean("success"));
+        assertFalse(synchronizations.getJSONObject(0).has("message"));
+        assertTrue(synchronizations.getJSONObject(0).getInt("duration") > 0);
         
         // Check the subscriptions list (with zero errors)
         GET("/subscription");
@@ -393,7 +394,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         JSONObject rootCategory = categories.optJSONObject(0);
         JSONArray subscriptions = rootCategory.optJSONArray("subscriptions");
         JSONObject subscription = subscriptions.getJSONObject(0);
-        Assert.assertEquals(0, subscription.getInt("sync_fail_count"));
+        assertEquals(0, subscription.getInt("sync_fail_count"));
     }
 
     /**
@@ -422,25 +423,25 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         int unreadCount = json.optInt("unread_count");
-        Assert.assertTrue(unreadCount > 0);
+        assertTrue(unreadCount > 0);
         JSONArray categories = json.optJSONArray("categories");
-        Assert.assertNotNull(categories);
-        Assert.assertEquals(1, categories.length());
+        assertNotNull(categories);
+        assertEquals(1, categories.length());
         JSONObject rootCategory = categories.optJSONObject(0);
         categories = rootCategory.getJSONArray("categories");
-        Assert.assertEquals(2, categories.length());
+        assertEquals(2, categories.length());
         JSONObject comicsCategory = categories.optJSONObject(0);
-        Assert.assertEquals("Dev", comicsCategory.getString("name"));
+        assertEquals("Dev", comicsCategory.getString("name"));
         JSONArray subscriptions = comicsCategory.optJSONArray("subscriptions");
-        Assert.assertEquals(1, subscriptions.length());
+        assertEquals(1, subscriptions.length());
         
         // Export all subscriptions
         AppContext.getInstance().waitForAsync();
         GET("/subscription/export");
         assertIsOk();
         String text = CharStreams.toString(new InputStreamReader(response.getEntityInputStream(), Charsets.UTF_8));
-        Assert.assertTrue(text.contains("Comics / Sub"));
-        Assert.assertTrue(text.contains("Good Math, Bad Math"));
+        assertTrue(text.contains("Comics / Sub"));
+        assertTrue(text.contains("Good Math, Bad Math"));
     }
 
     /**
@@ -469,25 +470,25 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         int unreadCount = json.optInt("unread_count");
-        Assert.assertTrue(unreadCount > 0);
+        assertTrue(unreadCount > 0);
         JSONArray categories = json.optJSONArray("categories");
-        Assert.assertNotNull(categories);
-        Assert.assertEquals(1, categories.length());
+        assertNotNull(categories);
+        assertEquals(1, categories.length());
         JSONObject rootCategory = categories.optJSONObject(0);
         categories = rootCategory.getJSONArray("categories");
-        Assert.assertEquals(2, categories.length());
+        assertEquals(2, categories.length());
         JSONObject comicsCategory = categories.optJSONObject(0);
-        Assert.assertEquals("Blogs", comicsCategory.getString("name"));
+        assertEquals("Blogs", comicsCategory.getString("name"));
         JSONArray subscriptions = comicsCategory.optJSONArray("subscriptions");
-        Assert.assertEquals(1, subscriptions.length());
+        assertEquals(1, subscriptions.length());
         
         // Check the starred resource
         GET("/starred");
         assertIsOk();
         json = getJsonResult();
         JSONArray articles = json.optJSONArray("articles");
-        Assert.assertNotNull(articles);
-        Assert.assertEquals(3, articles.length());
+        assertNotNull(articles);
+        assertEquals(3, articles.length());
     }
     
     /**
@@ -517,7 +518,7 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         String subscription1Id = json.getString("id");
-        Assert.assertNotNull(subscription1Id);
+        assertNotNull(subscription1Id);
     }
     
     /**
@@ -538,26 +539,26 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         String subscription1Id = json.getString("id");
-        Assert.assertNotNull(subscription1Id);
+        assertNotNull(subscription1Id);
         
         // Check all subscriptions for unread articles
         GET("/subscription");
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals(3, json.optInt("unread_count"));
+        assertEquals(3, json.optInt("unread_count"));
         
         // Check the subscription data
         GET("/subscription/" + subscription1Id);
         assertIsOk();
         json = getJsonResult();
         JSONArray articles = json.optJSONArray("articles");
-        Assert.assertEquals(3, articles.length());
+        assertEquals(3, articles.length());
         
         // Delete the subscription
         DELETE("/subscription/" + subscription1Id);
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals("ok", json.getString("status"));
+        assertEquals("ok", json.getString("status"));
         
         // At this moment, the subscription must have a new article
         
@@ -566,19 +567,19 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         assertIsOk();
         json = getJsonResult();
         subscription1Id = json.getString("id");
-        Assert.assertNotNull(subscription1Id);
+        assertNotNull(subscription1Id);
         
         // Check all subscriptions for unread articles
         GET("/subscription");
         assertIsOk();
         json = getJsonResult();
-        Assert.assertEquals(4, json.optInt("unread_count"));
+        assertEquals(4, json.optInt("unread_count"));
         
         // Check the subscription data
         GET("/subscription/" + subscription1Id);
         assertIsOk();
         json = getJsonResult();
         articles = json.optJSONArray("articles");
-        Assert.assertEquals(4, articles.length());
+        assertEquals(4, articles.length());
     }
 }

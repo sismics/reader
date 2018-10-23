@@ -2,12 +2,13 @@ package com.sismics.util;
 
 import com.sismics.reader.core.util.http.ReaderHttpClient;
 import com.sismics.util.cert.CertUtil;
-import junit.framework.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.InputStream;
 import java.net.URL;
+
+import static junit.framework.Assert.fail;
 
 /**
  * Test of the certificate utilities.
@@ -24,7 +25,7 @@ public class TestCertUtil {
         // sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
         try {
             CertUtil.testSsl("lescastcodeurs.com", 443);
-            Assert.fail();
+            fail();
         } catch (Exception e) {
             // NOP
         }

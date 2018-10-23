@@ -1,10 +1,11 @@
 package com.sismics.reader.rest;
 
-import junit.framework.Assert;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
+
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Test the locale resource.
@@ -22,6 +23,6 @@ public class TestLocaleResource extends BaseJerseyTest {
         assertIsOk();
         JSONObject json = getJsonResult();
         JSONArray locale = json.getJSONArray("locales");
-        Assert.assertTrue(locale.length() > 0);
+        assertTrue(locale.length() > 0);
     }
 }
