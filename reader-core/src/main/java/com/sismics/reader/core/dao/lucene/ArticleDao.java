@@ -4,11 +4,9 @@ import com.sismics.reader.core.dao.jpa.dto.UserArticleDto;
 import com.sismics.reader.core.model.context.AppContext;
 import com.sismics.reader.core.model.jpa.Article;
 import com.sismics.reader.core.util.LuceneUtil;
-import com.sismics.reader.core.util.LuceneUtil.LuceneRunnable;
 import com.sismics.reader.core.util.jpa.PaginatedList;
 import org.apache.lucene.document.*;
 import org.apache.lucene.index.FieldInfo.IndexOptions;
-import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.flexible.standard.QueryParserUtil;
 import org.apache.lucene.queryparser.flexible.standard.StandardQueryParser;
@@ -44,17 +42,14 @@ public class ArticleDao {
      * @param articleList The list of articles
      */
     public void rebuildIndex(final List<Article> articleList) {
-        LuceneUtil.handle(new LuceneRunnable() {
-            @Override
-            public void run(IndexWriter indexWriter) throws Exception {
-                // Empty index
-                indexWriter.deleteAll();
-                
-                // Add all articles
-                for (Article article : articleList) {
-                    org.apache.lucene.document.Document document = getDocumentFromArticle(article);
-                    indexWriter.addDocument(document);
-                }
+        LuceneUtil.handle(indexWriter -> {
+            // Empty index
+            indexWriter.deleteAll();
+
+            // Add all articles
+            for (Article article : articleList) {
+                Document document = getDocumentFromArticle(article);
+                indexWriter.addDocument(document);
             }
         });
     }
@@ -66,14 +61,11 @@ public class ArticleDao {
      * @param articleList The list of articles
      */
     public void create(final List<Article> articleList) {
-        LuceneUtil.handle(new LuceneRunnable() {
-            @Override
-            public void run(IndexWriter indexWriter) throws Exception {
-                // Add all articles
-                for (Article article : articleList) {
-                    org.apache.lucene.document.Document document = getDocumentFromArticle(article);
-                    indexWriter.addDocument(document);
-                }
+        LuceneUtil.handle(indexWriter -> {
+            // Add all articles
+            for (Article article : articleList) {
+                Document document = getDocumentFromArticle(article);
+                indexWriter.addDocument(document);
             }
         });
     }
@@ -84,14 +76,11 @@ public class ArticleDao {
      * @param articleList Article list
      */
     public void update(final List<Article> articleList) {
-        LuceneUtil.handle(new LuceneRunnable() {
-            @Override
-            public void run(IndexWriter indexWriter) throws Exception {
-                // Update all articles
-                for (Article article : articleList) {
-                    org.apache.lucene.document.Document document = getDocumentFromArticle(article);
-                    indexWriter.updateDocument(new Term("id", article.getId()), document);
-                }
+        LuceneUtil.handle(indexWriter -> {
+            // Update all articles
+            for (Article article : articleList) {
+                Document document = getDocumentFromArticle(article);
+                indexWriter.updateDocument(new Term("id", article.getId()), document);
             }
         });
     }
@@ -102,13 +91,10 @@ public class ArticleDao {
      * @param articleList Article list
      */
     public void delete(final List<Article> articleList) {
-        LuceneUtil.handle(new LuceneRunnable() {
-            @Override
-            public void run(IndexWriter indexWriter) throws Exception {
-                // Delete all articles
-                for (Article article : articleList) {
-                    indexWriter.deleteDocuments(new Term("id", article.getId()));
-                }
+        LuceneUtil.handle(indexWriter -> {
+            // Delete all articles
+            for (Article article : articleList) {
+                indexWriter.deleteDocuments(new Term("id", article.getId()));
             }
         });
     }

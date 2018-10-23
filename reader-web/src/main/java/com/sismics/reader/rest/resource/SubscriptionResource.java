@@ -43,7 +43,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -443,22 +446,12 @@ public class SubscriptionResource extends BaseResource {
         
         // Get the favicon
         File faviconDirectory = DirectoryUtil.getFaviconDirectory();
-        File[] matchingFiles = faviconDirectory.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.startsWith(feedSubscription.getFeedId());
-            }
-        });
+        File[] matchingFiles = faviconDirectory.listFiles((dir, name) -> name.startsWith(feedSubscription.getFeedId()));
         final File faviconFile = matchingFiles.length > 0 ? 
                 matchingFiles[0] :
                 new File(getClass().getResource("/image/subscription.png").getFile());
 
-        StreamingOutput stream = new StreamingOutput() {
-            @Override
-            public void write(OutputStream os) throws IOException, WebApplicationException {
-                ByteStreams.copy(new FileInputStream(faviconFile), os);
-            }
-        };
+        StreamingOutput stream = os -> ByteStreams.copy(new FileInputStream(faviconFile), os);
         return Response.ok(stream)
                 .header("Expires", new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z").format(new Date().getTime() + 3600000 * 24 * 7))
                 .header("Content-Disposition", MessageFormat.format("attachment; filename=\"{0}\"", faviconFile.getName()))

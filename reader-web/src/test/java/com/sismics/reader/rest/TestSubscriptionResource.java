@@ -356,20 +356,17 @@ public class TestSubscriptionResource extends BaseJerseyTest {
         final String subscription1Id = json.getString("id");
         assertNotNull(subscription1Id);
 
-        withNetworkDown(new Runnable() {
-            @Override
-            public void run() {
-                // Synchronize feeds
-                synchronizeAllFeed();
+        withNetworkDown(() -> {
+            // Synchronize feeds
+            synchronizeAllFeed();
 
-                // Check the we don't get any synchronization update at all as the network is down
-                GET("/subscription/" + subscription1Id + "/sync");
-                assertIsOk();
-                JSONObject json = getJsonResult();
-                JSONArray synchronizations = json.optJSONArray("synchronizations");
-                assertNotNull(synchronizations);
-                assertEquals(0, synchronizations.length());
-            }
+            // Check the we don't get any synchronization update at all as the network is down
+            GET("/subscription/" + subscription1Id + "/sync");
+            assertIsOk();
+            JSONObject json1 = getJsonResult();
+            JSONArray synchronizations = json1.optJSONArray("synchronizations");
+            assertNotNull(synchronizations);
+            assertEquals(0, synchronizations.length());
         });
 
         // Synchronize feeds to add a feed synchronization entry

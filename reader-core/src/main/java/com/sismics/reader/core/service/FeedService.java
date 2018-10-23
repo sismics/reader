@@ -70,12 +70,7 @@ public class FeedService extends AbstractScheduledService {
     protected void runOneIteration() {
         // Don't let Guava manage our exceptions, or they will be swallowed and the service will silently stop
         try {
-            TransactionUtil.handle(new Runnable() {
-                @Override
-                public void run() {
-                    synchronizeAllFeeds();
-                }
-            });
+            TransactionUtil.handle(() -> synchronizeAllFeeds());
         } catch (Throwable t) {
             log.error("Error synchronizing feeds", t);
         }

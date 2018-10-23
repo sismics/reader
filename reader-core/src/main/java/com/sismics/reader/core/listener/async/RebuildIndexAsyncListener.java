@@ -33,16 +33,13 @@ public class RebuildIndexAsyncListener {
         }
         
         // Fetch all articles
-        TransactionUtil.handle(new Runnable() {
-            @Override
-            public void run() {
-                com.sismics.reader.core.dao.jpa.ArticleDao jpaArticleDao = new com.sismics.reader.core.dao.jpa.ArticleDao();
-                List<Article> articleList = jpaArticleDao.findAll();
-                
-                // Rebuild index
-                ArticleDao articleDao = new ArticleDao();
-                articleDao.rebuildIndex(articleList);
-            }
+        TransactionUtil.handle(() -> {
+            com.sismics.reader.core.dao.jpa.ArticleDao jpaArticleDao = new com.sismics.reader.core.dao.jpa.ArticleDao();
+            List<Article> articleList = jpaArticleDao.findAll();
+
+            // Rebuild index
+            ArticleDao articleDao = new ArticleDao();
+            articleDao.rebuildIndex(articleList);
         });
     }
 }

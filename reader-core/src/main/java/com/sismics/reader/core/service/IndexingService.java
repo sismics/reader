@@ -97,11 +97,8 @@ public class IndexingService extends AbstractScheduledService {
     
     @Override
     protected void runOneIteration() throws Exception {
-        TransactionUtil.handle(new Runnable() {
-            @Override
-            public void run() {
-                // NOP
-            }
+        TransactionUtil.handle(() -> {
+            // NOP
         });
     }
     

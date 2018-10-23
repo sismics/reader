@@ -1,16 +1,15 @@
 package com.sismics.reader.rest.dao;
 
+import com.google.common.collect.Lists;
+import com.google.common.io.Files;
+
+import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import javax.servlet.ServletContext;
-
-import com.google.common.collect.Lists;
-import com.google.common.io.Files;
 
 /**
  * Theme DAO.
@@ -23,12 +22,7 @@ public class ThemeDao {
      */
     public static final List<String> STYLESHEETS_THEME_DIRS = Lists.newArrayList("/src/stylesheets/theme/", "/stylesheets/theme/");
 
-    private final static FilenameFilter CSS_FILTER = new FilenameFilter() {
-        @Override
-        public boolean accept(File dir, String name) {
-            return name.endsWith(".css") || name.endsWith(".less");
-        }
-    };
+    private final static FilenameFilter CSS_FILTER = (dir, name) -> name.endsWith(".css") || name.endsWith(".less");
 
     /**
      * Return the list of all themes.

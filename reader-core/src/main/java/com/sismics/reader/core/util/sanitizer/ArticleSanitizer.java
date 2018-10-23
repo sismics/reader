@@ -21,26 +21,23 @@ public class ArticleSanitizer {
      */
     private static final Logger log = LoggerFactory.getLogger(ArticleSanitizer.class);
 
-    private static final AttributePolicy INTEGER_POLICY = new AttributePolicy() {
-        @Override
-        public String apply(String elementName, String attributeName, String value) {
-            int n = value.length();
-            if (n == 0) {
-                return null;
-            }
-            for (int i = 0; i < n; ++i) {
-                char ch = value.charAt(i);
-                if (ch == '.') {
-                    if (i == 0) {
-                        return null;
-                    }
-                    return value.substring(0, i); // truncate to integer.
-                } else if (!('0' <= ch && ch <= '9')) {
+    private static final AttributePolicy INTEGER_POLICY = (elementName, attributeName, value) -> {
+        int n = value.length();
+        if (n == 0) {
+            return null;
+        }
+        for (int i = 0; i < n; ++i) {
+            char ch = value.charAt(i);
+            if (ch == '.') {
+                if (i == 0) {
                     return null;
                 }
+                return value.substring(0, i); // truncate to integer.
+            } else if (!('0' <= ch && ch <= '9')) {
+                return null;
             }
-            return value;
         }
+        return value;
     };
 
     /**

@@ -63,12 +63,7 @@ public class RequestContextFilter implements Filter {
         }
 
         // Initialize the application context
-        TransactionUtil.handle(new Runnable() {
-            @Override
-            public void run() {
-                AppContext.getInstance();
-            }
-        });
+        TransactionUtil.handle(AppContext::getInstance);
     }
 
     /**

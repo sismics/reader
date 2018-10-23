@@ -16,7 +16,9 @@ import org.hibernate.tool.hbm2ddl.ConnectionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -134,12 +136,9 @@ public abstract class DbOpenHelper {
      * @param version Version number
      */
     protected void executeAllScript(final int version) throws Exception {
-        List<String> fileNameList = ResourceUtil.list(getClass(), "/db/update/", new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                String versionString = String.format("%03d", version);
-                return name.matches("dbupdate-" + versionString + "-\\d+(-web|-test)?\\.sql");
-            }
+        List<String> fileNameList = ResourceUtil.list(getClass(), "/db/update/", (dir, name) -> {
+            String versionString = String.format("%03d", version);
+            return name.matches("dbupdate-" + versionString + "-\\d+(-web|-test)?\\.sql");
         });
         Collections.sort(fileNameList);
         

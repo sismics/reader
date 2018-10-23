@@ -7,8 +7,6 @@ import com.google.common.eventbus.Subscribe;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Closer;
 import com.sismics.reader.core.constant.Constants;
-import com.sismics.reader.core.dao.file.json.StarredArticleImportedEvent;
-import com.sismics.reader.core.dao.file.json.StarredArticleImportedListener;
 import com.sismics.reader.core.dao.file.json.StarredReader;
 import com.sismics.reader.core.dao.file.opml.OpmlFlattener;
 import com.sismics.reader.core.dao.file.opml.OpmlReader;
@@ -80,13 +78,10 @@ public class SubscriptionImportAsyncListener {
         final User user = subscriptionImportedEvent.getUser();
         final File importFile = subscriptionImportedEvent.getImportFile();
         
-        TransactionUtil.handle(new Runnable() {
-            @Override
-            public void run() {
-                Job job = createJob(user, importFile);
-                if (job != null) {
-                    processImportFile(user, importFile, job);
-                }
+        TransactionUtil.handle(() -> {
+            Job job = createJob(user, importFile);
+            if (job != null) {
+                processImportFile(user, importFile, job);
             }
         });
     }
@@ -128,13 +123,7 @@ public class SubscriptionImportAsyncListener {
 
                             // Read the starred file
                             StarredReader starredReader = new StarredReader();
-                            starredReader.setStarredArticleListener(new StarredArticleImportedListener() {
-                                
-                                @Override
-                                public void onStarredArticleImported(StarredArticleImportedEvent event) {
-                                    starredCount.incrementAndGet();
-                                }
-                            });
+                            starredReader.setStarredArticleListener(event -> starredCount.incrementAndGet());
                             starredReader.read(new FileInputStream(outputFile));
                         }
                     } finally {
@@ -241,28 +230,24 @@ public class SubscriptionImportAsyncListener {
 
                             // Read the starred file
                             StarredReader starredReader = new StarredReader();
-                            starredReader.setStarredArticleListener(new StarredArticleImportedListener() {
-                                
-                                @Override
-                                public void onStarredArticleImported(StarredArticleImportedEvent event) {
-                                    if (log.isInfoEnabled()) {
-                                        log.info(MessageFormat.format("Importing a starred article for user {0}''s import", user.getId()));
-                                    }
-                                    
-                                    EntityManagerUtil.flush();
-                                    TransactionUtil.commit();
-                                    try {
-                                        importFeedFromStarred(user, event.getFeed(), event.getArticle());
+                            starredReader.setStarredArticleListener(event -> {
+                                if (log.isInfoEnabled()) {
+                                    log.info(MessageFormat.format("Importing a starred article for user {0}''s import", user.getId()));
+                                }
 
-                                        JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_STARRED_ARTICLE_IMPORT_SUCCESS, event.getArticle().getTitle());
-                                        jobEventDao.create(jobEvent);
-                                    } catch (Exception e) {
-                                        if (log.isErrorEnabled()) {
-                                            log.error(MessageFormat.format("Error importing article {0} from feed {1} for user {2}", event.getArticle(), event.getFeed(), user.getId()), e);
-                                        }
-                                        JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_STARRED_ARTICLE_IMPORT_FAILURE, event.getArticle().getTitle());
-                                        jobEventDao.create(jobEvent);
+                                EntityManagerUtil.flush();
+                                TransactionUtil.commit();
+                                try {
+                                    importFeedFromStarred(user, event.getFeed(), event.getArticle());
+
+                                    JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_STARRED_ARTICLE_IMPORT_SUCCESS, event.getArticle().getTitle());
+                                    jobEventDao.create(jobEvent);
+                                } catch (Exception e) {
+                                    if (log.isErrorEnabled()) {
+                                        log.error(MessageFormat.format("Error importing article {0} from feed {1} for user {2}", event.getArticle(), event.getFeed(), user.getId()), e);
                                     }
+                                    JobEvent jobEvent = new JobEvent(job.getId(), Constants.JOB_EVENT_STARRED_ARTICLE_IMPORT_FAILURE, event.getArticle().getTitle());
+                                    jobEventDao.create(jobEvent);
                                 }
                             });
                             starredReader.read(new FileInputStream(outputFile));

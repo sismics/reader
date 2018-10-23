@@ -35,22 +35,19 @@ public class FaviconUpdateRequestedAsyncListener {
         
         final Feed feed = faviconUpdateRequestedEvent.getFeed();
        
-        TransactionUtil.handle(new Runnable() {
-            @Override
-            public void run() {
-                String faviconDirectory = DirectoryUtil.getFaviconDirectory().getPath();
-                FaviconDownloader downloader = new FaviconDownloader();
-                
-                String localFilename = null;
-                if (feed.getUrl() != null) {
-                    // Try with the feed URL if available
-                    downloader.downloadFaviconFromPage(feed.getUrl(), faviconDirectory, feed.getId());
-                }
-                
-                if (localFilename == null) {
-                    // If nothing is found, try again with the RSS URL
-                    downloader.downloadFaviconFromPage(feed.getRssUrl(), faviconDirectory, feed.getId());
-                }
+        TransactionUtil.handle(() -> {
+            String faviconDirectory = DirectoryUtil.getFaviconDirectory().getPath();
+            FaviconDownloader downloader = new FaviconDownloader();
+
+            String localFilename = null;
+            if (feed.getUrl() != null) {
+                // Try with the feed URL if available
+                downloader.downloadFaviconFromPage(feed.getUrl(), faviconDirectory, feed.getId());
+            }
+
+            if (localFilename == null) {
+                // If nothing is found, try again with the RSS URL
+                downloader.downloadFaviconFromPage(feed.getRssUrl(), faviconDirectory, feed.getId());
             }
         });
     }

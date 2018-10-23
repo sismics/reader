@@ -25,7 +25,7 @@
     <junit.junit.version>4.7</junit.junit.version>
     <org.hsqldb.hsqldb.version>2.3.0</org.hsqldb.hsqldb.version>
     <org.postgresql.postgresql.version>9.4.1212.jre7</org.postgresql.postgresql.version>
-    <com.sun.jersey.version>1.17</com.sun.jersey.version>
+    <com.sun.jersey.version>1.19.4</com.sun.jersey.version>
     <org.mindrot.jbcrypt>0.3m</org.mindrot.jbcrypt>
     <org.subethamail.subethasmtp.version>3.1.6</org.subethamail.subethasmtp.version>
     <org.subethamail.subethasmtp-wiser.version>1.2</org.subethamail.subethasmtp-wiser.version>
@@ -47,7 +47,7 @@
     <!-- Plugins version -->
     <org.apache.maven.plugins.maven-surefire-plugin.version>2.19</org.apache.maven.plugins.maven-surefire-plugin.version>
     <org.apache.maven.plugins.maven-antrun-plugin.version>1.7</org.apache.maven.plugins.maven-antrun-plugin.version>
-    <org.apache.maven.plugins.maven-dependency-plugin.version>2.7</org.apache.maven.plugins.maven-dependency-plugin.version>
+    <org.apache.maven.plugins.maven-dependency-plugin.version>2.8</org.apache.maven.plugins.maven-dependency-plugin.version>
     <org.apache.maven.plugins.maven-jar-plugin.version>2.4</org.apache.maven.plugins.maven-jar-plugin.version>
     <org.apache.maven.plugins.maven-release-plugin.version>2.5.1</org.apache.maven.plugins.maven-release-plugin.version>
     <org.apache.maven.plugins.maven-resources-plugin.version>2.6</org.apache.maven.plugins.maven-resources-plugin.version>
