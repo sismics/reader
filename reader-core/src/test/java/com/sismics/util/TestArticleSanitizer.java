@@ -383,4 +383,15 @@ public class TestArticleSanitizer {
         assertTrue(html.contains("<iframe src=\"//fiddle.jshell.net/toddmotto/0oarywLe/show/light/\" width=\"480\" height=\"480\"></iframe>"));
         assertTrue(html.contains("<iframe src=\"//www.kickstarter.com/projects/223628811/the-airboard-sketch-internet-of-things-fast/widget/video.html\" width=\"480\" height=\"480\"></iframe>"));
     }
+
+    /**
+     * Tests various iframes sanitizing related to issue #99.
+     *
+     */
+    @Test
+    public void articleSanitizerMailto()  {
+        ArticleSanitizer articleSanitizer = new ArticleSanitizer();
+        String html = articleSanitizer.sanitize(null, "<a href=\"mailto:test@test.com\">Mail us!</a>");
+        System.out.println(html);
+    }
 }

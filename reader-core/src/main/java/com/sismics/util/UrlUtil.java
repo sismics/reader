@@ -72,6 +72,11 @@ public class UrlUtil {
             return new URL(relativeUrl).toString();
         }
         
+        // If the URL is already absolute, just validate
+        if (relativeUrl.toLowerCase().startsWith("mailto:")) {
+            return new URL(relativeUrl).toString();
+        }
+
         // Leading double slash: inherit the current protocol
         if (relativeUrl.startsWith("//")) {
             URL base = new URL(baseUrl);
