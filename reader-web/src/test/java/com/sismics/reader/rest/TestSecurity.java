@@ -77,18 +77,18 @@ public class TestSecurity extends BaseJerseyTest {
         final WebResource resource = resource().path("/user");
         createUser(userName);
 
-        assertEquals(Status.FORBIDDEN, resource
+        assertEquals(Status.FORBIDDEN.getStatusCode(), resource
                 .post(ClientResponse.class)
-                .getClientResponseStatus());
+                .getStatus());
 
-        assertEquals(Status.OK, resource
+        assertEquals(Status.OK.getStatusCode(), resource
                 .header(HeaderBasedSecurityFilter.AUTHENTICATED_USER_HEADER, userName)
                 .post(ClientResponse.class)
-                .getClientResponseStatus());
+                .getStatus());
 
-        assertEquals(Status.FORBIDDEN, resource
+        assertEquals(Status.FORBIDDEN.getStatusCode(), resource
                 .header(HeaderBasedSecurityFilter.AUTHENTICATED_USER_HEADER, "erroneous_" + userName)
                 .post(ClientResponse.class)
-                .getClientResponseStatus());
+                .getStatus());
     }
 }
