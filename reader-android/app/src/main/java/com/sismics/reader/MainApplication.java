@@ -1,5 +1,11 @@
 package com.sismics.reader;
 
+import android.app.Application;
+
+import com.androidquery.callback.BitmapAjaxCallback;
+import com.sismics.reader.model.application.ApplicationContext;
+import com.sismics.reader.util.PreferenceUtil;
+
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
@@ -7,25 +13,18 @@ import org.acra.sender.HttpSender.Method;
 import org.acra.sender.HttpSender.Type;
 import org.json.JSONObject;
 
-import android.app.Application;
-
-import com.androidquery.callback.BitmapAjaxCallback;
-import com.sismics.reader.model.application.ApplicationContext;
-import com.sismics.reader.util.PreferenceUtil;
-
 /**
  * Main application.
  * 
  * @author bgamard
  */
-@ReportsCrashes(formKey = "",
+@ReportsCrashes(
         httpMethod = Method.PUT,
         reportType = Type.JSON,
         formUri = "http://acralyzer.sismics.com/reader-report",
         formUriBasicAuthLogin = "reporter",
         formUriBasicAuthPassword = "jOS9ezJR",
         mode = ReportingInteractionMode.TOAST,
-        forceCloseDialogAfterToast = true,
         resToastText = R.string.crash_toast_text)
 public class MainApplication extends Application {
     @Override

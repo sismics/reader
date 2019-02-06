@@ -6,16 +6,17 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
@@ -40,10 +41,11 @@ import java.util.Set;
  * 
  * @author bgamard
  */
-public class ArticleActivity extends ActionBarActivity {
+public class ArticleActivity extends AppCompatActivity {
 
     // UI cache
     private ViewPager viewPager;
+    private ProgressBar progressBar;
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     private View drawer;
@@ -66,7 +68,7 @@ public class ArticleActivity extends ActionBarActivity {
     private ArticlesHelperListener articlesHelperListener = new ArticlesHelperListener() {
         @Override
         public void onStart() {
-            setSupportProgressBarIndeterminateVisibility(true);
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -79,7 +81,7 @@ public class ArticleActivity extends ActionBarActivity {
 
         @Override
         public void onEnd() {
-            setSupportProgressBarIndeterminateVisibility(false);
+            progressBar.setVisibility(View.INVISIBLE);
         }
     };
     
@@ -95,8 +97,10 @@ public class ArticleActivity extends ActionBarActivity {
         }
 
         // Configure the activity
-        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.article_activity);
+        Toolbar toolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+        progressBar = findViewById(R.id.progress_spinner);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -162,14 +166,14 @@ public class ArticleActivity extends ActionBarActivity {
         setTitle(getIntent().getStringExtra("title"));
 
         // Configure the ViewPager
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager = findViewById(R.id.viewPager);
         final ArticlesPagerAdapter adapter = new ArticlesPagerAdapter(getSupportFragmentManager());
         sharedAdapterHelper.addAdapter(adapter, articlesHelperListener);
         viewPager.setAdapter(adapter);
-        viewPager.setOnPageChangeListener(onPageChangeListener);
+        viewPager.addOnPageChangeListener(onPageChangeListener);
 
         // Configure the ListView
-        drawerList = (ListView) findViewById(R.id.drawer_list);
+        drawerList = findViewById(R.id.drawer_list);
         ArticlesAdapter listAdapter = new ArticlesAdapter(this);
         sharedAdapterHelper.addAdapter(listAdapter, null);
 
@@ -203,11 +207,11 @@ public class ArticleActivity extends ActionBarActivity {
         });
 
         // Configure the drawer
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
         drawer = findViewById(R.id.left_drawer);
 
         if (drawerLayout != null) {
-            drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
                 @Override
                 public void onDrawerSlide(View view, float v) {}
 

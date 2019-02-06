@@ -53,9 +53,6 @@
     <string name="add_subscription_error">Error adding this subscription</string>
     <string name="add_subscription_success">Subscription successfully added</string>
     <string name="add">Add</string>
-    <!-- Don't translate extension_description, it is used in the manifest and must not vary. -->
-    <string name="extension_description" translatable="false">Displays the number of unread articles</string>
-    <string name="extension_expanded_title">%1$d unread articles</string>
     <string name="enclosure">Enclosure</string>
     <string name="touch_close">Touch to close</string>
     <string name="version">Version</string>

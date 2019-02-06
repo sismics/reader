@@ -1,7 +1,7 @@
 package com.sismics.reader.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.sismics.reader.fragment.SettingsFragment;
@@ -11,7 +11,7 @@ import com.sismics.reader.fragment.SettingsFragment;
  *
  * @author bgamard.
  */
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

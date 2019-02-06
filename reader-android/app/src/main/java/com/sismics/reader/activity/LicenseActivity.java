@@ -1,7 +1,7 @@
 package com.sismics.reader.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
@@ -14,7 +14,7 @@ import com.sismics.reader.R;
  *
  * @author bgamard
  */
-public class LicenseActivity extends ActionBarActivity {
+public class LicenseActivity extends AppCompatActivity {
 
     /**
      * AQuery.

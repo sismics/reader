@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,7 +31,7 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @author bgamard
  */
-public class CategoriesActivity extends ActionBarActivity {
+public class CategoriesActivity extends AppCompatActivity {
 
     CategoryAdapter categoryAdapter;
 

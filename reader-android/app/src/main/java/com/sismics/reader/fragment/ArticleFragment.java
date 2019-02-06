@@ -86,30 +86,30 @@ public class ArticleFragment extends Fragment {
                     // HTML modification to fit the article content in the screen width
                     String html = json.optString("description");
                     try {
-                        html = "<!DOCTYPE html>" +
+                        html = URLEncoder.encode("<!DOCTYPE html>" +
                                 "<html>" +
                                 "<head>" +
                                 "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />" +
                                 "<meta name=\"viewport\" content=\"initial-scale=1, minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no\" />" +
                                 "<style>" +
-                                "img, iframe { max-width: 100%; height: auto; display: block; margin: 8px; } " +
-                                "iframe { display: none; } " +
-                                "pre { max-width: 100%; overflow: hidden; } " +
+                                "img { max-width: 100%; height: auto; display: block; margin: 8px; }\n" +
+                                "iframe { display: none; }\n" +
+                                "pre { max-width: 100%; overflow: hidden; }\n" +
                                 "a {" +
                                 "  text-decoration: none;" +
                                 "  color: #0099cc;" +
-                                "} " +
+                                "}\n" +
                                 "body {" +
                                 "  color: #191919;" +
                                 "  font-size: " + fontSize + "pt;" +
                                 "  font-family: 'sans-serif-light', 'sans-serif';" +
-                                "  line-height: 150%; } " +
+                                "  line-height: 150%; }" +
                                 "</style>" +
                                 "</head>" +
                                 "<body>" +
-                                URLEncoder.encode(html, "UTF-8").replaceAll("\\+", "%20") +
+                                html +
                                 "</body>" +
-                                "</html>";
+                                "</html>", "UTF-8").replaceAll("\\+", "%20");
                     } catch (UnsupportedEncodingException e) {
                         Log.e("ArticleFragment", "Error modifying article HTML", e);
                     }

@@ -13,8 +13,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,7 +47,7 @@ import org.json.JSONObject;
  * 
  * @author bgamard
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     
     private static final String ARTICLES_FRAGMENT_TAG = "articlesFragment";
     private static final String ARTICLES_DEFAULT_FRAGMENT_TAG = "articlesDefaultFragment";
