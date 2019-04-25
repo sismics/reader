@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Nullable;
 import java.net.MalformedURLException;
 import java.text.MessageFormat;
-import java.util.regex.Pattern;
+import java.util.List;
 
 /**
  * Sanitize the contents of an article: removes iframes, JS etc.
@@ -41,39 +41,6 @@ public class ArticleSanitizer {
     };
 
     /**
-     * Allowed iframe src.
-     */
-    private static final Pattern IFRAME_SRC_PATTERN = Pattern.compile(
-            "(http:|https:)?//(www.)?youtube.com/embed/.+|" + 
-            "(http:|https:)?//player.vimeo.com/video/.+|" +
-            "(http:|https:)?//www.dailymotion.com/embed/.+|" +
-            "(http:|https:)?//movies.yahoo.com/.+|" +
-            "(http:|https:)?//(www.)?ustream.tv/embed/.+|" +
-            "(http:|https:)?//(www.)?disclose.tv/embed/.+|" +
-            "http://slashdot.org/.+|" + // Slashdot doesn't support https but redirect 301 to http
-            "(http:|https:)?//www.viddler.com/.+|" +
-            "(http:|https:)?//maps.google.com/.+|" +
-            "(http:|https:)?//vine.co/v/.+|" +
-            "(http:|https:)?//w.soundcloud.com/.+|" +
-            "(http:|https:)?//(www.)?bandcamp.com/.+|" +
-            "(http:|https:)?//player.qobuz.com/.+|" +
-            "(http:|https:)?//www.deezer.com/plugins/player\\?.+|" +
-            "(http:|https:)?//giphy.com/embed/.+|" +
-            "(http:|https:)?//www.slideshare.net/slideshow/embed_code/.+|" +
-            "(http:|https:)?//hitbox.tv/#!/embed/.+|" +
-            "(http:|https:)?//(www.)?whyd.com/.+|" +
-            "(http:|https:)?//embed.spotify.com/.+|" +
-            "(http:|https:)?//www.kickstarter.com/.+|" +
-            "(http:|https:)?//cdn.livestream.com/embed/.+|" +
-            "(http:|https:)?//v.24liveblog.com/live/.+|" +
-            "(http:|https:)?//fiddle.jshell.net/.+|" +
-            "(http:|https:)?//embed-ssl.ted.com/.+|" +
-            "(http:|https:)?//twitch.tv/.+|" +
-            "(http:|https:)?//embed.plnkr.co/.+|" +
-            "(http:|https:)?//(www.)?facebook.com/plugins/.+|" +
-            "(http:|https:)?//soundsgood.co/embed/.+");
-
-    /**
      * Sanitize HTML contents.
      * 
      * @param baseUri Base URI
@@ -103,8 +70,8 @@ public class ArticleSanitizer {
                         "blockquote", "pre")
                 .toFactory();
         
-        // Allow iframes for embedded videos
-        PolicyFactory videoPolicyFactory = new HtmlPolicyBuilder()
+        // Allow iframes
+        PolicyFactory iframePolicyFactory = new HtmlPolicyBuilder()
                 .allowUrlProtocols("http", "https")
                 .allowAttributes("src", "height", "width", "style")
                 .matching(new AttributePolicy() {
@@ -115,7 +82,7 @@ public class ArticleSanitizer {
                             return value;
                         }
                         
-                        if ("src".equals(attributeName) && IFRAME_SRC_PATTERN.matcher(value).matches()) {
+                        if ("src".equals(attributeName)) {
                             // Deleting the protocol part
                             if (value.startsWith("https:")) value = value.substring(6);
                             else if (value.startsWith("http:")) value = value.substring(5);
@@ -143,7 +110,15 @@ public class ArticleSanitizer {
                     }
                 })
                 .onElements("iframe")
-                .allowElements("iframe")
+                .allowElements(new ElementPolicy() {
+                    @Nullable
+                    @Override
+                    public String apply(String elementName, List<String> attrs) {
+                        attrs.add("sandbox");
+                        attrs.add("allow-scripts");
+                        return elementName;
+                    }
+                }, "iframe")
                 .disallowWithoutAttributes("iframe")
                 .toFactory();
 
@@ -171,7 +146,7 @@ public class ArticleSanitizer {
                 .and(imagePolicyFactory)
                 .and(linksPolicyFactory)
                 .and(Sanitizers.STYLES)
-                .and(videoPolicyFactory);
+                .and(iframePolicyFactory);
         
         String safeHtml = policy.sanitize(html);
         
