@@ -115,9 +115,7 @@ public class ArticleSanitizer {
                     @Override
                     public String apply(String elementName, List<String> attrs) {
                         attrs.add("sandbox");
-                        attrs.add("allow-scripts");
-                        attrs.add("sandbox");
-                        attrs.add("allow-same-origin");
+                        attrs.add("allow-scripts allow-same-origin");
                         return elementName;
                     }
                 }, "iframe")
