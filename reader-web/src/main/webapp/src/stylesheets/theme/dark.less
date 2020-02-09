@@ -22,6 +22,10 @@ body, html {
   h1 {
     background: #444;
     color: #fff;
+
+    #subscription-unread-button {
+      filter: invert();
+    }
   }
 
   ul li {
@@ -35,12 +39,24 @@ body, html {
   }
 }
 
-#feed #toolbar {
-  background: #222;
-  border-bottom: 1px solid #3a3a3a;
+#feed {
+  #toolbar {
+    background: #222;
+    border-bottom: 1px solid #3a3a3a;
 
-  > .search-input {
-    color: #fff;
+    > .search-input {
+      color: #fff;
+    }
+  }
+
+  #feed-container.list > .feed-item {
+    &.unfolded .collapsed {
+      background: #222;
+    }
+
+    .feed-item-collapsed-link img {
+      filter: invert();
+    }
   }
 }
 
@@ -71,7 +87,7 @@ input[type="text"], input[type="password"], select {
 
   #feed-container {
     > .empty, > .bumper {
-      color: #fff;
+      filter: invert();
     }
 
     color: #fff;
@@ -87,10 +103,18 @@ input[type="text"], input[type="password"], select {
       .header .feed-item-creator {
         color: #e0e0e0;
       }
+
+      .feed-item-star {
+        filter: invert();
+      }
     }
   }
 }
 
 #settings-container {
   background: #fff;
+}
+
+.icon {
+  filter: invert();
 }
