@@ -40,7 +40,7 @@
     <org.hibernate.hibernate.version>4.2.21.Final</org.hibernate.hibernate.version>
     <joda-time.joda-time.version>2.2</joda-time.joda-time.version>
     <org.codehaus.jackson.jackson.version>1.7.1</org.codehaus.jackson.jackson.version>
-    <org.eclipse.jetty.jetty-server.version>9.4.12.v20180830</org.eclipse.jetty.jetty-server.version>
+    <org.eclipse.jetty.jetty-server.version>9.4.17.v20190418</org.eclipse.jetty.jetty-server.version>
     <org.eclipse.jetty.jetty-webapp.version>9.4.12.v20180830</org.eclipse.jetty.jetty-webapp.version>
     <org.eclipse.jetty.jetty-servlet.version>9.4.12.v20180830</org.eclipse.jetty.jetty-servlet.version>
 
