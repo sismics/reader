@@ -15,7 +15,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Dependencies version (external) -->
-    <org.apache.commons.commons-compress.version>1.18</org.apache.commons.commons-compress.version>
+    <org.apache.commons.commons-compress.version>1.19</org.apache.commons.commons-compress.version>
     <commons-lang.commons-lang.version>2.6</commons-lang.commons-lang.version>
     <commons-io.commons-io.version>2.1</commons-io.commons-io.version>
     <com.google.guava.guava.version>14.0</com.google.guava.guava.version>
