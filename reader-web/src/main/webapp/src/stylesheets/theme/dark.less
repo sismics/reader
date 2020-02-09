@@ -1,0 +1,96 @@
+@main-color: #00c2f2;
+@main-color-active: #00c7ff;
+
+@import "../_mixins";
+
+a:link, a:visited {
+  color: @main-color;
+}
+
+a:hover, a:active {
+  color: @main-color-active;
+}
+
+body, html {
+  background: #222;
+}
+
+#subscriptions {
+  background: #222;
+  border-right: 1px solid #3a3a3a;
+
+  h1 {
+    background: #444;
+    color: #fff;
+  }
+
+  ul li {
+    &:hover {
+      background: #444;
+    }
+
+    &.active > a {
+      background: #444 !important;
+    }
+  }
+}
+
+#feed #toolbar {
+  background: #222;
+  border-bottom: 1px solid #3a3a3a;
+
+  > .search-input {
+    color: #fff;
+  }
+}
+
+input[type="button"]:not(.important), input[type="submit"]:not(.important), .button:not(.important) {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #fff;
+  .linear-gradient(top, #2e2e2e, #363636);
+
+  &:hover {
+    .linear-gradient(top, #363636, #2e2e2e);
+    color: #ffffff;
+    border: 1px solid #575757;
+  }
+
+  &:active {
+    .linear-gradient(top, #363636, #2e2e2e);
+    color: #ffffff;
+    border: 1px solid #575757;
+  }
+}
+
+input[type="text"], input[type="password"], select {
+  border: 1px solid #3a3a3a;
+}
+
+#feed {
+  background: #222;
+
+  #feed-container {
+    > .empty, > .bumper {
+      color: #fff;
+    }
+
+    color: #fff;
+
+    .feed-item {
+      background: #2c2c2c;
+
+      .footer {
+        background: #444;
+        color: #fff;
+      }
+
+      .header .feed-item-creator {
+        color: #e0e0e0;
+      }
+    }
+  }
+}
+
+#settings-container {
+  background: #fff;
+}

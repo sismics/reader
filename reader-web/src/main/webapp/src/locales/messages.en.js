@@ -209,6 +209,9 @@
     },
     "highcontrast": {
       "name": "High contrast"
+    },
+    "dark": {
+      "name": "Dark"
     }
   },
   "locale": {

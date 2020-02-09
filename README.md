@@ -67,7 +67,6 @@ Prerequisites: JDK 8, Maven 3
 
 Reader is organized in several Maven modules:
 
-  - reader-parent
   - reader-core
   - reader-web
   - reader-web-common
@@ -78,7 +77,7 @@ or download the sources from GitHub.
 
 #### Launch the build
 
-From the `reader-parent` directory:
+From the root directory:
 
     mvn clean -DskipTests install
 

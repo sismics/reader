@@ -209,6 +209,9 @@
     },
     "highcontrast": {
       "name": "Contraste élevé"
+    },
+    "dark": {
+      "name": "Sombre"
     }
   }
 }

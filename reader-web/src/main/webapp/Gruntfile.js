@@ -34,6 +34,10 @@ module.exports = function(grunt) {
       theme_highcontrast: {
         src: ['src/stylesheets/theme/highcontrast.less'],
         dest: 'dist/stylesheets/theme/highcontrast.css'
+      },
+      theme_dark: {
+        src: ['src/stylesheets/theme/dark.less'],
+        dest: 'dist/stylesheets/theme/dark.css'
       }
     },
     cssmin: {
