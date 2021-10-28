@@ -26,20 +26,14 @@
     </dependency>
     
     <!-- Dependencies to Jersey -->
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-server</artifactId>
-    </dependency>
+    
     
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-bundle</artifactId>
     </dependency>
     
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-json</artifactId>
-    </dependency>
+    
     
     <dependency>
       <groupId>com.sun.jersey.contribs</groupId>
@@ -52,10 +46,7 @@
       <artifactId>commons-lang</artifactId>
     </dependency>
     
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-    </dependency>
+    
 
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -67,10 +58,7 @@
       <artifactId>log4j</artifactId>
     </dependency>
   
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-c3p0</artifactId>
-    </dependency>
+    
 
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -78,22 +66,11 @@
       <scope>provided</scope>
     </dependency>
   
-    <dependency>
-      <groupId>joda-time</groupId>
-      <artifactId>joda-time</artifactId>
-    </dependency>
+    
 
-    <dependency>
-      <groupId>org.hsqldb</groupId>
-      <artifactId>hsqldb</artifactId>
-    </dependency>
+    
 
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-    </dependency>
-
-    <!-- Test dependencies -->
+    
     <dependency>
       <groupId>com.sismics.reader</groupId>
       <artifactId>reader-web-common</artifactId>
@@ -107,23 +84,11 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>com.sun.grizzly</groupId>
-      <artifactId>grizzly-servlet-webserver</artifactId>
-      <scope>test</scope>
-    </dependency>
     
-    <dependency>
-      <groupId>com.sun.jersey.jersey-test-framework</groupId>
-      <artifactId>jersey-test-framework-grizzly2</artifactId>
-      <scope>test</scope>
-    </dependency>
     
-    <dependency>
-      <groupId>org.subethamail</groupId>
-      <artifactId>subethasmtp-wiser</artifactId>
-      <scope>test</scope>
-    </dependency>
+    
+    
+    
     
   </dependencies>
 

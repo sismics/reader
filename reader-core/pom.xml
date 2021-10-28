@@ -51,20 +51,14 @@
       <artifactId>log4j</artifactId>
     </dependency>
     
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-    </dependency>
+    
     
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
     
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-    </dependency>
+    
     
     <dependency>
       <groupId>org.mindrot</groupId>
@@ -96,20 +90,14 @@
       <artifactId>lucene-core</artifactId>
     </dependency>
     
-    <dependency>
-      <groupId>org.apache.lucene</groupId>
-      <artifactId>lucene-grouping</artifactId>
-    </dependency>
+    
     
     <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-analyzers-common</artifactId>
     </dependency>
     
-    <dependency>
-      <groupId>org.apache.lucene</groupId>
-      <artifactId>lucene-queryparser</artifactId>
-    </dependency>
+    
     
     <dependency>
       <groupId>org.apache.lucene</groupId>
@@ -133,11 +121,7 @@
       <scope>test</scope>
     </dependency>
     
-    <dependency>
-      <groupId>org.hsqldb</groupId>
-      <artifactId>hsqldb</artifactId>
-      <scope>test</scope>
-    </dependency>
+    
   </dependencies>
 
   <profiles>
